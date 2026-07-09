@@ -1456,9 +1456,9 @@ class Worm2DModelAdapter(BodyModel):
     """把现有 Worm2D 对象包装成身体模型接口。"""
 
     def __init__(self, worm):
+        object.__setattr__(self, "worm", worm)
         if not isinstance(worm, Worm2D):
             raise TypeError("Worm2DModelAdapter 只能包装 Worm2D 实例")
-        self.worm = worm
 
     @classmethod
     def create(cls, start_pos, width, height, body_params=None, noise_params=None):
@@ -1473,6 +1473,12 @@ class Worm2DModelAdapter(BodyModel):
 
     def __getattr__(self, name):
         return getattr(self.worm, name)
+
+    def __setattr__(self, name, value):
+        if name == "worm":
+            object.__setattr__(self, name, value)
+        else:
+            setattr(self.worm, name, value)
 
     def reset(self, start_pos=None, **kwargs):
         return self.worm.reset(start_pos=start_pos, **kwargs)

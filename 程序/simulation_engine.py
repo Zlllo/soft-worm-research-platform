@@ -55,7 +55,7 @@ has_chinese_font = setup_chinese_font()
 
 # 从core文件夹中导入所有必要的模块
 from core.environment import ExperimentConfig, Environment2D
-from core.worm_body import Worm2D
+from core.worm_body import Worm2D, create_body_model
 from core.visualization import plot_training_results_2d, create_training_animation_2d, create_training_animation_2d_dynamic_mp4
 from core.utils import (save_training_log, save_q_table, setup_neural_network, 
                       reset_worm_for_new_round, create_temperature_environment, 
@@ -139,15 +139,16 @@ def run_standard_simulation_engine(config, training_params, field_type, use_neur
         
         # 创建线虫对象 - 使用超时保护
         try:
-            print("🔧 调试：开始创建 Worm2D 对象...")
-            worm = Worm2D(
+            print("🔧 调试：开始通过身体模型工厂创建线虫对象...")
+            worm = create_body_model(
+                model_type="worm2d",
                 start_pos=start_pos, 
                 width=width, 
                 height=height, 
                 body_params=body_params, 
                 noise_params=noise_params
             )
-            print("🔧 调试：Worm2D 对象创建成功！")
+            print("🔧 调试：线虫身体模型创建成功！")
             yield 5, 1000, "✅ 线虫对象创建成功", {'phase': 'init'}
             
         except Exception as worm_error:
