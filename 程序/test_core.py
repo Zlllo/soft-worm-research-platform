@@ -1,7 +1,10 @@
 import contextlib
+import importlib
+import importlib.util
 import io
 import random
 import sys
+import types
 from pathlib import Path
 
 import numpy as np
@@ -192,3 +195,143 @@ def test_dqn_initialization_when_pytorch_is_available():
     with torch.no_grad():
         output = worm.neural_network(torch.zeros((1, 32), dtype=torch.float32))
     assert tuple(output.shape) == (1, 4)
+
+
+def _install_streamlit_and_matplotlib_stubs(monkeypatch):
+    streamlit_stub = types.SimpleNamespace(session_state={})
+    monkeypatch.setitem(sys.modules, "streamlit", streamlit_stub)
+
+    if importlib.util.find_spec("matplotlib") is not None:
+        return streamlit_stub
+
+    matplotlib_stub = types.ModuleType("matplotlib")
+    matplotlib_stub.rcParams = {}
+    matplotlib_stub.use = lambda *args, **kwargs: None
+
+    pyplot_stub = types.ModuleType("matplotlib.pyplot")
+    pyplot_stub.rcParams = matplotlib_stub.rcParams
+    pyplot_stub.cm = types.SimpleNamespace(
+        viridis=lambda value: value,
+        get_cmap=lambda name: (lambda value: value),
+    )
+
+    def noop(*args, **kwargs):
+        return types.SimpleNamespace()
+
+    pyplot_stub.figure = noop
+    pyplot_stub.subplots = lambda *args, **kwargs: (noop(), noop())
+    pyplot_stub.close = noop
+    pyplot_stub.savefig = noop
+    pyplot_stub.tight_layout = noop
+    pyplot_stub.colorbar = noop
+    pyplot_stub.subplot = noop
+    pyplot_stub.imshow = noop
+    pyplot_stub.plot = noop
+    pyplot_stub.scatter = noop
+    pyplot_stub.title = noop
+    pyplot_stub.xlabel = noop
+    pyplot_stub.ylabel = noop
+    pyplot_stub.legend = noop
+    pyplot_stub.grid = noop
+    pyplot_stub.hist = noop
+
+    font_manager_stub = types.ModuleType("matplotlib.font_manager")
+    font_manager_stub.fontManager = types.SimpleNamespace(ttflist=[])
+
+    animation_stub = types.ModuleType("matplotlib.animation")
+    animation_stub.FuncAnimation = lambda *args, **kwargs: types.SimpleNamespace(save=noop)
+    animation_stub.FFMpegWriter = lambda *args, **kwargs: noop()
+
+    monkeypatch.setitem(sys.modules, "matplotlib", matplotlib_stub)
+    monkeypatch.setitem(sys.modules, "matplotlib.pyplot", pyplot_stub)
+    monkeypatch.setitem(sys.modules, "matplotlib.font_manager", font_manager_stub)
+    monkeypatch.setitem(sys.modules, "matplotlib.animation", animation_stub)
+    return streamlit_stub
+
+
+def test_standard_simulation_engine_uses_body_model_factory(monkeypatch, tmp_path):
+    _install_streamlit_and_matplotlib_stubs(monkeypatch)
+    simulation_engine = importlib.import_module("simulation_engine")
+    monkeypatch.setattr(
+        simulation_engine,
+        "st",
+        types.SimpleNamespace(session_state={"stop_requested": False}),
+    )
+
+    from core.worm_body import Worm2DModelAdapter
+
+    original_create_body_model = simulation_engine.create_body_model
+    factory_calls = []
+    saved_results = []
+
+    def spy_create_body_model(*args, **kwargs):
+        body_model = original_create_body_model(*args, **kwargs)
+        factory_calls.append({"args": args, "kwargs": kwargs, "body_model": body_model})
+        return body_model
+
+    def record_save_results(config, all_histories, all_rewards, worm, env, training_params, temp_array, best_point):
+        saved_results.append(
+            {
+                "rounds": len(all_rewards),
+                "histories": len(all_histories),
+                "worm": worm,
+                "env_size": (env.width, env.height),
+                "best_point": best_point,
+            }
+        )
+
+    monkeypatch.setattr(simulation_engine, "create_body_model", spy_create_body_model)
+    monkeypatch.setattr(simulation_engine, "save_and_visualize_results", record_save_results)
+
+    config = types.SimpleNamespace(
+        experiment_name="pytest_standard_engine",
+        output_dir=str(tmp_path),
+        log_file=str(tmp_path / "experiment.log"),
+        results_image=str(tmp_path / "training_results.png"),
+        animation_gif=str(tmp_path / "training_animation.gif"),
+        animation_video=str(tmp_path / "training_animation.mp4"),
+        q_table_file=str(tmp_path / "q_table.txt"),
+    )
+    training_params = {
+        "width": 16,
+        "height": 16,
+        "num_rounds": 1,
+        "steps_per_round": 3,
+        "initial_epsilon": 0.2,
+        "min_epsilon": 0.1,
+        "epsilon_decay": 0.01,
+        "learning_rate": 0.1,
+        "discount_factor": 0.9,
+        "body_params": {"num_segments": 3, "segment_length": 3.0},
+        "noise_params": {},
+        "method": "Q-Learning",
+    }
+
+    with contextlib.redirect_stdout(io.StringIO()):
+        events = list(
+            simulation_engine.run_standard_simulation_engine(
+                config=config,
+                training_params=training_params,
+                field_type="single_center",
+                use_neural_network=False,
+                enable_step_tracking=False,
+            )
+        )
+
+    assert factory_calls, "标准训练入口没有调用身体模型工厂"
+    factory_kwargs = factory_calls[0]["kwargs"]
+    assert factory_kwargs["model_type"] == "worm2d"
+    assert factory_kwargs["width"] == training_params["width"]
+    assert factory_kwargs["height"] == training_params["height"]
+    assert factory_kwargs["body_params"] == training_params["body_params"]
+    assert isinstance(factory_calls[0]["body_model"], Worm2DModelAdapter)
+
+    assert saved_results, "标准训练没有进入结果保存阶段"
+    assert saved_results[0]["rounds"] == 1
+    assert saved_results[0]["histories"] == 1
+    assert saved_results[0]["env_size"] == (16, 16)
+    assert isinstance(saved_results[0]["worm"], Worm2DModelAdapter)
+
+    assert events[-1][0:2] == (1000, 1000)
+    assert events[-1][3]["total_rounds"] == 1
+    assert any(event[3].get("round") == 1 for event in events if isinstance(event[3], dict))
