@@ -25,7 +25,7 @@ from core.utils import (
     save_body_metrics,
     setup_neural_network,
 )
-from core.worm_body import Worm2D
+from core.worm_body import ActiveDeformationBody, ContinuousCenterlineBody, Worm2D, create_body_model
 
 
 def build_q_learning_worm(width=20, height=20, start_pos=(5, 5), num_segments=3):
@@ -138,6 +138,80 @@ def test_worm_body_metrics_include_shape_constraints():
     assert "curvature_max_deg" in metrics
     assert "constraint_violation_rate" in metrics
     assert metrics["distance_to_best"] >= 0
+
+
+def test_continuous_centerline_body_preserves_length_and_reports_metrics():
+    env = build_single_center_env(width=30, height=30)
+    body = create_body_model(
+        model_type="continuous_centerline",
+        start_pos=(12, 12),
+        width=30,
+        height=30,
+        body_params={
+            "sample_count": 7,
+            "body_length": 12.0,
+            "forward_speed": 2.0,
+            "damping": 0.0,
+            "curvature_limit_deg": 55.0,
+        },
+        noise_params={},
+    )
+
+    assert isinstance(body, ContinuousCenterlineBody)
+    geometry = body.get_geometry()
+    assert geometry["type"] == "continuous_centerline"
+    assert geometry["sample_count"] == 7
+    assert len(geometry["centerline"]) == 7
+
+    body.apply_action({"heading": 0.0, "step": 2.0})
+    result = body.step_physics(env=env)
+    metrics = body.get_metrics(env=env)
+
+    assert result["moved"] is True
+    assert metrics["model"] == "continuous_centerline"
+    assert metrics["actual_body_length"] == pytest.approx(12.0, abs=1.0)
+    assert metrics["body_length_error_abs"] < 1.0
+    assert metrics["curvature_max_deg"] <= metrics["curvature_limit_deg"] + 1e-6
+    assert metrics["energy"] < body.max_energy
+    assert len(body.history) == 2
+
+
+def test_active_deformation_body_advances_wave_and_factory_alias():
+    env = build_single_center_env(width=32, height=32)
+    body = create_body_model(
+        model_type="active_wave",
+        start_pos=(14, 14),
+        width=32,
+        height=32,
+        body_params={
+            "sample_count": 9,
+            "body_length": 14.0,
+            "wave_amplitude": 1.4,
+            "wave_frequency": 0.5,
+            "wave_phase": 0.0,
+            "wave_speed": 1.0,
+            "damping": 0.0,
+        },
+        noise_params={},
+    )
+
+    assert isinstance(body, ActiveDeformationBody)
+    initial_phase = body.wave_phase
+    initial_geometry = body.get_geometry()["centerline"]
+
+    body.apply_action({"heading": 0.0, "step": 1.0, "wave_amplitude": 1.2, "wave_frequency": 0.4})
+    result = body.step_physics(env=env, dt=1.0)
+    metrics = body.get_metrics(env=env)
+    updated_geometry = body.get_geometry()["centerline"]
+
+    assert result["moved"] is True
+    assert body.wave_phase > initial_phase
+    assert metrics["model"] == "active_deformation"
+    assert metrics["wave_amplitude"] == pytest.approx(1.2)
+    assert metrics["wave_frequency"] == pytest.approx(0.4)
+    assert metrics["actual_body_length"] == pytest.approx(14.0, abs=1.5)
+    assert metrics["energy"] < body.max_energy
+    assert updated_geometry != initial_geometry
 
 
 def test_single_decision_step_updates_motion_and_learning_state():
@@ -401,6 +475,65 @@ def test_standard_simulation_engine_uses_body_model_factory(monkeypatch, tmp_pat
     assert events[-1][0:2] == (1000, 1000)
     assert events[-1][3]["total_rounds"] == 1
     assert any(event[3].get("round") == 1 for event in events if isinstance(event[3], dict))
+
+
+def test_standard_simulation_engine_runs_with_continuous_centerline_body(monkeypatch, tmp_path):
+    _install_streamlit_and_matplotlib_stubs(monkeypatch)
+    simulation_engine = importlib.import_module("simulation_engine")
+    monkeypatch.setattr(
+        simulation_engine,
+        "st",
+        types.SimpleNamespace(session_state={"stop_requested": False}),
+    )
+
+    factory_calls = _spy_body_model_factory(monkeypatch, simulation_engine)
+    saved_results = []
+
+    def record_save_results(config, all_histories, all_rewards, worm, env, training_params, temp_array, best_point):
+        saved_results.append(
+            {
+                "rounds": len(all_rewards),
+                "histories": len(all_histories),
+                "worm": worm,
+                "metrics": worm.get_metrics(env=env),
+            }
+        )
+
+    monkeypatch.setattr(simulation_engine, "save_and_visualize_results", record_save_results)
+
+    config = _build_engine_config(tmp_path, "pytest_continuous_engine")
+    training_params = _build_engine_training_params(width=24, height=24)
+    training_params.update(
+        {
+            "body_model_type": "continuous_centerline",
+            "steps_per_round": 2,
+            "body_params": {
+                "sample_count": 7,
+                "body_length": 10.0,
+                "forward_speed": 1.0,
+                "damping": 0.0,
+            },
+        }
+    )
+
+    with contextlib.redirect_stdout(io.StringIO()):
+        events = list(
+            simulation_engine.run_standard_simulation_engine(
+                config=config,
+                training_params=training_params,
+                field_type="spotty_field",
+                use_neural_network=False,
+                enable_step_tracking=False,
+            )
+        )
+
+    assert factory_calls[0]["kwargs"]["model_type"] == "continuous_centerline"
+    assert isinstance(factory_calls[0]["body_model"], ContinuousCenterlineBody)
+    assert saved_results[0]["rounds"] == 1
+    assert saved_results[0]["histories"] == 1
+    assert saved_results[0]["metrics"]["model"] == "continuous_centerline"
+    assert saved_results[0]["metrics"]["body_length_error_abs"] < 2.0
+    assert events[-1][0:2] == (1000, 1000)
 
 
 def test_transfer_simulation_engine_uses_body_model_factory(monkeypatch, tmp_path):

@@ -1561,11 +1561,437 @@ class Worm2DModelAdapter(BodyModel):
         return self.worm.get_metrics(env=env)
 
 
+class ContinuousCenterlineBody(BodyModel):
+    """固定弧长采样的连续中心线身体模型。"""
+
+    model_name = "continuous_centerline"
+
+    def __init__(self, start_pos, width, height, body_params=None, noise_params=None):
+        body_params = body_params or {}
+        noise_params = noise_params or {}
+        self.width = int(width)
+        self.height = int(height)
+        self.num_segments = int(body_params.get("sample_count", body_params.get("num_segments", 9)))
+        self.num_segments = max(3, self.num_segments)
+        self.body_length = float(body_params.get("body_length", body_params.get("segment_length", 12.0)))
+        self.segment_distance = self.body_length / max(1, self.num_segments - 1)
+        self.head_radius = float(body_params.get("head_radius", 3.0))
+        self.body_width = float(body_params.get("body_width", 2.0))
+        self.forward_speed = float(body_params.get("forward_speed", 1.2))
+        self.max_turn_angle = float(body_params.get("max_turn_angle", 35.0))
+        self.angular_constraint = float(body_params.get("curvature_limit_deg", body_params.get("angular_constraint", 45.0)))
+        self.length_stiffness = float(body_params.get("length_stiffness", 0.85))
+        self.curvature_stiffness = float(body_params.get("curvature_stiffness", 0.35))
+        self.damping = float(body_params.get("damping", 0.72))
+        self.max_energy = float(body_params.get("max_energy", 100.0))
+        self.energy = self.max_energy
+        self.energy_decay_rate = float(body_params.get("energy_decay_rate", 0.12))
+        self.low_energy_threshold = 0.5 * self.max_energy
+        self.muscle_fatigue_level = 0.0
+        self.fatigue_accumulation_rate = float(body_params.get("fatigue_accumulation_rate", 0.006))
+        self.fatigue_recovery_rate = float(body_params.get("fatigue_recovery_rate", 0.004))
+        self.fatigue_threshold = 0.35
+        self.max_fatigue_penalty = 0.5
+        self.position_noise = float(noise_params.get("position_noise", 0.0))
+        self.action_size = 4
+        self.use_neural = False
+        self.q_table = [[[0.0, 0.0, 0.0, 0.0] for _ in range(self.width)] for _ in range(self.height)]
+        self.state_buffer = deque(maxlen=4)
+        self.recent_temperatures = []
+        self.visited_positions = {}
+        self.current_step = 0
+        self.total_reward = 0.0
+        self.heading = float(body_params.get("initial_heading", 0.0))
+        self.velocity = np.zeros(2, dtype=float)
+        self._pending_action = None
+        self.last_action = None
+        self.last_physics_result = {}
+        self.body_temperatures = [0.0] * self.num_segments
+        self.segment_tensions = [0.0] * self.num_segments
+        self.muscle_wave_phase = 0.0
+        self.dorsal_muscle_state = 0.0
+        self.ventral_muscle_state = 0.0
+        self.base_muscle_wave_frequency = 0.0
+        self.muscle_wave_frequency = 0.0
+        self.reset(start_pos=start_pos)
+
+    @classmethod
+    def create(cls, start_pos, width, height, body_params=None, noise_params=None):
+        return cls(start_pos=start_pos, width=width, height=height, body_params=body_params, noise_params=noise_params)
+
+    def _clip_point(self, point):
+        clipped = np.array(point, dtype=float)
+        clipped[0] = float(np.clip(clipped[0], 0.0, max(0, self.width - 1)))
+        clipped[1] = float(np.clip(clipped[1], 0.0, max(0, self.height - 1)))
+        return clipped
+
+    def _tangent(self):
+        return np.array([math.cos(self.heading), math.sin(self.heading)], dtype=float)
+
+    def _sync_public_state(self):
+        self.centerline = np.array([self._clip_point(point) for point in self.centerline], dtype=float)
+        self.body_segments = [[float(point[0]), float(point[1])] for point in self.centerline]
+        self.body_segment = [self.body_segments[0], self.body_segments[-1]]
+        self.x = float(self.centerline[0][0])
+        self.y = float(self.centerline[0][1])
+        if len(self.body_temperatures) != len(self.body_segments):
+            self.body_temperatures = [0.0] * len(self.body_segments)
+
+    def _sync_centerline_from_public_segments(self):
+        if not hasattr(self, "body_segments") or len(self.body_segments) != self.num_segments:
+            return
+        self.centerline = np.array([[float(x), float(y)] for x, y in self.body_segments], dtype=float)
+        self.x = float(self.centerline[0][0])
+        self.y = float(self.centerline[0][1])
+
+    def _initialize_centerline(self, start_pos):
+        head = np.array([float(start_pos[0]), float(start_pos[1])], dtype=float)
+        tangent = self._tangent()
+        self.centerline = np.array([
+            self._clip_point(head - tangent * self.segment_distance * i)
+            for i in range(self.num_segments)
+        ], dtype=float)
+        self._enforce_constraints(iterations=3)
+        self._sync_public_state()
+        self.history = [self.body_segments.copy()]
+
+    def _enforce_constraints(self, iterations=2):
+        for _ in range(iterations):
+            self.centerline[0] = self._clip_point(self.centerline[0])
+            for i in range(1, self.num_segments):
+                prev_point = self.centerline[i - 1]
+                point = self.centerline[i]
+                direction = point - prev_point
+                distance = float(np.linalg.norm(direction))
+                if distance <= 1e-9:
+                    direction = -self._tangent()
+                    distance = 1.0
+                target = prev_point + direction / distance * self.segment_distance
+                self.centerline[i] = self._clip_point(
+                    point * (1.0 - self.length_stiffness) + target * self.length_stiffness
+                )
+
+            for i in range(1, self.num_segments - 1):
+                prev_vector = self.centerline[i] - self.centerline[i - 1]
+                next_vector = self.centerline[i + 1] - self.centerline[i]
+                prev_norm = float(np.linalg.norm(prev_vector))
+                next_norm = float(np.linalg.norm(next_vector))
+                if prev_norm <= 1e-9 or next_norm <= 1e-9:
+                    continue
+                cosine = float(np.dot(prev_vector, next_vector) / (prev_norm * next_norm))
+                angle = math.degrees(math.acos(max(-1.0, min(1.0, cosine))))
+                if angle > self.angular_constraint:
+                    smoothed = 0.5 * (self.centerline[i - 1] + self.centerline[i + 1])
+                    self.centerline[i] = self._clip_point(
+                        self.centerline[i] * (1.0 - self.curvature_stiffness)
+                        + smoothed * self.curvature_stiffness
+                    )
+
+    def reset(self, start_pos=None, **kwargs):
+        if start_pos is None:
+            start_pos = (getattr(self, "x", 0.0), getattr(self, "y", 0.0))
+        self.energy = self.max_energy
+        self.muscle_fatigue_level = 0.0
+        self.current_step = 0
+        self.total_reward = 0.0
+        self.velocity = np.zeros(2, dtype=float)
+        self._pending_action = None
+        self.last_action = None
+        self.last_physics_result = {'moved': False, 'action': None, 'position': start_pos}
+        self.recent_temperatures.clear()
+        self.visited_positions.clear()
+        self.state_buffer.clear()
+        self._initialize_centerline(start_pos)
+        return self.get_observation(env=kwargs.get("env"))
+
+    def get_observation(self, env=None, **kwargs):
+        state_vector = None
+        if env is not None:
+            try:
+                state_vector = env.get_state_vector((self.x, self.y), worm=self)
+            except Exception:
+                state_vector = np.zeros(8, dtype=np.float32)
+        return {
+            'model': self.model_name,
+            'position': (self.x, self.y),
+            'head_position': (self.x, self.y),
+            'heading': float(self.heading),
+            'velocity': (float(self.velocity[0]), float(self.velocity[1])),
+            'state_vector': state_vector,
+            'centerline': self.body_segments.copy(),
+            'energy': float(self.energy),
+            'muscle_fatigue': float(self.muscle_fatigue_level),
+            'pending_action': self._pending_action,
+        }
+
+    def apply_action(self, action, **kwargs):
+        self._pending_action = action
+        return {'accepted': True, 'action': action}
+
+    def _parse_action(self, action):
+        if action is None:
+            return self.heading, 0.0
+        if isinstance(action, dict):
+            heading = float(action.get("heading", self.heading + float(action.get("heading_delta", 0.0))))
+            step = float(action.get("step", action.get("step_length", self.forward_speed)))
+            return heading, step
+        if isinstance(action, (tuple, list, np.ndarray)) and len(action) >= 2:
+            return float(action[0]), float(action[1])
+        action_index = int(action)
+        headings = {
+            0: -math.pi / 2.0,
+            1: math.pi / 2.0,
+            2: math.pi,
+            3: 0.0,
+        }
+        return headings.get(action_index, self.heading), self.forward_speed
+
+    def step_physics(self, env=None, dt=1.0, **kwargs):
+        self._sync_centerline_from_public_segments()
+        action = kwargs.get("action", self._pending_action)
+        heading, step_distance = self._parse_action(action)
+        old_head = self.centerline[0].copy()
+        turn_amount = abs((heading - self.heading + math.pi) % (2.0 * math.pi) - math.pi)
+        self.heading = heading
+        desired_velocity = np.array([math.cos(self.heading), math.sin(self.heading)], dtype=float) * step_distance
+        if self.position_noise:
+            desired_velocity += np.random.normal(0.0, self.position_noise, size=2)
+        self.velocity = self.velocity * self.damping + desired_velocity * (1.0 - self.damping)
+        new_head = self._clip_point(old_head + self.velocity * float(dt))
+        old_centerline = self.centerline.copy()
+        self.centerline[0] = new_head
+        for i in range(1, self.num_segments):
+            self.centerline[i] = old_centerline[i - 1]
+        self._enforce_constraints(iterations=3)
+        self._sync_public_state()
+        movement = float(np.linalg.norm(new_head - old_head))
+        self.energy = max(0.0, self.energy - self.energy_decay_rate * (movement + 0.25 * turn_amount))
+        if movement > 0:
+            self.muscle_fatigue_level = min(1.0, self.muscle_fatigue_level + self.fatigue_accumulation_rate * movement)
+        else:
+            self.muscle_fatigue_level = max(0.0, self.muscle_fatigue_level - self.fatigue_recovery_rate)
+        self.current_step += 1
+        self.last_action = action
+        self._pending_action = None
+        self.history.append(self.body_segments.copy())
+        if env is not None:
+            self.body_temperatures = [
+                float(env.get_temperature(int(point[0]), int(point[1])))
+                for point in self.body_segments
+            ]
+            self.recent_temperatures.append(self.body_temperatures[0])
+        moved = movement > 1e-9
+        self.last_physics_result = {
+            'moved': moved,
+            'action': action,
+            'position': (self.x, self.y),
+            'movement': movement,
+        }
+        return self.last_physics_result
+
+    def decide_move(self, env, epsilon=0.2, alpha=0.5, gamma=0.9):
+        old_x, old_y = int(round(self.x)), int(round(self.y))
+        old_temp = float(env.get_temperature(old_x, old_y))
+        if random.random() < epsilon:
+            action = random.randint(0, self.action_size - 1)
+        else:
+            action = int(np.argmax(self.q_table[old_y][old_x]))
+        result = self.step_physics(env=env, action=action)
+        new_x, new_y = int(round(self.x)), int(round(self.y))
+        new_temp = float(env.get_temperature(new_x, new_y))
+        reward = (new_temp - old_temp) * 0.1 - (self.max_energy - self.energy) * 0.001
+        if 0 <= old_y < self.height and 0 <= old_x < self.width:
+            old_q = self.q_table[old_y][old_x][action]
+            max_next_q = max(self.q_table[new_y][new_x])
+            self.q_table[old_y][old_x][action] = old_q + alpha * (reward + gamma * max_next_q - old_q)
+        self.total_reward += reward
+        return bool(result.get('moved', False))
+
+    def get_geometry(self):
+        points = [(float(x), float(y)) for x, y in self.body_segments]
+        xs = [point[0] for point in points]
+        ys = [point[1] for point in points]
+        return {
+            'model': self.model_name,
+            'type': 'continuous_centerline',
+            'head': points[0],
+            'tail': points[-1],
+            'segments': points,
+            'centerline': points,
+            'sample_count': len(points),
+            'segment_count': len(points),
+            'segment_distance': float(self.segment_distance),
+            'body_length': float(self.body_length),
+            'bounds': {
+                'min_x': min(xs),
+                'max_x': max(xs),
+                'min_y': min(ys),
+                'max_y': max(ys),
+            },
+        }
+
+    def _shape_metrics(self):
+        points = [np.array(point, dtype=float) for point in self.body_segments]
+        segment_lengths = [
+            float(np.linalg.norm(points[i + 1] - points[i]))
+            for i in range(len(points) - 1)
+        ]
+        turn_angles = []
+        for i in range(1, len(points) - 1):
+            prev_vector = points[i] - points[i - 1]
+            next_vector = points[i + 1] - points[i]
+            prev_norm = float(np.linalg.norm(prev_vector))
+            next_norm = float(np.linalg.norm(next_vector))
+            if prev_norm <= 1e-9 or next_norm <= 1e-9:
+                continue
+            cosine = float(np.dot(prev_vector, next_vector) / (prev_norm * next_norm))
+            turn_angles.append(float(math.degrees(math.acos(max(-1.0, min(1.0, cosine))))))
+        actual_length = float(sum(segment_lengths))
+        length_errors = [abs(length - self.segment_distance) for length in segment_lengths]
+        curvature_violations = sum(1 for angle in turn_angles if angle > self.angular_constraint)
+        return {
+            'actual_body_length': actual_length,
+            'body_length_error': float(actual_length - self.body_length),
+            'body_length_error_abs': float(abs(actual_length - self.body_length)),
+            'target_body_length': float(self.body_length),
+            'target_segment_length': float(self.segment_distance),
+            'average_segment_length': float(np.mean(segment_lengths)) if segment_lengths else 0.0,
+            'mean_segment_length_error': float(np.mean(length_errors)) if length_errors else 0.0,
+            'max_segment_length_error': float(max(length_errors)) if length_errors else 0.0,
+            'curvature_mean_deg': float(np.mean(turn_angles)) if turn_angles else 0.0,
+            'curvature_max_deg': float(max(turn_angles)) if turn_angles else 0.0,
+            'curvature_limit_deg': float(self.angular_constraint),
+            'curvature_violation_count': int(curvature_violations),
+            'curvature_violation_rate': float(curvature_violations / len(turn_angles)) if turn_angles else 0.0,
+            'constraint_violation_count': int(curvature_violations),
+            'constraint_violation_rate': float(curvature_violations / len(turn_angles)) if turn_angles else 0.0,
+        }
+
+    def get_metrics(self, env=None):
+        metrics = {
+            'model': self.model_name,
+            'position': (float(self.x), float(self.y)),
+            'heading': float(self.heading),
+            'total_reward': float(self.total_reward),
+            'current_step': int(self.current_step),
+            'energy': float(self.energy),
+            'energy_ratio': float(self.energy / self.max_energy) if self.max_energy else 0.0,
+            'muscle_fatigue': float(self.muscle_fatigue_level),
+            'body_segments': len(self.body_segments),
+            'history_length': len(self.history),
+            'last_action': self.last_action,
+            'pending_action': self._pending_action,
+        }
+        metrics.update(self._shape_metrics())
+        if env is not None:
+            try:
+                metrics['head_temperature'] = float(env.get_temperature(int(self.x), int(self.y)))
+            except Exception:
+                metrics['head_temperature'] = None
+            if getattr(env, 'best_point', None) is not None:
+                best_x, best_y = env.best_point
+                metrics['distance_to_best'] = float(np.sqrt((self.x - best_x) ** 2 + (self.y - best_y) ** 2))
+        return metrics
+
+
+class ActiveDeformationBody(ContinuousCenterlineBody):
+    """带主动传播波的连续中心线身体模型。"""
+
+    model_name = "active_deformation"
+
+    def __init__(self, start_pos, width, height, body_params=None, noise_params=None):
+        body_params = body_params or {}
+        self.wave_amplitude = float(body_params.get("wave_amplitude", 1.0))
+        self.wave_frequency = float(body_params.get("wave_frequency", 0.25))
+        self.wave_phase = float(body_params.get("wave_phase", 0.0))
+        self.wave_speed = float(body_params.get("wave_speed", 1.0))
+        self.wave_length = float(body_params.get("wave_length", body_params.get("body_length", body_params.get("segment_length", 12.0))))
+        self.propulsion_gain = float(body_params.get("propulsion_gain", 0.45))
+        super().__init__(start_pos=start_pos, width=width, height=height, body_params=body_params, noise_params=noise_params)
+        self.base_muscle_wave_frequency = self.wave_frequency
+        self.muscle_wave_frequency = self.wave_frequency
+        self.muscle_wave_amplitude = self.wave_amplitude
+
+    def apply_action(self, action, **kwargs):
+        if isinstance(action, dict):
+            if "wave_amplitude" in action:
+                self.wave_amplitude = float(action["wave_amplitude"])
+            if "wave_frequency" in action:
+                self.wave_frequency = float(action["wave_frequency"])
+            if "wave_phase" in action:
+                self.wave_phase = float(action["wave_phase"])
+            if "wave_speed" in action:
+                self.wave_speed = float(action["wave_speed"])
+        elif isinstance(action, (tuple, list, np.ndarray)) and len(action) >= 4:
+            self.wave_amplitude = float(action[0])
+            self.wave_frequency = float(action[1])
+            self.wave_phase = float(action[2])
+            self.wave_speed = float(action[3])
+        return super().apply_action(action, **kwargs)
+
+    def step_physics(self, env=None, dt=1.0, **kwargs):
+        action = kwargs.get("action", self._pending_action)
+        if isinstance(action, dict):
+            self.apply_action(action)
+        base_step = self.forward_speed + self.propulsion_gain * abs(self.wave_amplitude * self.wave_frequency)
+        if isinstance(action, dict):
+            action = {
+                "heading": action.get("heading", self.heading + float(action.get("heading_delta", 0.0))),
+                "step": action.get("step", base_step),
+            }
+        result = super().step_physics(env=env, dt=dt, action=action)
+        self.wave_phase += 2.0 * math.pi * self.wave_frequency * float(dt) * self.wave_speed
+        head = np.array([self.x, self.y], dtype=float)
+        tangent = self._tangent()
+        normal = np.array([-tangent[1], tangent[0]], dtype=float)
+        wave_number = 2.0 * math.pi / max(self.wave_length, 1e-6)
+        self.centerline = np.array([
+            self._clip_point(
+                head
+                - tangent * (self.segment_distance * i)
+                + normal * (self.wave_amplitude * math.sin(self.wave_phase - wave_number * self.segment_distance * i))
+            )
+            for i in range(self.num_segments)
+        ], dtype=float)
+        self._enforce_constraints(iterations=2)
+        self._sync_public_state()
+        self.history[-1] = self.body_segments.copy()
+        self.muscle_wave_phase = self.wave_phase
+        self.muscle_wave_frequency = self.wave_frequency
+        self.muscle_wave_amplitude = self.wave_amplitude
+        self.dorsal_muscle_state = math.sin(self.wave_phase)
+        self.ventral_muscle_state = -self.dorsal_muscle_state
+        self.energy = max(0.0, self.energy - 0.01 * abs(self.wave_amplitude * self.wave_frequency))
+        self.muscle_fatigue_level = min(
+            1.0,
+            self.muscle_fatigue_level + 0.002 * abs(self.wave_amplitude * self.wave_frequency)
+        )
+        result['wave_phase'] = float(self.wave_phase)
+        result['position'] = (self.x, self.y)
+        self.last_physics_result = result
+        return result
+
+    def get_metrics(self, env=None):
+        metrics = super().get_metrics(env=env)
+        metrics.update({
+            'wave_amplitude': float(self.wave_amplitude),
+            'wave_frequency': float(self.wave_frequency),
+            'wave_phase': float(self.wave_phase),
+            'wave_speed': float(self.wave_speed),
+            'wave_length': float(self.wave_length),
+        })
+        return metrics
+
+
 def create_body_model(model_type="worm2d", **kwargs):
     """身体模型工厂函数。当前支持基于 Worm2D 的兼容实现。"""
     normalized_type = str(model_type).lower()
     if normalized_type in ("worm2d", "segmented_worm2d", "legacy_worm2d"):
         return Worm2DModelAdapter.create(**kwargs)
+    if normalized_type in ("continuous_centerline", "centerline", "continuous"):
+        return ContinuousCenterlineBody.create(**kwargs)
+    if normalized_type in ("active_deformation", "active_wave", "wave_body"):
+        return ActiveDeformationBody.create(**kwargs)
     raise ValueError(f"未知身体模型类型: {model_type}")
 
 
@@ -1573,5 +1999,7 @@ __all__ = [
     "BodyModel",
     "Worm2D",
     "Worm2DModelAdapter",
+    "ContinuousCenterlineBody",
+    "ActiveDeformationBody",
     "create_body_model",
 ]
