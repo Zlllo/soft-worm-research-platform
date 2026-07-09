@@ -1317,19 +1317,81 @@ class Worm2D(BodyModel):
             temp for temp in self.body_temperatures
             if temp != -float('inf') and np.isfinite(temp)
         ]
+        points = [
+            np.array([float(x), float(y)], dtype=float)
+            for x, y in self.body_segments
+        ]
+        segment_lengths = []
+        turn_angles = []
+        if len(points) >= 2:
+            segment_lengths = [
+                float(np.linalg.norm(points[i + 1] - points[i]))
+                for i in range(len(points) - 1)
+            ]
+        if len(points) >= 3:
+            for i in range(1, len(points) - 1):
+                prev_vector = points[i] - points[i - 1]
+                next_vector = points[i + 1] - points[i]
+                prev_norm = float(np.linalg.norm(prev_vector))
+                next_norm = float(np.linalg.norm(next_vector))
+                if prev_norm <= 1e-9 or next_norm <= 1e-9:
+                    continue
+                cosine = float(np.dot(prev_vector, next_vector) / (prev_norm * next_norm))
+                angle = math.degrees(math.acos(max(-1.0, min(1.0, cosine))))
+                turn_angles.append(float(angle))
+
+        target_segment_length = float(self.segment_distance)
+        target_body_length = float(self.body_length)
+        actual_body_length = float(sum(segment_lengths)) if segment_lengths else 0.0
+        length_errors = [
+            abs(length - target_segment_length)
+            for length in segment_lengths
+        ]
+        min_segment_length = target_segment_length * float(getattr(self, 'min_segment_compression', 0.7))
+        max_segment_length = target_segment_length * float(getattr(self, 'max_segment_stretch', 1.5))
+        length_violation_count = sum(
+            1 for length in segment_lengths
+            if length < min_segment_length or length > max_segment_length
+        )
+        curvature_limit = float(getattr(self, 'angular_constraint', self.max_bend_angle))
+        curvature_violation_count = sum(1 for angle in turn_angles if angle > curvature_limit)
+        constraint_check_count = len(segment_lengths) + len(turn_angles)
+        constraint_violation_count = length_violation_count + curvature_violation_count
+
         metrics = {
             'model': 'worm2d',
             'position': (self.x, self.y),
             'total_reward': float(self.total_reward),
             'current_step': int(self.current_step),
             'energy': float(self.energy),
+            'energy_ratio': float(self.energy / self.max_energy) if self.max_energy else 0.0,
             'body_segments': len(self.body_segments),
             'history_length': len(self.history),
             'last_action': self.last_action,
             'pending_action': self._pending_action,
             'average_body_temperature': float(np.mean(valid_temps)) if valid_temps else None,
             'use_neural': bool(self.use_neural),
-            'muscle_fatigue': float(getattr(self, 'muscle_fatigue_level', 0.0))
+            'muscle_fatigue': float(getattr(self, 'muscle_fatigue_level', 0.0)),
+            'target_body_length': target_body_length,
+            'actual_body_length': actual_body_length,
+            'body_length_error': float(actual_body_length - target_body_length),
+            'body_length_error_abs': float(abs(actual_body_length - target_body_length)),
+            'target_segment_length': target_segment_length,
+            'average_segment_length': float(np.mean(segment_lengths)) if segment_lengths else 0.0,
+            'max_segment_length_error': float(max(length_errors)) if length_errors else 0.0,
+            'mean_segment_length_error': float(np.mean(length_errors)) if length_errors else 0.0,
+            'length_violation_count': int(length_violation_count),
+            'length_violation_rate': float(length_violation_count / len(segment_lengths)) if segment_lengths else 0.0,
+            'curvature_mean_deg': float(np.mean(turn_angles)) if turn_angles else 0.0,
+            'curvature_max_deg': float(max(turn_angles)) if turn_angles else 0.0,
+            'curvature_limit_deg': curvature_limit,
+            'curvature_violation_count': int(curvature_violation_count),
+            'curvature_violation_rate': float(curvature_violation_count / len(turn_angles)) if turn_angles else 0.0,
+            'constraint_violation_count': int(constraint_violation_count),
+            'constraint_violation_rate': (
+                float(constraint_violation_count / constraint_check_count)
+                if constraint_check_count else 0.0
+            )
         }
 
         if env is not None:

@@ -2,6 +2,7 @@ import contextlib
 import importlib
 import importlib.util
 import io
+import json
 import random
 import sys
 import types
@@ -21,6 +22,7 @@ from core.utils import (
     create_temperature_environment,
     generate_dynamic_rotating_double_center,
     reset_worm_for_new_round,
+    save_body_metrics,
     setup_neural_network,
 )
 from core.worm_body import Worm2D
@@ -117,6 +119,27 @@ def test_worm_body_creation_respects_body_params():
     assert all(0 <= x < worm.width and 0 <= y < worm.height for x, y in worm.body_segments)
 
 
+def test_worm_body_metrics_include_shape_constraints():
+    env = build_single_center_env()
+    worm = build_q_learning_worm(width=env.width, height=env.height, start_pos=(8, 8), num_segments=4)
+    worm.body_segments = [[8, 8], [6, 8], [5, 9], [3, 9]]
+    worm.energy = 75.0
+    worm.muscle_fatigue_level = 0.25
+
+    metrics = worm.get_metrics(env=env)
+
+    assert metrics["energy"] == pytest.approx(75.0)
+    assert metrics["energy_ratio"] == pytest.approx(0.75)
+    assert metrics["muscle_fatigue"] == pytest.approx(0.25)
+    assert metrics["actual_body_length"] > 0
+    assert metrics["target_body_length"] > 0
+    assert "body_length_error_abs" in metrics
+    assert "curvature_mean_deg" in metrics
+    assert "curvature_max_deg" in metrics
+    assert "constraint_violation_rate" in metrics
+    assert metrics["distance_to_best"] >= 0
+
+
 def test_single_decision_step_updates_motion_and_learning_state():
     random.seed(1)
     np.random.seed(1)
@@ -167,6 +190,35 @@ def test_short_q_learning_training_two_rounds():
     assert len(rewards) == 2
     assert np.isfinite(rewards).all()
     assert all(length >= 2 for length in history_lengths)
+
+
+def test_save_body_metrics_writes_comparison_json(tmp_path):
+    env = build_single_center_env()
+    worm = build_q_learning_worm(width=env.width, height=env.height, start_pos=(5, 5), num_segments=4)
+    worm.body_segments = [[5, 5], [4, 5], [3, 6], [2, 6]]
+    worm.history = [worm.body_segments.copy()]
+    worm.total_reward = 3.5
+
+    config = types.SimpleNamespace(
+        output_dir=str(tmp_path),
+        experiment_name="pytest_body_metrics",
+        field_type="single_center",
+        timestamp="2026-07-09T00:00:00",
+    )
+
+    metrics_file = save_body_metrics(config, [worm.history], [worm.total_reward], worm, env)
+
+    with open(metrics_file, "r", encoding="utf-8") as f:
+        payload = json.load(f)
+
+    assert payload["experiment_name"] == "pytest_body_metrics"
+    assert payload["model"] == "worm2d"
+    assert payload["final_metrics"]["energy"] == pytest.approx(worm.energy)
+    assert "body_length_error_abs" in payload["final_metrics"]
+    assert "curvature_max_deg" in payload["final_metrics"]
+    assert "muscle_fatigue" in payload["final_metrics"]
+    assert payload["summary"]["round_count"] == 1
+    assert payload["round_metrics"][0]["reward"] == pytest.approx(3.5)
 
 
 def test_dqn_initialization_when_pytorch_is_available():

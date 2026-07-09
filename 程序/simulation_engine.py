@@ -57,7 +57,7 @@ has_chinese_font = setup_chinese_font()
 from core.environment import ExperimentConfig, Environment2D
 from core.worm_body import create_body_model
 from core.visualization import plot_training_results_2d, create_training_animation_2d, create_training_animation_2d_dynamic_mp4
-from core.utils import (save_training_log, save_q_table, setup_neural_network, 
+from core.utils import (save_training_log, save_q_table, save_body_metrics, setup_neural_network, 
                       reset_worm_for_new_round, create_temperature_environment, 
                       generate_dynamic_rotating_double_center, generate_dynamic_rotating_quad_center)
 from core.neural_networks import PYTORCH_AVAILABLE
@@ -934,6 +934,7 @@ def save_and_visualize_results(config, all_histories, all_rewards, worm, env, tr
         
         # 保存训练日志和数据
         save_training_log(config, all_histories, all_rewards, worm, env, training_params)
+        save_body_metrics(config, all_histories, all_rewards, worm, env)
         if hasattr(worm, 'q_table'):
             save_q_table(config, worm.q_table, env)
         

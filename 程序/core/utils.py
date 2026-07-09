@@ -2,6 +2,8 @@
 工具函数模块 - 包含日志保存、Q表保存等辅助功能
 """
 from collections import deque
+import json
+import os
 import numpy as np
 
 
@@ -204,6 +206,129 @@ def save_training_log(config, all_histories, all_rewards, worm, env, training_pa
             f.write(f"  弹性约束系统: 未初始化\n")
         
     print(f"✓ 训练日志已保存到: {config.log_file}")
+
+
+def _to_json_safe(value):
+    """把 NumPy 类型和元组转成 JSON 可写的数据。"""
+    if isinstance(value, dict):
+        return {str(key): _to_json_safe(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_to_json_safe(item) for item in value]
+    if isinstance(value, np.ndarray):
+        return _to_json_safe(value.tolist())
+    if isinstance(value, (np.floating,)):
+        return float(value)
+    if isinstance(value, (np.integer,)):
+        return int(value)
+    if isinstance(value, (np.bool_,)):
+        return bool(value)
+    return value
+
+
+def _polyline_metrics_from_segments(segments, target_segment_length, target_body_length, curvature_limit_deg):
+    points = []
+    for point in segments or []:
+        if isinstance(point, (list, tuple)) and len(point) == 2:
+            points.append(np.array([float(point[0]), float(point[1])], dtype=float))
+
+    segment_lengths = [
+        float(np.linalg.norm(points[i + 1] - points[i]))
+        for i in range(len(points) - 1)
+    ]
+    turn_angles = []
+    for i in range(1, len(points) - 1):
+        prev_vector = points[i] - points[i - 1]
+        next_vector = points[i + 1] - points[i]
+        prev_norm = float(np.linalg.norm(prev_vector))
+        next_norm = float(np.linalg.norm(next_vector))
+        if prev_norm <= 1e-9 or next_norm <= 1e-9:
+            continue
+        cosine = float(np.dot(prev_vector, next_vector) / (prev_norm * next_norm))
+        angle = float(np.degrees(np.arccos(max(-1.0, min(1.0, cosine)))))
+        turn_angles.append(angle)
+
+    body_length = float(sum(segment_lengths)) if segment_lengths else 0.0
+    segment_errors = [abs(length - target_segment_length) for length in segment_lengths]
+    curvature_violations = sum(1 for angle in turn_angles if angle > curvature_limit_deg)
+
+    return {
+        "actual_body_length": body_length,
+        "body_length_error": float(body_length - target_body_length),
+        "body_length_error_abs": float(abs(body_length - target_body_length)),
+        "average_segment_length": float(np.mean(segment_lengths)) if segment_lengths else 0.0,
+        "mean_segment_length_error": float(np.mean(segment_errors)) if segment_errors else 0.0,
+        "max_segment_length_error": float(max(segment_errors)) if segment_errors else 0.0,
+        "curvature_mean_deg": float(np.mean(turn_angles)) if turn_angles else 0.0,
+        "curvature_max_deg": float(max(turn_angles)) if turn_angles else 0.0,
+        "curvature_violation_count": int(curvature_violations),
+        "curvature_violation_rate": float(curvature_violations / len(turn_angles)) if turn_angles else 0.0,
+    }
+
+
+def save_body_metrics(config, all_histories, all_rewards, worm, env=None):
+    """保存身体模型指标，供不同身体表征做横向比较。"""
+    output_dir = getattr(config, "output_dir", ".")
+    metrics_file = getattr(config, "body_metrics_file", os.path.join(output_dir, "body_metrics.json"))
+
+    final_metrics = worm.get_metrics(env=env) if hasattr(worm, "get_metrics") else {}
+    geometry = worm.get_geometry() if hasattr(worm, "get_geometry") else {}
+    target_segment_length = float(final_metrics.get("target_segment_length", getattr(worm, "segment_distance", 0.0)))
+    target_body_length = float(final_metrics.get("target_body_length", getattr(worm, "body_length", 0.0)))
+    curvature_limit_deg = float(final_metrics.get("curvature_limit_deg", getattr(worm, "angular_constraint", 0.0)))
+
+    round_metrics = []
+    for index, history in enumerate(all_histories or []):
+        if not history:
+            continue
+        final_segments = history[-1]
+        if not (
+            isinstance(final_segments, list)
+            and final_segments
+            and isinstance(final_segments[0], (list, tuple))
+        ):
+            continue
+        metrics = _polyline_metrics_from_segments(
+            final_segments,
+            target_segment_length,
+            target_body_length,
+            curvature_limit_deg,
+        )
+        metrics["round"] = index + 1
+        if index < len(all_rewards):
+            metrics["reward"] = float(all_rewards[index])
+        round_metrics.append(metrics)
+
+    summary_fields = [
+        "body_length_error_abs",
+        "mean_segment_length_error",
+        "max_segment_length_error",
+        "curvature_mean_deg",
+        "curvature_max_deg",
+        "curvature_violation_rate",
+    ]
+    summary = {"round_count": len(round_metrics)}
+    for field in summary_fields:
+        values = [item[field] for item in round_metrics if field in item]
+        if values:
+            summary[f"mean_{field}"] = float(np.mean(values))
+            summary[f"max_{field}"] = float(max(values))
+
+    payload = {
+        "experiment_name": getattr(config, "experiment_name", None),
+        "field_type": getattr(config, "field_type", None),
+        "timestamp": getattr(config, "timestamp", None),
+        "model": final_metrics.get("model", geometry.get("model", "unknown")),
+        "final_metrics": final_metrics,
+        "geometry": geometry,
+        "round_metrics": round_metrics,
+        "summary": summary,
+    }
+
+    os.makedirs(os.path.dirname(metrics_file) or ".", exist_ok=True)
+    with open(metrics_file, "w", encoding="utf-8") as f:
+        json.dump(_to_json_safe(payload), f, ensure_ascii=False, indent=2)
+    print(f"身体指标已保存到: {metrics_file}")
+    return metrics_file
 
 
 def save_q_table(config, q_table, env):
