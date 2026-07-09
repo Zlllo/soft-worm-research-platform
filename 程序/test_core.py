@@ -249,6 +249,48 @@ def _install_streamlit_and_matplotlib_stubs(monkeypatch):
     return streamlit_stub
 
 
+def _build_engine_config(tmp_path, name):
+    return types.SimpleNamespace(
+        experiment_name=name,
+        output_dir=str(tmp_path),
+        log_file=str(tmp_path / "experiment.log"),
+        results_image=str(tmp_path / "training_results.png"),
+        animation_gif=str(tmp_path / "training_animation.gif"),
+        animation_video=str(tmp_path / "training_animation.mp4"),
+        q_table_file=str(tmp_path / "q_table.txt"),
+    )
+
+
+def _build_engine_training_params(width=16, height=16):
+    return {
+        "width": width,
+        "height": height,
+        "num_rounds": 1,
+        "steps_per_round": 3,
+        "initial_epsilon": 0.2,
+        "min_epsilon": 0.1,
+        "epsilon_decay": 0.01,
+        "learning_rate": 0.1,
+        "discount_factor": 0.9,
+        "body_params": {"num_segments": 3, "segment_length": 3.0},
+        "noise_params": {},
+        "method": "Q-Learning",
+    }
+
+
+def _spy_body_model_factory(monkeypatch, simulation_engine):
+    original_create_body_model = simulation_engine.create_body_model
+    factory_calls = []
+
+    def spy_create_body_model(*args, **kwargs):
+        body_model = original_create_body_model(*args, **kwargs)
+        factory_calls.append({"args": args, "kwargs": kwargs, "body_model": body_model})
+        return body_model
+
+    monkeypatch.setattr(simulation_engine, "create_body_model", spy_create_body_model)
+    return factory_calls
+
+
 def test_standard_simulation_engine_uses_body_model_factory(monkeypatch, tmp_path):
     _install_streamlit_and_matplotlib_stubs(monkeypatch)
     simulation_engine = importlib.import_module("simulation_engine")
@@ -260,14 +302,8 @@ def test_standard_simulation_engine_uses_body_model_factory(monkeypatch, tmp_pat
 
     from core.worm_body import Worm2DModelAdapter
 
-    original_create_body_model = simulation_engine.create_body_model
-    factory_calls = []
+    factory_calls = _spy_body_model_factory(monkeypatch, simulation_engine)
     saved_results = []
-
-    def spy_create_body_model(*args, **kwargs):
-        body_model = original_create_body_model(*args, **kwargs)
-        factory_calls.append({"args": args, "kwargs": kwargs, "body_model": body_model})
-        return body_model
 
     def record_save_results(config, all_histories, all_rewards, worm, env, training_params, temp_array, best_point):
         saved_results.append(
@@ -280,32 +316,10 @@ def test_standard_simulation_engine_uses_body_model_factory(monkeypatch, tmp_pat
             }
         )
 
-    monkeypatch.setattr(simulation_engine, "create_body_model", spy_create_body_model)
     monkeypatch.setattr(simulation_engine, "save_and_visualize_results", record_save_results)
 
-    config = types.SimpleNamespace(
-        experiment_name="pytest_standard_engine",
-        output_dir=str(tmp_path),
-        log_file=str(tmp_path / "experiment.log"),
-        results_image=str(tmp_path / "training_results.png"),
-        animation_gif=str(tmp_path / "training_animation.gif"),
-        animation_video=str(tmp_path / "training_animation.mp4"),
-        q_table_file=str(tmp_path / "q_table.txt"),
-    )
-    training_params = {
-        "width": 16,
-        "height": 16,
-        "num_rounds": 1,
-        "steps_per_round": 3,
-        "initial_epsilon": 0.2,
-        "min_epsilon": 0.1,
-        "epsilon_decay": 0.01,
-        "learning_rate": 0.1,
-        "discount_factor": 0.9,
-        "body_params": {"num_segments": 3, "segment_length": 3.0},
-        "noise_params": {},
-        "method": "Q-Learning",
-    }
+    config = _build_engine_config(tmp_path, "pytest_standard_engine")
+    training_params = _build_engine_training_params()
 
     with contextlib.redirect_stdout(io.StringIO()):
         events = list(
@@ -335,3 +349,122 @@ def test_standard_simulation_engine_uses_body_model_factory(monkeypatch, tmp_pat
     assert events[-1][0:2] == (1000, 1000)
     assert events[-1][3]["total_rounds"] == 1
     assert any(event[3].get("round") == 1 for event in events if isinstance(event[3], dict))
+
+
+def test_transfer_simulation_engine_uses_body_model_factory(monkeypatch, tmp_path):
+    _install_streamlit_and_matplotlib_stubs(monkeypatch)
+    simulation_engine = importlib.import_module("simulation_engine")
+    monkeypatch.setattr(
+        simulation_engine,
+        "st",
+        types.SimpleNamespace(session_state={"stop_requested": False}),
+    )
+
+    from core.worm_body import Worm2DModelAdapter
+
+    factory_calls = _spy_body_model_factory(monkeypatch, simulation_engine)
+    saved_results = []
+
+    def record_save_results(config, all_histories, all_rewards, worm, env, training_params, temp_array, best_point):
+        saved_results.append(
+            {
+                "rounds": len(all_rewards),
+                "histories": len(all_histories),
+                "worm": worm,
+                "env_size": (env.width, env.height),
+            }
+        )
+
+    monkeypatch.setattr(simulation_engine, "save_and_visualize_results", record_save_results)
+
+    config = _build_engine_config(tmp_path, "pytest_transfer_engine")
+    training_params = _build_engine_training_params(width=80, height=80)
+    training_params["steps_per_round"] = 1
+
+    with contextlib.redirect_stdout(io.StringIO()):
+        events = list(
+            simulation_engine.run_transfer_simulation_engine(
+                config=config,
+                training_params=training_params,
+                source_field="single_center",
+                target_field="dual_center",
+                use_neural_network=False,
+            )
+        )
+
+    assert len(factory_calls) == 2
+    assert [call["kwargs"]["model_type"] for call in factory_calls] == ["worm2d", "worm2d"]
+    assert all(call["kwargs"]["body_params"] == training_params["body_params"] for call in factory_calls)
+    assert all(isinstance(call["body_model"], Worm2DModelAdapter) for call in factory_calls)
+
+    assert saved_results, "迁移学习没有进入结果保存阶段"
+    assert saved_results[0]["rounds"] == 20
+    assert saved_results[0]["histories"] == 20
+    assert isinstance(saved_results[0]["worm"], Worm2DModelAdapter)
+    assert events[-1][0:2] == (1200, 1200)
+    assert events[-1][3]["source_field"] == "single_center"
+    assert events[-1][3]["target_field"] == "dual_center"
+
+
+def test_curriculum_simulation_engine_uses_body_model_factory(monkeypatch, tmp_path):
+    _install_streamlit_and_matplotlib_stubs(monkeypatch)
+    simulation_engine = importlib.import_module("simulation_engine")
+
+    class StopAfterFirstStageCheck:
+        def __init__(self):
+            self.calls = 0
+
+        def get(self, key, default=None):
+            if key != "stop_requested":
+                return default
+            self.calls += 1
+            return self.calls > 1
+
+    monkeypatch.setattr(
+        simulation_engine,
+        "st",
+        types.SimpleNamespace(session_state=StopAfterFirstStageCheck()),
+    )
+
+    from core.worm_body import Worm2DModelAdapter
+
+    factory_calls = _spy_body_model_factory(monkeypatch, simulation_engine)
+    monkeypatch.setattr(simulation_engine, "save_and_visualize_results", lambda *args, **kwargs: None)
+    monkeypatch.setattr(
+        simulation_engine,
+        "setup_neural_network",
+        lambda worm, training_params: setattr(worm, "use_neural", True) or True,
+    )
+
+    def fake_zero_shot_testing_engine(*args, **kwargs):
+        yield 1, 1, "fake zero-shot test", {"phase": "zero_shot_testing"}
+        return [], [], {"final_performance": 0.0}
+
+    monkeypatch.setattr(
+        simulation_engine,
+        "zero_shot_testing_engine",
+        fake_zero_shot_testing_engine,
+    )
+
+    config = _build_engine_config(tmp_path, "pytest_curriculum_engine")
+    training_params = _build_engine_training_params(width=16, height=16)
+    training_params.update({"hidden_size": 16, "neural_lr": 0.001})
+
+    with contextlib.redirect_stdout(io.StringIO()):
+        events = list(
+            simulation_engine.run_curriculum_simulation_engine(
+                config=config,
+                training_params=training_params,
+                test_stage_idx=0,
+                env_size=16,
+                enable_step_tracking=False,
+            )
+        )
+
+    assert len(factory_calls) == 2
+    assert [call["kwargs"]["model_type"] for call in factory_calls] == ["worm2d", "worm2d"]
+    assert all(call["kwargs"]["body_params"] == training_params["body_params"] for call in factory_calls)
+    assert all(isinstance(call["body_model"], Worm2DModelAdapter) for call in factory_calls)
+
+    assert events[-1][0] == events[-1][1]
+    assert events[-1][3]["total_training_stages"] >= 1

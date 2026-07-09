@@ -55,7 +55,7 @@ has_chinese_font = setup_chinese_font()
 
 # 从core文件夹中导入所有必要的模块
 from core.environment import ExperimentConfig, Environment2D
-from core.worm_body import Worm2D, create_body_model
+from core.worm_body import create_body_model
 from core.visualization import plot_training_results_2d, create_training_animation_2d, create_training_animation_2d_dynamic_mp4
 from core.utils import (save_training_log, save_q_table, setup_neural_network, 
                       reset_worm_for_new_round, create_temperature_environment, 
@@ -88,6 +88,27 @@ def get_start_position(field_type, width, height):
         return (scaled_x, scaled_y)
     else:
         return (random.randint(3, width-4), random.randint(3, height-4))
+
+
+def create_training_body_model(start_pos, width, height, training_params):
+    """按训练参数创建身体模型，默认使用兼容的多节段链式身体。"""
+    body_params = training_params.get('body_params', {})
+    noise_params = training_params.get('noise_params', {})
+    if not isinstance(body_params, dict):
+        print(f"⚠️ 警告：body_params 不是字典类型: {type(body_params)}")
+        body_params = {}
+    if not isinstance(noise_params, dict):
+        print(f"⚠️ 警告：noise_params 不是字典类型: {type(noise_params)}")
+        noise_params = {}
+
+    return create_body_model(
+        model_type=training_params.get("body_model_type", "worm2d"),
+        start_pos=start_pos,
+        width=width,
+        height=height,
+        body_params=body_params,
+        noise_params=noise_params,
+    )
 
 
 def run_standard_simulation_engine(config, training_params, field_type, use_neural_network, enable_step_tracking=False):
@@ -140,14 +161,7 @@ def run_standard_simulation_engine(config, training_params, field_type, use_neur
         # 创建线虫对象 - 使用超时保护
         try:
             print("🔧 调试：开始通过身体模型工厂创建线虫对象...")
-            worm = create_body_model(
-                model_type="worm2d",
-                start_pos=start_pos, 
-                width=width, 
-                height=height, 
-                body_params=body_params, 
-                noise_params=noise_params
-            )
+            worm = create_training_body_model(start_pos, width, height, training_params)
             print("🔧 调试：线虫身体模型创建成功！")
             yield 5, 1000, "✅ 线虫对象创建成功", {'phase': 'init'}
             
@@ -426,14 +440,7 @@ def run_transfer_simulation_engine(config, training_params, source_field, target
         source_env = Environment2D(source_temp_array, best_point=source_best_point)
         
         start_pos = get_start_position(source_field, width, height)
-        # 🔧 修复点2：传递body_params和noise_params参数
-        source_worm = Worm2D(
-            start_pos=start_pos, 
-            width=width, 
-            height=height, 
-            body_params=training_params.get('body_params', {}), 
-            noise_params=training_params.get('noise_params', {})
-        )
+        source_worm = create_training_body_model(start_pos, width, height, training_params)
         
         if use_neural_network:
             if not PYTORCH_AVAILABLE:
@@ -493,14 +500,7 @@ def run_transfer_simulation_engine(config, training_params, source_field, target
         target_env = Environment2D(target_temp_array, best_point=target_best_point)
         
         target_start_pos = get_start_position(target_field, width, height)
-        # 🔧 修复点3：传递body_params和noise_params参数
-        veteran_worm = Worm2D(
-            start_pos=target_start_pos, 
-            width=width, 
-            height=height, 
-            body_params=training_params.get('body_params', {}), 
-            noise_params=training_params.get('noise_params', {})
-        )
+        veteran_worm = create_training_body_model(target_start_pos, width, height, training_params)
         
         if use_neural_network:
             setup_neural_network(veteran_worm, training_params)
@@ -664,14 +664,7 @@ def run_curriculum_simulation_engine(config, training_params, test_stage_idx, en
                 
                 # 创建或重置线虫
                 if worm is None:
-                    # 🔧 修复点4：传递body_params和noise_params参数
-                    worm = Worm2D(
-                        start_pos=start_pos, 
-                        width=width, 
-                        height=height, 
-                        body_params=training_params.get('body_params', {}), 
-                        noise_params=training_params.get('noise_params', {})
-                    )
+                    worm = create_training_body_model(start_pos, width, height, training_params)
                     setup_neural_network(worm, stage_training_params)
                 else:
                     # 重置经验池，保留神经网络权重
@@ -756,14 +749,7 @@ def run_curriculum_simulation_engine(config, training_params, test_stage_idx, en
         
         if worm is None:
             start_pos = get_start_position(test_stage["field_type"], width, height)
-            # 🔧 修复点5：传递body_params和noise_params参数
-            worm = Worm2D(
-                start_pos=start_pos, 
-                width=width, 
-                height=height, 
-                body_params=training_params.get('body_params', {}), 
-                noise_params=training_params.get('noise_params', {})
-            )
+            worm = create_training_body_model(start_pos, width, height, training_params)
             setup_neural_network(worm, base_training_params)
         
         # 准备测试环境
@@ -793,14 +779,7 @@ def run_curriculum_simulation_engine(config, training_params, test_stage_idx, en
         # --- 对照实验：新兵测试 ---
         yield current_step, total_estimated_steps, "🆚 对照实验：测试全新'新兵'的表现...", {'phase': 'control'}
         
-        # 🔧 修复点6：传递body_params和noise_params参数
-        rookie_worm = Worm2D(
-            start_pos=start_pos, 
-            width=width, 
-            height=height, 
-            body_params=training_params.get('body_params', {}), 
-            noise_params=training_params.get('noise_params', {})
-        )
+        rookie_worm = create_training_body_model(start_pos, width, height, training_params)
         setup_neural_network(rookie_worm, base_training_params)
         
         rookie_histories, rookie_rewards, rookie_test_results = yield from zero_shot_testing_engine(
