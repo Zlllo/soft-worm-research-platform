@@ -5,6 +5,8 @@
 """
 
 import os
+import sys
+import io
 import numpy as np
 import time
 import streamlit as st
@@ -15,6 +17,15 @@ import matplotlib
 matplotlib.use('Agg')  # 🔧 使用非交互式后端，避免GUI问题
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
+
+# 🔧 Windows GBK编码修复：强制stdout使用UTF-8，避免emoji打印崩溃
+try:
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    elif hasattr(sys.stdout, 'buffer'):
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+except Exception:
+    pass
 
 # 🔧 Mac系统中文字体配置
 def setup_chinese_font():
@@ -170,8 +181,24 @@ def run_standard_simulation_engine(config, training_params, field_type, use_neur
             yield -1, -1, f"线虫对象创建失败: {worm_error}", {}
             return
 
-        # 设置神经网络
-        if use_neural_network:
+        # 设置 Actor-Critic (优先级高于 DQN / Q-Learning)
+        method_name = training_params.get("method", "")
+        if "Actor-Critic" in method_name:
+            if hasattr(worm, 'setup_actor_critic'):
+                try:
+                    worm.setup_actor_critic()
+                    print("🔧 调试：Actor-Critic 初始化完成")
+                    yield 6, 1000, "🎯 Actor-Critic (DDPG) 已配置", {'phase': 'init'}
+                except Exception as ac_error:
+                    print(f"❌ Actor-Critic 初始化失败: {ac_error}")
+                    yield -1, -1, f"Actor-Critic 初始化失败: {ac_error}", {}
+                    return
+            else:
+                yield -1, -1, "所选身体模型不支持 Actor-Critic", {}
+                return
+
+        # 设置神经网络 (DQN / Dueling DQN)
+        elif use_neural_network:
             print("🔧 调试：设置神经网络...")
             if not PYTORCH_AVAILABLE:
                 yield -1, -1, "PyTorch 未安装，无法使用神经网络。", {}
@@ -1607,13 +1634,8 @@ def create_training_animation_2d_fixed(all_histories, temp_array, best_point, co
         # 保存动画
         try:
             # 保存为MP4 (推荐)
-            mp4_path = os.path.join(config.output_dir, "training_animation_fixed.mp4")
-            anim.save(mp4_path, writer='pillow', fps=5, bitrate=1800)
-            print(f"✓ 修复版MP4动画已保存: {mp4_path}")
-            
-            # 同时保存为GIF
             gif_path = os.path.join(config.output_dir, "training_animation_fixed.gif")
-            anim.save(gif_path, writer='pillow', fps=3, bitrate=1800)
+            anim.save(gif_path, writer='pillow', fps=5)
             print(f"✓ 修复版GIF动画已保存: {gif_path}")
             
         except Exception as save_error:

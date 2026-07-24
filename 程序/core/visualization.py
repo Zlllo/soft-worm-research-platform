@@ -1,6 +1,7 @@
 """
 可视化模块 - 包含训练结果图表和动画生成功能
 """
+import os
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.animation import FuncAnimation
@@ -191,15 +192,19 @@ def create_training_animation_2d(all_round_histories, temp_array, best_point, co
     anim = FuncAnimation(fig, animate, frames=max_len + 5, init_func=init, 
                         blit=True, interval=200, repeat=True)
     
-    # 保存动画
+    # 保存动画 — 使用 Pillow 输出 GIF (无需 FFmpeg)
     try:
-        print(f"正在保存动画到: {config.animation_video}")
-        # 提高质量
-        anim.save(config.animation_video, writer='ffmpeg', fps=4, dpi=120, bitrate=2000)
-        print(f"✓ 多节段身体动画已保存到: {config.animation_video}")
+        print(f"正在保存动画到: {config.animation_gif}")
+        anim.save(config.animation_gif, writer='pillow', fps=4, dpi=120)
+        print(f"✓ 训练动画已保存到: {config.animation_gif}")
     except Exception as e:
-        print(f"❌ 无法保存动画: {e}")
-        print("提示: 可能需要安装ffmpeg: brew install ffmpeg")
+        print(f"⚠️ Pillow 保存失败 ({e})，尝试 ffmpeg...")
+        try:
+            anim.save(config.animation_video, writer='ffmpeg', fps=4, dpi=120, bitrate=2000)
+            print(f"✓ MP4 动画已保存到: {config.animation_video}")
+        except Exception as e2:
+            print(f"❌ 无法保存动画: pillow={e}, ffmpeg={e2}")
+            raise
     
     # 注释掉 plt.show()，避免在无GUI环境下卡住
     # plt.show()
@@ -272,8 +277,6 @@ def create_training_animation_2d_dynamic_mp4(all_round_histories, width, height,
         from .utils import generate_dynamic_rotating_double_center, generate_dynamic_rotating_quad_center
     except ImportError:
         from utils import generate_dynamic_rotating_double_center, generate_dynamic_rotating_quad_center
-    from matplotlib.animation import FFMpegWriter
-    
     # 🔧 根据温度场类型选择正确的生成函数
     if hasattr(config, 'field_type') and config.field_type == 'dynamic_rotating_quad_center':
         generate_temp_field = generate_dynamic_rotating_quad_center
@@ -355,12 +358,16 @@ def create_training_animation_2d_dynamic_mp4(all_round_histories, width, height,
     # 🔧 修复：减少interval提高流畅度，提高fps减少掉帧
     anim = FuncAnimation(fig, animate, frames=max_len + 5, init_func=init, blit=True, interval=150, repeat=True)
     try:
-        print(f"正在保存动态温度场动画为MP4: {config.animation_video}")
-        # 🔧 修复：提高fps和比特率，减少掉帧和闪烁
-        writer = FFMpegWriter(fps=7, bitrate=3000)
-        anim.save(config.animation_video, writer=writer)
-        print(f"✓ 动态温度场MP4已保存到: {config.animation_video}")
+        print(f"正在保存动态温度场动画为GIF: {config.animation_gif}")
+        anim.save(config.animation_gif, writer='pillow', fps=7, dpi=120)
+        print(f"✓ 动态温度场GIF已保存到: {config.animation_gif}")
     except Exception as e:
-        print(f"❌ 无法保存MP4动画: {e}")
+        print(f"⚠️ Pillow 保存失败 ({e})，尝试 ffmpeg...")
+        try:
+            anim.save(config.animation_video, writer='ffmpeg', fps=7, dpi=120, bitrate=3000)
+            print(f"✓ 动态温度场MP4已保存到: {config.animation_video}")
+        except Exception as e2:
+            print(f"❌ 无法保存动画: pillow={e}, ffmpeg={e2}")
+            raise
     plt.close()
     return anim

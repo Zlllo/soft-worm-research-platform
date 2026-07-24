@@ -1,10 +1,21 @@
 """
 工具函数模块 - 包含日志保存、Q表保存等辅助功能
 """
+import sys
+import io
 from collections import deque
 import json
 import os
 import numpy as np
+
+# 🔧 Windows GBK编码修复
+try:
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    elif hasattr(sys.stdout, 'buffer'):
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+except Exception:
+    pass
 
 
 def save_training_log(config, all_histories, all_rewards, worm, env, training_params):
@@ -82,16 +93,25 @@ def save_training_log(config, all_histories, all_rewards, worm, env, training_pa
         else:
             f.write("  无有效的最终位置数据\n")
             
-        # 更新多节段身体特性分析
-        f.write(f"\n多节段身体特性:\n")
-        f.write(f"  节段数量: {worm.num_segments}\n")
-        f.write(f"  节段间距: {worm.segment_distance}\n")
-        f.write(f"  身体总长度: {(worm.num_segments - 1) * worm.segment_distance:.1f}格\n")
-        f.write(f"  身体柔韧性: {worm.body_flexibility}\n")
-        f.write(f"  表皮刚性: {worm.cuticle_stiffness}\n")
-        f.write(f"  最大弯曲角度: {worm.max_bend_angle}°\n")
-        f.write(f"  液压恢复力: {worm.hydrostatic_pressure}\n")
-        f.write(f"  液压恢复速度: {worm.pressure_recovery_rate}\n")
+        # 身体特性分析 (兼容多种身体模型)
+        f.write(f"\n身体特性:\n")
+        f.write(f"  节段/采样点数: {getattr(worm, 'num_segments', len(getattr(worm, 'body_segments', [])))}\n")
+        seg_dist = getattr(worm, 'segment_distance', 0.0)
+        f.write(f"  节段间距: {seg_dist}\n")
+        if hasattr(worm, 'body_length'):
+            f.write(f"  身体总长度: {worm.body_length:.1f}格\n")
+        elif hasattr(worm, 'num_segments'):
+            f.write(f"  身体总长度: {(worm.num_segments - 1) * seg_dist:.1f}格\n")
+        # Worm2D-specific body properties
+        for attr, label in [
+            ('body_flexibility', '身体柔韧性'),
+            ('cuticle_stiffness', '表皮刚性'),
+            ('max_bend_angle', '最大弯曲角度'),
+            ('hydrostatic_pressure', '液压恢复力'),
+            ('pressure_recovery_rate', '液压恢复速度'),
+        ]:
+            if hasattr(worm, attr):
+                f.write(f"  {label}: {getattr(worm, attr)}\n")
         
         # 🔧 【标黄-待改进】肌肉收缩波系统状态记录 - 新增功能，尚待完善
         # ⚠️ TODO: 下一步将添加更详细的肌肉系统日志，包括：
@@ -99,43 +119,52 @@ def save_training_log(config, all_histories, all_rewards, worm, env, training_pa
         # - 肌肉波频率和幅度的变化趋势
         # - 背腹肌肉协调性的量化分析
         # - 肌肉疲劳和能量消耗的追踪记录
-        f.write(f"\n🔧 【标黄-待改进】肌肉收缩波系统状态 (基础版本):\n")
-        f.write(f"  当前肌肉波相位: {worm.muscle_wave_phase:.3f} 弧度\n")
-        f.write(f"  背侧肌肉状态: {worm.dorsal_muscle_state:.3f} (激活强度)\n")
-        f.write(f"  腹侧肌肉状态: {worm.ventral_muscle_state:.3f} (激活强度)\n")
-        f.write(f"  肌肉波幅度: {worm.muscle_wave_amplitude:.3f}\n")
-        f.write(f"  肌肉波频率: {worm.muscle_wave_frequency:.3f}\n")
-        f.write(f"  肌肉协调性: {worm.muscle_coordination:.3f}\n")
-        
-        # 🔧 【微小改进-第一步】增强的肌肉系统分析
-        f.write(f"\n🔧 【微小改进-第一步】增强的肌肉动力学参数:\n")
-        f.write(f"  基础肌肉波频率: {worm.base_muscle_wave_frequency:.3f}\n")
-        f.write(f"  频率适应速度: {worm.frequency_adaptation_rate:.3f}\n")
-        f.write(f"  运动频率提升系数: {worm.movement_frequency_boost:.3f}\n")
-        f.write(f"  能量频率影响系数: {worm.energy_frequency_factor:.3f}\n")
-        
+        f.write(f"\n🔧 肌肉收缩波系统状态:\n")
+        f.write(f"  当前肌肉波相位: {getattr(worm, 'muscle_wave_phase', 0.0):.3f} 弧度\n")
+        f.write(f"  背侧肌肉状态: {getattr(worm, 'dorsal_muscle_state', 0.0):.3f} (激活强度)\n")
+        f.write(f"  腹侧肌肉状态: {getattr(worm, 'ventral_muscle_state', 0.0):.3f} (激活强度)\n")
+        f.write(f"  肌肉波幅度: {getattr(worm, 'muscle_wave_amplitude', 0.0):.3f}\n")
+        f.write(f"  肌肉波频率: {getattr(worm, 'muscle_wave_frequency', 0.0):.3f}\n")
+        mc = getattr(worm, 'muscle_coordination', None)
+        if mc is not None:
+            f.write(f"  肌肉协调性: {mc:.3f}\n")
+
+        # 增强的肌肉动力学参数 (Worm2D-specific)
+        for attr, label in [
+            ('base_muscle_wave_frequency', '基础肌肉波频率'),
+            ('frequency_adaptation_rate', '频率适应速度'),
+            ('movement_frequency_boost', '运动频率提升系数'),
+            ('energy_frequency_factor', '能量频率影响系数'),
+        ]:
+            val = getattr(worm, attr, None)
+            if val is not None:
+                f.write(f"  {label}: {val:.3f}\n")
+
         # 计算肌肉系统健康指标
-        muscle_balance = abs(worm.dorsal_muscle_state - worm.ventral_muscle_state)
-        muscle_activity = abs(worm.dorsal_muscle_state) + abs(worm.ventral_muscle_state)
-        energy_ratio = worm.energy / worm.max_energy
+        muscle_balance = abs(getattr(worm, 'dorsal_muscle_state', 0.0) - getattr(worm, 'ventral_muscle_state', 0.0))
+        muscle_activity = abs(getattr(worm, 'dorsal_muscle_state', 0.0)) + abs(getattr(worm, 'ventral_muscle_state', 0.0))
+        energy_ratio = getattr(worm, 'energy', 100.0) / max(getattr(worm, 'max_energy', 100.0), 1.0)
         f.write(f"\n🔧 肌肉系统健康指标:\n")
         f.write(f"  肌肉平衡度: {muscle_balance:.3f} (越小越平衡)\n")
         f.write(f"  肌肉活跃度: {muscle_activity:.3f}\n")
         f.write(f"  当前能量比例: {energy_ratio:.3f} ({energy_ratio*100:.1f}%)\n")
         f.write("  ⚠️ 注：以上肌肉系统参数为微小改进版本，持续完善中\n")
         
-        f.write(f"\n肌肉疲劳系统:\n")  # 🔧 第十三步：新增疲劳系统日志
-        f.write(f"  当前疲劳水平: {worm.muscle_fatigue_level:.3f}\n")
-        f.write(f"  疲劳累积速度: {worm.fatigue_accumulation_rate:.3f}\n")
-        f.write(f"  疲劳恢复速度: {worm.fatigue_recovery_rate:.3f}\n")
-        f.write(f"  疲劳阈值: {worm.fatigue_threshold:.3f}\n")
-        f.write(f"  最大疲劳惩罚: {worm.max_fatigue_penalty:.3f}\n")
-        
-        # 🔧 计算疲劳健康指标
-        if worm.muscle_fatigue_level > worm.fatigue_threshold:
+        f.write(f"\n肌肉疲劳系统:\n")
+        f.write(f"  当前疲劳水平: {getattr(worm, 'muscle_fatigue_level', 0.0):.3f}\n")
+        f.write(f"  疲劳累积速度: {getattr(worm, 'fatigue_accumulation_rate', 0.0):.3f}\n")
+        f.write(f"  疲劳恢复速度: {getattr(worm, 'fatigue_recovery_rate', 0.0):.3f}\n")
+        f.write(f"  疲劳阈值: {getattr(worm, 'fatigue_threshold', 0.0):.3f}\n")
+        f.write(f"  最大疲劳惩罚: {getattr(worm, 'max_fatigue_penalty', 0.0):.3f}\n")
+
+        # 计算疲劳健康指标
+        fatigue_level = getattr(worm, 'muscle_fatigue_level', 0.0)
+        fatigue_threshold = getattr(worm, 'fatigue_threshold', 0.3)
+        max_fatigue_penalty = getattr(worm, 'max_fatigue_penalty', 0.6)
+        if fatigue_level > fatigue_threshold:
             fatigue_status = "疲劳"
-            excess_fatigue = worm.muscle_fatigue_level - worm.fatigue_threshold
-            fatigue_penalty = (excess_fatigue / (1.0 - worm.fatigue_threshold)) * worm.max_fatigue_penalty
+            excess_fatigue = fatigue_level - fatigue_threshold
+            fatigue_penalty = (excess_fatigue / max(0.01, 1.0 - fatigue_threshold)) * max_fatigue_penalty
             muscle_efficiency = 1.0 - fatigue_penalty
         else:
             fatigue_status = "正常"
@@ -144,15 +173,16 @@ def save_training_log(config, all_histories, all_rewards, worm, env, training_pa
         f.write(f"  疲劳状态: {fatigue_status}\n")
         f.write(f"  当前肌肉效率: {muscle_efficiency:.3f} ({muscle_efficiency*100:.1f}%)\n")
         
-        f.write(f"\n温度感应肌肉系统:\n")  # 🔧 第十四步：新增温度-肌肉系统日志
-        if hasattr(worm, 'current_temp'):
-            f.write(f"  当前体温: {worm.current_temp:.1f}°C\n")
-            f.write(f"  最适肌肉温度: {worm.optimal_muscle_temperature:.1f}°C\n")
-            f.write(f"  温度肌肉敏感度: {worm.temperature_muscle_sensitivity:.2f}\n")
-            f.write(f"  肌肉温度适应速度: {worm.muscle_temp_adaptation_rate:.2f}\n")
-            
-            # 🔧 计算温度对肌肉的实际影响
-            temp_diff = abs(worm.current_temp - worm.optimal_muscle_temperature)
+        f.write(f"\n温度感应肌肉系统:\n")
+        current_temp = getattr(worm, 'current_temp', None)
+        if current_temp is not None:
+            f.write(f"  当前体温: {current_temp:.1f}°C\n")
+            f.write(f"  最适肌肉温度: {getattr(worm, 'optimal_muscle_temperature', 75.0):.1f}°C\n")
+            f.write(f"  温度肌肉敏感度: {getattr(worm, 'temperature_muscle_sensitivity', 0.8):.2f}\n")
+            f.write(f"  肌肉温度适应速度: {getattr(worm, 'muscle_temp_adaptation_rate', 0.1):.2f}\n")
+
+            # 计算温度对肌肉的实际影响
+            temp_diff = abs(current_temp - getattr(worm, 'optimal_muscle_temperature', 75.0))
             if temp_diff <= 5.0:
                 temp_status = "最适温度"
                 temp_efficiency = 1.0
@@ -171,13 +201,13 @@ def save_training_log(config, all_histories, all_rewards, worm, env, training_pa
         else:
             f.write(f"  温度感应系统: 未初始化\n")
         
-        f.write(f"\n身体弹性约束系统:\n")  # 🔧 第十五步：新增弹性约束系统日志
-        if hasattr(worm, 'segment_elasticity'):
-            f.write(f"  节段弹性系数: {worm.segment_elasticity:.2f}\n")
-            f.write(f"  最大拉伸倍数: {worm.max_segment_stretch:.2f}\n")
-            f.write(f"  最小压缩倍数: {worm.min_segment_compression:.2f}\n")
-            f.write(f"  最大角度约束: {worm.angular_constraint:.1f}°\n")
-            f.write(f"  弹性恢复速度: {worm.elastic_recovery_rate:.3f}\n")
+        f.write(f"\n身体弹性约束系统:\n")
+        if hasattr(worm, 'segment_elasticity') or hasattr(worm, 'angular_constraint'):
+            f.write(f"  节段弹性系数: {getattr(worm, 'segment_elasticity', 0.85):.2f}\n")
+            f.write(f"  最大拉伸倍数: {getattr(worm, 'max_segment_stretch', 1.5):.2f}\n")
+            f.write(f"  最小压缩倍数: {getattr(worm, 'min_segment_compression', 0.7):.2f}\n")
+            f.write(f"  最大角度约束: {getattr(worm, 'angular_constraint', 45.0):.1f}°\n")
+            f.write(f"  弹性恢复速度: {getattr(worm, 'elastic_recovery_rate', 0.12):.3f}\n")
             
             # 🔧 计算当前身体张力统计
             if hasattr(worm, 'segment_tensions'):
@@ -444,7 +474,15 @@ def reset_worm_for_new_round(worm, env, start_pos, width, height, field_type):
             worm.body_segments.append([int(segment_x), int(segment_y)])
 
     # --- 后续所有通用重置逻辑保持不变 ---
+    # 同步连续中心线模型的内部状态
+    if hasattr(worm, '_sync_centerline_from_public_segments'):
+        worm._sync_centerline_from_public_segments()
     worm.body_segment = [worm.body_segments[0], worm.body_segments[-1]]
+    if hasattr(worm, '_sync_public_state'):
+        try:
+            worm._sync_public_state()
+        except Exception:
+            pass
     worm.history = [worm.body_segments.copy()]
     worm.total_reward = 0
     

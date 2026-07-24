@@ -9,6 +9,16 @@ from collections import deque
 import time
 from abc import ABC, abstractmethod
 
+# Actor-Critic 导入
+try:
+    from .actor_critic import DDPGAgent, TORCH_AVAILABLE as AC_TORCH_AVAILABLE
+except ImportError:
+    try:
+        from actor_critic import DDPGAgent, TORCH_AVAILABLE as AC_TORCH_AVAILABLE
+    except ImportError:
+        DDPGAgent = None
+        AC_TORCH_AVAILABLE = False
+
 # 🔧 PyTorch导入检查
 try:
     import torch
@@ -1595,6 +1605,15 @@ class ContinuousCenterlineBody(BodyModel):
         self.position_noise = float(noise_params.get("position_noise", 0.0))
         self.action_size = 4
         self.use_neural = False
+        self.use_actor_critic = False
+        self.actor_critic_agent = None
+        self.ac_state_dim = 15
+        self.ac_hidden_size = int(body_params.get("ac_hidden_size", 128))
+        self.ac_actor_lr = float(body_params.get("ac_actor_lr", 1e-4))
+        self.ac_critic_lr = float(body_params.get("ac_critic_lr", 1e-3))
+        self.ac_gamma = float(body_params.get("ac_gamma", 0.95))
+        self.ac_batch_size = int(body_params.get("ac_batch_size", 64))
+        self.ac_noise_scale = float(body_params.get("ac_noise_scale", 0.6))
         self.q_table = [[[0.0, 0.0, 0.0, 0.0] for _ in range(self.width)] for _ in range(self.height)]
         self.state_buffer = deque(maxlen=4)
         self.recent_temperatures = []
@@ -1702,6 +1721,9 @@ class ContinuousCenterlineBody(BodyModel):
         self.visited_positions.clear()
         self.state_buffer.clear()
         self._initialize_centerline(start_pos)
+        # 重置 Actor-Critic 噪声
+        if self.use_actor_critic and self.actor_critic_agent is not None:
+            self.actor_critic_agent.noise.reset()
         return self.get_observation(env=kwargs.get("env"))
 
     def get_observation(self, env=None, **kwargs):
@@ -1790,6 +1812,12 @@ class ContinuousCenterlineBody(BodyModel):
         return self.last_physics_result
 
     def decide_move(self, env, epsilon=0.2, alpha=0.5, gamma=0.9):
+        """决策并移动。Actor-Critic 可用时优先使用。"""
+        # Actor-Critic 路径
+        if self.use_actor_critic and self.actor_critic_agent is not None:
+            return self.decide_move_actor_critic(env)
+
+        # Q-learning 路径（原有逻辑）
         old_x, old_y = int(round(self.x)), int(round(self.y))
         old_temp = float(env.get_temperature(old_x, old_y))
         if random.random() < epsilon:
@@ -1805,6 +1833,146 @@ class ContinuousCenterlineBody(BodyModel):
             max_next_q = max(self.q_table[new_y][new_x])
             self.q_table[old_y][old_x][action] = old_q + alpha * (reward + gamma * max_next_q - old_q)
         self.total_reward += reward
+        return bool(result.get('moved', False))
+
+    # ── Actor-Critic 相关方法 ─────────────────────────
+
+    def get_state_v2(self, env=None):
+        """返回 15 维连续状态向量，供 Actor-Critic 使用。"""
+        state = []
+
+        # 1-2. 归一化头部位置
+        state.append(float(self.x) / max(1, self.width))
+        state.append(float(self.y) / max(1, self.height))
+
+        # 3-4. 朝向 (cos, sin 编码，保证连续性)
+        state.append(math.cos(self.heading))
+        state.append(math.sin(self.heading))
+
+        # 5-6. 归一化速度
+        max_speed = max(self.forward_speed * 2.0, 1.0)
+        state.append(float(self.velocity[0]) / max_speed)
+        state.append(float(self.velocity[1]) / max_speed)
+
+        # 7. 身体长度误差（归一化）
+        shape = self._shape_metrics() if hasattr(self, '_shape_metrics') else {}
+        length_error = shape.get('body_length_error_abs', 0.0)
+        state.append(np.clip(length_error / max(self.body_length, 1.0), 0.0, 1.0))
+
+        # 8-9. 曲率（归一化）
+        curv_limit = max(self.angular_constraint, 1.0)
+        state.append(np.clip(shape.get('curvature_mean_deg', 0.0) / curv_limit, 0.0, 1.0))
+        state.append(np.clip(shape.get('curvature_max_deg', 0.0) / curv_limit, 0.0, 1.0))
+
+        # 10. 头部温度
+        head_temp = 25.0
+        if env is not None:
+            head_temp = float(env.get_temperature(int(self.x), int(self.y)))
+        state.append(np.clip(head_temp / 120.0, 0.0, 1.0))
+
+        # 11-14. 四个方向的温度梯度
+        gradient_defaults = [0.0, 0.0, 0.0, 0.0]
+        if env is not None:
+            hx, hy = int(self.x), int(self.y)
+            base_temp = float(env.get_temperature(hx, hy))
+            directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]  # 上 下 右 左
+            for dx, dy in directions:
+                nx, ny = hx + dx, hy + dy
+                if 0 <= nx < self.width and 0 <= ny < self.height:
+                    gradient_defaults.append(
+                        np.clip((float(env.get_temperature(nx, ny)) - base_temp) / 20.0, -1.0, 1.0)
+                    )
+                else:
+                    gradient_defaults.append(0.0)
+        # 只取前 4 个方向
+        state.extend(gradient_defaults[:4])
+
+        # 15. 能量比例
+        state.append(float(self.energy) / max(self.max_energy, 1.0))
+
+        return np.array(state[: self.ac_state_dim], dtype=np.float32)
+
+    def setup_actor_critic(self):
+        """初始化 DDPG Agent。"""
+        if DDPGAgent is None or not AC_TORCH_AVAILABLE:
+            print("⚠️ Actor-Critic 不可用 (需要 PyTorch)")
+            self.use_actor_critic = False
+            return False
+
+        try:
+            import torch  # noqa: F401
+        except ImportError:
+            self.use_actor_critic = False
+            return False
+
+        self.actor_critic_agent = DDPGAgent(
+            state_dim=self.ac_state_dim,
+            action_dim=2,
+            hidden_size=self.ac_hidden_size,
+            actor_lr=self.ac_actor_lr,
+            critic_lr=self.ac_critic_lr,
+            gamma=self.ac_gamma,
+            batch_size=self.ac_batch_size,
+            noise_scale=self.ac_noise_scale,
+        )
+        self.use_actor_critic = True
+        self.use_neural = False  # AC 和 Q-learning 互斥
+        print("✓ Actor-Critic (DDPG) Agent 初始化完成")
+        return True
+
+    def decide_move_actor_critic(self, env):
+        """
+        Actor-Critic 决策：使用 Actor 输出连续 (heading, step_length)，
+        收集经验并在 buffer 足够时训练。
+        """
+        agent = self.actor_critic_agent
+        if agent is None:
+            return False
+
+        # 1. 获取当前状态
+        state = self.get_state_v2(env)
+
+        # 2. 选择动作
+        heading, step = agent.act(state, add_noise=agent.train_mode)
+        action_dict = {"heading": heading, "step": step}
+
+        # 3. 记录旧状态用于经验回放
+        old_head = (self.x, self.y)
+        old_energy = self.energy
+
+        # 4. 执行物理步
+        result = self.step_physics(env=env, action=action_dict)
+
+        # 5. 计算奖励
+        new_head = (self.x, self.y)
+        new_temp = float(env.get_temperature(int(new_head[0]), int(new_head[1])))
+        old_temp = float(env.get_temperature(int(old_head[0]), int(old_head[1])))
+
+        # 温度收益 + 能量惩罚 + 约束惩罚
+        temp_reward = (new_temp - old_temp) * 0.1
+        energy_penalty = (self.max_energy - self.energy) * 0.001
+        shape = self._shape_metrics() if hasattr(self, '_shape_metrics') else {}
+        constraint_penalty = shape.get('constraint_violation_rate', 0.0) * 0.5
+        reward = temp_reward - energy_penalty - constraint_penalty
+
+        # 边界惩罚
+        movement = result.get('movement', 0.0)
+        if movement < 1e-9:
+            reward -= 0.5
+
+        # 6. 存储经验
+        next_state = self.get_state_v2(env)
+        done = self.energy <= 0.0
+        agent.remember(state, np.array([heading, step]), reward, next_state, done)
+
+        # 7. 训练
+        agent.train()
+
+        # 8. 更新统计
+        self.total_reward += reward
+        self.current_step += 1
+        self.recent_temperatures.append(float(env.get_temperature(int(self.x), int(self.y))))
+
         return bool(result.get('moved', False))
 
     def get_geometry(self):
@@ -1881,6 +2049,8 @@ class ContinuousCenterlineBody(BodyModel):
             'history_length': len(self.history),
             'last_action': self.last_action,
             'pending_action': self._pending_action,
+            'use_actor_critic': bool(getattr(self, 'use_actor_critic', False)),
+            'training_method': 'actor_critic' if getattr(self, 'use_actor_critic', False) else 'q_learning',
         }
         metrics.update(self._shape_metrics())
         if env is not None:

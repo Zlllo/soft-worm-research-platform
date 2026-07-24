@@ -14,6 +14,7 @@ import datetime
 import os
 import time
 import sys
+import io
 import shutil
 import traceback
 from pathlib import Path
@@ -21,6 +22,15 @@ from collections import deque
 
 # 将core文件夹添加到Python路径中
 sys.path.append(os.path.join(os.path.dirname(__file__), 'core'))
+
+# 🔧 Windows GBK编码修复：强制stdout使用UTF-8，避免emoji打印崩溃
+try:
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    elif hasattr(sys.stdout, 'buffer'):
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+except Exception:
+    pass
 
 # 从 simulation_engine.py 导入所有引擎
 from simulation_engine import (
@@ -684,66 +694,275 @@ with st.sidebar:
     # 身体参数配置
     # ==========================================================================
     with st.expander("🐛 身体形态设计", expanded=False):
-        st.markdown("##### 🔧 身体结构参数")
-        
-        col1, col2 = st.columns(2)
-        with col1:
-            num_segments = st.slider(
-                "节段数量", 3, 15, 6, 1,
-                disabled=st.session_state.is_simulating,
-                key="num_segments_slider",
-                help="线虫身体的节段数量"
-            )
-            segment_length = st.slider(
-                "节段长度", 3.0, 8.0, 5.0, 0.5,
-                disabled=st.session_state.is_simulating,
-                key="segment_length_slider",
-                help="每个节段的长度(像素)"
-            )
-            
-        with col2:
-            head_radius = st.slider(
-                "头部半径", 2.0, 6.0, 4.0, 0.5,
-                disabled=st.session_state.is_simulating,
-                key="head_radius_slider",
-                help="头部圆形半径(像素)"
-            )
-            body_width = st.slider(
-                "身体宽度", 1.0, 4.0, 2.5, 0.25,
-                disabled=st.session_state.is_simulating,
-                key="body_width_slider",
-                help="身体节段宽度(像素)"
-            )
-        
-        st.markdown("##### 🎯 运动参数")
-        col3, col4 = st.columns(2)
-        with col3:
-            max_turn_angle = st.slider(
-                "最大转向角", 10, 60, 30, 5,
-                disabled=st.session_state.is_simulating,
-                key="max_turn_angle_slider",
-                help="每步最大转向角度(度)"
-            )
-            forward_speed = st.slider(
-                "前进速度", 1.0, 5.0, 2.0, 0.5,
-                disabled=st.session_state.is_simulating,
-                key="forward_speed_slider",
-                help="前进步长(像素)"
-            )
-            
-        with col4:
-            backward_speed = st.slider(
-                "后退速度", 0.5, 3.0, 1.0, 0.25,
-                disabled=st.session_state.is_simulating,
-                key="backward_speed_slider",
-                help="后退步长(像素)"
-            )
-            turning_speed = st.slider(
-                "转向速度", 0.5, 3.0, 1.5, 0.25,
-                disabled=st.session_state.is_simulating,
-                key="turning_speed_slider",
-                help="转向时的移动速度"
-            )
+        # 身体模型类型选择器
+        body_model_map = {
+            "🪱 多节段链条 (Worm2D)": "worm2d",
+            "📏 连续中心线 (Continuous)": "continuous_centerline",
+            "🌊 主动形变波 (Active Wave)": "active_deformation",
+        }
+        body_model_display = st.selectbox(
+            "🧬 身体模型",
+            list(body_model_map.keys()),
+            index=0,
+            disabled=st.session_state.is_simulating,
+            key="body_model_selector",
+            help="选择线虫身体的数学模型"
+        )
+        body_model_type = body_model_map[body_model_display]
+
+        # ---- Worm2D 参数 ----
+        if body_model_type == "worm2d":
+            st.markdown("##### 🔧 身体结构参数")
+            col1, col2 = st.columns(2)
+            with col1:
+                num_segments = st.slider(
+                    "节段数量", 3, 15, 6, 1,
+                    disabled=st.session_state.is_simulating,
+                    key="num_segments_slider",
+                    help="线虫身体的节段数量"
+                )
+                segment_length = st.slider(
+                    "节段长度", 3.0, 8.0, 5.0, 0.5,
+                    disabled=st.session_state.is_simulating,
+                    key="segment_length_slider",
+                    help="每个节段的长度(像素)"
+                )
+            with col2:
+                head_radius = st.slider(
+                    "头部半径", 2.0, 6.0, 4.0, 0.5,
+                    disabled=st.session_state.is_simulating,
+                    key="head_radius_slider",
+                    help="头部圆形半径(像素)"
+                )
+                body_width = st.slider(
+                    "身体宽度", 1.0, 4.0, 2.5, 0.25,
+                    disabled=st.session_state.is_simulating,
+                    key="body_width_slider",
+                    help="身体节段宽度(像素)"
+                )
+            st.markdown("##### 🎯 运动参数")
+            col3, col4 = st.columns(2)
+            with col3:
+                max_turn_angle = st.slider(
+                    "最大转向角", 10, 60, 30, 5,
+                    disabled=st.session_state.is_simulating,
+                    key="max_turn_angle_slider",
+                    help="每步最大转向角度(度)"
+                )
+                forward_speed = st.slider(
+                    "前进速度", 1.0, 5.0, 2.0, 0.5,
+                    disabled=st.session_state.is_simulating,
+                    key="forward_speed_slider",
+                    help="前进步长(像素)"
+                )
+            with col4:
+                backward_speed = st.slider(
+                    "后退速度", 0.5, 3.0, 1.0, 0.25,
+                    disabled=st.session_state.is_simulating,
+                    key="backward_speed_slider",
+                    help="后退步长(像素)"
+                )
+                turning_speed = st.slider(
+                    "转向速度", 0.5, 3.0, 1.5, 0.25,
+                    disabled=st.session_state.is_simulating,
+                    key="turning_speed_slider",
+                    help="转向时的移动速度"
+                )
+            # 为Q-Learning兼容设置默认值
+            sample_count = num_segments
+            body_length_ui = segment_length
+            curvature_limit = max_turn_angle
+            length_stiffness = 0.85
+            curvature_stiffness = 0.35
+            damping = 0.72
+            wave_amplitude = 1.0
+            wave_frequency = 0.25
+            wave_speed = 1.0
+            wave_length = 12.0
+
+        # ---- ContinuousCenterlineBody 参数 ----
+        elif body_model_type == "continuous_centerline":
+            st.markdown("##### 🔧 中心线参数")
+            col1, col2 = st.columns(2)
+            with col1:
+                sample_count = st.slider(
+                    "采样点数", 3, 20, 9, 1,
+                    disabled=st.session_state.is_simulating,
+                    key="cc_sample_count",
+                    help="沿中心线的等距采样点数"
+                )
+                body_length_ui = st.slider(
+                    "身体总弧长", 5.0, 30.0, 12.0, 0.5,
+                    disabled=st.session_state.is_simulating,
+                    key="cc_body_length",
+                    help="中心线总弧长(像素)"
+                )
+                head_radius = st.slider(
+                    "头部半径", 2.0, 6.0, 3.0, 0.5,
+                    disabled=st.session_state.is_simulating,
+                    key="cc_head_radius",
+                    help="头部圆形半径(像素)"
+                )
+            with col2:
+                body_width = st.slider(
+                    "身体宽度", 1.0, 4.0, 2.0, 0.25,
+                    disabled=st.session_state.is_simulating,
+                    key="cc_body_width",
+                    help="身体节段宽度(像素)"
+                )
+                forward_speed = st.slider(
+                    "前进速度", 0.5, 5.0, 1.2, 0.1,
+                    disabled=st.session_state.is_simulating,
+                    key="cc_forward_speed",
+                    help="每步前进基础步长"
+                )
+                max_turn_angle = st.slider(
+                    "最大转向角", 10, 60, 35, 5,
+                    disabled=st.session_state.is_simulating,
+                    key="cc_max_turn_angle",
+                    help="每步最大转向角度(度)"
+                )
+            st.markdown("##### 🔗 约束参数")
+            col3, col4 = st.columns(2)
+            with col3:
+                curvature_limit = st.slider(
+                    "曲率限制角", 15, 90, 45, 5,
+                    disabled=st.session_state.is_simulating,
+                    key="cc_curvature_limit",
+                    help="相邻段最大弯折角度(度)"
+                )
+                length_stiffness = st.slider(
+                    "长度刚度", 0.3, 1.0, 0.85, 0.05,
+                    disabled=st.session_state.is_simulating,
+                    key="cc_length_stiffness",
+                    help="长度保持约束的刚度"
+                )
+            with col4:
+                curvature_stiffness = st.slider(
+                    "曲率刚度", 0.1, 1.0, 0.35, 0.05,
+                    disabled=st.session_state.is_simulating,
+                    key="cc_curvature_stiffness",
+                    help="曲率约束的刚度"
+                )
+                damping = st.slider(
+                    "运动阻尼", 0.3, 0.95, 0.72, 0.05,
+                    disabled=st.session_state.is_simulating,
+                    key="cc_damping",
+                    help="速度平滑阻尼系数"
+                )
+            # 为兼容性设置默认值
+            num_segments = sample_count
+            segment_length = body_length_ui
+            backward_speed = 1.0
+            turning_speed = 1.5
+            wave_amplitude = 0.0
+            wave_frequency = 0.0
+            wave_speed = 0.0
+            wave_length = body_length_ui
+
+        # ---- ActiveDeformationBody 参数 ----
+        else:  # active_deformation
+            st.markdown("##### 🔧 中心线参数")
+            col1, col2 = st.columns(2)
+            with col1:
+                sample_count = st.slider(
+                    "采样点数", 3, 20, 9, 1,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_sample_count",
+                    help="沿中心线的等距采样点数"
+                )
+                body_length_ui = st.slider(
+                    "身体总弧长", 5.0, 30.0, 12.0, 0.5,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_body_length",
+                    help="中心线总弧长(像素)"
+                )
+                head_radius = st.slider(
+                    "头部半径", 2.0, 6.0, 3.0, 0.5,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_head_radius",
+                    help="头部圆形半径(像素)"
+                )
+            with col2:
+                body_width = st.slider(
+                    "身体宽度", 1.0, 4.0, 2.0, 0.25,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_body_width",
+                    help="身体节段宽度(像素)"
+                )
+                forward_speed = st.slider(
+                    "前进速度", 0.5, 5.0, 1.2, 0.1,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_forward_speed",
+                    help="每步前进基础步长"
+                )
+                max_turn_angle = st.slider(
+                    "最大转向角", 10, 60, 35, 5,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_max_turn_angle",
+                    help="每步最大转向角度(度)"
+                )
+            st.markdown("##### 🔗 约束参数")
+            col3, col4 = st.columns(2)
+            with col3:
+                curvature_limit = st.slider(
+                    "曲率限制角", 15, 90, 45, 5,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_curvature_limit",
+                    help="相邻段最大弯折角度(度)"
+                )
+                length_stiffness = st.slider(
+                    "长度刚度", 0.3, 1.0, 0.85, 0.05,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_length_stiffness",
+                    help="长度保持约束的刚度"
+                )
+            with col4:
+                curvature_stiffness = st.slider(
+                    "曲率刚度", 0.1, 1.0, 0.35, 0.05,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_curvature_stiffness",
+                    help="曲率约束的刚度"
+                )
+                damping = st.slider(
+                    "运动阻尼", 0.3, 0.95, 0.72, 0.05,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_damping",
+                    help="速度平滑阻尼系数"
+                )
+            st.markdown("##### 🌊 主动波参数")
+            col5, col6 = st.columns(2)
+            with col5:
+                wave_amplitude = st.slider(
+                    "波幅", 0.1, 3.0, 1.0, 0.1,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_wave_amplitude",
+                    help="正弦波侧向摆动幅度"
+                )
+                wave_frequency = st.slider(
+                    "波频率", 0.05, 1.0, 0.25, 0.05,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_wave_frequency",
+                    help="肌肉波频率"
+                )
+            with col6:
+                wave_speed = st.slider(
+                    "波传播速度", 0.1, 3.0, 1.0, 0.1,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_wave_speed",
+                    help="波沿身体传播速度"
+                )
+                wave_length = st.slider(
+                    "波长", 3.0, 30.0, 12.0, 0.5,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_wave_length",
+                    help="正弦波的波长"
+                )
+            # 为兼容性设置默认值
+            num_segments = sample_count
+            segment_length = body_length_ui
+            backward_speed = 1.0
+            turning_speed = 1.5
 
     # ==========================================================================
     # 噪声参数配置
@@ -795,16 +1014,24 @@ with st.sidebar:
     if mode_choice == "标准训练模式":
         st.markdown("### 📊 标准设置")
         
-        # 学习方法选择
-        methods = []
-        if PYTORCH_AVAILABLE:
-            methods = ["🧠 DQN", "⚡ Dueling DQN"]
-        methods.insert(0, "📋 Q-Learning")
-        
+        # 学习方法选择 — 根据身体模型类型显示可用算法
+        if body_model_type == "worm2d":
+            # Worm2D: Q-Learning + DQN + Dueling DQN
+            methods = ["📋 Q-Learning"]
+            if PYTORCH_AVAILABLE:
+                methods += ["🧠 DQN", "⚡ Dueling DQN"]
+            default_method_idx = 1 if PYTORCH_AVAILABLE else 0
+        else:
+            # 连续身体模型: Q-Learning + Actor-Critic (DQN 未适配)
+            methods = ["📋 Q-Learning"]
+            if PYTORCH_AVAILABLE:
+                methods.append("🎯 Actor-Critic")
+            default_method_idx = 1 if PYTORCH_AVAILABLE else 0
+
         method_choice = st.selectbox(
-            "🤖 学习算法", 
-            methods, 
-            index=1 if PYTORCH_AVAILABLE else 0, 
+            "🤖 学习算法",
+            methods,
+            index=default_method_idx,
             disabled=st.session_state.is_simulating,
             key="method_selector_standard"
         )
@@ -954,7 +1181,7 @@ with st.sidebar:
                     disabled=st.session_state.is_simulating,
                     key="min_epsilon_slider"
                 )
-                if "DQN" in method_choice:
+                if "DQN" in method_choice or "Actor" in method_choice:
                     hidden_size = st.slider(
                         "隐藏层大小", 32, 512, 32, 32,  # 改为32，匹配8.22版本
                         disabled=st.session_state.is_simulating,
@@ -1006,6 +1233,51 @@ with st.sidebar:
             else:
                 neural_lr = 0.001
                 weight_decay = 0.0005
+
+            # Actor-Critic 专用超参数
+            if "Actor-Critic" in method_choice:
+                st.markdown("##### 🎯 Actor-Critic 超参数")
+                col_ac1, col_ac2 = st.columns(2)
+                with col_ac1:
+                    ac_hidden_size = st.slider(
+                        "AC 隐藏层大小", 32, 256, 128, 16,
+                        disabled=st.session_state.is_simulating,
+                        key="ac_hidden_size_slider",
+                        help="Actor 和 Critic 网络的隐藏层神经元数"
+                    )
+                    ac_actor_lr = st.slider(
+                        "Actor 学习率", 0.00001, 0.01, 0.0001, 0.00001,
+                        format="%.5f",
+                        disabled=st.session_state.is_simulating,
+                        key="ac_actor_lr_slider",
+                        help="策略网络学习率"
+                    )
+                with col_ac2:
+                    ac_batch_size = st.slider(
+                        "AC 批次大小", 16, 256, 64, 16,
+                        disabled=st.session_state.is_simulating,
+                        key="ac_batch_size_slider",
+                        help="经验回放采样批次大小"
+                    )
+                    ac_critic_lr = st.slider(
+                        "Critic 学习率", 0.0001, 0.01, 0.001, 0.0001,
+                        format="%.4f",
+                        disabled=st.session_state.is_simulating,
+                        key="ac_critic_lr_slider",
+                        help="价值网络学习率"
+                    )
+                ac_noise_scale = st.slider(
+                    "探索噪声强度", 0.1, 2.0, 0.6, 0.1,
+                    disabled=st.session_state.is_simulating,
+                    key="ac_noise_scale_slider",
+                    help="Ornstein-Uhlenbeck 噪声初始强度 (越大探索越多)"
+                )
+            else:
+                ac_hidden_size = 128
+                ac_actor_lr = 1e-4
+                ac_critic_lr = 1e-3
+                ac_batch_size = 64
+                ac_noise_scale = 0.6
     else:
         # 课程学习默认值，匹配8.22版本
         width = height = 40  # 改为40，匹配8.22版本
@@ -1053,17 +1325,41 @@ if start_button:
     st.session_state.current_config = config
     
     use_neural = "DQN" in method_choice
+
+    # 非Worm2D身体模型不支持迁移学习和课程学习 (需要DQN)
+    if body_model_type != "worm2d" and mode_choice != "标准训练模式":
+        st.error(f"❌「{body_model_display}」身体模型目前仅支持标准训练 + Q-Learning 模式。\n\n请切换为「标准训练」模式或选择「Worm2D」身体模型。")
+        st.session_state.is_simulating = False
+        st.stop()
     
     # 身体参数字典 - 关键修复：确保参数正确传递
     body_params = {
         "num_segments": num_segments,
+        "sample_count": sample_count,
         "segment_length": segment_length,
+        "body_length": body_length_ui,
         "head_radius": head_radius,
         "body_width": body_width,
         "max_turn_angle": max_turn_angle,
         "forward_speed": forward_speed,
         "backward_speed": backward_speed,
-        "turning_speed": turning_speed
+        "turning_speed": turning_speed,
+        "curvature_limit_deg": curvature_limit,
+        "angular_constraint": curvature_limit,
+        "length_stiffness": length_stiffness,
+        "curvature_stiffness": curvature_stiffness,
+        "damping": damping,
+        "wave_amplitude": wave_amplitude,
+        "wave_frequency": wave_frequency,
+        "wave_speed": wave_speed,
+        "wave_length": wave_length,
+        # Actor-Critic 超参数
+        "ac_hidden_size": ac_hidden_size,
+        "ac_actor_lr": ac_actor_lr,
+        "ac_critic_lr": ac_critic_lr,
+        "ac_gamma": discount_factor,
+        "ac_batch_size": ac_batch_size,
+        "ac_noise_scale": ac_noise_scale,
     }
     
     # 噪声参数字典 - 关键修复：确保参数正确传递
@@ -1093,17 +1389,18 @@ if start_button:
             "neural_lr": neural_lr,
             "hidden_size": hidden_size,
             "weight_decay": weight_decay,
+            "body_model_type": body_model_type,
             "body_params": body_params,  # 确保传递
             "noise_params": noise_params  # 确保传递
         }
     else:
         training_params = {
-            "width": width, 
-            "height": height, 
-            "num_rounds": num_rounds, 
+            "width": width,
+            "height": height,
+            "num_rounds": num_rounds,
             "steps_per_round": steps_per_round,
-            "initial_epsilon": initial_epsilon, 
-            "learning_rate": learning_rate, 
+            "initial_epsilon": initial_epsilon,
+            "learning_rate": learning_rate,
             "min_epsilon": min_epsilon,  # 使用配置的最小epsilon
             "epsilon_decay": epsilon_decay,  # 使用配置的epsilon衰减
             "discount_factor": discount_factor,  # 使用配置的折扣因子
@@ -1111,6 +1408,7 @@ if start_button:
             "neural_lr": neural_lr,
             "hidden_size": hidden_size,  # 使用配置的隐藏层大小
             "weight_decay": weight_decay if "DQN" in method_choice else 5e-4,  # 添加权重衰减
+            "body_model_type": body_model_type,
             "body_params": body_params,  # 确保传递
             "noise_params": noise_params  # 确保传递
         }
@@ -1152,12 +1450,19 @@ if start_button:
     
     # 身体参数展示
     st.markdown("#### 🐛 当前身体配置")
+    # 模型名称映射
+    model_display_name = {
+        "worm2d": "多节段链条",
+        "continuous_centerline": "连续中心线",
+        "active_deformation": "主动形变波",
+    }.get(body_model_type, body_model_type)
+
     col1, col2, col3, col4 = st.columns(4)
     with col1:
         st.markdown(f"""
         <div class="compact-card">
-            <strong>节段数:</strong> {num_segments}<br>
-            <strong>长度:</strong> {segment_length}px
+            <strong>模型:</strong> {model_display_name}<br>
+            <strong>采样点:</strong> {sample_count}
         </div>
         """, unsafe_allow_html=True)
     with col2:
@@ -1175,10 +1480,15 @@ if start_button:
         </div>
         """, unsafe_allow_html=True)
     with col4:
+        if body_model_type == "active_deformation":
+            card_text = f"<strong>波幅:</strong> {wave_amplitude}<br><strong>波频:</strong> {wave_frequency}"
+        elif body_model_type == "continuous_centerline":
+            card_text = f"<strong>阻尼:</strong> {damping}<br><strong>长度刚度:</strong> {length_stiffness}"
+        else:
+            card_text = f"<strong>后退:</strong> {backward_speed}px<br><strong>转向:</strong> {turning_speed}px"
         st.markdown(f"""
         <div class="compact-card">
-            <strong>后退:</strong> {backward_speed}px<br>
-            <strong>转向:</strong> {turning_speed}px
+            {card_text}
         </div>
         """, unsafe_allow_html=True)
     
