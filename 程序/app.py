@@ -1075,12 +1075,15 @@ with st.sidebar:
             st.stop()
         
         method_choice = st.selectbox(
-            "🧠 算法", 
+            "🧠 算法",
             ["🧠 DQN", "⚡ Dueling DQN"],
             index=1,
             disabled=st.session_state.is_simulating,
             key="method_selector_transfer"
         )
+        # 奖励函数变体（迁移学习仅 Worm2D，能量变体对其无效果，固定原版）
+        reward_variant = "original"
+        reward_energy_weight = 0.1
         
         transfer_options = [
             "🎯 单热源 (single_center)", "♻️ 双热源 (dual_center)", "🌊 S型迷宫 (maze_thermal_channel)", 
@@ -1230,9 +1233,21 @@ with st.sidebar:
                     disabled=st.session_state.is_simulating,
                     key="weight_decay_slider"
                 )
+                # state_v2 选项 — 仅 Worm2D + DQN 可用
+                if body_model_type == "worm2d":
+                    use_state_v2 = st.toggle(
+                        "🧬 使用 state_v2 (10维)",
+                        value=False,
+                        disabled=st.session_state.is_simulating,
+                        key="use_state_v2_toggle",
+                        help="启用后 DQN 输入从 32 维 (8×4) 升级到 40 维 (10×4)：原8维 + 能量率 + 平均曲率"
+                    )
+                else:
+                    use_state_v2 = False
             else:
                 neural_lr = 0.001
                 weight_decay = 0.0005
+                use_state_v2 = False
 
             # Actor-Critic 专用超参数
             if "Actor-Critic" in method_choice:
@@ -1278,6 +1293,27 @@ with st.sidebar:
                 ac_critic_lr = 1e-3
                 ac_batch_size = 64
                 ac_noise_scale = 0.6
+
+            # 奖励函数变体 — 统一 core/reward_functions.py 模块
+            st.markdown("##### 🎁 奖励函数")
+            reward_variant = st.selectbox(
+                "奖励变体",
+                ["original", "energy"],
+                index=0,
+                format_func=lambda v: {"original": "不含能量（原版）", "energy": "含能量（单步化）"}[v],
+                disabled=st.session_state.is_simulating,
+                key="reward_variant_selectbox",
+                help="original: Worm2D 原始温度阶梯（无能量项）；energy: 阶梯 + 单步能量惩罚 -w_e·ΔE/maxE"
+            )
+            reward_energy_weight = st.slider(
+                "能量权重 w_e", 0.0, 0.5, 0.1, 0.01,
+                format="%.2f",
+                disabled=st.session_state.is_simulating or reward_variant != "energy",
+                key="reward_energy_weight_slider",
+                help="单步能量惩罚系数：每步扣除 w_e × ΔE / max_energy（ΔE = 当步能量消耗）"
+            )
+            if body_model_type == "worm2d" and reward_variant == "energy":
+                st.warning("⚠️ Worm2D 的能量从不衰减（ΔE≡0），含能量变体与原版逐值等价，仅在 CCB/ADB 上有效果。")
     else:
         # 课程学习默认值，匹配8.22版本
         width = height = 40  # 改为40，匹配8.22版本
@@ -1291,6 +1327,9 @@ with st.sidebar:
         neural_lr = 0.001  # 改为0.001，匹配8.22版本
         hidden_size = 32  # 改为32，匹配8.22版本
         weight_decay = 5e-4
+        # 奖励函数变体（课程学习默认原版）
+        reward_variant = "original"
+        reward_energy_weight = 0.1
 
     st.markdown("---")
     
@@ -1390,6 +1429,9 @@ if start_button:
             "hidden_size": hidden_size,
             "weight_decay": weight_decay,
             "body_model_type": body_model_type,
+            "use_state_v2": use_state_v2,
+            "reward_variant": reward_variant,
+            "reward_energy_weight": reward_energy_weight,
             "body_params": body_params,  # 确保传递
             "noise_params": noise_params  # 确保传递
         }
@@ -1409,6 +1451,9 @@ if start_button:
             "hidden_size": hidden_size,  # 使用配置的隐藏层大小
             "weight_decay": weight_decay if "DQN" in method_choice else 5e-4,  # 添加权重衰减
             "body_model_type": body_model_type,
+            "use_state_v2": use_state_v2,
+            "reward_variant": reward_variant,
+            "reward_energy_weight": reward_energy_weight,
             "body_params": body_params,  # 确保传递
             "noise_params": noise_params  # 确保传递
         }

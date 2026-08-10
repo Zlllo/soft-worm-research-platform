@@ -409,23 +409,27 @@ def setup_neural_network(worm, training_params):
     
     print("🔧 初始化持久神经网络组件...")
     worm.use_neural = True
-    
+
     method = training_params.get("method", "Neural Network")
-    
+
     if method == "Dueling DQN":
         NetworkClass = DuelingDQN
         network_name = "Dueling DQN"
     else:
         NetworkClass = SimpleNeuralNetwork
         network_name = "标准 DQN"
-    
+
+    # 计算网络输入维度: 帧维度 × 4 帧堆叠
+    frame_dim = getattr(worm, 'state_size', 8)
+    input_size = frame_dim * 4  # 4 帧堆叠
+    worm.state_size = frame_dim  # 确保一致
     worm.neural_network = NetworkClass(
-        input_size=32,
+        input_size=input_size,
         hidden_size=training_params["hidden_size"],
         output_size=4
     )
     worm.target_network = NetworkClass(
-        input_size=32,
+        input_size=input_size,
         hidden_size=training_params["hidden_size"],
         output_size=4
     )
@@ -1208,16 +1212,33 @@ def create_temperature_environment(width, height, seed, field_type):
         print(f"✓ 默认单热源温度场已生成 ({width}x{height})")
         return temp_array, best_point
 
-def get_stacked_state(state_buffer):
-    """从状态缓冲区获取并拼接成一个大的状态向量。"""
+def get_stacked_state(state_buffer, frame_dim=None):
+    """从状态缓冲区获取并拼接成一个大的状态向量。自动检测帧维度。"""
     if not state_buffer:
-        return np.zeros(8 * 4)
-    
+        dim = frame_dim or 8
+        return np.zeros(dim * 4, dtype=np.float32)
+
     frames = list(state_buffer)
+    # 自动检测帧维度
+    if frame_dim is None and frames:
+        frame_dim = len(frames[0]) if hasattr(frames[0], '__len__') else 1
+    elif frame_dim is None:
+        frame_dim = 8
+
     while len(frames) < 4:
         frames.insert(0, frames[0])
-        
-    return np.concatenate(frames)
+
+    # 截断/填充每个帧到 frame_dim
+    aligned = []
+    for f in frames:
+        f_arr = np.array(f, dtype=np.float32).flatten()
+        if len(f_arr) < frame_dim:
+            f_arr = np.pad(f_arr, (0, frame_dim - len(f_arr)))
+        elif len(f_arr) > frame_dim:
+            f_arr = f_arr[:frame_dim]
+        aligned.append(f_arr)
+
+    return np.concatenate(aligned)
 
 
 def generate_dynamic_rotating_double_center(width, height, t, omega_deg=11, temp1=120, temp2=100):

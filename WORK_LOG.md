@@ -1,4 +1,4 @@
-# 工作日志 — 2026-07-24 / 2026-07-25
+# 工作日志 — 2026-07-24 / 2026-08-08
 
 ## 概述
 
@@ -95,3 +95,87 @@ streamlit: http://localhost:8502 正常运行
 - PyTorch 2.13.0 (CPU)
 - Streamlit, Matplotlib, NumPy, Pillow
 - Windows 11
+
+---
+
+## 2026-08-08: state_v2 统一重构
+
+### 变更内容
+
+将之前随意拼凑的 15 维 state_v2 替换为 **10 维统一结构**，三种身体模型（Worm2D / CCB / ADB）共用。
+
+**新 10 维 state_v2 结构：**
+
+| 维度 | 内容 | 来源 |
+|---|---|---|
+| 1-8 | 原 8 维环境状态向量 | `env.get_state_vector()` |
+| 9 | 能量率 `energy / max_energy` | 身体属性 |
+| 10 | 平均曲率 (归一化) | `_shape_metrics()` / 节段转角 |
+
+堆叠 4 帧 → 40 维 NN 输入。NN 输入维度由 `worm.state_size * 4` 动态计算，不再硬编码。
+
+### 修改文件
+
+- `worm_body.py`: Worm2D 和 CCB 的 `get_state_v2()` 重写为 10 维；`ac_state_dim` 15→10
+- `app.py`: state_v2 toggle 标签 (15→10 维)
+- `simulation_engine.py`: state_v2 启用时 `state_size = 10`
+
+### 变更理由
+
+删掉的维度及原因：
+
+| 删掉的维度 | 理由 |
+|---|---|
+| 坐标 x, y | 加坐标让 DQN 退化为"背地图"，破坏泛化 |
+| 朝向 cos/sin | Worm2D 不需要；CCB 温度梯度已含方向信息 |
+| 速度 vx, vy | 奖励只和温度有关，速度和奖励无因果链 |
+| 长度误差 | 和温度奖励无关，物理约束强制执行 |
+| 最大曲率 | 和均值高度相关，冗余 |
+| 头部温度(单独) | 原 8 维已含（第 5 维） |
+| 四方向梯度(单独) | 原 8 维已含（第 1-4 维） |
+
+保留/新增维度的理由：
+
+| 维度 | 理由 |
+|---|---|
+| 1-8 (原 8 维) | 经过验证的趋温任务核心状态 |
+| 能量率 | AC 路径中能量出现在奖励惩罚项，有因果链 |
+| 平均曲率 | AC 路径中曲率违例有惩罚；Worm2D DQN 可选关闭 |
+
+---
+
+## 2026-08-11: 奖励函数模块化（原版 / 含能量变体）
+
+### 变更内容
+
+按 README「奖励函数配置化」计划，把散落在 `worm_body.py` 里的奖励计算统一收口到新文件 **`core/reward_functions.py`**，后续只改这一个文件即可调整奖励。
+
+**两个变体：**
+
+| 变体 | 内容 | 说明 |
+|---|---|---|
+| `original`（不含能量） | Worm2D 原始温度阶梯，**逐位保留** | 出界 −10 / 120°C→5.0 阶梯 / 温差梯度 / +0.1；测试用独立参考实现模糊验证逐值相等 |
+| `energy`（含能量，单步化） | 阶梯 + `−w_e·max(0, old_energy − energy) / max_energy` | 只对**当步消耗** ΔE 计费，不再混入历史时间信号 |
+
+**两个具体修改点（按需求）：**
+
+1. **单步化**：旧 CCB/ADB 用绝对能量 `(maxE − E)·0.001` 作惩罚，该值包含"从开局到现在的总消耗"时间信号；新方案按步计算 ΔE，只对当步消耗计费。
+2. **改量级**：旧权重 0.001 相对温度奖励（0.1~5.0）可忽略；默认权重提到 **0.1**（前端滑块 0.0~0.5 可调）。
+
+### 修改文件
+
+- `core/reward_functions.py`：**新增**。`compute_reward(env, worm, variant, old_energy, energy_weight, stuck_penalty, constraint_penalty, target, movement)` + `apply_reward_config(worm, training_params)` + `DEFAULT_ENERGY_WEIGHT = 0.1`
+- `core/worm_body.py`：删除 `Worm2D._calculate_reward` 和死代码 `calculate_reward_optimized`；三条奖励路径改调模块：
+  - Worm2D `decide_move`：`compute_reward(..., target=(self.x, self.y))`，无附加惩罚
+  - CCB `decide_move`（Q-learning）：统一阶梯（原为 ΔT 差分），无 stuck/constraint（保持原行为）
+  - CCB `decide_move_actor_critic`：统一阶梯 + **stuck 0.5** 和 **constraint 违例率×0.5** 以参数传入（数值与触发条件原样保留，仅挪位置）
+  - Worm2D/CCB `__init__` 增加 `reward_variant` / `reward_energy_weight` 默认属性
+- `simulation_engine.py`：6 个线虫创建点（标准 1 / 迁移 2 / 课程 3）调用 `apply_reward_config`
+- `app.py`：标准训练侧边栏新增「奖励变体」选择器（不含能量（原版）/ 含能量（单步化））+ 能量权重滑块；Worm2D 选含能量时提示"与原版逐值等价"；`training_params` 增加 `reward_variant` / `reward_energy_weight` 键
+- `test_core.py`：新增 7 项测试（原版参考实现模糊测试 300 例逐值相等、能量公式数学测试、Worm2D 惰性模糊测试、stuck/constraint 测试、config 装配测试、CCB Q 路径冒烟测试）
+
+### 行为影响
+
+- **Worm2D**：奖励逐值不变（原版=原始；含能量变体因 ΔE≡0 与原始等价）
+- **CCB / ADB**：温度部分从 ΔT 差分改为 Worm2D 阶梯（需重新基准）；能量项从绝对式改为单步式并放大权重
+- AC 路径的 stuck / constraint 安全正则项原样保留

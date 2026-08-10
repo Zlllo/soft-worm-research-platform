@@ -101,6 +101,20 @@ except ImportError:
                 print(f"⚠️ get_stacked_state 异常: {e}")
                 return np.zeros(8 * stack_size)
 
+# 🔧 修复奖励函数模块导入
+try:
+    from reward_functions import compute_reward, DEFAULT_ENERGY_WEIGHT
+except ImportError:
+    try:
+        from .reward_functions import compute_reward, DEFAULT_ENERGY_WEIGHT
+    except ImportError:
+        print("⚠️ 无法导入reward_functions模块（奖励计算不可用）")
+
+        def compute_reward(*args, **kwargs):
+            raise RuntimeError("reward_functions 模块导入失败，奖励计算不可用")
+
+        DEFAULT_ENERGY_WEIGHT = 0.1
+
 # 🔧 修复DQN导入
 try:
     if PYTORCH_AVAILABLE:
@@ -238,8 +252,9 @@ class Worm2D(BodyModel):
         self.use_neural = False
         self.neural_network = None
         self.optimizer = None
-        self.state_size = 8
+        self.state_size = 8  # 单帧维度 (默认旧 8 维; state_v2 时改为 15)
         self.action_size = 4
+        self.use_state_v2 = False  # 默认关闭，前端可开启
         self._pending_action = None
         self.last_action = None
         self.last_physics_result = {
@@ -259,6 +274,8 @@ class Worm2D(BodyModel):
         self.energy = self.max_energy
         self.energy_decay_rate = 0.5
         self.low_energy_threshold = 50.0
+        self.reward_variant = "original"      # original / energy（reward_functions 模块统一计算）
+        self.reward_energy_weight = DEFAULT_ENERGY_WEIGHT
         self.body_flexibility = 0.8
         self.cuticle_stiffness = 0.7
         self.max_bend_angle = 50
@@ -290,6 +307,7 @@ class Worm2D(BodyModel):
         self.elastic_recovery_rate = 0.12
         self.segment_tensions = [0.0] * self.num_segments
         self.state_buffer = deque(maxlen=4)
+        self._prev_head_pos = (self.x, self.y)  # 追踪头部速度
 
         # 🎯 【恢复奖励处理机制】保持优化的同时恢复必要的奖励处理
         self.reward_buffer = deque(maxlen=3000)  # 奖励缓冲区，用于统计和归一化
@@ -368,16 +386,21 @@ class Worm2D(BodyModel):
             # 🔧 调试点3：状态处理 - 添加超时保护
             state_start = time.time()
             current_pos = (self.x, self.y)
-            current_state = env.get_state_vector(current_pos, worm=self)
-            
+            # 使用统一 state_v2 或旧版 8 维状态
+            if getattr(self, 'use_state_v2', False) and self.use_neural:
+                current_state = self.get_state_v2(env)
+            else:
+                current_state = env.get_state_vector(current_pos, worm=self)
+
             # 检查状态有效性
             if current_state is None or len(current_state) == 0:
+                default_dim = 10 if getattr(self, 'use_state_v2', False) else 8
                 print(f"⚠️ 获取到无效状态，使用默认状态")
-                current_state = np.zeros(8)
-            
-            self.state_buffer.append(current_state)
-            state_time = time.time() - state_start
-            
+                current_state = np.zeros(default_dim, dtype=np.float32)
+
+            self.state_buffer.append(current_state.astype(np.float32))
+            state_time = time.time() - start_time
+
             if state_time > 0.2:
                 print(f"⚠️ 状态处理耗时: {state_time:.3f}s")
             
@@ -389,8 +412,9 @@ class Worm2D(BodyModel):
             try:
                 stacked_state = get_stacked_state(self.state_buffer)
                 if stacked_state is None or len(stacked_state) == 0:
+                    default_dim = 40 if getattr(self, 'use_state_v2', False) else 32
                     print(f"⚠️ 堆叠状态无效，使用默认状态")
-                    stacked_state = np.zeros(32)  # 8 * 4 = 32
+                    stacked_state = np.zeros(default_dim, dtype=np.float32)
             except Exception as e:
                 print(f"❌ 堆叠状态处理失败: {e}")
                 stacked_state = np.zeros(32)
@@ -442,20 +466,30 @@ class Worm2D(BodyModel):
             # 🔧 调试点7：奖励计算 - 添加超时保护
             reward_start = time.time()
             
-            # 🔧 修复：获取新状态并构造32维堆叠状态用于神经网络
+            # 🔧 修复：获取新状态并构造堆叠状态用于神经网络
             new_pos = (self.x, self.y)
-            new_state_8d = env.get_state_vector(new_pos, worm=self)
-            if new_state_8d is None:
-                new_state_8d = np.zeros(8)
-            
-            # 为神经网络构造32维的新堆叠状态
+            if getattr(self, 'use_state_v2', False) and self.use_neural:
+                new_state_frame = self.get_state_v2(env)
+            else:
+                new_state_frame = env.get_state_vector(new_pos, worm=self)
+            if new_state_frame is None:
+                default_dim = 10 if getattr(self, 'use_state_v2', False) else 8
+                new_state_frame = np.zeros(default_dim, dtype=np.float32)
+
+            # 为神经网络构造新堆叠状态
             temp_buffer = self.state_buffer.copy()
-            temp_buffer.append(new_state_8d)
+            temp_buffer.append(new_state_frame)
             new_stacked_state = get_stacked_state(temp_buffer)
             
-            # 🔧 使用8.22版本的简单奖励计算
+            # 🔧 统一奖励函数模块（原版 = Worm2D 原始阶梯，逐位保留）
             try:
-                reward = self._calculate_reward(env, self.x, self.y)
+                reward = compute_reward(
+                    env, self,
+                    variant=getattr(self, 'reward_variant', 'original'),
+                    old_energy=self.energy,
+                    energy_weight=getattr(self, 'reward_energy_weight', DEFAULT_ENERGY_WEIGHT),
+                    target=(self.x, self.y),
+                )
             except Exception as reward_error:
                 print(f"⚠️ 奖励计算失败: {reward_error}")
                 reward = 0.0  # 使用默认奖励
@@ -798,6 +832,42 @@ class Worm2D(BodyModel):
                 else:
                     self.body_temperatures.append(0.0)
 
+    def get_state_v2(self, env=None):
+        """返回统一 10 维状态向量：原 8 维 + 能量率 + 平均曲率。
+
+        所有身体模型共用同一结构，4 帧堆叠 → 40 维 NN 输入。
+        """
+        state = []
+
+        # 1-8. 复用环境 8 维状态向量(四方向梯度 + 温度 + 对齐 + 趋势 + 距离)
+        if env is not None:
+            base = env.get_state_vector((self.x, self.y), worm=self)
+        else:
+            base = np.zeros(8, dtype=np.float32)
+        state.extend(base.astype(np.float32).tolist())
+
+        # 9. 能量率
+        state.append(float(self.energy / max(self.max_energy, 1.0)))
+
+        # 10. 平均曲率(归一化)
+        curv_limit = max(getattr(self, 'angular_constraint', 45.0), 1.0)
+        mean_curv = 0.0
+        points = [np.array([float(x), float(y)]) for x, y in self.body_segments]
+        if len(points) >= 3:
+            turn_angles = []
+            for i in range(1, len(points) - 1):
+                pv = points[i] - points[i-1]
+                nv = points[i+1] - points[i]
+                pn = float(np.linalg.norm(pv))
+                nn = float(np.linalg.norm(nv))
+                if pn > 1e-9 and nn > 1e-9:
+                    cos_a = float(np.dot(pv, nv) / (pn * nn))
+                    turn_angles.append(math.degrees(math.acos(max(-1.0, min(1.0, cos_a)))))
+            mean_curv = np.mean(turn_angles) if turn_angles else 0.0
+        state.append(float(np.clip(mean_curv / curv_limit, 0.0, 1.0)))
+
+        return np.array(state[:10], dtype=np.float32)
+
     def _select_action(self, current_state, adjusted_epsilon, old_x, old_y):
         """选择动作"""
         if self.use_neural and self.neural_network is not None and PYTORCH_AVAILABLE and torch is not None:
@@ -806,9 +876,10 @@ class Worm2D(BodyModel):
             else:
                 try:
                     with torch.no_grad():
-                        # 🔧 强制检查状态维度，确保是32维状态
-                        if len(current_state) != 32:
-                            print(f"⚠️ 状态维度错误: {len(current_state)}, 期望32维，使用随机动作")
+                        frame_dim = getattr(self, 'state_size', 8)
+                        expected_dim = frame_dim * 4  # 堆叠 4 帧
+                        if len(current_state) != expected_dim:
+                            print(f"⚠️ 状态维度错误: {len(current_state)}, 期望{expected_dim}维，使用随机动作")
                             action = random.choice([0,1,2,3])
                         else:
                             state_tensor = torch.FloatTensor(current_state).unsqueeze(0)
@@ -858,7 +929,10 @@ class Worm2D(BodyModel):
                 processed_reward = raw_reward
 
         # 构造 next_stacked_state
-        next_frame = env.get_state_vector((new_head_x, new_head_y), worm=self)
+        if getattr(self, 'use_state_v2', False) and self.use_neural:
+            next_frame = self.get_state_v2(env)
+        else:
+            next_frame = env.get_state_vector((new_head_x, new_head_y), worm=self)
         temp_buffer = self.state_buffer.copy()
         temp_buffer.append(next_frame)
         next_stacked_state = get_stacked_state(temp_buffer)
@@ -920,66 +994,12 @@ class Worm2D(BodyModel):
                 except Exception as q_error:
                     print(f"⚠️ Q-learning 更新失败: {q_error}")
 
-    def _calculate_reward(self, env, new_head_x, new_head_y):
-        """
-        简化的奖励计算 - 回归7.26版本的简洁设计
-        """
-        new_temp = env.get_temperature(new_head_x, new_head_y)
-
-        # 出界或无效位置
-        if new_temp == -float('inf'):
-            return -10.0
-
-        # 基础温度奖励系统 - 调整为120度最佳温度
-        if new_temp >= 120:
-            temp_reward = 5.0
-        elif new_temp >= 115:
-            temp_reward = 4.5
-        elif new_temp >= 110:
-            temp_reward = 4.0
-        elif new_temp >= 100:
-            temp_reward = 3.0
-        elif new_temp >= 90:
-            temp_reward = 2.0
-        elif new_temp >= 80:
-            temp_reward = 1.0
-        elif new_temp >= 70:
-            temp_reward = 0.5
-        elif new_temp >= 60:
-            temp_reward = 0.3
-        elif new_temp >= 50:
-            temp_reward = 0.1
-        elif new_temp >= 40:
-            temp_reward = 0.0
-        elif new_temp >= 30:
-            temp_reward = -0.3
-        elif new_temp >= 20:
-            temp_reward = -0.5
-        elif new_temp >= 10:
-            temp_reward = -0.8
-        else:
-            temp_reward = -1.0
-
-        # 温度梯度奖励
-        if len(self.recent_temperatures) >= 2:
-            recent_avg = sum(self.recent_temperatures[-2:]) / 2
-            if new_temp > recent_avg + 1.0:
-                temp_reward += 1.0
-            elif new_temp > recent_avg + 0.5:
-                temp_reward += 0.3
-            elif new_temp < recent_avg - 1.0:
-                temp_reward -= 0.8
-            elif new_temp < recent_avg - 0.5:
-                temp_reward -= 0.2
-
-        temp_reward += 0.1
-        return temp_reward
-
     def move(self, action, env):
         """执行移动动作"""
         import time
         start_time = time.time()
-        
+        self._prev_head_pos = (self.x, self.y)  # 记录移动前位置用于计算速度
+
         try:
             # 基础移动向量
             moves = [(0, -1), (0, 1), (-1, 0), (1, 0)]  # 上下左右
@@ -1180,6 +1200,7 @@ class Worm2D(BodyModel):
             self.history = [self.body_segments.copy()]
             self.recent_temperatures = []
             self.state_buffer.clear()
+            self._prev_head_pos = (self.x, self.y)  # 重置速度追踪
             
             # 重置记忆系统
             if hasattr(self, 'hotspot_memory'):
@@ -1427,12 +1448,15 @@ class Worm2D(BodyModel):
                 self.use_neural = False
                 return False
             
-            # 使用传入的参数或默认值
-            self.state_size = state_size or 32  # 8 * 4 = 32 (堆叠状态)
+            # 单帧维度 (state_v2: 15, 旧版: 8); NN 输入 = 帧×4
+            if state_size is None:
+                state_size = 10 if getattr(self, 'use_state_v2', False) else 8
+            self.state_size = state_size  # 单帧维度
             self.action_size = action_size or 4
-            
-            print(f"🔧 初始化持久神经网络组件...")
-            
+            nn_input_size = state_size * 4  # 堆叠 4 帧
+
+            print(f"🔧 初始化持久神经网络组件 (输入 {nn_input_size} 维)...")
+
             # 创建神经网络和优化器
             try:
                 try:
@@ -1440,7 +1464,7 @@ class Worm2D(BodyModel):
                 except ImportError:
                     from neural_networks import setup_neural_network
                 self.neural_network, self.optimizer = setup_neural_network(
-                    self.state_size, self.action_size, learning_rate
+                    nn_input_size, self.action_size, learning_rate
                 )
             except ImportError:
                 print("⚠️ 无法导入setup_neural_network函数")
@@ -1473,43 +1497,6 @@ class Worm2D(BodyModel):
             print(f"❌ 神经网络设置失败: {e}")
             self.use_neural = False
             return False
-
-    def calculate_reward_optimized(self, old_position, new_position, env, perception_data, 
-                                 old_body_segments, move_successful):
-        """
-        优化的奖励计算方法
-        """
-        try:
-            if not move_successful:
-                return -10.0  # 移动失败的惩罚
-            
-            # 获取新位置温度
-            new_temp = env.get_temperature(int(new_position[0]), int(new_position[1]))
-            
-            # 使用简化的奖励计算
-            reward = self._calculate_reward(env, int(new_position[0]), int(new_position[1]))
-            
-            # 添加感知奖励
-            if perception_data:
-                # 如果朝着更高温度方向移动，给予奖励
-                if 'best_direction' in perception_data and perception_data['best_direction'] is not None:
-                    reward += 0.5
-                
-                # 梯度导向奖励
-                if 'gradient_confidence' in perception_data and perception_data['gradient_confidence'] > 0.5:
-                    reward += 0.3
-            
-            # 能量奖励
-            if self.energy > self.low_energy_threshold:
-                reward += 0.1
-            else:
-                reward -= 0.2
-            
-            return reward
-            
-        except Exception as e:
-            print(f"⚠️ 奖励计算异常: {e}")
-            return 0.0
 
     def get_state_summary(self):
         """获取状态摘要"""
@@ -1597,6 +1584,8 @@ class ContinuousCenterlineBody(BodyModel):
         self.energy = self.max_energy
         self.energy_decay_rate = float(body_params.get("energy_decay_rate", 0.12))
         self.low_energy_threshold = 0.5 * self.max_energy
+        self.reward_variant = "original"      # original / energy（reward_functions 模块统一计算）
+        self.reward_energy_weight = DEFAULT_ENERGY_WEIGHT
         self.muscle_fatigue_level = 0.0
         self.fatigue_accumulation_rate = float(body_params.get("fatigue_accumulation_rate", 0.006))
         self.fatigue_recovery_rate = float(body_params.get("fatigue_recovery_rate", 0.004))
@@ -1607,7 +1596,7 @@ class ContinuousCenterlineBody(BodyModel):
         self.use_neural = False
         self.use_actor_critic = False
         self.actor_critic_agent = None
-        self.ac_state_dim = 15
+        self.ac_state_dim = 10  # state_v2 统一 10 维
         self.ac_hidden_size = int(body_params.get("ac_hidden_size", 128))
         self.ac_actor_lr = float(body_params.get("ac_actor_lr", 1e-4))
         self.ac_critic_lr = float(body_params.get("ac_critic_lr", 1e-3))
@@ -1819,15 +1808,21 @@ class ContinuousCenterlineBody(BodyModel):
 
         # Q-learning 路径（原有逻辑）
         old_x, old_y = int(round(self.x)), int(round(self.y))
-        old_temp = float(env.get_temperature(old_x, old_y))
+        old_energy = self.energy
         if random.random() < epsilon:
             action = random.randint(0, self.action_size - 1)
         else:
             action = int(np.argmax(self.q_table[old_y][old_x]))
         result = self.step_physics(env=env, action=action)
         new_x, new_y = int(round(self.x)), int(round(self.y))
-        new_temp = float(env.get_temperature(new_x, new_y))
-        reward = (new_temp - old_temp) * 0.1 - (self.max_energy - self.energy) * 0.001
+        # 统一奖励函数模块（温度阶梯 + 单步能量；Q 路径无 stuck/constraint 惩罚）
+        reward = compute_reward(
+            env, self,
+            variant=self.reward_variant,
+            old_energy=old_energy,
+            energy_weight=self.reward_energy_weight,
+            target=(new_x, new_y),
+        )
         if 0 <= old_y < self.height and 0 <= old_x < self.width:
             old_q = self.q_table[old_y][old_x][action]
             max_next_q = max(self.q_table[new_y][new_x])
@@ -1838,59 +1833,29 @@ class ContinuousCenterlineBody(BodyModel):
     # ── Actor-Critic 相关方法 ─────────────────────────
 
     def get_state_v2(self, env=None):
-        """返回 15 维连续状态向量，供 Actor-Critic 使用。"""
+        """返回统一 10 维状态向量：原 8 维 + 能量率 + 平均曲率。
+
+        所有身体模型共用同一结构，Actor-Critic 直接使用此向量。
+        """
         state = []
 
-        # 1-2. 归一化头部位置
-        state.append(float(self.x) / max(1, self.width))
-        state.append(float(self.y) / max(1, self.height))
+        # 1-8. 复用环境 8 维状态向量(四方向梯度 + 温度 + 对齐 + 趋势 + 距离)
+        if env is not None:
+            base = env.get_state_vector((self.x, self.y), worm=self)
+        else:
+            base = np.zeros(8, dtype=np.float32)
+        state.extend(base.astype(np.float32).tolist())
 
-        # 3-4. 朝向 (cos, sin 编码，保证连续性)
-        state.append(math.cos(self.heading))
-        state.append(math.sin(self.heading))
+        # 9. 能量率
+        state.append(float(self.energy / max(self.max_energy, 1.0)))
 
-        # 5-6. 归一化速度
-        max_speed = max(self.forward_speed * 2.0, 1.0)
-        state.append(float(self.velocity[0]) / max_speed)
-        state.append(float(self.velocity[1]) / max_speed)
-
-        # 7. 身体长度误差（归一化）
+        # 10. 平均曲率(归一化)
         shape = self._shape_metrics() if hasattr(self, '_shape_metrics') else {}
-        length_error = shape.get('body_length_error_abs', 0.0)
-        state.append(np.clip(length_error / max(self.body_length, 1.0), 0.0, 1.0))
-
-        # 8-9. 曲率（归一化）
         curv_limit = max(self.angular_constraint, 1.0)
-        state.append(np.clip(shape.get('curvature_mean_deg', 0.0) / curv_limit, 0.0, 1.0))
-        state.append(np.clip(shape.get('curvature_max_deg', 0.0) / curv_limit, 0.0, 1.0))
+        mean_curv = shape.get('curvature_mean_deg', 0.0)
+        state.append(float(np.clip(mean_curv / curv_limit, 0.0, 1.0)))
 
-        # 10. 头部温度
-        head_temp = 25.0
-        if env is not None:
-            head_temp = float(env.get_temperature(int(self.x), int(self.y)))
-        state.append(np.clip(head_temp / 120.0, 0.0, 1.0))
-
-        # 11-14. 四个方向的温度梯度
-        gradient_defaults = [0.0, 0.0, 0.0, 0.0]
-        if env is not None:
-            hx, hy = int(self.x), int(self.y)
-            base_temp = float(env.get_temperature(hx, hy))
-            directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]  # 上 下 右 左
-            for dx, dy in directions:
-                nx, ny = hx + dx, hy + dy
-                if 0 <= nx < self.width and 0 <= ny < self.height:
-                    gradient_defaults.append(
-                        np.clip((float(env.get_temperature(nx, ny)) - base_temp) / 20.0, -1.0, 1.0)
-                    )
-                else:
-                    gradient_defaults.append(0.0)
-        # 只取前 4 个方向
-        state.extend(gradient_defaults[:4])
-
-        # 15. 能量比例
-        state.append(float(self.energy) / max(self.max_energy, 1.0))
-
-        return np.array(state[: self.ac_state_dim], dtype=np.float32)
+        return np.array(state[:10], dtype=np.float32)
 
     def setup_actor_critic(self):
         """初始化 DDPG Agent。"""
@@ -1937,28 +1902,26 @@ class ContinuousCenterlineBody(BodyModel):
         action_dict = {"heading": heading, "step": step}
 
         # 3. 记录旧状态用于经验回放
-        old_head = (self.x, self.y)
         old_energy = self.energy
 
         # 4. 执行物理步
         result = self.step_physics(env=env, action=action_dict)
 
-        # 5. 计算奖励
+        # 5. 计算奖励（统一奖励函数：温度阶梯 + 单步能量 + 约束/原地惩罚）
         new_head = (self.x, self.y)
-        new_temp = float(env.get_temperature(int(new_head[0]), int(new_head[1])))
-        old_temp = float(env.get_temperature(int(old_head[0]), int(old_head[1])))
-
-        # 温度收益 + 能量惩罚 + 约束惩罚
-        temp_reward = (new_temp - old_temp) * 0.1
-        energy_penalty = (self.max_energy - self.energy) * 0.001
+        movement = result.get('movement', 0.0)
         shape = self._shape_metrics() if hasattr(self, '_shape_metrics') else {}
         constraint_penalty = shape.get('constraint_violation_rate', 0.0) * 0.5
-        reward = temp_reward - energy_penalty - constraint_penalty
-
-        # 边界惩罚
-        movement = result.get('movement', 0.0)
-        if movement < 1e-9:
-            reward -= 0.5
+        reward = compute_reward(
+            env, self,
+            variant=self.reward_variant,
+            old_energy=old_energy,
+            energy_weight=self.reward_energy_weight,
+            stuck_penalty=0.5,
+            constraint_penalty=constraint_penalty,
+            target=new_head,
+            movement=movement,
+        )
 
         # 6. 存储经验
         next_state = self.get_state_v2(env)

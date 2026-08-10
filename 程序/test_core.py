@@ -26,6 +26,7 @@ from core.utils import (
     setup_neural_network,
 )
 from core.worm_body import ActiveDeformationBody, ContinuousCenterlineBody, Worm2D, create_body_model
+from core.reward_functions import DEFAULT_ENERGY_WEIGHT, apply_reward_config, compute_reward
 
 
 def build_q_learning_worm(width=20, height=20, start_pos=(5, 5), num_segments=3):
@@ -318,8 +319,9 @@ def test_dqn_initialization_when_pytorch_is_available():
     assert worm.target_network is not None
     assert worm.experience_replay is not None
 
+    input_dim = worm.state_size * 4  # 帧维度 × 4 帧堆叠
     with torch.no_grad():
-        output = worm.neural_network(torch.zeros((1, 32), dtype=torch.float32))
+        output = worm.neural_network(torch.zeros((1, input_dim), dtype=torch.float32))
     assert tuple(output.shape) == (1, 4)
 
 
@@ -653,3 +655,179 @@ def test_curriculum_simulation_engine_uses_body_model_factory(monkeypatch, tmp_p
 
     assert events[-1][0] == events[-1][1]
     assert events[-1][3]["total_training_stages"] >= 1
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# 奖励函数模块测试 (core/reward_functions.py)
+# ══════════════════════════════════════════════════════════════════════════════
+
+def _reference_original_reward(env, worm, target):
+    """Worm2D 原始奖励的独立参考实现（独立重写，用于逐值对比）。"""
+    tx, ty = int(round(target[0])), int(round(target[1]))
+    new_temp = env.get_temperature(tx, ty)
+
+    if new_temp == -float('inf'):
+        return -10.0
+
+    if new_temp >= 120:
+        temp_reward = 5.0
+    elif new_temp >= 115:
+        temp_reward = 4.5
+    elif new_temp >= 110:
+        temp_reward = 4.0
+    elif new_temp >= 100:
+        temp_reward = 3.0
+    elif new_temp >= 90:
+        temp_reward = 2.0
+    elif new_temp >= 80:
+        temp_reward = 1.0
+    elif new_temp >= 70:
+        temp_reward = 0.5
+    elif new_temp >= 60:
+        temp_reward = 0.3
+    elif new_temp >= 50:
+        temp_reward = 0.1
+    elif new_temp >= 40:
+        temp_reward = 0.0
+    elif new_temp >= 30:
+        temp_reward = -0.3
+    elif new_temp >= 20:
+        temp_reward = -0.5
+    elif new_temp >= 10:
+        temp_reward = -0.8
+    else:
+        temp_reward = -1.0
+
+    if len(worm.recent_temperatures) >= 2:
+        recent_avg = sum(worm.recent_temperatures[-2:]) / 2
+        if new_temp > recent_avg + 1.0:
+            temp_reward += 1.0
+        elif new_temp > recent_avg + 0.5:
+            temp_reward += 0.3
+        elif new_temp < recent_avg - 1.0:
+            temp_reward -= 0.8
+        elif new_temp < recent_avg - 0.5:
+            temp_reward -= 0.2
+
+    temp_reward += 0.1
+    return temp_reward
+
+
+def test_reward_original_variant_matches_worm2d_reference():
+    """模糊测试：original 变体与 Worm2D 原始奖励逐值相等（含梯度分支与出界）。"""
+    env = build_single_center_env(width=20, height=20)
+    worm = build_q_learning_worm(width=20, height=20)
+    rng = random.Random(42)
+    for _ in range(300):
+        worm.recent_temperatures = [rng.uniform(0.0, 150.0) for _ in range(rng.randint(0, 6))]
+        target = (rng.uniform(-5.0, 25.0), rng.uniform(-5.0, 25.0))
+        expected = _reference_original_reward(env, worm, target)
+        actual = compute_reward(env, worm, variant="original", target=target)
+        assert actual == expected, f"target={target}, temps={worm.recent_temperatures}: {actual} != {expected}"
+
+
+def test_reward_energy_variant_formula():
+    """能量变体数学：reward = 阶梯 + (-w_e · max(0, oldE − E) / maxE)。"""
+    env = build_single_center_env(width=20, height=20)
+    worm = build_q_learning_worm(width=20, height=20)
+    worm.recent_temperatures = []
+    worm.max_energy = 100.0
+    worm.energy = 70.0
+    target = (5, 5)
+
+    base = _reference_original_reward(env, worm, target)
+    w = 0.25
+    # 消耗 30 → 惩罚 w·30/100
+    reward = compute_reward(env, worm, variant="energy", old_energy=100.0, energy_weight=w, target=target)
+    assert reward == pytest.approx(base - w * (100.0 - 70.0) / 100.0)
+    # 无消耗 → 无惩罚
+    reward2 = compute_reward(env, worm, variant="energy", old_energy=70.0, energy_weight=w, target=target)
+    assert reward2 == pytest.approx(base)
+    # 能量反而增加 → max(0, ·) 截断，无惩罚
+    reward3 = compute_reward(env, worm, variant="energy", old_energy=50.0, energy_weight=w, target=target)
+    assert reward3 == pytest.approx(base)
+    # original 变体完全忽略能量
+    reward4 = compute_reward(env, worm, variant="original", old_energy=100.0, target=target)
+    assert reward4 == pytest.approx(base)
+
+
+def test_energy_variant_inert_for_worm2d():
+    """Worm2D 能量从不衰减 → 含能量变体与原版逐值相等。"""
+    env = build_single_center_env(width=20, height=20)
+    worm = build_q_learning_worm(width=20, height=20)
+    rng = random.Random(7)
+    for _ in range(150):
+        worm.recent_temperatures = [rng.uniform(0.0, 150.0) for _ in range(rng.randint(0, 6))]
+        target = (rng.randint(0, 19), rng.randint(0, 19))
+        base = compute_reward(env, worm, variant="original", target=target)
+        variant = compute_reward(
+            env, worm, variant="energy", old_energy=worm.energy,
+            energy_weight=rng.uniform(0.0, 0.5), target=target,
+        )
+        assert variant == base
+
+
+def test_reward_stuck_and_constraint_penalties():
+    """AC 路径的 stuck / constraint 惩罚按参数生效。"""
+    env = build_single_center_env(width=20, height=20)
+    worm = build_q_learning_worm(width=20, height=20)
+    worm.recent_temperatures = []
+    target = (5, 5)
+    base = compute_reward(env, worm, variant="original", target=target)
+
+    # stuck: 位移 < 1e-9 时扣除
+    stuck = compute_reward(env, worm, variant="original", target=target,
+                           stuck_penalty=0.5, movement=0.0)
+    assert stuck == pytest.approx(base - 0.5)
+    # 正常移动不扣
+    moving = compute_reward(env, worm, variant="original", target=target,
+                            stuck_penalty=0.5, movement=2.0)
+    assert moving == pytest.approx(base)
+    # constraint: 违例惩罚直接扣除
+    constrained = compute_reward(env, worm, variant="original", target=target,
+                                 constraint_penalty=0.25)
+    assert constrained == pytest.approx(base - 0.25)
+    # 与能量惩罚叠加
+    combined = compute_reward(env, worm, variant="energy", old_energy=100.0,
+                              energy_weight=0.1, stuck_penalty=0.5, movement=0.0,
+                              constraint_penalty=0.25, target=target)
+    expected = base - 0.1 * (100.0 - worm.energy) / 100.0 - 0.5 - 0.25
+    assert combined == pytest.approx(expected)
+
+
+def test_apply_reward_config_sets_worm_attributes():
+    """apply_reward_config 装配变体到各种身体模型，默认值正确。"""
+    worm = build_q_learning_worm(width=20, height=20)
+    cc = create_body_model(
+        model_type="continuous_centerline", start_pos=(5, 5), width=20, height=20,
+        body_params={"sample_count": 5, "body_length": 8.0}, noise_params={},
+    )
+
+    apply_reward_config(worm, {})
+    assert worm.reward_variant == "original"
+    assert worm.reward_energy_weight == DEFAULT_ENERGY_WEIGHT
+
+    apply_reward_config(worm, {"reward_variant": "energy", "reward_energy_weight": 0.3})
+    assert worm.reward_variant == "energy"
+    assert worm.reward_energy_weight == 0.3
+
+    apply_reward_config(cc, {"reward_variant": "energy"})
+    assert cc.reward_variant == "energy"
+    assert cc.reward_energy_weight == DEFAULT_ENERGY_WEIGHT
+
+
+def test_ccb_q_learning_runs_with_module_reward():
+    """CCB Q-learning 路径走统一奖励函数模块（含能量变体不报错、奖励有限）。"""
+    random.seed(3)
+    np.random.seed(3)
+    env = build_single_center_env(width=20, height=20)
+    body = create_body_model(
+        model_type="continuous_centerline", start_pos=(5, 5), width=20, height=20,
+        body_params={"sample_count": 5, "body_length": 8.0, "damping": 0.0}, noise_params={},
+    )
+    apply_reward_config(body, {"reward_variant": "energy", "reward_energy_weight": 0.1})
+    assert body.reward_variant == "energy"
+
+    moved = body.decide_move(env, epsilon=1.0, alpha=0.1, gamma=0.9)
+    assert moved is True
+    assert np.isfinite(body.total_reward)

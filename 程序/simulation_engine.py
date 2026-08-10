@@ -68,9 +68,10 @@ has_chinese_font = setup_chinese_font()
 from core.environment import ExperimentConfig, Environment2D
 from core.worm_body import create_body_model
 from core.visualization import plot_training_results_2d, create_training_animation_2d, create_training_animation_2d_dynamic_mp4
-from core.utils import (save_training_log, save_q_table, save_body_metrics, setup_neural_network, 
-                      reset_worm_for_new_round, create_temperature_environment, 
+from core.utils import (save_training_log, save_q_table, save_body_metrics, setup_neural_network,
+                      reset_worm_for_new_round, create_temperature_environment,
                       generate_dynamic_rotating_double_center, generate_dynamic_rotating_quad_center)
+from core.reward_functions import apply_reward_config
 from core.neural_networks import PYTORCH_AVAILABLE
 from core.training_stats import create_step_tracker, create_dual_center_tracker
 
@@ -180,6 +181,15 @@ def run_standard_simulation_engine(config, training_params, field_type, use_neur
             print(f"❌ 线虫创建失败: {worm_error}")
             yield -1, -1, f"线虫对象创建失败: {worm_error}", {}
             return
+
+        # 启用 state_v2 (仅 Worm2D + DQN，默认关闭)
+        if training_params.get("use_state_v2", False) and hasattr(worm, 'use_state_v2'):
+            worm.use_state_v2 = True
+            worm.state_size = 10
+            print("🔧 调试：已启用 state_v2 (10 维单帧)")
+
+        # 奖励函数变体配置 (original / energy)
+        apply_reward_config(worm, training_params)
 
         # 设置 Actor-Critic (优先级高于 DQN / Q-Learning)
         method_name = training_params.get("method", "")
@@ -468,7 +478,8 @@ def run_transfer_simulation_engine(config, training_params, source_field, target
         
         start_pos = get_start_position(source_field, width, height)
         source_worm = create_training_body_model(start_pos, width, height, training_params)
-        
+        apply_reward_config(source_worm, training_params)
+
         if use_neural_network:
             if not PYTORCH_AVAILABLE:
                 yield -1, -1, "PyTorch 未安装，无法使用神经网络。", {}
@@ -528,7 +539,8 @@ def run_transfer_simulation_engine(config, training_params, source_field, target
         
         target_start_pos = get_start_position(target_field, width, height)
         veteran_worm = create_training_body_model(target_start_pos, width, height, training_params)
-        
+        apply_reward_config(veteran_worm, training_params)
+
         if use_neural_network:
             setup_neural_network(veteran_worm, training_params)
             # 迁移权重
@@ -692,6 +704,7 @@ def run_curriculum_simulation_engine(config, training_params, test_stage_idx, en
                 # 创建或重置线虫
                 if worm is None:
                     worm = create_training_body_model(start_pos, width, height, training_params)
+                    apply_reward_config(worm, training_params)
                     setup_neural_network(worm, stage_training_params)
                 else:
                     # 重置经验池，保留神经网络权重
@@ -777,6 +790,7 @@ def run_curriculum_simulation_engine(config, training_params, test_stage_idx, en
         if worm is None:
             start_pos = get_start_position(test_stage["field_type"], width, height)
             worm = create_training_body_model(start_pos, width, height, training_params)
+            apply_reward_config(worm, training_params)
             setup_neural_network(worm, base_training_params)
         
         # 准备测试环境
@@ -807,6 +821,7 @@ def run_curriculum_simulation_engine(config, training_params, test_stage_idx, en
         yield current_step, total_estimated_steps, "🆚 对照实验：测试全新'新兵'的表现...", {'phase': 'control'}
         
         rookie_worm = create_training_body_model(start_pos, width, height, training_params)
+        apply_reward_config(rookie_worm, training_params)
         setup_neural_network(rookie_worm, base_training_params)
         
         rookie_histories, rookie_rewards, rookie_test_results = yield from zero_shot_testing_engine(
