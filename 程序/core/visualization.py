@@ -91,10 +91,10 @@ def create_training_animation_2d(all_round_histories, temp_array, best_point, co
     current_worm_heads = []  # 当前线虫头部
     current_worm_tails = []  # 当前线虫尾部
     
-    viridis = plt.cm.get_cmap('viridis')
+    viridis = plt.cm.viridis  # matplotlib 3.9+ 已移除 cm.get_cmap，直接用色图对象
     for i, history in enumerate(last_histories):
         color = viridis(i / max(1, len(last_histories)-1))
-        
+
         # 当前线虫身体（实线，粗线）
         worm_line, = ax.plot([], [], '-', lw=8, color=color, alpha=0.9,
                            label=f'线虫{start_round+i}')
@@ -294,7 +294,7 @@ def create_training_animation_2d_dynamic_mp4(all_round_histories, width, height,
     current_worm_lines = []
     current_worm_heads = []
     current_worm_tails = []
-    viridis = plt.cm.get_cmap('viridis')
+    viridis = plt.cm.viridis  # matplotlib 3.9+ 已移除 cm.get_cmap，直接用色图对象
     for i, history in enumerate(last_histories):
         color = viridis(i / max(1, len(last_histories)-1))
         # 🔧 修复：保持与静态动画一致的线条设置

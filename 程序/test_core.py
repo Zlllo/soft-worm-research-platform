@@ -831,3 +831,130 @@ def test_ccb_q_learning_runs_with_module_reward():
     moved = body.decide_move(env, epsilon=1.0, alpha=0.1, gamma=0.9)
     assert moved is True
     assert np.isfinite(body.total_reward)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# 动作空间扩展测试 (8 方向; 4 方向保持历史行为)
+# ══════════════════════════════════════════════════════════════════════════════
+
+EIGHT_DIR_VECTORS = [
+    (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1),
+]  # 顺时针: 上 右上 右 右下 下 左下 左 左上
+
+
+def build_q_learning_worm_8dir(width=20, height=20, start_pos=(5, 5), num_segments=3):
+    with contextlib.redirect_stdout(io.StringIO()):
+        worm = Worm2D(
+            start_pos=start_pos,
+            width=width,
+            height=height,
+            body_params={"num_segments": num_segments, "segment_length": 3.0, "action_size": 8},
+            noise_params={},
+        )
+    worm.use_neural = False
+    return worm
+
+
+def test_eight_direction_worm2d_action_space():
+    """8 方向：Q 表宽 8，apply_action 边界正确 (7 合法, 8/-1 越界)。"""
+    worm = build_q_learning_worm_8dir()
+    assert worm.action_size == 8
+    assert all(len(row[0]) == 8 for row in worm.q_table)
+
+    assert worm.apply_action(7)["accepted"] is True
+    with pytest.raises(ValueError):
+        worm.apply_action(8)
+    with pytest.raises(ValueError):
+        worm.apply_action(-1)
+
+
+def test_eight_direction_moves_and_diagonal_landing():
+    """8 方向移动：顺时针落点逐一正确，对角整数格点 (不缩放)。"""
+    env = build_single_center_env(width=20, height=20)
+    for action, (dx, dy) in enumerate(EIGHT_DIR_VECTORS):
+        worm = build_q_learning_worm_8dir(start_pos=(10, 10))
+        worm.move(action, env)
+        assert (worm.x - 10, worm.y - 10) == (dx, dy), f"action={action} 落点错误"
+
+
+def test_four_direction_legacy_order_unchanged():
+    """4 方向回归：默认参数下动作编号与历史版本完全一致 (0上 1下 2左 3右)。"""
+    env = build_single_center_env(width=20, height=20)
+    legacy = [(0, -1), (0, 1), (-1, 0), (1, 0)]
+    worm = build_q_learning_worm()
+    assert worm.action_size == 4
+    assert all(len(row[0]) == 4 for row in worm.q_table)
+    for action, (dx, dy) in enumerate(legacy):
+        worm.x, worm.y = 10, 10
+        worm.move(action, env)
+        assert (worm.x - 10, worm.y - 10) == (dx, dy), f"action={action} 落点错误"
+
+
+def test_eight_direction_ccb_headings_and_q_learning():
+    """CCB 8 方向：朝向按 45° 顺时针编号，Q-learning 冒烟正常。"""
+    env = build_single_center_env(width=20, height=20)
+    body = create_body_model(
+        model_type="continuous_centerline", start_pos=(5, 5), width=20, height=20,
+        body_params={"sample_count": 5, "body_length": 8.0, "damping": 0.0, "action_size": 8},
+        noise_params={},
+    )
+    assert body.action_size == 8
+    assert all(len(row[0]) == 8 for row in body.q_table)
+
+    expected = [i * 2.0 * np.pi / 8 - np.pi / 2.0 for i in range(8)]
+    for action, angle in enumerate(expected):
+        heading, _ = body._parse_action(action)
+        assert heading == pytest.approx(angle, abs=1e-12)
+
+    random.seed(4)
+    np.random.seed(4)
+    assert body.decide_move(env, epsilon=1.0, alpha=0.1, gamma=0.9) is True
+    assert np.isfinite(body.total_reward)
+
+
+def test_eight_direction_dqn_output_dim():
+    """8 方向 + DQN：网络输出维度 8 (输入维度不变)。"""
+    from core.neural_networks import PYTORCH_AVAILABLE
+
+    if not PYTORCH_AVAILABLE:
+        pytest.skip("PyTorch is not installed in this environment")
+
+    import torch
+
+    worm = build_q_learning_worm_8dir()
+    training_params = {
+        "method": "DQN",
+        "hidden_size": 16,
+        "neural_lr": 0.001,
+        "weight_decay": 0.0005,
+    }
+    assert setup_neural_network(worm, training_params) is True
+    assert worm.use_neural is True
+
+    input_dim = worm.state_size * 4
+    with torch.no_grad():
+        output = worm.neural_network(torch.zeros((1, input_dim), dtype=torch.float32))
+    assert tuple(output.shape) == (1, 8)
+
+
+def test_save_q_table_dynamic_columns(tmp_path):
+    """save_q_table：8 方向输出 8 列并带顺时针标签。"""
+    env = build_single_center_env(width=20, height=20)
+    worm = build_q_learning_worm_8dir()
+    config = types.SimpleNamespace(
+        experiment_name="pytest_qtable_8dir",
+        q_table_file=str(tmp_path / "q_table.txt"),
+    )
+
+    from core.utils import save_q_table
+
+    save_q_table(config, worm.q_table, env)
+
+    with open(config.q_table_file, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+    header = lines[1].strip().split("\t")
+    assert header[0] == "位置(x,y)"
+    assert header[1] == "温度"
+    assert header[2:10] == ["上Q", "右上Q", "右Q", "右下Q", "下Q", "左下Q", "左Q", "左上Q"]
+    assert header[10] == "偏好动作"
+    assert len(lines) == 3 + env.width * env.height

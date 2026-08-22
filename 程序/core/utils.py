@@ -362,23 +362,29 @@ def save_body_metrics(config, all_histories, all_rewards, worm, env=None):
 
 
 def save_q_table(config, q_table, env):
-    """保存Q表数据"""
+    """保存Q表数据 (列数随动作空间自适应)"""
+    action_count = len(q_table[0][0]) if q_table and q_table[0] else 4
+    if action_count == 4:
+        action_labels = ["上", "下", "左", "右"]  # 4 方向历史编号
+    else:
+        action_labels = ["上", "右上", "右", "右下", "下", "左下", "左", "左上"]  # 顺时针
+    action_labels = action_labels[:action_count] + [
+        f"动作{i}" for i in range(len(action_labels), action_count)
+    ]
     with open(config.q_table_file, 'w', encoding='utf-8') as f:
         f.write(f"Q表数据 - {config.experiment_name}\n")
-        f.write("位置(x,y)\t温度\t上Q\t下Q\t左Q\t右Q\t偏好动作\n")
+        f.write("位置(x,y)\t温度\t" + "\t".join(f"{label}Q" for label in action_labels) + "\t偏好动作\n")
         f.write("-" * 60 + "\n")
         for y in range(env.height):
             for x in range(env.width):
-                q_up, q_down, q_left, q_right = q_table[y][x]
+                q_list = list(q_table[y][x])
                 temp = env.get_temperature(x, y)
-                q_list = [q_up, q_down, q_left, q_right]
-                actions = ["上","下","左","右"]
                 max_q = max(q_list)
                 if q_list.count(max_q) == 1:
-                    preference = actions[q_list.index(max_q)]
+                    preference = action_labels[q_list.index(max_q)]
                 else:
                     preference = "无偏好"
-                f.write(f"({x:2d},{y:2d})\t{temp:6.1f}\t{q_up:8.3f}\t{q_down:8.3f}\t{q_left:8.3f}\t{q_right:8.3f}\t{preference}\n")
+                f.write(f"({x:2d},{y:2d})\t{temp:6.1f}\t" + "\t".join(f"{q:8.3f}" for q in q_list) + f"\t{preference}\n")
     print(f"Q表已保存到: {config.q_table_file}")
 
 
@@ -426,12 +432,12 @@ def setup_neural_network(worm, training_params):
     worm.neural_network = NetworkClass(
         input_size=input_size,
         hidden_size=training_params["hidden_size"],
-        output_size=4
+        output_size=getattr(worm, 'action_size', 4)
     )
     worm.target_network = NetworkClass(
         input_size=input_size,
         hidden_size=training_params["hidden_size"],
-        output_size=4
+        output_size=getattr(worm, 'action_size', 4)
     )
     
     worm.optimizer = optim.Adam(

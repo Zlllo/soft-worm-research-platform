@@ -1013,28 +1013,50 @@ with st.sidebar:
     # ==========================================================================
     if mode_choice == "标准训练模式":
         st.markdown("### 📊 标准设置")
-        
-        # 学习方法选择 — 根据身体模型类型显示可用算法
+
+        # 动作空间(方向)选择器 — 按身体模型过滤; 后续可扩展 16 方向
         if body_model_type == "worm2d":
+            direction_options = {"4 方向 (离散)": "4", "8 方向 (离散)": "8"}
+        else:
+            direction_options = {"4 方向 (离散)": "4", "8 方向 (离散)": "8", "连续方向 (Actor-Critic)": "continuous"}
+        direction_label = st.selectbox(
+            "🧭 动作空间",
+            list(direction_options.keys()),
+            index=0,
+            disabled=st.session_state.is_simulating,
+            key="direction_selector_standard",
+            help="离散方向对应 Q-Learning / DQN / Dueling DQN；连续方向仅支持 Actor-Critic"
+        )
+        direction_mode = direction_options[direction_label]
+        action_size = 4 if direction_mode == "continuous" else int(direction_mode)  # 连续方向不走离散Q路径
+
+        # 学习方法选择 — 根据身体模型类型 + 动作空间显示可用算法
+        if direction_mode == "continuous":
+            if not PYTORCH_AVAILABLE:
+                st.error("⚠️ 连续方向需要 PyTorch (Actor-Critic)")
+                st.stop()
+            methods = ["🎯 Actor-Critic"]
+            default_method_idx = 0
+        elif body_model_type == "worm2d":
             # Worm2D: Q-Learning + DQN + Dueling DQN
             methods = ["📋 Q-Learning"]
             if PYTORCH_AVAILABLE:
                 methods += ["🧠 DQN", "⚡ Dueling DQN"]
             default_method_idx = 1 if PYTORCH_AVAILABLE else 0
         else:
-            # 连续身体模型: Q-Learning + Actor-Critic (DQN 未适配)
+            # 连续身体模型离散方向: 仅 Q-Learning (DQN/Dueling 未适配)
             methods = ["📋 Q-Learning"]
-            if PYTORCH_AVAILABLE:
-                methods.append("🎯 Actor-Critic")
-            default_method_idx = 1 if PYTORCH_AVAILABLE else 0
+            default_method_idx = 0
 
         method_choice = st.selectbox(
             "🤖 学习算法",
             methods,
             index=default_method_idx,
             disabled=st.session_state.is_simulating,
-            key="method_selector_standard"
+            key=f"method_selector_standard_{body_model_type}_{direction_mode}"
         )
+        if direction_mode != "continuous" and body_model_type != "worm2d":
+            st.caption("🚫 🧠 DQN / ⚡ Dueling DQN 未适配该身体模型（后续版本支持）")
 
         # 温度场选择
         field_map = {
@@ -1084,6 +1106,7 @@ with st.sidebar:
         # 奖励函数变体（迁移学习仅 Worm2D，能量变体对其无效果，固定原版）
         reward_variant = "original"
         reward_energy_weight = 0.1
+        action_size = 4  # 迁移学习仅 Worm2D，固定 4 方向
         
         transfer_options = [
             "🎯 单热源 (single_center)", "♻️ 双热源 (dual_center)", "🌊 S型迷宫 (maze_thermal_channel)", 
@@ -1330,6 +1353,7 @@ with st.sidebar:
         # 奖励函数变体（课程学习默认原版）
         reward_variant = "original"
         reward_energy_weight = 0.1
+        action_size = 4  # 课程学习仅 Worm2D，固定 4 方向
 
     st.markdown("---")
     
@@ -1373,6 +1397,7 @@ if start_button:
     
     # 身体参数字典 - 关键修复：确保参数正确传递
     body_params = {
+        "action_size": action_size,
         "num_segments": num_segments,
         "sample_count": sample_count,
         "segment_length": segment_length,
@@ -1719,7 +1744,8 @@ if start_button:
                     os.path.join(config.output_dir, "training_animation.gif"),
                     os.path.join(config.output_dir, "training_animation.mp4"),
                     os.path.join(config.output_dir, "worm_body_animation.gif"),
-                    os.path.join(config.output_dir, "worm_body_animation.mp4")
+                    os.path.join(config.output_dir, "worm_body_animation.mp4"),
+                    os.path.join(config.output_dir, "simple_training_animation.gif"),  # 回退动画
                 ]
                 
                 found_animation = None

@@ -115,6 +115,30 @@ except ImportError:
 
         DEFAULT_ENERGY_WEIGHT = 0.1
 
+# ── 动作空间辅助: 离散方向编号统一 ─────────────────────────────
+# 4 方向保持历史编号 (0上 1下 2左 3右)，与旧版逐位一致；
+# n>4 方向为顺时针编号: 0上 1右上 2右 3右下 4下 5左下 6左 7左上
+_LEGACY_MOVES_4 = [(0, -1), (0, 1), (-1, 0), (1, 0)]
+_LEGACY_HEADINGS_4 = {0: -math.pi / 2.0, 1: math.pi / 2.0, 2: math.pi, 3: 0.0}
+
+
+def _action_vectors(action_size):
+    """离散动作 → 网格位移向量 (Worm2D)。8 方向对角不缩放 (网格语义，整数格点)。"""
+    if action_size == 4:
+        return list(_LEGACY_MOVES_4)
+    return [
+        (int(round(math.cos(a))), int(round(math.sin(a))))
+        for i in range(action_size)
+        for a in [i * 2.0 * math.pi / action_size - math.pi / 2.0]
+    ]
+
+
+def _action_headings(action_size):
+    """离散动作 → 绝对朝向角 (CCB/ADB)。4 方向保持历史映射。"""
+    if action_size == 4:
+        return dict(_LEGACY_HEADINGS_4)
+    return {i: i * 2.0 * math.pi / action_size - math.pi / 2.0 for i in range(action_size)}
+
 # 🔧 修复DQN导入
 try:
     if PYTORCH_AVAILABLE:
@@ -248,12 +272,12 @@ class Worm2D(BodyModel):
         print(f"🔧 历史记录初始化：保存完整身体段 {len(self.body_segments)} 个")
         
         self.total_reward = 0
-        self.q_table = [[[0.0, 0.0, 0.0, 0.0] for _ in range(width)] for _ in range(height)]
+        self.action_size = int(body_params.get("action_size", 4))  # 离散方向数: 4/8/16 (默认4保持兼容)
+        self.q_table = [[[0.0] * self.action_size for _ in range(width)] for _ in range(height)]
         self.use_neural = False
         self.neural_network = None
         self.optimizer = None
         self.state_size = 8  # 单帧维度 (默认旧 8 维; state_v2 时改为 15)
-        self.action_size = 4
         self.use_state_v2 = False  # 默认关闭，前端可开启
         self._pending_action = None
         self.last_action = None
@@ -872,7 +896,7 @@ class Worm2D(BodyModel):
         """选择动作"""
         if self.use_neural and self.neural_network is not None and PYTORCH_AVAILABLE and torch is not None:
             if random.random() < adjusted_epsilon:
-                action = random.choice([0,1,2,3])
+                action = random.randrange(self.action_size)
             else:
                 try:
                     with torch.no_grad():
@@ -880,17 +904,17 @@ class Worm2D(BodyModel):
                         expected_dim = frame_dim * 4  # 堆叠 4 帧
                         if len(current_state) != expected_dim:
                             print(f"⚠️ 状态维度错误: {len(current_state)}, 期望{expected_dim}维，使用随机动作")
-                            action = random.choice([0,1,2,3])
+                            action = random.randrange(self.action_size)
                         else:
                             state_tensor = torch.FloatTensor(current_state).unsqueeze(0)
                             q_values = self.neural_network(state_tensor)
                             action = q_values.argmax().item()
                 except Exception as e:
                     print(f"⚠️ 神经网络推理失败，使用随机动作: {e}")
-                    action = random.choice([0,1,2,3])
+                    action = random.randrange(self.action_size)
         else:
             if random.random() < adjusted_epsilon:
-                action = random.choice([0,1,2,3])
+                action = random.randrange(self.action_size)
             else:
                 # 使用旧状态坐标来查询Q表
                 q_values = self.q_table[old_y][old_x]
@@ -1001,9 +1025,8 @@ class Worm2D(BodyModel):
         self._prev_head_pos = (self.x, self.y)  # 记录移动前位置用于计算速度
 
         try:
-            # 基础移动向量
-            moves = [(0, -1), (0, 1), (-1, 0), (1, 0)]  # 上下左右
-            dx, dy = moves[action]
+            # 基础移动向量 (方向编号与 _action_vectors 统一; 8 方向对角不缩放)
+            dx, dy = _action_vectors(self.action_size)[action]
             
             # 计算新的头部位置
             new_head_x = self.x + dx
@@ -1293,8 +1316,7 @@ class Worm2D(BodyModel):
         if env is not None:
             moved = self.move(action_index, env)
         else:
-            moves = [(0, -1), (0, 1), (-1, 0), (1, 0)]
-            dx, dy = moves[action_index]
+            dx, dy = _action_vectors(self.action_size)[action_index]
             new_head_x = max(0, min(self.width - 1, self.x + dx))
             new_head_y = max(0, min(self.height - 1, self.y + dy))
             self._update_body_physics(new_head_x, new_head_y)
@@ -1452,7 +1474,8 @@ class Worm2D(BodyModel):
             if state_size is None:
                 state_size = 10 if getattr(self, 'use_state_v2', False) else 8
             self.state_size = state_size  # 单帧维度
-            self.action_size = action_size or 4
+            if action_size:
+                self.action_size = action_size
             nn_input_size = state_size * 4  # 堆叠 4 帧
 
             print(f"🔧 初始化持久神经网络组件 (输入 {nn_input_size} 维)...")
@@ -1592,7 +1615,7 @@ class ContinuousCenterlineBody(BodyModel):
         self.fatigue_threshold = 0.35
         self.max_fatigue_penalty = 0.5
         self.position_noise = float(noise_params.get("position_noise", 0.0))
-        self.action_size = 4
+        self.action_size = int(body_params.get("action_size", 4))  # 离散方向数: 4/8/16 (默认4保持兼容)
         self.use_neural = False
         self.use_actor_critic = False
         self.actor_critic_agent = None
@@ -1603,7 +1626,7 @@ class ContinuousCenterlineBody(BodyModel):
         self.ac_gamma = float(body_params.get("ac_gamma", 0.95))
         self.ac_batch_size = int(body_params.get("ac_batch_size", 64))
         self.ac_noise_scale = float(body_params.get("ac_noise_scale", 0.6))
-        self.q_table = [[[0.0, 0.0, 0.0, 0.0] for _ in range(self.width)] for _ in range(self.height)]
+        self.q_table = [[[0.0] * self.action_size for _ in range(self.width)] for _ in range(self.height)]
         self.state_buffer = deque(maxlen=4)
         self.recent_temperatures = []
         self.visited_positions = {}
@@ -1749,12 +1772,7 @@ class ContinuousCenterlineBody(BodyModel):
         if isinstance(action, (tuple, list, np.ndarray)) and len(action) >= 2:
             return float(action[0]), float(action[1])
         action_index = int(action)
-        headings = {
-            0: -math.pi / 2.0,
-            1: math.pi / 2.0,
-            2: math.pi,
-            3: 0.0,
-        }
+        headings = _action_headings(getattr(self, 'action_size', 4))
         return headings.get(action_index, self.heading), self.forward_speed
 
     def step_physics(self, env=None, dt=1.0, **kwargs):

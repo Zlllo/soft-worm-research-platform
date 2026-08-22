@@ -179,3 +179,80 @@ streamlit: http://localhost:8502 正常运行
 - **Worm2D**：奖励逐值不变（原版=原始；含能量变体因 ΔE≡0 与原始等价）
 - **CCB / ADB**：温度部分从 ΔT 差分改为 Worm2D 阶梯（需重新基准）；能量项从绝对式改为单步式并放大权重
 - AC 路径的 stuck / constraint 安全正则项原样保留
+
+---
+
+## 2026-08-18: 8 方向动作空间扩展（后端参数化 + 前端选择器）
+
+### 变更内容
+
+动作空间从"写死 4 方向"改为**参数化离散方向**（默认 4 保持历史行为，8 方向为新增，16 方向预留），前端新增动作空间选择器并与学习算法联动。
+
+**方向编号统一：**
+
+| | 编号 |
+|---|---|
+| 4 方向（历史编号，逐位不变） | 0上 1下 2左 3右 |
+| n>4 方向（顺时针，公式生成） | 0上 1右上 2右 3右下 4下 5左下 6左 7左上，每 360°/n 一步 |
+
+**关键设计决策：**
+
+1. **对角不缩放**：8 方向对角 `(1,1)` 落在整数格点上，Q 表索引保持干净；缩放 1/√2 会引入浮点坐标截断伪影（一步对角 Q 状态不变、两步才进一格）。网格语义下对角移动快 √2 倍是合法策略，文档注明即可。
+2. **Worm2D 只开 4/8**：16 方向含 8 个非格点方向，网格模型无法无损表示；16 方向留给 CCB（heading 连续，无此问题）。
+3. **4 方向行为完全不变**：动作编号、落点、Q 表结构、NN 输入输出与旧版逐位一致，默认参数下零行为差异。
+
+### 修改文件
+
+- `core/worm_body.py`：新增 `_action_vectors()` / `_action_headings()`（4 方向历史表，n>4 公式生成）；Worm2D/CCB 的 `action_size` 读 `body_params["action_size"]`（默认 4）；两处 Q 表宽度动态化；`move()` / `step_physics` 兜底的 `moves` 动态化；`_select_action` 4 处 `random.choice([0,1,2,3])` → `random.randrange(action_size)`（修复 4-7 号动作永远探索不到的隐患）；CCB `_parse_action` headings 动态化；`Worm2D.setup_neural_network` 的 action_size 参数不再覆盖已有值
+- `core/utils.py`：`setup_neural_network` 两处 `output_size=4` → `worm.action_size`；`save_q_table` 列数与标签动态（4 方向历史标签，n>4 顺时针标签，超 8 用"动作N"兜底）
+- `app.py`：标准训练新增「🧭 动作空间」选择器（Worm2D: 4/8；CCB/ADB: 4/8/连续，默认 4）；算法联动过滤（离散→Worm2D: Q/DQN/Dueling、CCB/ADB: 仅 Q-Learning + "DQN/Dueling 未适配"提示；连续→仅 Actor-Critic）；`body_params` 新增 `action_size` 键；迁移/课程模式固定 4 方向
+- `test_core.py`：+6 项测试（8 方向 Q 表宽/动作边界/8 落点/CCB 朝向 45°+冒烟/DQN 输出 8 维/save_q_table 8 列标签，4 方向历史编号回归），26/26 通过
+
+### 已知瑕疵（文档注明，后续修复）
+
+- **CCB 离散 Q 路径的能量-转向非 Markov**：Q 状态只有位置，但转向能耗依赖当前朝向（`turn_amount`）。4 方向时已存在，8 方向粒度变细影响变小；修复方案是 Q 状态加朝向，留作后续任务。
+- **CCB/ADB 的 DQN/Dueling 未适配**：缺少神经网络回路（推理/回放/批训练/目标网络）与 `state_size` 组件，UI 中显示为"未适配"；本次 `output_size` 动态化后适配成本已降低，单独开一轮做。
+
+### 验证结果
+
+```
+pytest:        26/26 passed（20 原有 + 6 新增）
+test_simple.py: 全部通过
+端到端冒烟:     8 方向 worm 完整训练回路（重置→决策→Q 更新）正常
+```
+
+### 后续建议
+
+1. **16 方向 UI 选项**：CCB/ADB 打开 16（后端已支持，加个选项即可）
+2. **CCB 的 DQN/Dueling 适配**：补神经网络回路 + `utils.setup_neural_network` 兼容 CCB 状态
+3. **CCB Q 状态加朝向**：修复能量-转向 Markov 瑕疵
+4. **state_v3 候选**：8 方向温度梯度（环境状态第 1-4 维扩到对角）
+
+---
+
+## 2026-08-23: 动画生成修复（matplotlib 3.9+ 兼容）
+
+### 症状
+
+多种动作空间 × 学习算法组合训练完成后，前端显示「⚠️ 未找到动画文件」。
+
+### 根因（两层叠加）
+
+1. **主因**：matplotlib 升级到 3.9+（当前环境 3.11）后 `plt.cm.get_cmap()` 被移除，`core/visualization.py` 两个动画函数（静态 `create_training_animation_2d` 第 94 行、动态 `create_training_animation_2d_dynamic_mp4` 第 297 行）一进循环就抛 `AttributeError` → `save_and_visualize_results` 捕获后走回退路径。
+2. **次因**：回退函数 `create_simple_animation` 保存的文件名是 `simple_training_animation.gif`，而前端 `app.py` 的动画查找列表（`training_animation.gif/.mp4`、`worm_body_animation.gif/.mp4`）不含此名 → 即使回退成功也显示"未找到动画文件"。
+
+说明：此故障影响**所有组合**（包括 worm2d Q-learning）；7 月 a0cef93 的"ffmpeg→pillow"修复解决的是另一个故障点（缺 ffmpeg），两者叠加不冲突。
+
+### 修复
+
+- `core/visualization.py`：两处 `plt.cm.get_cmap('viridis')` → `plt.cm.viridis`（色图对象直接使用，所有版本通用；pillow 保存逻辑未动）
+- `app.py`：动画查找列表补充 `simple_training_animation.gif`，未来走回退路径时也能正常显示
+
+### 验证
+
+```
+静态场动画 (CCB 历史)      → GIF 正常生成 (320KB)
+动态场动画 (双中心旋转)     → GIF 正常生成 (921KB)
+worm2d Q-learning 端到端   → save_and_visualize_results 输出 training_animation.gif (240KB)
+pytest 26/26 + test_simple 全过
+```

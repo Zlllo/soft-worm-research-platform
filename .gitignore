@@ -17,3 +17,6 @@ tmp/
 .venv/
 venv/
 env/
+
+# Exported conversation archives (local only)
+历史对话导出_*.md
