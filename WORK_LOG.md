@@ -256,3 +256,48 @@ test_simple.py: 全部通过
 worm2d Q-learning 端到端   → save_and_visualize_results 输出 training_animation.gif (240KB)
 pytest 26/26 + test_simple 全过
 ```
+
+---
+
+## 2026-08-28: CCB/ADB 的 DQN / Dueling DQN 通路补全
+
+### 变更内容
+
+补全连续身体模型（CCB/ADB）缺失的深度强化学习通路，实现后 UI 上 CCB/ADB 离散方向可选 Q-Learning / DQN / Dueling DQN。
+
+**1. 共享训练函数**：`worm_body.py` 模块级 `train_dqn_batch(worm, gamma)`，从 `Worm2D._train_neural_network_batch` 抽取批训练数学（Double DQN + 优先回放 + 梯度裁剪 1.0 + 目标网络同步），Worm2D 方法变薄壳调用、行为不变。采样判别从 `hasattr('sample')` 改为 `hasattr('batch_update')`（ExperienceReplay 也有 sample，原判别会误判；实际引擎只用 PrioritizedReplayBuffer，对 Worm2D 零影响）。
+
+**2. CCB 状态升级**：`get_state_v2` 10→**12 维**（末尾加 `cosθ/sinθ` 朝向），`ac_state_dim` 同步 12。朝向是能量-转向耦合的必要信息（Markov 修复）；Worm2D 保持 10 维（无 heading 概念）。
+
+**3. CCB DQN 分支**：`decide_move` 优先级 **AC → DQN → Q 表**。DQN 分支：12 维×4 帧堆叠、ε-greedy、统一奖励函数、经验 5 元组（done 恒 False，Q/DQN 路径暂无能量耗尽终止）、**每 10 步且 buffer ≥ 64 训练、每 100 训练批硬更新目标网络**（正确语义）。惰性初始化 state_buffer：reset 预热的是 8 维旧帧，首步检测帧维不一致即清空重灌 12 维帧，防混帧静默截断。
+
+**4. 前端**：`app.py` CCB/ADB 离散方向方法列表加 DQN/Dueling DQN，"未适配"提示删除。
+
+### 过程中发现并处理的 bug
+
+| bug | 处理 |
+|---|---|
+| `_update_learning` 是死代码，Worm2D 的 `step_count` 永不递增 → 目标网络每批硬更新（冻结失效） | 用户决定 Worm2D 保持原样；CCB 按正确语义实现 |
+| 采样判别 `hasattr('sample')` 对 ExperienceReplay 误判 | 共享函数改 `batch_update` 判别 |
+| `current_step` 被 `step_physics` 与 DQN 分支双重递增 → 触发检查时恒为奇数、`%10==0` 永不成立 | CCB 用独立计数器 `dqn_step_counter` |
+| reset 预热 8 维帧与 12 维 DQN 帧混入 → `get_stacked_state` 静默截断丢 heading | CCB DQN 分支惰性 buffer 初始化 |
+| **Worm2D 的 state_v2 DQN 一直静默失效**（预热混帧 → 维度校验失败 → 永远随机动作） | **只报告未修**（用户指令 Worm2D 不动），待用户决策 |
+
+### 验证
+
+```
+pytest: 31/31（新增 5：12 维状态含朝向 / DQN setup 48 输入 / 75 步决策冒烟含批训练触发 / Dueling 变体 / 引擎级 CCB+DQN）
+test_simple + py_compile 全过
+端到端: CCB+DQN 150 步多次批训练正常; ADB+Dueling(8方向) 冒烟正常
+```
+
+### 下一步（按优先级）
+
+1. **ADB 模型改造（下一步重点）**：波-速度映射 `base_step = forward_speed + propulsion_gain·|A·f|` 目前被两条训练路径绕过——Q-learning 用固定 `forward_speed`、AC 用 actor 自输出的 step，波幅/频率实际只影响形状、能耗（0.01·|A·f|）、疲劳（0.002·|A·f|），**不影响前进速度**。需把 base_step 真正接入两条路径，让波-速度-能耗三角关系成立。
+2. Worm2D state_v2 DQN 静默失效 bug 的修复决策。
+3. Q 表路径的 Markov 修复（Q 状态加朝向分箱）。
+4. Q/DQN 路径的能量耗尽终止（done 信号）。
+
+### ⚠️ 重要原则（后续工作必读）
+
+**历史设计决策不可当作已考虑周全的定论。** 例：state_v2 当年砍掉朝向的理由（"Worm2D 不需要；温度梯度已含方向"）在 2026-08-11 加入能量-转向耦合后已失效，直到 08-28 才被修正。后续每次改动（尤其涉及 state_v2 结构、动作空间、奖励、训练通路）都应根据**当前代码状态**重新审视历史取舍，主动核对旧理由是否仍然成立，不能照搬旧结论。

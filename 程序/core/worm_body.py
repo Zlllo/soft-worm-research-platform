@@ -139,6 +139,99 @@ def _action_headings(action_size):
         return dict(_LEGACY_HEADINGS_4)
     return {i: i * 2.0 * math.pi / action_size - math.pi / 2.0 for i in range(action_size)}
 
+def train_dqn_batch(worm, gamma):
+    """DQN 批训练数学（Worm2D / CCB / ADB 共用）。
+
+    采样判别用 batch_update（ExperienceReplay 也有 sample 方法，用 sample 会误判）；
+    目标网络按 worm.step_count % worm.target_update_freq == 0 硬更新。
+    """
+    if not PYTORCH_AVAILABLE or worm.experience_replay is None:
+        return
+    if not getattr(worm, 'use_neural_training', True):
+        return
+
+    try:
+        batch_size = min(worm.batch_size, len(worm.experience_replay))
+        if batch_size < 8:  # 最小批次大小
+            return
+
+        # 采样经验：以 batch_update 区分优先回放与普通队列
+        if hasattr(worm.experience_replay, 'batch_update'):
+            # PrioritizedReplayBuffer
+            try:
+                tree_indices, experiences_data, is_weights = worm.experience_replay.sample(batch_size)
+                if tree_indices is None or experiences_data is None:
+                    return
+            except Exception as sample_error:
+                print(f"⚠️ 优先经验回放采样失败: {sample_error}")
+                return
+        else:
+            # 普通 deque - 随机采样
+            experiences_data = random.sample(list(worm.experience_replay), batch_size)
+            is_weights = np.ones(batch_size)  # 等权重
+            tree_indices = None
+
+        # 提取批次数据
+        states = np.vstack([e[0] for e in experiences_data])
+        actions = np.array([e[1] for e in experiences_data])
+        rewards = np.array([e[2] for e in experiences_data])
+        next_states = np.vstack([e[3] for e in experiences_data])
+        dones = np.array([e[4] for e in experiences_data])
+
+        # 转换为张量
+        states_tensor = torch.FloatTensor(states)
+        actions_tensor = torch.LongTensor(actions)
+        rewards_tensor = torch.FloatTensor(rewards)
+        next_states_tensor = torch.FloatTensor(next_states)
+        dones_tensor = torch.BoolTensor(dones)
+        is_weights_tensor = torch.FloatTensor(is_weights)
+
+        # 计算当前Q值
+        current_q_values = worm.neural_network(states_tensor).gather(1, actions_tensor.unsqueeze(1))
+
+        # 计算目标Q值 (Double DQN: 在线网选动作、目标网估值)
+        with torch.no_grad():
+            if hasattr(worm, 'target_network') and worm.target_network is not None:
+                next_actions = worm.neural_network(next_states_tensor).argmax(1)
+                next_q_values_target = worm.target_network(next_states_tensor)
+                next_max_q_values = next_q_values_target.gather(1, next_actions.unsqueeze(1))
+            else:
+                next_max_q_values = worm.neural_network(next_states_tensor).max(1)[0].unsqueeze(1)
+
+        next_max_q_values[dones_tensor.unsqueeze(1)] = 0.0
+        target_q_values = rewards_tensor.unsqueeze(1) + gamma * next_max_q_values
+
+        # 计算损失
+        td_errors = torch.abs(target_q_values - current_q_values).detach()
+        loss = torch.mean(is_weights_tensor.unsqueeze(1) * torch.nn.functional.mse_loss(
+            current_q_values, target_q_values, reduction='none'))
+
+        # 反向传播
+        worm.optimizer.zero_grad()
+        loss.backward()
+        torch.nn.utils.clip_grad_norm_(worm.neural_network.parameters(), max_norm=1.0)
+        worm.optimizer.step()
+
+        # 更新优先级
+        if tree_indices is not None and hasattr(worm.experience_replay, 'batch_update'):
+            try:
+                td_errors_numpy = td_errors.squeeze().cpu().numpy()
+                if td_errors_numpy.ndim > 1:
+                    td_errors_numpy = td_errors_numpy.flatten()
+                td_errors_numpy = td_errors_numpy.astype(np.float32)
+                worm.experience_replay.batch_update(tree_indices, td_errors_numpy)
+            except Exception as update_error:
+                print(f"⚠️ 优先级更新失败: {update_error}")
+
+        # 更新目标网络
+        if hasattr(worm, 'target_network') and hasattr(worm, 'target_update_freq'):
+            if worm.step_count % worm.target_update_freq == 0:
+                worm.target_network.load_state_dict(worm.neural_network.state_dict())
+
+    except Exception as e:
+        print(f"⚠️ 神经网络批训练失败: {e}")
+
+
 # 🔧 修复DQN导入
 try:
     if PYTORCH_AVAILABLE:
@@ -1098,94 +1191,8 @@ class Worm2D(BodyModel):
         self.history.append(self.body_segments.copy())
 
     def _train_neural_network_batch(self, gamma):
-        """修复版神经网络批训练"""
-        if not PYTORCH_AVAILABLE or self.experience_replay is None:
-            return
-        if not getattr(self, 'use_neural_training', True):
-            return
-        
-        try:
-            # 🔧 修复：兼容不同类型的经验回放缓冲区
-            batch_size = min(self.batch_size, len(self.experience_replay))
-            if batch_size < 8:  # 最小批次大小
-                return
-            
-            # 采样经验
-            if hasattr(self.experience_replay, 'sample'):
-                # PrioritizedReplayBuffer
-                try:
-                    tree_indices, experiences_data, is_weights = self.experience_replay.sample(batch_size)
-                    if tree_indices is None or experiences_data is None:
-                        return
-                except Exception as sample_error:
-                    print(f"⚠️ 优先经验回放采样失败: {sample_error}")
-                    return
-            else:
-                # 普通 deque - 随机采样
-                import random
-                experiences_data = random.sample(list(self.experience_replay), batch_size)
-                is_weights = np.ones(batch_size)  # 等权重
-                tree_indices = None
-        
-            # 提取批次数据
-            states = np.vstack([e[0] for e in experiences_data])
-            actions = np.array([e[1] for e in experiences_data])
-            rewards = np.array([e[2] for e in experiences_data])
-            next_states = np.vstack([e[3] for e in experiences_data])
-            dones = np.array([e[4] for e in experiences_data])
-            
-            # 转换为张量
-            import torch
-            states_tensor = torch.FloatTensor(states)
-            actions_tensor = torch.LongTensor(actions)
-            rewards_tensor = torch.FloatTensor(rewards)
-            next_states_tensor = torch.FloatTensor(next_states)
-            dones_tensor = torch.BoolTensor(dones)
-            is_weights_tensor = torch.FloatTensor(is_weights)
-            
-            # 计算当前Q值
-            current_q_values = self.neural_network(states_tensor).gather(1, actions_tensor.unsqueeze(1))
-            
-            # 计算目标Q值
-            with torch.no_grad():
-                if hasattr(self, 'target_network') and self.target_network is not None:
-                    next_actions = self.neural_network(next_states_tensor).argmax(1)
-                    next_q_values_target = self.target_network(next_states_tensor)
-                    next_max_q_values = next_q_values_target.gather(1, next_actions.unsqueeze(1))
-                else:
-                    next_max_q_values = self.neural_network(next_states_tensor).max(1)[0].unsqueeze(1)
-            
-            next_max_q_values[dones_tensor.unsqueeze(1)] = 0.0
-            target_q_values = rewards_tensor.unsqueeze(1) + gamma * next_max_q_values
-        
-            # 计算损失
-            td_errors = torch.abs(target_q_values - current_q_values).detach()
-            loss = torch.mean(is_weights_tensor.unsqueeze(1) * torch.nn.functional.mse_loss(current_q_values, target_q_values, reduction='none'))
-            
-            # 反向传播
-            self.optimizer.zero_grad()
-            loss.backward()
-            torch.nn.utils.clip_grad_norm_(self.neural_network.parameters(), max_norm=1.0)
-            self.optimizer.step()
-            
-            # 更新优先级
-            if tree_indices is not None and hasattr(self.experience_replay, 'batch_update'):
-                try:
-                    td_errors_numpy = td_errors.squeeze().cpu().numpy()
-                    if td_errors_numpy.ndim > 1:
-                        td_errors_numpy = td_errors_numpy.flatten()
-                    td_errors_numpy = td_errors_numpy.astype(np.float32)
-                    self.experience_replay.batch_update(tree_indices, td_errors_numpy)
-                except Exception as update_error:
-                    print(f"⚠️ 优先级更新失败: {update_error}")
-        
-            # 更新目标网络
-            if hasattr(self, 'target_network') and hasattr(self, 'target_update_freq'):
-                if self.step_count % self.target_update_freq == 0:
-                    self.target_network.load_state_dict(self.neural_network.state_dict())
-        
-        except Exception as e:
-            print(f"⚠️ 神经网络批训练失败: {e}")
+        """修复版神经网络批训练（训练数学见模块级 train_dqn_batch）。"""
+        train_dqn_batch(self, gamma)
 
     def reset(self, start_pos=None, **kwargs):
         """重置线虫状态"""
@@ -1619,7 +1626,19 @@ class ContinuousCenterlineBody(BodyModel):
         self.use_neural = False
         self.use_actor_critic = False
         self.actor_critic_agent = None
-        self.ac_state_dim = 10  # state_v2 统一 10 维
+        self.ac_state_dim = 12  # state_v2 12 维 (10 + cos/sin 朝向)
+        # DQN 组件 (由 utils.setup_neural_network 装配)
+        self.state_size = 12   # 单帧维度 = get_state_v2 输出 (DQN 输入 = 12×4)
+        self.neural_network = None
+        self.target_network = None
+        self.optimizer = None
+        self.experience_replay = None
+        self.scheduler = None
+        self.batch_size = 64
+        self.train_interval = 4
+        self.target_update_freq = 100
+        self.step_count = 0        # DQN 训练批次计数 (每 100 批硬更新目标网络)
+        self.dqn_step_counter = 0  # DQN 决策步计数 (step_physics 也递增 current_step，不能共用)
         self.ac_hidden_size = int(body_params.get("ac_hidden_size", 128))
         self.ac_actor_lr = float(body_params.get("ac_actor_lr", 1e-4))
         self.ac_critic_lr = float(body_params.get("ac_critic_lr", 1e-3))
@@ -1819,10 +1838,14 @@ class ContinuousCenterlineBody(BodyModel):
         return self.last_physics_result
 
     def decide_move(self, env, epsilon=0.2, alpha=0.5, gamma=0.9):
-        """决策并移动。Actor-Critic 可用时优先使用。"""
+        """决策并移动。优先级：Actor-Critic → DQN → Q-learning。"""
         # Actor-Critic 路径
         if self.use_actor_critic and self.actor_critic_agent is not None:
             return self.decide_move_actor_critic(env)
+
+        # DQN / Dueling DQN 路径
+        if self.use_neural and self.neural_network is not None and PYTORCH_AVAILABLE:
+            return self._decide_move_neural(env, epsilon, gamma)
 
         # Q-learning 路径（原有逻辑）
         old_x, old_y = int(round(self.x)), int(round(self.y))
@@ -1848,12 +1871,83 @@ class ContinuousCenterlineBody(BodyModel):
         self.total_reward += reward
         return bool(result.get('moved', False))
 
+    def _decide_move_neural(self, env, epsilon, gamma):
+        """DQN/Dueling DQN 决策：state_v2(12维)×4帧 → ε-greedy → 物理步 → 经验回放 → 批训练。
+
+        - 惰性初始化 state_buffer：reset_worm_for_new_round 预热的是 8 维旧帧，
+          首步检测帧维与 self.state_size 不一致时清空重灌 12 维帧，避免静默截断。
+        - 经验 5 元组 done 恒 False（Q/DQN 路径暂无能量耗尽终止，与 Worm2D 现状一致）。
+        - 训练：每 10 步且 buffer ≥ batch_size 时批训练；step_count 每训练一批 +1，
+          每 target_update_freq(100) 批硬更新目标网络。
+        """
+        # 1. 惰性初始化状态缓冲，保证帧维度一致
+        frame = self.get_state_v2(env)
+        if (len(self.state_buffer) == 0
+                or len(self.state_buffer[-1]) != self.state_size):
+            self.state_buffer.clear()
+            for _ in range(self.state_buffer.maxlen):
+                self.state_buffer.append(frame)
+        self.state_buffer.append(frame)
+        stacked_state = get_stacked_state(self.state_buffer)
+
+        # 2. 动作选择 (ε-greedy)
+        if random.random() < epsilon:
+            action = random.randrange(self.action_size)
+        else:
+            try:
+                with torch.no_grad():
+                    state_tensor = torch.FloatTensor(stacked_state).unsqueeze(0)
+                    q_values = self.neural_network(state_tensor)
+                    action = int(q_values.argmax().item())
+            except Exception as e:
+                print(f"⚠️ 神经网络推理失败，使用随机动作: {e}")
+                action = random.randrange(self.action_size)
+
+        # 3. 执行物理步并计算奖励
+        old_energy = self.energy
+        result = self.step_physics(env=env, action=action)
+        reward = compute_reward(
+            env, self,
+            variant=getattr(self, 'reward_variant', 'original'),
+            old_energy=old_energy,
+            energy_weight=getattr(self, 'reward_energy_weight', DEFAULT_ENERGY_WEIGHT),
+            target=(self.x, self.y),
+        )
+
+        # 4. 存储经验 (5 元组, done 恒 False)
+        next_frame = self.get_state_v2(env)
+        temp_buffer = self.state_buffer.copy()
+        temp_buffer.append(next_frame)
+        next_stacked = get_stacked_state(temp_buffer)
+        experience = (stacked_state.copy(), action, reward, next_stacked.copy(), False)
+        try:
+            if hasattr(self.experience_replay, 'add'):
+                # PrioritizedReplayBuffer 使用 add 方法
+                self.experience_replay.add(experience)
+            elif hasattr(self.experience_replay, 'append'):
+                # 普通 deque 使用 append 方法
+                self.experience_replay.append(experience)
+        except Exception as e:
+            print(f"⚠️ 经验存储失败: {e}")
+
+        # 5. 触发批训练：每 10 个决策步且 buffer ≥ batch_size
+        self.dqn_step_counter += 1
+        buffer_size = len(self.experience_replay) if hasattr(self.experience_replay, '__len__') else 0
+        if buffer_size >= self.batch_size and self.dqn_step_counter % 10 == 0:
+            self.step_count += 1
+            train_dqn_batch(self, gamma)
+
+        # 6. 统计
+        self.total_reward += reward
+        return bool(result.get('moved', False))
+
     # ── Actor-Critic 相关方法 ─────────────────────────
 
     def get_state_v2(self, env=None):
-        """返回统一 10 维状态向量：原 8 维 + 能量率 + 平均曲率。
+        """返回 CCB/ADB 12 维状态向量：原 8 维 + 能量率 + 平均曲率 + 朝向(cos,sin)。
 
-        所有身体模型共用同一结构，Actor-Critic 直接使用此向量。
+        朝向维度是能量-转向耦合的必要信息（转向能耗依赖当前朝向），
+        用 cos/sin 表示以避免 ±π 跳变。Worm2D 保持 10 维（无 heading 概念）。
         """
         state = []
 
@@ -1873,7 +1967,11 @@ class ContinuousCenterlineBody(BodyModel):
         mean_curv = shape.get('curvature_mean_deg', 0.0)
         state.append(float(np.clip(mean_curv / curv_limit, 0.0, 1.0)))
 
-        return np.array(state[:10], dtype=np.float32)
+        # 11-12. 朝向 (cos/sin)
+        state.append(float(math.cos(self.heading)))
+        state.append(float(math.sin(self.heading)))
+
+        return np.array(state[:12], dtype=np.float32)
 
     def setup_actor_critic(self):
         """初始化 DDPG Agent。"""

@@ -1044,8 +1044,10 @@ with st.sidebar:
                 methods += ["🧠 DQN", "⚡ Dueling DQN"]
             default_method_idx = 1 if PYTORCH_AVAILABLE else 0
         else:
-            # 连续身体模型离散方向: 仅 Q-Learning (DQN/Dueling 未适配)
+            # 连续身体模型离散方向: Q-Learning + DQN + Dueling DQN
             methods = ["📋 Q-Learning"]
+            if PYTORCH_AVAILABLE:
+                methods += ["🧠 DQN", "⚡ Dueling DQN"]
             default_method_idx = 0
 
         method_choice = st.selectbox(
@@ -1055,8 +1057,6 @@ with st.sidebar:
             disabled=st.session_state.is_simulating,
             key=f"method_selector_standard_{body_model_type}_{direction_mode}"
         )
-        if direction_mode != "continuous" and body_model_type != "worm2d":
-            st.caption("🚫 🧠 DQN / ⚡ Dueling DQN 未适配该身体模型（后续版本支持）")
 
         # 温度场选择
         field_map = {

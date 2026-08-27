@@ -3,6 +3,7 @@ import importlib
 import importlib.util
 import io
 import json
+import math
 import random
 import sys
 import types
@@ -958,3 +959,155 @@ def test_save_q_table_dynamic_columns(tmp_path):
     assert header[2:10] == ["上Q", "右上Q", "右Q", "右下Q", "下Q", "左下Q", "左Q", "左上Q"]
     assert header[10] == "偏好动作"
     assert len(lines) == 3 + env.width * env.height
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CCB/ADB DQN / Dueling DQN 通路测试
+# ══════════════════════════════════════════════════════════════════════════════
+
+def build_ccb_body(width=20, height=20, start_pos=(5, 5), **body_params):
+    params = {"sample_count": 5, "body_length": 8.0, "damping": 0.0}
+    params.update(body_params)
+    with contextlib.redirect_stdout(io.StringIO()):
+        body = create_body_model(
+            model_type="continuous_centerline", start_pos=start_pos,
+            width=width, height=height, body_params=params, noise_params={},
+        )
+    return body
+
+
+def test_ccb_state_v2_has_heading_and_12_dims():
+    """CCB state_v2 = 12 维，末两位为 cos/sin 朝向；ac_state_dim/state_size 同步 12。"""
+    env = build_single_center_env(width=20, height=20)
+    body = build_ccb_body()
+
+    state = body.get_state_v2(env)
+    assert state.shape == (12,)
+    assert body.ac_state_dim == 12
+    assert body.state_size == 12
+    assert state[10] == pytest.approx(math.cos(body.heading), abs=1e-6)
+    assert state[11] == pytest.approx(math.sin(body.heading), abs=1e-6)
+
+    # 转向后 cos/sin 跟随变化
+    body.heading = math.pi / 2.0
+    state2 = body.get_state_v2(env)
+    assert state2[10] == pytest.approx(0.0, abs=1e-6)
+    assert state2[11] == pytest.approx(1.0, abs=1e-6)
+
+
+def test_ccb_dqn_setup_dimensions():
+    """CCB + DQN：输入 12×4=48 维，输出 = action_size。"""
+    from core.neural_networks import PYTORCH_AVAILABLE
+
+    if not PYTORCH_AVAILABLE:
+        pytest.skip("PyTorch is not installed in this environment")
+
+    import torch
+
+    body = build_ccb_body()
+    params = {"method": "DQN", "hidden_size": 16, "neural_lr": 0.001, "weight_decay": 0.0005}
+    assert setup_neural_network(body, params) is True
+    assert body.use_neural is True
+    assert body.state_size == 12
+
+    with torch.no_grad():
+        output = body.neural_network(torch.zeros((1, 48), dtype=torch.float32))
+    assert tuple(output.shape) == (1, 4)  # 默认 action_size=4
+
+    body8 = build_ccb_body(action_size=8)
+    setup_neural_network(body8, params)
+    with torch.no_grad():
+        output8 = body8.neural_network(torch.zeros((1, 48), dtype=torch.float32))
+    assert tuple(output8.shape) == (1, 8)
+
+
+def test_ccb_dqn_decide_move_smoke_and_training():
+    """CCB DQN 分支：随机动作 75 步 → 经验入库、至少一次批训练、Q 表未被写。"""
+    from core.neural_networks import PYTORCH_AVAILABLE
+
+    if not PYTORCH_AVAILABLE:
+        pytest.skip("PyTorch is not installed in this environment")
+
+    random.seed(5)
+    np.random.seed(5)
+    env = build_single_center_env(width=20, height=20)
+    body = build_ccb_body()
+    setup_neural_network(
+        body, {"method": "DQN", "hidden_size": 16, "neural_lr": 0.001, "weight_decay": 0.0005}
+    )
+
+    moved_count = 0
+    for _ in range(75):
+        if body.decide_move(env, epsilon=1.0, alpha=0.1, gamma=0.9):
+            moved_count += 1
+    assert moved_count >= 50  # 随机游走会撞墙（位移0），允许少数夹停步
+
+    assert np.isfinite(body.total_reward)
+    assert len(body.experience_replay) >= 64
+    assert body.step_count >= 1  # 触发过批训练
+    assert all(all(all(q == 0.0 for q in x_row) for x_row in y_row) for y_row in body.q_table)  # Q 表未被 DQN 路径写入
+
+
+def test_ccb_dueling_variant_network_class():
+    """CCB + Dueling DQN：主网络和目标网络都是 DuelingDQN。"""
+    from core.neural_networks import DuelingDQN, PYTORCH_AVAILABLE
+
+    if not PYTORCH_AVAILABLE:
+        pytest.skip("PyTorch is not installed in this environment")
+
+    body = build_ccb_body()
+    setup_neural_network(
+        body, {"method": "Dueling DQN", "hidden_size": 16, "neural_lr": 0.001, "weight_decay": 0.0005}
+    )
+    assert isinstance(body.neural_network, DuelingDQN)
+    assert isinstance(body.target_network, DuelingDQN)
+
+
+def test_standard_simulation_engine_ccb_dqn(monkeypatch, tmp_path):
+    """引擎级：CCB + DQN 短训练完整走到结果保存阶段。"""
+    from core.neural_networks import PYTORCH_AVAILABLE
+
+    if not PYTORCH_AVAILABLE:
+        pytest.skip("PyTorch is not installed in this environment")
+
+    _install_streamlit_and_matplotlib_stubs(monkeypatch)
+    simulation_engine = importlib.import_module("simulation_engine")
+    monkeypatch.setattr(
+        simulation_engine,
+        "st",
+        types.SimpleNamespace(session_state={"stop_requested": False}),
+    )
+
+    factory_calls = _spy_body_model_factory(monkeypatch, simulation_engine)
+    saved_results = []
+    monkeypatch.setattr(
+        simulation_engine, "save_and_visualize_results",
+        lambda *args, **kwargs: saved_results.append(args) or None,
+    )
+
+    config = _build_engine_config(tmp_path, "pytest_ccb_dqn_engine")
+    training_params = _build_engine_training_params(width=16, height=16)
+    training_params.update({
+        "method": "DQN",
+        "hidden_size": 16,
+        "neural_lr": 0.001,
+        "weight_decay": 0.0005,
+        "body_model_type": "continuous_centerline",
+        "body_params": {"sample_count": 5, "body_length": 8.0, "damping": 0.0},
+        "steps_per_round": 2,
+    })
+
+    with contextlib.redirect_stdout(io.StringIO()):
+        events = list(
+            simulation_engine.run_standard_simulation_engine(
+                config=config,
+                training_params=training_params,
+                field_type="single_center",
+                use_neural_network=True,
+                enable_step_tracking=False,
+            )
+        )
+
+    assert factory_calls[0]["kwargs"]["model_type"] == "continuous_centerline"
+    assert saved_results, "CCB + DQN 训练没有进入结果保存阶段"
+    assert events[-1][0:2] == (1000, 1000)
