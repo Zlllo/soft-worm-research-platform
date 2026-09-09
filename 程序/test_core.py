@@ -1111,3 +1111,212 @@ def test_standard_simulation_engine_ccb_dqn(monkeypatch, tmp_path):
     assert factory_calls[0]["kwargs"]["model_type"] == "continuous_centerline"
     assert saved_results, "CCB + DQN 训练没有进入结果保存阶段"
     assert events[-1][0:2] == (1000, 1000)
+
+
+# ── 2026-09-02: ADB RFT 力基波驱动 (3×3 力/力矩平衡 + 子步积分 + 课程训练) ──────
+
+
+def build_adb_body(width=200, height=200, start_pos=(100, 100), **body_params):
+    params = {"sample_count": 9, "body_length": 12.0, "wave_amplitude": 1.0,
+              "wave_frequency": 0.25, "steer_bias": 0.0, "sub_steps": 10}
+    params.update(body_params)
+    with contextlib.redirect_stdout(io.StringIO()):
+        body = create_body_model(
+            model_type="active_deformation", start_pos=start_pos,
+            width=width, height=height, body_params=params, noise_params={},
+        )
+    return body
+
+
+def adb_speed(A, f, b=0.0, warmup=20, steps=40):
+    """跑 warmup+steps 个宏步, 返回 (每步速率, 每步转角)。"""
+    body = build_adb_body(wave_amplitude=A, wave_frequency=f, steer_bias=b)
+    for _ in range(warmup):
+        body.step_physics(env=None, dt=1.0)
+    x0, y0 = body.com.copy()
+    t0 = body.body_theta
+    for _ in range(steps):
+        body.step_physics(env=None, dt=1.0)
+    disp = body.com - np.array([x0, y0])
+    return float(np.hypot(disp[0], disp[1])) / steps, (body.body_theta - t0) / steps
+
+
+def test_adb_rft_forward_motion_and_taylor_scaling():
+    """RFT: 波向尾传 → 身体前向推进; 速度 ∝ A²·f (Taylor 1951); 无波不动。"""
+    s1, _ = adb_speed(0.4, 0.25)
+    s2, _ = adb_speed(0.8, 0.25)   # A 翻倍 → 速度 ≈ ×4 (平方律)
+    s3, _ = adb_speed(0.8, 0.5)    # f 翻倍 → 速度 ≈ ×2
+    s0, _ = adb_speed(0.0, 0.5)    # 无波 → 不动
+    assert s0 < 1e-4
+    assert s1 > 1e-4
+    assert s2 == pytest.approx(4.0 * s1, rel=0.25)
+    assert s3 == pytest.approx(2.0 * s2, rel=0.25)
+
+
+def test_adb_rft_isotropic_drag_no_propulsion():
+    """drag_ratio=1.0 (各向同性阻力) → 推进归零 (RFT 各向异性的必要条件)。
+
+    测量窗口取整周期 (f=0.25 → 周期 4 宏步), 消除摆动残留。
+    """
+    body = build_adb_body()
+    body.drag_ratio = 1.0
+    for _ in range(20):
+        body.step_physics(env=None, dt=1.0)
+    x0, y0 = body.com.copy()
+    for _ in range(120):  # 30 个整周期
+        body.step_physics(env=None, dt=1.0)
+    rate = float(np.hypot(*(body.com - np.array([x0, y0])))) / 120
+    assert rate < 1e-3
+
+
+def test_adb_rft_steer_bias_both_directions():
+    """曲率偏置 b 的符号决定转向方向 (力矩平衡 → 身体旋转)。
+
+    测量窗口取整周期, 消除身体轴摆动 (±~18°) 的残留。
+    """
+    _, dt_pos = adb_speed(1.0, 0.25, b=0.05, warmup=20, steps=40)   # 10 个整周期
+    _, dt_neg = adb_speed(1.0, 0.25, b=-0.05, warmup=20, steps=40)
+    assert dt_pos > 1e-5
+    assert dt_neg < -1e-5
+
+
+def test_adb_rft_mirror_covariance():
+    """镜像协变: 相位 0 与相位 π 出发 1 宏步的侧向位移互为反号 (有限线虫相位锁定漂移, 自洽性)。"""
+
+    def one_macro(phase0):
+        b2 = build_adb_body()
+        b2.wave_phase = phase0
+        b2._rebuild_shape_points()
+        x0, y0 = b2.com.copy()
+        b2.step_physics(env=None, dt=1.0)
+        return (b2.com - np.array([x0, y0]))[1]
+
+    d0, d1 = one_macro(0.0), one_macro(math.pi)
+    assert abs(d0) > 1e-3
+    assert d1 == pytest.approx(-d0, abs=1e-3)
+
+
+def test_adb_rft_substeps_and_energy():
+    """子步积分: history 每子步一帧; 相位每宏步推进 2πf; 能耗 = 机械耗散功。"""
+    body = build_adb_body()
+    h0 = len(body.history)
+    result = body.step_physics(env=None, dt=1.0)
+    assert len(body.history) - h0 == body.sub_steps
+    assert result["dissipation"] >= 0.0
+    assert body.max_energy - body.energy == pytest.approx(result["dissipation"], abs=1e-9)
+
+    body2 = build_adb_body(wave_frequency=0.3)
+    ph0 = body2.wave_phase
+    body2.step_physics(env=None, dt=1.0)
+    assert body2.wave_phase - ph0 == pytest.approx(2 * math.pi * 0.3, abs=1e-9)
+
+
+def test_adb_ac_actions_and_curriculum_freeze():
+    """ADB AC 动作 3 维 (A, f, b) + 边界裁剪; 课程阶段一冻结 b=0。"""
+    from core.neural_networks import PYTORCH_AVAILABLE
+
+    if not PYTORCH_AVAILABLE:
+        pytest.skip("PyTorch is not installed in this environment")
+
+    env = build_single_center_env(width=20, height=20)
+    body = build_adb_body(width=20, height=20, start_pos=(5, 5), curriculum_freeze_steps=3)
+    assert body.ac_action_dim == 3
+    with contextlib.redirect_stdout(io.StringIO()):
+        assert body.setup_actor_critic() is True
+    agent = body.actor_critic_agent
+    assert agent.action_dim == 3
+
+    action = agent.act(body.get_state_v2(env), add_noise=False)
+    assert len(action) == 3
+    assert 0.05 - 1e-6 <= action[0] <= 2.0 + 1e-6
+    assert 0.02 - 1e-6 <= action[1] <= 0.8 + 1e-6
+    assert -0.08 - 1e-6 <= action[2] <= 0.08 + 1e-6
+
+    fake = (1.0, 0.25, 0.06)
+    for i in range(4):
+        d = body._build_actor_action(fake)
+        expected = 0.0 if i < 3 else 0.06
+        assert d["steer_bias"] == pytest.approx(expected, abs=1e-12)
+        assert set(d.keys()) == {"wave_amplitude", "wave_frequency", "steer_bias"}
+
+
+def test_adb_requires_ac_and_ac_path_smoke():
+    """ADB 无离散方向路径: 未装配 AC 时 decide_move 明确报错; AC 路径冒烟。"""
+    from core.neural_networks import PYTORCH_AVAILABLE
+
+    if not PYTORCH_AVAILABLE:
+        pytest.skip("PyTorch is not installed in this environment")
+
+    env = build_single_center_env(width=40, height=40)
+    body = build_adb_body(width=40, height=40, start_pos=(20, 20))
+    with pytest.raises(RuntimeError, match="仅支持 Actor-Critic"):
+        body.decide_move(env)
+
+    with contextlib.redirect_stdout(io.StringIO()):
+        body.setup_actor_critic()
+    random.seed(7)
+    np.random.seed(7)
+    assert body.decide_move(env, epsilon=0.5, alpha=0.1, gamma=0.9) is True
+    assert np.isfinite(body.total_reward)
+    assert 0.05 - 1e-6 <= body.wave_amplitude <= 2.0 + 1e-6
+    assert 0.02 - 1e-6 <= body.wave_frequency <= 0.8 + 1e-6
+
+
+def test_adb_round_reset_rebuilds_rft_shape():
+    """reset_worm_for_new_round: 直线解释为新一轮初始轴, 重建 RFT 形状。"""
+    env = build_single_center_env(width=40, height=40)
+    body = build_adb_body(width=40, height=40, start_pos=(20, 20))
+    reset_worm_for_new_round(body, env, start_pos=(10, 10), width=40, height=40,
+                             field_type="single_center")
+    assert body.com[0] == pytest.approx(10.0, abs=1e-9)
+    assert body.com[1] == pytest.approx(10.0, abs=1e-9)
+    assert body.body_theta == pytest.approx(0.0, abs=1e-9)  # 水平排列: 头朝 +x
+    assert body.wave_phase == 0.0
+    assert len(body.body_segments) == body.num_segments
+
+
+def test_standard_simulation_engine_adb_ac(monkeypatch, tmp_path):
+    """引擎级：ADB + Actor-Critic 短训练完整走到结果保存阶段。"""
+    from core.neural_networks import PYTORCH_AVAILABLE
+
+    if not PYTORCH_AVAILABLE:
+        pytest.skip("PyTorch is not installed in this environment")
+
+    _install_streamlit_and_matplotlib_stubs(monkeypatch)
+    simulation_engine = importlib.import_module("simulation_engine")
+    monkeypatch.setattr(
+        simulation_engine,
+        "st",
+        types.SimpleNamespace(session_state={"stop_requested": False}),
+    )
+
+    factory_calls = _spy_body_model_factory(monkeypatch, simulation_engine)
+    saved_results = []
+    monkeypatch.setattr(
+        simulation_engine, "save_and_visualize_results",
+        lambda *args, **kwargs: saved_results.append(args) or None,
+    )
+
+    config = _build_engine_config(tmp_path, "pytest_adb_ac_engine")
+    training_params = _build_engine_training_params(width=16, height=16)
+    training_params.update({
+        "method": "Actor-Critic",
+        "body_model_type": "active_deformation",
+        "body_params": {"sample_count": 5, "body_length": 8.0, "sub_steps": 5},
+        "steps_per_round": 2,
+    })
+
+    with contextlib.redirect_stdout(io.StringIO()):
+        events = list(
+            simulation_engine.run_standard_simulation_engine(
+                config=config,
+                training_params=training_params,
+                field_type="single_center",
+                use_neural_network=True,
+                enable_step_tracking=False,
+            )
+        )
+
+    assert factory_calls[0]["kwargs"]["model_type"] == "active_deformation"
+    assert saved_results, "ADB + AC 训练没有进入结果保存阶段"
+    assert events[-1][0:2] == (1000, 1000)

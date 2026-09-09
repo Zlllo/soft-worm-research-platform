@@ -2,7 +2,8 @@
 Actor-Critic (DDPG) 模块 — 用于连续身体模型的连续动作控制。
 
 提供:
-- Actor:  状态 → (heading, step_length) 连续动作
+- Actor:  状态 → 连续动作 (维度/每维边界可配: CCB 2 维 = (heading, step);
+           ADB 3 维 = (波幅, 频率, 曲率偏置), 输出经 (tanh+1)/2·(hi-lo)+lo 仿射映射)
 - Critic: 状态+动作 → Q值
 - 经验回放缓冲区
 - Ornstein-Uhlenbeck 探索噪声
@@ -30,27 +31,33 @@ except ImportError:
 if TORCH_AVAILABLE:
 
     class Actor(nn.Module):
-        """策略网络: state → (heading, step_length)"""
+        """策略网络: state → action_dim 维连续动作。
 
-        def __init__(self, state_dim, hidden_size=128):
+        每维输出 = (tanh+1)/2·(hi−lo)·scale + lo, 默认输出范围 [lo, hi] 由 action_bounds 给出
+        (CCB: [(-π,π),(0.05,5.0)] = (heading, step); ADB: (波幅, 频率, 曲率偏置) 三界)。
+        可学习 scale 初始为 1, 网络可自行调整映射幅度。
+        """
+
+        def __init__(self, state_dim, hidden_size=128, action_dim=2, action_bounds=None):
             super().__init__()
+            if action_bounds is None:
+                action_bounds = [(-math.pi, math.pi), (0.05, 5.0)]
+            self.action_dim = action_dim
             self.net = nn.Sequential(
                 nn.Linear(state_dim, hidden_size),
                 nn.ReLU(),
                 nn.Linear(hidden_size, hidden_size),
                 nn.ReLU(),
-                nn.Linear(hidden_size, 2),
+                nn.Linear(hidden_size, action_dim),
                 nn.Tanh(),
             )
-            # 可学习的缩放因子
-            self.heading_scale = nn.Parameter(torch.tensor(math.pi))
-            self.step_scale = nn.Parameter(torch.tensor(1.0))
+            self.register_buffer("lo", torch.tensor([b[0] for b in action_bounds], dtype=torch.float32))
+            self.register_buffer("hi", torch.tensor([b[1] for b in action_bounds], dtype=torch.float32))
+            self.action_scales = nn.Parameter(torch.ones(action_dim))
 
         def forward(self, state):
             raw = self.net(state)
-            heading = raw[:, 0] * self.heading_scale          # [-π, π]
-            step = (raw[:, 1] + 1.0) / 2.0 * self.step_scale   # [0, step_scale]
-            return torch.stack([heading, step], dim=1)
+            return (raw + 1.0) / 2.0 * (self.hi - self.lo) * self.action_scales + self.lo
 
 
     class Critic(nn.Module):
@@ -137,6 +144,7 @@ class DDPGAgent:
         self,
         state_dim,
         action_dim=2,
+        action_bounds=None,
         hidden_size=128,
         actor_lr=1e-4,
         critic_lr=1e-3,
@@ -155,6 +163,9 @@ class DDPGAgent:
 
         self.state_dim = state_dim
         self.action_dim = action_dim
+        if action_bounds is None:
+            action_bounds = [(-math.pi, math.pi), (0.05, 5.0)]
+        self.action_bounds = action_bounds
         self.gamma = gamma
         self.tau = tau
         self.batch_size = batch_size
@@ -164,8 +175,8 @@ class DDPGAgent:
         self.step_count = 0
 
         # 网络
-        self.actor = Actor(state_dim, hidden_size)
-        self.actor_target = Actor(state_dim, hidden_size)
+        self.actor = Actor(state_dim, hidden_size, action_dim, action_bounds)
+        self.actor_target = Actor(state_dim, hidden_size, action_dim, action_bounds)
         self.critic = Critic(state_dim, action_dim, hidden_size)
         self.critic_target = Critic(state_dim, action_dim, hidden_size)
 
@@ -187,7 +198,7 @@ class DDPGAgent:
     # ── 动作选择 ──────────────────────────────────────
 
     def act(self, state, add_noise=True):
-        """给定状态，返回 (heading, step_length) 动作。"""
+        """给定状态，返回连续动作元组 (维度 = action_dim, 按 action_bounds 裁剪)。"""
         state_tensor = torch.FloatTensor(state).unsqueeze(0)
         self.actor.eval()
         with torch.no_grad():
@@ -200,10 +211,9 @@ class DDPGAgent:
             # 衰减噪声
             self.noise_scale = max(0.05, self.noise_scale * self.noise_decay)
 
-        # 裁剪
-        heading = float(np.clip(action[0], -math.pi, math.pi))
-        step = float(np.clip(action[1], 0.05, 5.0))
-        return heading, step
+        # 按维度裁剪
+        clipped = [float(np.clip(action[i], lo, hi)) for i, (lo, hi) in enumerate(self.action_bounds)]
+        return tuple(clipped)
 
     # ── 经验存储 ──────────────────────────────────────
 

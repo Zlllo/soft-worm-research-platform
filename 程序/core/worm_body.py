@@ -1627,6 +1627,8 @@ class ContinuousCenterlineBody(BodyModel):
         self.use_actor_critic = False
         self.actor_critic_agent = None
         self.ac_state_dim = 12  # state_v2 12 维 (10 + cos/sin 朝向)
+        self.ac_action_dim = 2  # AC 动作维: (heading, step); ADB 覆写为 3
+        self.ac_action_bounds = [(-math.pi, math.pi), (0.05, 5.0)]  # 每维输出/裁剪边界
         # DQN 组件 (由 utils.setup_neural_network 装配)
         self.state_size = 12   # 单帧维度 = get_state_v2 输出 (DQN 输入 = 12×4)
         self.neural_network = None
@@ -1988,7 +1990,8 @@ class ContinuousCenterlineBody(BodyModel):
 
         self.actor_critic_agent = DDPGAgent(
             state_dim=self.ac_state_dim,
-            action_dim=2,
+            action_dim=getattr(self, 'ac_action_dim', 2),
+            action_bounds=getattr(self, 'ac_action_bounds', None),
             hidden_size=self.ac_hidden_size,
             actor_lr=self.ac_actor_lr,
             critic_lr=self.ac_critic_lr,
@@ -2001,10 +2004,14 @@ class ContinuousCenterlineBody(BodyModel):
         print("✓ Actor-Critic (DDPG) Agent 初始化完成")
         return True
 
+    def _build_actor_action(self, action):
+        """把 Actor 连续输出转为物理动作 dict。CCB: (heading, step)。ADB 覆写为 (波幅, 频率, 曲率偏置)。"""
+        return {"heading": float(action[0]), "step": float(action[1])}
+
     def decide_move_actor_critic(self, env):
         """
-        Actor-Critic 决策：使用 Actor 输出连续 (heading, step_length)，
-        收集经验并在 buffer 足够时训练。
+        Actor-Critic 决策：使用 Actor 输出连续动作 (维数 = ac_action_dim)，
+        经 _build_actor_action 转为物理动作，收集经验并在 buffer 足够时训练。
         """
         agent = self.actor_critic_agent
         if agent is None:
@@ -2014,8 +2021,8 @@ class ContinuousCenterlineBody(BodyModel):
         state = self.get_state_v2(env)
 
         # 2. 选择动作
-        heading, step = agent.act(state, add_noise=agent.train_mode)
-        action_dict = {"heading": heading, "step": step}
+        action = agent.act(state, add_noise=agent.train_mode)
+        action_dict = self._build_actor_action(action)
 
         # 3. 记录旧状态用于经验回放
         old_energy = self.energy
@@ -2042,7 +2049,7 @@ class ContinuousCenterlineBody(BodyModel):
         # 6. 存储经验
         next_state = self.get_state_v2(env)
         done = self.energy <= 0.0
-        agent.remember(state, np.array([heading, step]), reward, next_state, done)
+        agent.remember(state, np.asarray(action, dtype=np.float32), reward, next_state, done)
 
         # 7. 训练
         agent.train()
@@ -2144,7 +2151,18 @@ class ContinuousCenterlineBody(BodyModel):
 
 
 class ActiveDeformationBody(ContinuousCenterlineBody):
-    """带主动传播波的连续中心线身体模型。"""
+    """RFT 力基波驱动身体: 波 + 曲率偏置为输入, 运动由阻力力/力矩平衡涌现。
+
+    物理依据 (Taylor 1951 游泳板; RFT; C. elegans 实测 cN/cT ≈ 1.4):
+    - 形状 (身体局部系): y(s) = A·sin(k·s − phase) + (b/2)·s², 行波向尾传播
+    - 每点速度: v = V + Ω×r + w (净平动 + 旋转 + 行波横向速度)
+    - 各向异性阻力: F_i = −Δs·D_i·v_i, D_i = drag_coeff·(t tᵀ + drag_ratio·n nᵀ)
+    - 自推进: ΣF=0 且 Σ r×F=0 → 3×3 线性方程解 (Vx, Vy, Ω); 全体点平移+旋转
+    - 转向: 曲率偏置 b 产生净力矩 → 身体旋转, b 符号决定左右
+    - 能量 = 机械耗散功 Σ vᵀD v Δs dt (替换旧的拍脑袋系数)
+    - 仅支持 Actor-Critic 连续动作 (波幅, 频率, 曲率偏置); 无 heading 动作
+    - 决策步 ≠ 物理步: 每决策步内做 sub_steps 个子步积分 (相位平滑、积分更准)
+    """
 
     model_name = "active_deformation"
 
@@ -2155,11 +2173,86 @@ class ActiveDeformationBody(ContinuousCenterlineBody):
         self.wave_phase = float(body_params.get("wave_phase", 0.0))
         self.wave_speed = float(body_params.get("wave_speed", 1.0))
         self.wave_length = float(body_params.get("wave_length", body_params.get("body_length", body_params.get("segment_length", 12.0))))
-        self.propulsion_gain = float(body_params.get("propulsion_gain", 0.45))
+        self.steer_bias = float(body_params.get("steer_bias", 0.0))   # 曲率偏置 (AC 动作第三维)
+        self.wave_envelope = bool(body_params.get("wave_envelope", True))  # 头尾波幅包络 (生物真实 + 削弱端点伪影)
+        self.drag_ratio = 1.4   # 固定: C. elegans 实测法向/切向阻力比 (非可调)
+        self.drag_coeff = float(body_params.get("drag_coeff", 0.35))  # 阻力绝对量级 (标定速度尺度)
+        self.sub_steps = max(1, int(body_params.get("sub_steps", 10)))  # 子步积分
+        self.curriculum_freeze_steps = int(body_params.get("curriculum_freeze_steps", 0))  # 课程: 前 N 决策步冻结 b=0
+        self.decision_count = 0
+        # RFT 状态: 质心与身体轴朝向 (必须在 super().__init__ 前, 其 reset 会调用 _initialize_centerline)
+        self.com = np.array([float(start_pos[0]), float(start_pos[1])], dtype=float)
+        self.body_theta = float(body_params.get("initial_heading", 0.0))
         super().__init__(start_pos=start_pos, width=width, height=height, body_params=body_params, noise_params=noise_params)
+        # AC 动作 = (波幅, 频率, 曲率偏置); 速度与转向由物理涌现, 不存在于动作空间
+        self.ac_action_dim = 3
+        self.ac_action_bounds = [(0.05, 2.0), (0.02, 0.8), (-0.08, 0.08)]
+        self.ac_state_dim = 14   # 8 环境 + 能量率 + 曲率 + 身体轴朝向 cos/sin + 波相位 cos/sin
+        self.state_size = 14
         self.base_muscle_wave_frequency = self.wave_frequency
         self.muscle_wave_frequency = self.wave_frequency
         self.muscle_wave_amplitude = self.wave_amplitude
+
+    # ── 形状与坐标系 ─────────────────────────────
+
+    def _rebuild_shape_points(self):
+        """由 (com, body_theta, phase, A, b) 重建世界系身体点。
+
+        约定: s 从 −L/2 (头) 到 +L/2 (尾); 身体轴向尾, 头朝向 = body_theta;
+        世界点 = com + R(θ)·(−s, y)。感知位置 = 质心 com。
+        """
+        k = 2.0 * math.pi / max(self.wave_length, 1e-6)
+        A, b = self.wave_amplitude, self.steer_bias
+        # 中点采样: n 个点放在 n 个等分段的中心, 避免 λ=body_length 时首尾端点相位重合
+        # (端点采样会对同一相位重复计数, 产生与点数无关的横向漂移伪影)
+        s = np.array([-self.body_length / 2.0 + (i + 0.5) * self.body_length / self.num_segments
+                      for i in range(self.num_segments)], dtype=float)
+        # 波幅包络: 头尾渐变为零 (真实线虫弯曲幅值头尾为零, 且削弱端点力矩伪影)
+        env = np.sin(math.pi * (s + self.body_length / 2.0) / self.body_length) if self.wave_envelope else np.ones(self.num_segments)
+        y = A * env * np.sin(k * s - self.wave_phase) + 0.5 * b * s * s
+        cth, sth = math.cos(self.body_theta), math.sin(self.body_theta)
+        pts = np.stack([cth * (-s) - sth * y, sth * (-s) + cth * y], axis=1) + self.com
+        self.centerline = pts
+        self.body_segments = [[float(p[0]), float(p[1])] for p in pts]
+        self.x, self.y = float(self.com[0]), float(self.com[1])
+
+    def _initialize_centerline(self, start_pos):
+        if not hasattr(self, 'com'):
+            self.com = np.array([float(start_pos[0]), float(start_pos[1])], dtype=float)
+        if not hasattr(self, 'body_theta'):
+            self.body_theta = float(getattr(self, 'heading', 0.0))
+        # 不重置 wave_phase: 尊重 body_params 传入值 (轮次重置在 _sync_centerline_from_public_segments 中处理)
+        self._rebuild_shape_points()
+        self.history = [self.body_segments.copy()]
+
+    def _sync_centerline_from_public_segments(self):
+        """reset_worm_for_new_round 直接写入直线 body_segments 后调用此处:
+        把直线解释为新一轮初始轴 (质心=头部位置, 朝向=头−尾方向), 重建 RFT 形状。"""
+        if not hasattr(self, "body_segments") or len(self.body_segments) != self.num_segments:
+            return
+        head = np.array([float(self.body_segments[0][0]), float(self.body_segments[0][1])])
+        tail = np.array([float(self.body_segments[-1][0]), float(self.body_segments[-1][1])])
+        self.com = head.copy()
+        direction = head - tail  # 头朝向 = 从尾指向头
+        if np.linalg.norm(direction) > 1e-9:
+            self.body_theta = math.atan2(direction[1], direction[0])
+        else:
+            self.body_theta = float(getattr(self, 'heading', 0.0))
+        self.wave_phase = 0.0
+        self._rebuild_shape_points()
+
+    def _sync_public_state(self):
+        """ADB: 感知位置 = 质心; heading 与身体轴朝向同步。"""
+        self.centerline = np.array([self._clip_point(p) for p in self.centerline], dtype=float)
+        self.body_segments = [[float(p[0]), float(p[1])] for p in self.centerline]
+        self.body_segment = [self.body_segments[0], self.body_segments[-1]]
+        self.x = float(self.com[0])
+        self.y = float(self.com[1])
+        self.heading = self.body_theta
+        if len(self.body_temperatures) != len(self.body_segments):
+            self.body_temperatures = [0.0] * len(self.body_segments)
+
+    # ── 动作与决策 ─────────────────────────────
 
     def apply_action(self, action, **kwargs):
         if isinstance(action, dict):
@@ -2167,10 +2260,16 @@ class ActiveDeformationBody(ContinuousCenterlineBody):
                 self.wave_amplitude = float(action["wave_amplitude"])
             if "wave_frequency" in action:
                 self.wave_frequency = float(action["wave_frequency"])
+            if "steer_bias" in action:
+                self.steer_bias = float(action["steer_bias"])
             if "wave_phase" in action:
                 self.wave_phase = float(action["wave_phase"])
             if "wave_speed" in action:
                 self.wave_speed = float(action["wave_speed"])
+        elif isinstance(action, (tuple, list, np.ndarray)) and len(action) == 3:
+            self.wave_amplitude = float(action[0])
+            self.wave_frequency = float(action[1])
+            self.steer_bias = float(action[2])
         elif isinstance(action, (tuple, list, np.ndarray)) and len(action) >= 4:
             self.wave_amplitude = float(action[0])
             self.wave_frequency = float(action[1])
@@ -2178,45 +2277,170 @@ class ActiveDeformationBody(ContinuousCenterlineBody):
             self.wave_speed = float(action[3])
         return super().apply_action(action, **kwargs)
 
+    def _build_actor_action(self, action):
+        """ADB: Actor 输出 (波幅, 频率, 曲率偏置) → 物理动作 dict。
+        课程阶段一: 前 curriculum_freeze_steps 个决策步强制 b=0 (只学速度-能耗)。"""
+        self.decision_count += 1
+        bias = float(action[2])
+        if self.curriculum_freeze_steps > 0 and self.decision_count <= self.curriculum_freeze_steps:
+            bias = 0.0
+        return {
+            "wave_amplitude": float(action[0]),
+            "wave_frequency": float(action[1]),
+            "steer_bias": bias,
+        }
+
+    def decide_move(self, env, epsilon=0.2, alpha=0.5, gamma=0.9):
+        """ADB 仅支持 Actor-Critic 连续波参数控制 (无 heading/离散方向动作)。"""
+        if not self.use_actor_critic or self.actor_critic_agent is None:
+            raise RuntimeError(
+                "ADB (RFT 波驱动) 仅支持 Actor-Critic 路径: 请先调用 setup_actor_critic()。"
+                "Q-learning/DQN 方向动作对波驱动模型无意义。"
+            )
+        return self.decide_move_actor_critic(env)
+
+    def get_state_v2(self, env=None):
+        """ADB 14 维状态: 环境 8 维(质心) + 能量率 + 平均曲率 + 身体轴朝向 cos/sin + 波相位 cos/sin。"""
+        state = []
+        if env is not None:
+            base = env.get_state_vector((self.x, self.y), worm=self)
+        else:
+            base = np.zeros(8, dtype=np.float32)
+        state.extend(base.astype(np.float32).tolist())
+        state.append(float(self.energy / max(self.max_energy, 1.0)))
+        shape = self._shape_metrics() if hasattr(self, '_shape_metrics') else {}
+        curv_limit = max(self.angular_constraint, 1.0)
+        state.append(float(np.clip(shape.get('curvature_mean_deg', 0.0) / curv_limit, 0.0, 1.0)))
+        state.append(float(math.cos(self.body_theta)))
+        state.append(float(math.sin(self.body_theta)))
+        state.append(float(math.cos(self.wave_phase)))
+        state.append(float(math.sin(self.wave_phase)))
+        return np.array(state[:14], dtype=np.float32)
+
+    # ── RFT 物理 ─────────────────────────────
+
+    def _rft_substep(self, dt):
+        """一个 RFT 物理子步: 行波推进 + 3×3 力/力矩平衡解 (Vx, Vy, Ω) + 全体平移旋转。"""
+        self.wave_phase += 2.0 * math.pi * self.wave_frequency * dt * self.wave_speed
+        k = 2.0 * math.pi / max(self.wave_length, 1e-6)
+        A, f, b = self.wave_amplitude, self.wave_frequency, self.steer_bias
+        n = self.num_segments
+        s = np.array([-self.body_length / 2.0 + (i + 0.5) * self.body_length / n
+                      for i in range(n)], dtype=float)  # 中点采样 (同 _rebuild_shape_points)
+        cth, sth = math.cos(self.body_theta), math.sin(self.body_theta)
+
+        # 形状与波速 (局部系, 含头尾幅值包络)
+        env = np.sin(math.pi * (s + self.body_length / 2.0) / self.body_length) if self.wave_envelope else np.ones(n)
+        envp = (math.pi / self.body_length) * np.cos(math.pi * (s + self.body_length / 2.0) / self.body_length) if self.wave_envelope else np.zeros(n)
+        y = A * env * np.sin(k * s - self.wave_phase) + 0.5 * b * s * s
+        yp = A * (env * k * np.cos(k * s - self.wave_phase) + envp * np.sin(k * s - self.wave_phase)) + b * s  # dy/ds
+        ydot = -A * env * (2.0 * math.pi * f) * np.cos(k * s - self.wave_phase)  # 行波横向速度
+
+        # 局部单位切向 (沿身体轴向尾, 局部系方向 (-1, yp)) → 世界系
+        inv = 1.0 / np.sqrt(1.0 + yp * yp)
+        tx = (-cth - yp * sth) * inv
+        ty = (-sth + yp * cth) * inv
+        nx, ny = -ty, tx
+
+        # 相对质心的位置与行波世界速度
+        rx = cth * (-s) - sth * y
+        ry = sth * (-s) + cth * y
+        wx = -sth * ydot
+        wy = cth * ydot
+
+        # 组装 3×3: ΣF=0, Σ r×F=0; 未知 [Vx, Vy, Ω]; M·x = rhs
+        cT, cN = 1.0, self.drag_ratio
+        M = np.zeros((3, 3), dtype=float)
+        rhs = np.zeros(3, dtype=float)
+        for i in range(n):
+            dxx = (cT * tx[i] * tx[i] + cN * nx[i] * nx[i]) * self.drag_coeff
+            dxy = (cT * tx[i] * ty[i] + cN * nx[i] * ny[i]) * self.drag_coeff
+            dyy = (cT * ty[i] * ty[i] + cN * ny[i] * ny[i]) * self.drag_coeff
+            rotx, roty = -ry[i], rx[i]                      # Ω 的速度贡献方向
+            drotx = dxx * rotx + dxy * roty                 # D·rot
+            droty = dxy * rotx + dyy * roty
+            dwx = dxx * wx[i] + dxy * wy[i]                 # D·w
+            dwy = dxy * wx[i] + dyy * wy[i]
+            M[0, 0] += dxx; M[0, 1] += dxy; M[0, 2] += drotx
+            M[1, 0] += dxy; M[1, 1] += dyy; M[1, 2] += droty
+            rhs[0] -= dwx; rhs[1] -= dwy
+            # 力矩行: Σ r×D·V + Σ r×D·Ωrot = −Σ r×D·w
+            M[2, 0] += rx[i] * dxy - ry[i] * dxx
+            M[2, 1] += rx[i] * dyy - ry[i] * dxy
+            M[2, 2] += rx[i] * droty - ry[i] * drotx
+            rhs[2] -= rx[i] * dwy - ry[i] * dwx
+        try:
+            sol = np.linalg.solve(M, rhs)
+        except np.linalg.LinAlgError:
+            sol = np.zeros(3)
+        vx, vy, omega = float(sol[0]), float(sol[1]), float(sol[2])
+
+        # 更新刚体运动并重建形状
+        self.com += np.array([vx, vy]) * dt
+        self.body_theta += omega * dt
+        self._rebuild_shape_points()
+
+        # 边界: 整体平移回界内 (保持形状, 不逐点 clip)
+        lo_x, lo_y = 0.0, 0.0
+        hi_x, hi_y = float(max(0, self.width - 1)), float(max(0, self.height - 1))
+        shift_x = min(0.0, hi_x - self.centerline[:, 0].max()) + max(0.0, lo_x - self.centerline[:, 0].min())
+        shift_y = min(0.0, hi_y - self.centerline[:, 1].max()) + max(0.0, lo_y - self.centerline[:, 1].min())
+        if shift_x != 0.0 or shift_y != 0.0:
+            self.com += np.array([shift_x, shift_y])
+            self._rebuild_shape_points()
+
+        # 机械耗散功: Σ vᵀ D v Δs dt (恒 ≥ 0)
+        ds = self.segment_distance
+        diss = 0.0
+        for i in range(n):
+            vix = vx + omega * (-ry[i]) + wx[i]
+            viy = vy + omega * rx[i] + wy[i]
+            fpx = (cT * tx[i] * (tx[i] * vix + ty[i] * viy)
+                   + cN * nx[i] * (nx[i] * vix + ny[i] * viy)) * self.drag_coeff
+            fpy = (cT * ty[i] * (tx[i] * vix + ty[i] * viy)
+                   + cN * ny[i] * (nx[i] * vix + ny[i] * viy)) * self.drag_coeff
+            diss += (vix * fpx + viy * fpy) * ds * dt
+        return {'movement': float(np.hypot(vx, vy) * dt), 'dissipation': float(max(0.0, diss))}
+
     def step_physics(self, env=None, dt=1.0, **kwargs):
+        """ADB 物理步: 决策步内做 sub_steps 个子步 RFT 积分。能量扣减 = 机械耗散功。"""
         action = kwargs.get("action", self._pending_action)
         if isinstance(action, dict):
             self.apply_action(action)
-        base_step = self.forward_speed + self.propulsion_gain * abs(self.wave_amplitude * self.wave_frequency)
-        if isinstance(action, dict):
-            action = {
-                "heading": action.get("heading", self.heading + float(action.get("heading_delta", 0.0))),
-                "step": action.get("step", base_step),
-            }
-        result = super().step_physics(env=env, dt=dt, action=action)
-        self.wave_phase += 2.0 * math.pi * self.wave_frequency * float(dt) * self.wave_speed
-        head = np.array([self.x, self.y], dtype=float)
-        tangent = self._tangent()
-        normal = np.array([-tangent[1], tangent[0]], dtype=float)
-        wave_number = 2.0 * math.pi / max(self.wave_length, 1e-6)
-        self.centerline = np.array([
-            self._clip_point(
-                head
-                - tangent * (self.segment_distance * i)
-                + normal * (self.wave_amplitude * math.sin(self.wave_phase - wave_number * self.segment_distance * i))
-            )
-            for i in range(self.num_segments)
-        ], dtype=float)
-        self._enforce_constraints(iterations=2)
-        self._sync_public_state()
-        self.history[-1] = self.body_segments.copy()
+        n_sub = max(1, int(self.sub_steps))
+        dt_sub = float(dt) / n_sub
+        total_movement = 0.0
+        total_dissipation = 0.0
+        for _ in range(n_sub):
+            sub = self._rft_substep(dt=dt_sub)
+            total_movement += sub['movement']
+            total_dissipation += sub['dissipation']
+            self.history.append(self.body_segments.copy())  # 子步帧 → 动画看到平滑行波
+        self.energy = max(0.0, self.energy - total_dissipation)
+        self.muscle_fatigue_level = min(
+            1.0,
+            self.muscle_fatigue_level
+            + self.fatigue_accumulation_rate * abs(self.wave_amplitude * self.wave_frequency) * float(dt),
+        )
         self.muscle_wave_phase = self.wave_phase
         self.muscle_wave_frequency = self.wave_frequency
         self.muscle_wave_amplitude = self.wave_amplitude
         self.dorsal_muscle_state = math.sin(self.wave_phase)
         self.ventral_muscle_state = -self.dorsal_muscle_state
-        self.energy = max(0.0, self.energy - 0.01 * abs(self.wave_amplitude * self.wave_frequency))
-        self.muscle_fatigue_level = min(
-            1.0,
-            self.muscle_fatigue_level + 0.002 * abs(self.wave_amplitude * self.wave_frequency)
-        )
-        result['wave_phase'] = float(self.wave_phase)
-        result['position'] = (self.x, self.y)
+        if env is not None:
+            self.body_temperatures = [
+                float(env.get_temperature(int(p[0]), int(p[1]))) for p in self.body_segments
+            ]
+        self.current_step += 1
+        self._sync_public_state()
+        result = {
+            'moved': total_movement > 1e-9,
+            'action': action,
+            'position': (self.x, self.y),
+            'movement': total_movement,
+            'dissipation': total_dissipation,
+            'wave_phase': float(self.wave_phase),
+        }
         self.last_physics_result = result
         return result
 
@@ -2228,6 +2452,9 @@ class ActiveDeformationBody(ContinuousCenterlineBody):
             'wave_phase': float(self.wave_phase),
             'wave_speed': float(self.wave_speed),
             'wave_length': float(self.wave_length),
+            'steer_bias': float(self.steer_bias),
+            'drag_ratio': float(self.drag_ratio),
+            'body_theta': float(self.body_theta),
         })
         return metrics
 

@@ -779,6 +779,11 @@ with st.sidebar:
             wave_frequency = 0.25
             wave_speed = 1.0
             wave_length = 12.0
+            # RFT 参数默认值 (仅 ADB 使用)
+            sub_steps = 10
+            drag_coeff = 0.35
+            curriculum_freeze_steps = 0
+            wave_envelope = True
 
         # ---- ContinuousCenterlineBody 参数 ----
         elif body_model_type == "continuous_centerline":
@@ -859,9 +864,16 @@ with st.sidebar:
             wave_frequency = 0.0
             wave_speed = 0.0
             wave_length = body_length_ui
+            # RFT 参数默认值 (仅 ADB 使用)
+            sub_steps = 10
+            drag_coeff = 0.35
+            curriculum_freeze_steps = 0
+            wave_envelope = True
 
-        # ---- ActiveDeformationBody 参数 ----
+        # ---- ActiveDeformationBody 参数 (RFT 力基波驱动) ----
         else:  # active_deformation
+            st.info("🌊 ADB 波驱动模型 (RFT): 速度与转向由波参数经力/力矩平衡涌现, "
+                    "没有头部步长/转向角参数; 动作 = 连续 (波幅, 频率, 曲率偏置)")
             st.markdown("##### 🔧 中心线参数")
             col1, col2 = st.columns(2)
             with col1:
@@ -877,92 +889,88 @@ with st.sidebar:
                     key="ad_body_length",
                     help="中心线总弧长(像素)"
                 )
+            with col2:
                 head_radius = st.slider(
                     "头部半径", 2.0, 6.0, 3.0, 0.5,
                     disabled=st.session_state.is_simulating,
                     key="ad_head_radius",
                     help="头部圆形半径(像素)"
                 )
-            with col2:
                 body_width = st.slider(
                     "身体宽度", 1.0, 4.0, 2.0, 0.25,
                     disabled=st.session_state.is_simulating,
                     key="ad_body_width",
                     help="身体节段宽度(像素)"
                 )
-                forward_speed = st.slider(
-                    "前进速度", 0.5, 5.0, 1.2, 0.1,
-                    disabled=st.session_state.is_simulating,
-                    key="ad_forward_speed",
-                    help="每步前进基础步长"
-                )
-                max_turn_angle = st.slider(
-                    "最大转向角", 10, 60, 35, 5,
-                    disabled=st.session_state.is_simulating,
-                    key="ad_max_turn_angle",
-                    help="每步最大转向角度(度)"
-                )
-            st.markdown("##### 🔗 约束参数")
-            col3, col4 = st.columns(2)
-            with col3:
-                curvature_limit = st.slider(
-                    "曲率限制角", 15, 90, 45, 5,
-                    disabled=st.session_state.is_simulating,
-                    key="ad_curvature_limit",
-                    help="相邻段最大弯折角度(度)"
-                )
-                length_stiffness = st.slider(
-                    "长度刚度", 0.3, 1.0, 0.85, 0.05,
-                    disabled=st.session_state.is_simulating,
-                    key="ad_length_stiffness",
-                    help="长度保持约束的刚度"
-                )
-            with col4:
-                curvature_stiffness = st.slider(
-                    "曲率刚度", 0.1, 1.0, 0.35, 0.05,
-                    disabled=st.session_state.is_simulating,
-                    key="ad_curvature_stiffness",
-                    help="曲率约束的刚度"
-                )
-                damping = st.slider(
-                    "运动阻尼", 0.3, 0.95, 0.72, 0.05,
-                    disabled=st.session_state.is_simulating,
-                    key="ad_damping",
-                    help="速度平滑阻尼系数"
-                )
-            st.markdown("##### 🌊 主动波参数")
+            st.markdown("##### 🌊 波参数 (AC 动作的初始值; 波速/波长为固定参数)")
             col5, col6 = st.columns(2)
             with col5:
                 wave_amplitude = st.slider(
-                    "波幅", 0.1, 3.0, 1.0, 0.1,
+                    "波幅 (初始值)", 0.1, 2.0, 1.0, 0.1,
                     disabled=st.session_state.is_simulating,
                     key="ad_wave_amplitude",
-                    help="正弦波侧向摆动幅度"
+                    help="正弦波侧向摆动幅度 (AC 动作边界 [0.05, 2.0])"
                 )
                 wave_frequency = st.slider(
-                    "波频率", 0.05, 1.0, 0.25, 0.05,
+                    "波频率 (初始值)", 0.02, 0.8, 0.25, 0.02,
                     disabled=st.session_state.is_simulating,
                     key="ad_wave_frequency",
-                    help="肌肉波频率"
+                    help="肌肉波频率 (AC 动作边界 [0.02, 0.8])"
                 )
             with col6:
                 wave_speed = st.slider(
                     "波传播速度", 0.1, 3.0, 1.0, 0.1,
                     disabled=st.session_state.is_simulating,
                     key="ad_wave_speed",
-                    help="波沿身体传播速度"
+                    help="波沿身体传播速度倍率"
                 )
                 wave_length = st.slider(
                     "波长", 3.0, 30.0, 12.0, 0.5,
                     disabled=st.session_state.is_simulating,
                     key="ad_wave_length",
-                    help="正弦波的波长"
+                    help="正弦波的波长 (默认=体长, 身体上恰好一个完整波)"
                 )
-            # 为兼容性设置默认值
+            st.markdown("##### ⚙️ RFT 力学参数")
+            col7, col8 = st.columns(2)
+            with col7:
+                sub_steps = st.slider(
+                    "子步积分步数", 2, 50, 10, 1,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_sub_steps",
+                    help="每决策步内的物理子步数: 越大波传播越平滑、积分越准"
+                )
+                drag_coeff = st.slider(
+                    "阻力系数 (能耗尺度)", 0.1, 1.0, 0.35, 0.05,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_drag_coeff",
+                    help="阻力绝对量级: 只缩放能耗, 不影响速度 (速度由波参数决定, 与粘度无关)"
+                )
+                curriculum_freeze_steps = st.number_input(
+                    "课程阶段一: 冻结转向的决策步数", 0, 100000, 0, 100,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_curriculum_freeze",
+                    help="前 N 步强制曲率偏置 b=0 (只学速度-能耗), 0=跳过阶段一"
+                )
+            with col8:
+                wave_envelope = st.checkbox(
+                    "头尾波幅包络", True,
+                    disabled=st.session_state.is_simulating,
+                    key="ad_wave_envelope",
+                    help="波幅在头尾渐变为零 (真实线虫形态; 削弱端点伪影)"
+                )
+                st.caption("法向/切向阻力比固定 1.4 (C. elegans 实测值)")
+                st.caption("曲率限制角用于状态/违例指标, 不作为力学约束")
+            # 兼容性默认值 (RFT 物理不使用)
             num_segments = sample_count
             segment_length = body_length_ui
+            forward_speed = 1.2
+            max_turn_angle = 35.0
             backward_speed = 1.0
             turning_speed = 1.5
+            curvature_limit = 45.0
+            length_stiffness = 0.85
+            curvature_stiffness = 0.35
+            damping = 0.72
 
     # ==========================================================================
     # 噪声参数配置
@@ -1015,20 +1023,27 @@ with st.sidebar:
         st.markdown("### 📊 标准设置")
 
         # 动作空间(方向)选择器 — 按身体模型过滤; 后续可扩展 16 方向
-        if body_model_type == "worm2d":
-            direction_options = {"4 方向 (离散)": "4", "8 方向 (离散)": "8"}
+        if body_model_type == "active_deformation":
+            # ADB (RFT 波驱动): 无离散方向动作, 动作 = 连续波参数 (波幅, 频率, 曲率偏置)
+            direction_mode = "continuous"
+            action_size = 4
+            st.info("🌊 ADB: 动作空间固定为连续波参数 (波幅, 频率, 曲率偏置); "
+                    "速度与转向由力/力矩平衡涌现, 无离散方向动作")
         else:
-            direction_options = {"4 方向 (离散)": "4", "8 方向 (离散)": "8", "连续方向 (Actor-Critic)": "continuous"}
-        direction_label = st.selectbox(
-            "🧭 动作空间",
-            list(direction_options.keys()),
-            index=0,
-            disabled=st.session_state.is_simulating,
-            key="direction_selector_standard",
-            help="离散方向对应 Q-Learning / DQN / Dueling DQN；连续方向仅支持 Actor-Critic"
-        )
-        direction_mode = direction_options[direction_label]
-        action_size = 4 if direction_mode == "continuous" else int(direction_mode)  # 连续方向不走离散Q路径
+            if body_model_type == "worm2d":
+                direction_options = {"4 方向 (离散)": "4", "8 方向 (离散)": "8"}
+            else:
+                direction_options = {"4 方向 (离散)": "4", "8 方向 (离散)": "8", "连续方向 (Actor-Critic)": "continuous"}
+            direction_label = st.selectbox(
+                "🧭 动作空间",
+                list(direction_options.keys()),
+                index=0,
+                disabled=st.session_state.is_simulating,
+                key="direction_selector_standard",
+                help="离散方向对应 Q-Learning / DQN / Dueling DQN；连续方向仅支持 Actor-Critic"
+            )
+            direction_mode = direction_options[direction_label]
+            action_size = 4 if direction_mode == "continuous" else int(direction_mode)  # 连续方向不走离散Q路径
 
         # 学习方法选择 — 根据身体模型类型 + 动作空间显示可用算法
         if direction_mode == "continuous":
@@ -1417,6 +1432,12 @@ if start_button:
         "wave_frequency": wave_frequency,
         "wave_speed": wave_speed,
         "wave_length": wave_length,
+        # RFT 波驱动参数 (仅 ADB 使用)
+        "steer_bias": 0.0,
+        "sub_steps": sub_steps,
+        "drag_coeff": drag_coeff,
+        "curriculum_freeze_steps": curriculum_freeze_steps,
+        "wave_envelope": wave_envelope,
         # Actor-Critic 超参数
         "ac_hidden_size": ac_hidden_size,
         "ac_actor_lr": ac_actor_lr,
