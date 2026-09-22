@@ -5,6 +5,8 @@
 """
 
 import os
+import sys
+import io
 import numpy as np
 import time
 import streamlit as st
@@ -15,6 +17,15 @@ import matplotlib
 matplotlib.use('Agg')  # 🔧 使用非交互式后端，避免GUI问题
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
+
+# 🔧 Windows GBK编码修复：强制stdout使用UTF-8，避免emoji打印崩溃
+try:
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    elif hasattr(sys.stdout, 'buffer'):
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+except Exception:
+    pass
 
 # 🔧 Mac系统中文字体配置
 def setup_chinese_font():
@@ -57,9 +68,10 @@ has_chinese_font = setup_chinese_font()
 from core.environment import ExperimentConfig, Environment2D
 from core.worm_body import create_body_model
 from core.visualization import plot_training_results_2d, create_training_animation_2d, create_training_animation_2d_dynamic_mp4
-from core.utils import (save_training_log, save_q_table, save_body_metrics, setup_neural_network, 
-                      reset_worm_for_new_round, create_temperature_environment, 
+from core.utils import (save_training_log, save_q_table, save_body_metrics, setup_neural_network,
+                      reset_worm_for_new_round, create_temperature_environment,
                       generate_dynamic_rotating_double_center, generate_dynamic_rotating_quad_center)
+from core.reward_functions import apply_reward_config
 from core.neural_networks import PYTORCH_AVAILABLE
 from core.training_stats import create_step_tracker, create_dual_center_tracker
 
@@ -170,8 +182,33 @@ def run_standard_simulation_engine(config, training_params, field_type, use_neur
             yield -1, -1, f"线虫对象创建失败: {worm_error}", {}
             return
 
-        # 设置神经网络
-        if use_neural_network:
+        # 启用 state_v2 (仅 Worm2D + DQN，默认关闭)
+        if training_params.get("use_state_v2", False) and hasattr(worm, 'use_state_v2'):
+            worm.use_state_v2 = True
+            worm.state_size = 10
+            print("🔧 调试：已启用 state_v2 (10 维单帧)")
+
+        # 奖励函数变体配置 (original / energy)
+        apply_reward_config(worm, training_params)
+
+        # 设置 Actor-Critic (优先级高于 DQN / Q-Learning)
+        method_name = training_params.get("method", "")
+        if "Actor-Critic" in method_name:
+            if hasattr(worm, 'setup_actor_critic'):
+                try:
+                    worm.setup_actor_critic()
+                    print("🔧 调试：Actor-Critic 初始化完成")
+                    yield 6, 1000, "🎯 Actor-Critic (DDPG) 已配置", {'phase': 'init'}
+                except Exception as ac_error:
+                    print(f"❌ Actor-Critic 初始化失败: {ac_error}")
+                    yield -1, -1, f"Actor-Critic 初始化失败: {ac_error}", {}
+                    return
+            else:
+                yield -1, -1, "所选身体模型不支持 Actor-Critic", {}
+                return
+
+        # 设置神经网络 (DQN / Dueling DQN)
+        elif use_neural_network:
             print("🔧 调试：设置神经网络...")
             if not PYTORCH_AVAILABLE:
                 yield -1, -1, "PyTorch 未安装，无法使用神经网络。", {}
@@ -441,7 +478,8 @@ def run_transfer_simulation_engine(config, training_params, source_field, target
         
         start_pos = get_start_position(source_field, width, height)
         source_worm = create_training_body_model(start_pos, width, height, training_params)
-        
+        apply_reward_config(source_worm, training_params)
+
         if use_neural_network:
             if not PYTORCH_AVAILABLE:
                 yield -1, -1, "PyTorch 未安装，无法使用神经网络。", {}
@@ -501,7 +539,8 @@ def run_transfer_simulation_engine(config, training_params, source_field, target
         
         target_start_pos = get_start_position(target_field, width, height)
         veteran_worm = create_training_body_model(target_start_pos, width, height, training_params)
-        
+        apply_reward_config(veteran_worm, training_params)
+
         if use_neural_network:
             setup_neural_network(veteran_worm, training_params)
             # 迁移权重
@@ -665,6 +704,7 @@ def run_curriculum_simulation_engine(config, training_params, test_stage_idx, en
                 # 创建或重置线虫
                 if worm is None:
                     worm = create_training_body_model(start_pos, width, height, training_params)
+                    apply_reward_config(worm, training_params)
                     setup_neural_network(worm, stage_training_params)
                 else:
                     # 重置经验池，保留神经网络权重
@@ -750,6 +790,7 @@ def run_curriculum_simulation_engine(config, training_params, test_stage_idx, en
         if worm is None:
             start_pos = get_start_position(test_stage["field_type"], width, height)
             worm = create_training_body_model(start_pos, width, height, training_params)
+            apply_reward_config(worm, training_params)
             setup_neural_network(worm, base_training_params)
         
         # 准备测试环境
@@ -780,6 +821,7 @@ def run_curriculum_simulation_engine(config, training_params, test_stage_idx, en
         yield current_step, total_estimated_steps, "🆚 对照实验：测试全新'新兵'的表现...", {'phase': 'control'}
         
         rookie_worm = create_training_body_model(start_pos, width, height, training_params)
+        apply_reward_config(rookie_worm, training_params)
         setup_neural_network(rookie_worm, base_training_params)
         
         rookie_histories, rookie_rewards, rookie_test_results = yield from zero_shot_testing_engine(
@@ -1607,13 +1649,8 @@ def create_training_animation_2d_fixed(all_histories, temp_array, best_point, co
         # 保存动画
         try:
             # 保存为MP4 (推荐)
-            mp4_path = os.path.join(config.output_dir, "training_animation_fixed.mp4")
-            anim.save(mp4_path, writer='pillow', fps=5, bitrate=1800)
-            print(f"✓ 修复版MP4动画已保存: {mp4_path}")
-            
-            # 同时保存为GIF
             gif_path = os.path.join(config.output_dir, "training_animation_fixed.gif")
-            anim.save(gif_path, writer='pillow', fps=3, bitrate=1800)
+            anim.save(gif_path, writer='pillow', fps=5)
             print(f"✓ 修复版GIF动画已保存: {gif_path}")
             
         except Exception as save_error:

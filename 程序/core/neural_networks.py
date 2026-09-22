@@ -5,6 +5,12 @@ from collections import deque
 import numpy as np
 import random
 import os
+import sys
+
+# 🔧 Windows GBK 编码修复 (与 app.py/utils.py 同款, 防 ✓ 打印崩溃)
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
 
 # 🔧 修复PyTorch导入
 try:

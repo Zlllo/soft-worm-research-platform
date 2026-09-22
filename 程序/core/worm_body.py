@@ -9,6 +9,16 @@ from collections import deque
 import time
 from abc import ABC, abstractmethod
 
+# Actor-Critic 导入
+try:
+    from .actor_critic import DDPGAgent, TORCH_AVAILABLE as AC_TORCH_AVAILABLE
+except ImportError:
+    try:
+        from actor_critic import DDPGAgent, TORCH_AVAILABLE as AC_TORCH_AVAILABLE
+    except ImportError:
+        DDPGAgent = None
+        AC_TORCH_AVAILABLE = False
+
 # 🔧 PyTorch导入检查
 try:
     import torch
@@ -90,6 +100,137 @@ except ImportError:
             except Exception as e:
                 print(f"⚠️ get_stacked_state 异常: {e}")
                 return np.zeros(8 * stack_size)
+
+# 🔧 修复奖励函数模块导入
+try:
+    from reward_functions import compute_reward, DEFAULT_ENERGY_WEIGHT
+except ImportError:
+    try:
+        from .reward_functions import compute_reward, DEFAULT_ENERGY_WEIGHT
+    except ImportError:
+        print("⚠️ 无法导入reward_functions模块（奖励计算不可用）")
+
+        def compute_reward(*args, **kwargs):
+            raise RuntimeError("reward_functions 模块导入失败，奖励计算不可用")
+
+        DEFAULT_ENERGY_WEIGHT = 0.1
+
+# ── 动作空间辅助: 离散方向编号统一 ─────────────────────────────
+# 4 方向保持历史编号 (0上 1下 2左 3右)，与旧版逐位一致；
+# n>4 方向为顺时针编号: 0上 1右上 2右 3右下 4下 5左下 6左 7左上
+_LEGACY_MOVES_4 = [(0, -1), (0, 1), (-1, 0), (1, 0)]
+_LEGACY_HEADINGS_4 = {0: -math.pi / 2.0, 1: math.pi / 2.0, 2: math.pi, 3: 0.0}
+
+
+def _action_vectors(action_size):
+    """离散动作 → 网格位移向量 (Worm2D)。8 方向对角不缩放 (网格语义，整数格点)。"""
+    if action_size == 4:
+        return list(_LEGACY_MOVES_4)
+    return [
+        (int(round(math.cos(a))), int(round(math.sin(a))))
+        for i in range(action_size)
+        for a in [i * 2.0 * math.pi / action_size - math.pi / 2.0]
+    ]
+
+
+def _action_headings(action_size):
+    """离散动作 → 绝对朝向角 (CCB/ADB)。4 方向保持历史映射。"""
+    if action_size == 4:
+        return dict(_LEGACY_HEADINGS_4)
+    return {i: i * 2.0 * math.pi / action_size - math.pi / 2.0 for i in range(action_size)}
+
+def train_dqn_batch(worm, gamma):
+    """DQN 批训练数学（Worm2D / CCB / ADB 共用）。
+
+    采样判别用 batch_update（ExperienceReplay 也有 sample 方法，用 sample 会误判）；
+    目标网络按 worm.step_count % worm.target_update_freq == 0 硬更新。
+    """
+    if not PYTORCH_AVAILABLE or worm.experience_replay is None:
+        return
+    if not getattr(worm, 'use_neural_training', True):
+        return
+
+    try:
+        batch_size = min(worm.batch_size, len(worm.experience_replay))
+        if batch_size < 8:  # 最小批次大小
+            return
+
+        # 采样经验：以 batch_update 区分优先回放与普通队列
+        if hasattr(worm.experience_replay, 'batch_update'):
+            # PrioritizedReplayBuffer
+            try:
+                tree_indices, experiences_data, is_weights = worm.experience_replay.sample(batch_size)
+                if tree_indices is None or experiences_data is None:
+                    return
+            except Exception as sample_error:
+                print(f"⚠️ 优先经验回放采样失败: {sample_error}")
+                return
+        else:
+            # 普通 deque - 随机采样
+            experiences_data = random.sample(list(worm.experience_replay), batch_size)
+            is_weights = np.ones(batch_size)  # 等权重
+            tree_indices = None
+
+        # 提取批次数据
+        states = np.vstack([e[0] for e in experiences_data])
+        actions = np.array([e[1] for e in experiences_data])
+        rewards = np.array([e[2] for e in experiences_data])
+        next_states = np.vstack([e[3] for e in experiences_data])
+        dones = np.array([e[4] for e in experiences_data])
+
+        # 转换为张量
+        states_tensor = torch.FloatTensor(states)
+        actions_tensor = torch.LongTensor(actions)
+        rewards_tensor = torch.FloatTensor(rewards)
+        next_states_tensor = torch.FloatTensor(next_states)
+        dones_tensor = torch.BoolTensor(dones)
+        is_weights_tensor = torch.FloatTensor(is_weights)
+
+        # 计算当前Q值
+        current_q_values = worm.neural_network(states_tensor).gather(1, actions_tensor.unsqueeze(1))
+
+        # 计算目标Q值 (Double DQN: 在线网选动作、目标网估值)
+        with torch.no_grad():
+            if hasattr(worm, 'target_network') and worm.target_network is not None:
+                next_actions = worm.neural_network(next_states_tensor).argmax(1)
+                next_q_values_target = worm.target_network(next_states_tensor)
+                next_max_q_values = next_q_values_target.gather(1, next_actions.unsqueeze(1))
+            else:
+                next_max_q_values = worm.neural_network(next_states_tensor).max(1)[0].unsqueeze(1)
+
+        next_max_q_values[dones_tensor.unsqueeze(1)] = 0.0
+        target_q_values = rewards_tensor.unsqueeze(1) + gamma * next_max_q_values
+
+        # 计算损失
+        td_errors = torch.abs(target_q_values - current_q_values).detach()
+        loss = torch.mean(is_weights_tensor.unsqueeze(1) * torch.nn.functional.mse_loss(
+            current_q_values, target_q_values, reduction='none'))
+
+        # 反向传播
+        worm.optimizer.zero_grad()
+        loss.backward()
+        torch.nn.utils.clip_grad_norm_(worm.neural_network.parameters(), max_norm=1.0)
+        worm.optimizer.step()
+
+        # 更新优先级
+        if tree_indices is not None and hasattr(worm.experience_replay, 'batch_update'):
+            try:
+                td_errors_numpy = td_errors.squeeze().cpu().numpy()
+                if td_errors_numpy.ndim > 1:
+                    td_errors_numpy = td_errors_numpy.flatten()
+                td_errors_numpy = td_errors_numpy.astype(np.float32)
+                worm.experience_replay.batch_update(tree_indices, td_errors_numpy)
+            except Exception as update_error:
+                print(f"⚠️ 优先级更新失败: {update_error}")
+
+        # 更新目标网络
+        if hasattr(worm, 'target_network') and hasattr(worm, 'target_update_freq'):
+            if worm.step_count % worm.target_update_freq == 0:
+                worm.target_network.load_state_dict(worm.neural_network.state_dict())
+
+    except Exception as e:
+        print(f"⚠️ 神经网络批训练失败: {e}")
+
 
 # 🔧 修复DQN导入
 try:
@@ -224,12 +365,13 @@ class Worm2D(BodyModel):
         print(f"🔧 历史记录初始化：保存完整身体段 {len(self.body_segments)} 个")
         
         self.total_reward = 0
-        self.q_table = [[[0.0, 0.0, 0.0, 0.0] for _ in range(width)] for _ in range(height)]
+        self.action_size = int(body_params.get("action_size", 4))  # 离散方向数: 4/8/16 (默认4保持兼容)
+        self.q_table = [[[0.0] * self.action_size for _ in range(width)] for _ in range(height)]
         self.use_neural = False
         self.neural_network = None
         self.optimizer = None
-        self.state_size = 8
-        self.action_size = 4
+        self.state_size = 8  # 单帧维度 (默认旧 8 维; state_v2 时改为 15)
+        self.use_state_v2 = False  # 默认关闭，前端可开启
         self._pending_action = None
         self.last_action = None
         self.last_physics_result = {
@@ -249,6 +391,8 @@ class Worm2D(BodyModel):
         self.energy = self.max_energy
         self.energy_decay_rate = 0.5
         self.low_energy_threshold = 50.0
+        self.reward_variant = "original"      # original / energy（reward_functions 模块统一计算）
+        self.reward_energy_weight = DEFAULT_ENERGY_WEIGHT
         self.body_flexibility = 0.8
         self.cuticle_stiffness = 0.7
         self.max_bend_angle = 50
@@ -280,6 +424,7 @@ class Worm2D(BodyModel):
         self.elastic_recovery_rate = 0.12
         self.segment_tensions = [0.0] * self.num_segments
         self.state_buffer = deque(maxlen=4)
+        self._prev_head_pos = (self.x, self.y)  # 追踪头部速度
 
         # 🎯 【恢复奖励处理机制】保持优化的同时恢复必要的奖励处理
         self.reward_buffer = deque(maxlen=3000)  # 奖励缓冲区，用于统计和归一化
@@ -358,16 +503,21 @@ class Worm2D(BodyModel):
             # 🔧 调试点3：状态处理 - 添加超时保护
             state_start = time.time()
             current_pos = (self.x, self.y)
-            current_state = env.get_state_vector(current_pos, worm=self)
-            
+            # 使用统一 state_v2 或旧版 8 维状态
+            if getattr(self, 'use_state_v2', False) and self.use_neural:
+                current_state = self.get_state_v2(env)
+            else:
+                current_state = env.get_state_vector(current_pos, worm=self)
+
             # 检查状态有效性
             if current_state is None or len(current_state) == 0:
+                default_dim = 10 if getattr(self, 'use_state_v2', False) else 8
                 print(f"⚠️ 获取到无效状态，使用默认状态")
-                current_state = np.zeros(8)
-            
-            self.state_buffer.append(current_state)
-            state_time = time.time() - state_start
-            
+                current_state = np.zeros(default_dim, dtype=np.float32)
+
+            self.state_buffer.append(current_state.astype(np.float32))
+            state_time = time.time() - start_time
+
             if state_time > 0.2:
                 print(f"⚠️ 状态处理耗时: {state_time:.3f}s")
             
@@ -379,8 +529,9 @@ class Worm2D(BodyModel):
             try:
                 stacked_state = get_stacked_state(self.state_buffer)
                 if stacked_state is None or len(stacked_state) == 0:
+                    default_dim = 40 if getattr(self, 'use_state_v2', False) else 32
                     print(f"⚠️ 堆叠状态无效，使用默认状态")
-                    stacked_state = np.zeros(32)  # 8 * 4 = 32
+                    stacked_state = np.zeros(default_dim, dtype=np.float32)
             except Exception as e:
                 print(f"❌ 堆叠状态处理失败: {e}")
                 stacked_state = np.zeros(32)
@@ -432,20 +583,30 @@ class Worm2D(BodyModel):
             # 🔧 调试点7：奖励计算 - 添加超时保护
             reward_start = time.time()
             
-            # 🔧 修复：获取新状态并构造32维堆叠状态用于神经网络
+            # 🔧 修复：获取新状态并构造堆叠状态用于神经网络
             new_pos = (self.x, self.y)
-            new_state_8d = env.get_state_vector(new_pos, worm=self)
-            if new_state_8d is None:
-                new_state_8d = np.zeros(8)
-            
-            # 为神经网络构造32维的新堆叠状态
+            if getattr(self, 'use_state_v2', False) and self.use_neural:
+                new_state_frame = self.get_state_v2(env)
+            else:
+                new_state_frame = env.get_state_vector(new_pos, worm=self)
+            if new_state_frame is None:
+                default_dim = 10 if getattr(self, 'use_state_v2', False) else 8
+                new_state_frame = np.zeros(default_dim, dtype=np.float32)
+
+            # 为神经网络构造新堆叠状态
             temp_buffer = self.state_buffer.copy()
-            temp_buffer.append(new_state_8d)
+            temp_buffer.append(new_state_frame)
             new_stacked_state = get_stacked_state(temp_buffer)
             
-            # 🔧 使用8.22版本的简单奖励计算
+            # 🔧 统一奖励函数模块（原版 = Worm2D 原始阶梯，逐位保留）
             try:
-                reward = self._calculate_reward(env, self.x, self.y)
+                reward = compute_reward(
+                    env, self,
+                    variant=getattr(self, 'reward_variant', 'original'),
+                    old_energy=self.energy,
+                    energy_weight=getattr(self, 'reward_energy_weight', DEFAULT_ENERGY_WEIGHT),
+                    target=(self.x, self.y),
+                )
             except Exception as reward_error:
                 print(f"⚠️ 奖励计算失败: {reward_error}")
                 reward = 0.0  # 使用默认奖励
@@ -788,28 +949,65 @@ class Worm2D(BodyModel):
                 else:
                     self.body_temperatures.append(0.0)
 
+    def get_state_v2(self, env=None):
+        """返回统一 10 维状态向量：原 8 维 + 能量率 + 平均曲率。
+
+        所有身体模型共用同一结构，4 帧堆叠 → 40 维 NN 输入。
+        """
+        state = []
+
+        # 1-8. 复用环境 8 维状态向量(四方向梯度 + 温度 + 对齐 + 趋势 + 距离)
+        if env is not None:
+            base = env.get_state_vector((self.x, self.y), worm=self)
+        else:
+            base = np.zeros(8, dtype=np.float32)
+        state.extend(base.astype(np.float32).tolist())
+
+        # 9. 能量率
+        state.append(float(self.energy / max(self.max_energy, 1.0)))
+
+        # 10. 平均曲率(归一化)
+        curv_limit = max(getattr(self, 'angular_constraint', 45.0), 1.0)
+        mean_curv = 0.0
+        points = [np.array([float(x), float(y)]) for x, y in self.body_segments]
+        if len(points) >= 3:
+            turn_angles = []
+            for i in range(1, len(points) - 1):
+                pv = points[i] - points[i-1]
+                nv = points[i+1] - points[i]
+                pn = float(np.linalg.norm(pv))
+                nn = float(np.linalg.norm(nv))
+                if pn > 1e-9 and nn > 1e-9:
+                    cos_a = float(np.dot(pv, nv) / (pn * nn))
+                    turn_angles.append(math.degrees(math.acos(max(-1.0, min(1.0, cos_a)))))
+            mean_curv = np.mean(turn_angles) if turn_angles else 0.0
+        state.append(float(np.clip(mean_curv / curv_limit, 0.0, 1.0)))
+
+        return np.array(state[:10], dtype=np.float32)
+
     def _select_action(self, current_state, adjusted_epsilon, old_x, old_y):
         """选择动作"""
         if self.use_neural and self.neural_network is not None and PYTORCH_AVAILABLE and torch is not None:
             if random.random() < adjusted_epsilon:
-                action = random.choice([0,1,2,3])
+                action = random.randrange(self.action_size)
             else:
                 try:
                     with torch.no_grad():
-                        # 🔧 强制检查状态维度，确保是32维状态
-                        if len(current_state) != 32:
-                            print(f"⚠️ 状态维度错误: {len(current_state)}, 期望32维，使用随机动作")
-                            action = random.choice([0,1,2,3])
+                        frame_dim = getattr(self, 'state_size', 8)
+                        expected_dim = frame_dim * 4  # 堆叠 4 帧
+                        if len(current_state) != expected_dim:
+                            print(f"⚠️ 状态维度错误: {len(current_state)}, 期望{expected_dim}维，使用随机动作")
+                            action = random.randrange(self.action_size)
                         else:
                             state_tensor = torch.FloatTensor(current_state).unsqueeze(0)
                             q_values = self.neural_network(state_tensor)
                             action = q_values.argmax().item()
                 except Exception as e:
                     print(f"⚠️ 神经网络推理失败，使用随机动作: {e}")
-                    action = random.choice([0,1,2,3])
+                    action = random.randrange(self.action_size)
         else:
             if random.random() < adjusted_epsilon:
-                action = random.choice([0,1,2,3])
+                action = random.randrange(self.action_size)
             else:
                 # 使用旧状态坐标来查询Q表
                 q_values = self.q_table[old_y][old_x]
@@ -848,7 +1046,10 @@ class Worm2D(BodyModel):
                 processed_reward = raw_reward
 
         # 构造 next_stacked_state
-        next_frame = env.get_state_vector((new_head_x, new_head_y), worm=self)
+        if getattr(self, 'use_state_v2', False) and self.use_neural:
+            next_frame = self.get_state_v2(env)
+        else:
+            next_frame = env.get_state_vector((new_head_x, new_head_y), worm=self)
         temp_buffer = self.state_buffer.copy()
         temp_buffer.append(next_frame)
         next_stacked_state = get_stacked_state(temp_buffer)
@@ -910,70 +1111,15 @@ class Worm2D(BodyModel):
                 except Exception as q_error:
                     print(f"⚠️ Q-learning 更新失败: {q_error}")
 
-    def _calculate_reward(self, env, new_head_x, new_head_y):
-        """
-        简化的奖励计算 - 回归7.26版本的简洁设计
-        """
-        new_temp = env.get_temperature(new_head_x, new_head_y)
-
-        # 出界或无效位置
-        if new_temp == -float('inf'):
-            return -10.0
-
-        # 基础温度奖励系统 - 调整为120度最佳温度
-        if new_temp >= 120:
-            temp_reward = 5.0
-        elif new_temp >= 115:
-            temp_reward = 4.5
-        elif new_temp >= 110:
-            temp_reward = 4.0
-        elif new_temp >= 100:
-            temp_reward = 3.0
-        elif new_temp >= 90:
-            temp_reward = 2.0
-        elif new_temp >= 80:
-            temp_reward = 1.0
-        elif new_temp >= 70:
-            temp_reward = 0.5
-        elif new_temp >= 60:
-            temp_reward = 0.3
-        elif new_temp >= 50:
-            temp_reward = 0.1
-        elif new_temp >= 40:
-            temp_reward = 0.0
-        elif new_temp >= 30:
-            temp_reward = -0.3
-        elif new_temp >= 20:
-            temp_reward = -0.5
-        elif new_temp >= 10:
-            temp_reward = -0.8
-        else:
-            temp_reward = -1.0
-
-        # 温度梯度奖励
-        if len(self.recent_temperatures) >= 2:
-            recent_avg = sum(self.recent_temperatures[-2:]) / 2
-            if new_temp > recent_avg + 1.0:
-                temp_reward += 1.0
-            elif new_temp > recent_avg + 0.5:
-                temp_reward += 0.3
-            elif new_temp < recent_avg - 1.0:
-                temp_reward -= 0.8
-            elif new_temp < recent_avg - 0.5:
-                temp_reward -= 0.2
-
-        temp_reward += 0.1
-        return temp_reward
-
     def move(self, action, env):
         """执行移动动作"""
         import time
         start_time = time.time()
-        
+        self._prev_head_pos = (self.x, self.y)  # 记录移动前位置用于计算速度
+
         try:
-            # 基础移动向量
-            moves = [(0, -1), (0, 1), (-1, 0), (1, 0)]  # 上下左右
-            dx, dy = moves[action]
+            # 基础移动向量 (方向编号与 _action_vectors 统一; 8 方向对角不缩放)
+            dx, dy = _action_vectors(self.action_size)[action]
             
             # 计算新的头部位置
             new_head_x = self.x + dx
@@ -1045,94 +1191,8 @@ class Worm2D(BodyModel):
         self.history.append(self.body_segments.copy())
 
     def _train_neural_network_batch(self, gamma):
-        """修复版神经网络批训练"""
-        if not PYTORCH_AVAILABLE or self.experience_replay is None:
-            return
-        if not getattr(self, 'use_neural_training', True):
-            return
-        
-        try:
-            # 🔧 修复：兼容不同类型的经验回放缓冲区
-            batch_size = min(self.batch_size, len(self.experience_replay))
-            if batch_size < 8:  # 最小批次大小
-                return
-            
-            # 采样经验
-            if hasattr(self.experience_replay, 'sample'):
-                # PrioritizedReplayBuffer
-                try:
-                    tree_indices, experiences_data, is_weights = self.experience_replay.sample(batch_size)
-                    if tree_indices is None or experiences_data is None:
-                        return
-                except Exception as sample_error:
-                    print(f"⚠️ 优先经验回放采样失败: {sample_error}")
-                    return
-            else:
-                # 普通 deque - 随机采样
-                import random
-                experiences_data = random.sample(list(self.experience_replay), batch_size)
-                is_weights = np.ones(batch_size)  # 等权重
-                tree_indices = None
-        
-            # 提取批次数据
-            states = np.vstack([e[0] for e in experiences_data])
-            actions = np.array([e[1] for e in experiences_data])
-            rewards = np.array([e[2] for e in experiences_data])
-            next_states = np.vstack([e[3] for e in experiences_data])
-            dones = np.array([e[4] for e in experiences_data])
-            
-            # 转换为张量
-            import torch
-            states_tensor = torch.FloatTensor(states)
-            actions_tensor = torch.LongTensor(actions)
-            rewards_tensor = torch.FloatTensor(rewards)
-            next_states_tensor = torch.FloatTensor(next_states)
-            dones_tensor = torch.BoolTensor(dones)
-            is_weights_tensor = torch.FloatTensor(is_weights)
-            
-            # 计算当前Q值
-            current_q_values = self.neural_network(states_tensor).gather(1, actions_tensor.unsqueeze(1))
-            
-            # 计算目标Q值
-            with torch.no_grad():
-                if hasattr(self, 'target_network') and self.target_network is not None:
-                    next_actions = self.neural_network(next_states_tensor).argmax(1)
-                    next_q_values_target = self.target_network(next_states_tensor)
-                    next_max_q_values = next_q_values_target.gather(1, next_actions.unsqueeze(1))
-                else:
-                    next_max_q_values = self.neural_network(next_states_tensor).max(1)[0].unsqueeze(1)
-            
-            next_max_q_values[dones_tensor.unsqueeze(1)] = 0.0
-            target_q_values = rewards_tensor.unsqueeze(1) + gamma * next_max_q_values
-        
-            # 计算损失
-            td_errors = torch.abs(target_q_values - current_q_values).detach()
-            loss = torch.mean(is_weights_tensor.unsqueeze(1) * torch.nn.functional.mse_loss(current_q_values, target_q_values, reduction='none'))
-            
-            # 反向传播
-            self.optimizer.zero_grad()
-            loss.backward()
-            torch.nn.utils.clip_grad_norm_(self.neural_network.parameters(), max_norm=1.0)
-            self.optimizer.step()
-            
-            # 更新优先级
-            if tree_indices is not None and hasattr(self.experience_replay, 'batch_update'):
-                try:
-                    td_errors_numpy = td_errors.squeeze().cpu().numpy()
-                    if td_errors_numpy.ndim > 1:
-                        td_errors_numpy = td_errors_numpy.flatten()
-                    td_errors_numpy = td_errors_numpy.astype(np.float32)
-                    self.experience_replay.batch_update(tree_indices, td_errors_numpy)
-                except Exception as update_error:
-                    print(f"⚠️ 优先级更新失败: {update_error}")
-        
-            # 更新目标网络
-            if hasattr(self, 'target_network') and hasattr(self, 'target_update_freq'):
-                if self.step_count % self.target_update_freq == 0:
-                    self.target_network.load_state_dict(self.neural_network.state_dict())
-        
-        except Exception as e:
-            print(f"⚠️ 神经网络批训练失败: {e}")
+        """修复版神经网络批训练（训练数学见模块级 train_dqn_batch）。"""
+        train_dqn_batch(self, gamma)
 
     def reset(self, start_pos=None, **kwargs):
         """重置线虫状态"""
@@ -1170,6 +1230,7 @@ class Worm2D(BodyModel):
             self.history = [self.body_segments.copy()]
             self.recent_temperatures = []
             self.state_buffer.clear()
+            self._prev_head_pos = (self.x, self.y)  # 重置速度追踪
             
             # 重置记忆系统
             if hasattr(self, 'hotspot_memory'):
@@ -1262,8 +1323,7 @@ class Worm2D(BodyModel):
         if env is not None:
             moved = self.move(action_index, env)
         else:
-            moves = [(0, -1), (0, 1), (-1, 0), (1, 0)]
-            dx, dy = moves[action_index]
+            dx, dy = _action_vectors(self.action_size)[action_index]
             new_head_x = max(0, min(self.width - 1, self.x + dx))
             new_head_y = max(0, min(self.height - 1, self.y + dy))
             self._update_body_physics(new_head_x, new_head_y)
@@ -1417,12 +1477,16 @@ class Worm2D(BodyModel):
                 self.use_neural = False
                 return False
             
-            # 使用传入的参数或默认值
-            self.state_size = state_size or 32  # 8 * 4 = 32 (堆叠状态)
-            self.action_size = action_size or 4
-            
-            print(f"🔧 初始化持久神经网络组件...")
-            
+            # 单帧维度 (state_v2: 15, 旧版: 8); NN 输入 = 帧×4
+            if state_size is None:
+                state_size = 10 if getattr(self, 'use_state_v2', False) else 8
+            self.state_size = state_size  # 单帧维度
+            if action_size:
+                self.action_size = action_size
+            nn_input_size = state_size * 4  # 堆叠 4 帧
+
+            print(f"🔧 初始化持久神经网络组件 (输入 {nn_input_size} 维)...")
+
             # 创建神经网络和优化器
             try:
                 try:
@@ -1430,7 +1494,7 @@ class Worm2D(BodyModel):
                 except ImportError:
                     from neural_networks import setup_neural_network
                 self.neural_network, self.optimizer = setup_neural_network(
-                    self.state_size, self.action_size, learning_rate
+                    nn_input_size, self.action_size, learning_rate
                 )
             except ImportError:
                 print("⚠️ 无法导入setup_neural_network函数")
@@ -1463,43 +1527,6 @@ class Worm2D(BodyModel):
             print(f"❌ 神经网络设置失败: {e}")
             self.use_neural = False
             return False
-
-    def calculate_reward_optimized(self, old_position, new_position, env, perception_data, 
-                                 old_body_segments, move_successful):
-        """
-        优化的奖励计算方法
-        """
-        try:
-            if not move_successful:
-                return -10.0  # 移动失败的惩罚
-            
-            # 获取新位置温度
-            new_temp = env.get_temperature(int(new_position[0]), int(new_position[1]))
-            
-            # 使用简化的奖励计算
-            reward = self._calculate_reward(env, int(new_position[0]), int(new_position[1]))
-            
-            # 添加感知奖励
-            if perception_data:
-                # 如果朝着更高温度方向移动，给予奖励
-                if 'best_direction' in perception_data and perception_data['best_direction'] is not None:
-                    reward += 0.5
-                
-                # 梯度导向奖励
-                if 'gradient_confidence' in perception_data and perception_data['gradient_confidence'] > 0.5:
-                    reward += 0.3
-            
-            # 能量奖励
-            if self.energy > self.low_energy_threshold:
-                reward += 0.1
-            else:
-                reward -= 0.2
-            
-            return reward
-            
-        except Exception as e:
-            print(f"⚠️ 奖励计算异常: {e}")
-            return 0.0
 
     def get_state_summary(self):
         """获取状态摘要"""
@@ -1587,15 +1614,40 @@ class ContinuousCenterlineBody(BodyModel):
         self.energy = self.max_energy
         self.energy_decay_rate = float(body_params.get("energy_decay_rate", 0.12))
         self.low_energy_threshold = 0.5 * self.max_energy
+        self.reward_variant = "original"      # original / energy（reward_functions 模块统一计算）
+        self.reward_energy_weight = DEFAULT_ENERGY_WEIGHT
         self.muscle_fatigue_level = 0.0
         self.fatigue_accumulation_rate = float(body_params.get("fatigue_accumulation_rate", 0.006))
         self.fatigue_recovery_rate = float(body_params.get("fatigue_recovery_rate", 0.004))
         self.fatigue_threshold = 0.35
         self.max_fatigue_penalty = 0.5
         self.position_noise = float(noise_params.get("position_noise", 0.0))
-        self.action_size = 4
+        self.action_size = int(body_params.get("action_size", 4))  # 离散方向数: 4/8/16 (默认4保持兼容)
         self.use_neural = False
-        self.q_table = [[[0.0, 0.0, 0.0, 0.0] for _ in range(self.width)] for _ in range(self.height)]
+        self.use_actor_critic = False
+        self.actor_critic_agent = None
+        self.ac_state_dim = 12  # state_v2 12 维 (10 + cos/sin 朝向)
+        self.ac_action_dim = 2  # AC 动作维: (heading, step); ADB 覆写为 3
+        self.ac_action_bounds = [(-math.pi, math.pi), (0.05, 5.0)]  # 每维输出/裁剪边界
+        # DQN 组件 (由 utils.setup_neural_network 装配)
+        self.state_size = 12   # 单帧维度 = get_state_v2 输出 (DQN 输入 = 12×4)
+        self.neural_network = None
+        self.target_network = None
+        self.optimizer = None
+        self.experience_replay = None
+        self.scheduler = None
+        self.batch_size = 64
+        self.train_interval = 4
+        self.target_update_freq = 100
+        self.step_count = 0        # DQN 训练批次计数 (每 100 批硬更新目标网络)
+        self.dqn_step_counter = 0  # DQN 决策步计数 (step_physics 也递增 current_step，不能共用)
+        self.ac_hidden_size = int(body_params.get("ac_hidden_size", 128))
+        self.ac_actor_lr = float(body_params.get("ac_actor_lr", 1e-4))
+        self.ac_critic_lr = float(body_params.get("ac_critic_lr", 1e-3))
+        self.ac_gamma = float(body_params.get("ac_gamma", 0.95))
+        self.ac_batch_size = int(body_params.get("ac_batch_size", 64))
+        self.ac_noise_scale = float(body_params.get("ac_noise_scale", 0.6))
+        self.q_table = [[[0.0] * self.action_size for _ in range(self.width)] for _ in range(self.height)]
         self.state_buffer = deque(maxlen=4)
         self.recent_temperatures = []
         self.visited_positions = {}
@@ -1702,6 +1754,9 @@ class ContinuousCenterlineBody(BodyModel):
         self.visited_positions.clear()
         self.state_buffer.clear()
         self._initialize_centerline(start_pos)
+        # 重置 Actor-Critic 噪声
+        if self.use_actor_critic and self.actor_critic_agent is not None:
+            self.actor_critic_agent.noise.reset()
         return self.get_observation(env=kwargs.get("env"))
 
     def get_observation(self, env=None, **kwargs):
@@ -1738,12 +1793,7 @@ class ContinuousCenterlineBody(BodyModel):
         if isinstance(action, (tuple, list, np.ndarray)) and len(action) >= 2:
             return float(action[0]), float(action[1])
         action_index = int(action)
-        headings = {
-            0: -math.pi / 2.0,
-            1: math.pi / 2.0,
-            2: math.pi,
-            3: 0.0,
-        }
+        headings = _action_headings(getattr(self, 'action_size', 4))
         return headings.get(action_index, self.heading), self.forward_speed
 
     def step_physics(self, env=None, dt=1.0, **kwargs):
@@ -1790,21 +1840,225 @@ class ContinuousCenterlineBody(BodyModel):
         return self.last_physics_result
 
     def decide_move(self, env, epsilon=0.2, alpha=0.5, gamma=0.9):
+        """决策并移动。优先级：Actor-Critic → DQN → Q-learning。"""
+        # Actor-Critic 路径
+        if self.use_actor_critic and self.actor_critic_agent is not None:
+            return self.decide_move_actor_critic(env)
+
+        # DQN / Dueling DQN 路径
+        if self.use_neural and self.neural_network is not None and PYTORCH_AVAILABLE:
+            return self._decide_move_neural(env, epsilon, gamma)
+
+        # Q-learning 路径（原有逻辑）
         old_x, old_y = int(round(self.x)), int(round(self.y))
-        old_temp = float(env.get_temperature(old_x, old_y))
+        old_energy = self.energy
         if random.random() < epsilon:
             action = random.randint(0, self.action_size - 1)
         else:
             action = int(np.argmax(self.q_table[old_y][old_x]))
         result = self.step_physics(env=env, action=action)
         new_x, new_y = int(round(self.x)), int(round(self.y))
-        new_temp = float(env.get_temperature(new_x, new_y))
-        reward = (new_temp - old_temp) * 0.1 - (self.max_energy - self.energy) * 0.001
+        # 统一奖励函数模块（温度阶梯 + 单步能量；Q 路径无 stuck/constraint 惩罚）
+        reward = compute_reward(
+            env, self,
+            variant=self.reward_variant,
+            old_energy=old_energy,
+            energy_weight=self.reward_energy_weight,
+            target=(new_x, new_y),
+        )
         if 0 <= old_y < self.height and 0 <= old_x < self.width:
             old_q = self.q_table[old_y][old_x][action]
             max_next_q = max(self.q_table[new_y][new_x])
             self.q_table[old_y][old_x][action] = old_q + alpha * (reward + gamma * max_next_q - old_q)
         self.total_reward += reward
+        return bool(result.get('moved', False))
+
+    def _decide_move_neural(self, env, epsilon, gamma):
+        """DQN/Dueling DQN 决策：state_v2(12维)×4帧 → ε-greedy → 物理步 → 经验回放 → 批训练。
+
+        - 惰性初始化 state_buffer：reset_worm_for_new_round 预热的是 8 维旧帧，
+          首步检测帧维与 self.state_size 不一致时清空重灌 12 维帧，避免静默截断。
+        - 经验 5 元组 done 恒 False（Q/DQN 路径暂无能量耗尽终止，与 Worm2D 现状一致）。
+        - 训练：每 10 步且 buffer ≥ batch_size 时批训练；step_count 每训练一批 +1，
+          每 target_update_freq(100) 批硬更新目标网络。
+        """
+        # 1. 惰性初始化状态缓冲，保证帧维度一致
+        frame = self.get_state_v2(env)
+        if (len(self.state_buffer) == 0
+                or len(self.state_buffer[-1]) != self.state_size):
+            self.state_buffer.clear()
+            for _ in range(self.state_buffer.maxlen):
+                self.state_buffer.append(frame)
+        self.state_buffer.append(frame)
+        stacked_state = get_stacked_state(self.state_buffer)
+
+        # 2. 动作选择 (ε-greedy)
+        if random.random() < epsilon:
+            action = random.randrange(self.action_size)
+        else:
+            try:
+                with torch.no_grad():
+                    state_tensor = torch.FloatTensor(stacked_state).unsqueeze(0)
+                    q_values = self.neural_network(state_tensor)
+                    action = int(q_values.argmax().item())
+            except Exception as e:
+                print(f"⚠️ 神经网络推理失败，使用随机动作: {e}")
+                action = random.randrange(self.action_size)
+
+        # 3. 执行物理步并计算奖励
+        old_energy = self.energy
+        result = self.step_physics(env=env, action=action)
+        reward = compute_reward(
+            env, self,
+            variant=getattr(self, 'reward_variant', 'original'),
+            old_energy=old_energy,
+            energy_weight=getattr(self, 'reward_energy_weight', DEFAULT_ENERGY_WEIGHT),
+            target=(self.x, self.y),
+        )
+
+        # 4. 存储经验 (5 元组, done 恒 False)
+        next_frame = self.get_state_v2(env)
+        temp_buffer = self.state_buffer.copy()
+        temp_buffer.append(next_frame)
+        next_stacked = get_stacked_state(temp_buffer)
+        experience = (stacked_state.copy(), action, reward, next_stacked.copy(), False)
+        try:
+            if hasattr(self.experience_replay, 'add'):
+                # PrioritizedReplayBuffer 使用 add 方法
+                self.experience_replay.add(experience)
+            elif hasattr(self.experience_replay, 'append'):
+                # 普通 deque 使用 append 方法
+                self.experience_replay.append(experience)
+        except Exception as e:
+            print(f"⚠️ 经验存储失败: {e}")
+
+        # 5. 触发批训练：每 10 个决策步且 buffer ≥ batch_size
+        self.dqn_step_counter += 1
+        buffer_size = len(self.experience_replay) if hasattr(self.experience_replay, '__len__') else 0
+        if buffer_size >= self.batch_size and self.dqn_step_counter % 10 == 0:
+            self.step_count += 1
+            train_dqn_batch(self, gamma)
+
+        # 6. 统计
+        self.total_reward += reward
+        return bool(result.get('moved', False))
+
+    # ── Actor-Critic 相关方法 ─────────────────────────
+
+    def get_state_v2(self, env=None):
+        """返回 CCB/ADB 12 维状态向量：原 8 维 + 能量率 + 平均曲率 + 朝向(cos,sin)。
+
+        朝向维度是能量-转向耦合的必要信息（转向能耗依赖当前朝向），
+        用 cos/sin 表示以避免 ±π 跳变。Worm2D 保持 10 维（无 heading 概念）。
+        """
+        state = []
+
+        # 1-8. 复用环境 8 维状态向量(四方向梯度 + 温度 + 对齐 + 趋势 + 距离)
+        if env is not None:
+            base = env.get_state_vector((self.x, self.y), worm=self)
+        else:
+            base = np.zeros(8, dtype=np.float32)
+        state.extend(base.astype(np.float32).tolist())
+
+        # 9. 能量率
+        state.append(float(self.energy / max(self.max_energy, 1.0)))
+
+        # 10. 平均曲率(归一化)
+        shape = self._shape_metrics() if hasattr(self, '_shape_metrics') else {}
+        curv_limit = max(self.angular_constraint, 1.0)
+        mean_curv = shape.get('curvature_mean_deg', 0.0)
+        state.append(float(np.clip(mean_curv / curv_limit, 0.0, 1.0)))
+
+        # 11-12. 朝向 (cos/sin)
+        state.append(float(math.cos(self.heading)))
+        state.append(float(math.sin(self.heading)))
+
+        return np.array(state[:12], dtype=np.float32)
+
+    def setup_actor_critic(self):
+        """初始化 DDPG Agent。"""
+        if DDPGAgent is None or not AC_TORCH_AVAILABLE:
+            print("⚠️ Actor-Critic 不可用 (需要 PyTorch)")
+            self.use_actor_critic = False
+            return False
+
+        try:
+            import torch  # noqa: F401
+        except ImportError:
+            self.use_actor_critic = False
+            return False
+
+        self.actor_critic_agent = DDPGAgent(
+            state_dim=self.ac_state_dim,
+            action_dim=getattr(self, 'ac_action_dim', 2),
+            action_bounds=getattr(self, 'ac_action_bounds', None),
+            hidden_size=self.ac_hidden_size,
+            actor_lr=self.ac_actor_lr,
+            critic_lr=self.ac_critic_lr,
+            gamma=self.ac_gamma,
+            batch_size=self.ac_batch_size,
+            noise_scale=self.ac_noise_scale,
+        )
+        self.use_actor_critic = True
+        self.use_neural = False  # AC 和 Q-learning 互斥
+        print("✓ Actor-Critic (DDPG) Agent 初始化完成")
+        return True
+
+    def _build_actor_action(self, action):
+        """把 Actor 连续输出转为物理动作 dict。CCB: (heading, step)。ADB 覆写为 (波幅, 频率, 曲率偏置)。"""
+        return {"heading": float(action[0]), "step": float(action[1])}
+
+    def decide_move_actor_critic(self, env):
+        """
+        Actor-Critic 决策：使用 Actor 输出连续动作 (维数 = ac_action_dim)，
+        经 _build_actor_action 转为物理动作，收集经验并在 buffer 足够时训练。
+        """
+        agent = self.actor_critic_agent
+        if agent is None:
+            return False
+
+        # 1. 获取当前状态
+        state = self.get_state_v2(env)
+
+        # 2. 选择动作
+        action = agent.act(state, add_noise=agent.train_mode)
+        action_dict = self._build_actor_action(action)
+
+        # 3. 记录旧状态用于经验回放
+        old_energy = self.energy
+
+        # 4. 执行物理步
+        result = self.step_physics(env=env, action=action_dict)
+
+        # 5. 计算奖励（统一奖励函数：温度阶梯 + 单步能量 + 约束/原地惩罚）
+        new_head = (self.x, self.y)
+        movement = result.get('movement', 0.0)
+        shape = self._shape_metrics() if hasattr(self, '_shape_metrics') else {}
+        constraint_penalty = shape.get('constraint_violation_rate', 0.0) * 0.5
+        reward = compute_reward(
+            env, self,
+            variant=self.reward_variant,
+            old_energy=old_energy,
+            energy_weight=self.reward_energy_weight,
+            stuck_penalty=0.5,
+            constraint_penalty=constraint_penalty,
+            target=new_head,
+            movement=movement,
+        )
+
+        # 6. 存储经验
+        next_state = self.get_state_v2(env)
+        done = self.energy <= 0.0
+        agent.remember(state, np.asarray(action, dtype=np.float32), reward, next_state, done)
+
+        # 7. 训练
+        agent.train()
+
+        # 8. 更新统计
+        self.total_reward += reward
+        self.current_step += 1
+        self.recent_temperatures.append(float(env.get_temperature(int(self.x), int(self.y))))
+
         return bool(result.get('moved', False))
 
     def get_geometry(self):
@@ -1881,6 +2135,8 @@ class ContinuousCenterlineBody(BodyModel):
             'history_length': len(self.history),
             'last_action': self.last_action,
             'pending_action': self._pending_action,
+            'use_actor_critic': bool(getattr(self, 'use_actor_critic', False)),
+            'training_method': 'actor_critic' if getattr(self, 'use_actor_critic', False) else 'q_learning',
         }
         metrics.update(self._shape_metrics())
         if env is not None:
@@ -1895,7 +2151,18 @@ class ContinuousCenterlineBody(BodyModel):
 
 
 class ActiveDeformationBody(ContinuousCenterlineBody):
-    """带主动传播波的连续中心线身体模型。"""
+    """RFT 力基波驱动身体: 波 + 曲率偏置为输入, 运动由阻力力/力矩平衡涌现。
+
+    物理依据 (Taylor 1951 游泳板; RFT; C. elegans 实测 cN/cT ≈ 1.4):
+    - 形状 (身体局部系): y(s) = A·sin(k·s − phase) + (b/2)·s², 行波向尾传播
+    - 每点速度: v = V + Ω×r + w (净平动 + 旋转 + 行波横向速度)
+    - 各向异性阻力: F_i = −Δs·D_i·v_i, D_i = drag_coeff·(t tᵀ + drag_ratio·n nᵀ)
+    - 自推进: ΣF=0 且 Σ r×F=0 → 3×3 线性方程解 (Vx, Vy, Ω); 全体点平移+旋转
+    - 转向: 曲率偏置 b 产生净力矩 → 身体旋转, b 符号决定左右
+    - 能量 = 机械耗散功 Σ vᵀD v Δs dt (替换旧的拍脑袋系数)
+    - 仅支持 Actor-Critic 连续动作 (波幅, 频率, 曲率偏置); 无 heading 动作
+    - 决策步 ≠ 物理步: 每决策步内做 sub_steps 个子步积分 (相位平滑、积分更准)
+    """
 
     model_name = "active_deformation"
 
@@ -1906,11 +2173,86 @@ class ActiveDeformationBody(ContinuousCenterlineBody):
         self.wave_phase = float(body_params.get("wave_phase", 0.0))
         self.wave_speed = float(body_params.get("wave_speed", 1.0))
         self.wave_length = float(body_params.get("wave_length", body_params.get("body_length", body_params.get("segment_length", 12.0))))
-        self.propulsion_gain = float(body_params.get("propulsion_gain", 0.45))
+        self.steer_bias = float(body_params.get("steer_bias", 0.0))   # 曲率偏置 (AC 动作第三维)
+        self.wave_envelope = bool(body_params.get("wave_envelope", True))  # 头尾波幅包络 (生物真实 + 削弱端点伪影)
+        self.drag_ratio = 1.4   # 固定: C. elegans 实测法向/切向阻力比 (非可调)
+        self.drag_coeff = float(body_params.get("drag_coeff", 0.35))  # 阻力绝对量级 (标定速度尺度)
+        self.sub_steps = max(1, int(body_params.get("sub_steps", 10)))  # 子步积分
+        self.curriculum_freeze_steps = int(body_params.get("curriculum_freeze_steps", 0))  # 课程: 前 N 决策步冻结 b=0
+        self.decision_count = 0
+        # RFT 状态: 质心与身体轴朝向 (必须在 super().__init__ 前, 其 reset 会调用 _initialize_centerline)
+        self.com = np.array([float(start_pos[0]), float(start_pos[1])], dtype=float)
+        self.body_theta = float(body_params.get("initial_heading", 0.0))
         super().__init__(start_pos=start_pos, width=width, height=height, body_params=body_params, noise_params=noise_params)
+        # AC 动作 = (波幅, 频率, 曲率偏置); 速度与转向由物理涌现, 不存在于动作空间
+        self.ac_action_dim = 3
+        self.ac_action_bounds = [(0.05, 2.0), (0.02, 0.8), (-0.08, 0.08)]
+        self.ac_state_dim = 14   # 8 环境 + 能量率 + 曲率 + 身体轴朝向 cos/sin + 波相位 cos/sin
+        self.state_size = 14
         self.base_muscle_wave_frequency = self.wave_frequency
         self.muscle_wave_frequency = self.wave_frequency
         self.muscle_wave_amplitude = self.wave_amplitude
+
+    # ── 形状与坐标系 ─────────────────────────────
+
+    def _rebuild_shape_points(self):
+        """由 (com, body_theta, phase, A, b) 重建世界系身体点。
+
+        约定: s 从 −L/2 (头) 到 +L/2 (尾); 身体轴向尾, 头朝向 = body_theta;
+        世界点 = com + R(θ)·(−s, y)。感知位置 = 质心 com。
+        """
+        k = 2.0 * math.pi / max(self.wave_length, 1e-6)
+        A, b = self.wave_amplitude, self.steer_bias
+        # 中点采样: n 个点放在 n 个等分段的中心, 避免 λ=body_length 时首尾端点相位重合
+        # (端点采样会对同一相位重复计数, 产生与点数无关的横向漂移伪影)
+        s = np.array([-self.body_length / 2.0 + (i + 0.5) * self.body_length / self.num_segments
+                      for i in range(self.num_segments)], dtype=float)
+        # 波幅包络: 头尾渐变为零 (真实线虫弯曲幅值头尾为零, 且削弱端点力矩伪影)
+        env = np.sin(math.pi * (s + self.body_length / 2.0) / self.body_length) if self.wave_envelope else np.ones(self.num_segments)
+        y = A * env * np.sin(k * s - self.wave_phase) + 0.5 * b * s * s
+        cth, sth = math.cos(self.body_theta), math.sin(self.body_theta)
+        pts = np.stack([cth * (-s) - sth * y, sth * (-s) + cth * y], axis=1) + self.com
+        self.centerline = pts
+        self.body_segments = [[float(p[0]), float(p[1])] for p in pts]
+        self.x, self.y = float(self.com[0]), float(self.com[1])
+
+    def _initialize_centerline(self, start_pos):
+        if not hasattr(self, 'com'):
+            self.com = np.array([float(start_pos[0]), float(start_pos[1])], dtype=float)
+        if not hasattr(self, 'body_theta'):
+            self.body_theta = float(getattr(self, 'heading', 0.0))
+        # 不重置 wave_phase: 尊重 body_params 传入值 (轮次重置在 _sync_centerline_from_public_segments 中处理)
+        self._rebuild_shape_points()
+        self.history = [self.body_segments.copy()]
+
+    def _sync_centerline_from_public_segments(self):
+        """reset_worm_for_new_round 直接写入直线 body_segments 后调用此处:
+        把直线解释为新一轮初始轴 (质心=头部位置, 朝向=头−尾方向), 重建 RFT 形状。"""
+        if not hasattr(self, "body_segments") or len(self.body_segments) != self.num_segments:
+            return
+        head = np.array([float(self.body_segments[0][0]), float(self.body_segments[0][1])])
+        tail = np.array([float(self.body_segments[-1][0]), float(self.body_segments[-1][1])])
+        self.com = head.copy()
+        direction = head - tail  # 头朝向 = 从尾指向头
+        if np.linalg.norm(direction) > 1e-9:
+            self.body_theta = math.atan2(direction[1], direction[0])
+        else:
+            self.body_theta = float(getattr(self, 'heading', 0.0))
+        self.wave_phase = 0.0
+        self._rebuild_shape_points()
+
+    def _sync_public_state(self):
+        """ADB: 感知位置 = 质心; heading 与身体轴朝向同步。"""
+        self.centerline = np.array([self._clip_point(p) for p in self.centerline], dtype=float)
+        self.body_segments = [[float(p[0]), float(p[1])] for p in self.centerline]
+        self.body_segment = [self.body_segments[0], self.body_segments[-1]]
+        self.x = float(self.com[0])
+        self.y = float(self.com[1])
+        self.heading = self.body_theta
+        if len(self.body_temperatures) != len(self.body_segments):
+            self.body_temperatures = [0.0] * len(self.body_segments)
+
+    # ── 动作与决策 ─────────────────────────────
 
     def apply_action(self, action, **kwargs):
         if isinstance(action, dict):
@@ -1918,10 +2260,16 @@ class ActiveDeformationBody(ContinuousCenterlineBody):
                 self.wave_amplitude = float(action["wave_amplitude"])
             if "wave_frequency" in action:
                 self.wave_frequency = float(action["wave_frequency"])
+            if "steer_bias" in action:
+                self.steer_bias = float(action["steer_bias"])
             if "wave_phase" in action:
                 self.wave_phase = float(action["wave_phase"])
             if "wave_speed" in action:
                 self.wave_speed = float(action["wave_speed"])
+        elif isinstance(action, (tuple, list, np.ndarray)) and len(action) == 3:
+            self.wave_amplitude = float(action[0])
+            self.wave_frequency = float(action[1])
+            self.steer_bias = float(action[2])
         elif isinstance(action, (tuple, list, np.ndarray)) and len(action) >= 4:
             self.wave_amplitude = float(action[0])
             self.wave_frequency = float(action[1])
@@ -1929,45 +2277,170 @@ class ActiveDeformationBody(ContinuousCenterlineBody):
             self.wave_speed = float(action[3])
         return super().apply_action(action, **kwargs)
 
+    def _build_actor_action(self, action):
+        """ADB: Actor 输出 (波幅, 频率, 曲率偏置) → 物理动作 dict。
+        课程阶段一: 前 curriculum_freeze_steps 个决策步强制 b=0 (只学速度-能耗)。"""
+        self.decision_count += 1
+        bias = float(action[2])
+        if self.curriculum_freeze_steps > 0 and self.decision_count <= self.curriculum_freeze_steps:
+            bias = 0.0
+        return {
+            "wave_amplitude": float(action[0]),
+            "wave_frequency": float(action[1]),
+            "steer_bias": bias,
+        }
+
+    def decide_move(self, env, epsilon=0.2, alpha=0.5, gamma=0.9):
+        """ADB 仅支持 Actor-Critic 连续波参数控制 (无 heading/离散方向动作)。"""
+        if not self.use_actor_critic or self.actor_critic_agent is None:
+            raise RuntimeError(
+                "ADB (RFT 波驱动) 仅支持 Actor-Critic 路径: 请先调用 setup_actor_critic()。"
+                "Q-learning/DQN 方向动作对波驱动模型无意义。"
+            )
+        return self.decide_move_actor_critic(env)
+
+    def get_state_v2(self, env=None):
+        """ADB 14 维状态: 环境 8 维(质心) + 能量率 + 平均曲率 + 身体轴朝向 cos/sin + 波相位 cos/sin。"""
+        state = []
+        if env is not None:
+            base = env.get_state_vector((self.x, self.y), worm=self)
+        else:
+            base = np.zeros(8, dtype=np.float32)
+        state.extend(base.astype(np.float32).tolist())
+        state.append(float(self.energy / max(self.max_energy, 1.0)))
+        shape = self._shape_metrics() if hasattr(self, '_shape_metrics') else {}
+        curv_limit = max(self.angular_constraint, 1.0)
+        state.append(float(np.clip(shape.get('curvature_mean_deg', 0.0) / curv_limit, 0.0, 1.0)))
+        state.append(float(math.cos(self.body_theta)))
+        state.append(float(math.sin(self.body_theta)))
+        state.append(float(math.cos(self.wave_phase)))
+        state.append(float(math.sin(self.wave_phase)))
+        return np.array(state[:14], dtype=np.float32)
+
+    # ── RFT 物理 ─────────────────────────────
+
+    def _rft_substep(self, dt):
+        """一个 RFT 物理子步: 行波推进 + 3×3 力/力矩平衡解 (Vx, Vy, Ω) + 全体平移旋转。"""
+        self.wave_phase += 2.0 * math.pi * self.wave_frequency * dt * self.wave_speed
+        k = 2.0 * math.pi / max(self.wave_length, 1e-6)
+        A, f, b = self.wave_amplitude, self.wave_frequency, self.steer_bias
+        n = self.num_segments
+        s = np.array([-self.body_length / 2.0 + (i + 0.5) * self.body_length / n
+                      for i in range(n)], dtype=float)  # 中点采样 (同 _rebuild_shape_points)
+        cth, sth = math.cos(self.body_theta), math.sin(self.body_theta)
+
+        # 形状与波速 (局部系, 含头尾幅值包络)
+        env = np.sin(math.pi * (s + self.body_length / 2.0) / self.body_length) if self.wave_envelope else np.ones(n)
+        envp = (math.pi / self.body_length) * np.cos(math.pi * (s + self.body_length / 2.0) / self.body_length) if self.wave_envelope else np.zeros(n)
+        y = A * env * np.sin(k * s - self.wave_phase) + 0.5 * b * s * s
+        yp = A * (env * k * np.cos(k * s - self.wave_phase) + envp * np.sin(k * s - self.wave_phase)) + b * s  # dy/ds
+        ydot = -A * env * (2.0 * math.pi * f) * np.cos(k * s - self.wave_phase)  # 行波横向速度
+
+        # 局部单位切向 (沿身体轴向尾, 局部系方向 (-1, yp)) → 世界系
+        inv = 1.0 / np.sqrt(1.0 + yp * yp)
+        tx = (-cth - yp * sth) * inv
+        ty = (-sth + yp * cth) * inv
+        nx, ny = -ty, tx
+
+        # 相对质心的位置与行波世界速度
+        rx = cth * (-s) - sth * y
+        ry = sth * (-s) + cth * y
+        wx = -sth * ydot
+        wy = cth * ydot
+
+        # 组装 3×3: ΣF=0, Σ r×F=0; 未知 [Vx, Vy, Ω]; M·x = rhs
+        cT, cN = 1.0, self.drag_ratio
+        M = np.zeros((3, 3), dtype=float)
+        rhs = np.zeros(3, dtype=float)
+        for i in range(n):
+            dxx = (cT * tx[i] * tx[i] + cN * nx[i] * nx[i]) * self.drag_coeff
+            dxy = (cT * tx[i] * ty[i] + cN * nx[i] * ny[i]) * self.drag_coeff
+            dyy = (cT * ty[i] * ty[i] + cN * ny[i] * ny[i]) * self.drag_coeff
+            rotx, roty = -ry[i], rx[i]                      # Ω 的速度贡献方向
+            drotx = dxx * rotx + dxy * roty                 # D·rot
+            droty = dxy * rotx + dyy * roty
+            dwx = dxx * wx[i] + dxy * wy[i]                 # D·w
+            dwy = dxy * wx[i] + dyy * wy[i]
+            M[0, 0] += dxx; M[0, 1] += dxy; M[0, 2] += drotx
+            M[1, 0] += dxy; M[1, 1] += dyy; M[1, 2] += droty
+            rhs[0] -= dwx; rhs[1] -= dwy
+            # 力矩行: Σ r×D·V + Σ r×D·Ωrot = −Σ r×D·w
+            M[2, 0] += rx[i] * dxy - ry[i] * dxx
+            M[2, 1] += rx[i] * dyy - ry[i] * dxy
+            M[2, 2] += rx[i] * droty - ry[i] * drotx
+            rhs[2] -= rx[i] * dwy - ry[i] * dwx
+        try:
+            sol = np.linalg.solve(M, rhs)
+        except np.linalg.LinAlgError:
+            sol = np.zeros(3)
+        vx, vy, omega = float(sol[0]), float(sol[1]), float(sol[2])
+
+        # 更新刚体运动并重建形状
+        self.com += np.array([vx, vy]) * dt
+        self.body_theta += omega * dt
+        self._rebuild_shape_points()
+
+        # 边界: 整体平移回界内 (保持形状, 不逐点 clip)
+        lo_x, lo_y = 0.0, 0.0
+        hi_x, hi_y = float(max(0, self.width - 1)), float(max(0, self.height - 1))
+        shift_x = min(0.0, hi_x - self.centerline[:, 0].max()) + max(0.0, lo_x - self.centerline[:, 0].min())
+        shift_y = min(0.0, hi_y - self.centerline[:, 1].max()) + max(0.0, lo_y - self.centerline[:, 1].min())
+        if shift_x != 0.0 or shift_y != 0.0:
+            self.com += np.array([shift_x, shift_y])
+            self._rebuild_shape_points()
+
+        # 机械耗散功: Σ vᵀ D v Δs dt (恒 ≥ 0)
+        ds = self.segment_distance
+        diss = 0.0
+        for i in range(n):
+            vix = vx + omega * (-ry[i]) + wx[i]
+            viy = vy + omega * rx[i] + wy[i]
+            fpx = (cT * tx[i] * (tx[i] * vix + ty[i] * viy)
+                   + cN * nx[i] * (nx[i] * vix + ny[i] * viy)) * self.drag_coeff
+            fpy = (cT * ty[i] * (tx[i] * vix + ty[i] * viy)
+                   + cN * ny[i] * (nx[i] * vix + ny[i] * viy)) * self.drag_coeff
+            diss += (vix * fpx + viy * fpy) * ds * dt
+        return {'movement': float(np.hypot(vx, vy) * dt), 'dissipation': float(max(0.0, diss))}
+
     def step_physics(self, env=None, dt=1.0, **kwargs):
+        """ADB 物理步: 决策步内做 sub_steps 个子步 RFT 积分。能量扣减 = 机械耗散功。"""
         action = kwargs.get("action", self._pending_action)
         if isinstance(action, dict):
             self.apply_action(action)
-        base_step = self.forward_speed + self.propulsion_gain * abs(self.wave_amplitude * self.wave_frequency)
-        if isinstance(action, dict):
-            action = {
-                "heading": action.get("heading", self.heading + float(action.get("heading_delta", 0.0))),
-                "step": action.get("step", base_step),
-            }
-        result = super().step_physics(env=env, dt=dt, action=action)
-        self.wave_phase += 2.0 * math.pi * self.wave_frequency * float(dt) * self.wave_speed
-        head = np.array([self.x, self.y], dtype=float)
-        tangent = self._tangent()
-        normal = np.array([-tangent[1], tangent[0]], dtype=float)
-        wave_number = 2.0 * math.pi / max(self.wave_length, 1e-6)
-        self.centerline = np.array([
-            self._clip_point(
-                head
-                - tangent * (self.segment_distance * i)
-                + normal * (self.wave_amplitude * math.sin(self.wave_phase - wave_number * self.segment_distance * i))
-            )
-            for i in range(self.num_segments)
-        ], dtype=float)
-        self._enforce_constraints(iterations=2)
-        self._sync_public_state()
-        self.history[-1] = self.body_segments.copy()
+        n_sub = max(1, int(self.sub_steps))
+        dt_sub = float(dt) / n_sub
+        total_movement = 0.0
+        total_dissipation = 0.0
+        for _ in range(n_sub):
+            sub = self._rft_substep(dt=dt_sub)
+            total_movement += sub['movement']
+            total_dissipation += sub['dissipation']
+            self.history.append(self.body_segments.copy())  # 子步帧 → 动画看到平滑行波
+        self.energy = max(0.0, self.energy - total_dissipation)
+        self.muscle_fatigue_level = min(
+            1.0,
+            self.muscle_fatigue_level
+            + self.fatigue_accumulation_rate * abs(self.wave_amplitude * self.wave_frequency) * float(dt),
+        )
         self.muscle_wave_phase = self.wave_phase
         self.muscle_wave_frequency = self.wave_frequency
         self.muscle_wave_amplitude = self.wave_amplitude
         self.dorsal_muscle_state = math.sin(self.wave_phase)
         self.ventral_muscle_state = -self.dorsal_muscle_state
-        self.energy = max(0.0, self.energy - 0.01 * abs(self.wave_amplitude * self.wave_frequency))
-        self.muscle_fatigue_level = min(
-            1.0,
-            self.muscle_fatigue_level + 0.002 * abs(self.wave_amplitude * self.wave_frequency)
-        )
-        result['wave_phase'] = float(self.wave_phase)
-        result['position'] = (self.x, self.y)
+        if env is not None:
+            self.body_temperatures = [
+                float(env.get_temperature(int(p[0]), int(p[1]))) for p in self.body_segments
+            ]
+        self.current_step += 1
+        self._sync_public_state()
+        result = {
+            'moved': total_movement > 1e-9,
+            'action': action,
+            'position': (self.x, self.y),
+            'movement': total_movement,
+            'dissipation': total_dissipation,
+            'wave_phase': float(self.wave_phase),
+        }
         self.last_physics_result = result
         return result
 
@@ -1979,6 +2452,9 @@ class ActiveDeformationBody(ContinuousCenterlineBody):
             'wave_phase': float(self.wave_phase),
             'wave_speed': float(self.wave_speed),
             'wave_length': float(self.wave_length),
+            'steer_bias': float(self.steer_bias),
+            'drag_ratio': float(self.drag_ratio),
+            'body_theta': float(self.body_theta),
         })
         return metrics
 
