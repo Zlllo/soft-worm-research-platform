@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+results/
 
 # Local experiment outputs
 C_Elegans_Sim_Results/
