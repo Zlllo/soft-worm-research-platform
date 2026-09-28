@@ -13,6 +13,26 @@ SCHEMA_VERSION = 1
 ALLOWED_OBSERVATIONS = ("temperature_K", "sample_time_s")
 
 
+def _require_keys(name: str, data: Dict[str, Any], expected: Tuple[str, ...]) -> None:
+    actual = set(data)
+    required = set(expected)
+    missing = sorted(required - actual)
+    unknown = sorted(actual - required)
+    if missing or unknown:
+        details = []
+        if missing:
+            details.append(f"missing={missing}")
+        if unknown:
+            details.append(f"unknown={unknown}")
+        raise ValueError(f"{name} fields must match schema: {', '.join(details)}")
+
+
+def _strict_int(name: str, value: Any) -> int:
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise ValueError(f"{name} must be an integer")
+    return value
+
+
 def _positive(name: str, value: float) -> float:
     value = float(value)
     if not math.isfinite(value) or value <= 0:
@@ -27,10 +47,10 @@ def _nonnegative(name: str, value: float) -> float:
     return value
 
 
-def _integer_multiple(slower_name: str, slower: float, physics_dt: float) -> None:
-    ratio = slower / physics_dt
+def _integer_multiple(name: str, value: float, base_name: str, base: float) -> None:
+    ratio = value / base
     if not math.isclose(ratio, round(ratio), rel_tol=0.0, abs_tol=1e-9):
-        raise ValueError(f"{slower_name} must be an integer multiple of physics_dt_s")
+        raise ValueError(f"{name} must be an integer multiple of {base_name}")
 
 
 @dataclass(frozen=True)
@@ -42,8 +62,9 @@ class DomainConfig:
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "DomainConfig":
+        _require_keys("domain", data, ("dimension", "x_extent_m", "y_extent_m", "boundary"))
         result = cls(
-            dimension=int(data["dimension"]),
+            dimension=_strict_int("domain.dimension", data["dimension"]),
             x_extent_m=_positive("domain.x_extent_m", data["x_extent_m"]),
             y_extent_m=_positive("domain.y_extent_m", data["y_extent_m"]),
             boundary=str(data["boundary"]),
@@ -65,6 +86,11 @@ class TemperatureConfig:
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "TemperatureConfig":
+        _require_keys(
+            "temperature",
+            data,
+            ("field_type", "preferred_K", "comfort_half_width_K", "reference_K", "gradient_K_per_m"),
+        )
         gradient = tuple(float(v) for v in data["gradient_K_per_m"])
         if len(gradient) != 2 or not all(math.isfinite(v) for v in gradient):
             raise ValueError("temperature.gradient_K_per_m must contain two finite values")
@@ -94,6 +120,7 @@ class MediumConfig:
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "MediumConfig":
+        _require_keys("medium", data, ("model", "density_kg_m3", "dynamic_viscosity_Pa_s"))
         result = cls(
             model=str(data["model"]),
             density_kg_m3=_positive("medium.density_kg_m3", data["density_kg_m3"]),
@@ -113,6 +140,7 @@ class BodyReferenceConfig:
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "BodyReferenceConfig":
+        _require_keys("body_reference", data, ("length_m", "speed_m_s"))
         return cls(
             length_m=_positive("body_reference.length_m", data["length_m"]),
             speed_m_s=_positive("body_reference.speed_m_s", data["speed_m_s"]),
@@ -128,6 +156,9 @@ class TimeConfig:
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "TimeConfig":
+        _require_keys(
+            "time", data, ("physics_dt_s", "sensor_dt_s", "control_dt_s", "duration_s")
+        )
         result = cls(
             physics_dt_s=_positive("time.physics_dt_s", data["physics_dt_s"]),
             sensor_dt_s=_positive("time.sensor_dt_s", data["sensor_dt_s"]),
@@ -139,9 +170,11 @@ class TimeConfig:
             ("control_dt_s", result.control_dt_s),
             ("duration_s", result.duration_s),
         ):
-            _integer_multiple(name, value, result.physics_dt_s)
+            _integer_multiple(name, value, "physics_dt_s", result.physics_dt_s)
         if result.sensor_dt_s < result.physics_dt_s or result.control_dt_s < result.physics_dt_s:
             raise ValueError("sensor and control clocks cannot be faster than the physics clock")
+        _integer_multiple("duration_s", result.duration_s, "sensor_dt_s", result.sensor_dt_s)
+        _integer_multiple("duration_s", result.duration_s, "control_dt_s", result.control_dt_s)
         return result
 
 
@@ -154,6 +187,9 @@ class SensorConfig:
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "SensorConfig":
+        _require_keys(
+            "sensor", data, ("location", "noise_model", "noise_std_K", "noise_correlation_s")
+        )
         result = cls(
             location=str(data["location"]),
             noise_model=str(data["noise_model"]),
@@ -180,7 +216,9 @@ class SeedConfig:
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "SeedConfig":
-        values = {name: int(data[name]) for name in ("environment", "sensor", "initial_state", "controller")}
+        names = ("environment", "sensor", "initial_state", "controller")
+        _require_keys("seeds", data, names)
+        values = {name: _strict_int(f"seeds.{name}", data[name]) for name in names}
         if any(value < 0 for value in values.values()):
             raise ValueError("all seeds must be non-negative integers")
         return cls(**values)
@@ -202,6 +240,23 @@ class ExperimentConfig:
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "ExperimentConfig":
+        _require_keys(
+            "experiment",
+            data,
+            (
+                "schema_version",
+                "name",
+                "purpose",
+                "domain",
+                "temperature",
+                "medium",
+                "body_reference",
+                "time",
+                "sensor",
+                "seeds",
+                "controller_observations",
+            ),
+        )
         observations = tuple(str(v) for v in data["controller_observations"])
         if observations != ALLOWED_OBSERVATIONS:
             raise ValueError(
@@ -209,7 +264,7 @@ class ExperimentConfig:
                 "true gradient, position, preferred-region coordinates and field access are forbidden"
             )
         result = cls(
-            schema_version=int(data["schema_version"]),
+            schema_version=_strict_int("schema_version", data["schema_version"]),
             name=str(data["name"]),
             purpose=str(data["purpose"]),
             domain=DomainConfig.from_dict(data["domain"]),

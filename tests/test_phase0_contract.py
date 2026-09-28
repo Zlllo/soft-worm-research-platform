@@ -52,6 +52,27 @@ def test_privileged_observation_and_incommensurate_clock_are_rejected():
         ExperimentConfig.from_dict(raw)
 
 
+def test_duration_unknown_fields_and_fractional_integers_are_rejected():
+    raw = json.loads(REFERENCE.read_text(encoding="utf-8"))
+    raw["time"]["duration_s"] = 2.06
+    with pytest.raises(ValueError, match="integer multiple"):
+        ExperimentConfig.from_dict(raw)
+
+    raw = json.loads(REFERENCE.read_text(encoding="utf-8"))
+    raw["sensor"]["undocumented_gain"] = 4.0
+    with pytest.raises(ValueError, match="unknown"):
+        ExperimentConfig.from_dict(raw)
+
+    for path in (("schema_version",), ("domain", "dimension"), ("seeds", "sensor")):
+        raw = json.loads(REFERENCE.read_text(encoding="utf-8"))
+        target = raw
+        for key in path[:-1]:
+            target = target[key]
+        target[path[-1]] = 1.5
+        with pytest.raises(ValueError, match="integer"):
+            ExperimentConfig.from_dict(raw)
+
+
 def test_result_bundle_contains_config_manifest_and_result(tmp_path):
     config = load_config(REFERENCE)
     run_dir = write_result_bundle(config, tmp_path, ROOT)
