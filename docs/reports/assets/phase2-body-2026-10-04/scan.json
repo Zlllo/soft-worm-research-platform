@@ -1,0 +1,146 @@
+[
+  {
+    "drag_ratio": 1.0,
+    "amplitude_rad": 0.2,
+    "displacement_x_m": 2.899227366821192e-22,
+    "displacement_y_m": -3.7452435667925034e-21,
+    "net_displacement_m": 3.756448398134318e-21,
+    "orientation_change_rad": 1.5612511283791264e-17,
+    "dissipation_J": 5.545606904253338e-14
+  },
+  {
+    "drag_ratio": 1.0,
+    "amplitude_rad": 0.4,
+    "displacement_x_m": -6.3511900769806395e-21,
+    "displacement_y_m": 2.4008456191747423e-22,
+    "net_displacement_m": 6.3557262363012815e-21,
+    "orientation_change_rad": 4.5102810375396984e-17,
+    "dissipation_J": 2.1913201603714685e-13
+  },
+  {
+    "drag_ratio": 1.0,
+    "amplitude_rad": 0.6,
+    "displacement_x_m": 3.391291885120541e-21,
+    "displacement_y_m": 5.3398046540476975e-21,
+    "net_displacement_m": 6.3256916138453894e-21,
+    "orientation_change_rad": -6.591949208711867e-17,
+    "dissipation_J": 4.831686860144672e-13
+  },
+  {
+    "drag_ratio": 1.0,
+    "amplitude_rad": 0.8,
+    "displacement_x_m": 6.511671522141526e-21,
+    "displacement_y_m": 1.145065393118227e-20,
+    "net_displacement_m": 1.3172674043791143e-20,
+    "orientation_change_rad": 3.122502256758253e-16,
+    "dissipation_J": 8.351489423046828e-13
+  },
+  {
+    "drag_ratio": 1.5,
+    "amplitude_rad": 0.2,
+    "displacement_x_m": -2.7159856882558438e-05,
+    "displacement_y_m": 7.532746097608289e-21,
+    "net_displacement_m": 2.7159856882558438e-05,
+    "orientation_change_rad": -2.688821387764051e-17,
+    "dissipation_J": 8.243363750689204e-14
+  },
+  {
+    "drag_ratio": 1.5,
+    "amplitude_rad": 0.4,
+    "displacement_x_m": -0.0001009641961481397,
+    "displacement_y_m": 8.715588524164976e-21,
+    "net_displacement_m": 0.0001009641961481397,
+    "orientation_change_rad": -1.0408340855860843e-17,
+    "dissipation_J": 3.173903510318174e-13
+  },
+  {
+    "drag_ratio": 1.5,
+    "amplitude_rad": 0.6,
+    "displacement_x_m": -0.00020168964317355647,
+    "displacement_y_m": 7.947303171225724e-20,
+    "net_displacement_m": 0.00020168964317355647,
+    "orientation_change_rad": 3.469446951953614e-17,
+    "dissipation_J": 6.727428031450401e-13
+  },
+  {
+    "drag_ratio": 1.5,
+    "amplitude_rad": 0.8,
+    "displacement_x_m": -0.00030510522744283606,
+    "displacement_y_m": 1.64741290796061e-20,
+    "net_displacement_m": 0.00030510522744283606,
+    "orientation_change_rad": 3.642919299551295e-16,
+    "dissipation_J": 1.1078967846766837e-12
+  },
+  {
+    "drag_ratio": 2.0,
+    "amplitude_rad": 0.2,
+    "displacement_x_m": -5.3881848593125085e-05,
+    "displacement_y_m": 8.217987686926045e-21,
+    "net_displacement_m": 5.3881848593125085e-05,
+    "orientation_change_rad": 3.5561831257524545e-17,
+    "dissipation_J": 1.090106102814393e-13
+  },
+  {
+    "drag_ratio": 2.0,
+    "amplitude_rad": 0.4,
+    "displacement_x_m": -0.00019588451091307913,
+    "displacement_y_m": 6.758065604558236e-21,
+    "net_displacement_m": 0.00019588451091307913,
+    "orientation_change_rad": 1.734723475976807e-18,
+    "dissipation_J": 4.1023771863991684e-13
+  },
+  {
+    "drag_ratio": 2.0,
+    "amplitude_rad": 0.6,
+    "displacement_x_m": -0.00037912720036556294,
+    "displacement_y_m": 1.3154735999492054e-19,
+    "net_displacement_m": 0.00037912720036556294,
+    "orientation_change_rad": -1.97758476261356e-16,
+    "dissipation_J": 8.413776436242505e-13
+  },
+  {
+    "drag_ratio": 2.0,
+    "amplitude_rad": 0.8,
+    "displacement_x_m": -0.0005535853997575538,
+    "displacement_y_m": 1.0554328307809101e-19,
+    "net_displacement_m": 0.0005535853997575538,
+    "orientation_change_rad": 1.3183898417423734e-16,
+    "dissipation_J": 1.3341808473964825e-12
+  },
+  {
+    "drag_ratio": 3.0,
+    "amplitude_rad": 0.2,
+    "displacement_x_m": -0.00010612195782462819,
+    "displacement_y_m": 9.448134504763109e-21,
+    "net_displacement_m": 0.00010612195782462819,
+    "orientation_change_rad": 4.423544863740858e-17,
+    "dissipation_J": 1.6100110675358412e-13
+  },
+  {
+    "drag_ratio": 3.0,
+    "amplitude_rad": 0.4,
+    "displacement_x_m": -0.0003705354569413976,
+    "displacement_y_m": 4.6755660341523905e-20,
+    "net_displacement_m": 0.0003705354569413976,
+    "orientation_change_rad": -1.5612511283791264e-17,
+    "dissipation_J": 5.81530923658532e-13
+  },
+  {
+    "drag_ratio": 3.0,
+    "amplitude_rad": 0.6,
+    "displacement_x_m": -0.0006800522646018829,
+    "displacement_y_m": 6.456196379764666e-20,
+    "net_displacement_m": 0.0006800522646018829,
+    "orientation_change_rad": 2.1163626406917047e-16,
+    "dissipation_J": 1.1291928110004924e-12
+  },
+  {
+    "drag_ratio": 3.0,
+    "amplitude_rad": 0.8,
+    "displacement_x_m": -0.0009399196850503409,
+    "displacement_y_m": 1.3126529140603996e-19,
+    "net_displacement_m": 0.0009399196850503409,
+    "orientation_change_rad": 2.3245294578089215e-16,
+    "dissipation_J": 1.6903023181846365e-12
+  }
+]

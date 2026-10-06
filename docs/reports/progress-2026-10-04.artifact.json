@@ -1,0 +1,3706 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "含噪局部感知下的软体个体趋温：阶段进展汇报",
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# 含噪局部感知下的软体个体趋温：阶段进展汇报\n\n2026 年 10 月 4 日 · 物理学本科科研阶段汇报"
+      },
+      {
+        "id": "section-0",
+        "type": "markdown",
+        "body": "## 当前进展与研究判断\n\n目前已经建立了独立、可复现的一维趋温机制模型，完成局部感知权限、时钟、随机源、边界处理和评价指标的实现验证。本轮进一步开展固定设计的噪声—记忆探索性扫描，并用另一组随机种子检验参考参数在冷热两侧的表现。\n\n现阶段成果回答的是：在给定舒适温度的静态梯度中，仅通过局部含噪测温和短期记忆，是否可以形成朝舒适区的统计运动偏置。后续要研究身体形变、柔软性怎样改变这一过程，以及相应的机械耗散。\n"
+      },
+      {
+        "id": "section-1",
+        "type": "markdown",
+        "body": "## 研究问题与物理思路\n\n舒适温度 T* 由外部给定。个体不知道自身位置、真实温度梯度和舒适区坐标，只接收当前位置的带噪温度与采样时间。任务包括寻找舒适温度带，以及在有限观察时间内维持较高的驻留比例。\n\n研究从自由度较少的模型逐步推进：一维持续随机运动 → 规定形变的自由游动身体 → 有弯曲弹性的身体。点模型先隔离信息与决策机制；身体阶段再加入阻力平衡和能量记账。统计物理方法用于连接随机轨迹、漂移、扩散和分布；尺度分析用于解释噪声、记忆与运动时间尺度之间的配合。\n"
+      },
+      {
+        "id": "section-2",
+        "type": "markdown",
+        "body": "## 已完成工作及组员贡献\n\n| 工作板块 | 当前完成情况 | 对研究的作用 |\n|---|---|---|\n| 组员平台 | PR #1 已作为历史平台基线合并；保留身体选择、强化学习、训练界面、图表和动画 | 提供演示与身体接口、RFT 阻力平衡和物理检查的设计经验 |\n| 第 0 阶段 | 统一 SI 单位，严格配置，独立物理/传感/控制时钟与随机源，保存配置、版本和结果 | 实验定义可审计，同条件可重放 |\n| 第 1 阶段机制 | 一维固定速度点、局部高斯测量误差、快慢记忆、有界随机反向、反射边界 | 用少量自由度检验趋温机制 |\n| 指标与数值验证 | 沿真实路径计算首次进入、驻留时间和温度误差平方；验证镜像、时钟及步长一致性 | 避免漏掉跨带事件和把更多物理步误当更多信息 |\n| 机制对照 | 响应组与响应增益为零的对照组共享每对随机条件 | 将性能差异关联到指定控制机制 |\n| 本轮统计推进 | 探索参数扫描、新种子参考实验、置信区间和首次进入生存曲线 | 将单轨迹展示推进到可量化的群体结果 |\n\n旧演示界面继续保留，视觉优化安排在后续。新机制当前采用规则控制器，没有神经网络训练过程。旧强化学习的奖励与观测任务和本轮舒适温度任务不同，训练曲线需要按各自任务解释。\n"
+      },
+      {
+        "id": "section-3",
+        "type": "markdown",
+        "body": "## 模型与实验设计\n\n温度场为静态线性梯度，区域长 30 mm，梯度 100 K/m；舒适温度 293.15 K，舒适带半宽 0.25 K，其位置区间为 12.5—17.5 mm。个体速率为 0.2 mm/s，冷侧初态 3 mm，热侧初态 27 mm。每条轨迹观察 180 s；测温周期 0.1 s，控制周期 0.2 s。\n\n控制器把测得温度与 T* 的绝对误差送入快、慢两个指数记忆。快记忆误差小于慢记忆时，近期环境正在改善，降低反向率；恶化时增加反向率。参考快、慢记忆时间为 0.5 s 和 5 s，基础反向率 0.1 s⁻¹，允许范围 0.01—0.5 s⁻¹。改善判断只使用带噪测量，评价指标使用真值温度。\n\n本轮在运行前保存固定设计。探索扫描为 3 个噪声水平（0、0.05、0.25 K）×3 个慢记忆时间（2、5、10 s），每格 32 对，只用于定位参数影响。参考参数另做冷、热起点各 128 对，采用与旧诊断、探索扫描不同的种子块；固定样本量不随观察结果追加。它是模型内的参考条件确认实验，尚未完成以置信区间精度为停止条件的大样本研究。\n\n| 指标 | 定义与解释 |\n|---|---|\n| 到达率 | 180 s 内至少一次进入舒适带的轨迹数/总轨迹数；报告 Wilson 95% 区间 |\n| 限制平均首次进入时间 | 每条未到达轨迹按 180 s 计入，所有轨迹一起平均；对应首次进入生存曲线在 0—180 s 的面积 |\n| 驻留比例 | 每条轨迹在舒适带内的真实运动时间/180 s，然后对轨迹平均 |\n| RMS 温度误差 | 每条轨迹将真实温度偏离 T* 的平方按时间积分、平均、开方，再对轨迹平均 |\n| 配对差及区间 | 每对响应指标减去对照指标，以整对为单位 bootstrap 重采样；不把轨迹帧作为独立样本 |\n"
+      },
+      {
+        "id": "results",
+        "type": "markdown",
+        "sourceId": "statistics",
+        "body": "## 冷热两侧均改善了参考参数下的有限时窗趋温表现\n\n每侧 128 对，观察 180 s；响应组与无响应组共享配对随机条件。到达率用 Wilson 95% 区间，差值用整对 bootstrap 95% 区间。限制时间纳入所有未到达轨迹；驻留为有限观察窗比例，RMS 为各条轨迹时间 RMS 的均值。"
+      },
+      {
+        "id": "groups",
+        "type": "table",
+        "tableId": "group-table"
+      },
+      {
+        "id": "differences",
+        "type": "table",
+        "tableId": "difference-table"
+      },
+      {
+        "id": "finding-interpretation",
+        "type": "markdown",
+        "sourceId": "statistics",
+        "body": "上述时间、驻留和 RMS 配对差的区间均未跨零。结果支持当前模型、当前参数下的机制改善，尚不支持身体柔软性或跨环境普适性的结论。"
+      },
+      {
+        "id": "survival-chart",
+        "type": "chart",
+        "chartId": "survival"
+      },
+      {
+        "id": "scan-intro",
+        "type": "markdown",
+        "sourceId": "statistics",
+        "body": "## 九格探索扫描提供了噪声与记忆的后续研究区间\n\n每格 32 对；横轴列出噪声与慢记忆，纵轴是响应减对照的驻留比例。九格差值均为正；高噪声条件优势减弱。未做多重比较校正，不能根据最高格点选择最优参数。"
+      },
+      {
+        "id": "scan-chart",
+        "type": "chart",
+        "chartId": "scan"
+      },
+      {
+        "id": "section-5",
+        "type": "markdown",
+        "body": "## 结果的适用范围与验收\n\n这里的驻留比例和首次进入统计都是 180 s 有限时窗结果，尚不能称为稳态分布。结果依赖当前线性梯度、独立高斯测量误差、速度、边界和控制参数；探索扫描没有做多重比较校正，不能据最高格点宣布最优参数。冷热两侧的有限样本差异需要结合各自区间解释，不能因均值接近就宣称统计等价。\n\n控制器可能触及反向率上下限，随后须统计其饱和比例，再决定哪些参数能与弱响应推导比较。点模型没有形变、弹性储能和机械功；配置中的介质与参考 Reynolds 数只服务后续尺度约定，当前点模型未求解流体或身体力学。\n\n组员的 RFT 思路可迁移，但正式能耗实现仍需统一几何时间导数、弧长积分权重和累计功；不能以剩余能量预算代替真实累计耗散。\n\n本轮独立验收已完成：全部 544 对指标和 1,088 行 CSV 独立复算，11 个实验条件的首对另行重跑，原始记录与汇总一致；设计、分析脚本和核心源代码哈希匹配。完整回归为 67 项通过（已有 64 项加 3 项统计契约检查）。核心版本为 `fd7add1`；本轮新增统计脚本、设计和报告在本地工作区，尚未提交或推送。\n\nHTML 汇报页已通过规范、完整载荷和离线结构检查。当前报告打包工具未找到可用 Chromium，未进行浏览器布局及交互验收；静态科研图已逐张检查。Markdown 正文作为可编辑讲稿，关键图表和统计证据已单独归档。\n"
+      },
+      {
+        "id": "section-6",
+        "type": "markdown",
+        "body": "## 下一步安排与完成标准\n\n| 顺序 | 工作内容 | 可向老师提交的成果 | 完成标准 |\n|---|---|---|---|\n| 1：完成第 1 阶段解释 | 统计饱和比例；做无响应解析基准和弱响应近似；估计漂移、扩散；补控制周期、边界与时窗敏感性 | 推导说明、理论—数值比较图、机制有效区间 | 说明近似成立条件；至少一个可处理极限与仿真一致；不预设位置过程闭合 |\n| 2：建立身体力学 | 按固定材料弧长重建中心线；用完整形变速度求局部阻力与整体力/力矩平衡；记录功率和累计功 | 固定驱动游动、转弯及数值验证图 | 力/力矩残差、几何有限差分速度、对称性、弧长与步长/网格收敛通过 |\n| 3：接入趋温控制 | 用连续有限速率的驱动完成行为转向，接入同等局部感知 | 身体版趋温和性能—耗散比较 | 同时保存命令、有效驱动、观测、轨迹及机械功；统一观察窗和成功率 |\n| 4：正式研究柔软性 | 加入弯曲弹性；先固定驱动比较刚度，再另做各刚度重新调参 | 一个身体参数对含噪趋温与耗散的因果比较 | 关驱动弛豫、储能—主动做功—耗散平衡及数值收敛通过 |\n\n下一轮优先完成第 1 项，并确定第 2 项的身体、驱动和机械能接口。第 1 阶段的统计分析与身体力学准备可以并行；身体版趋温须等待力学验收。时间安排按可验证交付物推进，正式大规模扫描前先测代表配置运行成本。\n"
+      },
+      {
+        "id": "section-7",
+        "type": "markdown",
+        "body": "## 希望与老师讨论的问题\n\n1. 主课题是否聚焦“噪声下的主动采样与身体柔软性”，把点模型作为机制基准与阶段成果？\n2. 身体介质选择先按低 Reynolds 数黏性介质自由游动推进，还是需要对接培养皿表面爬行？这会影响阻力、接触和功率定义。\n3. 本科项目的优先交付是否设为“一个可解释机制＋一个身体因素的性能—机械代价比较”，再视进度增加温度场复杂性？\n"
+      },
+      {
+        "id": "section-8",
+        "type": "markdown",
+        "body": "## 汇报口述稿\n\n我们研究的是个体在只能局部含噪测温的条件下，怎样找到并维持在给定的舒适温度附近。现阶段已经完成可复现的一维机制模型，用快慢记忆判断近期温度误差是否改善，再改变随机转向的持续时间。组员原有的身体接口、训练平台和演示功能已经保留。本轮共完成 544 对实验；参考参数下冷热两侧的响应到达率约为 98% 和 100%，无响应对照约为 27% 和 25%，限制平均首次进入时间缩短约 94—95 秒，配对区间支持这个改善方向。结果属于当前模型、180 秒时窗；下一步先完成理论解释和敏感性检验，然后接入经过力学验证的形变身体，研究柔软性怎样改变趋温效果与机械耗散。\n"
+      }
+    ],
+    "sources": [
+      {
+        "id": "statistics",
+        "label": "固定设计统计实验及逐对指标汇总",
+        "path": "docs/reports/assets/phase1-progress-2026-10-04/summary.json"
+      },
+      {
+        "id": "design",
+        "label": "运行前固定的实验设计",
+        "path": "configs/phase1_progress_scan.json"
+      },
+      {
+        "id": "query-confirmation",
+        "label": "本地配对仿真与统计证据：confirmation",
+        "path": "docs/reports/assets/phase1-progress-2026-10-04/confirmation.sql",
+        "query": {
+          "sql": "SELECT side, grp AS \"group\", COUNT(*) AS pairs, AVG(reached) AS reached,\narrival_ci.display AS reached_ci, AVG(restricted) AS restricted_s, AVG(residence) AS residence, AVG(rms) AS rms_K\nFROM trials JOIN arrival_ci USING(side,grp) WHERE side <> '' GROUP BY side,grp ORDER BY side,grp",
+          "engine": "SQLite",
+          "language": "sql",
+          "description": "从保存的逐对轨迹指标计算组均值、配对差或首次进入生存曲线；区间来自 phase1_progress_scan.py 的 Wilson/整对 bootstrap 输出。",
+          "tables_used": [
+            "trials",
+            "arrival_ci",
+            "intervals",
+            "grid"
+          ],
+          "filters": [
+            "静态线性温度场；180 s；确认每侧128对，扫描每格32对"
+          ],
+          "source_files": [
+            "analysis/phase1_progress_scan.py",
+            "results/phase1-progress-2026-10-04/*/paired-records.json",
+            "docs/reports/assets/phase1-progress-2026-10-04/report-evidence.sqlite"
+          ]
+        }
+      },
+      {
+        "id": "query-differences",
+        "label": "本地配对仿真与统计证据：differences",
+        "path": "docs/reports/assets/phase1-progress-2026-10-04/differences.sql",
+        "query": {
+          "sql": "WITH paired AS (\nSELECT a.side, a.restricted-b.restricted AS restricted, a.residence-b.residence AS residence, a.rms-b.rms AS rms\nFROM trials a JOIN trials b ON a.condition=b.condition AND a.replicate=b.replicate\nWHERE a.side<>'' AND a.grp='响应' AND b.grp='无响应'),\nlong_delta AS (\nSELECT side,'限制首次进入时间 / s' AS metric,restricted AS delta FROM paired UNION ALL\nSELECT side,'驻留比例',residence FROM paired UNION ALL SELECT side,'RMS 温差 / K',rms FROM paired)\nSELECT side,metric,AVG(delta) AS difference,lo AS ci_low,hi AS ci_high,display,COUNT(*) AS pairs,4000 AS bootstrap_resamples\nFROM long_delta JOIN intervals USING(side,metric) GROUP BY side,metric ORDER BY side,metric",
+          "engine": "SQLite",
+          "language": "sql",
+          "description": "从保存的逐对轨迹指标计算组均值、配对差或首次进入生存曲线；区间来自 phase1_progress_scan.py 的 Wilson/整对 bootstrap 输出。",
+          "tables_used": [
+            "trials",
+            "arrival_ci",
+            "intervals",
+            "grid"
+          ],
+          "filters": [
+            "静态线性温度场；180 s；确认每侧128对，扫描每格32对"
+          ],
+          "source_files": [
+            "analysis/phase1_progress_scan.py",
+            "results/phase1-progress-2026-10-04/*/paired-records.json",
+            "docs/reports/assets/phase1-progress-2026-10-04/report-evidence.sqlite"
+          ]
+        }
+      },
+      {
+        "id": "query-survival",
+        "label": "本地配对仿真与统计证据：survival",
+        "path": "docs/reports/assets/phase1-progress-2026-10-04/survival.sql",
+        "query": {
+          "sql": "SELECT grid.t AS time_s,\nAVG(CASE WHEN trials.reached=1 AND (trials.entry<grid.t OR (grid.phase=1 AND trials.entry=grid.t)) THEN 0.0 ELSE 1.0 END) AS survival,\ngrid.side || '·' || grid.grp AS series,COUNT(*) AS pairs,180 AS window_s\nFROM grid JOIN trials ON grid.side=trials.side AND grid.grp=trials.grp\nGROUP BY grid.side,grid.grp,grid.t,grid.phase ORDER BY series,grid.t,grid.phase",
+          "engine": "SQLite",
+          "language": "sql",
+          "description": "从保存的逐对轨迹指标计算组均值、配对差或首次进入生存曲线；区间来自 phase1_progress_scan.py 的 Wilson/整对 bootstrap 输出。",
+          "tables_used": [
+            "trials",
+            "arrival_ci",
+            "intervals",
+            "grid"
+          ],
+          "filters": [
+            "静态线性温度场；180 s；确认每侧128对，扫描每格32对"
+          ],
+          "source_files": [
+            "analysis/phase1_progress_scan.py",
+            "results/phase1-progress-2026-10-04/*/paired-records.json",
+            "docs/reports/assets/phase1-progress-2026-10-04/report-evidence.sqlite"
+          ]
+        }
+      },
+      {
+        "id": "query-scan",
+        "label": "本地配对仿真与统计证据：scan",
+        "path": "docs/reports/assets/phase1-progress-2026-10-04/scan.sql",
+        "query": {
+          "sql": "SELECT 'σ=' || printf('%g',a.noise) || ' K；τ慢=' || printf('%g',a.tau) || ' s' AS condition,\na.noise AS noise_K,a.tau AS slow_memory_s,AVG(a.residence-b.residence) AS residence_difference,COUNT(*) AS pairs\nFROM trials a JOIN trials b ON a.condition=b.condition AND a.replicate=b.replicate\nWHERE a.side='' AND a.grp='响应' AND b.grp='无响应'\nGROUP BY a.noise,a.tau ORDER BY a.noise,a.tau",
+          "engine": "SQLite",
+          "language": "sql",
+          "description": "从保存的逐对轨迹指标计算组均值、配对差或首次进入生存曲线；区间来自 phase1_progress_scan.py 的 Wilson/整对 bootstrap 输出。",
+          "tables_used": [
+            "trials",
+            "arrival_ci",
+            "intervals",
+            "grid"
+          ],
+          "filters": [
+            "静态线性温度场；180 s；确认每侧128对，扫描每格32对"
+          ],
+          "source_files": [
+            "analysis/phase1_progress_scan.py",
+            "results/phase1-progress-2026-10-04/*/paired-records.json",
+            "docs/reports/assets/phase1-progress-2026-10-04/report-evidence.sqlite"
+          ]
+        }
+      }
+    ],
+    "charts": [
+      {
+        "id": "survival",
+        "title": "冷热起点的首次进入舒适带生存曲线",
+        "subtitle": "每侧 128 对；观察 180 s；纵轴为尚未进入的轨迹比例，阶梯下降表示首次到达",
+        "type": "line",
+        "dataset": "survival",
+        "sourceId": "query-survival",
+        "encodings": {
+          "x": {
+            "field": "time_s",
+            "type": "quantitative",
+            "label": "观察时间 / s"
+          },
+          "y": {
+            "field": "survival",
+            "type": "quantitative",
+            "label": "尚未到达比例"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "起点与组别"
+          }
+        }
+      },
+      {
+        "id": "scan",
+        "title": "噪声与慢记忆九格扫描的驻留比例差",
+        "subtitle": "每格 32 对；响应减无响应；探索性格点，无多重比较校正",
+        "type": "bar",
+        "dataset": "scan",
+        "sourceId": "query-scan",
+        "encodings": {
+          "x": {
+            "field": "condition",
+            "type": "nominal",
+            "label": "噪声 σ 与慢记忆 τ"
+          },
+          "y": {
+            "field": "residence_difference",
+            "type": "quantitative",
+            "label": "驻留比例差"
+          }
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "group-table",
+        "title": "冷热参考实验的组均值与到达区间",
+        "dataset": "confirmation",
+        "sourceId": "query-confirmation",
+        "defaultSort": {
+          "field": "side",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "side",
+            "label": "起点"
+          },
+          {
+            "field": "group",
+            "label": "组别"
+          },
+          {
+            "field": "pairs",
+            "label": "配对数"
+          },
+          {
+            "field": "reached",
+            "label": "到达率",
+            "format": "percent"
+          },
+          {
+            "field": "reached_ci",
+            "label": "95% 区间"
+          },
+          {
+            "field": "restricted_s",
+            "label": "限制时间 / s"
+          },
+          {
+            "field": "residence",
+            "label": "驻留比例"
+          },
+          {
+            "field": "rms_K",
+            "label": "RMS / K"
+          }
+        ]
+      },
+      {
+        "id": "difference-table",
+        "title": "响应减对照的配对差及 95% 区间",
+        "dataset": "differences",
+        "sourceId": "query-differences",
+        "defaultSort": {
+          "field": "side",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "side",
+            "label": "起点"
+          },
+          {
+            "field": "metric",
+            "label": "指标"
+          },
+          {
+            "field": "display",
+            "label": "配对均值差（95% 区间）"
+          }
+        ]
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "status": "ready",
+    "datasets": {
+      "confirmation": [
+        {
+          "side": "冷侧",
+          "group": "响应",
+          "pairs": 128,
+          "reached": 0.984375,
+          "reached_ci": "94.5%—99.6%",
+          "restricted_s": 68.84843748557194,
+          "residence": 0.5236935766988036,
+          "rms_K": 0.5629016946040457
+        },
+        {
+          "side": "冷侧",
+          "group": "无响应",
+          "pairs": 128,
+          "reached": 0.265625,
+          "reached_ci": "19.7%—34.8%",
+          "restricted_s": 163.16093749610673,
+          "residence": 0.05788628479920845,
+          "rms_K": 1.0371860368552455
+        },
+        {
+          "side": "热侧",
+          "group": "响应",
+          "pairs": 128,
+          "reached": 1.0,
+          "reached_ci": "97.1%—100.0%",
+          "restricted_s": 68.40937498533155,
+          "residence": 0.5256901044740643,
+          "rms_K": 0.5571296136544435
+        },
+        {
+          "side": "热侧",
+          "group": "无响应",
+          "pairs": 128,
+          "reached": 0.25,
+          "reached_ci": "18.3%—33.2%",
+          "restricted_s": 163.42812499633288,
+          "residence": 0.04625000005856555,
+          "rms_K": 1.0467204362683211
+        }
+      ],
+      "differences": [
+        {
+          "side": "冷侧",
+          "metric": "RMS 温差 / K",
+          "difference": -0.47428434225119964,
+          "ci_low": -0.5172840331283961,
+          "ci_high": -0.4322584740274169,
+          "display": "-0.4743（-0.5173—-0.4323）",
+          "pairs": 128,
+          "bootstrap_resamples": 4000
+        },
+        {
+          "side": "冷侧",
+          "metric": "限制首次进入时间 / s",
+          "difference": -94.31250001053478,
+          "ci_low": -101.19625001088974,
+          "ci_high": -87.41316407179235,
+          "display": "-94.31（-101.20—-87.41）",
+          "pairs": 128,
+          "bootstrap_resamples": 4000
+        },
+        {
+          "side": "冷侧",
+          "metric": "驻留比例",
+          "difference": 0.4658072918995951,
+          "ci_low": 0.43414333786939446,
+          "ci_high": 0.4973317059968571,
+          "display": "+0.4658（+0.4341—+0.4973）",
+          "pairs": 128,
+          "bootstrap_resamples": 4000
+        },
+        {
+          "side": "热侧",
+          "metric": "RMS 温差 / K",
+          "difference": -0.4895908226138776,
+          "ci_low": -0.5296814627285025,
+          "ci_high": -0.4470678933964757,
+          "display": "-0.4896（-0.5297—-0.4471）",
+          "pairs": 128,
+          "bootstrap_resamples": 4000
+        },
+        {
+          "side": "热侧",
+          "metric": "限制首次进入时间 / s",
+          "difference": -95.01875001100133,
+          "ci_low": -101.87136719975614,
+          "ci_high": -87.301523447384,
+          "display": "-95.02（-101.87—-87.30）",
+          "pairs": 128,
+          "bootstrap_resamples": 4000
+        },
+        {
+          "side": "热侧",
+          "metric": "驻留比例",
+          "difference": 0.4794401044154987,
+          "ci_low": 0.4469928387834694,
+          "ci_high": 0.5096790367140673,
+          "display": "+0.4794（+0.4470—+0.5097）",
+          "pairs": 128,
+          "bootstrap_resamples": 4000
+        }
+      ],
+      "survival": [
+        {
+          "time_s": 0.0,
+          "survival": 1.0,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 47.49999998534292,
+          "survival": 1.0,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 47.49999998534292,
+          "survival": 0.71875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 47.89999998534292,
+          "survival": 0.71875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 47.89999998534292,
+          "survival": 0.7109375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 48.29999998534292,
+          "survival": 0.7109375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 48.29999998534292,
+          "survival": 0.6875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 49.49999998534292,
+          "survival": 0.6875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 49.49999998534292,
+          "survival": 0.6796875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 50.29999998534292,
+          "survival": 0.6796875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 50.29999998534292,
+          "survival": 0.671875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 52.69999998534292,
+          "survival": 0.671875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 52.69999998534292,
+          "survival": 0.6640625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 53.49999998534292,
+          "survival": 0.6640625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 53.49999998534292,
+          "survival": 0.6484375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 53.89999998534292,
+          "survival": 0.6484375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 53.89999998534292,
+          "survival": 0.640625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 54.29999998534292,
+          "survival": 0.640625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 54.29999998534292,
+          "survival": 0.6328125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 55.49999998534292,
+          "survival": 0.6328125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 55.49999998534292,
+          "survival": 0.6171875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 56.29999998534292,
+          "survival": 0.6171875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 56.29999998534292,
+          "survival": 0.609375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 56.69999998534292,
+          "survival": 0.609375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 56.69999998534292,
+          "survival": 0.6015625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 57.09999998534292,
+          "survival": 0.6015625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 57.09999998534292,
+          "survival": 0.59375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 57.49999998534292,
+          "survival": 0.59375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 57.49999998534292,
+          "survival": 0.5859375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 57.89999998534292,
+          "survival": 0.5859375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 57.89999998534292,
+          "survival": 0.578125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 58.29999998534292,
+          "survival": 0.578125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 58.29999998534292,
+          "survival": 0.5703125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 59.09999998534292,
+          "survival": 0.5703125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 59.09999998534292,
+          "survival": 0.5625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 59.49999998534292,
+          "survival": 0.5625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 59.49999998534292,
+          "survival": 0.546875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 60.29999998534292,
+          "survival": 0.546875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 60.29999998534292,
+          "survival": 0.53125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 60.69999998534292,
+          "survival": 0.53125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 60.69999998534292,
+          "survival": 0.5078125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 61.49999998534292,
+          "survival": 0.5078125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 61.49999998534292,
+          "survival": 0.4921875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 61.89999998534292,
+          "survival": 0.4921875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 61.89999998534292,
+          "survival": 0.484375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 62.29999998534292,
+          "survival": 0.484375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 62.29999998534292,
+          "survival": 0.4765625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 63.49999998534292,
+          "survival": 0.4765625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 63.49999998534292,
+          "survival": 0.46875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 64.69999998534293,
+          "survival": 0.46875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 64.69999998534293,
+          "survival": 0.453125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 65.49999998534292,
+          "survival": 0.453125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 65.49999998534292,
+          "survival": 0.4375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 65.89999998534293,
+          "survival": 0.4375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 65.89999998534293,
+          "survival": 0.4296875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 66.29999998534292,
+          "survival": 0.4296875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 66.29999998534292,
+          "survival": 0.421875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 67.09999998534293,
+          "survival": 0.421875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 67.09999998534293,
+          "survival": 0.4140625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 67.49999998534292,
+          "survival": 0.4140625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 67.49999998534292,
+          "survival": 0.40625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 68.29999998534292,
+          "survival": 0.40625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 68.29999998534292,
+          "survival": 0.390625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 68.69999998534293,
+          "survival": 0.390625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 68.69999998534293,
+          "survival": 0.3828125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 69.49999998534292,
+          "survival": 0.3828125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 69.49999998534292,
+          "survival": 0.375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 69.89999998534293,
+          "survival": 0.375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 69.89999998534293,
+          "survival": 0.3671875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 71.09999998534293,
+          "survival": 0.3671875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 71.09999998534293,
+          "survival": 0.359375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 71.49999998534292,
+          "survival": 0.359375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 71.49999998534292,
+          "survival": 0.34375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 72.29999998534292,
+          "survival": 0.34375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 72.29999998534292,
+          "survival": 0.3359375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 73.09999998534293,
+          "survival": 0.3359375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 73.09999998534293,
+          "survival": 0.3125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 73.49999998534292,
+          "survival": 0.3125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 73.49999998534292,
+          "survival": 0.3046875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 73.89999998534293,
+          "survival": 0.3046875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 73.89999998534293,
+          "survival": 0.296875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 74.69999998534293,
+          "survival": 0.296875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 74.69999998534293,
+          "survival": 0.2890625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 75.09999998534293,
+          "survival": 0.2890625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 75.09999998534293,
+          "survival": 0.2734375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 77.89999998534293,
+          "survival": 0.2734375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 77.89999998534293,
+          "survival": 0.265625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 78.29999998534294,
+          "survival": 0.265625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 78.29999998534294,
+          "survival": 0.2578125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 78.69999998534293,
+          "survival": 0.2578125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 78.69999998534293,
+          "survival": 0.2421875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 79.09999998534293,
+          "survival": 0.2421875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 79.09999998534293,
+          "survival": 0.234375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 79.49999998534292,
+          "survival": 0.234375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 79.49999998534292,
+          "survival": 0.2265625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 80.69999998534293,
+          "survival": 0.2265625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 80.69999998534293,
+          "survival": 0.21875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 81.09999998534293,
+          "survival": 0.21875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 81.09999998534293,
+          "survival": 0.203125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 83.49999998534292,
+          "survival": 0.203125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 83.49999998534292,
+          "survival": 0.1953125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 84.29999998534294,
+          "survival": 0.1953125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 84.29999998534294,
+          "survival": 0.1796875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 84.69999998534293,
+          "survival": 0.1796875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 84.69999998534293,
+          "survival": 0.171875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 87.09999998534293,
+          "survival": 0.171875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 87.09999998534293,
+          "survival": 0.1640625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 89.09999998534293,
+          "survival": 0.1640625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 89.09999998534293,
+          "survival": 0.15625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 90.29999998534294,
+          "survival": 0.15625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 90.29999998534294,
+          "survival": 0.1484375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 91.49999998534292,
+          "survival": 0.1484375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 91.49999998534292,
+          "survival": 0.140625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 91.89999998534293,
+          "survival": 0.140625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 91.89999998534293,
+          "survival": 0.1328125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 92.69999998534293,
+          "survival": 0.1328125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 92.69999998534293,
+          "survival": 0.125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 95.89999998534293,
+          "survival": 0.125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 95.89999998534293,
+          "survival": 0.1171875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 99.09999998534293,
+          "survival": 0.1171875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 99.09999998534293,
+          "survival": 0.109375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 100.29999998534294,
+          "survival": 0.109375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 100.29999998534294,
+          "survival": 0.1015625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 101.09999998534293,
+          "survival": 0.1015625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 101.09999998534293,
+          "survival": 0.09375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 103.09999998534293,
+          "survival": 0.09375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 103.09999998534293,
+          "survival": 0.0859375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 104.69999998534293,
+          "survival": 0.0859375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 104.69999998534293,
+          "survival": 0.078125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 105.89999998534293,
+          "survival": 0.078125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 105.89999998534293,
+          "survival": 0.0703125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 109.49999998534292,
+          "survival": 0.0703125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 109.49999998534292,
+          "survival": 0.0625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 111.09999998534293,
+          "survival": 0.0625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 111.09999998534293,
+          "survival": 0.0546875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 118.69999998534293,
+          "survival": 0.0546875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 118.69999998534293,
+          "survival": 0.046875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 123.09999998534293,
+          "survival": 0.046875,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 123.09999998534293,
+          "survival": 0.0390625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 124.29999998534294,
+          "survival": 0.0390625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 124.29999998534294,
+          "survival": 0.03125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 139.49999998534292,
+          "survival": 0.03125,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 139.49999998534292,
+          "survival": 0.0234375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 155.09999998534295,
+          "survival": 0.0234375,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 155.09999998534295,
+          "survival": 0.015625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 180.0,
+          "survival": 0.015625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 180.0,
+          "survival": 0.015625,
+          "series": "冷侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 0.0,
+          "survival": 1.0,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 49.09999998534292,
+          "survival": 1.0,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 49.09999998534292,
+          "survival": 0.9921875,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 51.89999998534292,
+          "survival": 0.9921875,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 51.89999998534292,
+          "survival": 0.984375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 59.89999998534292,
+          "survival": 0.984375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 59.89999998534292,
+          "survival": 0.9765625,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 63.49999998534292,
+          "survival": 0.9765625,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 63.49999998534292,
+          "survival": 0.96875,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 63.89999998534292,
+          "survival": 0.96875,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 63.89999998534292,
+          "survival": 0.9609375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 77.89999998534293,
+          "survival": 0.9609375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 77.89999998534293,
+          "survival": 0.953125,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 79.09999998534293,
+          "survival": 0.953125,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 79.09999998534293,
+          "survival": 0.9453125,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 89.89999998534293,
+          "survival": 0.9453125,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 89.89999998534293,
+          "survival": 0.9375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 90.29999998534294,
+          "survival": 0.9375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 90.29999998534294,
+          "survival": 0.9296875,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 92.69999998534293,
+          "survival": 0.9296875,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 92.69999998534293,
+          "survival": 0.9140625,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 93.89999998534293,
+          "survival": 0.9140625,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 93.89999998534293,
+          "survival": 0.90625,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 99.49999998534292,
+          "survival": 0.90625,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 99.49999998534292,
+          "survival": 0.8984375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 104.69999998534293,
+          "survival": 0.8984375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 104.69999998534293,
+          "survival": 0.890625,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 109.09999998534293,
+          "survival": 0.890625,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 109.09999998534293,
+          "survival": 0.8828125,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 110.69999998534293,
+          "survival": 0.8828125,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 110.69999998534293,
+          "survival": 0.875,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 116.69999998534293,
+          "survival": 0.875,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 116.69999998534293,
+          "survival": 0.8671875,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 121.09999998534293,
+          "survival": 0.8671875,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 121.09999998534293,
+          "survival": 0.859375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 124.29999998534294,
+          "survival": 0.859375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 124.29999998534294,
+          "survival": 0.8515625,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 127.09999998534293,
+          "survival": 0.8515625,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 127.09999998534293,
+          "survival": 0.84375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 127.49999998534292,
+          "survival": 0.84375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 127.49999998534292,
+          "survival": 0.8359375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 131.89999998534293,
+          "survival": 0.8359375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 131.89999998534293,
+          "survival": 0.828125,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 133.89999998534293,
+          "survival": 0.828125,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 133.89999998534293,
+          "survival": 0.8203125,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 137.49999998534292,
+          "survival": 0.8203125,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 137.49999998534292,
+          "survival": 0.8125,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 141.49999998534292,
+          "survival": 0.8125,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 141.49999998534292,
+          "survival": 0.8046875,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 143.89999998534293,
+          "survival": 0.8046875,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 143.89999998534293,
+          "survival": 0.796875,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 152.69999998534294,
+          "survival": 0.796875,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 152.69999998534294,
+          "survival": 0.7890625,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 153.89999998534293,
+          "survival": 0.7890625,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 153.89999998534293,
+          "survival": 0.78125,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 154.69999998534294,
+          "survival": 0.78125,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 154.69999998534294,
+          "survival": 0.7734375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 163.09999998534295,
+          "survival": 0.7734375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 163.09999998534295,
+          "survival": 0.765625,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 174.69999998534294,
+          "survival": 0.765625,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 174.69999998534294,
+          "survival": 0.7578125,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 175.49999998534292,
+          "survival": 0.7578125,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 175.49999998534292,
+          "survival": 0.75,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 177.09999998534295,
+          "survival": 0.75,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 177.09999998534295,
+          "survival": 0.7421875,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 178.69999998534294,
+          "survival": 0.7421875,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 178.69999998534294,
+          "survival": 0.734375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 180.0,
+          "survival": 0.734375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 180.0,
+          "survival": 0.734375,
+          "series": "冷侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 0.0,
+          "survival": 1.0,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 47.49999998533155,
+          "survival": 1.0,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 47.49999998533155,
+          "survival": 0.7890625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 47.899999985331554,
+          "survival": 0.7890625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 47.899999985331554,
+          "survival": 0.765625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 49.09999998533155,
+          "survival": 0.765625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 49.09999998533155,
+          "survival": 0.7578125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 49.899999985331554,
+          "survival": 0.7578125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 49.899999985331554,
+          "survival": 0.75,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 50.69999998533155,
+          "survival": 0.75,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 50.69999998533155,
+          "survival": 0.7421875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 51.09999998533155,
+          "survival": 0.7421875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 51.09999998533155,
+          "survival": 0.734375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 51.49999998533155,
+          "survival": 0.734375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 51.49999998533155,
+          "survival": 0.71875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 51.899999985331554,
+          "survival": 0.71875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 51.899999985331554,
+          "survival": 0.703125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 53.09999998533155,
+          "survival": 0.703125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 53.09999998533155,
+          "survival": 0.6875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 53.49999998533155,
+          "survival": 0.6875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 53.49999998533155,
+          "survival": 0.6796875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 53.899999985331554,
+          "survival": 0.6796875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 53.899999985331554,
+          "survival": 0.671875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 55.09999998533155,
+          "survival": 0.671875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 55.09999998533155,
+          "survival": 0.6640625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 55.49999998533155,
+          "survival": 0.6640625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 55.49999998533155,
+          "survival": 0.65625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 55.899999985331554,
+          "survival": 0.65625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 55.899999985331554,
+          "survival": 0.640625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 56.29999998533155,
+          "survival": 0.640625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 56.29999998533155,
+          "survival": 0.625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 56.69999998533155,
+          "survival": 0.625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 56.69999998533155,
+          "survival": 0.6171875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 57.09999998533155,
+          "survival": 0.6171875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 57.09999998533155,
+          "survival": 0.6015625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 58.29999998533155,
+          "survival": 0.6015625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 58.29999998533155,
+          "survival": 0.59375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 58.69999998533155,
+          "survival": 0.59375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 58.69999998533155,
+          "survival": 0.5703125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 59.09999998533155,
+          "survival": 0.5703125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 59.09999998533155,
+          "survival": 0.5546875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 59.49999998533155,
+          "survival": 0.5546875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 59.49999998533155,
+          "survival": 0.546875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 59.899999985331554,
+          "survival": 0.546875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 59.899999985331554,
+          "survival": 0.5390625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 60.29999998533155,
+          "survival": 0.5390625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 60.29999998533155,
+          "survival": 0.53125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 61.09999998533155,
+          "survival": 0.53125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 61.09999998533155,
+          "survival": 0.5234375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 61.49999998533155,
+          "survival": 0.5234375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 61.49999998533155,
+          "survival": 0.515625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 61.899999985331554,
+          "survival": 0.515625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 61.899999985331554,
+          "survival": 0.5,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 62.29999998533155,
+          "survival": 0.5,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 62.29999998533155,
+          "survival": 0.4921875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 63.09999998533155,
+          "survival": 0.4921875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 63.09999998533155,
+          "survival": 0.484375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 63.49999998533155,
+          "survival": 0.484375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 63.49999998533155,
+          "survival": 0.453125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 63.899999985331554,
+          "survival": 0.453125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 63.899999985331554,
+          "survival": 0.4453125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 64.29999998533155,
+          "survival": 0.4453125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 64.29999998533155,
+          "survival": 0.4375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 64.69999998533156,
+          "survival": 0.4375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 64.69999998533156,
+          "survival": 0.4296875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 65.09999998533156,
+          "survival": 0.4296875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 65.09999998533156,
+          "survival": 0.421875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 65.89999998533156,
+          "survival": 0.421875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 65.89999998533156,
+          "survival": 0.4140625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 66.29999998533155,
+          "survival": 0.4140625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 66.29999998533155,
+          "survival": 0.390625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 67.09999998533156,
+          "survival": 0.390625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 67.09999998533156,
+          "survival": 0.3828125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 67.49999998533156,
+          "survival": 0.3828125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 67.49999998533156,
+          "survival": 0.375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 68.69999998533156,
+          "survival": 0.375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 68.69999998533156,
+          "survival": 0.3515625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 69.49999998533156,
+          "survival": 0.3515625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 69.49999998533156,
+          "survival": 0.34375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 69.89999998533156,
+          "survival": 0.34375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 69.89999998533156,
+          "survival": 0.3203125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 70.29999998533155,
+          "survival": 0.3203125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 70.29999998533155,
+          "survival": 0.3125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 71.89999998533156,
+          "survival": 0.3125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 71.89999998533156,
+          "survival": 0.3046875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 72.29999998533155,
+          "survival": 0.3046875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 72.29999998533155,
+          "survival": 0.296875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 72.69999998533156,
+          "survival": 0.296875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 72.69999998533156,
+          "survival": 0.28125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 73.09999998533156,
+          "survival": 0.28125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 73.09999998533156,
+          "survival": 0.2734375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 73.89999998533156,
+          "survival": 0.2734375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 73.89999998533156,
+          "survival": 0.265625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 75.49999998533156,
+          "survival": 0.265625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 75.49999998533156,
+          "survival": 0.2578125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 79.49999998533156,
+          "survival": 0.2578125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 79.49999998533156,
+          "survival": 0.25,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 80.29999998533157,
+          "survival": 0.25,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 80.29999998533157,
+          "survival": 0.2421875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 81.09999998533156,
+          "survival": 0.2421875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 81.09999998533156,
+          "survival": 0.234375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 81.89999998533156,
+          "survival": 0.234375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 81.89999998533156,
+          "survival": 0.2265625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 83.49999998533156,
+          "survival": 0.2265625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 83.49999998533156,
+          "survival": 0.21875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 83.89999998533156,
+          "survival": 0.21875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 83.89999998533156,
+          "survival": 0.203125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 84.69999998533156,
+          "survival": 0.203125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 84.69999998533156,
+          "survival": 0.1953125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 86.29999998533157,
+          "survival": 0.1953125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 86.29999998533157,
+          "survival": 0.1875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 87.09999998533156,
+          "survival": 0.1875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 87.09999998533156,
+          "survival": 0.1796875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 87.49999998533156,
+          "survival": 0.1796875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 87.49999998533156,
+          "survival": 0.171875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 88.29999998533157,
+          "survival": 0.171875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 88.29999998533157,
+          "survival": 0.1640625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 89.89999998533156,
+          "survival": 0.1640625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 89.89999998533156,
+          "survival": 0.15625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 90.69999998533156,
+          "survival": 0.15625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 90.69999998533156,
+          "survival": 0.1484375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 91.49999998533156,
+          "survival": 0.1484375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 91.49999998533156,
+          "survival": 0.140625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 92.29999998533157,
+          "survival": 0.140625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 92.29999998533157,
+          "survival": 0.1328125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 93.09999998533156,
+          "survival": 0.1328125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 93.09999998533156,
+          "survival": 0.125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 93.89999998533156,
+          "survival": 0.125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 93.89999998533156,
+          "survival": 0.1171875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 94.69999998533156,
+          "survival": 0.1171875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 94.69999998533156,
+          "survival": 0.109375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 95.49999998533156,
+          "survival": 0.109375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 95.49999998533156,
+          "survival": 0.1015625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 96.69999998533156,
+          "survival": 0.1015625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 96.69999998533156,
+          "survival": 0.09375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 98.69999998533156,
+          "survival": 0.09375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 98.69999998533156,
+          "survival": 0.0859375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 103.09999998533156,
+          "survival": 0.0859375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 103.09999998533156,
+          "survival": 0.078125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 105.49999998533156,
+          "survival": 0.078125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 105.49999998533156,
+          "survival": 0.0703125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 107.49999998533156,
+          "survival": 0.0703125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 107.49999998533156,
+          "survival": 0.0625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 107.89999998533156,
+          "survival": 0.0625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 107.89999998533156,
+          "survival": 0.0546875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 110.69999998533156,
+          "survival": 0.0546875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 110.69999998533156,
+          "survival": 0.046875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 111.89999998533156,
+          "survival": 0.046875,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 111.89999998533156,
+          "survival": 0.0390625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 133.49999998533156,
+          "survival": 0.0390625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 133.49999998533156,
+          "survival": 0.03125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 137.09999998533155,
+          "survival": 0.03125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 137.09999998533155,
+          "survival": 0.0234375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 145.89999998533156,
+          "survival": 0.0234375,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 145.89999998533156,
+          "survival": 0.015625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 152.69999998533157,
+          "survival": 0.015625,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 152.69999998533157,
+          "survival": 0.0078125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 159.09999998533158,
+          "survival": 0.0078125,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 159.09999998533158,
+          "survival": 0.0,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 180.0,
+          "survival": 0.0,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 180.0,
+          "survival": 0.0,
+          "series": "热侧·响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 0.0,
+          "survival": 1.0,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 51.09999998533155,
+          "survival": 1.0,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 51.09999998533155,
+          "survival": 0.9921875,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 57.09999998533155,
+          "survival": 0.9921875,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 57.09999998533155,
+          "survival": 0.984375,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 57.49999998533155,
+          "survival": 0.984375,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 57.49999998533155,
+          "survival": 0.9765625,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 62.69999998533155,
+          "survival": 0.9765625,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 62.69999998533155,
+          "survival": 0.96875,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 64.29999998533155,
+          "survival": 0.96875,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 64.29999998533155,
+          "survival": 0.9609375,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 67.49999998533156,
+          "survival": 0.9609375,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 67.49999998533156,
+          "survival": 0.953125,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 68.69999998533156,
+          "survival": 0.953125,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 68.69999998533156,
+          "survival": 0.9453125,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 77.89999998533156,
+          "survival": 0.9453125,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 77.89999998533156,
+          "survival": 0.9375,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 82.29999998533157,
+          "survival": 0.9375,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 82.29999998533157,
+          "survival": 0.9296875,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 86.69999998533156,
+          "survival": 0.9296875,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 86.69999998533156,
+          "survival": 0.921875,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 95.89999998533156,
+          "survival": 0.921875,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 95.89999998533156,
+          "survival": 0.9140625,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 96.29999998533157,
+          "survival": 0.9140625,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 96.29999998533157,
+          "survival": 0.90625,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 98.29999998533157,
+          "survival": 0.90625,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 98.29999998533157,
+          "survival": 0.8984375,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 116.29999998533157,
+          "survival": 0.8984375,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 116.29999998533157,
+          "survival": 0.8828125,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 117.49999998533156,
+          "survival": 0.8828125,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 117.49999998533156,
+          "survival": 0.875,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 117.89999998533156,
+          "survival": 0.875,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 117.89999998533156,
+          "survival": 0.8671875,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 119.09999998533156,
+          "survival": 0.8671875,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 119.09999998533156,
+          "survival": 0.859375,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 122.29999998533157,
+          "survival": 0.859375,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 122.29999998533157,
+          "survival": 0.8515625,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 127.49999998533156,
+          "survival": 0.8515625,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 127.49999998533156,
+          "survival": 0.84375,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 129.49999998533156,
+          "survival": 0.84375,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 129.49999998533156,
+          "survival": 0.8359375,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 130.29999998533157,
+          "survival": 0.8359375,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 130.29999998533157,
+          "survival": 0.828125,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 131.49999998533156,
+          "survival": 0.828125,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 131.49999998533156,
+          "survival": 0.8203125,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 131.89999998533156,
+          "survival": 0.8203125,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 131.89999998533156,
+          "survival": 0.8125,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 153.89999998533156,
+          "survival": 0.8125,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 153.89999998533156,
+          "survival": 0.8046875,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 158.29999998533157,
+          "survival": 0.8046875,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 158.29999998533157,
+          "survival": 0.796875,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 162.29999998533157,
+          "survival": 0.796875,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 162.29999998533157,
+          "survival": 0.7890625,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 163.09999998533158,
+          "survival": 0.7890625,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 163.09999998533158,
+          "survival": 0.78125,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 163.49999998533156,
+          "survival": 0.78125,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 163.49999998533156,
+          "survival": 0.7734375,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 167.09999998533158,
+          "survival": 0.7734375,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 167.09999998533158,
+          "survival": 0.765625,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 170.69999998533157,
+          "survival": 0.765625,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 170.69999998533157,
+          "survival": 0.7578125,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 173.49999998533156,
+          "survival": 0.7578125,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 173.49999998533156,
+          "survival": 0.75,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 180.0,
+          "survival": 0.75,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        },
+        {
+          "time_s": 180.0,
+          "survival": 0.75,
+          "series": "热侧·无响应",
+          "pairs": 128,
+          "window_s": 180
+        }
+      ],
+      "scan": [
+        {
+          "condition": "σ=0 K；τ慢=2 s",
+          "noise_K": 0.0,
+          "slow_memory_s": 2.0,
+          "residence_difference": 0.3234027779101788,
+          "pairs": 32
+        },
+        {
+          "condition": "σ=0 K；τ慢=5 s",
+          "noise_K": 0.0,
+          "slow_memory_s": 5.0,
+          "residence_difference": 0.431493055815212,
+          "pairs": 32
+        },
+        {
+          "condition": "σ=0 K；τ慢=10 s",
+          "noise_K": 0.0,
+          "slow_memory_s": 10.0,
+          "residence_difference": 0.4624131946761141,
+          "pairs": 32
+        },
+        {
+          "condition": "σ=0.05 K；τ慢=2 s",
+          "noise_K": 0.05,
+          "slow_memory_s": 2.0,
+          "residence_difference": 0.3361631946760797,
+          "pairs": 32
+        },
+        {
+          "condition": "σ=0.05 K；τ慢=5 s",
+          "noise_K": 0.05,
+          "slow_memory_s": 5.0,
+          "residence_difference": 0.4530034724487824,
+          "pairs": 32
+        },
+        {
+          "condition": "σ=0.05 K；τ慢=10 s",
+          "noise_K": 0.05,
+          "slow_memory_s": 10.0,
+          "residence_difference": 0.4292534725302565,
+          "pairs": 32
+        },
+        {
+          "condition": "σ=0.25 K；τ慢=2 s",
+          "noise_K": 0.25,
+          "slow_memory_s": 2.0,
+          "residence_difference": 0.17008680571081664,
+          "pairs": 32
+        },
+        {
+          "condition": "σ=0.25 K；τ慢=5 s",
+          "noise_K": 0.25,
+          "slow_memory_s": 5.0,
+          "residence_difference": 0.29883680574135085,
+          "pairs": 32
+        },
+        {
+          "condition": "σ=0.25 K；τ慢=10 s",
+          "noise_K": 0.25,
+          "slow_memory_s": 10.0,
+          "residence_difference": 0.276371527978872,
+          "pairs": 32
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "statistics",
+      "label": "固定设计统计实验及逐对指标汇总",
+      "path": "docs/reports/assets/phase1-progress-2026-10-04/summary.json"
+    },
+    {
+      "id": "design",
+      "label": "运行前固定的实验设计",
+      "path": "configs/phase1_progress_scan.json"
+    },
+    {
+      "id": "query-confirmation",
+      "label": "本地配对仿真与统计证据：confirmation",
+      "path": "docs/reports/assets/phase1-progress-2026-10-04/confirmation.sql",
+      "query": {
+        "sql": "SELECT side, grp AS \"group\", COUNT(*) AS pairs, AVG(reached) AS reached,\narrival_ci.display AS reached_ci, AVG(restricted) AS restricted_s, AVG(residence) AS residence, AVG(rms) AS rms_K\nFROM trials JOIN arrival_ci USING(side,grp) WHERE side <> '' GROUP BY side,grp ORDER BY side,grp",
+        "engine": "SQLite",
+        "language": "sql",
+        "description": "从保存的逐对轨迹指标计算组均值、配对差或首次进入生存曲线；区间来自 phase1_progress_scan.py 的 Wilson/整对 bootstrap 输出。",
+        "tables_used": [
+          "trials",
+          "arrival_ci",
+          "intervals",
+          "grid"
+        ],
+        "filters": [
+          "静态线性温度场；180 s；确认每侧128对，扫描每格32对"
+        ],
+        "source_files": [
+          "analysis/phase1_progress_scan.py",
+          "results/phase1-progress-2026-10-04/*/paired-records.json",
+          "docs/reports/assets/phase1-progress-2026-10-04/report-evidence.sqlite"
+        ]
+      }
+    },
+    {
+      "id": "query-differences",
+      "label": "本地配对仿真与统计证据：differences",
+      "path": "docs/reports/assets/phase1-progress-2026-10-04/differences.sql",
+      "query": {
+        "sql": "WITH paired AS (\nSELECT a.side, a.restricted-b.restricted AS restricted, a.residence-b.residence AS residence, a.rms-b.rms AS rms\nFROM trials a JOIN trials b ON a.condition=b.condition AND a.replicate=b.replicate\nWHERE a.side<>'' AND a.grp='响应' AND b.grp='无响应'),\nlong_delta AS (\nSELECT side,'限制首次进入时间 / s' AS metric,restricted AS delta FROM paired UNION ALL\nSELECT side,'驻留比例',residence FROM paired UNION ALL SELECT side,'RMS 温差 / K',rms FROM paired)\nSELECT side,metric,AVG(delta) AS difference,lo AS ci_low,hi AS ci_high,display,COUNT(*) AS pairs,4000 AS bootstrap_resamples\nFROM long_delta JOIN intervals USING(side,metric) GROUP BY side,metric ORDER BY side,metric",
+        "engine": "SQLite",
+        "language": "sql",
+        "description": "从保存的逐对轨迹指标计算组均值、配对差或首次进入生存曲线；区间来自 phase1_progress_scan.py 的 Wilson/整对 bootstrap 输出。",
+        "tables_used": [
+          "trials",
+          "arrival_ci",
+          "intervals",
+          "grid"
+        ],
+        "filters": [
+          "静态线性温度场；180 s；确认每侧128对，扫描每格32对"
+        ],
+        "source_files": [
+          "analysis/phase1_progress_scan.py",
+          "results/phase1-progress-2026-10-04/*/paired-records.json",
+          "docs/reports/assets/phase1-progress-2026-10-04/report-evidence.sqlite"
+        ]
+      }
+    },
+    {
+      "id": "query-survival",
+      "label": "本地配对仿真与统计证据：survival",
+      "path": "docs/reports/assets/phase1-progress-2026-10-04/survival.sql",
+      "query": {
+        "sql": "SELECT grid.t AS time_s,\nAVG(CASE WHEN trials.reached=1 AND (trials.entry<grid.t OR (grid.phase=1 AND trials.entry=grid.t)) THEN 0.0 ELSE 1.0 END) AS survival,\ngrid.side || '·' || grid.grp AS series,COUNT(*) AS pairs,180 AS window_s\nFROM grid JOIN trials ON grid.side=trials.side AND grid.grp=trials.grp\nGROUP BY grid.side,grid.grp,grid.t,grid.phase ORDER BY series,grid.t,grid.phase",
+        "engine": "SQLite",
+        "language": "sql",
+        "description": "从保存的逐对轨迹指标计算组均值、配对差或首次进入生存曲线；区间来自 phase1_progress_scan.py 的 Wilson/整对 bootstrap 输出。",
+        "tables_used": [
+          "trials",
+          "arrival_ci",
+          "intervals",
+          "grid"
+        ],
+        "filters": [
+          "静态线性温度场；180 s；确认每侧128对，扫描每格32对"
+        ],
+        "source_files": [
+          "analysis/phase1_progress_scan.py",
+          "results/phase1-progress-2026-10-04/*/paired-records.json",
+          "docs/reports/assets/phase1-progress-2026-10-04/report-evidence.sqlite"
+        ]
+      }
+    },
+    {
+      "id": "query-scan",
+      "label": "本地配对仿真与统计证据：scan",
+      "path": "docs/reports/assets/phase1-progress-2026-10-04/scan.sql",
+      "query": {
+        "sql": "SELECT 'σ=' || printf('%g',a.noise) || ' K；τ慢=' || printf('%g',a.tau) || ' s' AS condition,\na.noise AS noise_K,a.tau AS slow_memory_s,AVG(a.residence-b.residence) AS residence_difference,COUNT(*) AS pairs\nFROM trials a JOIN trials b ON a.condition=b.condition AND a.replicate=b.replicate\nWHERE a.side='' AND a.grp='响应' AND b.grp='无响应'\nGROUP BY a.noise,a.tau ORDER BY a.noise,a.tau",
+        "engine": "SQLite",
+        "language": "sql",
+        "description": "从保存的逐对轨迹指标计算组均值、配对差或首次进入生存曲线；区间来自 phase1_progress_scan.py 的 Wilson/整对 bootstrap 输出。",
+        "tables_used": [
+          "trials",
+          "arrival_ci",
+          "intervals",
+          "grid"
+        ],
+        "filters": [
+          "静态线性温度场；180 s；确认每侧128对，扫描每格32对"
+        ],
+        "source_files": [
+          "analysis/phase1_progress_scan.py",
+          "results/phase1-progress-2026-10-04/*/paired-records.json",
+          "docs/reports/assets/phase1-progress-2026-10-04/report-evidence.sqlite"
+        ]
+      }
+    }
+  ]
+}

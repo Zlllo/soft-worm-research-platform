@@ -1,0 +1,14 @@
+{
+  "created_utc": "2026-10-04T07:42:23.600174+00:00",
+  "python": "3.9.6",
+  "platform": "macOS-26.2-arm64-arm-64bit",
+  "git_commit": "fd7add178df6652344dd6527da1c4e817140d811",
+  "git_dirty": true,
+  "source_sha256": {
+    "src/thermotaxis/phase2_body.py": "f641710a6455a4efdb06584ac94e30a199681f6345f92fdd35d2ae73f3db5f6e",
+    "analysis/phase2_body_baseline.py": "04e761f528d08ff5e27f907e382cc7067af4705dd5315c775159da7dd3e98ef2",
+    "configs/phase2_body_reference.json": "c59a1fb3e4f9bf5f5f78362c21700494d72226a8bf7f3015df0113a69ed7e540"
+  },
+  "command": "analysis/phase2_body_baseline.py",
+  "randomness": "none; deterministic prescribed drive"
+}

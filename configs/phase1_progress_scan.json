@@ -1,0 +1,15 @@
+{
+  "design_version": 1,
+  "classification": "exploratory scan and prespecified finite-window confirmation",
+  "reference_config": "configs/phase1_reference.json",
+  "duration_s": 180,
+  "sensor_dt_s": 0.1,
+  "control_dt_s": 0.2,
+  "candidate_physics_dt_s": 0.1,
+  "fallback_physics_dt_s": 0.01,
+  "numerical_gate": {"configuration_count": 4, "paired_replicates_per_configuration": 1, "noise_K": [0.0, 0.25], "slow_memory_s": [2.0, 10.0], "absolute_metric_tolerance": 1e-8},
+  "scan": {"noise_K": [0.0, 0.05, 0.25], "slow_memory_s": [2.0, 5.0, 10.0], "fast_memory_s": 0.5, "initial_x_m": 0.003, "paired_replicates_per_cell": 32},
+  "confirmation": {"noise_K": 0.05, "slow_memory_s": 5.0, "cold_initial_x_m": 0.003, "hot_initial_x_m": 0.027, "paired_replicates_per_side": 128},
+  "seed_bases": {"sensor": 10000, "initial_state": 20000, "controller": 30000, "scan_cell_stride": 100, "confirmation_cold_offset": 2000, "confirmation_hot_offset": 4000},
+  "statistics": {"confidence": 0.95, "bootstrap_resamples": 4000, "bootstrap_seed": 918273, "difference": "response minus no_response", "censoring": "administrative at duration_s; unreached contributes duration_s to restricted first passage"}
+}

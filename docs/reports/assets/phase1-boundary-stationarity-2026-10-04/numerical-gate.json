@@ -1,0 +1,26 @@
+[
+  {
+    "gain": 0,
+    "length_m": 0.02,
+    "max_bin_occupation_difference": 2.327420663602216e-13,
+    "max_metric_difference": 3.325117958752344e-14
+  },
+  {
+    "gain": 4,
+    "length_m": 0.02,
+    "max_bin_occupation_difference": 2.1337966116252716e-13,
+    "max_metric_difference": 2.90878432451791e-14
+  },
+  {
+    "gain": 0,
+    "length_m": 0.06,
+    "max_bin_occupation_difference": 7.218392550356612e-13,
+    "max_metric_difference": 1.3217205108162489e-13
+  },
+  {
+    "gain": 4,
+    "length_m": 0.06,
+    "max_bin_occupation_difference": 2.249089803285642e-12,
+    "max_metric_difference": 6.503131366741854e-14
+  }
+]

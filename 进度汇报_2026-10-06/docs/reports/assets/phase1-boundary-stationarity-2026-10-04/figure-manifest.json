@@ -1,0 +1,5 @@
+{
+  "script_sha256": "7ff4e559eb82a3ee83d25f11d59e437e52679f3592e16a62ba2b0947feef516f",
+  "input_summary_sha256": "e2925701c85e8cff31b0a095dd479c2aae4b2b9771555e94f43376191e8d522c",
+  "command": "MPLCONFIGDIR=/private/tmp/softworm-boundary-mpl python3 analysis/phase1_boundary_figures.py"
+}

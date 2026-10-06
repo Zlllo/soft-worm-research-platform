@@ -1,0 +1,17 @@
+{
+  "speed_m_s": 0.0002,
+  "error_slope_K_m": 100.0,
+  "baseline_rate_s": 0.1,
+  "fast_tau_s": 0.5,
+  "slow_tau_s": 5.0,
+  "gains_K_s": [
+    0.0,
+    0.025,
+    0.05,
+    0.1
+  ],
+  "replicates": 64,
+  "burn_s": 500.0,
+  "measurement_s": 30000.0,
+  "seed_base": 740000
+}

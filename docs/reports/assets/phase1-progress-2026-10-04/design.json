@@ -1,0 +1,60 @@
+{
+  "candidate_physics_dt_s": 0.1,
+  "classification": "exploratory scan and prespecified finite-window confirmation",
+  "confirmation": {
+    "cold_initial_x_m": 0.003,
+    "hot_initial_x_m": 0.027,
+    "noise_K": 0.05,
+    "paired_replicates_per_side": 128,
+    "slow_memory_s": 5.0
+  },
+  "control_dt_s": 0.2,
+  "design_version": 1,
+  "duration_s": 180,
+  "fallback_physics_dt_s": 0.01,
+  "numerical_gate": {
+    "absolute_metric_tolerance": 1e-08,
+    "configuration_count": 4,
+    "noise_K": [
+      0.0,
+      0.25
+    ],
+    "paired_replicates_per_configuration": 1,
+    "slow_memory_s": [
+      2.0,
+      10.0
+    ]
+  },
+  "reference_config": "configs/phase1_reference.json",
+  "scan": {
+    "fast_memory_s": 0.5,
+    "initial_x_m": 0.003,
+    "noise_K": [
+      0.0,
+      0.05,
+      0.25
+    ],
+    "paired_replicates_per_cell": 32,
+    "slow_memory_s": [
+      2.0,
+      5.0,
+      10.0
+    ]
+  },
+  "seed_bases": {
+    "confirmation_cold_offset": 2000,
+    "confirmation_hot_offset": 4000,
+    "controller": 30000,
+    "initial_state": 20000,
+    "scan_cell_stride": 100,
+    "sensor": 10000
+  },
+  "sensor_dt_s": 0.1,
+  "statistics": {
+    "bootstrap_resamples": 4000,
+    "bootstrap_seed": 918273,
+    "censoring": "administrative at duration_s; unreached contributes duration_s to restricted first passage",
+    "confidence": 0.95,
+    "difference": "response minus no_response"
+  }
+}

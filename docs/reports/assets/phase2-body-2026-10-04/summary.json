@@ -1,0 +1,30 @@
+{
+  "mechanical_gates_passed": true,
+  "trajectories": {
+    "reference": {
+      "displacement_x_m": -0.0003791378521189953,
+      "displacement_y_m": 6.544508249912358e-20,
+      "net_displacement_m": 0.0003791378521189953,
+      "orientation_change_rad": 4.469168091159048e-14,
+      "dissipation_J": 8.413776436242542e-13
+    },
+    "modulated": {
+      "displacement_x_m": -0.0003774783506788196,
+      "displacement_y_m": 1.4390422388206678e-05,
+      "net_displacement_m": 0.0003777525506038482,
+      "orientation_change_rad": -0.03226923025959509,
+      "dissipation_J": 8.554472612236494e-13
+    }
+  },
+  "scan_conditions": 16,
+  "convergence_conditions": 12,
+  "reference_mean_net_speed_m_s": 9.478446302974883e-05,
+  "reference_max_material_speed_m_s": 0.0007684733231065405,
+  "Reynolds_screen": {
+    "Re_sampled_max": 0.007684733231065405,
+    "rho_kg_m3": 1000.0,
+    "mu_Pa_s": 0.1,
+    "method": "rho L max material speed / mu; diagnostic values, drag not calibrated from mu"
+  },
+  "scientific_scope": "mechanics of prescribed shape only; no thermotaxis or elasticity"
+}
