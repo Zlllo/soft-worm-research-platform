@@ -5,8 +5,9 @@ import matplotlib
 matplotlib.use('Agg')  # 关键修复：强制使用非GUI后端，防止Streamlit环境下卡死
 import numpy as np
 import matplotlib.pyplot as plt
-matplotlib.rcParams['font.sans-serif'] = ['SimHei']
-matplotlib.rcParams['axes.unicode_minus'] = False
+from core.plot_fonts import setup_chinese_font
+
+setup_chinese_font()
 
 class DualCenterTracker:
     """双热源追踪器 - 统计线虫到达高温和低温热源的次数"""

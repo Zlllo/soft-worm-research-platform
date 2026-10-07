@@ -5,6 +5,8 @@
 变体:
   - "original": Worm2D 原始温度阶梯奖励（逐位保留），不含能量项
   - "energy":   温度阶梯 + 单步能量惩罚 -w_e * ΔE / max_energy
+  - "continuous": CCB 连续插值测温 + 温度势函数塑形 + 步数代价 + 目标终止奖励
+  - "continuous_energy": 连续奖励 + 单步能量惩罚
 
 设计说明 (2026-08-11):
   - 模块化: 原来散落在 worm_body.py 中的奖励逻辑（Worm2D `_calculate_reward`、
@@ -23,7 +25,8 @@ DEFAULT_ENERGY_WEIGHT = 0.1
 def compute_reward(env, worm, variant="original", old_energy=None,
                    energy_weight=DEFAULT_ENERGY_WEIGHT,
                    stuck_penalty=0.0, constraint_penalty=0.0,
-                   target=None, movement=0.0):
+                   target=None, movement=0.0, old_temperature=None,
+                   goal_reached=False, terminated=False):
     """
     统一奖励函数。
 
@@ -43,6 +46,28 @@ def compute_reward(env, worm, variant="original", old_energy=None,
     """
     if target is None:
         target = (worm.x, worm.y)
+    if variant in ("continuous", "continuous_energy"):
+        import numpy as np
+        new_temp = env.get_temperature_continuous(*target)
+        if not np.isfinite(new_temp):
+            return -10.0
+        if old_temperature is None:
+            raise ValueError("连续奖励需要动作执行前的 old_temperature")
+        low, high = float(env.temp_array.min()), float(env.temp_array.max())
+        span = max(high - low, 1e-6)
+        old_potential = (float(old_temperature) - low) / span
+        new_potential = 0.0 if terminated else (new_temp - low) / span
+        # 温度势函数塑形 + 每步代价 + 到达终点奖励，避免奖励档位平台。
+        reward = -0.05 + 5.0 * (worm.ac_gamma * new_potential - old_potential)
+        if goal_reached:
+            reward += 10.0
+        elif movement < 1e-9:
+            reward -= stuck_penalty
+        reward -= constraint_penalty
+        if variant == "continuous_energy" and old_energy is not None:
+            reward -= energy_weight * max(0.0, old_energy - worm.energy) / max(worm.max_energy, 1.0)
+        return float(reward)
+
     target_x, target_y = int(round(target[0])), int(round(target[1]))
 
     # ── 基础温度阶梯奖励 (Worm2D 原始奖励, 逐位保留) ──
@@ -122,7 +147,14 @@ def apply_reward_config(worm, training_params):
 
     在仿真引擎创建线虫后调用一次即可；重置线虫不会覆盖这两个属性。
     """
-    variant = str(training_params.get("reward_variant", "original"))
+    continuous_control = (getattr(worm, "model_name", "") == "continuous_centerline"
+                          and "Actor-Critic" in training_params.get("method", ""))
+    default = "continuous" if continuous_control else "original"
+    variant = str(training_params.get("reward_variant", default))
+    if variant not in ("original", "energy", "continuous", "continuous_energy"):
+        raise ValueError(f"未知奖励变体: {variant}")
+    if variant.startswith("continuous") and not continuous_control:
+        raise ValueError("连续奖励目前用于 CCB Actor-Critic 导航任务")
     weight = float(training_params.get("reward_energy_weight", DEFAULT_ENERGY_WEIGHT))
     worm.reward_variant = variant
     worm.reward_energy_weight = weight

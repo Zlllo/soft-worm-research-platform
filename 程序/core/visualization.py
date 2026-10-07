@@ -8,9 +8,9 @@ from matplotlib.animation import FuncAnimation
 import matplotlib
 matplotlib.use('Agg')
 
-# 配置中文字体显示
-plt.rcParams['font.sans-serif'] = ['Arial Unicode MS', 'SimHei', 'DejaVu Sans']  # macOS中文字体
-plt.rcParams['axes.unicode_minus'] = False  # 解决坐标轴负数显示问题
+from core.plot_fonts import setup_chinese_font
+
+setup_chinese_font()
 plt.rcParams['font.size'] = 12
 
 
@@ -113,12 +113,12 @@ def create_training_animation_2d(all_round_histories, temp_array, best_point, co
     ax.set_ylim(-1, temp_array.shape[0])
     ax.set_xlabel('X坐标')
     ax.set_ylabel('Y坐标')
-    ax.set_title(f'线虫身体运动动画（最后{len(last_histories)}轮）\n粗线=线虫身体，圆点=头部，方块=尾部')
+    ax.set_title(f'线虫身体运动动画（最后{len(last_histories)}轮，全程采样）\n粗线=线虫身体，圆点=头部，方块=尾部')
     ax.legend(loc='upper right', fontsize=12)
     ax.grid(True, alpha=0.3)
     
     # 限制最大帧数，避免动画过长
-    max_len = min(150, max(len(h) for h in last_histories))  # 最多80帧
+    max_len = min(150, max(len(h) for h in last_histories))  # 均匀采样完整轨迹，保留最终帧
     
     def init():
         for line in current_worm_lines:
@@ -132,13 +132,14 @@ def create_training_animation_2d(all_round_histories, temp_array, best_point, co
     def animate(frame):
         for i, history in enumerate(last_histories):
             # 统一的数据验证
-            if not history or len(history) == 0 or frame >= len(history):
+            if not history or len(history) == 0:
                 current_worm_lines[i].set_data([], [])
                 current_worm_heads[i].set_offsets(np.empty((0, 2)))
                 current_worm_tails[i].set_offsets(np.empty((0, 2)))
                 continue
             
-            current_segment = history[frame]
+            index = round(min(frame, max_len - 1) * (len(history) - 1) / max(1, max_len - 1))
+            current_segment = history[index]
             
             # 检查是否为多节段身体格式
             if (isinstance(current_segment, list) and 

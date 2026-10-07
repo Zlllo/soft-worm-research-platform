@@ -1626,9 +1626,10 @@ class ContinuousCenterlineBody(BodyModel):
         self.use_neural = False
         self.use_actor_critic = False
         self.actor_critic_agent = None
-        self.ac_state_dim = 12  # state_v2 12 维 (10 + cos/sin 朝向)
-        self.ac_action_dim = 2  # AC 动作维: (heading, step); ADB 覆写为 3
-        self.ac_action_bounds = [(-math.pi, math.pi), (0.05, 5.0)]  # 每维输出/裁剪边界
+        self.ac_state_dim = 14  # AC: state_v2 12 维 + 实际速度，DQN 仍用 12 维
+        self.ac_action_dim = 2  # AC 动作: (heading_delta, step); ADB 覆写为 3
+        turn_limit = math.radians(self.max_turn_angle)
+        self.ac_action_bounds = [(-turn_limit, turn_limit), (0.0, self.forward_speed)]
         # DQN 组件 (由 utils.setup_neural_network 装配)
         self.state_size = 12   # 单帧维度 = get_state_v2 输出 (DQN 输入 = 12×4)
         self.neural_network = None
@@ -1644,7 +1645,14 @@ class ContinuousCenterlineBody(BodyModel):
         self.ac_hidden_size = int(body_params.get("ac_hidden_size", 128))
         self.ac_actor_lr = float(body_params.get("ac_actor_lr", 1e-4))
         self.ac_critic_lr = float(body_params.get("ac_critic_lr", 1e-3))
-        self.ac_gamma = float(body_params.get("ac_gamma", 0.95))
+        self.ac_gamma = float(body_params.get("ac_gamma", 0.99))
+        self.goal_radius = float(body_params.get("goal_radius", 0.75))
+        self.ac_random_starts = bool(body_params.get("ac_random_starts", True))
+        self.goal_reached = False
+        self.episode_done = False
+        self.rl_step_records = []
+        self.training_round_records = []
+        self.continuous_sensor = False
         self.ac_batch_size = int(body_params.get("ac_batch_size", 64))
         self.ac_noise_scale = float(body_params.get("ac_noise_scale", 0.6))
         self.q_table = [[[0.0] * self.action_size for _ in range(self.width)] for _ in range(self.height)]
@@ -1680,8 +1688,20 @@ class ContinuousCenterlineBody(BodyModel):
     def _tangent(self):
         return np.array([math.cos(self.heading), math.sin(self.heading)], dtype=float)
 
+    def _fit_centerline_to_bounds(self):
+        """整体平移回场地内，保留节段长度和形状；返回是否能容纳。"""
+        lower = self.centerline.min(axis=0)
+        upper = self.centerline.max(axis=0)
+        limits = np.array([self.width - 1, self.height - 1], dtype=float)
+        if np.any(upper - lower > limits + 1e-9):
+            return False
+        shift = np.maximum(-lower, 0.0) + np.minimum(limits - upper, 0.0)
+        self.centerline += shift
+        # 消除持续指向墙外的惯性，允许下一步立即向内离开。
+        self.velocity[(shift * self.velocity) < 0.0] = 0.0
+        return True
+
     def _sync_public_state(self):
-        self.centerline = np.array([self._clip_point(point) for point in self.centerline], dtype=float)
         self.body_segments = [[float(point[0]), float(point[1])] for point in self.centerline]
         self.body_segment = [self.body_segments[0], self.body_segments[-1]]
         self.x = float(self.centerline[0][0])
@@ -1700,44 +1720,38 @@ class ContinuousCenterlineBody(BodyModel):
         head = np.array([float(start_pos[0]), float(start_pos[1])], dtype=float)
         tangent = self._tangent()
         self.centerline = np.array([
-            self._clip_point(head - tangent * self.segment_distance * i)
+            head - tangent * self.segment_distance * i
             for i in range(self.num_segments)
         ], dtype=float)
         self._enforce_constraints(iterations=3)
+        if not self._fit_centerline_to_bounds():
+            raise ValueError("连续中心线初始身体无法完整放入场地，请增大场地或缩短身体")
         self._sync_public_state()
         self.history = [self.body_segments.copy()]
 
     def _enforce_constraints(self, iterations=2):
-        for _ in range(iterations):
-            self.centerline[0] = self._clip_point(self.centerline[0])
-            for i in range(1, self.num_segments):
-                prev_point = self.centerline[i - 1]
-                point = self.centerline[i]
-                direction = point - prev_point
-                distance = float(np.linalg.norm(direction))
-                if distance <= 1e-9:
-                    direction = -self._tangent()
-                    distance = 1.0
-                target = prev_point + direction / distance * self.segment_distance
-                self.centerline[i] = self._clip_point(
-                    point * (1.0 - self.length_stiffness) + target * self.length_stiffness
-                )
+        """由头向尾重建固定段长，并显式限制相邻段转角。
 
-            for i in range(1, self.num_segments - 1):
-                prev_vector = self.centerline[i] - self.centerline[i - 1]
-                next_vector = self.centerline[i + 1] - self.centerline[i]
-                prev_norm = float(np.linalg.norm(prev_vector))
-                next_norm = float(np.linalg.norm(next_vector))
-                if prev_norm <= 1e-9 or next_norm <= 1e-9:
-                    continue
-                cosine = float(np.dot(prev_vector, next_vector) / (prev_norm * next_norm))
-                angle = math.degrees(math.acos(max(-1.0, min(1.0, cosine))))
-                if angle > self.angular_constraint:
-                    smoothed = 0.5 * (self.centerline[i - 1] + self.centerline[i + 1])
-                    self.centerline[i] = self._clip_point(
-                        self.centerline[i] * (1.0 - self.curvature_stiffness)
-                        + smoothed * self.curvature_stiffness
-                    )
+        这是几何约束，不是弹性/接触力学；旧 stiffness 参数仅为配置兼容保留。
+        """
+        previous_direction = None
+        limit = math.radians(self.angular_constraint)
+        for i in range(1, self.num_segments):
+            direction = self.centerline[i] - self.centerline[i - 1]
+            length = float(np.linalg.norm(direction))
+            if length <= 1e-9:
+                direction = -self._tangent() if previous_direction is None else previous_direction.copy()
+            else:
+                direction /= length
+            if previous_direction is not None:
+                cross = previous_direction[0] * direction[1] - previous_direction[1] * direction[0]
+                angle = math.atan2(cross, float(np.dot(previous_direction, direction)))
+                angle = float(np.clip(angle, -limit, limit))
+                c, sn = math.cos(angle), math.sin(angle)
+                direction = np.array([c * previous_direction[0] - sn * previous_direction[1],
+                                      sn * previous_direction[0] + c * previous_direction[1]])
+            self.centerline[i] = self.centerline[i - 1] + self.segment_distance * direction
+            previous_direction = direction
 
     def reset(self, start_pos=None, **kwargs):
         if start_pos is None:
@@ -1746,6 +1760,9 @@ class ContinuousCenterlineBody(BodyModel):
         self.muscle_fatigue_level = 0.0
         self.current_step = 0
         self.total_reward = 0.0
+        self.goal_reached = False
+        self.episode_done = False
+        self.rl_step_records.clear()
         self.velocity = np.zeros(2, dtype=float)
         self._pending_action = None
         self.last_action = None
@@ -1802,19 +1819,26 @@ class ContinuousCenterlineBody(BodyModel):
         heading, step_distance = self._parse_action(action)
         old_head = self.centerline[0].copy()
         turn_amount = abs((heading - self.heading + math.pi) % (2.0 * math.pi) - math.pi)
-        self.heading = heading
+        delta = (heading - self.heading + math.pi) % (2 * math.pi) - math.pi
+        delta = float(np.clip(delta, -math.radians(self.max_turn_angle), math.radians(self.max_turn_angle)))
+        self.heading = (self.heading + delta + math.pi) % (2 * math.pi) - math.pi
+        turn_amount = abs(delta)
         desired_velocity = np.array([math.cos(self.heading), math.sin(self.heading)], dtype=float) * step_distance
         if self.position_noise:
             desired_velocity += np.random.normal(0.0, self.position_noise, size=2)
         self.velocity = self.velocity * self.damping + desired_velocity * (1.0 - self.damping)
-        new_head = self._clip_point(old_head + self.velocity * float(dt))
+        new_head = old_head + self.velocity * float(dt)
         old_centerline = self.centerline.copy()
         self.centerline[0] = new_head
         for i in range(1, self.num_segments):
             self.centerline[i] = old_centerline[i - 1]
         self._enforce_constraints(iterations=3)
+        if not self._fit_centerline_to_bounds():
+            # 当前姿态无法容纳时拒绝这一步，不以压缩身体满足边界。
+            self.centerline = old_centerline
+            self.velocity[:] = 0.0
         self._sync_public_state()
-        movement = float(np.linalg.norm(new_head - old_head))
+        movement = float(np.linalg.norm(self.centerline[0] - old_head))
         self.energy = max(0.0, self.energy - self.energy_decay_rate * (movement + 0.25 * turn_amount))
         if movement > 0:
             self.muscle_fatigue_level = min(1.0, self.muscle_fatigue_level + self.fatigue_accumulation_rate * movement)
@@ -1826,7 +1850,8 @@ class ContinuousCenterlineBody(BodyModel):
         self.history.append(self.body_segments.copy())
         if env is not None:
             self.body_temperatures = [
-                float(env.get_temperature(int(point[0]), int(point[1])))
+                float(env.get_temperature_continuous(*point) if self.continuous_sensor
+                      else env.get_temperature(int(point[0]), int(point[1])))
                 for point in self.body_segments
             ]
             self.recent_temperatures.append(self.body_temperatures[0])
@@ -1945,7 +1970,7 @@ class ContinuousCenterlineBody(BodyModel):
 
     # ── Actor-Critic 相关方法 ─────────────────────────
 
-    def get_state_v2(self, env=None):
+    def get_state_v2(self, env=None, continuous=False):
         """返回 CCB/ADB 12 维状态向量：原 8 维 + 能量率 + 平均曲率 + 朝向(cos,sin)。
 
         朝向维度是能量-转向耦合的必要信息（转向能耗依赖当前朝向），
@@ -1955,7 +1980,7 @@ class ContinuousCenterlineBody(BodyModel):
 
         # 1-8. 复用环境 8 维状态向量(四方向梯度 + 温度 + 对齐 + 趋势 + 距离)
         if env is not None:
-            base = env.get_state_vector((self.x, self.y), worm=self)
+            base = env.get_state_vector((self.x, self.y), worm=self, continuous=continuous)
         else:
             base = np.zeros(8, dtype=np.float32)
         state.extend(base.astype(np.float32).tolist())
@@ -1974,6 +1999,12 @@ class ContinuousCenterlineBody(BodyModel):
         state.append(float(math.sin(self.heading)))
 
         return np.array(state[:12], dtype=np.float32)
+
+    def get_actor_state(self, env=None):
+        if self.model_name != "continuous_centerline":
+            return self.get_state_v2(env)
+        base = self.get_state_v2(env, continuous=True)
+        return np.concatenate([base, self.velocity / max(self.forward_speed, 1e-6)]).astype(np.float32)
 
     def setup_actor_critic(self):
         """初始化 DDPG Agent。"""
@@ -1998,15 +2029,19 @@ class ContinuousCenterlineBody(BodyModel):
             gamma=self.ac_gamma,
             batch_size=self.ac_batch_size,
             noise_scale=self.ac_noise_scale,
+            warmup_steps=1000 if self.model_name == "continuous_centerline" else 0,
+            normalize_noise=self.model_name == "continuous_centerline",
         )
         self.use_actor_critic = True
+        self.continuous_sensor = self.model_name == "continuous_centerline"
         self.use_neural = False  # AC 和 Q-learning 互斥
         print("✓ Actor-Critic (DDPG) Agent 初始化完成")
         return True
 
     def _build_actor_action(self, action):
-        """把 Actor 连续输出转为物理动作 dict。CCB: (heading, step)。ADB 覆写为 (波幅, 频率, 曲率偏置)。"""
-        return {"heading": float(action[0]), "step": float(action[1])}
+        """把 Actor 连续输出转为物理动作 dict。CCB: (heading_delta, step)。ADB 覆写为 (波幅, 频率, 曲率偏置)。"""
+        return {"heading": (self.heading + float(action[0]) + math.pi) % (2 * math.pi) - math.pi,
+                "step": float(action[1])}
 
     def decide_move_actor_critic(self, env):
         """
@@ -2018,7 +2053,7 @@ class ContinuousCenterlineBody(BodyModel):
             return False
 
         # 1. 获取当前状态
-        state = self.get_state_v2(env)
+        state = self.get_actor_state(env)
 
         # 2. 选择动作
         action = agent.act(state, add_noise=agent.train_mode)
@@ -2026,6 +2061,7 @@ class ContinuousCenterlineBody(BodyModel):
 
         # 3. 记录旧状态用于经验回放
         old_energy = self.energy
+        old_temperature = env.get_temperature_continuous(self.x, self.y)
 
         # 4. 执行物理步
         result = self.step_physics(env=env, action=action_dict)
@@ -2035,6 +2071,9 @@ class ContinuousCenterlineBody(BodyModel):
         movement = result.get('movement', 0.0)
         shape = self._shape_metrics() if hasattr(self, '_shape_metrics') else {}
         constraint_penalty = shape.get('constraint_violation_rate', 0.0) * 0.5
+        continuous_task = self.model_name == "continuous_centerline" and self.reward_variant.startswith("continuous")
+        self.goal_reached = bool(continuous_task and env.get_distance_to_best(self.x, self.y) <= self.goal_radius)
+        self.episode_done = bool(self.goal_reached or self.energy <= 0.0)
         reward = compute_reward(
             env, self,
             variant=self.reward_variant,
@@ -2044,20 +2083,29 @@ class ContinuousCenterlineBody(BodyModel):
             constraint_penalty=constraint_penalty,
             target=new_head,
             movement=movement,
+            old_temperature=old_temperature,
+            goal_reached=self.goal_reached,
+            terminated=self.episode_done,
         )
 
         # 6. 存储经验
-        next_state = self.get_state_v2(env)
-        done = self.energy <= 0.0
-        agent.remember(state, np.asarray(action, dtype=np.float32), reward, next_state, done)
-
-        # 7. 训练
-        agent.train()
+        next_state = self.get_actor_state(env)
+        if agent.train_mode:
+            agent.remember(state, np.asarray(action, dtype=np.float32), reward, next_state, self.episode_done)
+            losses = agent.train()
+        else:
+            losses = (None, None)
+        self.rl_step_records.append({
+            'step': self.current_step, 'position': [self.x, self.y],
+            'action': list(action), 'heading': self.heading, 'movement': movement,
+            'temperature': env.get_temperature_continuous(self.x, self.y),
+            'reward': reward, 'done': self.episode_done, 'goal_reached': self.goal_reached,
+            'critic_loss': losses[0], 'actor_loss': losses[1],
+        })
 
         # 8. 更新统计
         self.total_reward += reward
-        self.current_step += 1
-        self.recent_temperatures.append(float(env.get_temperature(int(self.x), int(self.y))))
+
 
         return bool(result.get('moved', False))
 
@@ -2102,7 +2150,7 @@ class ContinuousCenterlineBody(BodyModel):
             turn_angles.append(float(math.degrees(math.acos(max(-1.0, min(1.0, cosine))))))
         actual_length = float(sum(segment_lengths))
         length_errors = [abs(length - self.segment_distance) for length in segment_lengths]
-        curvature_violations = sum(1 for angle in turn_angles if angle > self.angular_constraint)
+        curvature_violations = sum(1 for angle in turn_angles if angle > self.angular_constraint + 1e-6)
         return {
             'actual_body_length': actual_length,
             'body_length_error': float(actual_length - self.body_length),
@@ -2128,6 +2176,9 @@ class ContinuousCenterlineBody(BodyModel):
             'heading': float(self.heading),
             'total_reward': float(self.total_reward),
             'current_step': int(self.current_step),
+            'goal_reached': self.goal_reached,
+            'goal_radius': self.goal_radius,
+            'velocity': self.velocity.tolist(),
             'energy': float(self.energy),
             'energy_ratio': float(self.energy / self.max_energy) if self.max_energy else 0.0,
             'muscle_fatigue': float(self.muscle_fatigue_level),

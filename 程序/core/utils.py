@@ -348,6 +348,9 @@ def save_body_metrics(config, all_histories, all_rewards, worm, env=None):
         "field_type": getattr(config, "field_type", None),
         "timestamp": getattr(config, "timestamp", None),
         "model": final_metrics.get("model", geometry.get("model", "unknown")),
+        "temperature_sampling": "bilinear" if getattr(worm, "continuous_sensor", False) else "legacy_grid",
+        "reward_variant": getattr(worm, "reward_variant", "original"),
+        "goal_radius": getattr(worm, "goal_radius", None),
         "final_metrics": final_metrics,
         "geometry": geometry,
         "round_metrics": round_metrics,
@@ -456,12 +459,34 @@ def setup_neural_network(worm, training_params):
     return True
 
 
+def reset_ccb_training_round(worm, env, start_pos, width, height, field_type, round_index):
+    """单热源连续导航混合默认起点与随机位置/朝向，避免只记住一条路线。"""
+    reset_worm_for_new_round(worm, env, start_pos, width, height, field_type)
+    if (getattr(worm, 'model_name', '') == 'continuous_centerline'
+            and getattr(worm, 'use_actor_critic', False) and field_type == 'single_center'
+            and getattr(worm, 'ac_random_starts', True) and round_index % 4 != 0):
+        worm.heading = float(np.random.uniform(-np.pi, np.pi))
+        worm.reset(start_pos=(float(np.random.uniform(0, width - 1)),
+                              float(np.random.uniform(0, height - 1))), env=env)
+
+
 def reset_worm_for_new_round(worm, env, start_pos, width, height, field_type):
     """
     为新一轮重置线虫状态，并自动预热状态缓冲区。
     核心功能：根据环境类型智能设置初始朝向。
     """
     
+    # 连续中心线使用自身初始化，避免旧节点链的逐点裁剪和整数化。
+    if getattr(worm, 'model_name', None) == 'continuous_centerline':
+        worm.heading = (-np.pi / 2 if field_type in [
+            'maze_thermal_channel', 'complex_maze_channel', 'complex_maze_mirror'
+        ] else 0.0)
+        worm.reset(start_pos=start_pos, env=env)
+        if env is not None:
+            for _ in range(4):
+                worm.state_buffer.append(env.get_state_vector((worm.x, worm.y), worm=worm))
+        return
+
     worm.x, worm.y = start_pos
     x, y = start_pos
 

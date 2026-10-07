@@ -800,7 +800,7 @@ with st.sidebar:
                     "身体总弧长", 5.0, 30.0, 12.0, 0.5,
                     disabled=st.session_state.is_simulating,
                     key="cc_body_length",
-                    help="中心线总弧长(像素)"
+                    help="中心线总弧长（场地坐标单位）"
                 )
                 head_radius = st.slider(
                     "头部半径", 2.0, 6.0, 3.0, 0.5,
@@ -836,19 +836,10 @@ with st.sidebar:
                     key="cc_curvature_limit",
                     help="相邻段最大弯折角度(度)"
                 )
-                length_stiffness = st.slider(
-                    "长度刚度", 0.3, 1.0, 0.85, 0.05,
-                    disabled=st.session_state.is_simulating,
-                    key="cc_length_stiffness",
-                    help="长度保持约束的刚度"
-                )
+                length_stiffness = 1.0
+                st.caption("节段长度固定；相邻节段转角不超过上述限制。")
             with col4:
-                curvature_stiffness = st.slider(
-                    "曲率刚度", 0.1, 1.0, 0.35, 0.05,
-                    disabled=st.session_state.is_simulating,
-                    key="cc_curvature_stiffness",
-                    help="曲率约束的刚度"
-                )
+                curvature_stiffness = 1.0
                 damping = st.slider(
                     "运动阻尼", 0.3, 0.95, 0.72, 0.05,
                     disabled=st.session_state.is_simulating,
@@ -887,7 +878,7 @@ with st.sidebar:
                     "身体总弧长", 5.0, 30.0, 12.0, 0.5,
                     disabled=st.session_state.is_simulating,
                     key="ad_body_length",
-                    help="中心线总弧长(像素)"
+                    help="中心线总弧长（场地坐标单位）"
                 )
             with col2:
                 head_radius = st.slider(
@@ -1255,7 +1246,7 @@ with st.sidebar:
                     key="epsilon_decay_slider"
                 )
                 discount_factor = st.slider(
-                    "折扣因子", 0.8, 0.99, 0.95, 0.01,
+                    "折扣因子", 0.8, 0.99, (0.99 if body_model_type == "continuous_centerline" and "Actor" in method_choice else 0.95), 0.01,
                     disabled=st.session_state.is_simulating,
                     key="discount_factor_slider"
                 )
@@ -1287,6 +1278,8 @@ with st.sidebar:
                 weight_decay = 0.0005
                 use_state_v2 = False
 
+            ac_random_starts = True
+            ac_seed = 7
             # Actor-Critic 专用超参数
             if "Actor-Critic" in method_choice:
                 st.markdown("##### 🎯 Actor-Critic 超参数")
@@ -1319,6 +1312,15 @@ with st.sidebar:
                         key="ac_critic_lr_slider",
                         help="价值网络学习率"
                     )
+                if body_model_type == "continuous_centerline":
+                    ac_random_starts = st.checkbox(
+                        "单热源混合起点训练", value=True,
+                        disabled=st.session_state.is_simulating, key="ac_random_starts",
+                        help="每四轮保留一轮默认起点，其余使用随机位置和初始朝向，减少只记住一条路线的情况。")
+                    ac_seed = st.number_input("训练随机种子", min_value=0, max_value=999999,
+                                              value=7, step=1, key="ac_seed",
+                                              disabled=st.session_state.is_simulating)
+                    st.caption("连续转向与步长控制；测温使用连续插值，目标到达半径为 0.75 格。")
                 ac_noise_scale = st.slider(
                     "探索噪声强度", 0.1, 2.0, 0.6, 0.1,
                     disabled=st.session_state.is_simulating,
@@ -1336,17 +1338,20 @@ with st.sidebar:
             st.markdown("##### 🎁 奖励函数")
             reward_variant = st.selectbox(
                 "奖励变体",
-                ["original", "energy"],
+                (["continuous", "continuous_energy", "original", "energy"]
+                 if body_model_type == "continuous_centerline" and "Actor" in method_choice
+                 else ["original", "energy"]),
                 index=0,
-                format_func=lambda v: {"original": "不含能量（原版）", "energy": "含能量（单步化）"}[v],
+                format_func=lambda v: {"continuous": "连续趋近奖励", "continuous_energy": "连续趋近奖励 + 能耗",
+                                       "original": "温度阶梯（原版对照）", "energy": "温度阶梯 + 能耗"}[v],
                 disabled=st.session_state.is_simulating,
                 key="reward_variant_selectbox",
-                help="original: Worm2D 原始温度阶梯（无能量项）；energy: 阶梯 + 单步能量惩罚 -w_e·ΔE/maxE"
+                help="连续奖励使用插值温度、温度势函数与每步代价；头部进入目标 0.75 格内时成功结束。原版阶梯可作对照。"
             )
             reward_energy_weight = st.slider(
                 "能量权重 w_e", 0.0, 0.5, 0.1, 0.01,
                 format="%.2f",
-                disabled=st.session_state.is_simulating or reward_variant != "energy",
+                disabled=st.session_state.is_simulating or reward_variant not in ("energy", "continuous_energy"),
                 key="reward_energy_weight_slider",
                 help="单步能量惩罚系数：每步扣除 w_e × ΔE / max_energy（ΔE = 当步能量消耗）"
             )
@@ -1443,6 +1448,8 @@ if start_button:
         "ac_actor_lr": ac_actor_lr,
         "ac_critic_lr": ac_critic_lr,
         "ac_gamma": discount_factor,
+        "ac_random_starts": locals().get("ac_random_starts", True),
+        "ac_seed": int(locals().get("ac_seed", 7)),
         "ac_batch_size": ac_batch_size,
         "ac_noise_scale": ac_noise_scale,
     }
@@ -1574,7 +1581,7 @@ if start_button:
         if body_model_type == "active_deformation":
             card_text = f"<strong>波幅:</strong> {wave_amplitude}<br><strong>波频:</strong> {wave_frequency}"
         elif body_model_type == "continuous_centerline":
-            card_text = f"<strong>阻尼:</strong> {damping}<br><strong>长度刚度:</strong> {length_stiffness}"
+            card_text = f"<strong>阻尼:</strong> {damping}<br><strong>最大弯折:</strong> {curvature_limit}°"
         else:
             card_text = f"<strong>后退:</strong> {backward_speed}px<br><strong>转向:</strong> {turning_speed}px"
         st.markdown(f"""
@@ -1635,6 +1642,7 @@ if start_button:
         log_content = deque(maxlen=50)  # 使用双端队列更高效，最多保存50条日志
         last_stats = {}
         update_counter = 0  # 更新计数器
+        experiment_failed = False
         
         try:
             for current, total, message, stats in engine:
@@ -1642,6 +1650,7 @@ if start_button:
                     break
                     
                 if current == -1:
+                    experiment_failed = True
                     error_html = f"""
                     <div class="error-box">
                         <h4>💥 实验错误</h4>
@@ -1699,6 +1708,7 @@ if start_button:
             # 🔧 添加：正常的生成器结束处理
             print("🔧 调试：生成器正常结束")
         except Exception as gen_error:
+            experiment_failed = True
             print(f"❌ 生成器处理错误: {gen_error}")
             error_html = f"""
             <div class="error-box">
@@ -1710,7 +1720,9 @@ if start_button:
 
         # 实验完成处理
         print("🔧 调试：开始实验完成处理...")
-        if not st.session_state.stop_requested:
+        if experiment_failed:
+            status_placeholder.error("实验未完成，请查看错误信息；没有生成有效结果时不会显示成功。")
+        if not st.session_state.stop_requested and not experiment_failed:
             progress_bar.progress(1.0, text="✅ 实验完成！")
             
             success_html = """
@@ -1724,6 +1736,19 @@ if start_button:
             # 显示最终日志
             log_placeholder.code("\n".join(log_content), language="text")
             
+            evaluation_path = os.path.join(config.output_dir, "policy_evaluation.json")
+            if os.path.exists(evaluation_path):
+                import json
+                with open(evaluation_path, encoding="utf-8") as f:
+                    policy_evaluation = json.load(f)
+                with result_tabs[0]:
+                    st.info(f"关闭探索和位置噪声后的导航评估：{policy_evaluation['success_count']}/{policy_evaluation['episode_count']} 个起点进入目标 {policy_evaluation['goal_radius']} 格以内。")
+                    st.caption("评估固定当前温度场；使用包含已知目标距离的原平台观测。训练奖励与评估成功率分开判断。")
+                    st.dataframe([{
+                        '起点': str(row['actual_start']), '到达目标': row['success'],
+                        '实际步数': row['steps'], '最终距离': round(row['final_distance'], 3),
+                    } for row in policy_evaluation['episodes']], use_container_width=True)
+
             # 显示结果图片
             try:
                 results_image_path = None
@@ -1743,7 +1768,7 @@ if start_button:
                         image_placeholder.image(
                             results_image_path, 
                             caption="📊 训练结果分析",
-                            use_column_width=True
+                            use_container_width=True
                         )
                         print(f"✅ 成功显示结果图片: {results_image_path}")
                 else:
@@ -1785,7 +1810,7 @@ if start_button:
                             video_placeholder.image(
                                 found_animation,
                                 caption="🎥 线虫训练行为动画",
-                                use_column_width=True
+                                use_container_width=True
                             )
                             print(f"✅ 成功显示GIF动画: {found_animation}")
                         else:

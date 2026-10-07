@@ -2,7 +2,7 @@
 Actor-Critic (DDPG) 模块 — 用于连续身体模型的连续动作控制。
 
 提供:
-- Actor:  状态 → 连续动作 (维度/每维边界可配: CCB 2 维 = (heading, step);
+- Actor:  状态 → 连续动作 (维度/每维边界可配: CCB 2 维 = (heading_delta, step);
            ADB 3 维 = (波幅, 频率, 曲率偏置), 输出经 (tanh+1)/2·(hi-lo)+lo 仿射映射)
 - Critic: 状态+动作 → Q值
 - 经验回放缓冲区
@@ -33,9 +33,9 @@ if TORCH_AVAILABLE:
     class Actor(nn.Module):
         """策略网络: state → action_dim 维连续动作。
 
-        每维输出 = (tanh+1)/2·(hi−lo)·scale + lo, 默认输出范围 [lo, hi] 由 action_bounds 给出
-        (CCB: [(-π,π),(0.05,5.0)] = (heading, step); ADB: (波幅, 频率, 曲率偏置) 三界)。
-        可学习 scale 初始为 1, 网络可自行调整映射幅度。
+        每维输出 = (tanh+1)/2·(hi−lo) + lo，固定输出范围 [lo, hi] 由 action_bounds 给出
+        (默认通用动作: [(-π,π),(0.05,5.0)]；CCB 配置相对转向与步长，ADB 配置波参数三界)。
+        执行、Actor 优化和目标 Q 计算共享此有界映射，避免训练使用不可执行动作。
         """
 
         def __init__(self, state_dim, hidden_size=128, action_dim=2, action_bounds=None):
@@ -53,11 +53,10 @@ if TORCH_AVAILABLE:
             )
             self.register_buffer("lo", torch.tensor([b[0] for b in action_bounds], dtype=torch.float32))
             self.register_buffer("hi", torch.tensor([b[1] for b in action_bounds], dtype=torch.float32))
-            self.action_scales = nn.Parameter(torch.ones(action_dim))
 
         def forward(self, state):
             raw = self.net(state)
-            return (raw + 1.0) / 2.0 * (self.hi - self.lo) * self.action_scales + self.lo
+            return (raw + 1.0) / 2.0 * (self.hi - self.lo) + self.lo
 
 
     class Critic(nn.Module):
@@ -157,6 +156,8 @@ class DDPGAgent:
         noise_sigma=0.3,
         noise_scale=0.6,
         noise_decay=0.9995,
+        warmup_steps=0,
+        normalize_noise=False,
     ):
         if not TORCH_AVAILABLE:
             raise ImportError("Actor-Critic 需要 PyTorch")
@@ -173,6 +174,8 @@ class DDPGAgent:
         self.noise_scale = noise_scale
         self.noise_decay = noise_decay
         self.step_count = 0
+        self.warmup_steps = int(warmup_steps)
+        self.normalize_noise = bool(normalize_noise)
 
         # 网络
         self.actor = Actor(state_dim, hidden_size, action_dim, action_bounds)
@@ -199,6 +202,8 @@ class DDPGAgent:
 
     def act(self, state, add_noise=True):
         """给定状态，返回连续动作元组 (维度 = action_dim, 按 action_bounds 裁剪)。"""
+        if add_noise and self.train_mode and len(self.replay_buffer) < self.warmup_steps:
+            return tuple(float(np.random.uniform(lo, hi)) for lo, hi in self.action_bounds)
         state_tensor = torch.FloatTensor(state).unsqueeze(0)
         self.actor.eval()
         with torch.no_grad():
@@ -207,6 +212,8 @@ class DDPGAgent:
 
         if add_noise and self.train_mode:
             noise = self.noise.sample(self.noise_scale)
+            if self.normalize_noise:
+                noise *= np.array([(hi - lo) / 2 for lo, hi in self.action_bounds])
             action += noise
             # 衰减噪声
             self.noise_scale = max(0.05, self.noise_scale * self.noise_decay)
@@ -224,7 +231,7 @@ class DDPGAgent:
 
     def train(self):
         """执行一次 DDPG 更新。"""
-        if len(self.replay_buffer) < self.batch_size:
+        if not self.train_mode or len(self.replay_buffer) < self.batch_size:
             return None, None
 
         self.step_count += 1
@@ -278,6 +285,9 @@ class DDPGAgent:
 
     def state_dict(self):
         return {
+            'schema_version': 2,
+            'state_dim': self.state_dim,
+            'action_bounds': self.action_bounds,
             'actor': self.actor.state_dict(),
             'actor_target': self.actor_target.state_dict(),
             'critic': self.critic.state_dict(),
@@ -287,6 +297,10 @@ class DDPGAgent:
         }
 
     def load_state_dict(self, d):
+        if any('action_scales' in d[key] for key in ('actor', 'actor_target')):
+            raise ValueError("旧 DDPG 权重含无界 action_scales，与新动作映射不兼容，请重新训练")
+        if d.get('state_dim', self.state_dim) != self.state_dim or d.get('action_bounds', self.action_bounds) != self.action_bounds:
+            raise ValueError("DDPG 输入或动作含义与当前模型不同，请重新训练")
         self.actor.load_state_dict(d['actor'])
         self.actor_target.load_state_dict(d['actor_target'])
         self.critic.load_state_dict(d['critic'])
