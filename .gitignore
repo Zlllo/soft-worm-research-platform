@@ -22,3 +22,8 @@ env/
 
 # Exported conversation archives (local only)
 历史对话导出_*.md
+
+# Local presentation script and dedicated illustrations
+/进度汇报_2026-10-06/阶段进展汇报.md
+/进度汇报_2026-10-06/阶段进展汇报与讲述稿.md
+/进度汇报_2026-10-06/讲述稿配图/
