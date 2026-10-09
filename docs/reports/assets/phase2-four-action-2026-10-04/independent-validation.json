@@ -1,0 +1,56 @@
+{
+  "four_cardinal_metrics": [
+    {
+      "name": "up",
+      "independently_recomputed": {
+        "final_x_mm": -0.39172064559706554,
+        "final_y_mm": 1.926734365388073,
+        "dissipation_pJ": 4.665106942061204,
+        "tail_mean_abs_axis_error_rad": 0.10974373115952449,
+        "first_1s_within_025rad_s": 9.34
+      }
+    },
+    {
+      "name": "down",
+      "independently_recomputed": {
+        "final_x_mm": -0.3917021033297215,
+        "final_y_mm": -1.919654805056382,
+        "dissipation_pJ": 4.677628751560177,
+        "tail_mean_abs_axis_error_rad": 0.10949410544968921,
+        "first_1s_within_025rad_s": 9.8
+      }
+    },
+    {
+      "name": "left",
+      "independently_recomputed": {
+        "final_x_mm": -2.116727634024332,
+        "final_y_mm": 0.0021180932613855123,
+        "dissipation_pJ": 4.511071022946576,
+        "tail_mean_abs_axis_error_rad": 0.1095775372318751,
+        "first_1s_within_025rad_s": 0.0
+      }
+    },
+    {
+      "name": "right",
+      "independently_recomputed": {
+        "final_x_mm": 1.174121065764922,
+        "final_y_mm": 0.6261730904638972,
+        "dissipation_pJ": 4.976209369971379,
+        "tail_mean_abs_axis_error_rad": 0.11051338703723212,
+        "first_1s_within_025rad_s": 14.32
+      }
+    }
+  ],
+  "full_24s_left_replay_exact": true,
+  "never_started_rest_exact": true,
+  "finite_stop_verified": true,
+  "frozen_policy_full_replay_exact": true,
+  "frozen_policy_weight_hash_unchanged": true,
+  "first_sampled_domain_exit_s": 8.700000000000001,
+  "manifest_all_sources_current": true,
+  "replay_source_sha256": {
+    "src/thermotaxis/phase2_control.py": "23cae5485e1a4fd2ff651c584e11f127aefa9f9bebd46e8dae42d3dbd736c7a7",
+    "src/thermotaxis/phase2_body.py": "f641710a6455a4efdb06584ac94e30a199681f6345f92fdd35d2ae73f3db5f6e",
+    "analysis/validate_phase2_bridge.py": "70a07a304815dd06aa07d022cacc28ada852008e9501ae9df41ffcad58a9c982"
+  }
+}

@@ -1,5 +1,37 @@
 # 软体仿生线虫研究平台
 
+2026-10-08：原可视化平台 CCB 连续测温、奖励、几何约束与 DDPG 导航已优化。单热源800轮/500步、三个随机种子、8起点冻结评估共24/24次进入中心0.75格内；该结果属于原平台额外信息基线，不是 SI 身体趋温结论。修改、失败记录及复现方法见 [连续导航验证报告](docs/reports/ccb-continuous-navigation-2026-10-08.md)。
+
+2026-10-08 界面改版：极简浅色布局、轻量交互、训练后自动恢复配置、切换参数保留结果。界面说明与截图见 [界面改版记录](docs/reports/platform-ui-2026-10-08.md)。
+
+最新汇报材料已集中整理到 [进度汇报_2026-10-06](进度汇报_2026-10-06/README.md)，包含进展总览、阶段报告、展示图表、训练样本及验证记录。
+
+## 趋温重建主线（第0—2阶段）
+
+组员 PR #1 已作为历史平台基线合并。新的研究主线在 `src/thermotaxis/` 中独立发展，研究局部含噪测温、短期记忆、身体运动与机械耗散怎样共同产生趋温。
+
+第 0 阶段已经固定模型契约、SI 单位、独立的物理/传感/控制时钟、随机源和控制器观测权限。第 1 阶段新增一维含噪点模型、快慢记忆控制器，以及与无响应对照共享随机种子的配对集合实验。运行方式见 `docs/phase0-usage.md` 和 `docs/phase1-point-model.md`，完整约定见 `docs/model-contract.md`。
+
+点模型用于回答“局部含噪测温与短期记忆能否产生趋温偏置”。它还没有身体形变与机械耗散，因此其结果属于机制基准，不能代替后续软体身体结论。项目结构和模块关系见 `docs/project-structure-map.md`，独立核验记录见 `docs/validation/phase0-phase1-validation.md`。
+
+2026-10-04既有批次：544对统计实验、1,536对控制周期/时窗比较与256条连续局部弱响应轨迹已核验。参考180s下约47.7%—49.1%决策触及速率下限，弱响应式不定量预测参考强响应；该批次完整回归76项通过。
+
+点模型最新批次：有限采样一阶系数与576条局部轨迹核验通过；三种域宽共192对3600秒轨迹、后期块与区间已复算，响应末块驻留约82%—83%，严格稳态仍是研究问题；该批次完整回归86项通过。
+
+当前第二阶段：`src/thermotaxis/phase2_body.py`建立固定材料弧长、完整形变速度、RFT自由平移/旋转及介质耗散。16组驱动扫描、12组收敛比较与独立密网格核验完成，身体基准批次完整回归102项通过。参考1mm身体4秒推进0.37914mm；阻力工作值尚未标定。随后已建立有限响应四方向执行器、材料头部测温入口和独立时钟；旧Q表及DQN冻结接口已完成。历史权重暂未找到，本轮使用明确标为新训练的旧程序接口样本；实际新样本迁移于8.70s头部离域后终止，未完成导航；最新全套115项通过。身体局部记忆趋温及弹性尚待开展。
+
+点模型材料见 `docs/phase1-memory-scaling.md`、`docs/phase1-sampling-response.md`、`docs/phase1-theory-sensitivity.md`、`docs/phase1-boundary-stationarity.md`。身体推导见 `docs/phase2-prescribed-body.md`，四方向执行见 `docs/phase2-four-action-bridge.md`，旧策略冻结接入见 `docs/legacy-policy-bridge.md`，最新老师续报见 `docs/reports/progress-2026-10-04-body.md`。既有离线HTML仍对应原统计批次。
+
+运行第 1 阶段配对集合：
+
+```bash
+PYTHONPATH=src python3 -m thermotaxis phase1-ensemble \
+  --config configs/phase1_reference.json \
+  --replicates 100 \
+  --output-root results \
+  --repository .
+```
+
 这是一个基于 Python 的二维线虫趋温仿真平台。原始程序已经包含温度场、线虫身体、Q-Learning、DQN、Dueling DQN、迁移学习、课程学习和 Streamlit 可视化界面。当前仓库在此基础上继续改造，目标是逐步形成可用于比较不同身体表征、不同控制方式、复杂温度场和群体间接交互的研究平台。
 
 GitHub 仓库：
@@ -8,19 +40,28 @@ GitHub 仓库：
 
 ## 当前状态
 
+新的趋温主线当前包括：
+
+- 第 0 阶段：严格配置、单位与信息边界、独立时钟和随机源、可复现结果包。
+- 第 1 阶段：一维点模型、局部含噪测温、双时间尺度记忆、有界随机转向，以及共享种子的响应/无响应配对集合。
+- 理论与诊断：连续无响应首次到达、离散概率传播、弱响应局部替代模型，以及控制周期/观察窗口和速率夹限诊断。身体力学与介质耗散已有独立模块，身体趋温统计尚未开展。
+- 当前完整回归：`PYTHONPATH=src python3 -m pytest tests 程序/test_core.py -q` 共146项通过；原平台连续导航验证见 `docs/reports/ccb-continuous-navigation-2026-10-08.md`，SI身体核验见 `docs/validation/phase2-body-validation-2026-10-04.md`。
+
+以下内容描述已经合并的旧平台基线：
+
 当前代码已经完成前三个阶段中的主要内容：
 
 - 第一阶段：整理可运行基础，修复测试入口，增加依赖说明和 pytest 测试。
 - 第二阶段：身体模型解耦，把训练引擎从直接创建 `Worm2D` 改为通过身体模型工厂创建。
 - 第三阶段：新增连续中心线身体和主动形变身体的第一版实现。
 
-当前验证结果：
+旧平台合并时的验证结果：
 
-- `python3 -m pytest`：14 个测试通过
+- `python3 -m pytest`：14 个旧平台测试通过
 - `python3 程序/test_simple.py`：通过
 - `py_compile`：通过
 
-最新代码已经推送到 GitHub 的 `main` 分支。
+新的趋温主线在 `codex/phase0-foundation` 分支和 PR #2 中继续开发；`main` 保留已合并的组员 PR #1 基线。
 
 ## 环境要求
 

@@ -1,0 +1,72 @@
+{
+  "result_type": "prescribed_body_mechanical_baseline",
+  "temperature_controller": false,
+  "elasticity": false,
+  "biological_calibration": false,
+  "reference_config": {
+    "schema_version": 1,
+    "length_m": 0.001,
+    "drag_parallel_N_s_m2": 0.001,
+    "drag_ratio": 2.0,
+    "waves": 1.0,
+    "amplitude_rad": 0.6,
+    "frequency_Hz": 1.0,
+    "amplitude_modulation_rad": 0.0,
+    "phase_modulation_rad": 0.0,
+    "bias_rad": 0.0,
+    "bias_modulation_rad": 0.0,
+    "modulation_frequency_Hz": 0.25,
+    "quadrature_order": 48,
+    "integration_order": 32,
+    "dt_s": 0.01,
+    "duration_s": 4.0,
+    "initial_orientation_rad": 0.0
+  },
+  "mechanical_gates": [
+    "derivative",
+    "centre",
+    "rotation",
+    "reflection",
+    "force",
+    "torque",
+    "positive_power",
+    "isotropic_translation",
+    "reciprocal_pose",
+    "overall_drag_scaling_power_and_energy"
+  ],
+  "scan_amplitude_rad": [
+    0.2,
+    0.4,
+    0.6,
+    0.8
+  ],
+  "scan_drag_ratio": [
+    1.0,
+    1.5,
+    2.0,
+    3.0
+  ],
+  "dt_convergence_s": [
+    0.04,
+    0.02,
+    0.01,
+    0.005
+  ],
+  "outer_orders": [
+    12,
+    24,
+    48,
+    72
+  ],
+  "inner_orders": [
+    8,
+    16,
+    32,
+    48
+  ],
+  "modulated_drive": {
+    "amplitude_modulation_rad": 0.15,
+    "phase_modulation_rad": 0.2,
+    "bias_modulation_rad": 0.25
+  }
+}

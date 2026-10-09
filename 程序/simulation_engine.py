@@ -16,7 +16,7 @@ from pathlib import Path
 import matplotlib
 matplotlib.use('Agg')  # 🔧 使用非交互式后端，避免GUI问题
 import matplotlib.pyplot as plt
-import matplotlib.font_manager as fm
+from core.plot_fonts import setup_chinese_font
 
 # 🔧 Windows GBK编码修复：强制stdout使用UTF-8，避免emoji打印崩溃
 try:
@@ -26,40 +26,6 @@ try:
         sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 except Exception:
     pass
-
-# 🔧 Mac系统中文字体配置
-def setup_chinese_font():
-    """为Mac系统设置中文字体"""
-    try:
-        # Mac系统常见中文字体列表
-        mac_chinese_fonts = [
-            'PingFang SC',      # macOS默认中文字体
-            'Hiragino Sans GB', # macOS系统字体
-            'STHeiti',          # 华文黑体
-            'Arial Unicode MS', # 万能Unicode字体
-            'SimHei',           # Windows黑体(如果安装了)
-            'Microsoft YaHei'   # 微软雅黑(如果安装了)
-        ]
-        
-        # 检查可用字体
-        available_fonts = [f.name for f in fm.fontManager.ttflist]
-        
-        for font_name in mac_chinese_fonts:
-            if font_name in available_fonts:
-                plt.rcParams['font.sans-serif'] = [font_name]
-                plt.rcParams['axes.unicode_minus'] = False
-                print(f"✓ 使用中文字体: {font_name}")
-                return True
-        
-        # 如果没有找到中文字体，使用英文标题
-        print("⚠️ 未找到中文字体，将使用英文标题")
-        plt.rcParams['font.sans-serif'] = ['Arial', 'DejaVu Sans']
-        plt.rcParams['axes.unicode_minus'] = False
-        return False
-        
-    except Exception as e:
-        print(f"⚠️ 字体设置失败: {e}")
-        return False
 
 # 在所有绘图函数开始前调用
 has_chinese_font = setup_chinese_font()
@@ -131,6 +97,15 @@ def run_standard_simulation_engine(config, training_params, field_type, use_neur
         # --- 1. 初始化阶段 ---
         yield 0, 1000, "🔄 开始初始化实验环境...", {'phase': 'init'}
         
+        if (training_params.get('body_model_type') == 'continuous_centerline'
+                and 'Actor-Critic' in training_params.get('method', '')):
+            import torch
+            seed = int(training_params.get('body_params', {}).get('ac_seed', 7))
+            random.seed(seed)
+            np.random.seed(seed)
+            torch.manual_seed(seed)
+            # 小型 CPU 网络避免多线程调度开销，匹配可复现实验的运行设置。
+            torch.set_num_threads(1)
         config.field_type = field_type
         width, height = training_params.get("width", 40), training_params.get("height", 40)  # 改为40，匹配8.22版本
         
@@ -302,12 +277,13 @@ def run_standard_simulation_engine(config, training_params, field_type, use_neur
             # 重置线虫
             try:
                 start_pos = get_start_position(field_type, width, height)
-                reset_worm_for_new_round(worm, env, start_pos, width, height, field_type)
+                from core.utils import reset_ccb_training_round
+                reset_ccb_training_round(worm, env, start_pos, width, height, field_type, round_num)
                 if (round_num + 1) % 10 == 0:
                     print(f"🔧 调试：线虫重置完成，位置={start_pos}")
             except Exception as reset_error:
-                print(f"❌ 线虫重置失败: {reset_error}")
-                continue  # 跳过这一轮
+                yield -1, -1, f"第 {round_num + 1} 轮重置失败: {reset_error}", {}
+                return
             
             epsilon = max(training_params["min_epsilon"], 
                          training_params["initial_epsilon"] - round_num * training_params["epsilon_decay"])
@@ -338,7 +314,7 @@ def run_standard_simulation_engine(config, training_params, field_type, use_neur
                     moved = worm.decide_move(env, epsilon=epsilon, 
                                            alpha=training_params["learning_rate"], 
                                            gamma=training_params["discount_factor"])
-                    if not moved:
+                    if not moved and not getattr(worm, 'use_actor_critic', False):
                         print(f"⚠️ 第{step}步移动失败")
                         break
                     # 温度统计
@@ -358,9 +334,11 @@ def run_standard_simulation_engine(config, training_params, field_type, use_neur
                         if target_distance <= 3.0:
                             round_steps = step + 1
                             
+                    if getattr(worm, 'episode_done', False):
+                        break
                 except Exception as step_error:
-                    print(f"❌ 第{step}步训练失败: {step_error}")
-                    break
+                    yield -1, -1, f"第 {round_num + 1} 轮第 {step} 步失败: {step_error}", {}
+                    return
 
             # 记录统计数据
             if enable_step_tracking:
@@ -376,6 +354,15 @@ def run_standard_simulation_engine(config, training_params, field_type, use_neur
                 except Exception as track_error:
                     print(f"⚠️ 双热源追踪失败: {track_error}")
 
+            if getattr(worm, 'use_actor_critic', False):
+                worm.training_round_records.append({
+                    'round': round_num + 1, 'steps': len(worm.rl_step_records),
+                    'reward': worm.total_reward,
+                    'mean_step_reward': worm.total_reward / max(1, len(worm.rl_step_records)),
+                    'goal_reached': worm.goal_reached,
+                    'final_distance': float(env.get_distance_to_best(worm.x, worm.y)),
+                    'trajectory': worm.rl_step_records.copy(),
+                })
             all_histories.append(worm.history.copy())
             all_rewards.append(worm.total_reward)
             
@@ -432,7 +419,8 @@ def run_standard_simulation_engine(config, training_params, field_type, use_neur
                                          training_params, temp_array, best_point)
                 print("🔧 调试：结果保存和可视化完成")
             except Exception as save_error:
-                print(f"❌ 结果保存失败: {save_error}")
+                yield -1, -1, f"结果保存失败: {save_error}", {}
+                return
             
             final_stats = {
                 'total_rounds': len(all_rewards),
@@ -443,7 +431,7 @@ def run_standard_simulation_engine(config, training_params, field_type, use_neur
             
             yield 1000, 1000, f"🎉 标准训练完成！平均奖励: {final_stats['avg_reward']:.2f}", final_stats
         else:
-            yield 1000, 1000, "⚠️ 训练完成，但没有生成有效数据", {}
+            yield -1, -1, "没有生成有效训练数据", {}
 
         # 🔧 关键修复：添加生成器完成信号
         print("🔧 调试：生成器即将结束，发送完成信号")
@@ -977,6 +965,22 @@ def save_and_visualize_results(config, all_histories, all_rewards, worm, env, tr
         # 保存训练日志和数据
         save_training_log(config, all_histories, all_rewards, worm, env, training_params)
         save_body_metrics(config, all_histories, all_rewards, worm, env)
+        if getattr(worm, 'use_actor_critic', False):
+            import json
+            import torch
+            torch.save(worm.actor_critic_agent.state_dict(), output_dir / "ddpg_checkpoint.pt")
+            if worm.model_name == "continuous_centerline":
+                from core.evaluation import evaluate_continuous_policy
+                evaluation = evaluate_continuous_policy(worm, env, training_params.get('steps_per_round', 500))
+                with open(output_dir / "policy_evaluation.json", "w", encoding="utf-8") as f:
+                    json.dump(evaluation, f, ensure_ascii=False, indent=2)
+                print(f"冻结策略评估: {evaluation['success_count']}/{evaluation['episode_count']} 个起点到达目标")
+
+            with open(output_dir / "continuous_training.json", "w", encoding="utf-8") as f:
+                json.dump({'reward_variant': worm.reward_variant,
+                           'goal_radius': worm.goal_radius,
+                           'rounds': worm.training_round_records}, f, ensure_ascii=False)
+
         if hasattr(worm, 'q_table'):
             save_q_table(config, worm.q_table, env)
         
@@ -1038,6 +1042,7 @@ def save_and_visualize_results(config, all_histories, all_rewards, worm, env, tr
             
     except Exception as e:
         print(f"❌ 保存和可视化结果失败: {e}")
+        raise
 
 def plot_training_results_simple_mac(all_rewards, config):
     """Mac适配的简化版训练结果可视化"""

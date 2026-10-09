@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "reference_config": "configs/phase1_reference.json",
+  "classification": "fixed exploratory sensitivity design, not parameter optimization",
+  "control_dt_s": [0.1, 0.2, 0.5, 1.0],
+  "duration_s": [90.0, 180.0, 360.0],
+  "physics_dt_s": 0.1,
+  "sensor_dt_s": 0.1,
+  "paired_replicates_per_condition": 128,
+  "seed_bases": {"sensor": 71000, "initial_state": 72000, "controller": 73000},
+  "bootstrap_resamples": 4000,
+  "bootstrap_seed": 74100,
+  "pairing": "Same new seed tuple per replicate for response/control and all conditions. Same control interval gives identical trajectory prefixes across windows. Different control intervals consume uniforms at different times: shared seeds are not a common continuous Poisson path.",
+  "saturation_definition": "Controller rates at actual decisions t > 0 and t < duration, excluding final decision with no subsequent motion; fractions across decisions per trajectory, then equally weighted trajectory means."
+}

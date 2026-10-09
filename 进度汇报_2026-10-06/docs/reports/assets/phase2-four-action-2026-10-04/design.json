@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "deterministic_interface_benchmark",
+  "cardinal_actions": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "cardinal_duration_s": 24,
+  "sequence_actions": [
+    2,
+    0,
+    3,
+    1
+  ],
+  "sequence_hold_s": 24,
+  "sequence_duration_s": 96,
+  "settling_metric": "first complete 1s with every axis heading error <=.25rad",
+  "tail_window_s": 4,
+  "dt_compare_s": [
+    0.02,
+    0.01
+  ],
+  "no_contact": true,
+  "no_training": true,
+  "no_randomness": false,
+  "randomness": "frozen Q-table tie RNG only; seed 44001",
+  "frozen_policy_demo": {
+    "planned_duration_s": 96,
+    "initial_center_m": [
+      0.001,
+      0.002
+    ],
+    "initial_orientation_rad": 0,
+    "grid_extent_m": [
+      0.004,
+      0.004
+    ],
+    "tie_seed": 44001,
+    "on_head_exit": "terminal at first out-of-domain physics sample; no projection"
+  },
+  "initial_forward_axis": "left; theta=0, forward axis=theta+pi",
+  "observation_mode": "local_temperature (scripted commands ignore observation)"
+}

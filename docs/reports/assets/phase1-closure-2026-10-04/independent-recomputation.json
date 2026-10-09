@@ -1,0 +1,107 @@
+{
+  "sampling": {
+    "groups_checked": 9,
+    "trajectories_checked": 576,
+    "core_full_length_replays": [
+      {
+        "h_s": 0.1,
+        "seed": 852000,
+        "turn_count": 2978,
+        "full_measurement_drift_m_s": -8.893333333332842e-06
+      },
+      {
+        "h_s": 0.2,
+        "seed": 855000,
+        "turn_count": 3044,
+        "full_measurement_drift_m_s": -1.0173333333333748e-05
+      },
+      {
+        "h_s": 1.0,
+        "seed": 858000,
+        "turn_count": 2918,
+        "full_measurement_drift_m_s": -5.0266666666667425e-06
+      }
+    ]
+  },
+  "boundary": {
+    "pairs_checked": 192,
+    "blocks_checked": 1152,
+    "scalar_bootstrap_intervals_recomputed": 75,
+    "tv_resampling_ranges_recomputed": 30,
+    "independent_full_core_replays": [
+      {
+        "length_m": 0.02,
+        "offset_m": -0.007,
+        "group": "response",
+        "replicate": 0
+      },
+      {
+        "length_m": 0.02,
+        "offset_m": -0.007,
+        "group": "no_response",
+        "replicate": 0
+      },
+      {
+        "length_m": 0.02,
+        "offset_m": 0.007,
+        "group": "response",
+        "replicate": 0
+      },
+      {
+        "length_m": 0.02,
+        "offset_m": 0.007,
+        "group": "no_response",
+        "replicate": 0
+      },
+      {
+        "length_m": 0.03,
+        "offset_m": -0.007,
+        "group": "response",
+        "replicate": 0
+      },
+      {
+        "length_m": 0.03,
+        "offset_m": -0.007,
+        "group": "no_response",
+        "replicate": 0
+      },
+      {
+        "length_m": 0.03,
+        "offset_m": 0.007,
+        "group": "response",
+        "replicate": 0
+      },
+      {
+        "length_m": 0.03,
+        "offset_m": 0.007,
+        "group": "no_response",
+        "replicate": 0
+      },
+      {
+        "length_m": 0.06,
+        "offset_m": -0.007,
+        "group": "response",
+        "replicate": 0
+      },
+      {
+        "length_m": 0.06,
+        "offset_m": -0.007,
+        "group": "no_response",
+        "replicate": 0
+      },
+      {
+        "length_m": 0.06,
+        "offset_m": 0.007,
+        "group": "response",
+        "replicate": 0
+      },
+      {
+        "length_m": 0.06,
+        "offset_m": 0.007,
+        "group": "no_response",
+        "replicate": 0
+      }
+    ]
+  },
+  "validation_script_sha256": "f947401c82600cfa9c576615e28e029ab8af6ce8ad04e2a247e7e4b28f539ae1"
+}

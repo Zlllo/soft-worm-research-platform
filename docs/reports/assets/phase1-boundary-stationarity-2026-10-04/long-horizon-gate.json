@@ -1,0 +1,199 @@
+{
+  "command": "MPLCONFIGDIR=/private/tmp/softworm-boundary-mpl PYTHONPATH=src:. python3 analysis/phase1_boundary_long_gate.py",
+  "fresh_seed_index": 99888,
+  "rows": [
+    {
+      "absolute_differences": {
+        "comfort_residence_fraction": 7.133182933216631e-14,
+        "first_entry_time_s": 2.2737367544323206e-11,
+        "rms_temperature_error_K": 3.888001032237298e-13,
+        "turn_count": 0
+      },
+      "config_at_accelerated_step": {
+        "body_reference": {
+          "length_m": 0.001,
+          "speed_m_s": 0.0002
+        },
+        "controller_observations": [
+          "temperature_K",
+          "sample_time_s"
+        ],
+        "domain": {
+          "boundary": "reflecting",
+          "dimension": 1,
+          "x_extent_m": 0.06,
+          "y_extent_m": 0.03
+        },
+        "medium": {
+          "density_kg_m3": 1000.0,
+          "dynamic_viscosity_Pa_s": 0.1,
+          "model": "newtonian_viscous"
+        },
+        "name": "boundary-0.06-0.007",
+        "point_model": {
+          "initial_direction": "random",
+          "initial_x_m": 0.037,
+          "speed_m_s": 0.0002
+        },
+        "purpose": "Test whether noisy local temperature measurements and two-timescale memory produce thermotaxis in a one-dimensional persistent random walk.",
+        "schema_version": 1,
+        "seeds": {
+          "controller": 729888,
+          "environment": 101,
+          "initial_state": 719888,
+          "sensor": 709888
+        },
+        "sensor": {
+          "location": "head",
+          "noise_correlation_s": 0.0,
+          "noise_model": "independent_gaussian",
+          "noise_std_K": 0.05
+        },
+        "temperature": {
+          "comfort_half_width_K": 0.25,
+          "field_type": "linear_static",
+          "gradient_K_per_m": [
+            100.0,
+            0.0
+          ],
+          "preferred_K": 293.15,
+          "reference_K": 290.15
+        },
+        "thermotaxis_controller": {
+          "baseline_turn_rate_per_s": 0.1,
+          "fast_memory_tau_s": 0.5,
+          "max_turn_rate_per_s": 0.5,
+          "min_turn_rate_per_s": 0.01,
+          "response_deadband_K": 0.01,
+          "response_gain_per_K_s": 0,
+          "slow_memory_tau_s": 5.0
+        },
+        "time": {
+          "control_dt_s": 0.2,
+          "duration_s": 3600.0,
+          "physics_dt_s": 0.1,
+          "sensor_dt_s": 0.1
+        }
+      },
+      "gain": 0,
+      "metrics": [
+        {
+          "comfort_residence_fraction": 0.16819444461142402,
+          "entered_comfort_region": true,
+          "first_entry_time_s": 98.09999998530598,
+          "rms_temperature_error_K": 1.5465373968962517,
+          "turn_count": 374
+        },
+        {
+          "comfort_residence_fraction": 0.16819444461149535,
+          "entered_comfort_region": true,
+          "first_entry_time_s": 98.09999998532872,
+          "rms_temperature_error_K": 1.5465373968966405,
+          "turn_count": 374
+        }
+      ],
+      "passed": true,
+      "physics_dt_s": [
+        0.01,
+        0.1
+      ]
+    },
+    {
+      "absolute_differences": {
+        "comfort_residence_fraction": 4.050981772252271e-12,
+        "first_entry_time_s": 2.2723156689608004e-11,
+        "rms_temperature_error_K": 2.120525977034049e-14,
+        "turn_count": 0
+      },
+      "config_at_accelerated_step": {
+        "body_reference": {
+          "length_m": 0.001,
+          "speed_m_s": 0.0002
+        },
+        "controller_observations": [
+          "temperature_K",
+          "sample_time_s"
+        ],
+        "domain": {
+          "boundary": "reflecting",
+          "dimension": 1,
+          "x_extent_m": 0.06,
+          "y_extent_m": 0.03
+        },
+        "medium": {
+          "density_kg_m3": 1000.0,
+          "dynamic_viscosity_Pa_s": 0.1,
+          "model": "newtonian_viscous"
+        },
+        "name": "boundary-0.06-0.007",
+        "point_model": {
+          "initial_direction": "random",
+          "initial_x_m": 0.037,
+          "speed_m_s": 0.0002
+        },
+        "purpose": "Test whether noisy local temperature measurements and two-timescale memory produce thermotaxis in a one-dimensional persistent random walk.",
+        "schema_version": 1,
+        "seeds": {
+          "controller": 729888,
+          "environment": 101,
+          "initial_state": 719888,
+          "sensor": 709888
+        },
+        "sensor": {
+          "location": "head",
+          "noise_correlation_s": 0.0,
+          "noise_model": "independent_gaussian",
+          "noise_std_K": 0.05
+        },
+        "temperature": {
+          "comfort_half_width_K": 0.25,
+          "field_type": "linear_static",
+          "gradient_K_per_m": [
+            100.0,
+            0.0
+          ],
+          "preferred_K": 293.15,
+          "reference_K": 290.15
+        },
+        "thermotaxis_controller": {
+          "baseline_turn_rate_per_s": 0.1,
+          "fast_memory_tau_s": 0.5,
+          "max_turn_rate_per_s": 0.5,
+          "min_turn_rate_per_s": 0.01,
+          "response_deadband_K": 0.01,
+          "response_gain_per_K_s": 4,
+          "slow_memory_tau_s": 5.0
+        },
+        "time": {
+          "control_dt_s": 0.2,
+          "duration_s": 3600.0,
+          "physics_dt_s": 0.1,
+          "sensor_dt_s": 0.1
+        }
+      },
+      "gain": 4,
+      "metrics": [
+        {
+          "comfort_residence_fraction": 0.7560833338787986,
+          "entered_comfort_region": true,
+          "first_entry_time_s": 48.89999998530599,
+          "rms_temperature_error_K": 0.22153263316166696,
+          "turn_count": 463
+        },
+        {
+          "comfort_residence_fraction": 0.7560833338747476,
+          "entered_comfort_region": true,
+          "first_entry_time_s": 48.89999998532871,
+          "rms_temperature_error_K": 0.22153263316168817,
+          "turn_count": 463
+        }
+      ],
+      "passed": true,
+      "physics_dt_s": [
+        0.01,
+        0.1
+      ]
+    }
+  ],
+  "script_sha256": "a9462d3647c4b5dcfb721a5ebfde0d4c47253cec39880260943543789c7bea56"
+}

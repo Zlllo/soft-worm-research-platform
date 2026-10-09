@@ -1,0 +1,170 @@
+{
+  "mode": "frozen_field_no_exploration_no_motion_noise",
+  "information": "legacy privileged observations include distance to known target",
+  "goal_radius": 0.75,
+  "max_steps": 500,
+  "success_count": 8,
+  "episode_count": 8,
+  "episodes": [
+    {
+      "requested_start": [
+        4.875,
+        4.875
+      ],
+      "actual_start": [
+        12.0,
+        4.875
+      ],
+      "success": true,
+      "steps": 18,
+      "closest_distance": 0.3052089669359954,
+      "final_distance": 0.3052089669359954,
+      "max_length_error": 3.552713678800501e-15,
+      "max_angle_deg": 45.00000000000004
+    },
+    {
+      "requested_start": [
+        29.25,
+        4.875
+      ],
+      "actual_start": [
+        29.25,
+        4.875
+      ],
+      "success": true,
+      "steps": 20,
+      "closest_distance": 0.33053063262989607,
+      "final_distance": 0.33053063262989607,
+      "max_length_error": 5.329070518200751e-15,
+      "max_angle_deg": 45.00000000000009
+    },
+    {
+      "requested_start": [
+        29.25,
+        29.25
+      ],
+      "actual_start": [
+        29.25,
+        29.25
+      ],
+      "success": true,
+      "steps": 21,
+      "closest_distance": 0.5569357421392389,
+      "final_distance": 0.5569357421392389,
+      "max_length_error": 1.0658141036401503e-14,
+      "max_angle_deg": 45.00000000000011
+    },
+    {
+      "requested_start": [
+        4.875,
+        29.25
+      ],
+      "actual_start": [
+        12.0,
+        29.25
+      ],
+      "success": true,
+      "steps": 13,
+      "closest_distance": 0.18757168393640938,
+      "final_distance": 0.18757168393640938,
+      "max_length_error": 5.329070518200751e-15,
+      "max_angle_deg": 45.00000000000009
+    },
+    {
+      "requested_start": [
+        19.5,
+        4.875
+      ],
+      "actual_start": [
+        19.5,
+        4.875
+      ],
+      "success": true,
+      "steps": 17,
+      "closest_distance": 0.06409879131567955,
+      "final_distance": 0.06409879131567955,
+      "max_length_error": 3.552713678800501e-15,
+      "max_angle_deg": 45.00000000000007
+    },
+    {
+      "requested_start": [
+        29.25,
+        19.5
+      ],
+      "actual_start": [
+        29.25,
+        19.5
+      ],
+      "success": true,
+      "steps": 15,
+      "closest_distance": 0.6527465685076446,
+      "final_distance": 0.6527465685076446,
+      "max_length_error": 7.105427357601002e-15,
+      "max_angle_deg": 45.00000000000017
+    },
+    {
+      "requested_start": [
+        19.5,
+        29.25
+      ],
+      "actual_start": [
+        19.5,
+        29.25
+      ],
+      "success": true,
+      "steps": 11,
+      "closest_distance": 0.33555047406694716,
+      "final_distance": 0.33555047406694716,
+      "max_length_error": 5.329070518200751e-15,
+      "max_angle_deg": 45.00000000000014
+    },
+    {
+      "requested_start": [
+        4.875,
+        19.5
+      ],
+      "actual_start": [
+        12.0,
+        19.5
+      ],
+      "success": true,
+      "steps": 9,
+      "closest_distance": 0.5485673166291378,
+      "final_distance": 0.5485673166291378,
+      "max_length_error": 7.105427357601002e-15,
+      "max_angle_deg": 45.000000000000135
+    }
+  ],
+  "training_rounds": 800,
+  "source_bundle": "20261008_034358_exp_1008_034358",
+  "files": {
+    "experiment.log": {
+      "bytes": 20726,
+      "sha256": "ac99af041520ec4372f5739488877635fe803484daef2cf060485b76ef779370"
+    },
+    "body_metrics.json": {
+      "bytes": 442086,
+      "sha256": "0fa1a5bd1ceae65774d727711635bd463f4c1daa21ed6c619febd88410b9e748"
+    },
+    "ddpg_checkpoint.pt": {
+      "bytes": 887272,
+      "sha256": "b1c1c20d55c1e9c07f7f38378200b6cb19a2436a958fc2f43939e3ff4b46d1c2"
+    },
+    "continuous_training.json": {
+      "bytes": 8627126,
+      "sha256": "12954b314356b766b43861122380868d7d1a786be5b7ea1b52dcf18f859fb96b"
+    },
+    "policy_evaluation.json": {
+      "bytes": 68569,
+      "sha256": "c0b11d2cc964e292b2bbe6c3553292a313c41a04e7aca11ad2ff9b608bcf6148"
+    },
+    "training_results.png": {
+      "bytes": 555019,
+      "sha256": "13640f4b936f5c92a11cf53caaf780ad38a7f82eb8261c7a6ddc09998a6043e3"
+    },
+    "training_animation.gif": {
+      "bytes": 428688,
+      "sha256": "56a1918335e88a02b7c8ddb73c7e2fe47964097f82cb8404565dd3aa42432f5d"
+    }
+  }
+}

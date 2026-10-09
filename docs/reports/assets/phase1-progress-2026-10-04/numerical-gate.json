@@ -1,0 +1,27 @@
+{
+  "checks": [
+    {
+      "max_absolute_metric_difference": 5.6843418860808015e-12,
+      "noise_K": 0.0,
+      "slow_memory_s": 2.0
+    },
+    {
+      "max_absolute_metric_difference": 5.6772364587232005e-12,
+      "noise_K": 0.0,
+      "slow_memory_s": 10.0
+    },
+    {
+      "max_absolute_metric_difference": 5.6843418860808015e-12,
+      "noise_K": 0.25,
+      "slow_memory_s": 2.0
+    },
+    {
+      "max_absolute_metric_difference": 5.6772364587232005e-12,
+      "noise_K": 0.25,
+      "slow_memory_s": 10.0
+    }
+  ],
+  "passed": true,
+  "selected_physics_dt_s": 0.1,
+  "tolerance": 1e-08
+}

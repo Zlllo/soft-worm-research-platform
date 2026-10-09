@@ -1,0 +1,56 @@
+[
+  {
+    "control_interval_s": 0.1,
+    "gain_K_s": 0.0,
+    "core_turn_count": 13,
+    "max_absolute_difference": 2.2221530171506743e-12
+  },
+  {
+    "control_interval_s": 0.1,
+    "gain_K_s": 0.05,
+    "core_turn_count": 21,
+    "max_absolute_difference": 2.4437396550780477e-12
+  },
+  {
+    "control_interval_s": 0.1,
+    "gain_K_s": 0.1,
+    "core_turn_count": 17,
+    "max_absolute_difference": 2.370048601818553e-12
+  },
+  {
+    "control_interval_s": 0.2,
+    "gain_K_s": 0.0,
+    "core_turn_count": 15,
+    "max_absolute_difference": 2.222486084058062e-12
+  },
+  {
+    "control_interval_s": 0.2,
+    "gain_K_s": 0.05,
+    "core_turn_count": 16,
+    "max_absolute_difference": 2.154040834589921e-12
+  },
+  {
+    "control_interval_s": 0.2,
+    "gain_K_s": 0.1,
+    "core_turn_count": 19,
+    "max_absolute_difference": 2.1470464295347824e-12
+  },
+  {
+    "control_interval_s": 1.0,
+    "gain_K_s": 0.0,
+    "core_turn_count": 14,
+    "max_absolute_difference": 2.1115748038980087e-12
+  },
+  {
+    "control_interval_s": 1.0,
+    "gain_K_s": 0.05,
+    "core_turn_count": 34,
+    "max_absolute_difference": 1.9903384496089416e-12
+  },
+  {
+    "control_interval_s": 1.0,
+    "gain_K_s": 0.1,
+    "core_turn_count": 16,
+    "max_absolute_difference": 2.2797319587652964e-12
+  }
+]

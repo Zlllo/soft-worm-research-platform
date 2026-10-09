@@ -1,0 +1,11 @@
+{
+  "design_date": "2026-10-04", "reference_config": "configs/phase1_reference.json",
+  "domain_lengths_m": [0.02, 0.03, 0.06], "center_relative_initial_offsets_m": [-0.007, 0.007],
+  "paired_replicates_per_initial_side": 32, "duration_s": 3600,
+  "physics_dt_s": 0.1, "late_block_edges_s": [1800, 2400, 3000, 3600],
+  "histogram_bins": 60, "bootstrap_resamples": 4000, "bootstrap_seed": 641900,
+  "seed_bases": {"sensor": 610000, "initial_state": 620000, "controller": 630000},
+  "condition_seed_stride": 1000,
+  "diagnostic_thresholds": {"adjacent_block_TV": 0.10, "initial_side_TV": 0.10, "absolute_residence_difference": 0.05},
+  "interpretation": "Fixed exploratory finite-time stability diagnostics. Threshold success is evidence of distributional stability over selected blocks, not proof of stationarity. Uniform no-response baseline and larger-domain mixing limitations must be reported."
+}

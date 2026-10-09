@@ -983,7 +983,7 @@ def test_ccb_state_v2_has_heading_and_12_dims():
 
     state = body.get_state_v2(env)
     assert state.shape == (12,)
-    assert body.ac_state_dim == 12
+    assert body.ac_state_dim == 14
     assert body.state_size == 12
     assert state[10] == pytest.approx(math.cos(body.heading), abs=1e-6)
     assert state[11] == pytest.approx(math.sin(body.heading), abs=1e-6)
@@ -1320,3 +1320,59 @@ def test_standard_simulation_engine_adb_ac(monkeypatch, tmp_path):
     assert factory_calls[0]["kwargs"]["model_type"] == "active_deformation"
     assert saved_results, "ADB + AC 训练没有进入结果保存阶段"
     assert events[-1][0:2] == (1000, 1000)
+
+
+@pytest.mark.parametrize('heading,start_pos', [
+    (0.0, (0, 10)), (math.pi, (19, 10)),
+    (math.pi / 2, (10, 0)), (-math.pi / 2, (10, 19)),
+])
+def test_ccb_tail_leaves_boundary_without_length_collapse(heading, start_pos):
+    body = build_ccb_body(start_pos=start_pos, initial_heading=heading,
+                          length_stiffness=1.0, curvature_stiffness=0.0)
+    initial = np.asarray(body.body_segments).copy()
+    assert np.linalg.norm(np.diff(initial, axis=0), axis=1) == pytest.approx([2.0] * 4)
+    body.step_physics(action={'heading': heading, 'step': 0.5})
+    points = np.asarray(body.body_segments)
+    assert np.linalg.norm(points[-1] - initial[-1]) == pytest.approx(0.5)
+    assert np.linalg.norm(np.diff(points, axis=0), axis=1) == pytest.approx([2.0] * 4)
+    assert points.min() >= -1e-9
+    assert points.max() <= 19 + 1e-9
+
+
+def test_ccb_wall_reports_actual_motion_and_can_leave():
+    body = build_ccb_body(start_pos=(19, 10), length_stiffness=1.0,
+                          curvature_stiffness=0.0)
+    initial = np.asarray(body.body_segments).copy()
+    result = body.step_physics(action={'heading': 0.0, 'step': 1.0})
+    assert result['movement'] == pytest.approx(0.0)
+    assert result['moved'] is False
+    np.testing.assert_allclose(body.body_segments, initial)
+    assert body.velocity[0] == pytest.approx(0.0)
+    result = body.step_physics(action={'heading': math.pi / 2, 'step': 0.5})
+    assert result['moved'] is True
+    assert body.y > 10
+
+
+def test_ccb_rejects_initial_body_that_cannot_fit():
+    with pytest.raises(ValueError, match='无法完整放入场地'):
+        build_ccb_body(width=5, height=5, body_length=8.0)
+
+
+@pytest.mark.parametrize('field_type,start_pos', [
+    ('single_center', (0, 10)), ('maze_thermal_channel', (10, 19)),
+])
+def test_ccb_training_round_reset_preserves_full_body(field_type, start_pos):
+    body = build_ccb_body(body_length=7.0)
+    body.velocity[:] = 1.0
+    body.current_step = 10
+    reset_worm_for_new_round(body, None, start_pos, 20, 20, field_type)
+    points = np.asarray(body.body_segments)
+    assert np.linalg.norm(np.diff(points, axis=0), axis=1) == pytest.approx([1.75] * 4)
+    assert points.min() >= -1e-9
+    assert points.max() <= 19 + 1e-9
+    assert body.current_step == 0
+    np.testing.assert_allclose(body.velocity, 0.0)
+    tail_before = points[-1].copy()
+    for _ in range(5):
+        body.step_physics(action={'heading': body.heading, 'step': 0.5})
+    assert np.linalg.norm(np.asarray(body.body_segments)[-1] - tail_before) > 1.0

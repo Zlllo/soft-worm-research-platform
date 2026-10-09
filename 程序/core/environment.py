@@ -91,6 +91,18 @@ class Environment2D:
             print(f"警告：索引超出边界 ({x}, {y}): {e}")
             return 0.0
     
+    def get_temperature_continuous(self, x, y):
+        """双线性插值测温；越界返回 -inf，整数格点与原温度数组一致。"""
+        x, y = float(x), float(y)
+        if not (np.isfinite(x) and np.isfinite(y)
+                and 0 <= x <= self.width - 1 and 0 <= y <= self.height - 1):
+            return -float('inf')
+        x0, y0 = int(np.floor(x)), int(np.floor(y))
+        x1, y1 = min(x0 + 1, self.width - 1), min(y0 + 1, self.height - 1)
+        fx, fy = x - x0, y - y0
+        return float((1 - fy) * ((1 - fx) * self.temp_array[y0, x0] + fx * self.temp_array[y0, x1])
+                     + fy * ((1 - fx) * self.temp_array[y1, x0] + fx * self.temp_array[y1, x1]))
+
     def is_valid_position(self, x, y):
         """
         检查位置是否在环境范围内
@@ -223,7 +235,7 @@ class Environment2D:
             print(f"警告：归一化温度计算失败 ({x}, {y}): {e}")
             return 0.0
     
-    def get_state_vector(self, position, worm=None):
+    def get_state_vector(self, position, worm=None, continuous=False):
         """
         🔧 关键修复：获取固定8维状态向量，与神经网络兼容
         
@@ -241,8 +253,9 @@ class Environment2D:
             else:
                 x, y = position[0], position[1]
             
-            x_int, y_int = int(round(x)), int(round(y))
-            current_temp = self.get_temperature(x_int, y_int)
+            x_int, y_int = (float(x), float(y)) if continuous else (int(round(x)), int(round(y)))
+            sample_temperature = self.get_temperature_continuous if continuous else self.get_temperature
+            current_temp = sample_temperature(x_int, y_int)
             
             state = []
             
@@ -250,8 +263,9 @@ class Environment2D:
             directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
             for dx, dy in directions:
                 nx, ny = x_int + dx, y_int + dy
-                if self.is_valid_position(nx, ny):
-                    neighbor_temp = self.get_temperature(nx, ny)
+                valid = (0 <= nx <= self.width - 1 and 0 <= ny <= self.height - 1) if continuous else self.is_valid_position(nx, ny)
+                if valid:
+                    neighbor_temp = sample_temperature(nx, ny)
                     gradient = (neighbor_temp - current_temp) / 20.0  # 归一化梯度
                     state.append(gradient)
                 else:
@@ -264,10 +278,11 @@ class Environment2D:
                 state.append(-1.0)
         
             # 6. 身体姿态与温度梯度的关系
-            if worm and hasattr(worm, 'segments') and worm.segments:
+            segments = getattr(worm, 'body_segments', []) if continuous else getattr(worm, 'segments', [])
+            if worm and segments:
                 try:
                     head_pos = (worm.x, worm.y)
-                    tail_pos = worm.segments[-1] if worm.segments else head_pos
+                    tail_pos = segments[-1]
                     
                     body_dx = head_pos[0] - tail_pos[0]
                     body_dy = head_pos[1] - tail_pos[1]
@@ -277,7 +292,11 @@ class Environment2D:
                         gradients = state[:4]
                         valid_gradients = [g for g in gradients if g > -2.0]
                         if valid_gradients:
-                            best_grad_idx = np.argmax(valid_gradients)
+                            if continuous:
+                                valid_indices = [i for i, g in enumerate(gradients) if g > -2.0]
+                                best_grad_idx = max(valid_indices, key=lambda i: gradients[i])
+                            else:
+                                best_grad_idx = np.argmax(valid_gradients)
                             grad_direction = directions[best_grad_idx]
                             alignment = (body_dx * grad_direction[0] + body_dy * grad_direction[1]) / body_length
                             state.append(alignment)

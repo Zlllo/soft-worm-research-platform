@@ -1,0 +1,44 @@
+{
+  "source_bundle": "20261008_040017_exp_1008_035918",
+  "rounds": 800,
+  "evaluation_successes": 8,
+  "evaluation_starts": 8,
+  "goal_radius": 0.75,
+  "files": {
+    "experiment.log": {
+      "bytes": 20726,
+      "sha256": "9b8b72db07fa910f0c4459d500b51948c0157197e2246f1e2a1786280416d63c"
+    },
+    "body_metrics.json": {
+      "bytes": 442086,
+      "sha256": "9e2919bc051675d08ca901e17562f4e53c6840174cf4ad423e87bbb4548d8390"
+    },
+    "ddpg_checkpoint.pt": {
+      "bytes": 887272,
+      "sha256": "b1c1c20d55c1e9c07f7f38378200b6cb19a2436a958fc2f43939e3ff4b46d1c2"
+    },
+    "continuous_training.json": {
+      "bytes": 8627126,
+      "sha256": "12954b314356b766b43861122380868d7d1a786be5b7ea1b52dcf18f859fb96b"
+    },
+    "policy_evaluation.json": {
+      "bytes": 68569,
+      "sha256": "c0b11d2cc964e292b2bbe6c3553292a313c41a04e7aca11ad2ff9b608bcf6148"
+    },
+    "training_results.png": {
+      "bytes": 555019,
+      "sha256": "13640f4b936f5c92a11cf53caaf780ad38a7f82eb8261c7a6ddc09998a6043e3"
+    },
+    "training_animation.gif": {
+      "bytes": 428688,
+      "sha256": "56a1918335e88a02b7c8ddb73c7e2fe47964097f82cb8404565dd3aa42432f5d"
+    }
+  },
+  "interaction_checks": [
+    "configuration_unlocked_after_completion",
+    "name_and_results_retained_after_toggle",
+    "animation_tab_rendered",
+    "log_tab_rendered",
+    "single_stop_unlocks_configuration_and_keeps_previous_completed_result"
+  ]
+}

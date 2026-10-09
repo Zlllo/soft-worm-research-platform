@@ -1,0 +1,49 @@
+{
+  "command": "PYTHONPATH=src MPLCONFIGDIR=/private/tmp/softworm-mpl python3 analysis/phase1_theory_sensitivity.py",
+  "core_sha256": {
+    "src/thermotaxis/__init__.py": "ee217c273fab2e50494058d039d1313e78499f6b404378165d72af3a6e8b83ac",
+    "src/thermotaxis/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/thermotaxis/cli.py": "aaf877d80387c2bf20ebe4843a18d45884bd73a7f2404cc063fa026d1f00da45",
+    "src/thermotaxis/config.py": "6fbbcec93bcab29bc0c718f739665b483643c63ef6f7cb58a3151e392c3982aa",
+    "src/thermotaxis/contracts.py": "887684c43bee2a0343bf3653af54fef6054a67ac11b92e05cc0f12352f23fe04",
+    "src/thermotaxis/phase1.py": "2b6a64fdbd1aaf47d4766cc99b05d4f6e321e617685650b8666cf76e1050812a",
+    "src/thermotaxis/phase1_config.py": "5541ff0260e8757840e1b6ce8ea39edec4136a272f5d1d7aae40ccead8aa080a",
+    "src/thermotaxis/phase1_ensemble.py": "241f37c178ba3f4a5d42a9878326e77a1ccd04640ea4cad05bff0d1680cb3917",
+    "src/thermotaxis/phase1_runner.py": "683aa2825fdafb1eb89d0841b58dfbd63108500dd47ad7fd66119dbd0c35f296",
+    "src/thermotaxis/runner.py": "d8836a5fb7149c2e7fb6bcff287da1930d1aefe59697c854cd62ab9d977f166f"
+  },
+  "created_at_utc": "2026-10-04T07:04:59.706608+00:00",
+  "design": {
+    "bootstrap_resamples": 4000,
+    "bootstrap_seed": 74100,
+    "classification": "fixed exploratory sensitivity design, not parameter optimization",
+    "control_dt_s": [
+      0.1,
+      0.2,
+      0.5,
+      1.0
+    ],
+    "duration_s": [
+      90.0,
+      180.0,
+      360.0
+    ],
+    "paired_replicates_per_condition": 128,
+    "pairing": "Same new seed tuple per replicate for response/control and all conditions. Same control interval gives identical trajectory prefixes across windows. Different control intervals consume uniforms at different times: shared seeds are not a common continuous Poisson path.",
+    "physics_dt_s": 0.1,
+    "reference_config": "configs/phase1_reference.json",
+    "saturation_definition": "Controller rates at actual decisions t > 0 and t < duration, excluding final decision with no subsequent motion; fractions across decisions per trajectory, then equally weighted trajectory means.",
+    "schema_version": 1,
+    "seed_bases": {
+      "controller": 73000,
+      "initial_state": 72000,
+      "sensor": 71000
+    },
+    "sensor_dt_s": 0.1
+  },
+  "elapsed_s": 156.154567542,
+  "git_revision": "fd7add178df6652344dd6527da1c4e817140d811",
+  "prefix_first_entry_check": "all 512 seed/clock combinations passed",
+  "python": "3.9.6",
+  "script_sha256": "e0390af150e4dcd022b44c7b01081d7308cf696c243d9c725c7bca8c3d7cd297"
+}

@@ -1,0 +1,722 @@
+[
+  {
+    "episode": 0,
+    "start": [
+      2,
+      3
+    ],
+    "final": [
+      9,
+      8
+    ],
+    "total_reward": 163.79999999999995
+  },
+  {
+    "episode": 1,
+    "start": [
+      15,
+      14
+    ],
+    "final": [
+      8,
+      10
+    ],
+    "total_reward": 190.79999999999993
+  },
+  {
+    "episode": 2,
+    "start": [
+      10,
+      16
+    ],
+    "final": [
+      8,
+      8
+    ],
+    "total_reward": 288.60000000000014
+  },
+  {
+    "episode": 3,
+    "start": [
+      8,
+      15
+    ],
+    "final": [
+      7,
+      10
+    ],
+    "total_reward": 392.60000000000076
+  },
+  {
+    "episode": 4,
+    "start": [
+      7,
+      10
+    ],
+    "final": [
+      7,
+      10
+    ],
+    "total_reward": 424.5000000000008
+  },
+  {
+    "episode": 5,
+    "start": [
+      11,
+      12
+    ],
+    "final": [
+      10,
+      7
+    ],
+    "total_reward": 396.70000000000084
+  },
+  {
+    "episode": 6,
+    "start": [
+      9,
+      6
+    ],
+    "final": [
+      7,
+      8
+    ],
+    "total_reward": 391.9000000000007
+  },
+  {
+    "episode": 7,
+    "start": [
+      13,
+      4
+    ],
+    "final": [
+      10,
+      9
+    ],
+    "total_reward": 242.60000000000002
+  },
+  {
+    "episode": 8,
+    "start": [
+      5,
+      8
+    ],
+    "final": [
+      6,
+      7
+    ],
+    "total_reward": 464.8000000000008
+  },
+  {
+    "episode": 9,
+    "start": [
+      11,
+      7
+    ],
+    "final": [
+      7,
+      11
+    ],
+    "total_reward": 499.000000000001
+  },
+  {
+    "episode": 10,
+    "start": [
+      6,
+      6
+    ],
+    "final": [
+      8,
+      10
+    ],
+    "total_reward": 471.3000000000008
+  },
+  {
+    "episode": 11,
+    "start": [
+      16,
+      8
+    ],
+    "final": [
+      7,
+      9
+    ],
+    "total_reward": 376.7000000000005
+  },
+  {
+    "episode": 12,
+    "start": [
+      12,
+      11
+    ],
+    "final": [
+      9,
+      8
+    ],
+    "total_reward": 369.9000000000005
+  },
+  {
+    "episode": 13,
+    "start": [
+      7,
+      1
+    ],
+    "final": [
+      8,
+      8
+    ],
+    "total_reward": 350.20000000000044
+  },
+  {
+    "episode": 14,
+    "start": [
+      10,
+      13
+    ],
+    "final": [
+      5,
+      10
+    ],
+    "total_reward": 350.40000000000043
+  },
+  {
+    "episode": 15,
+    "start": [
+      3,
+      11
+    ],
+    "final": [
+      11,
+      7
+    ],
+    "total_reward": 414.4000000000007
+  },
+  {
+    "episode": 16,
+    "start": [
+      4,
+      6
+    ],
+    "final": [
+      6,
+      10
+    ],
+    "total_reward": 468.9000000000009
+  },
+  {
+    "episode": 17,
+    "start": [
+      6,
+      16
+    ],
+    "final": [
+      10,
+      8
+    ],
+    "total_reward": 422.1000000000008
+  },
+  {
+    "episode": 18,
+    "start": [
+      10,
+      4
+    ],
+    "final": [
+      8,
+      10
+    ],
+    "total_reward": 425.1000000000009
+  },
+  {
+    "episode": 19,
+    "start": [
+      2,
+      0
+    ],
+    "final": [
+      9,
+      8
+    ],
+    "total_reward": 462.1000000000008
+  },
+  {
+    "episode": 20,
+    "start": [
+      16,
+      2
+    ],
+    "final": [
+      9,
+      9
+    ],
+    "total_reward": 408.10000000000065
+  },
+  {
+    "episode": 21,
+    "start": [
+      14,
+      13
+    ],
+    "final": [
+      9,
+      9
+    ],
+    "total_reward": 433.6000000000007
+  },
+  {
+    "episode": 22,
+    "start": [
+      14,
+      7
+    ],
+    "final": [
+      8,
+      9
+    ],
+    "total_reward": 452.50000000000074
+  },
+  {
+    "episode": 23,
+    "start": [
+      13,
+      12
+    ],
+    "final": [
+      9,
+      6
+    ],
+    "total_reward": 513.8000000000009
+  },
+  {
+    "episode": 24,
+    "start": [
+      13,
+      1
+    ],
+    "final": [
+      8,
+      8
+    ],
+    "total_reward": 483.1000000000009
+  },
+  {
+    "episode": 25,
+    "start": [
+      8,
+      2
+    ],
+    "final": [
+      8,
+      8
+    ],
+    "total_reward": 497.5000000000009
+  },
+  {
+    "episode": 26,
+    "start": [
+      9,
+      6
+    ],
+    "final": [
+      9,
+      8
+    ],
+    "total_reward": 557.3000000000009
+  },
+  {
+    "episode": 27,
+    "start": [
+      13,
+      6
+    ],
+    "final": [
+      9,
+      8
+    ],
+    "total_reward": 534.200000000001
+  },
+  {
+    "episode": 28,
+    "start": [
+      5,
+      9
+    ],
+    "final": [
+      9,
+      9
+    ],
+    "total_reward": 533.300000000001
+  },
+  {
+    "episode": 29,
+    "start": [
+      1,
+      11
+    ],
+    "final": [
+      7,
+      11
+    ],
+    "total_reward": 483.9000000000009
+  },
+  {
+    "episode": 30,
+    "start": [
+      11,
+      7
+    ],
+    "final": [
+      8,
+      8
+    ],
+    "total_reward": 536.800000000001
+  },
+  {
+    "episode": 31,
+    "start": [
+      13,
+      12
+    ],
+    "final": [
+      9,
+      8
+    ],
+    "total_reward": 474.9000000000009
+  },
+  {
+    "episode": 32,
+    "start": [
+      14,
+      10
+    ],
+    "final": [
+      9,
+      7
+    ],
+    "total_reward": 424.5000000000006
+  },
+  {
+    "episode": 33,
+    "start": [
+      13,
+      11
+    ],
+    "final": [
+      8,
+      8
+    ],
+    "total_reward": 540.8000000000009
+  },
+  {
+    "episode": 34,
+    "start": [
+      11,
+      0
+    ],
+    "final": [
+      8,
+      8
+    ],
+    "total_reward": 527.800000000001
+  },
+  {
+    "episode": 35,
+    "start": [
+      2,
+      5
+    ],
+    "final": [
+      9,
+      8
+    ],
+    "total_reward": 532.8000000000009
+  },
+  {
+    "episode": 36,
+    "start": [
+      7,
+      8
+    ],
+    "final": [
+      9,
+      8
+    ],
+    "total_reward": 564.5000000000008
+  },
+  {
+    "episode": 37,
+    "start": [
+      1,
+      12
+    ],
+    "final": [
+      9,
+      10
+    ],
+    "total_reward": 509.8000000000009
+  },
+  {
+    "episode": 38,
+    "start": [
+      8,
+      9
+    ],
+    "final": [
+      9,
+      8
+    ],
+    "total_reward": 570.8000000000008
+  },
+  {
+    "episode": 39,
+    "start": [
+      4,
+      5
+    ],
+    "final": [
+      9,
+      8
+    ],
+    "total_reward": 541.9000000000008
+  },
+  {
+    "episode": 40,
+    "start": [
+      3,
+      8
+    ],
+    "final": [
+      9,
+      8
+    ],
+    "total_reward": 552.7000000000008
+  },
+  {
+    "episode": 41,
+    "start": [
+      2,
+      4
+    ],
+    "final": [
+      9,
+      9
+    ],
+    "total_reward": 508.10000000000093
+  },
+  {
+    "episode": 42,
+    "start": [
+      14,
+      13
+    ],
+    "final": [
+      7,
+      8
+    ],
+    "total_reward": 470.7000000000008
+  },
+  {
+    "episode": 43,
+    "start": [
+      16,
+      12
+    ],
+    "final": [
+      10,
+      8
+    ],
+    "total_reward": 511.40000000000094
+  },
+  {
+    "episode": 44,
+    "start": [
+      11,
+      13
+    ],
+    "final": [
+      9,
+      7
+    ],
+    "total_reward": 506.70000000000107
+  },
+  {
+    "episode": 45,
+    "start": [
+      4,
+      10
+    ],
+    "final": [
+      8,
+      8
+    ],
+    "total_reward": 525.4000000000009
+  },
+  {
+    "episode": 46,
+    "start": [
+      16,
+      4
+    ],
+    "final": [
+      8,
+      8
+    ],
+    "total_reward": 509.70000000000095
+  },
+  {
+    "episode": 47,
+    "start": [
+      8,
+      4
+    ],
+    "final": [
+      7,
+      9
+    ],
+    "total_reward": 496.6000000000008
+  },
+  {
+    "episode": 48,
+    "start": [
+      12,
+      9
+    ],
+    "final": [
+      9,
+      8
+    ],
+    "total_reward": 524.900000000001
+  },
+  {
+    "episode": 49,
+    "start": [
+      13,
+      10
+    ],
+    "final": [
+      9,
+      8
+    ],
+    "total_reward": 503.70000000000095
+  },
+  {
+    "episode": 50,
+    "start": [
+      13,
+      7
+    ],
+    "final": [
+      8,
+      8
+    ],
+    "total_reward": 567.9000000000008
+  },
+  {
+    "episode": 51,
+    "start": [
+      13,
+      5
+    ],
+    "final": [
+      8,
+      8
+    ],
+    "total_reward": 490.90000000000083
+  },
+  {
+    "episode": 52,
+    "start": [
+      10,
+      10
+    ],
+    "final": [
+      9,
+      9
+    ],
+    "total_reward": 546.8000000000009
+  },
+  {
+    "episode": 53,
+    "start": [
+      13,
+      10
+    ],
+    "final": [
+      9,
+      8
+    ],
+    "total_reward": 527.400000000001
+  },
+  {
+    "episode": 54,
+    "start": [
+      10,
+      2
+    ],
+    "final": [
+      8,
+      8
+    ],
+    "total_reward": 530.300000000001
+  },
+  {
+    "episode": 55,
+    "start": [
+      6,
+      12
+    ],
+    "final": [
+      9,
+      7
+    ],
+    "total_reward": 566.6000000000008
+  },
+  {
+    "episode": 56,
+    "start": [
+      6,
+      6
+    ],
+    "final": [
+      8,
+      8
+    ],
+    "total_reward": 563.1000000000008
+  },
+  {
+    "episode": 57,
+    "start": [
+      4,
+      1
+    ],
+    "final": [
+      9,
+      8
+    ],
+    "total_reward": 515.1000000000009
+  },
+  {
+    "episode": 58,
+    "start": [
+      7,
+      8
+    ],
+    "final": [
+      7,
+      8
+    ],
+    "total_reward": 529.0000000000009
+  },
+  {
+    "episode": 59,
+    "start": [
+      11,
+      2
+    ],
+    "final": [
+      9,
+      8
+    ],
+    "total_reward": 476.80000000000086
+  }
+]

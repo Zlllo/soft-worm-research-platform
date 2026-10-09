@@ -2,7 +2,7 @@
 Streamlit Web 应用 - 秀丽隐杆线虫仿真系统
 支持标准训练、迁移学习、课程学习三种模式
 与 simulation_engine.py 和 core 文件夹完全兼容
-采用白色背景的蓝灰渐变主题，支持身体参数和噪声调节
+采用极简浅色主题，支持身体参数和噪声调节
 修复核心Bug：
 1. UI参数正确传递到Worm2D类
 2. 移除导致卡死的st.rerun()调用 ✅
@@ -51,577 +51,9 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# --- 修复白色文字可见性的CSS样式 ---
-st.markdown("""
-<style>
-    /* Streamlit 全局背景设置为白色 */
-    .stApp {
-        background-color: #ffffff !important;
-    }
-    
-    /* 主容器背景和文字颜色 */
-    .main .block-container {
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        color: #6c757d !important;  /* 普通文字保持灰色 */
-    }
-    
-    /* 全局背景和字体 - 白色背景，普通文字灰色 */
-    .main {
-        background-color: #ffffff !important;
-        color: #6c757d !important;  /* 普通文字保持灰色 */
-    }
-    
-    /* 普通文字保持灰色 */
-    .stApp {
-        color: #6c757d !important;  /* 普通文字保持灰色 */
-    }
-    
-    /* 确保普通文本都是灰色 */
-    .stMarkdown, .stText, p, div, span {
-        color: #6c757d !important;  /* 普通文字保持灰色 */
-    }
-    
-    /* 🔵 主要标题改为蓝色系 - 不同深度的蓝色 */
-    h1 {
-        color: #0d47a1 !important;  /* 深蓝色 - 最重要的标题 */
-    }
-    
-    h2 {
-        color: #1565c0 !important;  /* 中深蓝色 - 次级标题 */
-    }
-    
-    h3 {
-        color: #1976d2 !important;  /* 标准蓝色 - 三级标题 */
-    }
-    
-    h4 {
-        color: #1e88e5 !important;  /* 中蓝色 - 四级标题 */
-    }
-    
-    h5 {
-        color: #2196f3 !important;  /* 亮蓝色 - 五级标题 */
-    }
-    
-    h6 {
-        color: #42a5f5 !important;  /* 浅蓝色 - 六级标题 */
-    }
-    
-    /* 侧边栏样式 - 保持蓝灰渐变背景 */
-    .css-1d391kg, .css-1v3fvcr, section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, 
-            #f8faff 0%,    /* 浅蓝白 */
-            #f0f4f8 25%,   /* 浅灰蓝 */
-            #e8f2ff 50%,   /* 中蓝白 */
-            #e0f0f7 75%,   /* 蓝灰 */
-            #d8ecf4 100%   /* 深蓝灰 */
-        ) !important;
-        border-right: 3px solid #b3d9ff;
-        width: 280px !important;
-        min-width: 280px !important;
-        box-shadow: 2px 0 8px rgba(33, 150, 243, 0.1);
-    }
-    
-    /* 侧边栏文字颜色 - 普通文字保持灰色 */
-    .css-1d391kg, .css-1lcbmhc, .css-1y4p8pa {
-        color: #6c757d !important;  /* 普通文字保持灰色 */
-    }
-    
-    /* 侧边栏标题改为蓝色 */
-    .css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3, 
-    .css-1d391kg h4, .css-1d391kg h5, .css-1d391kg h6 {
-        color: #1976d2 !important;  /* 侧边栏标题用标准蓝色 */
-    }
-    
-    /* 侧边栏内容背景 - 保持灰色主题 */
-    .css-1d391kg .css-1v3fvcr {
-        background: rgba(255, 255, 255, 0.7) !important;
-        border-radius: 8px;
-        border: 1px solid rgba(108, 117, 125, 0.15);  /* 边框保持灰色 */
-        margin: 0.5rem;
-        backdrop-filter: blur(5px);
-    }
-    
-    /* 🔵 主标题样式 - 改为深蓝色渐变 */
-    .main-header {
-        font-size: 2.2rem;
-        color: #0d47a1 !important;  /* 深蓝色 */
-        text-align: center;
-        margin-bottom: 0.5rem;
-        text-shadow: 2px 2px 4px rgba(13, 71, 161, 0.3);  /* 深蓝色阴影 */
-        font-weight: 700;
-        background: linear-gradient(45deg, #0d47a1 0%, #1565c0 50%, #1976d2 100%);  /* 蓝色渐变 */
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-    
-    /* 🔵 副标题样式 - 改为中蓝色 */
-    .sub-header {
-        color: #1976d2 !important;  /* 标准蓝色 */
-        text-align: center;
-        font-size: 1rem;
-        margin-bottom: 1rem;
-        opacity: 0.9;
-    }
-    
-    /* 状态框样式 - 保持灰色背景，但标题改为蓝色 */
-    .status-box {
-        padding: 1rem;
-        border-radius: 10px;
-        border: 2px solid #868e96;  /* 保持灰色边框 */
-        background: linear-gradient(135deg, rgba(108, 117, 125, 0.1) 0%, rgba(134, 142, 150, 0.05) 100%);  /* 保持灰色背景 */
-        margin: 0.5rem 0;
-        box-shadow: 0 2px 10px rgba(108, 117, 125, 0.15);  /* 保持灰色阴影 */
-        color: #6c757d !important;  /* 普通文字保持灰色 */
-    }
-    
-    .status-box h4 {
-        color: #1976d2 !important;  /* 状态框标题改为蓝色 */
-    }
-    
-    .status-box p {
-        color: #6c757d !important;  /* 普通文字保持灰色 */
-    }
-    
-    /* 错误框样式 - 保持红色 */
-    .error-box {
-        padding: 1rem;
-        border-radius: 10px;
-        border: 2px solid #dc3545;
-        background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(189, 33, 48, 0.05) 100%);
-        margin: 0.5rem 0;
-        box-shadow: 0 2px 10px rgba(220, 53, 69, 0.15);
-        color: #dc3545 !important;
-    }
-    
-    .error-box * {
-        color: #dc3545 !important;
-    }
-    
-    /* 成功框样式 - 保持绿色 */
-    .success-box {
-        padding: 1rem;
-        border-radius: 10px;
-        border: 2px solid #28a745;
-        background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(32, 134, 55, 0.05) 100%);
-        margin: 0.5rem 0;
-        box-shadow: 0 2px 10px rgba(40, 167, 69, 0.15);
-        color: #28a745 !important;
-    }
-    
-    .success-box * {
-        color: #28a745 !important;
-    }
-    
-    /* 信息框样式 - 保持灰色背景，但标题改为蓝色 */
-    .info-box {
-        padding: 1rem;
-        border-radius: 10px;
-        border: 2px solid #6c757d;  /* 保持灰色边框 */
-        background: linear-gradient(135deg, rgba(108, 117, 125, 0.1) 0%, rgba(134, 142, 150, 0.05) 100%);  /* 保持灰色背景 */
-        margin: 0.5rem 0;
-        box-shadow: 0 2px 10px rgba(108, 117, 125, 0.15);  /* 保持灰色阴影 */
-        color: #6c757d !important;  /* 普通文字保持灰色 */
-    }
-    
-    .info-box h3, .info-box h4 {
-        color: #1976d2 !important;  /* 信息框标题改为蓝色 */
-    }
-    
-    .info-box p, .info-box li {
-        color: #6c757d !important;  /* 普通文字保持灰色 */
-    }
-    
-    /* 警告框样式 - 保持橙色 */
-    .warning-box {
-        padding: 1rem;
-        border-radius: 10px;
-        border: 2px solid #fd7e14;
-        background: linear-gradient(135deg, rgba(253, 126, 20, 0.1) 0%, rgba(230, 113, 18, 0.05) 100%);
-        margin: 0.5rem 0;
-        box-shadow: 0 2px 10px rgba(253, 126, 20, 0.15);
-        color: #fd7e14 !important;
-    }
-    
-    .warning-box * {
-        color: #fd7e14 !important;
-    }
-    
-    /* 卡片样式 - 保持灰色背景，但标题改为蓝色 */
-    .feature-card {
-        background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(248,249,250,1) 100%);
-        border-radius: 15px;
-        padding: 1rem;
-        margin: 0.5rem 0;
-        border: 1px solid rgba(108, 117, 125, 0.2);  /* 保持灰色边框 */
-        box-shadow: 0 4px 15px rgba(108, 117, 125, 0.1);  /* 保持灰色阴影 */
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .feature-card h4 {
-        color: #1976d2 !important;  /* 卡片标题改为蓝色 */
-    }
-    
-    .feature-card p, .feature-card li {
-        color: #6c757d !important;  /* 普通文字保持灰色 */
-    }
-    
-    .feature-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(108, 117, 125, 0.2);  /* 保持灰色悬停阴影 */
-        border-color: #1976d2;  /* 悬停时边框改为蓝色 */
-    }
-    
-    /* 指标卡片样式 - 保持灰色背景，但标题改为白色以确保对比度 */
-    .metric-card {
-        background: linear-gradient(135deg, rgba(108, 117, 125, 0.9) 0%, rgba(134, 142, 150, 0.9) 100%);  /* 保持灰色渐变 */
-        border-radius: 10px;
-        padding: 1rem;
-        margin: 0.25rem;
-        border: 1px solid rgba(108, 117, 125, 0.3);  /* 保持灰色边框 */
-        box-shadow: 0 2px 10px rgba(108, 117, 125, 0.2);  /* 保持灰色阴影 */
-        text-align: center;
-        color: #ffffff !important;  /* 保持白色文字以确保对比度 */
-    }
-    
-    .metric-card h4, .metric-card p {
-        color: #ffffff !important;  /* 保持白色文字 */
-        margin: 0;
-    }
-
-    /* 紧凑型参数卡片 - 保持灰色背景，但标题改为蓝色 */
-    .compact-card {
-        background: rgba(248, 249, 250, 0.9);
-        border-radius: 8px;
-        padding: 0.8rem;
-        margin: 0.3rem 0;
-        border: 1px solid rgba(108, 117, 125, 0.2);  /* 保持灰色边框 */
-        box-shadow: 0 2px 8px rgba(108, 117, 125, 0.1);  /* 保持灰色阴影 */
-        color: #6c757d !important;  /* 普通文字保持灰色 */
-    }
-    
-    .compact-card strong {
-        color: #1976d2 !important;  /* 强调文字改为蓝色 */
-    }
-    
-    /* 进度条 - 改为蓝色 */
-    .stProgress > div > div > div {
-        background-color: #1976d2 !important;  /* 蓝色进度条 */
-    }
-    
-    /* 按钮样式 - 保持灰色主题 */
-    .stButton > button {
-        background-color: #6c757d !important;  /* 保持灰色按钮背景 */
-        color: #ffffff !important;  /* 白色按钮文字 */
-        border: 1px solid #6c757d !important;  /* 保持灰色边框 */
-    }
-    
-    .stButton > button:hover {
-        background-color: #5a6268 !important;  /* 深灰色悬停 */
-        border: 1px solid #5a6268 !important;
-    }
-    
-    /* 主要按钮样式 - 改为蓝色背景黑色文字 */
-    .stButton > button[kind="primary"],
-    .stButton > button[data-testid="baseButton-primary"],
-    .stButton button[kind="primary"],
-    button[kind="primary"] {
-        background-color: #1976d2 !important;  /* 蓝色主按钮 */
-        color: #000000 !important;  /* 黑色按钮文字 */
-        border: 1px solid #1976d2 !important;
-        font-weight: bold !important;  /* 加粗字体 */
-        font-size: 16px !important;  /* 增大字号 */
-    }
-    
-    .stButton > button[kind="primary"]:hover,
-    .stButton > button[data-testid="baseButton-primary"]:hover,
-    .stButton button[kind="primary"]:hover,
-    button[kind="primary"]:hover {
-        background-color: #1565c0 !important;  /* 深蓝色悬停 */
-        color: #000000 !important;  /* 悬停时保持黑色文字 */
-        border: 1px solid #1565c0 !important;
-    }
-    
-    /* 次要按钮样式 - 保持灰色 */
-    .stButton > button[kind="secondary"] {
-        background-color: #adb5bd !important;  /* 保持浅灰色次按钮 */
-        color: #495057 !important;  /* 深灰色文字 */
-        border: 1px solid #adb5bd !important;
-    }
-    
-    .stButton > button[kind="secondary"]:hover {
-        background-color: #95a5a6 !important;
-        border: 1px solid #95a5a6 !important;
-    }
-    
-    /* 输入框和选择框 - 保持灰色主题 */
-    .stSelectbox > div > div {
-        border: 1px solid #ced4da !important;  /* 保持浅灰色边框 */
-    }
-    
-    .stNumberInput > div > div > input {
-        border: 1px solid #ced4da !important;  /* 保持浅灰色边框 */
-        color: #6c757d !important;  /* 保持灰色文字 */
-    }
-    
-    .stTextInput > div > div > input {
-        border: 1px solid #ced4da !important;  /* 保持浅灰色边框 */
-        color: #6c757d !important;  /* 保持灰色文字 */
-    }
-    
-    /* 滑块样式 - 改为浅蓝色 */
-    .stSlider > div > div > div > div {
-        background-color: #dee2e6 !important;  /* 保持浅灰色滑轨 */
-    }
-    
-    .stSlider > div > div > div > div > div {
-        background-color: #64b5f6 !important;  /* 浅蓝色滑块手柄 */
-    }
-    
-    /* 标签页样式 - 改为蓝色主题 */
-    .stTabs [data-baseweb="tab-list"] {
-        background-color: #f8f9fa !important;  /* 保持浅灰色标签页背景 */
-    }
-    
-    .stTabs [data-baseweb="tab"] {
-        color: #6c757d !important;  /* 保持灰色标签页文字 */
-        border-bottom: 2px solid transparent !important;
-    }
-    
-    .stTabs [aria-selected="true"] {
-        color: #1976d2 !important;  /* 蓝色激活标签页 */
-        border-bottom: 2px solid #1976d2 !important;  /* 蓝色下划线 */
-    }
-    
-    /* 展开器样式 - 保持灰色背景，标题改为蓝色 */
-    .streamlit-expanderHeader {
-        background-color: #f8f9fa !important;  /* 保持浅灰色展开器头部 */
-        color: #1976d2 !important;  /* 蓝色文字 */
-        border: 1px solid #dee2e6 !important;  /* 保持浅灰色边框 */
-    }
-    
-    /* 切换开关样式 - 改为蓝色 */
-    .stCheckbox > label > div {
-        background-color: #dee2e6 !important;  /* 保持浅灰色背景 */
-    }
-    
-    .stCheckbox > label > div[data-checked="true"] {
-        background-color: #1976d2 !important;  /* 蓝色激活状态 */
-    }
-    
-    /* 单选按钮样式 - 改为蓝色 */
-    .stRadio > label > div {
-        color: #6c757d !important;  /* 保持灰色文字 */
-    }
-    
-    .stRadio > label > div[data-checked="true"] {
-        color: #1976d2 !important;  /* 蓝色选中状态 */
-    }
-    
-    /* 代码块样式 - 保持灰色主题 */
-    .stCode {
-        background-color: #f8f9fa !important;  /* 保持浅灰色背景 */
-        border: 1px solid #dee2e6 !important;  /* 保持浅灰色边框 */
-        color: #6c757d !important;  /* 保持灰色文字 */
-    }
-    
-    /* 页脚样式 - 标题改为蓝色 */
-    .footer-style {
-        text-align: center; 
-        color: #6c757d !important;  /* 普通文字保持灰色 */
-        padding: 1rem 0;
-    }
-    
-    .footer-style h5 {
-        color: #1976d2 !important;  /* 页脚标题改为蓝色 */
-    }
-    
-    .footer-style p {
-        color: #868e96 !important;  /* 副标题保持浅灰色 */
-    }
-    
-    /* 🔧 修改选择框内的文字为黑色 */
-    .stSelectbox label {
-        color: #000000 !important;  /* 选择框标签改为黑色 */
-    }
-    
-    .stSelectbox > div > div {
-        border: 1px solid #6c8dbf !important;  /* 框框改为蓝灰色边框 */
-        background-color: #f0f4f8 !important;  /* 框框背景改为蓝灰色 */
-    }
-    
-    .stSelectbox > div > div > div {
-        color: #000000 !important;  /* 选择框内的文字改为黑色 */
-        background-color: #f0f4f8 !important;  /* 保持蓝灰色背景 */
-    }
-    
-    .stSelectbox [data-baseweb="select"] {
-        background-color: #f0f4f8 !important;  /* 蓝灰色背景 */
-    }
-    
-    .stSelectbox [data-baseweb="select"] > div {
-        color: #000000 !important;  /* 黑色文字 */
-        background-color: #f0f4f8 !important;  /* 蓝灰色背景 */
-    }
-    
-    /* 🔧 修改输入框内的文字为黑色 */
-    .stTextInput label {
-        color: #000000 !important;  /* 输入框标签改为黑色 */
-    }
-    
-    .stTextInput > div > div > input {
-        border: 1px solid #6c8dbf !important;  /* 框框改为蓝灰色边框 */
-        background-color: #f0f4f8 !important;  /* 框框背景改为蓝灰色 */
-        color: #000000 !important;  /* 输入框内的文字改为黑色 */
-    }
-    
-    .stTextInput > div > div > input::placeholder {
-        color: #495057 !important;  /* 占位符文字为深灰色 */
-    }
-    
-    /* 🔧 修改数字输入框 */
-    .stNumberInput label {
-        color: #000000 !important;  /* 数字输入框标签改为黑色 */
-    }
-    
-    .stNumberInput > div > div > input {
-        border: 1px solid #6c8dbf !important;  /* 框框改为蓝灰色边框 */
-        background-color: #f0f4f8 !important;  /* 框框背景改为蓝灰色 */
-        color: #000000 !important;  /* 数字输入框内的文字改为黑色 */
-    }
-    
-    /* 🔧 修改滑块标签文字为黑色 */
-    .stSlider label {
-        color: #000000 !important;  /* 滑块标签改为黑色 */
-    }
-    
-    .stSlider > div > div > div {
-        color: #000000 !important;  /* 滑块数值显示为黑色 */
-    }
-    
-    /* 🔧 确保滑块所有文字都是黑色 */
-    .stSlider * {
-        color: #000000 !important;  /* 滑块内所有文字改为黑色 */
-    }
-    
-    .stSlider [data-baseweb="slider"] {
-        color: #000000 !important;  /* 滑块组件文字改为黑色 */
-    }
-    
-    /* 🔧 修改单选按钮标签为黑色 */
-    .stRadio label {
-        color: #000000 !important;  /* 单选按钮标签改为黑色 */
-    }
-    
-    .stRadio > div > label > div {
-        color: #000000 !important;  /* 单选按钮选项文字改为黑色 */
-    }
-    
-    /* 🔧 修改复选框标签为黑色 */
-    .stCheckbox label {
-        color: #000000 !important;  /* 复选框标签改为黑色 */
-    }
-    
-    .stCheckbox > label > div {
-        color: #000000 !important;  /* 复选框文字改为黑色 */
-    }
-    
-    /* 🔧 修改切换开关标签为黑色 */
-    .stToggle label {
-        color: #000000 !important;  /* 切换开关标签改为黑色 */
-    }
-    
-    /* 🔧 修改展开器内容为黑色 */
-    .streamlit-expanderHeader,
-    .stExpander > div > div > div > div,
-    [data-testid="stExpander"] > div > div > div > div,
-    .stExpander .streamlit-expanderHeader {
-        background-color: #f0f4f8 !important;  /* 展开器头部改为蓝灰色背景 */
-        color: #000000 !important;  /* 展开器标题改为黑色文字 */
-        border: 1px solid #6c8dbf !important;  /* 蓝灰色边框 */
-        font-size: 1.4em !important;  /* 显著增大展开器标题字号 */
-        font-weight: bold !important;  /* 加粗字体使标题更突出 */
-        padding: 12px 16px !important;  /* 增加内边距 */
-        line-height: 1.2 !important;  /* 调整行高 */
-    }
-    
-    .streamlit-expanderContent,
-    .stExpander > div > div:last-child,
-    [data-testid="stExpander"] > div > div:last-child {
-        background-color: #f8faff !important;  /* 展开器内容区域浅蓝灰色背景 */
-    }
-    
-    .streamlit-expanderContent label,
-    .stExpander label,
-    [data-testid="stExpander"] label {
-        color: #000000 !important;  /* 展开器内的标签改为黑色 */
-    }
-    
-    /* 额外的展开器样式确保生效 */
-    .stExpander summary,
-    [data-testid="stExpander"] summary,
-    .stExpander > div > div > summary {
-        font-size: 1.4em !important;  /* 展开器标题字号 */
-        font-weight: bold !important;  /* 加粗 */
-        color: #000000 !important;  /* 黑色文字 */
-        background-color: #f0f4f8 !important;  /* 蓝灰背景 */
-        padding: 12px 16px !important;  /* 内边距 */
-        border-radius: 4px !important;  /* 圆角 */
-    }
-    
-    /* 🔧 修改侧边栏内的标签文字为黑色 */
-    .css-1d391kg label, 
-    .css-1lcbmhc label,
-    .css-1y4p8pa label {
-        color: #000000 !important;  /* 侧边栏标签改为黑色 */
-    }
-    
-    /* 🔧 确保侧边栏内的输入框和选择框也应用蓝灰色背景和黑色文字 */
-    .css-1d391kg .stSelectbox > div > div,
-    .css-1d391kg .stTextInput > div > div > input,
-    .css-1d391kg .stNumberInput > div > div > input {
-        background-color: #f0f4f8 !important;  /* 蓝灰色背景 */
-        color: #000000 !important;  /* 黑色文字 */
-        border: 1px solid #6c8dbf !important;  /* 蓝灰色边框 */
-    }
-    
-    .css-1d391kg .stSelectbox [data-baseweb="select"] > div {
-        color: #000000 !important;  /* 侧边栏选择框文字为黑色 */
-        background-color: #f0f4f8 !important;  /* 蓝灰色背景 */
-    }
-    
-    /* 🔧 修改下拉菜单选项的颜色 */
-    [data-baseweb="menu"] {
-        background-color: #f0f4f8 !important;  /* 下拉菜单背景为蓝灰色 */
-    }
-    
-    [data-baseweb="menu"] [role="option"] {
-        color: #000000 !important;  /* 下拉菜单选项文字为黑色 */
-        background-color: #f0f4f8 !important;  /* 选项背景为蓝灰色 */
-    }
-    
-    [data-baseweb="menu"] [role="option"]:hover {
-        background-color: #e8f2ff !important;  /* 悬停时背景为更浅的蓝灰色 */
-        color: #000000 !important;  /* 悬停时文字仍为黑色 */
-    }
-    
-    /* 🔧 修改实验名称输入框的特定样式 */
-    input[aria-label*="实验名称"] {
-        background-color: #f0f4f8 !important;  /* 蓝灰色背景 */
-        color: #000000 !important;  /* 黑色文字 */
-        border: 1px solid #6c8dbf !important;  /* 蓝灰色边框 */
-    }
-    
-    /* 🔧 确保所有表单控件的焦点状态也保持正确的颜色 */
-    .stSelectbox > div > div:focus-within,
-    .stTextInput > div > div > input:focus,
-    .stNumberInput > div > div > input:focus {
-        border-color: #1976d2 !important;  /* 焦点时边框为标准蓝色 */
-        color: #000000 !important;  /* 焦点时文字仍为黑色 */
-        background-color: #f0f4f8 !important;  /* 焦点时背景仍为蓝灰色 */
-    }
-</style>
-""", unsafe_allow_html=True)
+# --- 极简界面主题 ---
+from core.ui import clean_label, render_header, render_welcome, render_experiment_preview, render_saved_results
+st.markdown("<style>" + (Path(__file__).parent / "assets/ui.css").read_text(encoding="utf-8") + "</style>", unsafe_allow_html=True)
 
 # --- 初始化 Session State ---
 if 'is_simulating' not in st.session_state:
@@ -633,27 +65,39 @@ if 'current_config' not in st.session_state:
 if 'selected_mode_index' not in st.session_state:
     st.session_state.selected_mode_index = 0
 
-# --- 主标题区域 ---
-st.markdown('<h1 class="main-header">🐛 C. elegans 仿真系统</h1>', unsafe_allow_html=True)
-st.markdown('<p class="sub-header">基于深度强化学习的多节段身体趋温行为建模平台</p>', unsafe_allow_html=True)
 
-# ==============================================================================
-# 侧边栏配置区域 - 蓝灰渐变主题
-# ==============================================================================
+def request_experiment():
+    st.session_state.run_requested = True
+    st.session_state.is_simulating = True
+    st.session_state.stop_requested = False
+
+
+def request_stop():
+    st.session_state.stop_requested = True
+    st.session_state.stopped_feedback = True
+    st.session_state.is_simulating = False
+    st.session_state.run_requested = False
+
+
+# --- 主标题区域 ---
+render_header()
+
+# 侧边栏保留全部实验参数；显示文字与内部选项值分别处理。
 with st.sidebar:
-    st.markdown("### 🔬 实验配置")
+    st.markdown('<div class="sidebar-brand">实验配置<span>CONFIGURATION</span></div>', unsafe_allow_html=True)
     
     # 实验名称
-    exp_name_default = f"exp_{datetime.datetime.now().strftime('%m%d_%H%M%S')}"
+    if "experiment_name" not in st.session_state:
+        st.session_state.experiment_name = f"exp_{datetime.datetime.now().strftime('%m%d_%H%M%S')}"
     experiment_name = st.text_input(
-        "🎯 实验名称", 
-        value=exp_name_default, 
+        "实验名称",
+        key="experiment_name",
         disabled=st.session_state.is_simulating,
         help="实验标识符"
     )
     
     # 实验模式选择
-    st.markdown("### 🚀 训练模式")
+    st.markdown("### 训练方式")
     mode_options = ["🎓 标准训练", "🔄 迁移学习", "📚 课程学习"]
     
     if not st.session_state.is_simulating:
@@ -662,7 +106,9 @@ with st.sidebar:
             mode_options,
             index=st.session_state.selected_mode_index,
             label_visibility="collapsed",
-            key="mode_selector"
+            key="mode_selector",
+            horizontal=True,
+            format_func=clean_label,
         )
         st.session_state.selected_mode_index = mode_options.index(selected_mode)
         
@@ -675,7 +121,7 @@ with st.sidebar:
         else:
             mode_choice = "标准训练模式"
             
-        st.success(f"✅ {mode_choice}")
+        st.caption({"标准训练模式": "在一个环境中学习运动策略。", "迁移学习实验": "比较策略在新环境中的表现。", "课程学习实验": "从简单环境逐步学习复杂任务。"}[mode_choice])
     else:
         current_mode = mode_options[st.session_state.selected_mode_index]
         if "标准训练" in current_mode:
@@ -686,14 +132,14 @@ with st.sidebar:
             mode_choice = "课程学习实验"
         else:
             mode_choice = "标准训练模式"
-        st.info(f"🔄 {mode_choice}")
+        st.caption(f"{mode_choice} · 运行中")
 
     st.markdown("---")
 
     # ==========================================================================
     # 身体参数配置
     # ==========================================================================
-    with st.expander("🐛 身体形态设计", expanded=False):
+    with st.expander("身体模型与形态", expanded=False):
         # 身体模型类型选择器
         body_model_map = {
             "🪱 多节段链条 (Worm2D)": "worm2d",
@@ -701,10 +147,11 @@ with st.sidebar:
             "🌊 主动形变波 (Active Wave)": "active_deformation",
         }
         body_model_display = st.selectbox(
-            "🧬 身体模型",
+            "身体模型",
             list(body_model_map.keys()),
             index=0,
             disabled=st.session_state.is_simulating,
+            format_func=clean_label,
             key="body_model_selector",
             help="选择线虫身体的数学模型"
         )
@@ -712,7 +159,7 @@ with st.sidebar:
 
         # ---- Worm2D 参数 ----
         if body_model_type == "worm2d":
-            st.markdown("##### 🔧 身体结构参数")
+            st.markdown("##### 身体结构")
             col1, col2 = st.columns(2)
             with col1:
                 num_segments = st.slider(
@@ -740,7 +187,7 @@ with st.sidebar:
                     key="body_width_slider",
                     help="身体节段宽度(像素)"
                 )
-            st.markdown("##### 🎯 运动参数")
+            st.markdown("##### 运动参数")
             col3, col4 = st.columns(2)
             with col3:
                 max_turn_angle = st.slider(
@@ -787,7 +234,7 @@ with st.sidebar:
 
         # ---- ContinuousCenterlineBody 参数 ----
         elif body_model_type == "continuous_centerline":
-            st.markdown("##### 🔧 中心线参数")
+            st.markdown("##### 中心线")
             col1, col2 = st.columns(2)
             with col1:
                 sample_count = st.slider(
@@ -800,7 +247,7 @@ with st.sidebar:
                     "身体总弧长", 5.0, 30.0, 12.0, 0.5,
                     disabled=st.session_state.is_simulating,
                     key="cc_body_length",
-                    help="中心线总弧长(像素)"
+                    help="中心线总弧长（场地坐标单位）"
                 )
                 head_radius = st.slider(
                     "头部半径", 2.0, 6.0, 3.0, 0.5,
@@ -827,7 +274,7 @@ with st.sidebar:
                     key="cc_max_turn_angle",
                     help="每步最大转向角度(度)"
                 )
-            st.markdown("##### 🔗 约束参数")
+            st.markdown("##### 身体约束")
             col3, col4 = st.columns(2)
             with col3:
                 curvature_limit = st.slider(
@@ -836,19 +283,10 @@ with st.sidebar:
                     key="cc_curvature_limit",
                     help="相邻段最大弯折角度(度)"
                 )
-                length_stiffness = st.slider(
-                    "长度刚度", 0.3, 1.0, 0.85, 0.05,
-                    disabled=st.session_state.is_simulating,
-                    key="cc_length_stiffness",
-                    help="长度保持约束的刚度"
-                )
+                length_stiffness = 1.0
+                st.caption("节段长度固定；相邻节段转角不超过上述限制。")
             with col4:
-                curvature_stiffness = st.slider(
-                    "曲率刚度", 0.1, 1.0, 0.35, 0.05,
-                    disabled=st.session_state.is_simulating,
-                    key="cc_curvature_stiffness",
-                    help="曲率约束的刚度"
-                )
+                curvature_stiffness = 1.0
                 damping = st.slider(
                     "运动阻尼", 0.3, 0.95, 0.72, 0.05,
                     disabled=st.session_state.is_simulating,
@@ -874,7 +312,7 @@ with st.sidebar:
         else:  # active_deformation
             st.info("🌊 ADB 波驱动模型 (RFT): 速度与转向由波参数经力/力矩平衡涌现, "
                     "没有头部步长/转向角参数; 动作 = 连续 (波幅, 频率, 曲率偏置)")
-            st.markdown("##### 🔧 中心线参数")
+            st.markdown("##### 中心线")
             col1, col2 = st.columns(2)
             with col1:
                 sample_count = st.slider(
@@ -887,7 +325,7 @@ with st.sidebar:
                     "身体总弧长", 5.0, 30.0, 12.0, 0.5,
                     disabled=st.session_state.is_simulating,
                     key="ad_body_length",
-                    help="中心线总弧长(像素)"
+                    help="中心线总弧长（场地坐标单位）"
                 )
             with col2:
                 head_radius = st.slider(
@@ -902,7 +340,7 @@ with st.sidebar:
                     key="ad_body_width",
                     help="身体节段宽度(像素)"
                 )
-            st.markdown("##### 🌊 波参数 (AC 动作的初始值; 波速/波长为固定参数)")
+            st.markdown("##### 驱动波参数")
             col5, col6 = st.columns(2)
             with col5:
                 wave_amplitude = st.slider(
@@ -930,7 +368,7 @@ with st.sidebar:
                     key="ad_wave_length",
                     help="正弦波的波长 (默认=体长, 身体上恰好一个完整波)"
                 )
-            st.markdown("##### ⚙️ RFT 力学参数")
+            st.markdown("##### RFT 力学参数")
             col7, col8 = st.columns(2)
             with col7:
                 sub_steps = st.slider(
@@ -975,8 +413,8 @@ with st.sidebar:
     # ==========================================================================
     # 噪声参数配置
     # ==========================================================================
-    with st.expander("🌪️ 布朗噪声调节", expanded=False):
-        st.markdown("##### 🔊 运动噪声参数")
+    with st.expander("噪声与扰动", expanded=False):
+        st.markdown("##### 运动噪声")
         
         col1, col2 = st.columns(2)
         with col1:
@@ -1020,7 +458,7 @@ with st.sidebar:
     # 标准训练模式配置
     # ==========================================================================
     if mode_choice == "标准训练模式":
-        st.markdown("### 📊 标准设置")
+        st.markdown("### 环境与策略")
 
         # 动作空间(方向)选择器 — 按身体模型过滤; 后续可扩展 16 方向
         if body_model_type == "active_deformation":
@@ -1035,10 +473,11 @@ with st.sidebar:
             else:
                 direction_options = {"4 方向 (离散)": "4", "8 方向 (离散)": "8", "连续方向 (Actor-Critic)": "continuous"}
             direction_label = st.selectbox(
-                "🧭 动作空间",
+                "动作空间",
                 list(direction_options.keys()),
                 index=0,
                 disabled=st.session_state.is_simulating,
+                format_func=clean_label,
                 key="direction_selector_standard",
                 help="离散方向对应 Q-Learning / DQN / Dueling DQN；连续方向仅支持 Actor-Critic"
             )
@@ -1066,10 +505,11 @@ with st.sidebar:
             default_method_idx = 0
 
         method_choice = st.selectbox(
-            "🤖 学习算法",
+            "学习算法",
             methods,
             index=default_method_idx,
             disabled=st.session_state.is_simulating,
+            format_func=clean_label,
             key=f"method_selector_standard_{body_model_type}_{direction_mode}"
         )
 
@@ -1086,16 +526,17 @@ with st.sidebar:
         }
         
         field_name = st.selectbox(
-            "🌡️ 环境类型", 
+            "温度环境",
             list(field_map.keys()), 
             index=0, 
             disabled=st.session_state.is_simulating,
+            format_func=clean_label,
             key="field_selector_standard"
         )
         field_type = field_map[field_name]
         
         enable_step_tracking = st.toggle(
-            "📈 详细分析",
+            "详细分析",
             value=False,
             disabled=st.session_state.is_simulating,
             key="step_tracking_standard"
@@ -1105,17 +546,18 @@ with st.sidebar:
     # 迁移学习实验配置
     # ==========================================================================
     elif mode_choice == "迁移学习实验":
-        st.markdown("### 🔄 迁移设置")
+        st.markdown("### 迁移设置")
         
         if not PYTORCH_AVAILABLE:
             st.error("⚠️ 需要 PyTorch")
             st.stop()
         
         method_choice = st.selectbox(
-            "🧠 算法",
+            "学习算法",
             ["🧠 DQN", "⚡ Dueling DQN"],
             index=1,
             disabled=st.session_state.is_simulating,
+            format_func=clean_label,
             key="method_selector_transfer"
         )
         # 奖励函数变体（迁移学习仅 Worm2D，能量变体对其无效果，固定原版）
@@ -1132,10 +574,11 @@ with st.sidebar:
         col1, col2 = st.columns(2)
         with col1:
             source_field_display = st.selectbox(
-                "📚 源环境",
+                "源环境",
                 transfer_options,
                 index=0,
                 disabled=st.session_state.is_simulating,
+                format_func=clean_label,
                 key="source_field_selector"
             )
             # 提取英文名称
@@ -1143,10 +586,11 @@ with st.sidebar:
         
         with col2:
             target_field_display = st.selectbox(
-                "🎯 目标环境",
+                "目标环境",
                 transfer_options,
                 index=2,
                 disabled=st.session_state.is_simulating,
+                format_func=clean_label,
                 key="target_field_selector"
             )
             # 提取英文名称
@@ -1156,7 +600,7 @@ with st.sidebar:
     # 课程学习实验配置
     # ==========================================================================
     elif mode_choice == "课程学习实验":
-        st.markdown("### 📚 课程设置")
+        st.markdown("### 课程设置")
         
         if not PYTORCH_AVAILABLE:
             st.error("⚠️ 需要 PyTorch")
@@ -1171,23 +615,24 @@ with st.sidebar:
         ]
         
         test_stage_name = st.selectbox(
-            "🏆 测试阶段",
+            "测试阶段",
             curriculum_stages,
             index=len(curriculum_stages)-1,
             disabled=st.session_state.is_simulating,
+            format_func=clean_label,
             key="test_stage_selector"
         )
         test_stage_idx = curriculum_stages.index(test_stage_name)
         
         env_size = st.slider(
-            "📐 环境尺寸",
+            "环境尺寸",
             min_value=40, max_value=120, value=80, step=10,
             disabled=st.session_state.is_simulating,
             key="env_size_slider"
         )
         
         enable_step_tracking = st.toggle(
-            "📊 详细分析",
+            "详细分析",
             value=False,
             disabled=st.session_state.is_simulating,
             key="step_tracking_curriculum"
@@ -1197,7 +642,7 @@ with st.sidebar:
     # 高级参数配置 - 紧凑版，减少默认训练量以避免卡死
     # ==========================================================================
     if mode_choice in ["标准训练模式", "迁移学习实验"]:
-        with st.expander("⚙️ 高级参数", expanded=False):
+        with st.expander("训练参数", expanded=False):
             col1, col2 = st.columns(2)
             
             with col1:
@@ -1255,7 +700,7 @@ with st.sidebar:
                     key="epsilon_decay_slider"
                 )
                 discount_factor = st.slider(
-                    "折扣因子", 0.8, 0.99, 0.95, 0.01,
+                    "折扣因子", 0.8, 0.99, (0.99 if body_model_type == "continuous_centerline" and "Actor" in method_choice else 0.95), 0.01,
                     disabled=st.session_state.is_simulating,
                     key="discount_factor_slider"
                 )
@@ -1287,9 +732,11 @@ with st.sidebar:
                 weight_decay = 0.0005
                 use_state_v2 = False
 
+            ac_random_starts = True
+            ac_seed = 7
             # Actor-Critic 专用超参数
             if "Actor-Critic" in method_choice:
-                st.markdown("##### 🎯 Actor-Critic 超参数")
+                st.markdown("##### Actor-Critic")
                 col_ac1, col_ac2 = st.columns(2)
                 with col_ac1:
                     ac_hidden_size = st.slider(
@@ -1319,6 +766,15 @@ with st.sidebar:
                         key="ac_critic_lr_slider",
                         help="价值网络学习率"
                     )
+                if body_model_type == "continuous_centerline":
+                    ac_random_starts = st.checkbox(
+                        "单热源混合起点训练", value=True,
+                        disabled=st.session_state.is_simulating, key="ac_random_starts",
+                        help="每四轮保留一轮默认起点，其余使用随机位置和初始朝向，减少只记住一条路线的情况。")
+                    ac_seed = st.number_input("训练随机种子", min_value=0, max_value=999999,
+                                              value=7, step=1, key="ac_seed",
+                                              disabled=st.session_state.is_simulating)
+                    st.caption("连续转向与步长控制；测温使用连续插值，目标到达半径为 0.75 格。")
                 ac_noise_scale = st.slider(
                     "探索噪声强度", 0.1, 2.0, 0.6, 0.1,
                     disabled=st.session_state.is_simulating,
@@ -1333,20 +789,23 @@ with st.sidebar:
                 ac_noise_scale = 0.6
 
             # 奖励函数变体 — 统一 core/reward_functions.py 模块
-            st.markdown("##### 🎁 奖励函数")
+            st.markdown("##### 奖励函数")
             reward_variant = st.selectbox(
                 "奖励变体",
-                ["original", "energy"],
+                (["continuous", "continuous_energy", "original", "energy"]
+                 if body_model_type == "continuous_centerline" and "Actor" in method_choice
+                 else ["original", "energy"]),
                 index=0,
-                format_func=lambda v: {"original": "不含能量（原版）", "energy": "含能量（单步化）"}[v],
+                format_func=lambda v: {"continuous": "连续趋近奖励", "continuous_energy": "连续趋近奖励 + 能耗",
+                                       "original": "温度阶梯（原版对照）", "energy": "温度阶梯 + 能耗"}[v],
                 disabled=st.session_state.is_simulating,
                 key="reward_variant_selectbox",
-                help="original: Worm2D 原始温度阶梯（无能量项）；energy: 阶梯 + 单步能量惩罚 -w_e·ΔE/maxE"
+                help="连续奖励使用插值温度、温度势函数与每步代价；头部进入目标 0.75 格内时成功结束。原版阶梯可作对照。"
             )
             reward_energy_weight = st.slider(
                 "能量权重 w_e", 0.0, 0.5, 0.1, 0.01,
                 format="%.2f",
-                disabled=st.session_state.is_simulating or reward_variant != "energy",
+                disabled=st.session_state.is_simulating or reward_variant not in ("energy", "continuous_energy"),
                 key="reward_energy_weight_slider",
                 help="单步能量惩罚系数：每步扣除 w_e × ΔE / max_energy（ΔE = 当步能量消耗）"
             )
@@ -1375,23 +834,43 @@ with st.sidebar:
     # ==========================================================================
     # 控制按钮区域
     # ==========================================================================
-    st.markdown("### 🎮 控制")
-    
-    if not st.session_state.is_simulating:
-        start_button = st.button(
-            "🚀 启动实验", 
-            use_container_width=True, 
-            type="primary",
-            key="start_experiment_button"
-        )
-    else:
-        start_button = False
-        if st.button("⏹️ 停止", use_container_width=True, type="secondary", key="stop_experiment_button"):
-            st.session_state.stop_requested = True
+    st.markdown("### 运行")
+    can_run = body_model_type == "worm2d" or mode_choice == "标准训练模式"
+    if not can_run:
+        st.caption("此身体模型适用于标准训练。迁移与课程学习请选择多节段链条。")
+
+    run_control = st.empty()
+    with run_control.container():
+        if not st.session_state.is_simulating:
+            st.button("开始实验", use_container_width=True, type="primary",
+                      key="start_experiment_button", on_click=request_experiment, disabled=not can_run)
+        else:
+            st.button("停止训练", use_container_width=True, type="secondary",
+                      key="stop_experiment_button", on_click=request_stop)
 
 # ==============================================================================
 # 主界面区域 - 紧凑设计
 # ==============================================================================
+
+start_button = st.session_state.pop("run_requested", False)
+if not start_button:
+    if st.session_state.pop("stopped_feedback", False):
+        st.info("本次训练已停止。最近一次完成的结果仍然保留。")
+    if mode_choice == "标准训练模式":
+        preview_field = clean_label(field_name)
+    elif mode_choice == "迁移学习实验":
+        preview_field = f"{clean_label(source_field_display)} → {clean_label(target_field_display)}"
+    else:
+        preview_field = clean_label(test_stage_name)
+    if st.session_state.get("last_result"):
+        render_experiment_preview(clean_label(body_model_display), clean_label(method_choice), preview_field, mode_choice)
+    else:
+        render_welcome(body_model_type, clean_label(body_model_display), clean_label(method_choice), preview_field, mode_choice)
+    st.button("开始新实验" if st.session_state.get("last_result") else "开始实验", type="primary", key="main_start_experiment",
+              on_click=request_experiment, disabled=not can_run, help="使用左侧当前配置开始训练")
+    st.caption("调整左侧参数，然后开始。结果将在此处展示。")
+    if st.session_state.get("last_result"):
+        render_saved_results(st.session_state.last_result)
 
 if start_button:
     st.session_state.is_simulating = True
@@ -1406,7 +885,7 @@ if start_button:
 
     # 非Worm2D身体模型不支持迁移学习和课程学习 (需要DQN)
     if body_model_type != "worm2d" and mode_choice != "标准训练模式":
-        st.error(f"❌「{body_model_display}」身体模型目前仅支持标准训练 + Q-Learning 模式。\n\n请切换为「标准训练」模式或选择「Worm2D」身体模型。")
+        st.error("此身体模型适用于标准训练。迁移与课程学习请选择多节段链条。")
         st.session_state.is_simulating = False
         st.stop()
     
@@ -1443,6 +922,8 @@ if start_button:
         "ac_actor_lr": ac_actor_lr,
         "ac_critic_lr": ac_critic_lr,
         "ac_gamma": discount_factor,
+        "ac_random_starts": locals().get("ac_random_starts", True),
+        "ac_seed": int(locals().get("ac_seed", 7)),
         "ac_batch_size": ac_batch_size,
         "ac_noise_scale": ac_noise_scale,
     }
@@ -1457,8 +938,6 @@ if start_button:
     }
     
     # 显示参数确认信息
-    st.info(f"🔧 正在使用身体参数：节段数={num_segments}, 长度={segment_length}, 头径={head_radius}, 体宽={body_width}")
-    st.info(f"🌪️ 正在使用噪声参数：位置噪声={position_noise}, 角度噪声={angle_noise}, 温度噪声={thermal_noise}")
     
     # 基础训练参数 - 包含所有必需的参数
     if mode_choice == "课程学习实验":
@@ -1505,22 +984,22 @@ if start_button:
         }
     
     # 实验信息展示 - 紧凑版
-    st.markdown("### 📊 实验监控")
+    st.markdown("### 实验概览")
     
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown(f"""
         <div class="metric-card">
-            <h4>🎯 模式</h4>
-            <p style="font-size: 1em; margin: 0;">{mode_choice}</p>
+            <h4>训练方式</h4>
+            <p style="font-size: 1em; margin: 0;">{clean_label(mode_choice)}</p>
         </div>
         """, unsafe_allow_html=True)
         
     with col2:
         st.markdown(f"""
         <div class="metric-card">
-            <h4>🧠 算法</h4>
-            <p style="font-size: 1em; margin: 0;">{method_choice}</p>
+            <h4>学习算法</h4>
+            <p style="font-size: 1em; margin: 0;">{clean_label(method_choice)}</p>
         </div>
         """, unsafe_allow_html=True)
         
@@ -1534,13 +1013,13 @@ if start_button:
             
         st.markdown(f"""
         <div class="metric-card">
-            <h4>🌡️ 环境</h4>
-            <p style="font-size: 1em; margin: 0;">{display_text}</p>
+            <h4>温度环境</h4>
+            <p style="font-size: 1em; margin: 0;">{clean_label(display_text)}</p>
         </div>
         """, unsafe_allow_html=True)
     
     # 身体参数展示
-    st.markdown("#### 🐛 当前身体配置")
+    st.markdown("#### 身体配置")
     # 模型名称映射
     model_display_name = {
         "worm2d": "多节段链条",
@@ -1574,7 +1053,7 @@ if start_button:
         if body_model_type == "active_deformation":
             card_text = f"<strong>波幅:</strong> {wave_amplitude}<br><strong>波频:</strong> {wave_frequency}"
         elif body_model_type == "continuous_centerline":
-            card_text = f"<strong>阻尼:</strong> {damping}<br><strong>长度刚度:</strong> {length_stiffness}"
+            card_text = f"<strong>阻尼:</strong> {damping}<br><strong>最大弯折:</strong> {curvature_limit}°"
         else:
             card_text = f"<strong>后退:</strong> {backward_speed}px<br><strong>转向:</strong> {turning_speed}px"
         st.markdown(f"""
@@ -1584,19 +1063,19 @@ if start_button:
         """, unsafe_allow_html=True)
     
     # 进度条和状态
-    progress_bar = st.progress(0, text="🔄 初始化实验引擎...")
+    progress_bar = st.progress(0, text="准备实验…")
     status_placeholder = st.empty()
     
     # 结果展示区域 - 紧凑版
-    st.markdown("### 📈 实验结果")
+    st.markdown("### 训练结果")
     
-    result_tabs = st.tabs(["📊 图表", "🎥 动画", "📋 日志"])
+    result_tabs = st.tabs(["曲线与轨迹", "运动回放", "运行日志"])
     
     with result_tabs[0]:
         image_placeholder = st.empty()
         image_placeholder.markdown("""
         <div class="info-box">
-            <h4>🖼️ 训练结果图表</h4>
+            <h4>训练曲线与轨迹</h4>
             <p>训练完成后显示详细分析图表。</p>
         </div>
         """, unsafe_allow_html=True)
@@ -1605,7 +1084,7 @@ if start_button:
         video_placeholder = st.empty()
         video_placeholder.markdown("""
         <div class="info-box">
-            <h4>🎥 行为动画</h4>
+            <h4>运动回放</h4>
             <p>展示线虫训练过程中的行为轨迹。</p>
         </div>
         """, unsafe_allow_html=True)
@@ -1615,6 +1094,7 @@ if start_button:
         log_placeholder.code("⏳ 等待实验开始...", language="text")
 
     # 启动仿真引擎
+    completed = False
     try:
         if mode_choice == "标准训练模式":
             engine = run_standard_simulation_engine(
@@ -1635,6 +1115,7 @@ if start_button:
         log_content = deque(maxlen=50)  # 使用双端队列更高效，最多保存50条日志
         last_stats = {}
         update_counter = 0  # 更新计数器
+        experiment_failed = False
         
         try:
             for current, total, message, stats in engine:
@@ -1642,9 +1123,10 @@ if start_button:
                     break
                     
                 if current == -1:
+                    experiment_failed = True
                     error_html = f"""
                     <div class="error-box">
-                        <h4>💥 实验错误</h4>
+                        <h4>实验未完成</h4>
                         <p>{message}</p>
                     </div>
                     """
@@ -1653,24 +1135,17 @@ if start_button:
                 
                 # 更新进度条 - 直接更新，无需额外调用
                 progress = current / total if total > 0 else 1.0
-                progress_text = f"[{current}/{total}] {message}"
+                progress_text = clean_label(message)
                 progress_bar.progress(min(progress, 1.0), text=progress_text)
                 
                 # 更新状态信息
                 if stats:
                     last_stats.update(stats)
                     if 'phase' in stats:
-                        phase_emojis = {
-                            "init": "🔄", "source_training": "🏋️", "target_testing": "🎯", 
-                            "training": "📚", "testing": "🏆", "control": "🆚"
-                        }
-                        phase_emoji = phase_emojis.get(stats['phase'], "⚙️")
-                        
-                        status_html = f"""
-                        <div class="status-box">
-                            <h4>{phase_emoji} {stats.get('phase', '进行中').title()}</h4>
-                        """
-                        
+                        phase_names = {"init": "准备实验", "source_training": "源环境训练", "target_testing": "目标环境评估", "training": "正在训练", "testing": "正在评估", "control": "对照实验", "results": "整理结果"}
+                        phase_label = phase_names.get(stats['phase'], "正在运行")
+                        status_html = f'<div class="status-box"><h4><span class="live-dot"></span>{phase_label}</h4>'
+
                         if 'round' in stats:
                             status_html += f"<p><strong>轮次:</strong> {stats['round']}</p>"
                         if 'reward' in stats:
@@ -1699,10 +1174,11 @@ if start_button:
             # 🔧 添加：正常的生成器结束处理
             print("🔧 调试：生成器正常结束")
         except Exception as gen_error:
+            experiment_failed = True
             print(f"❌ 生成器处理错误: {gen_error}")
             error_html = f"""
             <div class="error-box">
-                <h4>💥 处理错误</h4>
+                <h4>处理失败</h4>
                 <p>{gen_error}</p>
             </div>
             """
@@ -1710,121 +1186,21 @@ if start_button:
 
         # 实验完成处理
         print("🔧 调试：开始实验完成处理...")
-        if not st.session_state.stop_requested:
-            progress_bar.progress(1.0, text="✅ 实验完成！")
+        if experiment_failed:
+            status_placeholder.error("实验未完成，请查看错误信息；没有生成有效结果时不会显示成功。")
+        if not st.session_state.stop_requested and not experiment_failed:
+            progress_bar.progress(1.0, text="训练完成")
             
             success_html = """
             <div class="success-box">
-                <h4>🎉 实验成功完成！</h4>
+                <h4>训练完成</h4>
                 <p>结果已保存到指定目录。</p>
             </div>
             """
             status_placeholder.markdown(success_html, unsafe_allow_html=True)
             
-            # 显示最终日志
-            log_placeholder.code("\n".join(log_content), language="text")
-            
-            # 显示结果图片
-            try:
-                results_image_path = None
-                possible_paths = [
-                    config.results_image,
-                    os.path.join(config.output_dir, "training_results.png"),
-                    os.path.join(config.output_dir, "training_results_simple.png")
-                ]
-                
-                for path in possible_paths:
-                    if os.path.exists(path):
-                        results_image_path = path
-                        break
-                
-                if results_image_path:
-                    with result_tabs[0]:
-                        image_placeholder.image(
-                            results_image_path, 
-                            caption="📊 训练结果分析",
-                            use_column_width=True
-                        )
-                        print(f"✅ 成功显示结果图片: {results_image_path}")
-                else:
-                    print("⚠️ 未找到结果图片文件")
-                    
-            except Exception as e:
-                with result_tabs[0]:
-                    image_placeholder.markdown(f"""
-                    <div class="error-box">
-                        <h4>❌ 图表加载失败</h4>
-                        <p>{e}</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-            
-            # 🔧 添加：显示动画文件
-            try:
-                # 查找动画文件
-                animation_paths = [
-                    os.path.join(config.output_dir, "training_animation.gif"),
-                    os.path.join(config.output_dir, "training_animation.mp4"),
-                    os.path.join(config.output_dir, "worm_body_animation.gif"),
-                    os.path.join(config.output_dir, "worm_body_animation.mp4"),
-                    os.path.join(config.output_dir, "simple_training_animation.gif"),  # 回退动画
-                ]
-                
-                found_animation = None
-                animation_type = None
-                
-                for anim_path in animation_paths:
-                    if os.path.exists(anim_path):
-                        found_animation = anim_path
-                        animation_type = "gif" if anim_path.endswith('.gif') else "mp4"
-                        break
-                
-                if found_animation:
-                    with result_tabs[1]:
-                        if animation_type == "gif":
-                            # 显示GIF动画
-                            video_placeholder.image(
-                                found_animation,
-                                caption="🎥 线虫训练行为动画",
-                                use_column_width=True
-                            )
-                            print(f"✅ 成功显示GIF动画: {found_animation}")
-                        else:
-                            # 显示MP4视频
-                            try:
-                                video_placeholder.video(
-                                    found_animation,
-                                    format="video/mp4",
-                                    start_time=0
-                                )
-                                print(f"✅ 成功显示MP4视频: {found_animation}")
-                            except Exception as video_error:
-                                print(f"⚠️ MP4显示失败，尝试下载链接: {video_error}")
-                                video_placeholder.markdown(f"""
-                                <div class="info-box">
-                                    <h4>🎥 训练动画</h4>
-                                    <p>动画已生成，请前往结果目录查看：</p>
-                                    <p><code>{found_animation}</code></p>
-                                </div>
-                                """, unsafe_allow_html=True)
-                else:
-                    with result_tabs[1]:
-                        video_placeholder.markdown("""
-                        <div class="warning-box">
-                            <h4>⚠️ 未找到动画文件</h4>
-                            <p>动画可能生成失败或保存在其他位置。</p>
-                        </div>
-                        """, unsafe_allow_html=True)
-                    print("⚠️ 未找到任何动画文件")
-                    
-            except Exception as anim_error:
-                with result_tabs[1]:
-                    video_placeholder.markdown(f"""
-                    <div class="error-box">
-                        <h4>❌ 动画加载失败</h4>
-                        <p>{anim_error}</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                print(f"❌ 动画显示错误: {anim_error}")
+            st.session_state.last_result = {"output_dir": str(config.output_dir), "name": experiment_name}
+            completed = True
     except Exception as e:
         st.error(f"❌ 实验运行错误: {e}")
         st.code(traceback.format_exc(), language="python")
@@ -1832,73 +1208,13 @@ if start_button:
     finally:
         st.session_state.is_simulating = False
         st.session_state.stop_requested = False
-        
-        # 🔧 优化：使用按钮重启而不是自动rerun
-        if st.button("🔄 新实验", use_container_width=True, type="primary", key="restart_button"):
-            # 清理session state
-            for key in list(st.session_state.keys()):
-                if key.endswith('_slider') or key.endswith('_input') or key.endswith('_selector'):
-                    continue  # 保留用户设置的参数
-                if key in ['is_simulating', 'stop_requested', 'current_config']:
-                    del st.session_state[key]
+        if completed:
+            # 结果包已保存，重新启用参数；请求标志已消费，不会再次训练。
             st.rerun()
+        with run_control.container():
+            st.button("开始实验", use_container_width=True, type="primary",
+                      key="start_experiment_button", on_click=request_experiment)
+        st.button("配置下一次实验", key="restart_button")
 
-else:
-    # 默认界面 - 紧凑版
-    st.markdown("""
-    <div class="info-box">
-        <h3>👈 快速开始</h3>
-        <p>在左侧配置参数，点击"启动实验"开始仿真。</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # 功能介绍 - 紧凑版
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.markdown("""
-        <div class="feature-card">
-            <h4>🎓 标准训练</h4>
-            <p>单环境专精训练，适合基础研究。</p>
-            <ul style="font-size: 0.9em;">
-                <li>🎯 单环境训练</li>
-                <li>📊 详细学习曲线</li>
-                <li>🔧 多种算法</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-        <div class="feature-card">
-            <h4>🔄 迁移学习</h4>
-            <p>验证知识迁移能力。</p>
-            <ul style="font-size: 0.9em;">
-                <li>🏋️ 源环境预训练</li>
-                <li>🎯 目标环境测试</li>
-                <li>📈 迁移效果评估</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col3:
-        st.markdown("""
-        <div class="feature-card">
-            <h4>📚 课程学习</h4>
-            <p>渐进式多阶段训练。</p>
-            <ul style="font-size: 0.9em;">
-                <li>📖 循序渐进</li>
-                <li>🏆 留出法验证</li>
-                <li>🆚 对照实验</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-
-# 页脚 - 紧凑版
-st.markdown("---")
-st.markdown("""
-<div class="footer-style">
-    <h5>🐛 C. elegans 仿真系统</h5>
-    <p style="font-size: 0.9em;">基于深度强化学习的多节段身体建模平台</p>
-</div>
-""", unsafe_allow_html=True)
+# 简洁页脚
+st.markdown('<footer class="lab-footer"><span>C. elegans Lab</span><span>感知 · 决策 · 运动</span></footer>', unsafe_allow_html=True)

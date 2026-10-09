@@ -1,0 +1,59 @@
+{
+  "git_sha": "fd7add178df6652344dd6527da1c4e817140d811",
+  "git_dirty": true,
+  "python": "3.9.6",
+  "sources_sha256": {
+    "analysis/phase2_four_action_bridge.py": "4dc015acf2b93a44fb5ea6d9fe12de3b3483f88473494fcfafa529a86be5d2a0",
+    "src/thermotaxis/phase2_control.py": "23cae5485e1a4fd2ff651c584e11f127aefa9f9bebd46e8dae42d3dbd736c7a7",
+    "src/thermotaxis/phase2_body.py": "f641710a6455a4efdb06584ac94e30a199681f6345f92fdd35d2ae73f3db5f6e",
+    "configs/phase2_control_reference.json": "6a629b43c0331e4285a0998770919a5411180d3e8ac85a51f5cc6c4da376bd21",
+    "src/thermotaxis/legacy_policy.py": "90c2fd24334c3de8d10bbe28ee6254f3df115580c39de4a6f142af561d2877c3",
+    "docs/reports/assets/legacy-policy-bridge-2026-10-04/new-training-interface-qtable.json": "31d662edeef8f366be134dcadf36c110bc7db35ea8fbeae3bbed2a94c10e03bb"
+  },
+  "command": "PYTHONPATH=src python3 analysis/phase2_four_action_bridge.py",
+  "design": {
+    "schema_version": 1,
+    "kind": "deterministic_interface_benchmark",
+    "cardinal_actions": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "cardinal_duration_s": 24,
+    "sequence_actions": [
+      2,
+      0,
+      3,
+      1
+    ],
+    "sequence_hold_s": 24,
+    "sequence_duration_s": 96,
+    "settling_metric": "first complete 1s with every axis heading error <=.25rad",
+    "tail_window_s": 4,
+    "dt_compare_s": [
+      0.02,
+      0.01
+    ],
+    "no_contact": true,
+    "no_training": true,
+    "no_randomness": false,
+    "randomness": "frozen Q-table tie RNG only; seed 44001",
+    "frozen_policy_demo": {
+      "planned_duration_s": 96,
+      "initial_center_m": [
+        0.001,
+        0.002
+      ],
+      "initial_orientation_rad": 0,
+      "grid_extent_m": [
+        0.004,
+        0.004
+      ],
+      "tie_seed": 44001,
+      "on_head_exit": "terminal at first out-of-domain physics sample; no projection"
+    },
+    "initial_forward_axis": "left; theta=0, forward axis=theta+pi",
+    "observation_mode": "local_temperature (scripted commands ignore observation)"
+  }
+}
