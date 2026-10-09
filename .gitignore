@@ -13,6 +13,7 @@ tmp/
 # Large generated media from simulations
 *.mp4
 *.gif
+!docs/reports/assets/ccb-continuous-2026-10-08/training_animation.gif
 
 # Local virtual environments
 .venv/

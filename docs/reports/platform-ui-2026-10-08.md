@@ -23,6 +23,8 @@
 
 ![结果页面](assets/platform-ui-2026-10-08/results.jpg)
 
+本次新版界面验收产生的[训练动画](assets/ccb-continuous-2026-10-08/training_animation.gif)已归档到 CCB 连续导航报告素材文件夹，展示800轮训练中最后3轮的身体运动；与验收数据记录的原始 GIF 字节校验一致。
+
 窄屏样式已设置，实际浏览器视觉验收使用桌面视口；未进行移动端浏览器的实际运行验证。
 
 参考：[Apple 官网](https://www.apple.com.cn/)、[Streamlit App testing](https://docs.streamlit.io/develop/api-reference/app-testing)。
