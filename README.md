@@ -1,5 +1,13 @@
 # 软体仿生线虫研究平台
 
+2026-10-24 普通网络：去均值 GRU16 已在三个训练种子的二维基础评估中达到 100% 追踪时间比例；原始 GRU 追加示范与优化后为 91.92%。头摆频率迁移暴露了 MLP 的局限。当前为监督模仿学习，真实回路的样本效率与物理约束收益仍待对照。见 [训练结果、迁移与完整材料](docs/reports/neural-tracking-2026-10-24.md)。
+
+2026-10-24 二维场景：持续推进、头部摆动测温和有限转向响应已实现，444条验证完成。这是规定运动学基准。见 [场景验证](docs/reports/isothermal-scene-2026-10-24.md)。
+
+2026-10-24 编码与可学习性：42组编码×拓扑探索及15次监督可学习性对照已完成，简化真实连接尚未显示优势。记录见 [编码与拓扑](docs/reports/encoding-topology-2026-10-24.md)、[可学习性](docs/reports/trainability-matrix-2026-10-24.md)和 [首批回路探索](docs/reports/connectome-pilot-2026-10-24.md)。
+
+2026-10-24 主线：已导入修正版真实连接数据。下一项比较真实连接、度保持重排与普通记忆网络，再解释它们与物理约束的配合。见 [研究主线](docs/research-mainline.md)及 [场景设计](docs/scenario-design.md)。
+
 2026-10-08：原可视化平台 CCB 连续测温、奖励、几何约束与 DDPG 导航已优化。单热源800轮/500步、三个随机种子、8起点冻结评估共24/24次进入中心0.75格内；该结果属于原平台额外信息基线，不是 SI 身体趋温结论。修改、失败记录及复现方法见 [连续导航验证报告](docs/reports/ccb-continuous-navigation-2026-10-08.md)。
 
 2026-10-08 界面改版：极简浅色布局、轻量交互、训练后自动恢复配置、切换参数保留结果。界面说明与截图见 [界面改版记录](docs/reports/platform-ui-2026-10-08.md)。
@@ -45,7 +53,7 @@ GitHub 仓库：
 - 第 0 阶段：严格配置、单位与信息边界、独立时钟和随机源、可复现结果包。
 - 第 1 阶段：一维点模型、局部含噪测温、双时间尺度记忆、有界随机转向，以及共享种子的响应/无响应配对集合。
 - 理论与诊断：连续无响应首次到达、离散概率传播、弱响应局部替代模型，以及控制周期/观察窗口和速率夹限诊断。身体力学与介质耗散已有独立模块，身体趋温统计尚未开展。
-- 合并批次记录的完整回归：`PYTHONPATH=src python3 -m pytest tests 程序/test_core.py -q` 共146项通过，另有14条既有 matplotlib/pyparsing 弃用警告；原平台连续导航验证见 `docs/reports/ccb-continuous-navigation-2026-10-08.md`，SI身体核验见 `docs/validation/phase2-body-validation-2026-10-04.md`。
+- 合并批次记录的完整回归：`PYTHONPATH=src python3 -m pytest tests 程序/test_core.py -q` 共176项通过，另有14条既有 matplotlib/pyparsing 弃用警告；原平台连续导航验证见 `docs/reports/ccb-continuous-navigation-2026-10-08.md`，SI身体核验见 `docs/validation/phase2-body-validation-2026-10-04.md`。
 
 以下内容描述已经合并的旧平台基线：
 
@@ -554,7 +562,7 @@ Streamlit 已提供身体模型与连续控制选择、奖励选项、结果保�
 
 ## 建议的下一步
 
-趋温重建主线下一步是在 SI 身体模型中接入局部记忆控制，设置无响应对照，比较趋温表现、控制时间尺度与介质耗散。
+当前优先在二维规定运动学场景中比较真实连接、度保持重排与普通记忆网络的学习曲线，随后交叉研究执行响应与动作限制。SI 身体的局部记忆控制与耗散比较保留为后续身体阶段，详见 [研究主线](docs/research-mainline.md)。
 
 原平台另保留以下扩展计划；已有 Actor-Critic/DDPG 训练路径及身体模型、连续控制界面入口不再列为待实现事项：
 

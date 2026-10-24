@@ -1,0 +1,58 @@
+{
+  "strategy": "unchanged original CLI in isolated per-case subprocesses",
+  "workers": 3,
+  "initial_completed_cases": [
+    [
+      "anatomical",
+      "raw",
+      0,
+      7
+    ],
+    [
+      "anatomical",
+      "raw",
+      0,
+      17
+    ],
+    [
+      "anatomical",
+      "raw",
+      0,
+      27
+    ],
+    [
+      "anatomical",
+      "adaptive",
+      0,
+      7
+    ],
+    [
+      "anatomical",
+      "adaptive",
+      0,
+      17
+    ],
+    [
+      "anatomical",
+      "adaptive",
+      0,
+      27
+    ],
+    [
+      "rewired",
+      "raw",
+      10001,
+      7
+    ],
+    [
+      "rewired",
+      "raw",
+      10001,
+      17
+    ]
+  ],
+  "planned_cases": 42,
+  "scheduler_sha256": "cb4aeeb2c30fc121a7c59263946abc9ca549eea7d8daf70d35762826d6c52c9b",
+  "original_sources_verified": true,
+  "completed_cases": 42
+}

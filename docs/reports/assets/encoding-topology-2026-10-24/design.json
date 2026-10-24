@@ -1,0 +1,330 @@
+{
+  "status": "exploratory_supervised_encoding_by_topology",
+  "task": {
+    "batch": 16,
+    "steps": 180,
+    "dt_s": 1.0,
+    "speed_m_s": 0.0002,
+    "half_extent_m": 0.015,
+    "gradient_K_m": 100.0,
+    "noise_K": 0.05,
+    "comfort_K": 0.25,
+    "initial_min_m": 0.008,
+    "initial_max_m": 0.012
+  },
+  "runs": [
+    {
+      "architecture": "anatomical",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 7
+    },
+    {
+      "architecture": "anatomical",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 17
+    },
+    {
+      "architecture": "anatomical",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 27
+    },
+    {
+      "architecture": "anatomical",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 7
+    },
+    {
+      "architecture": "anatomical",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 17
+    },
+    {
+      "architecture": "anatomical",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 27
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10001,
+      "seed": 7
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10001,
+      "seed": 17
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10001,
+      "seed": 27
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10002,
+      "seed": 7
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10002,
+      "seed": 17
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10002,
+      "seed": 27
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10003,
+      "seed": 7
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10003,
+      "seed": 17
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10003,
+      "seed": 27
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10001,
+      "seed": 7
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10001,
+      "seed": 17
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10001,
+      "seed": 27
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10002,
+      "seed": 7
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10002,
+      "seed": 17
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10002,
+      "seed": 27
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10003,
+      "seed": 7
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10003,
+      "seed": 17
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10003,
+      "seed": 27
+    },
+    {
+      "architecture": "dense",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 7
+    },
+    {
+      "architecture": "dense",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 17
+    },
+    {
+      "architecture": "dense",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 27
+    },
+    {
+      "architecture": "dense",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 7
+    },
+    {
+      "architecture": "dense",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 17
+    },
+    {
+      "architecture": "dense",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 27
+    },
+    {
+      "architecture": "gru2",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 7
+    },
+    {
+      "architecture": "gru2",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 17
+    },
+    {
+      "architecture": "gru2",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 27
+    },
+    {
+      "architecture": "gru2",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 7
+    },
+    {
+      "architecture": "gru2",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 17
+    },
+    {
+      "architecture": "gru2",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 27
+    },
+    {
+      "architecture": "gru16",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 7
+    },
+    {
+      "architecture": "gru16",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 17
+    },
+    {
+      "architecture": "gru16",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 27
+    },
+    {
+      "architecture": "gru16",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 7
+    },
+    {
+      "architecture": "gru16",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 17
+    },
+    {
+      "architecture": "gru16",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 27
+    }
+  ],
+  "updates": 512,
+  "training_episodes": 192,
+  "validation_episodes": 64,
+  "batch": 32,
+  "optimizer": {
+    "name": "Adam",
+    "lr": 0.003,
+    "clip_gradient_norm": 1.0
+  },
+  "input": {
+    "level": "signed local noisy temperature deviation / 1.5K",
+    "auxiliary": "(fast signed temperature - slow signed temperature)/0.05K, or zero in raw condition",
+    "fast_tau_s": 0.5,
+    "slow_tau_s": 5.0,
+    "dt_s": 1.0,
+    "filters_computed_in_both_conditions": true
+  },
+  "controlled_comparison": "Within each architecture/topology/seed, only auxiliary channel masking changes",
+  "teacher": "previous known absolute-error two-timescale controller; states never input",
+  "data_seeds": {
+    "train": 82001,
+    "validation": 82002,
+    "behavior_validation": 90001,
+    "exploratory_holdouts": 94001
+  },
+  "initialization": "zero actor head: all models begin with rate .255/s",
+  "checkpoint_rule": "final fixed-budget model; retain all curves, no best checkpoint selection",
+  "source_sha256": {
+    "analysis/encoding_topology_probe.py": "261e3a69b346137ffad1a6744f3625d6c50788504e7ae0eeb45c3ed6db5b44aa",
+    "analysis/connectome_memory_probe.py": "e98a283c4f7689b96477877dd173183850aa823a9a3005699897c73c8d953713",
+    "analysis/connectome_pilot.py": "085aec96fd93ef1bb0517ee07d8eaa641dba27a715bd45d403642b4a8739896f",
+    "src/thermotaxis/encoding_policies.py": "924fe0e0c0404c697caed55d7f16823e8736ff48f671ed5ab9a438bc1049164c",
+    "src/thermotaxis/connectome_policy.py": "9f86e6b54a50d2011f2f048c73b0a743704ce23807579acc0ebce0dc7ea47721",
+    "src/thermotaxis/connectome.py": "007b6e7eaf144e7b0f0f2c101e0346a6823fa4770470c7686dd976b08be4aeb0"
+  },
+  "data": {
+    "dataset": "Cook2019Herm (July 2020 corrected)",
+    "paper_doi": "10.1038/s41586-019-1352-7",
+    "repository": "https://github.com/openworm/ConnectomeToolbox",
+    "commit": "ffe570268b7cffb9329cd009a1bb37d60db2d465",
+    "source_path": "cect/cache/Cook2019HermReader.json",
+    "source_git_blob_sha1": "2c44e7abaa1efa71c4d814a945692f5775692abc",
+    "workbook_git_blob_sha1": "4d53c16e9a07c1ecfd068a02b39ccffd6b8a3eaa",
+    "retrieved_date": "2026-10-24",
+    "includes_non_neuronal_cells": true,
+    "derived_data_sha256": "6e2bd37286570c7af6f87f82a453c8113d3b30429e134cb934218ca7342097da"
+  },
+  "git_commit": "922ca2ef5dfbdcf39fa56e4d588583c4879a4daa",
+  "versions": {
+    "torch": "2.6.0",
+    "numpy": "2.0.2"
+  },
+  "limitations": [
+    "not reinforcement learning or RL sample-efficiency evidence",
+    "same signed filter form across models; not calibrated AFD physiology",
+    "chemical topology ablation keeps real gap/input/output assumptions",
+    "generic GRU has different dynamics and readout; GRU2 is only near parameter matched",
+    "all rewired topologies crossed with training seeds, not selected for success",
+    "64 behavior episodes are not 64 independent trained models",
+    "holdouts are exploratory and retired after inspection"
+  ]
+}

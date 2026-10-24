@@ -1,0 +1,1791 @@
+{
+  "connectome-pilot-2026-10-24": {
+    "design": {
+      "status": "exploratory_pilot",
+      "biological_fidelity": "anatomical connectivity only; learned signed chemical efficacy; simplified rate dynamics",
+      "task": {
+        "batch": 16,
+        "steps": 180,
+        "dt_s": 1.0,
+        "speed_m_s": 0.0002,
+        "half_extent_m": 0.015,
+        "gradient_K_m": 100.0,
+        "noise_K": 0.05,
+        "comfort_K": 0.25,
+        "initial_min_m": 0.008,
+        "initial_max_m": 0.012
+      },
+      "circuit": "classic8",
+      "variants": [
+        "anatomical",
+        "rewired",
+        "dense"
+      ],
+      "seeds": [
+        7,
+        17,
+        27
+      ],
+      "updates": 48,
+      "observation": [
+        "noisy_local_temperature_minus_fixed_preference"
+      ],
+      "readout": "engineering hypothesis: AIY pair (4 cells) or RIA pair (8 cells)",
+      "comparison": "chemical topology ablation; gap topology held fixed; dense baseline has same input/readout bottlenecks",
+      "limitations": [
+        "no spiking/cell-specific adaptation",
+        "no learned cultivation-temperature memory",
+        "one topology per training seed; pilot not crossed factorial",
+        "1D reflecting point model, no body mechanics",
+        "not parameter-matched dense baseline",
+        "all checkpoints retained; no best checkpoint selection"
+      ],
+      "optimizer": {
+        "name": "Adam",
+        "lr": 0.003,
+        "gamma": 0.99,
+        "gae_lambda": 0.95,
+        "entropy_coefficient": 0.01,
+        "tau_s": 2.0
+      },
+      "data": {
+        "dataset": "Cook2019Herm (July 2020 corrected)",
+        "paper_doi": "10.1038/s41586-019-1352-7",
+        "repository": "https://github.com/openworm/ConnectomeToolbox",
+        "commit": "ffe570268b7cffb9329cd009a1bb37d60db2d465",
+        "source_path": "cect/cache/Cook2019HermReader.json",
+        "source_git_blob_sha1": "2c44e7abaa1efa71c4d814a945692f5775692abc",
+        "workbook_git_blob_sha1": "4d53c16e9a07c1ecfd068a02b39ccffd6b8a3eaa",
+        "retrieved_date": "2026-10-24",
+        "includes_non_neuronal_cells": true,
+        "derived_data_sha256": "6e2bd37286570c7af6f87f82a453c8113d3b30429e134cb934218ca7342097da"
+      },
+      "git_commit": "922ca2ef5dfbdcf39fa56e4d588583c4879a4daa",
+      "versions": {
+        "torch": "2.6.0",
+        "numpy": "2.0.2"
+      },
+      "code_sha256": {
+        "analysis/connectome_pilot.py": "6fdf08bbed6875a17dd7f1b5e0cf7916a980c446569e75e30e86a2205f1505c7",
+        "src/thermotaxis/connectome.py": "007b6e7eaf144e7b0f0f2c101e0346a6823fa4770470c7686dd976b08be4aeb0",
+        "src/thermotaxis/connectome_policy.py": "247af049879b5b32d19d8bfbba35b5ea3483a1a5adcb340f4879747728961c97"
+      }
+    },
+    "baselines": {
+      "blind": {
+        "residence_fraction": 0.07907986111111111,
+        "mean_absolute_error_K": 0.8943879597089663,
+        "entered_fraction": 0.3125
+      },
+      "memory": {
+        "residence_fraction": 0.6028645833333334,
+        "mean_absolute_error_K": 0.31515143066508083,
+        "entered_fraction": 0.984375
+      }
+    },
+    "runs": [
+      {
+        "variant": "anatomical",
+        "seed": 7,
+        "topology_seed": 10007,
+        "parameter_count": 38,
+        "rewiring": null,
+        "curves": [
+          {
+            "update": 0,
+            "interactions": 0,
+            "residence_fraction": 0.03975694444444444,
+            "mean_absolute_error_K": 0.9347555749629856,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 16,
+            "interactions": 46080,
+            "residence_fraction": 0.03107638888888889,
+            "mean_absolute_error_K": 0.9608194687338136,
+            "entered_fraction": 0.171875
+          },
+          {
+            "update": 32,
+            "interactions": 92160,
+            "residence_fraction": 0.041666666666666664,
+            "mean_absolute_error_K": 0.9296340159668515,
+            "entered_fraction": 0.203125
+          },
+          {
+            "update": 48,
+            "interactions": 138240,
+            "residence_fraction": 0.021527777777777778,
+            "mean_absolute_error_K": 0.9679260053018593,
+            "entered_fraction": 0.171875
+          }
+        ],
+        "holdouts": {
+          "same_distribution": {
+            "residence_fraction": 0.009895833333333333,
+            "mean_absolute_error_K": 0.9996101935774584,
+            "entered_fraction": 0.078125
+          },
+          "more_noise": {
+            "residence_fraction": 0.009895833333333333,
+            "mean_absolute_error_K": 0.9996101935774584,
+            "entered_fraction": 0.078125
+          },
+          "shallower_gradient": {
+            "residence_fraction": 0.026822916666666665,
+            "mean_absolute_error_K": 0.6997271355042207,
+            "entered_fraction": 0.171875
+          }
+        },
+        "wall_time_s": 2.7406141670000004
+      },
+      {
+        "variant": "anatomical",
+        "seed": 17,
+        "topology_seed": 10017,
+        "parameter_count": 38,
+        "rewiring": null,
+        "curves": [
+          {
+            "update": 0,
+            "interactions": 0,
+            "residence_fraction": 0.03975694444444444,
+            "mean_absolute_error_K": 0.9347555749629856,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 16,
+            "interactions": 46080,
+            "residence_fraction": 0.04401041666666667,
+            "mean_absolute_error_K": 0.9311604756224148,
+            "entered_fraction": 0.203125
+          },
+          {
+            "update": 32,
+            "interactions": 92160,
+            "residence_fraction": 0.03107638888888889,
+            "mean_absolute_error_K": 0.9527440799760045,
+            "entered_fraction": 0.171875
+          },
+          {
+            "update": 48,
+            "interactions": 138240,
+            "residence_fraction": 0.041666666666666664,
+            "mean_absolute_error_K": 0.9296340159668515,
+            "entered_fraction": 0.203125
+          }
+        ],
+        "holdouts": {
+          "same_distribution": {
+            "residence_fraction": 0.010069444444444445,
+            "mean_absolute_error_K": 1.0106031546936323,
+            "entered_fraction": 0.125
+          },
+          "more_noise": {
+            "residence_fraction": 0.010069444444444445,
+            "mean_absolute_error_K": 1.0106031546936323,
+            "entered_fraction": 0.125
+          },
+          "shallower_gradient": {
+            "residence_fraction": 0.02326388888888889,
+            "mean_absolute_error_K": 0.7074222082855425,
+            "entered_fraction": 0.171875
+          }
+        },
+        "wall_time_s": 2.9574715830000002
+      },
+      {
+        "variant": "anatomical",
+        "seed": 27,
+        "topology_seed": 10027,
+        "parameter_count": 38,
+        "rewiring": null,
+        "curves": [
+          {
+            "update": 0,
+            "interactions": 0,
+            "residence_fraction": 0.03975694444444444,
+            "mean_absolute_error_K": 0.9347555749629856,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 16,
+            "interactions": 46080,
+            "residence_fraction": 0.04001736111111111,
+            "mean_absolute_error_K": 0.9569590025879607,
+            "entered_fraction": 0.203125
+          },
+          {
+            "update": 32,
+            "interactions": 92160,
+            "residence_fraction": 0.021180555555555557,
+            "mean_absolute_error_K": 0.9779022278914765,
+            "entered_fraction": 0.15625
+          },
+          {
+            "update": 48,
+            "interactions": 138240,
+            "residence_fraction": 0.022569444444444444,
+            "mean_absolute_error_K": 0.9523565337419966,
+            "entered_fraction": 0.15625
+          }
+        ],
+        "holdouts": {
+          "same_distribution": {
+            "residence_fraction": 0.0038194444444444443,
+            "mean_absolute_error_K": 1.0144149968532843,
+            "entered_fraction": 0.03125
+          },
+          "more_noise": {
+            "residence_fraction": 0.0038194444444444443,
+            "mean_absolute_error_K": 1.0144149968532843,
+            "entered_fraction": 0.03125
+          },
+          "shallower_gradient": {
+            "residence_fraction": 0.016059027777777776,
+            "mean_absolute_error_K": 0.711272107371766,
+            "entered_fraction": 0.140625
+          }
+        },
+        "wall_time_s": 2.653782083000001
+      },
+      {
+        "variant": "rewired",
+        "seed": 7,
+        "topology_seed": 10007,
+        "parameter_count": 38,
+        "rewiring": {
+          "accepted_swaps": 116,
+          "changed_entries": 18
+        },
+        "curves": [
+          {
+            "update": 0,
+            "interactions": 0,
+            "residence_fraction": 0.03975694444444444,
+            "mean_absolute_error_K": 0.9347555749629856,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 16,
+            "interactions": 46080,
+            "residence_fraction": 0.03263888888888889,
+            "mean_absolute_error_K": 0.9537785818074381,
+            "entered_fraction": 0.171875
+          },
+          {
+            "update": 32,
+            "interactions": 92160,
+            "residence_fraction": 0.041666666666666664,
+            "mean_absolute_error_K": 0.9296340159668515,
+            "entered_fraction": 0.203125
+          },
+          {
+            "update": 48,
+            "interactions": 138240,
+            "residence_fraction": 0.04479166666666667,
+            "mean_absolute_error_K": 0.950451060169929,
+            "entered_fraction": 0.203125
+          }
+        ],
+        "holdouts": {
+          "same_distribution": {
+            "residence_fraction": 0.021961805555555554,
+            "mean_absolute_error_K": 0.9938960584045418,
+            "entered_fraction": 0.140625
+          },
+          "more_noise": {
+            "residence_fraction": 0.021961805555555554,
+            "mean_absolute_error_K": 0.9938960584045418,
+            "entered_fraction": 0.140625
+          },
+          "shallower_gradient": {
+            "residence_fraction": 0.03741319444444444,
+            "mean_absolute_error_K": 0.6957272408831792,
+            "entered_fraction": 0.1875
+          }
+        },
+        "wall_time_s": 2.6215354160000004
+      },
+      {
+        "variant": "rewired",
+        "seed": 17,
+        "topology_seed": 10017,
+        "parameter_count": 38,
+        "rewiring": {
+          "accepted_swaps": 119,
+          "changed_entries": 22
+        },
+        "curves": [
+          {
+            "update": 0,
+            "interactions": 0,
+            "residence_fraction": 0.03975694444444444,
+            "mean_absolute_error_K": 0.9347555749629856,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 16,
+            "interactions": 46080,
+            "residence_fraction": 0.04401041666666667,
+            "mean_absolute_error_K": 0.9311604756224148,
+            "entered_fraction": 0.203125
+          },
+          {
+            "update": 32,
+            "interactions": 92160,
+            "residence_fraction": 0.039149305555555555,
+            "mean_absolute_error_K": 0.9401282298853917,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 48,
+            "interactions": 138240,
+            "residence_fraction": 0.041666666666666664,
+            "mean_absolute_error_K": 0.9299222104112959,
+            "entered_fraction": 0.203125
+          }
+        ],
+        "holdouts": {
+          "same_distribution": {
+            "residence_fraction": 0.010069444444444445,
+            "mean_absolute_error_K": 1.010638560331139,
+            "entered_fraction": 0.125
+          },
+          "more_noise": {
+            "residence_fraction": 0.010069444444444445,
+            "mean_absolute_error_K": 1.010638560331139,
+            "entered_fraction": 0.125
+          },
+          "shallower_gradient": {
+            "residence_fraction": 0.02326388888888889,
+            "mean_absolute_error_K": 0.7074469922317973,
+            "entered_fraction": 0.171875
+          }
+        },
+        "wall_time_s": 2.596211792
+      },
+      {
+        "variant": "rewired",
+        "seed": 27,
+        "topology_seed": 10027,
+        "parameter_count": 38,
+        "rewiring": {
+          "accepted_swaps": 111,
+          "changed_entries": 20
+        },
+        "curves": [
+          {
+            "update": 0,
+            "interactions": 0,
+            "residence_fraction": 0.03975694444444444,
+            "mean_absolute_error_K": 0.9347555749629856,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 16,
+            "interactions": 46080,
+            "residence_fraction": 0.03975694444444444,
+            "mean_absolute_error_K": 0.9587610859212939,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 32,
+            "interactions": 92160,
+            "residence_fraction": 0.035069444444444445,
+            "mean_absolute_error_K": 0.96420816071701,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 48,
+            "interactions": 138240,
+            "residence_fraction": 0.021527777777777778,
+            "mean_absolute_error_K": 0.9623684740637672,
+            "entered_fraction": 0.15625
+          }
+        ],
+        "holdouts": {
+          "same_distribution": {
+            "residence_fraction": 0.005381944444444444,
+            "mean_absolute_error_K": 1.0107091242656938,
+            "entered_fraction": 0.046875
+          },
+          "more_noise": {
+            "residence_fraction": 0.005381944444444444,
+            "mean_absolute_error_K": 1.0107091242656938,
+            "entered_fraction": 0.046875
+          },
+          "shallower_gradient": {
+            "residence_fraction": 0.01840277777777778,
+            "mean_absolute_error_K": 0.7074963869859856,
+            "entered_fraction": 0.15625
+          }
+        },
+        "wall_time_s": 2.618219208000001
+      },
+      {
+        "variant": "dense",
+        "seed": 7,
+        "topology_seed": 10007,
+        "parameter_count": 84,
+        "rewiring": null,
+        "curves": [
+          {
+            "update": 0,
+            "interactions": 0,
+            "residence_fraction": 0.03975694444444444,
+            "mean_absolute_error_K": 0.9347555749629856,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 16,
+            "interactions": 46080,
+            "residence_fraction": 0.03671875,
+            "mean_absolute_error_K": 0.9555913213992637,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 32,
+            "interactions": 92160,
+            "residence_fraction": 0.03107638888888889,
+            "mean_absolute_error_K": 0.9544944180077459,
+            "entered_fraction": 0.171875
+          },
+          {
+            "update": 48,
+            "interactions": 138240,
+            "residence_fraction": 0.036631944444444446,
+            "mean_absolute_error_K": 0.948237446370585,
+            "entered_fraction": 0.1875
+          }
+        ],
+        "holdouts": {
+          "same_distribution": {
+            "residence_fraction": 0.023697916666666666,
+            "mean_absolute_error_K": 0.9932790523174946,
+            "entered_fraction": 0.15625
+          },
+          "more_noise": {
+            "residence_fraction": 0.023697916666666666,
+            "mean_absolute_error_K": 0.9932790523174946,
+            "entered_fraction": 0.15625
+          },
+          "shallower_gradient": {
+            "residence_fraction": 0.03967013888888889,
+            "mean_absolute_error_K": 0.6952953366222462,
+            "entered_fraction": 0.1875
+          }
+        },
+        "wall_time_s": 2.5797444170000006
+      },
+      {
+        "variant": "dense",
+        "seed": 17,
+        "topology_seed": 10017,
+        "parameter_count": 84,
+        "rewiring": null,
+        "curves": [
+          {
+            "update": 0,
+            "interactions": 0,
+            "residence_fraction": 0.03975694444444444,
+            "mean_absolute_error_K": 0.9347555749629856,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 16,
+            "interactions": 46080,
+            "residence_fraction": 0.039149305555555555,
+            "mean_absolute_error_K": 0.9401387218547999,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 32,
+            "interactions": 92160,
+            "residence_fraction": 0.039149305555555555,
+            "mean_absolute_error_K": 0.9389477496325777,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 48,
+            "interactions": 138240,
+            "residence_fraction": 0.03975694444444444,
+            "mean_absolute_error_K": 0.9368458527407632,
+            "entered_fraction": 0.1875
+          }
+        ],
+        "holdouts": {
+          "same_distribution": {
+            "residence_fraction": 0.010069444444444445,
+            "mean_absolute_error_K": 1.0106031546936323,
+            "entered_fraction": 0.125
+          },
+          "more_noise": {
+            "residence_fraction": 0.010069444444444445,
+            "mean_absolute_error_K": 1.0106031546936323,
+            "entered_fraction": 0.125
+          },
+          "shallower_gradient": {
+            "residence_fraction": 0.02326388888888889,
+            "mean_absolute_error_K": 0.7074222082855425,
+            "entered_fraction": 0.171875
+          }
+        },
+        "wall_time_s": 2.7318474580000007
+      },
+      {
+        "variant": "dense",
+        "seed": 27,
+        "topology_seed": 10027,
+        "parameter_count": 84,
+        "rewiring": null,
+        "curves": [
+          {
+            "update": 0,
+            "interactions": 0,
+            "residence_fraction": 0.03975694444444444,
+            "mean_absolute_error_K": 0.9347555749629856,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 16,
+            "interactions": 46080,
+            "residence_fraction": 0.04001736111111111,
+            "mean_absolute_error_K": 0.9569590025879607,
+            "entered_fraction": 0.203125
+          },
+          {
+            "update": 32,
+            "interactions": 92160,
+            "residence_fraction": 0.022916666666666665,
+            "mean_absolute_error_K": 0.9535891656116989,
+            "entered_fraction": 0.171875
+          },
+          {
+            "update": 48,
+            "interactions": 138240,
+            "residence_fraction": 0.024826388888888887,
+            "mean_absolute_error_K": 0.9673017339146103,
+            "entered_fraction": 0.109375
+          }
+        ],
+        "holdouts": {
+          "same_distribution": {
+            "residence_fraction": 0.005208333333333333,
+            "mean_absolute_error_K": 1.016150748656471,
+            "entered_fraction": 0.03125
+          },
+          "more_noise": {
+            "residence_fraction": 0.005208333333333333,
+            "mean_absolute_error_K": 1.016150748656471,
+            "entered_fraction": 0.03125
+          },
+          "shallower_gradient": {
+            "residence_fraction": 0.013020833333333334,
+            "mean_absolute_error_K": 0.7113468435039741,
+            "entered_fraction": 0.09375
+          }
+        },
+        "wall_time_s": 2.7190604580000013
+      }
+    ]
+  },
+  "connectome-gru-pilot-2026-10-24": {
+    "design": {
+      "status": "exploratory_pilot",
+      "biological_fidelity": "anatomical connectivity only; learned signed chemical efficacy; simplified rate dynamics",
+      "task": {
+        "batch": 16,
+        "steps": 180,
+        "dt_s": 1.0,
+        "speed_m_s": 0.0002,
+        "half_extent_m": 0.015,
+        "gradient_K_m": 100.0,
+        "noise_K": 0.05,
+        "comfort_K": 0.25,
+        "initial_min_m": 0.008,
+        "initial_max_m": 0.012
+      },
+      "circuit": "classic8",
+      "variants": [
+        "generic_gru"
+      ],
+      "seeds": [
+        7,
+        17,
+        27
+      ],
+      "updates": 48,
+      "observation": [
+        "noisy_local_temperature_minus_fixed_preference"
+      ],
+      "readout": "engineering hypothesis: AIY pair (4 cells) or RIA pair (8 cells)",
+      "comparison": "chemical topology ablation; gap topology held fixed; dense baseline has same input/readout bottlenecks; generic_gru has none",
+      "limitations": [
+        "no spiking/cell-specific adaptation",
+        "no learned cultivation-temperature memory",
+        "one topology per training seed; pilot not crossed factorial",
+        "1D reflecting point model, no body mechanics",
+        "not parameter-matched dense baseline",
+        "all checkpoints retained; no best checkpoint selection"
+      ],
+      "optimizer": {
+        "name": "Adam",
+        "lr": 0.003,
+        "gamma": 0.99,
+        "gae_lambda": 0.95,
+        "entropy_coefficient": 0.01,
+        "tau_s": 2.0
+      },
+      "data": {
+        "dataset": "Cook2019Herm (July 2020 corrected)",
+        "paper_doi": "10.1038/s41586-019-1352-7",
+        "repository": "https://github.com/openworm/ConnectomeToolbox",
+        "commit": "ffe570268b7cffb9329cd009a1bb37d60db2d465",
+        "source_path": "cect/cache/Cook2019HermReader.json",
+        "source_git_blob_sha1": "2c44e7abaa1efa71c4d814a945692f5775692abc",
+        "workbook_git_blob_sha1": "4d53c16e9a07c1ecfd068a02b39ccffd6b8a3eaa",
+        "retrieved_date": "2026-10-24",
+        "includes_non_neuronal_cells": true,
+        "derived_data_sha256": "6e2bd37286570c7af6f87f82a453c8113d3b30429e134cb934218ca7342097da"
+      },
+      "git_commit": "922ca2ef5dfbdcf39fa56e4d588583c4879a4daa",
+      "versions": {
+        "torch": "2.6.0",
+        "numpy": "2.0.2"
+      },
+      "code_sha256": {
+        "analysis/connectome_pilot.py": "085aec96fd93ef1bb0517ee07d8eaa641dba27a715bd45d403642b4a8739896f",
+        "src/thermotaxis/connectome.py": "007b6e7eaf144e7b0f0f2c101e0346a6823fa4770470c7686dd976b08be4aeb0",
+        "src/thermotaxis/connectome_policy.py": "9f86e6b54a50d2011f2f048c73b0a743704ce23807579acc0ebce0dc7ea47721"
+      }
+    },
+    "baselines": {
+      "blind": {
+        "residence_fraction": 0.07907986111111111,
+        "mean_absolute_error_K": 0.8943879597089663,
+        "entered_fraction": 0.3125
+      },
+      "memory": {
+        "residence_fraction": 0.6028645833333334,
+        "mean_absolute_error_K": 0.31515143066508083,
+        "entered_fraction": 0.984375
+      }
+    },
+    "runs": [
+      {
+        "variant": "generic_gru",
+        "seed": 7,
+        "topology_seed": 10007,
+        "parameter_count": 36,
+        "rewiring": null,
+        "curves": [
+          {
+            "update": 0,
+            "interactions": 0,
+            "residence_fraction": 0.03975694444444444,
+            "mean_absolute_error_K": 0.9347555749629856,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 16,
+            "interactions": 46080,
+            "residence_fraction": 0.03671875,
+            "mean_absolute_error_K": 0.955268404732597,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 32,
+            "interactions": 92160,
+            "residence_fraction": 0.03107638888888889,
+            "mean_absolute_error_K": 0.953633044167635,
+            "entered_fraction": 0.171875
+          },
+          {
+            "update": 48,
+            "interactions": 138240,
+            "residence_fraction": 0.04635416666666667,
+            "mean_absolute_error_K": 0.9270264702881065,
+            "entered_fraction": 0.21875
+          }
+        ],
+        "holdouts": {
+          "same_distribution": {
+            "residence_fraction": 0.016666666666666666,
+            "mean_absolute_error_K": 1.004447486209859,
+            "entered_fraction": 0.140625
+          },
+          "more_noise": {
+            "residence_fraction": 0.016666666666666666,
+            "mean_absolute_error_K": 0.9999125311378629,
+            "entered_fraction": 0.140625
+          },
+          "shallower_gradient": {
+            "residence_fraction": 0.03159722222222222,
+            "mean_absolute_error_K": 0.6999387717965041,
+            "entered_fraction": 0.1875
+          }
+        },
+        "wall_time_s": 2.175239542
+      },
+      {
+        "variant": "generic_gru",
+        "seed": 17,
+        "topology_seed": 10017,
+        "parameter_count": 36,
+        "rewiring": null,
+        "curves": [
+          {
+            "update": 0,
+            "interactions": 0,
+            "residence_fraction": 0.03975694444444444,
+            "mean_absolute_error_K": 0.9347555749629856,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 16,
+            "interactions": 46080,
+            "residence_fraction": 0.043055555555555555,
+            "mean_absolute_error_K": 0.9322580600245961,
+            "entered_fraction": 0.203125
+          },
+          {
+            "update": 32,
+            "interactions": 92160,
+            "residence_fraction": 0.039149305555555555,
+            "mean_absolute_error_K": 0.9406803885214665,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 48,
+            "interactions": 138240,
+            "residence_fraction": 0.03975694444444444,
+            "mean_absolute_error_K": 0.9408012825739729,
+            "entered_fraction": 0.1875
+          }
+        ],
+        "holdouts": {
+          "same_distribution": {
+            "residence_fraction": 0.010069444444444445,
+            "mean_absolute_error_K": 1.0049754774469521,
+            "entered_fraction": 0.125
+          },
+          "more_noise": {
+            "residence_fraction": 0.010069444444444445,
+            "mean_absolute_error_K": 1.0049754774469521,
+            "entered_fraction": 0.125
+          },
+          "shallower_gradient": {
+            "residence_fraction": 0.02326388888888889,
+            "mean_absolute_error_K": 0.7036335286573109,
+            "entered_fraction": 0.171875
+          }
+        },
+        "wall_time_s": 2.1283325840000002
+      },
+      {
+        "variant": "generic_gru",
+        "seed": 27,
+        "topology_seed": 10027,
+        "parameter_count": 36,
+        "rewiring": null,
+        "curves": [
+          {
+            "update": 0,
+            "interactions": 0,
+            "residence_fraction": 0.03975694444444444,
+            "mean_absolute_error_K": 0.9347555749629856,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 16,
+            "interactions": 46080,
+            "residence_fraction": 0.03359375,
+            "mean_absolute_error_K": 0.9723035759119095,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 32,
+            "interactions": 92160,
+            "residence_fraction": 0.021527777777777778,
+            "mean_absolute_error_K": 0.9586449621300723,
+            "entered_fraction": 0.171875
+          },
+          {
+            "update": 48,
+            "interactions": 138240,
+            "residence_fraction": 0.02048611111111111,
+            "mean_absolute_error_K": 0.972485241611176,
+            "entered_fraction": 0.15625
+          }
+        ],
+        "holdouts": {
+          "same_distribution": {
+            "residence_fraction": 0.0067708333333333336,
+            "mean_absolute_error_K": 1.0171576603436736,
+            "entered_fraction": 0.046875
+          },
+          "more_noise": {
+            "residence_fraction": 0.0067708333333333336,
+            "mean_absolute_error_K": 1.0171576603436736,
+            "entered_fraction": 0.046875
+          },
+          "shallower_gradient": {
+            "residence_fraction": 0.01675347222222222,
+            "mean_absolute_error_K": 0.7136228010901586,
+            "entered_fraction": 0.109375
+          }
+        },
+        "wall_time_s": 2.2855219999999994
+      }
+    ]
+  },
+  "connectome-trainability-2026-10-24": {
+    "design": {
+      "status": "exploratory_trainability_probe",
+      "created_unix": 1792826889.3494442,
+      "budget": {
+        "variants": [
+          "generic_gru",
+          "anatomical"
+        ],
+        "seed": 7,
+        "updates": 512,
+        "eval_every": 64,
+        "interactions_per_variant": 1474560
+      },
+      "task": {
+        "batch": 16,
+        "steps": 180,
+        "dt_s": 1.0,
+        "speed_m_s": 0.0002,
+        "half_extent_m": 0.015,
+        "gradient_K_m": 100.0,
+        "noise_K": 0.05,
+        "comfort_K": 0.25,
+        "initial_min_m": 0.008,
+        "initial_max_m": 0.012
+      },
+      "source_sha256": {
+        "analysis/connectome_pilot.py": "085aec96fd93ef1bb0517ee07d8eaa641dba27a715bd45d403642b4a8739896f",
+        "src/thermotaxis/connectome.py": "007b6e7eaf144e7b0f0f2c101e0346a6823fa4770470c7686dd976b08be4aeb0",
+        "src/thermotaxis/connectome_policy.py": "9f86e6b54a50d2011f2f048c73b0a743704ce23807579acc0ebce0dc7ea47721"
+      },
+      "git_commit": "922ca2ef5dfbdcf39fa56e4d588583c4879a4daa",
+      "data": {
+        "dataset": "Cook2019Herm (July 2020 corrected)",
+        "paper_doi": "10.1038/s41586-019-1352-7",
+        "repository": "https://github.com/openworm/ConnectomeToolbox",
+        "commit": "ffe570268b7cffb9329cd009a1bb37d60db2d465",
+        "source_path": "cect/cache/Cook2019HermReader.json",
+        "source_git_blob_sha1": "2c44e7abaa1efa71c4d814a945692f5775692abc",
+        "workbook_git_blob_sha1": "4d53c16e9a07c1ecfd068a02b39ccffd6b8a3eaa",
+        "retrieved_date": "2026-10-24",
+        "includes_non_neuronal_cells": true,
+        "derived_data_sha256": "6e2bd37286570c7af6f87f82a453c8113d3b30429e134cb934218ca7342097da"
+      },
+      "versions": {
+        "python": "3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 08:22:19) [Clang 14.0.6 ]",
+        "torch": "2.9.1",
+        "numpy": "1.26.4"
+      },
+      "interpretation": "Single seed preplanned larger-budget trainability probe; not biological superiority or sample-efficiency evidence"
+    },
+    "baselines": {
+      "blind": {
+        "residence_fraction": 0.07907986111111111,
+        "mean_absolute_error_K": 0.8943879597089663,
+        "entered_fraction": 0.3125
+      },
+      "memory": {
+        "residence_fraction": 0.6028645833333334,
+        "mean_absolute_error_K": 0.31515143066508083,
+        "entered_fraction": 0.984375
+      }
+    },
+    "runs": [
+      {
+        "variant": "generic_gru",
+        "seed": 7,
+        "topology_seed": 10007,
+        "parameter_count": 36,
+        "rewiring": null,
+        "curves": [
+          {
+            "update": 0,
+            "interactions": 0,
+            "residence_fraction": 0.03975694444444444,
+            "mean_absolute_error_K": 0.9347555749629856,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 64,
+            "interactions": 184320,
+            "residence_fraction": 0.037586805555555554,
+            "mean_absolute_error_K": 0.9350558421974529,
+            "entered_fraction": 0.203125
+          },
+          {
+            "update": 128,
+            "interactions": 368640,
+            "residence_fraction": 0.021527777777777778,
+            "mean_absolute_error_K": 0.9693683752420782,
+            "entered_fraction": 0.15625
+          },
+          {
+            "update": 192,
+            "interactions": 552960,
+            "residence_fraction": 0.021267361111111112,
+            "mean_absolute_error_K": 0.9688927843002385,
+            "entered_fraction": 0.125
+          },
+          {
+            "update": 256,
+            "interactions": 737280,
+            "residence_fraction": 0.017274305555555557,
+            "mean_absolute_error_K": 0.9920335279567601,
+            "entered_fraction": 0.0625
+          },
+          {
+            "update": 320,
+            "interactions": 921600,
+            "residence_fraction": 0.0140625,
+            "mean_absolute_error_K": 0.9784743730045442,
+            "entered_fraction": 0.046875
+          },
+          {
+            "update": 384,
+            "interactions": 1105920,
+            "residence_fraction": 0.013888888888888888,
+            "mean_absolute_error_K": 0.9817394228389822,
+            "entered_fraction": 0.0625
+          },
+          {
+            "update": 448,
+            "interactions": 1290240,
+            "residence_fraction": 0.0203125,
+            "mean_absolute_error_K": 0.9963775682730307,
+            "entered_fraction": 0.0625
+          },
+          {
+            "update": 512,
+            "interactions": 1474560,
+            "residence_fraction": 0.0140625,
+            "mean_absolute_error_K": 0.9890693919188716,
+            "entered_fraction": 0.046875
+          }
+        ],
+        "holdouts": {
+          "same_distribution": {
+            "residence_fraction": 0.007118055555555555,
+            "mean_absolute_error_K": 1.0288476745684847,
+            "entered_fraction": 0.0625
+          },
+          "more_noise": {
+            "residence_fraction": 0.007118055555555555,
+            "mean_absolute_error_K": 1.0288476745684847,
+            "entered_fraction": 0.0625
+          },
+          "shallower_gradient": {
+            "residence_fraction": 0.017013888888888887,
+            "mean_absolute_error_K": 0.7201933721979391,
+            "entered_fraction": 0.109375
+          }
+        },
+        "wall_time_s": 27.510450125002535,
+        "probability_diagnostics": {
+          "mean_probability": 0.267135888338089,
+          "std_probability": 1.679317392699886e-05,
+          "mean_rate_equivalent": 0.31079500913619995,
+          "mean_p_improving": 0.2671359181404114,
+          "mean_p_worsening": 0.2671359181404114,
+          "mean_p_inside_comfort": 0.2671380043029785,
+          "mean_p_outside_comfort": 0.2671358585357666,
+          "same_current_opposite_history": {
+            "improving": {
+              "final_observation": 0.5,
+              "final_probability": 0.26714032888412476,
+              "final_hidden": [
+                0.9982902407646179,
+                -0.9955670237541199
+              ]
+            },
+            "worsening": {
+              "final_observation": 0.5,
+              "final_probability": 0.26714032888412476,
+              "final_hidden": [
+                0.998290479183197,
+                -0.9955669045448303
+              ]
+            }
+          }
+        }
+      },
+      {
+        "variant": "anatomical",
+        "seed": 7,
+        "topology_seed": 10007,
+        "parameter_count": 38,
+        "rewiring": null,
+        "curves": [
+          {
+            "update": 0,
+            "interactions": 0,
+            "residence_fraction": 0.03975694444444444,
+            "mean_absolute_error_K": 0.9347555749629856,
+            "entered_fraction": 0.1875
+          },
+          {
+            "update": 64,
+            "interactions": 184320,
+            "residence_fraction": 0.023177083333333334,
+            "mean_absolute_error_K": 0.9605347647701135,
+            "entered_fraction": 0.15625
+          },
+          {
+            "update": 128,
+            "interactions": 368640,
+            "residence_fraction": 0.01892361111111111,
+            "mean_absolute_error_K": 0.9838940729458614,
+            "entered_fraction": 0.109375
+          },
+          {
+            "update": 192,
+            "interactions": 552960,
+            "residence_fraction": 0.022916666666666665,
+            "mean_absolute_error_K": 0.9824005883651812,
+            "entered_fraction": 0.078125
+          },
+          {
+            "update": 256,
+            "interactions": 737280,
+            "residence_fraction": 0.01875,
+            "mean_absolute_error_K": 0.9743576238721415,
+            "entered_fraction": 0.078125
+          },
+          {
+            "update": 320,
+            "interactions": 921600,
+            "residence_fraction": 0.021267361111111112,
+            "mean_absolute_error_K": 0.936769891983136,
+            "entered_fraction": 0.09375
+          },
+          {
+            "update": 384,
+            "interactions": 1105920,
+            "residence_fraction": 0.014496527777777778,
+            "mean_absolute_error_K": 0.9656851248682693,
+            "entered_fraction": 0.046875
+          },
+          {
+            "update": 448,
+            "interactions": 1290240,
+            "residence_fraction": 0.015364583333333333,
+            "mean_absolute_error_K": 0.9485785342425154,
+            "entered_fraction": 0.046875
+          },
+          {
+            "update": 512,
+            "interactions": 1474560,
+            "residence_fraction": 0.014583333333333334,
+            "mean_absolute_error_K": 0.9686960347926644,
+            "entered_fraction": 0.046875
+          }
+        ],
+        "holdouts": {
+          "same_distribution": {
+            "residence_fraction": 0.010416666666666666,
+            "mean_absolute_error_K": 1.0179118637021185,
+            "entered_fraction": 0.078125
+          },
+          "more_noise": {
+            "residence_fraction": 0.010416666666666666,
+            "mean_absolute_error_K": 1.0179118637021185,
+            "entered_fraction": 0.078125
+          },
+          "shallower_gradient": {
+            "residence_fraction": 0.025868055555555554,
+            "mean_absolute_error_K": 0.7125383045914829,
+            "entered_fraction": 0.140625
+          }
+        },
+        "wall_time_s": 33.313738083001226,
+        "probability_diagnostics": {
+          "mean_probability": 0.27710938453674316,
+          "std_probability": 0.001960311783477664,
+          "mean_rate_equivalent": 0.32450100779533386,
+          "mean_p_improving": 0.27709320187568665,
+          "mean_p_worsening": 0.2771260738372803,
+          "mean_p_inside_comfort": 0.2774137258529663,
+          "mean_p_outside_comfort": 0.2771046757698059,
+          "same_current_opposite_history": {
+            "improving": {
+              "final_observation": 0.5,
+              "final_probability": 0.27741390466690063,
+              "final_hidden": [
+                0.9885411858558655,
+                0.9224290251731873,
+                0.9254549741744995,
+                0.8676597476005554,
+                -0.8944974541664124,
+                -0.8978182673454285,
+                0.9984897971153259,
+                -0.9997448325157166
+              ]
+            },
+            "worsening": {
+              "final_observation": 0.5,
+              "final_probability": 0.27741384506225586,
+              "final_hidden": [
+                0.9880847334861755,
+                0.9202224612236023,
+                0.9251577258110046,
+                0.8667177557945251,
+                -0.8944560885429382,
+                -0.8975012302398682,
+                0.9984881281852722,
+                -0.9997434616088867
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "source_hashes_unchanged_at_save": {
+      "analysis/connectome_pilot.py": true,
+      "src/thermotaxis/connectome.py": true,
+      "src/thermotaxis/connectome_policy.py": true
+    }
+  },
+  "connectome-memory-probe-2026-10-24": {
+    "design": {
+      "status": "supervised_memory_probe_not_RL",
+      "seed": 7,
+      "updates": 256,
+      "teacher": "fixed fast=.5s slow=5s absolute noisy error; rate clip(.1-4*(slow-fast),.01,.5)",
+      "training_episodes": 192,
+      "validation_episodes": 64,
+      "batch": 32,
+      "sequence_steps": 180,
+      "input": "noisy temperature minus fixed preference, scaled by 1.5K",
+      "loss": "MSE on reversal probability / .4; no critic gradient",
+      "lr": 0.003,
+      "trajectory_seeds": {
+        "training": 82001,
+        "validation": 82002,
+        "closed_loop": 90001
+      },
+      "variants": [
+        "anatomical",
+        "dense",
+        "generic_gru"
+      ],
+      "limitations": [
+        "single training seed",
+        "offline teacher-state distribution",
+        "training targets and preprocessing supply strong task information",
+        "closed-loop evaluation may differ from teacher trajectories",
+        "not an estimate of RL learning efficiency"
+      ],
+      "code_sha256": {
+        "analysis/connectome_memory_probe.py": "e98a283c4f7689b96477877dd173183850aa823a9a3005699897c73c8d953713",
+        "analysis/connectome_pilot.py": "085aec96fd93ef1bb0517ee07d8eaa641dba27a715bd45d403642b4a8739896f",
+        "src/thermotaxis/connectome.py": "007b6e7eaf144e7b0f0f2c101e0346a6823fa4770470c7686dd976b08be4aeb0",
+        "src/thermotaxis/connectome_policy.py": "9f86e6b54a50d2011f2f048c73b0a743704ce23807579acc0ebce0dc7ea47721"
+      }
+    },
+    "constant_predictor_validation_mse": 0.08367128670215607,
+    "runs": [
+      {
+        "variant": "anatomical",
+        "parameter_count": 38,
+        "curves": [
+          {
+            "update": 0,
+            "validation_mse": 0.1891525834798813
+          },
+          {
+            "update": 64,
+            "validation_mse": 0.1273358017206192
+          },
+          {
+            "update": 128,
+            "validation_mse": 0.08778629451990128
+          },
+          {
+            "update": 192,
+            "validation_mse": 0.08434025198221207
+          },
+          {
+            "update": 256,
+            "validation_mse": 0.08391833305358887
+          }
+        ],
+        "closed_loop": {
+          "residence_fraction": 0.06927083333333334,
+          "mean_absolute_error_K": 0.8987659076761452,
+          "entered_fraction": 0.3125
+        },
+        "wall_time_s": 8.0534745
+      },
+      {
+        "variant": "dense",
+        "parameter_count": 84,
+        "curves": [
+          {
+            "update": 0,
+            "validation_mse": 0.1891525834798813
+          },
+          {
+            "update": 64,
+            "validation_mse": 0.11700491607189178
+          },
+          {
+            "update": 128,
+            "validation_mse": 0.09124839305877686
+          },
+          {
+            "update": 192,
+            "validation_mse": 0.08558265119791031
+          },
+          {
+            "update": 256,
+            "validation_mse": 0.08424928784370422
+          }
+        ],
+        "closed_loop": {
+          "residence_fraction": 0.065625,
+          "mean_absolute_error_K": 0.9005807660230806,
+          "entered_fraction": 0.28125
+        },
+        "wall_time_s": 7.972374416999999
+      },
+      {
+        "variant": "generic_gru",
+        "parameter_count": 36,
+        "curves": [
+          {
+            "update": 0,
+            "validation_mse": 0.1891525834798813
+          },
+          {
+            "update": 64,
+            "validation_mse": 0.1313134878873825
+          },
+          {
+            "update": 128,
+            "validation_mse": 0.09329932183027267
+          },
+          {
+            "update": 192,
+            "validation_mse": 0.08492439985275269
+          },
+          {
+            "update": 256,
+            "validation_mse": 0.08384498208761215
+          }
+        ],
+        "closed_loop": {
+          "residence_fraction": 0.06866319444444445,
+          "mean_absolute_error_K": 0.9285041865119824,
+          "entered_fraction": 0.25
+        },
+        "wall_time_s": 5.547512999999999
+      }
+    ]
+  },
+  "gradient_diagnostics": [
+    {
+      "variant": "generic_gru",
+      "stage": "initial",
+      "shared_gradient_norm": {
+        "actor": 0.0,
+        "critic": 3.278076410293579,
+        "entropy": 0.0
+      },
+      "loss": {
+        "actor": -0.011473851278424263,
+        "critic": 63.984310150146484,
+        "entropy": -0.0053326706402003765
+      },
+      "hidden_abs_mean": 0.291289359331131,
+      "hidden_saturation_fraction": 0.0,
+      "critic_value_mean": 0.7309131026268005,
+      "target_mean": -10.084457397460938
+    },
+    {
+      "variant": "generic_gru",
+      "stage": "final",
+      "shared_gradient_norm": {
+        "actor": 9.30980149860261e-06,
+        "critic": 0.4188805818557739,
+        "entropy": 3.661062464743736e-06
+      },
+      "loss": {
+        "actor": 0.0017385854152962565,
+        "critic": 54.255130767822266,
+        "entropy": -0.0058036139234900475
+      },
+      "hidden_abs_mean": 0.9958534240722656,
+      "hidden_saturation_fraction": 0.9944444298744202,
+      "critic_value_mean": -4.510782718658447,
+      "target_mean": -14.115626335144043
+    },
+    {
+      "variant": "anatomical",
+      "stage": "initial",
+      "shared_gradient_norm": {
+        "actor": 0.0,
+        "critic": 7.313177108764648,
+        "entropy": 0.0
+      },
+      "loss": {
+        "actor": -0.011400577612221241,
+        "critic": 61.34282684326172,
+        "entropy": -0.0053326706402003765
+      },
+      "hidden_abs_mean": 0.1929115355014801,
+      "hidden_saturation_fraction": 0.0,
+      "critic_value_mean": -0.43091636896133423,
+      "target_mean": -10.96150016784668
+    },
+    {
+      "variant": "anatomical",
+      "stage": "final",
+      "shared_gradient_norm": {
+        "actor": 2.7036747269448824e-05,
+        "critic": 0.35388216376304626,
+        "entropy": 2.831239726219792e-06
+      },
+      "loss": {
+        "actor": -0.0032752142287790775,
+        "critic": 54.261924743652344,
+        "entropy": -0.005900170654058456
+      },
+      "hidden_abs_mean": 0.9163678288459778,
+      "hidden_saturation_fraction": 0.3600260317325592,
+      "critic_value_mean": -5.534311771392822,
+      "target_mean": -15.06554126739502
+    }
+  ],
+  "audit": {
+    "provenance": {
+      "dataset": "Cook2019Herm (July 2020 corrected)",
+      "paper_doi": "10.1038/s41586-019-1352-7",
+      "repository": "https://github.com/openworm/ConnectomeToolbox",
+      "commit": "ffe570268b7cffb9329cd009a1bb37d60db2d465",
+      "source_path": "cect/cache/Cook2019HermReader.json",
+      "source_git_blob_sha1": "2c44e7abaa1efa71c4d814a945692f5775692abc",
+      "workbook_git_blob_sha1": "4d53c16e9a07c1ecfd068a02b39ccffd6b8a3eaa",
+      "retrieved_date": "2026-10-24",
+      "includes_non_neuronal_cells": true,
+      "derived_data_sha256": "6e2bd37286570c7af6f87f82a453c8113d3b30429e134cb934218ca7342097da"
+    },
+    "full": {
+      "cells": 473,
+      "chemical_edges": 4879,
+      "gap_directed_entries": 2883,
+      "gap_pairs": 1433,
+      "gap_self_entries": 17,
+      "chemical_weight": 28113.0,
+      "gap_weight": 23313.0,
+      "gap_symmetric": true
+    },
+    "candidates": {
+      "afd_aiy4": {
+        "cells": 4,
+        "chemical_edges": 7,
+        "gap_directed_entries": 6,
+        "gap_pairs": 3,
+        "gap_self_entries": 0,
+        "chemical_weight": 66.0,
+        "gap_weight": 14.0,
+        "gap_symmetric": true,
+        "names": [
+          "AFDL",
+          "AFDR",
+          "AIYL",
+          "AIYR"
+        ],
+        "afd_to_readout": {
+          "AIYL": true,
+          "AIYR": true
+        }
+      },
+      "classic8": {
+        "cells": 8,
+        "chemical_edges": 18,
+        "gap_directed_entries": 8,
+        "gap_pairs": 4,
+        "gap_self_entries": 0,
+        "chemical_weight": 424.0,
+        "gap_weight": 50.0,
+        "gap_symmetric": true,
+        "names": [
+          "AFDL",
+          "AFDR",
+          "AIYL",
+          "AIYR",
+          "AIZL",
+          "AIZR",
+          "RIAL",
+          "RIAR"
+        ],
+        "afd_to_readout": {
+          "RIAL": true,
+          "RIAR": true
+        }
+      },
+      "sensory16": {
+        "cells": 16,
+        "chemical_edges": 79,
+        "gap_directed_entries": 37,
+        "gap_pairs": 18,
+        "gap_self_entries": 1,
+        "chemical_weight": 870.0,
+        "gap_weight": 128.0,
+        "gap_symmetric": true,
+        "names": [
+          "AFDL",
+          "AFDR",
+          "AIYL",
+          "AIYR",
+          "AIZL",
+          "AIZR",
+          "RIAL",
+          "RIAR",
+          "AWCL",
+          "AWCR",
+          "ASIL",
+          "ASIR",
+          "AIAL",
+          "AIAR",
+          "AIBL",
+          "AIBR"
+        ],
+        "afd_to_readout": {
+          "RIAL": true,
+          "RIAR": true
+        }
+      },
+      "all302": {
+        "cells": 302,
+        "chemical_edges": 3709,
+        "gap_directed_entries": 2196,
+        "gap_pairs": 1091,
+        "gap_self_entries": 14,
+        "chemical_weight": 20965.0,
+        "gap_weight": 11523.0,
+        "gap_symmetric": true,
+        "names": [
+          "ADAL",
+          "ADAR",
+          "ADEL",
+          "ADER",
+          "ADFL",
+          "ADFR",
+          "ADLL",
+          "ADLR",
+          "AFDL",
+          "AFDR",
+          "AIAL",
+          "AIAR",
+          "AIBL",
+          "AIBR",
+          "AIML",
+          "AIMR",
+          "AINL",
+          "AINR",
+          "AIYL",
+          "AIYR",
+          "AIZL",
+          "AIZR",
+          "ALA",
+          "ALML",
+          "ALMR",
+          "ALNL",
+          "ALNR",
+          "AQR",
+          "AS1",
+          "AS10",
+          "AS11",
+          "AS2",
+          "AS3",
+          "AS4",
+          "AS5",
+          "AS6",
+          "AS7",
+          "AS8",
+          "AS9",
+          "ASEL",
+          "ASER",
+          "ASGL",
+          "ASGR",
+          "ASHL",
+          "ASHR",
+          "ASIL",
+          "ASIR",
+          "ASJL",
+          "ASJR",
+          "ASKL",
+          "ASKR",
+          "AUAL",
+          "AUAR",
+          "AVAL",
+          "AVAR",
+          "AVBL",
+          "AVBR",
+          "AVDL",
+          "AVDR",
+          "AVEL",
+          "AVER",
+          "AVFL",
+          "AVFR",
+          "AVG",
+          "AVHL",
+          "AVHR",
+          "AVJL",
+          "AVJR",
+          "AVKL",
+          "AVKR",
+          "AVL",
+          "AVM",
+          "AWAL",
+          "AWAR",
+          "AWBL",
+          "AWBR",
+          "AWCL",
+          "AWCR",
+          "BAGL",
+          "BAGR",
+          "BDUL",
+          "BDUR",
+          "CANL",
+          "CANR",
+          "CEPDL",
+          "CEPDR",
+          "CEPVL",
+          "CEPVR",
+          "DA1",
+          "DA2",
+          "DA3",
+          "DA4",
+          "DA5",
+          "DA6",
+          "DA7",
+          "DA8",
+          "DA9",
+          "DB1",
+          "DB2",
+          "DB3",
+          "DB4",
+          "DB5",
+          "DB6",
+          "DB7",
+          "DD1",
+          "DD2",
+          "DD3",
+          "DD4",
+          "DD5",
+          "DD6",
+          "DVA",
+          "DVB",
+          "DVC",
+          "FLPL",
+          "FLPR",
+          "HSNL",
+          "HSNR",
+          "I1L",
+          "I1R",
+          "I2L",
+          "I2R",
+          "I3",
+          "I4",
+          "I5",
+          "I6",
+          "IL1DL",
+          "IL1DR",
+          "IL1L",
+          "IL1R",
+          "IL1VL",
+          "IL1VR",
+          "IL2DL",
+          "IL2DR",
+          "IL2L",
+          "IL2R",
+          "IL2VL",
+          "IL2VR",
+          "LUAL",
+          "LUAR",
+          "M1",
+          "M2L",
+          "M2R",
+          "M3L",
+          "M3R",
+          "M4",
+          "M5",
+          "MCL",
+          "MCR",
+          "MI",
+          "NSML",
+          "NSMR",
+          "OLLL",
+          "OLLR",
+          "OLQDL",
+          "OLQDR",
+          "OLQVL",
+          "OLQVR",
+          "PDA",
+          "PDB",
+          "PDEL",
+          "PDER",
+          "PHAL",
+          "PHAR",
+          "PHBL",
+          "PHBR",
+          "PHCL",
+          "PHCR",
+          "PLML",
+          "PLMR",
+          "PLNL",
+          "PLNR",
+          "PQR",
+          "PVCL",
+          "PVCR",
+          "PVDL",
+          "PVDR",
+          "PVM",
+          "PVNL",
+          "PVNR",
+          "PVPL",
+          "PVPR",
+          "PVQL",
+          "PVQR",
+          "PVR",
+          "PVT",
+          "PVWL",
+          "PVWR",
+          "RIAL",
+          "RIAR",
+          "RIBL",
+          "RIBR",
+          "RICL",
+          "RICR",
+          "RID",
+          "RIFL",
+          "RIFR",
+          "RIGL",
+          "RIGR",
+          "RIH",
+          "RIML",
+          "RIMR",
+          "RIPL",
+          "RIPR",
+          "RIR",
+          "RIS",
+          "RIVL",
+          "RIVR",
+          "RMDDL",
+          "RMDDR",
+          "RMDL",
+          "RMDR",
+          "RMDVL",
+          "RMDVR",
+          "RMED",
+          "RMEL",
+          "RMER",
+          "RMEV",
+          "RMFL",
+          "RMFR",
+          "RMGL",
+          "RMGR",
+          "RMHL",
+          "RMHR",
+          "SAADL",
+          "SAADR",
+          "SAAVL",
+          "SAAVR",
+          "SABD",
+          "SABVL",
+          "SABVR",
+          "SDQL",
+          "SDQR",
+          "SIADL",
+          "SIADR",
+          "SIAVL",
+          "SIAVR",
+          "SIBDL",
+          "SIBDR",
+          "SIBVL",
+          "SIBVR",
+          "SMBDL",
+          "SMBDR",
+          "SMBVL",
+          "SMBVR",
+          "SMDDL",
+          "SMDDR",
+          "SMDVL",
+          "SMDVR",
+          "URADL",
+          "URADR",
+          "URAVL",
+          "URAVR",
+          "URBL",
+          "URBR",
+          "URXL",
+          "URXR",
+          "URYDL",
+          "URYDR",
+          "URYVL",
+          "URYVR",
+          "VA1",
+          "VA10",
+          "VA11",
+          "VA12",
+          "VA2",
+          "VA3",
+          "VA4",
+          "VA5",
+          "VA6",
+          "VA7",
+          "VA8",
+          "VA9",
+          "VB1",
+          "VB10",
+          "VB11",
+          "VB2",
+          "VB3",
+          "VB4",
+          "VB5",
+          "VB6",
+          "VB7",
+          "VB8",
+          "VB9",
+          "VC1",
+          "VC2",
+          "VC3",
+          "VC4",
+          "VC5",
+          "VC6",
+          "VD1",
+          "VD10",
+          "VD11",
+          "VD12",
+          "VD13",
+          "VD2",
+          "VD3",
+          "VD4",
+          "VD5",
+          "VD6",
+          "VD7",
+          "VD8",
+          "VD9"
+        ],
+        "afd_to_readout": {
+          "RIAL": true,
+          "RIAR": true
+        }
+      }
+    }
+  }
+}

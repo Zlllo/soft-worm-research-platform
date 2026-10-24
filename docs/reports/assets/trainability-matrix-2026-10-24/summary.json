@@ -1,0 +1,898 @@
+{
+  "design": {
+    "status": "supervised_trainability_controls_not_RL_efficiency",
+    "task": {
+      "batch": 16,
+      "steps": 180,
+      "dt_s": 1.0,
+      "speed_m_s": 0.0002,
+      "half_extent_m": 0.015,
+      "gradient_K_m": 100.0,
+      "noise_K": 0.05,
+      "comfort_K": 0.25,
+      "initial_min_m": 0.008,
+      "initial_max_m": 0.012
+    },
+    "variants": [
+      "signed_gru2",
+      "signed_gru16",
+      "absolute_gru16",
+      "fixed_error_filters",
+      "learned_error_filters"
+    ],
+    "seeds": [
+      7,
+      17,
+      27
+    ],
+    "updates": 512,
+    "optimizer": "Adam",
+    "lr": 0.003,
+    "batch": 32,
+    "training_episodes": 192,
+    "validation_episodes": 64,
+    "sequence_steps": 180,
+    "initial_actor": "zero GRU head; filter gain=0 bias=.255; all initial rates=.255/s",
+    "differences": {
+      "signed_gru16": "capacity control relative to signed_gru2",
+      "absolute_gru16": "only replace signed input by absolute input relative to signed_gru16",
+      "fixed_error_filters": "positive control: teacher time constants known, error-filter features, clipped linear rate readout",
+      "learned_error_filters": "same filter class but learn taus from .8s and 3s"
+    },
+    "validation_selection": "final budget model only; no best-checkpoint selection",
+    "source_sha256": {
+      "analysis/connectome_trainability_matrix.py": "bef0f2c445404f49f55ec7024b7f7c8ac842adc3e5a1992de4fb49cd7d34799b",
+      "analysis/connectome_memory_probe.py": "e98a283c4f7689b96477877dd173183850aa823a9a3005699897c73c8d953713",
+      "analysis/connectome_pilot.py": "085aec96fd93ef1bb0517ee07d8eaa641dba27a715bd45d403642b4a8739896f",
+      "src/thermotaxis/learning_probes.py": "949f4a6a334a14d6d2066469be700a3e781c0c0010cd19981499203a5bd895e1",
+      "src/thermotaxis/connectome.py": "007b6e7eaf144e7b0f0f2c101e0346a6823fa4770470c7686dd976b08be4aeb0",
+      "src/thermotaxis/connectome_policy.py": "9f86e6b54a50d2011f2f048c73b0a743704ce23807579acc0ebce0dc7ea47721"
+    },
+    "seeds_description": {
+      "teacher_training": 82001,
+      "teacher_validation": 82002,
+      "behavior_validation": 90001,
+      "exploratory_holdouts": 93001
+    },
+    "git_commit": "922ca2ef5dfbdcf39fa56e4d588583c4879a4daa",
+    "versions": {
+      "torch": "2.6.0",
+      "numpy": "2.0.2"
+    },
+    "limitations": [
+      "supervised teacher supplies known task mechanism",
+      "explicit filters are not AFD models",
+      "capacity and filter model comparisons do not isolate a single feature",
+      "input sign ablation has equal architecture and parameter count",
+      "teacher trajectories are reused, not independent environment samples per update",
+      "new holdouts are exploratory once inspected"
+    ]
+  },
+  "constant_predictor_mse": 0.08367128670215607,
+  "teacher_behavior": {
+    "residence_fraction": 0.6028645833333334,
+    "mean_absolute_error_K": 0.31515143066508083,
+    "entered_fraction": 0.984375
+  },
+  "runs": [
+    {
+      "variant": "signed_gru2",
+      "seed": 7,
+      "parameters": 33,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.09329932183027267
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08384498208761215
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08366657048463821
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08366058021783829
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.09114583333333333,
+        "mean_absolute_error_K": 0.8678063407106335,
+        "entered_fraction": 0.359375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.04487847222222222,
+          "mean_absolute_error_K": 0.9431406147617079,
+          "entered_fraction": 0.265625
+        },
+        "more_noise": {
+          "residence_fraction": 0.04487847222222222,
+          "mean_absolute_error_K": 0.9431406147617079,
+          "entered_fraction": 0.265625
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.08498263888888889,
+          "mean_absolute_error_K": 0.6513183061458853,
+          "entered_fraction": 0.40625
+        }
+      },
+      "fitted_filter_parameters": null,
+      "wall_time_s": 10.100140167000001
+    },
+    {
+      "variant": "signed_gru2",
+      "seed": 17,
+      "parameters": 33,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.092774897813797
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.0839124321937561
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.0836307555437088
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.0836021676659584
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.09392361111111111,
+        "mean_absolute_error_K": 0.8749857510582002,
+        "entered_fraction": 0.34375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.05130208333333333,
+          "mean_absolute_error_K": 0.9186990150318338,
+          "entered_fraction": 0.3125
+        },
+        "more_noise": {
+          "residence_fraction": 0.04401041666666667,
+          "mean_absolute_error_K": 0.9311549256827626,
+          "entered_fraction": 0.296875
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.06901041666666667,
+          "mean_absolute_error_K": 0.6575754015800116,
+          "entered_fraction": 0.40625
+        }
+      },
+      "fitted_filter_parameters": null,
+      "wall_time_s": 10.078697417
+    },
+    {
+      "variant": "signed_gru2",
+      "seed": 27,
+      "parameters": 33,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.09211451560258865
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08380510658025742
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08365568518638611
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.0836220234632492
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.09244791666666667,
+        "mean_absolute_error_K": 0.8726199112782405,
+        "entered_fraction": 0.34375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.05668402777777778,
+          "mean_absolute_error_K": 0.9235899224222339,
+          "entered_fraction": 0.3125
+        },
+        "more_noise": {
+          "residence_fraction": 0.05668402777777778,
+          "mean_absolute_error_K": 0.9235899224222339,
+          "entered_fraction": 0.3125
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.08168402777777778,
+          "mean_absolute_error_K": 0.6532479334662712,
+          "entered_fraction": 0.40625
+        }
+      },
+      "fitted_filter_parameters": null,
+      "wall_time_s": 11.090163916000002
+    },
+    {
+      "variant": "signed_gru16",
+      "seed": 7,
+      "parameters": 929,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08391189575195312
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08385249972343445
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08379640430212021
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08369497954845428
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.0859375,
+        "mean_absolute_error_K": 0.8659285334302566,
+        "entered_fraction": 0.34375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.04513888888888889,
+          "mean_absolute_error_K": 0.9603257259561844,
+          "entered_fraction": 0.25
+        },
+        "more_noise": {
+          "residence_fraction": 0.042534722222222224,
+          "mean_absolute_error_K": 0.9674441699051455,
+          "entered_fraction": 0.234375
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.06449652777777778,
+          "mean_absolute_error_K": 0.6807315273685551,
+          "entered_fraction": 0.34375
+        }
+      },
+      "fitted_filter_parameters": null,
+      "wall_time_s": 13.752351333
+    },
+    {
+      "variant": "signed_gru16",
+      "seed": 17,
+      "parameters": 929,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08395180106163025
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08390606939792633
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08383730798959732
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08374910801649094
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08402777777777778,
+        "mean_absolute_error_K": 0.8742662195630027,
+        "entered_fraction": 0.328125
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.04513888888888889,
+          "mean_absolute_error_K": 0.9512298326678471,
+          "entered_fraction": 0.25
+        },
+        "more_noise": {
+          "residence_fraction": 0.042534722222222224,
+          "mean_absolute_error_K": 0.9587781534884177,
+          "entered_fraction": 0.234375
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.07309027777777778,
+          "mean_absolute_error_K": 0.6687985948280323,
+          "entered_fraction": 0.359375
+        }
+      },
+      "fitted_filter_parameters": null,
+      "wall_time_s": 13.189475625
+    },
+    {
+      "variant": "signed_gru16",
+      "seed": 27,
+      "parameters": 929,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08395540714263916
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08389748632907867
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08386076986789703
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08380912989377975
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08524305555555556,
+        "mean_absolute_error_K": 0.8553496339313036,
+        "entered_fraction": 0.359375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.03923611111111111,
+          "mean_absolute_error_K": 0.9739772503787306,
+          "entered_fraction": 0.21875
+        },
+        "more_noise": {
+          "residence_fraction": 0.03923611111111111,
+          "mean_absolute_error_K": 0.9739772503787306,
+          "entered_fraction": 0.21875
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.07717013888888889,
+          "mean_absolute_error_K": 0.6715708789336732,
+          "entered_fraction": 0.34375
+        }
+      },
+      "fitted_filter_parameters": null,
+      "wall_time_s": 13.202131666000007
+    },
+    {
+      "variant": "absolute_gru16",
+      "seed": 7,
+      "parameters": 929,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08331123739480972
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.07647919654846191
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.0659513920545578
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.041072264313697815
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.31484375,
+        "mean_absolute_error_K": 0.5695487061876485,
+        "entered_fraction": 0.859375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.34609375,
+          "mean_absolute_error_K": 0.549746916942272,
+          "entered_fraction": 0.875
+        },
+        "more_noise": {
+          "residence_fraction": 0.3615451388888889,
+          "mean_absolute_error_K": 0.5192804198662347,
+          "entered_fraction": 0.859375
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.2785590277777778,
+          "mean_absolute_error_K": 0.4660968255935277,
+          "entered_fraction": 0.796875
+        }
+      },
+      "fitted_filter_parameters": null,
+      "wall_time_s": 13.209014625000009
+    },
+    {
+      "variant": "absolute_gru16",
+      "seed": 17,
+      "parameters": 929,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08319608867168427
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.07861921191215515
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.06763356178998947
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.03742925450205803
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.3363715277777778,
+        "mean_absolute_error_K": 0.5476173357748428,
+        "entered_fraction": 0.890625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.3625,
+          "mean_absolute_error_K": 0.5187489304370696,
+          "entered_fraction": 0.90625
+        },
+        "more_noise": {
+          "residence_fraction": 0.3579861111111111,
+          "mean_absolute_error_K": 0.5228708053664297,
+          "entered_fraction": 0.84375
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.34444444444444444,
+          "mean_absolute_error_K": 0.42971159259680103,
+          "entered_fraction": 0.8125
+        }
+      },
+      "fitted_filter_parameters": null,
+      "wall_time_s": 13.253343416999996
+    },
+    {
+      "variant": "absolute_gru16",
+      "seed": 27,
+      "parameters": 929,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08320632576942444
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.07894792407751083
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.07370840013027191
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.05233236774802208
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.22777777777777777,
+        "mean_absolute_error_K": 0.6485813164291594,
+        "entered_fraction": 0.78125
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.2748263888888889,
+          "mean_absolute_error_K": 0.6495775097016688,
+          "entered_fraction": 0.71875
+        },
+        "more_noise": {
+          "residence_fraction": 0.22760416666666666,
+          "mean_absolute_error_K": 0.7095837493609712,
+          "entered_fraction": 0.625
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.22751736111111112,
+          "mean_absolute_error_K": 0.5042089933919213,
+          "entered_fraction": 0.75
+        }
+      },
+      "fitted_filter_parameters": null,
+      "wall_time_s": 13.888211624999997
+    },
+    {
+      "variant": "fixed_error_filters",
+      "seed": 7,
+      "parameters": 2,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.00041735355625860393
+        },
+        {
+          "update": 256,
+          "validation_mse": 5.699856956198346e-06
+        },
+        {
+          "update": 384,
+          "validation_mse": 2.0374619325025378e-08
+        },
+        {
+          "update": 512,
+          "validation_mse": 1.1443048765491515e-11
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.6028645833333334,
+        "mean_absolute_error_K": 0.31515143066508083,
+        "entered_fraction": 0.984375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.6037326388888888,
+          "mean_absolute_error_K": 0.32240524480012456,
+          "entered_fraction": 1.0
+        },
+        "more_noise": {
+          "residence_fraction": 0.4092013888888889,
+          "mean_absolute_error_K": 0.501104941295987,
+          "entered_fraction": 0.875
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.6111979166666667,
+          "mean_absolute_error_K": 0.26563677429747046,
+          "entered_fraction": 0.984375
+        }
+      },
+      "fitted_filter_parameters": {
+        "bias": 0.1000017523765564,
+        "gain": -0.19999611377716064
+      },
+      "wall_time_s": 5.998377040999998,
+      "fitted_taus_s": [
+        0.5,
+        5.000000476837158
+      ]
+    },
+    {
+      "variant": "fixed_error_filters",
+      "seed": 17,
+      "parameters": 2,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.00042086426401510835
+        },
+        {
+          "update": 256,
+          "validation_mse": 5.786463589174673e-06
+        },
+        {
+          "update": 384,
+          "validation_mse": 2.082674122050321e-08
+        },
+        {
+          "update": 512,
+          "validation_mse": 1.2262728159295744e-11
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.6028645833333334,
+        "mean_absolute_error_K": 0.31515143066508083,
+        "entered_fraction": 0.984375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.6037326388888888,
+          "mean_absolute_error_K": 0.32240524480012456,
+          "entered_fraction": 1.0
+        },
+        "more_noise": {
+          "residence_fraction": 0.4092013888888889,
+          "mean_absolute_error_K": 0.501104941295987,
+          "entered_fraction": 0.875
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.6111979166666667,
+          "mean_absolute_error_K": 0.26563677429747046,
+          "entered_fraction": 0.984375
+        }
+      },
+      "fitted_filter_parameters": {
+        "bias": 0.1000017449259758,
+        "gain": -0.1999959498643875
+      },
+      "wall_time_s": 6.108046625,
+      "fitted_taus_s": [
+        0.5,
+        5.000000476837158
+      ]
+    },
+    {
+      "variant": "fixed_error_filters",
+      "seed": 27,
+      "parameters": 2,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.0004209594044368714
+        },
+        {
+          "update": 256,
+          "validation_mse": 5.740635970141739e-06
+        },
+        {
+          "update": 384,
+          "validation_mse": 2.1135731387289525e-08
+        },
+        {
+          "update": 512,
+          "validation_mse": 1.2345592430296204e-11
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.6028645833333334,
+        "mean_absolute_error_K": 0.31515143066508083,
+        "entered_fraction": 0.984375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.6037326388888888,
+          "mean_absolute_error_K": 0.32240524480012456,
+          "entered_fraction": 1.0
+        },
+        "more_noise": {
+          "residence_fraction": 0.4092013888888889,
+          "mean_absolute_error_K": 0.501104941295987,
+          "entered_fraction": 0.875
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.6111979166666667,
+          "mean_absolute_error_K": 0.26563677429747046,
+          "entered_fraction": 0.984375
+        }
+      },
+      "fitted_filter_parameters": {
+        "bias": 0.10000178217887878,
+        "gain": -0.1999959498643875
+      },
+      "wall_time_s": 6.303203499999995,
+      "fitted_taus_s": [
+        0.5,
+        5.000000476837158
+      ]
+    },
+    {
+      "variant": "learned_error_filters",
+      "seed": 7,
+      "parameters": 4,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.0037308442406356335
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.001524628489278257
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.0010296207619830966
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.0008433230104856193
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.61640625,
+        "mean_absolute_error_K": 0.31078467736790505,
+        "entered_fraction": 1.0
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.6077256944444445,
+          "mean_absolute_error_K": 0.3244561124213985,
+          "entered_fraction": 1.0
+        },
+        "more_noise": {
+          "residence_fraction": 0.3920138888888889,
+          "mean_absolute_error_K": 0.49352248422709155,
+          "entered_fraction": 0.953125
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.6267361111111112,
+          "mean_absolute_error_K": 0.25337101450403465,
+          "entered_fraction": 1.0
+        }
+      },
+      "fitted_filter_parameters": {
+        "bias": 0.0959714874625206,
+        "gain": -0.2632095217704773,
+        "raw_taus": [
+          -0.03459414467215538,
+          3.734332799911499
+        ]
+      },
+      "wall_time_s": 12.294140500000026,
+      "fitted_taus_s": [
+        0.7259997129440308,
+        3.80794095993042
+      ]
+    },
+    {
+      "variant": "learned_error_filters",
+      "seed": 17,
+      "parameters": 4,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.0037604523822665215
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.0015321820974349976
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.001030965824611485
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.0008454513153992593
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.61640625,
+        "mean_absolute_error_K": 0.31078467736790505,
+        "entered_fraction": 1.0
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.6079861111111111,
+          "mean_absolute_error_K": 0.3243722268120849,
+          "entered_fraction": 1.0
+        },
+        "more_noise": {
+          "residence_fraction": 0.3920138888888889,
+          "mean_absolute_error_K": 0.493439908380196,
+          "entered_fraction": 0.953125
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.6241319444444444,
+          "mean_absolute_error_K": 0.25401380111097943,
+          "entered_fraction": 1.0
+        }
+      },
+      "fitted_filter_parameters": {
+        "bias": 0.09586832672357559,
+        "gain": -0.26326313614845276,
+        "raw_taus": [
+          -0.03588283061981201,
+          3.7327346801757812
+        ]
+      },
+      "wall_time_s": 11.973218833000004,
+      "fitted_taus_s": [
+        0.7253667116165161,
+        3.806380271911621
+      ]
+    },
+    {
+      "variant": "learned_error_filters",
+      "seed": 27,
+      "parameters": 4,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.0037560800556093454
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.0015270757721737027
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.0010295434622094035
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.0008454553899355233
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.61640625,
+        "mean_absolute_error_K": 0.3112434845673442,
+        "entered_fraction": 1.0
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.6077256944444445,
+          "mean_absolute_error_K": 0.3244561124213985,
+          "entered_fraction": 1.0
+        },
+        "more_noise": {
+          "residence_fraction": 0.39053819444444443,
+          "mean_absolute_error_K": 0.49406171674315175,
+          "entered_fraction": 0.953125
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.6267361111111112,
+          "mean_absolute_error_K": 0.25337101450403465,
+          "entered_fraction": 1.0
+        }
+      },
+      "fitted_filter_parameters": {
+        "bias": 0.09598059952259064,
+        "gain": -0.2634620666503906,
+        "raw_taus": [
+          -0.03546804562211037,
+          3.73311448097229
+        ]
+      },
+      "wall_time_s": 12.752275999999995,
+      "fitted_taus_s": [
+        0.7255703806877136,
+        3.806751012802124
+      ]
+    }
+  ]
+}

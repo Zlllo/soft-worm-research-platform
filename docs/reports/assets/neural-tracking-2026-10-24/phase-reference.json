@@ -1,0 +1,1775 @@
+{
+  "status": "posthoc_no_training_paired_phase_reference",
+  "seeds": [
+    6101,
+    6102
+  ],
+  "purpose": "same frozen weights, same config and seeds as prior scrambled intervention",
+  "source_sha256": "db73f21ee4da171e5c5ca79dea7cc4d6d18561933edae11beb8dfcd5b33d85f0",
+  "runs": [
+    {
+      "variant": "gru_raw",
+      "seed": 7,
+      "correct_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.01215256476669679,
+            "center_error_mae_K": 0.010083780158599677,
+            "head_error_rms_K": 0.013095653818073325,
+            "tangent_error_mean_rad": 0.10760598621301369,
+            "tracking_tangential_distance_m": 0.02380903545978825,
+            "tracking_net_tangential_distance_m": 0.02380903545978825,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.023809069708198884,
+            "integrated_abs_turn_rad": 1.3473486891071977,
+            "max_abs_turn_rate_rad_s": 0.044131675146947276
+          },
+          "initial_state": {
+            "x_m": 0.00015010669622144194,
+            "y_m": -0.00024255507452896355,
+            "heading_rad": 0.8226349428829505,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.30141666666666667,
+            "head_residence_fraction": 0.301,
+            "tracking_fraction": 0.17008333333333334,
+            "longest_tracking_s": 10.93,
+            "center_error_rms_K": 0.1684264564829246,
+            "center_error_mae_K": 0.13693500993738736,
+            "head_error_rms_K": 0.1689872764494282,
+            "tangent_error_mean_rad": 0.7150214617965459,
+            "tracking_tangential_distance_m": 0.003935156154504641,
+            "tracking_net_tangential_distance_m": 0.003935156154504641,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.0014812961418282857,
+            "integrated_abs_turn_rad": 6.225826422904801,
+            "max_abs_turn_rate_rad_s": 0.08656763486761873
+          },
+          "initial_state": {
+            "x_m": -0.000197432752962123,
+            "y_m": -0.0002386198855497772,
+            "heading_rad": 2.7198558030060744,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.011782485578267776,
+            "center_error_mae_K": 0.01052837083769747,
+            "head_error_rms_K": 0.013506634560024534,
+            "tangent_error_mean_rad": 0.09562217935707397,
+            "tracking_tangential_distance_m": 0.02378365571166303,
+            "tracking_net_tangential_distance_m": 0.02378365571166303,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007627197652209657,
+            "integrated_abs_turn_rad": 4.688462661568028,
+            "max_abs_turn_rate_rad_s": 0.09994809428707144
+          },
+          "initial_state": {
+            "x_m": -0.003507496625954243,
+            "y_m": 0.0031506154308898657,
+            "heading_rad": 0.9855572799000325,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.011522996220840843,
+            "center_error_mae_K": 0.009909623223880424,
+            "head_error_rms_K": 0.01282942417935698,
+            "tangent_error_mean_rad": 0.07633775144555852,
+            "tracking_tangential_distance_m": 0.023828962417793295,
+            "tracking_net_tangential_distance_m": 0.023828962417793295,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007173181213339871,
+            "integrated_abs_turn_rad": 4.412639360212408,
+            "max_abs_turn_rate_rad_s": 0.08272762703367686
+          },
+          "initial_state": {
+            "x_m": -0.0035178561122744165,
+            "y_m": 0.0031021808389929545,
+            "heading_rad": 4.250587972621823,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        }
+      ],
+      "scrambled_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 0.3695,
+            "head_residence_fraction": 0.3478333333333333,
+            "tracking_fraction": 0.0675,
+            "longest_tracking_s": 8.1,
+            "center_error_rms_K": 0.08090087130530124,
+            "center_error_mae_K": 0.06860982281716257,
+            "head_error_rms_K": 0.0837376861803209,
+            "tangent_error_mean_rad": 0.8044704736869646,
+            "tracking_tangential_distance_m": 0.001538941016606097,
+            "tracking_net_tangential_distance_m": 0.001538941016606097,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.0151298152562264,
+            "integrated_abs_turn_rad": 9.949123543903337,
+            "max_abs_turn_rate_rad_s": 0.19338944123722546
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.2798333333333333,
+            "head_residence_fraction": 0.28141666666666665,
+            "tracking_fraction": 0.14008333333333334,
+            "longest_tracking_s": 8.83,
+            "center_error_rms_K": 0.17504392708105276,
+            "center_error_mae_K": 0.1437307687615696,
+            "head_error_rms_K": 0.17561156033954972,
+            "tangent_error_mean_rad": 0.7317668241937839,
+            "tracking_tangential_distance_m": 0.0032231539596367753,
+            "tracking_net_tangential_distance_m": 0.0032231539596367753,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.0010438116533926511,
+            "integrated_abs_turn_rad": 6.053560315558241,
+            "max_abs_turn_rate_rad_s": 0.0986307474261815
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 0.4008333333333333,
+            "head_residence_fraction": 0.40091666666666664,
+            "tracking_fraction": 0.047,
+            "longest_tracking_s": 5.64,
+            "center_error_rms_K": 0.08241346655272669,
+            "center_error_mae_K": 0.06858671986517662,
+            "head_error_rms_K": 0.0840046769375257,
+            "tangent_error_mean_rad": 0.9167249304898487,
+            "tracking_tangential_distance_m": 0.0010812489372777144,
+            "tracking_net_tangential_distance_m": 0.0010812489372777144,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.009102708850604034,
+            "integrated_abs_turn_rad": 10.355040439257088,
+            "max_abs_turn_rate_rad_s": 0.19264775453126956
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.020175073256116272,
+            "center_error_mae_K": 0.017683025949467527,
+            "head_error_rms_K": 0.02139977517557598,
+            "tangent_error_mean_rad": 0.13891480940875592,
+            "tracking_tangential_distance_m": 0.023631965622501253,
+            "tracking_net_tangential_distance_m": 0.023631965622501253,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007836951406682694,
+            "integrated_abs_turn_rad": 4.4481282058830764,
+            "max_abs_turn_rate_rad_s": 0.10608199763605898
+          }
+        }
+      ]
+    },
+    {
+      "variant": "gru_raw",
+      "seed": 17,
+      "correct_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.011679346658296362,
+            "center_error_mae_K": 0.009828534977577118,
+            "head_error_rms_K": 0.012622236300897401,
+            "tangent_error_mean_rad": 0.11262366670464684,
+            "tracking_tangential_distance_m": 0.02379654695166042,
+            "tracking_net_tangential_distance_m": 0.02379654695166042,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.023796726332801187,
+            "integrated_abs_turn_rad": 1.4957789152547096,
+            "max_abs_turn_rate_rad_s": 0.04288978211722155
+          },
+          "initial_state": {
+            "x_m": 0.00015010669622144194,
+            "y_m": -0.00024255507452896355,
+            "heading_rad": 0.8226349428829505,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.3545,
+            "head_residence_fraction": 0.33925,
+            "tracking_fraction": 0.34425,
+            "longest_tracking_s": 28.26,
+            "center_error_rms_K": 0.07922175617124858,
+            "center_error_mae_K": 0.07209664187418148,
+            "head_error_rms_K": 0.08114075879117295,
+            "tangent_error_mean_rad": 0.3082173738373712,
+            "tracking_tangential_distance_m": 0.008053262808027989,
+            "tracking_net_tangential_distance_m": 0.008053262808027989,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.022687670180792395,
+            "integrated_abs_turn_rad": 3.200114522906133,
+            "max_abs_turn_rate_rad_s": 0.07023633870511127
+          },
+          "initial_state": {
+            "x_m": -0.000197432752962123,
+            "y_m": -0.0002386198855497772,
+            "heading_rad": 2.7198558030060744,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.016392309020662917,
+            "center_error_mae_K": 0.013921452632039082,
+            "head_error_rms_K": 0.01791091482707004,
+            "tangent_error_mean_rad": 0.11485372552793319,
+            "tracking_tangential_distance_m": 0.023731935278751486,
+            "tracking_net_tangential_distance_m": 0.023731935278751486,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007930943815121818,
+            "integrated_abs_turn_rad": 4.654327569652668,
+            "max_abs_turn_rate_rad_s": 0.07662805571533297
+          },
+          "initial_state": {
+            "x_m": -0.003507496625954243,
+            "y_m": 0.0031506154308898657,
+            "heading_rad": 0.9855572799000325,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.007845402927927151,
+            "center_error_mae_K": 0.0059214552597286075,
+            "head_error_rms_K": 0.009197576134362272,
+            "tangent_error_mean_rad": 0.06271822557393426,
+            "tracking_tangential_distance_m": 0.023869297493675275,
+            "tracking_net_tangential_distance_m": 0.023869297493675275,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.006805109053676843,
+            "integrated_abs_turn_rad": 4.512167400179335,
+            "max_abs_turn_rate_rad_s": 0.10842759907358628
+          },
+          "initial_state": {
+            "x_m": -0.0035178561122744165,
+            "y_m": 0.0031021808389929545,
+            "heading_rad": 4.250587972621823,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        }
+      ],
+      "scrambled_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 0.2785,
+            "head_residence_fraction": 0.2803333333333333,
+            "tracking_fraction": 0.08041666666666666,
+            "longest_tracking_s": 9.65,
+            "center_error_rms_K": 0.11642980287011126,
+            "center_error_mae_K": 0.09897502991320063,
+            "head_error_rms_K": 0.11761287493810477,
+            "tangent_error_mean_rad": 0.9721785209015109,
+            "tracking_tangential_distance_m": 0.0018403598107320106,
+            "tracking_net_tangential_distance_m": 0.0018403598107320106,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.001574670480993196,
+            "integrated_abs_turn_rad": 7.822361632200491,
+            "max_abs_turn_rate_rad_s": 0.17221356218913703
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.30775,
+            "head_residence_fraction": 0.29025,
+            "tracking_fraction": 0.29941666666666666,
+            "longest_tracking_s": 22.69,
+            "center_error_rms_K": 0.07855860870077486,
+            "center_error_mae_K": 0.07282812451678213,
+            "head_error_rms_K": 0.07989720935866698,
+            "tangent_error_mean_rad": 0.292835793431992,
+            "tracking_tangential_distance_m": 0.007000863220114545,
+            "tracking_net_tangential_distance_m": 0.007000863220114545,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.022786082542733427,
+            "integrated_abs_turn_rad": 3.0953829090952527,
+            "max_abs_turn_rate_rad_s": 0.06983115249493146
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 0.4850833333333333,
+            "head_residence_fraction": 0.466,
+            "tracking_fraction": 0.3805,
+            "longest_tracking_s": 39.47,
+            "center_error_rms_K": 0.10429613137817652,
+            "center_error_mae_K": 0.07759696551348252,
+            "head_error_rms_K": 0.10608058673773613,
+            "tangent_error_mean_rad": 0.6862320736151784,
+            "tracking_tangential_distance_m": 0.008821350673713195,
+            "tracking_net_tangential_distance_m": 0.006449937765776716,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007302015707916639,
+            "integrated_abs_turn_rad": 7.418919920282413,
+            "max_abs_turn_rate_rad_s": 0.17769782877761905
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.26816666666666666,
+            "head_residence_fraction": 0.24466666666666667,
+            "tracking_fraction": 0.2105,
+            "longest_tracking_s": 25.26,
+            "center_error_rms_K": 0.12492715825233443,
+            "center_error_mae_K": 0.10179180323358,
+            "head_error_rms_K": 0.12641023218479552,
+            "tangent_error_mean_rad": 0.5540001930439136,
+            "tracking_tangential_distance_m": 0.004863935623939956,
+            "tracking_net_tangential_distance_m": 0.004863935623939956,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.011232134785256608,
+            "integrated_abs_turn_rad": 7.664825773378025,
+            "max_abs_turn_rate_rad_s": 0.18343922373198707
+          }
+        }
+      ]
+    },
+    {
+      "variant": "gru_raw",
+      "seed": 27,
+      "correct_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.005824397661828462,
+            "center_error_mae_K": 0.004645445169124799,
+            "head_error_rms_K": 0.007323922716514855,
+            "tangent_error_mean_rad": 0.07939233330110519,
+            "tracking_tangential_distance_m": 0.023868132918715257,
+            "tracking_net_tangential_distance_m": 0.023868132918715257,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.023869248369490444,
+            "integrated_abs_turn_rad": 1.2276675990105586,
+            "max_abs_turn_rate_rad_s": 0.04613276185324925
+          },
+          "initial_state": {
+            "x_m": 0.00015010669622144194,
+            "y_m": -0.00024255507452896355,
+            "heading_rad": 0.8226349428829505,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.46116666666666667,
+            "head_residence_fraction": 0.44033333333333335,
+            "tracking_fraction": 0.1735,
+            "longest_tracking_s": 16.14,
+            "center_error_rms_K": 0.11403511437610508,
+            "center_error_mae_K": 0.08776095509584501,
+            "head_error_rms_K": 0.11565764910068087,
+            "tangent_error_mean_rad": 0.7310500379585255,
+            "tracking_tangential_distance_m": 0.003993930849656215,
+            "tracking_net_tangential_distance_m": 0.003993930849656215,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.006522627512864933,
+            "integrated_abs_turn_rad": 7.437413386568051,
+            "max_abs_turn_rate_rad_s": 0.08820623992018035
+          },
+          "initial_state": {
+            "x_m": -0.000197432752962123,
+            "y_m": -0.0002386198855497772,
+            "heading_rad": 2.7198558030060744,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.011842982402225569,
+            "center_error_mae_K": 0.010743360733812614,
+            "head_error_rms_K": 0.013575362575506799,
+            "tangent_error_mean_rad": 0.08991083187712774,
+            "tracking_tangential_distance_m": 0.023794062009970442,
+            "tracking_net_tangential_distance_m": 0.023794062009970442,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007648475754669953,
+            "integrated_abs_turn_rad": 4.702851302761575,
+            "max_abs_turn_rate_rad_s": 0.09433547114424103
+          },
+          "initial_state": {
+            "x_m": -0.003507496625954243,
+            "y_m": 0.0031506154308898657,
+            "heading_rad": 0.9855572799000325,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.46725,
+            "head_residence_fraction": 0.47175,
+            "tracking_fraction": 0.38116666666666665,
+            "longest_tracking_s": 25.79,
+            "center_error_rms_K": 0.08282067953815346,
+            "center_error_mae_K": 0.06875465115005626,
+            "head_error_rms_K": 0.08186099240365621,
+            "tangent_error_mean_rad": 0.37578640328322194,
+            "tracking_tangential_distance_m": 0.008827781407359757,
+            "tracking_net_tangential_distance_m": 0.008827781407359757,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.008209683574317646,
+            "integrated_abs_turn_rad": 7.592786632985833,
+            "max_abs_turn_rate_rad_s": 0.08711993310224067
+          },
+          "initial_state": {
+            "x_m": -0.0035178561122744165,
+            "y_m": 0.0031021808389929545,
+            "heading_rad": 4.250587972621823,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        }
+      ],
+      "scrambled_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.011816929412270447,
+            "center_error_mae_K": 0.009867304579316309,
+            "head_error_rms_K": 0.012855566832523977,
+            "tangent_error_mean_rad": 0.13554107419154665,
+            "tracking_tangential_distance_m": 0.023691150087267673,
+            "tracking_net_tangential_distance_m": 0.023691150087267673,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.023691863658790936,
+            "integrated_abs_turn_rad": 1.7797100736671991,
+            "max_abs_turn_rate_rad_s": 0.06233293475547967
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.29591666666666666,
+            "head_residence_fraction": 0.30391666666666667,
+            "tracking_fraction": 0.043083333333333335,
+            "longest_tracking_s": 5.17,
+            "center_error_rms_K": 0.12279215134999123,
+            "center_error_mae_K": 0.10212998410389548,
+            "head_error_rms_K": 0.12382143734871069,
+            "tangent_error_mean_rad": 0.9263411918976003,
+            "tracking_tangential_distance_m": 0.0009727934839285226,
+            "tracking_net_tangential_distance_m": 0.0009727934839285226,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.0012287858088827193,
+            "integrated_abs_turn_rad": 9.516916647945704,
+            "max_abs_turn_rate_rad_s": 0.21327984357699492
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 0.6585833333333333,
+            "head_residence_fraction": 0.6494166666666666,
+            "tracking_fraction": 0.3914166666666667,
+            "longest_tracking_s": 17.13,
+            "center_error_rms_K": 0.042501087145439945,
+            "center_error_mae_K": 0.03608013201134407,
+            "head_error_rms_K": 0.04395115195534668,
+            "tangent_error_mean_rad": 0.33563733163614834,
+            "tracking_tangential_distance_m": 0.008986087563978203,
+            "tracking_net_tangential_distance_m": 0.008986087563978203,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.009625300240174427,
+            "integrated_abs_turn_rad": 5.073232802927093,
+            "max_abs_turn_rate_rad_s": 0.12451573721809057
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.4345833333333333,
+            "head_residence_fraction": 0.4445,
+            "tracking_fraction": 0.40858333333333335,
+            "longest_tracking_s": 36.4,
+            "center_error_rms_K": 0.08319819701499652,
+            "center_error_mae_K": 0.07106541800449859,
+            "head_error_rms_K": 0.0818261366713265,
+            "tangent_error_mean_rad": 0.3113979758708784,
+            "tracking_tangential_distance_m": 0.00959364129874986,
+            "tracking_net_tangential_distance_m": 0.00959364129874986,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007905933798990931,
+            "integrated_abs_turn_rad": 7.436761006476009,
+            "max_abs_turn_rate_rad_s": 0.08806226515278001
+          }
+        }
+      ]
+    },
+    {
+      "variant": "gru_demeaned",
+      "seed": 7,
+      "correct_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.0018418791063479223,
+            "center_error_mae_K": 0.0011244995647960558,
+            "head_error_rms_K": 0.004443591561592798,
+            "tangent_error_mean_rad": 0.027310526715704057,
+            "tracking_tangential_distance_m": 0.023968992032892503,
+            "tracking_net_tangential_distance_m": 0.023968992032892503,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.02397131669456035,
+            "integrated_abs_turn_rad": 1.4402698913539351,
+            "max_abs_turn_rate_rad_s": 0.0619635973119942
+          },
+          "initial_state": {
+            "x_m": 0.00015010669622144194,
+            "y_m": -0.00024255507452896355,
+            "heading_rad": 0.8226349428829505,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.007052545582214077,
+            "center_error_mae_K": 0.004432844300387674,
+            "head_error_rms_K": 0.008137701545688205,
+            "tangent_error_mean_rad": 0.04264564959468208,
+            "tracking_tangential_distance_m": 0.023948225838420628,
+            "tracking_net_tangential_distance_m": 0.023948225838420628,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.02394980845489292,
+            "integrated_abs_turn_rad": 2.1032701117226025,
+            "max_abs_turn_rate_rad_s": 0.08165906836246152
+          },
+          "initial_state": {
+            "x_m": -0.000197432752962123,
+            "y_m": -0.0002386198855497772,
+            "heading_rad": 2.7198558030060744,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.01733587003163514,
+            "center_error_mae_K": 0.01664179389422002,
+            "head_error_rms_K": 0.018914776810457397,
+            "tangent_error_mean_rad": 0.04090050596244085,
+            "tracking_tangential_distance_m": 0.023943231230235007,
+            "tracking_net_tangential_distance_m": 0.023943231230235007,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.008168115026751915,
+            "integrated_abs_turn_rad": 4.601574585156788,
+            "max_abs_turn_rate_rad_s": 0.09899722470661594
+          },
+          "initial_state": {
+            "x_m": -0.003507496625954243,
+            "y_m": 0.0031506154308898657,
+            "heading_rad": 0.9855572799000325,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.008320532582559579,
+            "center_error_mae_K": 0.007811347579879692,
+            "head_error_rms_K": 0.009924233550546191,
+            "tangent_error_mean_rad": 0.04736213458428802,
+            "tracking_tangential_distance_m": 0.023934212025252286,
+            "tracking_net_tangential_distance_m": 0.023934212025252286,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.0071300162887199346,
+            "integrated_abs_turn_rad": 4.934840841998613,
+            "max_abs_turn_rate_rad_s": 0.10625775285708457
+          },
+          "initial_state": {
+            "x_m": -0.0035178561122744165,
+            "y_m": 0.0031021808389929545,
+            "heading_rad": 4.250587972621823,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        }
+      ],
+      "scrambled_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 0.46725,
+            "head_residence_fraction": 0.48691666666666666,
+            "tracking_fraction": 0.46725,
+            "longest_tracking_s": 29.240000000000002,
+            "center_error_rms_K": 0.048083959011134915,
+            "center_error_mae_K": 0.044733017864092034,
+            "head_error_rms_K": 0.04872673392648853,
+            "tangent_error_mean_rad": 0.13035530626289457,
+            "tracking_tangential_distance_m": 0.01095483755294576,
+            "tracking_net_tangential_distance_m": 0.01095483755294576,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.023685668225976456,
+            "integrated_abs_turn_rad": 2.9200624403986155,
+            "max_abs_turn_rate_rad_s": 0.1015928517377083
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.892,
+            "head_residence_fraction": 0.8684166666666666,
+            "tracking_fraction": 0.8701666666666666,
+            "longest_tracking_s": 52.660000000000004,
+            "center_error_rms_K": 0.034967010943764115,
+            "center_error_mae_K": 0.03165073704753356,
+            "head_error_rms_K": 0.035843500148484385,
+            "tangent_error_mean_rad": 0.19950109910811956,
+            "tracking_tangential_distance_m": 0.020441959673451082,
+            "tracking_net_tangential_distance_m": 0.020441959673451082,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.02335131492159236,
+            "integrated_abs_turn_rad": 6.340828284155771,
+            "max_abs_turn_rate_rad_s": 0.19574381959546738
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 0.46366666666666667,
+            "head_residence_fraction": 0.47225,
+            "tracking_fraction": 0.16416666666666666,
+            "longest_tracking_s": 10.63,
+            "center_error_rms_K": 0.08536990996125358,
+            "center_error_mae_K": 0.06869495076459052,
+            "head_error_rms_K": 0.08661273143444229,
+            "tangent_error_mean_rad": 0.8689300557837591,
+            "tracking_tangential_distance_m": 0.0038313794393494962,
+            "tracking_net_tangential_distance_m": 0.000305450604770173,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.004262633165910462,
+            "integrated_abs_turn_rad": 9.378847618696247,
+            "max_abs_turn_rate_rad_s": 0.21800839910084416
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.7394166666666667,
+            "head_residence_fraction": 0.7024166666666667,
+            "tracking_fraction": 0.7024166666666667,
+            "longest_tracking_s": 29.93,
+            "center_error_rms_K": 0.0451235974816688,
+            "center_error_mae_K": 0.04173006950576633,
+            "head_error_rms_K": 0.046709021289452764,
+            "tangent_error_mean_rad": 0.23582141930937534,
+            "tracking_tangential_distance_m": 0.016476733531334317,
+            "tracking_net_tangential_distance_m": 0.016476733531334317,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.010085461801821663,
+            "integrated_abs_turn_rad": 8.015063238554514,
+            "max_abs_turn_rate_rad_s": 0.20355937623168885
+          }
+        }
+      ]
+    },
+    {
+      "variant": "gru_demeaned",
+      "seed": 17,
+      "correct_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.004390402929727895,
+            "center_error_mae_K": 0.004113256567534369,
+            "head_error_rms_K": 0.006052944786119703,
+            "tangent_error_mean_rad": 0.02856819285846348,
+            "tracking_tangential_distance_m": 0.02395970027796147,
+            "tracking_net_tangential_distance_m": 0.02395970027796147,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.023960152274402687,
+            "integrated_abs_turn_rad": 1.0243380510753313,
+            "max_abs_turn_rate_rad_s": 0.06237045442254382
+          },
+          "initial_state": {
+            "x_m": 0.00015010669622144194,
+            "y_m": -0.00024255507452896355,
+            "heading_rad": 0.8226349428829505,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.01262253088182238,
+            "center_error_mae_K": 0.0074078505188892845,
+            "head_error_rms_K": 0.013334389654211186,
+            "tangent_error_mean_rad": 0.060053705967118294,
+            "tracking_tangential_distance_m": 0.02388646395620226,
+            "tracking_net_tangential_distance_m": 0.02388646395620226,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.023888916701669025,
+            "integrated_abs_turn_rad": 1.5420689719463605,
+            "max_abs_turn_rate_rad_s": 0.04106405192538
+          },
+          "initial_state": {
+            "x_m": -0.000197432752962123,
+            "y_m": -0.0002386198855497772,
+            "heading_rad": 2.7198558030060744,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.010012662837964485,
+            "center_error_mae_K": 0.009823775023222648,
+            "head_error_rms_K": 0.011742944041783531,
+            "tangent_error_mean_rad": 0.03394082587804289,
+            "tracking_tangential_distance_m": 0.023946699933210285,
+            "tracking_net_tangential_distance_m": 0.023946699933210285,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007486721383504986,
+            "integrated_abs_turn_rad": 4.759780382316448,
+            "max_abs_turn_rate_rad_s": 0.08560858774954785
+          },
+          "initial_state": {
+            "x_m": -0.003507496625954243,
+            "y_m": 0.0031506154308898657,
+            "heading_rad": 0.9855572799000325,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.011497770630731515,
+            "center_error_mae_K": 0.011141190872254066,
+            "head_error_rms_K": 0.012988966939183708,
+            "tangent_error_mean_rad": 0.048864741902394815,
+            "tracking_tangential_distance_m": 0.023909922261872555,
+            "tracking_net_tangential_distance_m": 0.023909922261872555,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007414424089320068,
+            "integrated_abs_turn_rad": 4.640122618165897,
+            "max_abs_turn_rate_rad_s": 0.08741156437423155
+          },
+          "initial_state": {
+            "x_m": -0.0035178561122744165,
+            "y_m": 0.0031021808389929545,
+            "heading_rad": 4.250587972621823,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        }
+      ],
+      "scrambled_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 0.9540833333333333,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.03036186313382877,
+            "center_error_mae_K": 0.027112091957110326,
+            "head_error_rms_K": 0.03103114294083327,
+            "tangent_error_mean_rad": 0.11108360372323765,
+            "tracking_tangential_distance_m": 0.023773862661562083,
+            "tracking_net_tangential_distance_m": 0.023773862661562083,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.023778429062331123,
+            "integrated_abs_turn_rad": 1.730506974481175,
+            "max_abs_turn_rate_rad_s": 0.058470671486676395
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.1365,
+            "head_residence_fraction": 0.11666666666666667,
+            "tracking_fraction": 0.1365,
+            "longest_tracking_s": 16.38,
+            "center_error_rms_K": 0.22826062545033568,
+            "center_error_mae_K": 0.19892980092293022,
+            "head_error_rms_K": 0.22912942706469888,
+            "tangent_error_mean_rad": 0.7456968371184897,
+            "tracking_tangential_distance_m": 0.003136357519697341,
+            "tracking_net_tangential_distance_m": 0.003136357519697341,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.0023107806551142924,
+            "integrated_abs_turn_rad": 5.565788856659585,
+            "max_abs_turn_rate_rad_s": 0.07485918493644991
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.006932229095308768,
+            "center_error_mae_K": 0.0045374238825127864,
+            "head_error_rms_K": 0.008656023704921006,
+            "tangent_error_mean_rad": 0.07572033048581168,
+            "tracking_tangential_distance_m": 0.02387602824367828,
+            "tracking_net_tangential_distance_m": 0.02387602824367828,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007001809284172907,
+            "integrated_abs_turn_rad": 4.8298137099099625,
+            "max_abs_turn_rate_rad_s": 0.10389211418389936
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.17791666666666667,
+            "head_residence_fraction": 0.1565,
+            "tracking_fraction": 0.10008333333333333,
+            "longest_tracking_s": 12.01,
+            "center_error_rms_K": 0.18738968489686159,
+            "center_error_mae_K": 0.1679412741090367,
+            "head_error_rms_K": 0.1903054452247065,
+            "tangent_error_mean_rad": 0.46783725409034765,
+            "tracking_tangential_distance_m": 0.002356779587633898,
+            "tracking_net_tangential_distance_m": 0.002356779587633898,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007958446721278961,
+            "integrated_abs_turn_rad": 5.409719408964584,
+            "max_abs_turn_rate_rad_s": 0.1297506192492213
+          }
+        }
+      ]
+    },
+    {
+      "variant": "gru_demeaned",
+      "seed": 27,
+      "correct_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.0041002144448140055,
+            "center_error_mae_K": 0.0035438995758891394,
+            "head_error_rms_K": 0.005774358268817372,
+            "tangent_error_mean_rad": 0.04051855175996912,
+            "tracking_tangential_distance_m": 0.02395329999597519,
+            "tracking_net_tangential_distance_m": 0.02395329999597519,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.023955231003348357,
+            "integrated_abs_turn_rad": 1.4302773226196976,
+            "max_abs_turn_rate_rad_s": 0.045002158503007116
+          },
+          "initial_state": {
+            "x_m": 0.00015010669622144194,
+            "y_m": -0.00024255507452896355,
+            "heading_rad": 0.8226349428829505,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.007489699763038908,
+            "center_error_mae_K": 0.0037800440574379326,
+            "head_error_rms_K": 0.008525922642742947,
+            "tangent_error_mean_rad": 0.040352688670838265,
+            "tracking_tangential_distance_m": 0.023947691800460046,
+            "tracking_net_tangential_distance_m": 0.023947691800460046,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.02394990953232998,
+            "integrated_abs_turn_rad": 1.754737255014212,
+            "max_abs_turn_rate_rad_s": 0.06463080950481677
+          },
+          "initial_state": {
+            "x_m": -0.000197432752962123,
+            "y_m": -0.0002386198855497772,
+            "heading_rad": 2.7198558030060744,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.01525771212085821,
+            "center_error_mae_K": 0.014789288582341369,
+            "head_error_rms_K": 0.01692094733747734,
+            "tangent_error_mean_rad": 0.05200346132904978,
+            "tracking_tangential_distance_m": 0.02392226489382729,
+            "tracking_net_tangential_distance_m": 0.02392226489382729,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.008039629230455538,
+            "integrated_abs_turn_rad": 4.613936382776193,
+            "max_abs_turn_rate_rad_s": 0.08946843831763555
+          },
+          "initial_state": {
+            "x_m": -0.003507496625954243,
+            "y_m": 0.0031506154308898657,
+            "heading_rad": 0.9855572799000325,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.010345860750322025,
+            "center_error_mae_K": 0.009985528429288038,
+            "head_error_rms_K": 0.011875308332934742,
+            "tangent_error_mean_rad": 0.04549664561769539,
+            "tracking_tangential_distance_m": 0.023935007915924816,
+            "tracking_net_tangential_distance_m": 0.023935007915924816,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007329185177905887,
+            "integrated_abs_turn_rad": 4.767722069758145,
+            "max_abs_turn_rate_rad_s": 0.09881076996665614
+          },
+          "initial_state": {
+            "x_m": -0.0035178561122744165,
+            "y_m": 0.0031021808389929545,
+            "heading_rad": 4.250587972621823,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        }
+      ],
+      "scrambled_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 0.9281666666666667,
+            "head_residence_fraction": 0.8210833333333334,
+            "tracking_fraction": 0.9281666666666667,
+            "longest_tracking_s": 76.66,
+            "center_error_rms_K": 0.041182396568843864,
+            "center_error_mae_K": 0.0390280989881938,
+            "head_error_rms_K": 0.042065744706982246,
+            "tangent_error_mean_rad": 0.07933965487211994,
+            "tracking_tangential_distance_m": 0.02210761999849976,
+            "tracking_net_tangential_distance_m": 0.02210761999849976,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.023850466705156347,
+            "integrated_abs_turn_rad": 2.26439515207897,
+            "max_abs_turn_rate_rad_s": 0.06374431059623051
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.269,
+            "head_residence_fraction": 0.25216666666666665,
+            "tracking_fraction": 0.18166666666666667,
+            "longest_tracking_s": 21.8,
+            "center_error_rms_K": 0.24823442263699327,
+            "center_error_mae_K": 0.20563959791279263,
+            "head_error_rms_K": 0.25140990817012604,
+            "tangent_error_mean_rad": 0.6390378840631737,
+            "tracking_tangential_distance_m": 0.004276590932257737,
+            "tracking_net_tangential_distance_m": 0.004276590932257737,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.009194272266876864,
+            "integrated_abs_turn_rad": 4.766558761590239,
+            "max_abs_turn_rate_rad_s": 0.10935910712963579
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.009365507709214146,
+            "center_error_mae_K": 0.008603642587288463,
+            "head_error_rms_K": 0.009440358380319355,
+            "tangent_error_mean_rad": 0.04403905941205304,
+            "tracking_tangential_distance_m": 0.023959369313615787,
+            "tracking_net_tangential_distance_m": 0.023959369313615787,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.0056573434238721175,
+            "integrated_abs_turn_rad": 5.120198179657141,
+            "max_abs_turn_rate_rad_s": 0.0776916043707143
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.1535,
+            "head_residence_fraction": 0.13583333333333333,
+            "tracking_fraction": 0.072,
+            "longest_tracking_s": 8.64,
+            "center_error_rms_K": 0.29048801165160065,
+            "center_error_mae_K": 0.25471917426816915,
+            "head_error_rms_K": 0.2934579017926124,
+            "tangent_error_mean_rad": 0.7082488019445488,
+            "tracking_tangential_distance_m": 0.0016891298194214432,
+            "tracking_net_tangential_distance_m": 0.0016891298194214432,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007716205564360836,
+            "integrated_abs_turn_rad": 5.0260155708211895,
+            "max_abs_turn_rate_rad_s": 0.11116293720068741
+          }
+        }
+      ]
+    },
+    {
+      "variant": "window_mlp",
+      "seed": 7,
+      "correct_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.0016927087328887417,
+            "center_error_mae_K": 0.0008009574294919267,
+            "head_error_rms_K": 0.004489756942661745,
+            "tangent_error_mean_rad": 0.029324251862337274,
+            "tracking_tangential_distance_m": 0.023945177499310844,
+            "tracking_net_tangential_distance_m": 0.023945177499310844,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.023946887022052877,
+            "integrated_abs_turn_rad": 2.2411888727613847,
+            "max_abs_turn_rate_rad_s": 0.11244948651574416
+          },
+          "initial_state": {
+            "x_m": 0.00015010669622144194,
+            "y_m": -0.00024255507452896355,
+            "heading_rad": 0.8226349428829505,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.011259659975355434,
+            "center_error_mae_K": 0.007534415156431373,
+            "head_error_rms_K": 0.012006242072677364,
+            "tangent_error_mean_rad": 0.048953374501120105,
+            "tracking_tangential_distance_m": 0.023913937677655667,
+            "tracking_net_tangential_distance_m": 0.023913937677655667,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.023915399486734094,
+            "integrated_abs_turn_rad": 1.5840762470982097,
+            "max_abs_turn_rate_rad_s": 0.06875729914659634
+          },
+          "initial_state": {
+            "x_m": -0.000197432752962123,
+            "y_m": -0.0002386198855497772,
+            "heading_rad": 2.7198558030060744,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.007250269024207411,
+            "center_error_mae_K": 0.007166426861943649,
+            "head_error_rms_K": 0.009249696602289805,
+            "tangent_error_mean_rad": 0.03605140595116394,
+            "tracking_tangential_distance_m": 0.02393358890054797,
+            "tracking_net_tangential_distance_m": 0.02393358890054797,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007270100441626675,
+            "integrated_abs_turn_rad": 5.08912437915551,
+            "max_abs_turn_rate_rad_s": 0.1229972647963197
+          },
+          "initial_state": {
+            "x_m": -0.003507496625954243,
+            "y_m": 0.0031506154308898657,
+            "heading_rad": 0.9855572799000325,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.009304063033711554,
+            "center_error_mae_K": 0.008704004722370972,
+            "head_error_rms_K": 0.010749184721225756,
+            "tangent_error_mean_rad": 0.04567633397900373,
+            "tracking_tangential_distance_m": 0.02393189667005318,
+            "tracking_net_tangential_distance_m": 0.02393189667005318,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007131501755216156,
+            "integrated_abs_turn_rad": 4.650638577035356,
+            "max_abs_turn_rate_rad_s": 0.10460606523707298
+          },
+          "initial_state": {
+            "x_m": -0.0035178561122744165,
+            "y_m": 0.0031021808389929545,
+            "heading_rad": 4.250587972621823,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        }
+      ],
+      "scrambled_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 0.26425,
+            "head_residence_fraction": 0.24441666666666667,
+            "tracking_fraction": 0.097,
+            "longest_tracking_s": 11.64,
+            "center_error_rms_K": 0.13632740880577074,
+            "center_error_mae_K": 0.11462292648832396,
+            "head_error_rms_K": 0.14161670215342523,
+            "tangent_error_mean_rad": 0.8769877381218523,
+            "tracking_tangential_distance_m": 0.0021915758073038838,
+            "tracking_net_tangential_distance_m": 0.0021915758073038838,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.013889665827225516,
+            "integrated_abs_turn_rad": 5.461051198790314,
+            "max_abs_turn_rate_rad_s": 0.14177683534157834
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.10891666666666666,
+            "head_residence_fraction": 0.08866666666666667,
+            "tracking_fraction": 0.09016666666666667,
+            "longest_tracking_s": 10.82,
+            "center_error_rms_K": 0.21027616236257982,
+            "center_error_mae_K": 0.19020781922399035,
+            "head_error_rms_K": 0.21632306626971448,
+            "tangent_error_mean_rad": 0.7902685231786446,
+            "tracking_tangential_distance_m": 0.0020292168447781627,
+            "tracking_net_tangential_distance_m": 0.0020292168447781627,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.010133946315137823,
+            "integrated_abs_turn_rad": 8.656800300301196,
+            "max_abs_turn_rate_rad_s": 0.12807824324505673
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 0.12575,
+            "head_residence_fraction": 0.10491666666666667,
+            "tracking_fraction": 0.04808333333333333,
+            "longest_tracking_s": 5.7700000000000005,
+            "center_error_rms_K": 0.19221129597644981,
+            "center_error_mae_K": 0.17172268109953018,
+            "head_error_rms_K": 0.19867504234346936,
+            "tangent_error_mean_rad": 0.7782152837812852,
+            "tracking_tangential_distance_m": 0.0010928895402252008,
+            "tracking_net_tangential_distance_m": 0.0010928895402252008,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.009273211029179126,
+            "integrated_abs_turn_rad": 8.521534440702554,
+            "max_abs_turn_rate_rad_s": 0.15042580572487624
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.2816666666666667,
+            "head_residence_fraction": 0.25708333333333333,
+            "tracking_fraction": 0.1915,
+            "longest_tracking_s": 22.98,
+            "center_error_rms_K": 0.19099191616788794,
+            "center_error_mae_K": 0.15826637820894818,
+            "head_error_rms_K": 0.19591434794023163,
+            "tangent_error_mean_rad": 0.6804155004193407,
+            "tracking_tangential_distance_m": 0.004497521533864489,
+            "tracking_net_tangential_distance_m": 0.004497521533864489,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.013828859931886461,
+            "integrated_abs_turn_rad": 8.209380544776034,
+            "max_abs_turn_rate_rad_s": 0.16225843975769957
+          }
+        }
+      ]
+    },
+    {
+      "variant": "window_mlp",
+      "seed": 17,
+      "correct_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.0030099912991750945,
+            "center_error_mae_K": 0.00275824324491747,
+            "head_error_rms_K": 0.005032067806328294,
+            "tangent_error_mean_rad": 0.027182770721676623,
+            "tracking_tangential_distance_m": 0.02395528530599319,
+            "tracking_net_tangential_distance_m": 0.02395528530599319,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.023956231954523566,
+            "integrated_abs_turn_rad": 1.8991627030066378,
+            "max_abs_turn_rate_rad_s": 0.07800476760958508
+          },
+          "initial_state": {
+            "x_m": 0.00015010669622144194,
+            "y_m": -0.00024255507452896355,
+            "heading_rad": 0.8226349428829505,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.007232945268289274,
+            "center_error_mae_K": 0.0036743680817194657,
+            "head_error_rms_K": 0.008312269490844631,
+            "tangent_error_mean_rad": 0.04372852706228353,
+            "tracking_tangential_distance_m": 0.023931283566619076,
+            "tracking_net_tangential_distance_m": 0.023931283566619076,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.023933718203386533,
+            "integrated_abs_turn_rad": 2.042365563665819,
+            "max_abs_turn_rate_rad_s": 0.13551808817496158
+          },
+          "initial_state": {
+            "x_m": -0.000197432752962123,
+            "y_m": -0.0002386198855497772,
+            "heading_rad": 2.7198558030060744,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.006674013553344832,
+            "center_error_mae_K": 0.006557046534649991,
+            "head_error_rms_K": 0.008647563269414477,
+            "tangent_error_mean_rad": 0.03344033968611503,
+            "tracking_tangential_distance_m": 0.023938641413013936,
+            "tracking_net_tangential_distance_m": 0.023938641413013936,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.0071909144214022955,
+            "integrated_abs_turn_rad": 4.916074830040197,
+            "max_abs_turn_rate_rad_s": 0.09609065552738352
+          },
+          "initial_state": {
+            "x_m": -0.003507496625954243,
+            "y_m": 0.0031506154308898657,
+            "heading_rad": 0.9855572799000325,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.00928133024534167,
+            "center_error_mae_K": 0.008902565907316877,
+            "head_error_rms_K": 0.010847750642137728,
+            "tangent_error_mean_rad": 0.044041028192227806,
+            "tracking_tangential_distance_m": 0.02392861604671103,
+            "tracking_net_tangential_distance_m": 0.02392861604671103,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.0072361105661803244,
+            "integrated_abs_turn_rad": 4.823549531692856,
+            "max_abs_turn_rate_rad_s": 0.15107667249102938
+          },
+          "initial_state": {
+            "x_m": -0.0035178561122744165,
+            "y_m": 0.0031021808389929545,
+            "heading_rad": 4.250587972621823,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        }
+      ],
+      "scrambled_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 0.281,
+            "head_residence_fraction": 0.2628333333333333,
+            "tracking_fraction": 0.12533333333333332,
+            "longest_tracking_s": 15.040000000000001,
+            "center_error_rms_K": 0.12366541302067581,
+            "center_error_mae_K": 0.10517582586604389,
+            "head_error_rms_K": 0.12598118874509495,
+            "tangent_error_mean_rad": 0.8249662881101804,
+            "tracking_tangential_distance_m": 0.0028810170912983474,
+            "tracking_net_tangential_distance_m": 0.0028810170912983474,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.005128024769545303,
+            "integrated_abs_turn_rad": 7.72369696327649,
+            "max_abs_turn_rate_rad_s": 0.12150360161366279
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 0.9859166666666667,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.02711415051092393,
+            "center_error_mae_K": 0.024387962085311007,
+            "head_error_rms_K": 0.02777439856175162,
+            "tangent_error_mean_rad": 0.2205298791632407,
+            "tracking_tangential_distance_m": 0.02327487144538312,
+            "tracking_net_tangential_distance_m": 0.02327487144538312,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.0232765084518352,
+            "integrated_abs_turn_rad": 4.130635780430649,
+            "max_abs_turn_rate_rad_s": 0.113862985916686
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 0.41175,
+            "head_residence_fraction": 0.38616666666666666,
+            "tracking_fraction": 0.06208333333333333,
+            "longest_tracking_s": 7.45,
+            "center_error_rms_K": 0.09064710362690731,
+            "center_error_mae_K": 0.07253505569188448,
+            "head_error_rms_K": 0.09209947631435085,
+            "tangent_error_mean_rad": 0.6996156727367233,
+            "tracking_tangential_distance_m": 0.001427864632168453,
+            "tracking_net_tangential_distance_m": 0.001427864632168453,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.010246360028334673,
+            "integrated_abs_turn_rad": 6.675134413001041,
+            "max_abs_turn_rate_rad_s": 0.12057351797762507
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.511,
+            "head_residence_fraction": 0.5184166666666666,
+            "tracking_fraction": 0.4653333333333333,
+            "longest_tracking_s": 31.96,
+            "center_error_rms_K": 0.04712416520539023,
+            "center_error_mae_K": 0.04369311941245468,
+            "head_error_rms_K": 0.04869157252699758,
+            "tangent_error_mean_rad": 0.16594863469347368,
+            "tracking_tangential_distance_m": 0.010830820450365035,
+            "tracking_net_tangential_distance_m": 0.010830820450365035,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.010128122832064015,
+            "integrated_abs_turn_rad": 4.995440566681525,
+            "max_abs_turn_rate_rad_s": 0.12850935221872967
+          }
+        }
+      ]
+    },
+    {
+      "variant": "window_mlp",
+      "seed": 27,
+      "correct_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.002441805284504708,
+            "center_error_mae_K": 0.0015940405634451086,
+            "head_error_rms_K": 0.0048145304524126456,
+            "tangent_error_mean_rad": 0.03709966062175791,
+            "tracking_tangential_distance_m": 0.0239281226605649,
+            "tracking_net_tangential_distance_m": 0.0239281226605649,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.02393003810641647,
+            "integrated_abs_turn_rad": 2.467487183468012,
+            "max_abs_turn_rate_rad_s": 0.09196490542416899
+          },
+          "initial_state": {
+            "x_m": 0.00015010669622144194,
+            "y_m": -0.00024255507452896355,
+            "heading_rad": 0.8226349428829505,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.09941666666666667,
+            "head_residence_fraction": 0.07708333333333334,
+            "tracking_fraction": 0.0795,
+            "longest_tracking_s": 9.540000000000001,
+            "center_error_rms_K": 0.18144042204064106,
+            "center_error_mae_K": 0.16486157687941747,
+            "head_error_rms_K": 0.1844459559677009,
+            "tangent_error_mean_rad": 0.7781828473747638,
+            "tracking_tangential_distance_m": 0.0017595360058445004,
+            "tracking_net_tangential_distance_m": 0.0017595360058445004,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.005091997356447946,
+            "integrated_abs_turn_rad": 10.911322503819713,
+            "max_abs_turn_rate_rad_s": 0.18118983998168772
+          },
+          "initial_state": {
+            "x_m": -0.000197432752962123,
+            "y_m": -0.0002386198855497772,
+            "heading_rad": 2.7198558030060744,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.011036061704737718,
+            "center_error_mae_K": 0.010299564513986543,
+            "head_error_rms_K": 0.012711060725808012,
+            "tangent_error_mean_rad": 0.05274929548889683,
+            "tracking_tangential_distance_m": 0.02387419972095146,
+            "tracking_net_tangential_distance_m": 0.02387419972095146,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007543287795785493,
+            "integrated_abs_turn_rad": 4.910478617399033,
+            "max_abs_turn_rate_rad_s": 0.09392586844914787
+          },
+          "initial_state": {
+            "x_m": -0.003507496625954243,
+            "y_m": 0.0031506154308898657,
+            "heading_rad": 0.9855572799000325,
+            "motor_phase_rad": -1.6723321064111938,
+            "field_angle_rad": 2.124965378400051
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 1.0,
+            "head_residence_fraction": 1.0,
+            "tracking_fraction": 1.0,
+            "longest_tracking_s": 120.0,
+            "center_error_rms_K": 0.012783661497717366,
+            "center_error_mae_K": 0.012045247581111373,
+            "head_error_rms_K": 0.014044958078958388,
+            "tangent_error_mean_rad": 0.05653873115298058,
+            "tracking_tangential_distance_m": 0.0238908650269019,
+            "tracking_net_tangential_distance_m": 0.0238908650269019,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007286274150157956,
+            "integrated_abs_turn_rad": 4.6455526850612445,
+            "max_abs_turn_rate_rad_s": 0.078169793118962
+          },
+          "initial_state": {
+            "x_m": -0.0035178561122744165,
+            "y_m": 0.0031021808389929545,
+            "heading_rad": 4.250587972621823,
+            "motor_phase_rad": 1.3016559730252546,
+            "field_angle_rad": 0.8795732576912885
+          }
+        }
+      ],
+      "scrambled_phase": [
+        {
+          "field": "linear",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 0.38308333333333333,
+            "head_residence_fraction": 0.37025,
+            "tracking_fraction": 0.23558333333333334,
+            "longest_tracking_s": 22.98,
+            "center_error_rms_K": 0.10135334912524793,
+            "center_error_mae_K": 0.08155614507730097,
+            "head_error_rms_K": 0.10547724073217034,
+            "tangent_error_mean_rad": 0.5987628452628846,
+            "tracking_tangential_distance_m": 0.005337705544374039,
+            "tracking_net_tangential_distance_m": 0.0033507877395305688,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.009194776111498468,
+            "integrated_abs_turn_rad": 7.82220321262756,
+            "max_abs_turn_rate_rad_s": 0.182952777778305
+          }
+        },
+        {
+          "field": "linear",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.08125,
+            "head_residence_fraction": 0.06291666666666666,
+            "tracking_fraction": 0.02725,
+            "longest_tracking_s": 3.27,
+            "center_error_rms_K": 0.19017095659348807,
+            "center_error_mae_K": 0.17634036037986145,
+            "head_error_rms_K": 0.19483956854578352,
+            "tangent_error_mean_rad": 0.8120416383847044,
+            "tracking_tangential_distance_m": 0.0006158099480916971,
+            "tracking_net_tangential_distance_m": 0.0006158099480916971,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.007019506174004843,
+            "integrated_abs_turn_rad": 13.872033231715482,
+            "max_abs_turn_rate_rad_s": 0.1932398285220442
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6101,
+          "metrics": {
+            "center_residence_fraction": 0.242,
+            "head_residence_fraction": 0.25225,
+            "tracking_fraction": 0.16775,
+            "longest_tracking_s": 16.11,
+            "center_error_rms_K": 0.0740759761196191,
+            "center_error_mae_K": 0.06706918049500057,
+            "head_error_rms_K": 0.07547521947711666,
+            "tangent_error_mean_rad": 0.2656630192768423,
+            "tracking_tangential_distance_m": 0.003986793564234696,
+            "tracking_net_tangential_distance_m": 0.0024527079086475966,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.010646490097892482,
+            "integrated_abs_turn_rad": 6.2374889386105234,
+            "max_abs_turn_rate_rad_s": 0.15507968784481863
+          }
+        },
+        {
+          "field": "radial",
+          "seed": 6102,
+          "metrics": {
+            "center_residence_fraction": 0.14416666666666667,
+            "head_residence_fraction": 0.12875,
+            "tracking_fraction": 0.14416666666666667,
+            "longest_tracking_s": 17.3,
+            "center_error_rms_K": 0.12433776627605328,
+            "center_error_mae_K": 0.11610478375226682,
+            "head_error_rms_K": 0.12320218807550211,
+            "tangent_error_mean_rad": 0.2618335283485281,
+            "tracking_tangential_distance_m": 0.0033292533630977705,
+            "tracking_net_tangential_distance_m": 0.0033292533630977705,
+            "prescribed_forward_distance_m": 0.024,
+            "net_displacement_m": 0.004565108989619486,
+            "integrated_abs_turn_rad": 13.597649723675184,
+            "max_abs_turn_rate_rad_s": 0.18679738452285816
+          }
+        }
+      ]
+    }
+  ]
+}

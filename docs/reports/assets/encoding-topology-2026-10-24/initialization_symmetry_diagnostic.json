@@ -1,0 +1,169 @@
+{
+  "status": "post_design_initialization_symmetry_diagnostic_not_training",
+  "source_sha256": {
+    "analysis/encoding_topology_probe.py": "261e3a69b346137ffad1a6744f3625d6c50788504e7ae0eeb45c3ed6db5b44aa",
+    "analysis/connectome_memory_probe.py": "e98a283c4f7689b96477877dd173183850aa823a9a3005699897c73c8d953713",
+    "analysis/connectome_pilot.py": "085aec96fd93ef1bb0517ee07d8eaa641dba27a715bd45d403642b4a8739896f",
+    "src/thermotaxis/encoding_policies.py": "924fe0e0c0404c697caed55d7f16823e8736ff48f671ed5ab9a438bc1049164c",
+    "src/thermotaxis/connectome_policy.py": "9f86e6b54a50d2011f2f048c73b0a743704ce23807579acc0ebce0dc7ea47721",
+    "src/thermotaxis/connectome.py": "007b6e7eaf144e7b0f0f2c101e0346a6823fa4770470c7686dd976b08be4aeb0"
+  },
+  "source_hashes_match_frozen_design": {
+    "analysis/encoding_topology_probe.py": true,
+    "analysis/connectome_memory_probe.py": true,
+    "analysis/connectome_pilot.py": true,
+    "src/thermotaxis/encoding_policies.py": true,
+    "src/thermotaxis/connectome_policy.py": true,
+    "src/thermotaxis/connectome.py": true
+  },
+  "diagnostic_source_sha256": "454c928f25c8a5e856291a970fd9bcb8483697fbb673c05da217c1fb336278d6",
+  "dataset_seed": 86001,
+  "construction": "8 teacher trajectories duplicated with whole signed temperature history negated; identical teacher probability labels; no optimizer steps",
+  "interpretation": [
+    "FeatureCircuit with zero neuronal bias, odd tanh, linear gap diffusion is odd in signed history at initialization",
+    "With zero actor weight and equal targets for sign-paired histories, actor-weight gradients cancel in exact arithmetic and neural gradients are zero; actor bias has a mean-error gradient",
+    "Floating summation may leave tiny actor-weight gradient residuals",
+    "Not proof of a unique cause of observed training failure; unpaired finite training batches break exact symmetry and learned biases can break oddness",
+    "Applies to these simplified rate dynamics independent of chemical topology; not a claim about living AFD neurons or generic GRU"
+  ],
+  "rows": [
+    {
+      "architecture": "anatomical",
+      "encoding": "raw",
+      "paired_episodes": 16,
+      "steps": 180,
+      "seed": 7,
+      "topology_seed": 10001,
+      "neural_state_oddness_max_abs_error": 0.0,
+      "filter_state_oddness_max_abs_error": 0.0,
+      "teacher_label_pair_max_abs_difference": 0.0,
+      "prediction_pair_max_abs_difference": 0.0,
+      "actor_weight_gradient_max_abs": 2.5051831269162772e-12,
+      "actor_bias_gradient": 0.15737199783325195,
+      "shared_neural_gradient_max_abs": 0.0,
+      "all_parameter_gradient_max_abs": {
+        "core.chemical_weights": 0.0,
+        "core.gap_logits": 0.0,
+        "core.bias": 0.0,
+        "core.input_gain": 0.0,
+        "core.actor.weight": 2.5051831269162772e-12,
+        "core.actor.bias": 0.15737199783325195
+      }
+    },
+    {
+      "architecture": "anatomical",
+      "encoding": "adaptive",
+      "paired_episodes": 16,
+      "steps": 180,
+      "seed": 7,
+      "topology_seed": 10001,
+      "neural_state_oddness_max_abs_error": 0.0,
+      "filter_state_oddness_max_abs_error": 0.0,
+      "teacher_label_pair_max_abs_difference": 0.0,
+      "prediction_pair_max_abs_difference": 0.0,
+      "actor_weight_gradient_max_abs": 4.867263276447931e-12,
+      "actor_bias_gradient": 0.15737199783325195,
+      "shared_neural_gradient_max_abs": 0.0,
+      "all_parameter_gradient_max_abs": {
+        "core.chemical_weights": 0.0,
+        "core.gap_logits": 0.0,
+        "core.bias": 0.0,
+        "core.input_gain": 0.0,
+        "core.actor.weight": 4.867263276447931e-12,
+        "core.actor.bias": 0.15737199783325195
+      }
+    },
+    {
+      "architecture": "dense",
+      "encoding": "raw",
+      "paired_episodes": 16,
+      "steps": 180,
+      "seed": 7,
+      "topology_seed": 10001,
+      "neural_state_oddness_max_abs_error": 0.0,
+      "filter_state_oddness_max_abs_error": 0.0,
+      "teacher_label_pair_max_abs_difference": 0.0,
+      "prediction_pair_max_abs_difference": 0.0,
+      "actor_weight_gradient_max_abs": 4.786538786855088e-12,
+      "actor_bias_gradient": 0.15737199783325195,
+      "shared_neural_gradient_max_abs": 0.0,
+      "all_parameter_gradient_max_abs": {
+        "core.chemical_weights": 0.0,
+        "core.gap_logits": 0.0,
+        "core.bias": 0.0,
+        "core.input_gain": 0.0,
+        "core.actor.weight": 4.786538786855088e-12,
+        "core.actor.bias": 0.15737199783325195
+      }
+    },
+    {
+      "architecture": "dense",
+      "encoding": "adaptive",
+      "paired_episodes": 16,
+      "steps": 180,
+      "seed": 7,
+      "topology_seed": 10001,
+      "neural_state_oddness_max_abs_error": 0.0,
+      "filter_state_oddness_max_abs_error": 0.0,
+      "teacher_label_pair_max_abs_difference": 0.0,
+      "prediction_pair_max_abs_difference": 0.0,
+      "actor_weight_gradient_max_abs": 2.5211622611646944e-13,
+      "actor_bias_gradient": 0.15737199783325195,
+      "shared_neural_gradient_max_abs": 0.0,
+      "all_parameter_gradient_max_abs": {
+        "core.chemical_weights": 0.0,
+        "core.gap_logits": 0.0,
+        "core.bias": 0.0,
+        "core.input_gain": 0.0,
+        "core.actor.weight": 2.5211622611646944e-13,
+        "core.actor.bias": 0.15737199783325195
+      }
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "paired_episodes": 16,
+      "steps": 180,
+      "seed": 7,
+      "topology_seed": 10001,
+      "neural_state_oddness_max_abs_error": 0.0,
+      "filter_state_oddness_max_abs_error": 0.0,
+      "teacher_label_pair_max_abs_difference": 0.0,
+      "prediction_pair_max_abs_difference": 0.0,
+      "actor_weight_gradient_max_abs": 1.5798874795219797e-12,
+      "actor_bias_gradient": 0.15737199783325195,
+      "shared_neural_gradient_max_abs": 0.0,
+      "all_parameter_gradient_max_abs": {
+        "core.chemical_weights": 0.0,
+        "core.gap_logits": 0.0,
+        "core.bias": 0.0,
+        "core.input_gain": 0.0,
+        "core.actor.weight": 1.5798874795219797e-12,
+        "core.actor.bias": 0.15737199783325195
+      }
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "paired_episodes": 16,
+      "steps": 180,
+      "seed": 7,
+      "topology_seed": 10001,
+      "neural_state_oddness_max_abs_error": 0.0,
+      "filter_state_oddness_max_abs_error": 0.0,
+      "teacher_label_pair_max_abs_difference": 0.0,
+      "prediction_pair_max_abs_difference": 0.0,
+      "actor_weight_gradient_max_abs": 6.7782979749908545e-12,
+      "actor_bias_gradient": 0.15737199783325195,
+      "shared_neural_gradient_max_abs": 0.0,
+      "all_parameter_gradient_max_abs": {
+        "core.chemical_weights": 0.0,
+        "core.gap_logits": 0.0,
+        "core.bias": 0.0,
+        "core.input_gain": 0.0,
+        "core.actor.weight": 6.7782979749908545e-12,
+        "core.actor.bias": 0.15737199783325195
+      }
+    }
+  ]
+}

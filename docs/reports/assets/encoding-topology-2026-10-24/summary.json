@@ -1,0 +1,3132 @@
+{
+  "design": {
+    "status": "exploratory_supervised_encoding_by_topology",
+    "task": {
+      "batch": 16,
+      "steps": 180,
+      "dt_s": 1.0,
+      "speed_m_s": 0.0002,
+      "half_extent_m": 0.015,
+      "gradient_K_m": 100.0,
+      "noise_K": 0.05,
+      "comfort_K": 0.25,
+      "initial_min_m": 0.008,
+      "initial_max_m": 0.012
+    },
+    "runs": [
+      {
+        "architecture": "anatomical",
+        "encoding": "raw",
+        "topology_seed": 0,
+        "seed": 7
+      },
+      {
+        "architecture": "anatomical",
+        "encoding": "raw",
+        "topology_seed": 0,
+        "seed": 17
+      },
+      {
+        "architecture": "anatomical",
+        "encoding": "raw",
+        "topology_seed": 0,
+        "seed": 27
+      },
+      {
+        "architecture": "anatomical",
+        "encoding": "adaptive",
+        "topology_seed": 0,
+        "seed": 7
+      },
+      {
+        "architecture": "anatomical",
+        "encoding": "adaptive",
+        "topology_seed": 0,
+        "seed": 17
+      },
+      {
+        "architecture": "anatomical",
+        "encoding": "adaptive",
+        "topology_seed": 0,
+        "seed": 27
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "raw",
+        "topology_seed": 10001,
+        "seed": 7
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "raw",
+        "topology_seed": 10001,
+        "seed": 17
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "raw",
+        "topology_seed": 10001,
+        "seed": 27
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "raw",
+        "topology_seed": 10002,
+        "seed": 7
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "raw",
+        "topology_seed": 10002,
+        "seed": 17
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "raw",
+        "topology_seed": 10002,
+        "seed": 27
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "raw",
+        "topology_seed": 10003,
+        "seed": 7
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "raw",
+        "topology_seed": 10003,
+        "seed": 17
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "raw",
+        "topology_seed": 10003,
+        "seed": 27
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "adaptive",
+        "topology_seed": 10001,
+        "seed": 7
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "adaptive",
+        "topology_seed": 10001,
+        "seed": 17
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "adaptive",
+        "topology_seed": 10001,
+        "seed": 27
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "adaptive",
+        "topology_seed": 10002,
+        "seed": 7
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "adaptive",
+        "topology_seed": 10002,
+        "seed": 17
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "adaptive",
+        "topology_seed": 10002,
+        "seed": 27
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "adaptive",
+        "topology_seed": 10003,
+        "seed": 7
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "adaptive",
+        "topology_seed": 10003,
+        "seed": 17
+      },
+      {
+        "architecture": "rewired",
+        "encoding": "adaptive",
+        "topology_seed": 10003,
+        "seed": 27
+      },
+      {
+        "architecture": "dense",
+        "encoding": "raw",
+        "topology_seed": 0,
+        "seed": 7
+      },
+      {
+        "architecture": "dense",
+        "encoding": "raw",
+        "topology_seed": 0,
+        "seed": 17
+      },
+      {
+        "architecture": "dense",
+        "encoding": "raw",
+        "topology_seed": 0,
+        "seed": 27
+      },
+      {
+        "architecture": "dense",
+        "encoding": "adaptive",
+        "topology_seed": 0,
+        "seed": 7
+      },
+      {
+        "architecture": "dense",
+        "encoding": "adaptive",
+        "topology_seed": 0,
+        "seed": 17
+      },
+      {
+        "architecture": "dense",
+        "encoding": "adaptive",
+        "topology_seed": 0,
+        "seed": 27
+      },
+      {
+        "architecture": "gru2",
+        "encoding": "raw",
+        "topology_seed": 0,
+        "seed": 7
+      },
+      {
+        "architecture": "gru2",
+        "encoding": "raw",
+        "topology_seed": 0,
+        "seed": 17
+      },
+      {
+        "architecture": "gru2",
+        "encoding": "raw",
+        "topology_seed": 0,
+        "seed": 27
+      },
+      {
+        "architecture": "gru2",
+        "encoding": "adaptive",
+        "topology_seed": 0,
+        "seed": 7
+      },
+      {
+        "architecture": "gru2",
+        "encoding": "adaptive",
+        "topology_seed": 0,
+        "seed": 17
+      },
+      {
+        "architecture": "gru2",
+        "encoding": "adaptive",
+        "topology_seed": 0,
+        "seed": 27
+      },
+      {
+        "architecture": "gru16",
+        "encoding": "raw",
+        "topology_seed": 0,
+        "seed": 7
+      },
+      {
+        "architecture": "gru16",
+        "encoding": "raw",
+        "topology_seed": 0,
+        "seed": 17
+      },
+      {
+        "architecture": "gru16",
+        "encoding": "raw",
+        "topology_seed": 0,
+        "seed": 27
+      },
+      {
+        "architecture": "gru16",
+        "encoding": "adaptive",
+        "topology_seed": 0,
+        "seed": 7
+      },
+      {
+        "architecture": "gru16",
+        "encoding": "adaptive",
+        "topology_seed": 0,
+        "seed": 17
+      },
+      {
+        "architecture": "gru16",
+        "encoding": "adaptive",
+        "topology_seed": 0,
+        "seed": 27
+      }
+    ],
+    "updates": 512,
+    "training_episodes": 192,
+    "validation_episodes": 64,
+    "batch": 32,
+    "optimizer": {
+      "name": "Adam",
+      "lr": 0.003,
+      "clip_gradient_norm": 1.0
+    },
+    "input": {
+      "level": "signed local noisy temperature deviation / 1.5K",
+      "auxiliary": "(fast signed temperature - slow signed temperature)/0.05K, or zero in raw condition",
+      "fast_tau_s": 0.5,
+      "slow_tau_s": 5.0,
+      "dt_s": 1.0,
+      "filters_computed_in_both_conditions": true
+    },
+    "controlled_comparison": "Within each architecture/topology/seed, only auxiliary channel masking changes",
+    "teacher": "previous known absolute-error two-timescale controller; states never input",
+    "data_seeds": {
+      "train": 82001,
+      "validation": 82002,
+      "behavior_validation": 90001,
+      "exploratory_holdouts": 94001
+    },
+    "initialization": "zero actor head: all models begin with rate .255/s",
+    "checkpoint_rule": "final fixed-budget model; retain all curves, no best checkpoint selection",
+    "source_sha256": {
+      "analysis/encoding_topology_probe.py": "261e3a69b346137ffad1a6744f3625d6c50788504e7ae0eeb45c3ed6db5b44aa",
+      "analysis/connectome_memory_probe.py": "e98a283c4f7689b96477877dd173183850aa823a9a3005699897c73c8d953713",
+      "analysis/connectome_pilot.py": "085aec96fd93ef1bb0517ee07d8eaa641dba27a715bd45d403642b4a8739896f",
+      "src/thermotaxis/encoding_policies.py": "924fe0e0c0404c697caed55d7f16823e8736ff48f671ed5ab9a438bc1049164c",
+      "src/thermotaxis/connectome_policy.py": "9f86e6b54a50d2011f2f048c73b0a743704ce23807579acc0ebce0dc7ea47721",
+      "src/thermotaxis/connectome.py": "007b6e7eaf144e7b0f0f2c101e0346a6823fa4770470c7686dd976b08be4aeb0"
+    },
+    "data": {
+      "dataset": "Cook2019Herm (July 2020 corrected)",
+      "paper_doi": "10.1038/s41586-019-1352-7",
+      "repository": "https://github.com/openworm/ConnectomeToolbox",
+      "commit": "ffe570268b7cffb9329cd009a1bb37d60db2d465",
+      "source_path": "cect/cache/Cook2019HermReader.json",
+      "source_git_blob_sha1": "2c44e7abaa1efa71c4d814a945692f5775692abc",
+      "workbook_git_blob_sha1": "4d53c16e9a07c1ecfd068a02b39ccffd6b8a3eaa",
+      "retrieved_date": "2026-10-24",
+      "includes_non_neuronal_cells": true,
+      "derived_data_sha256": "6e2bd37286570c7af6f87f82a453c8113d3b30429e134cb934218ca7342097da"
+    },
+    "git_commit": "922ca2ef5dfbdcf39fa56e4d588583c4879a4daa",
+    "versions": {
+      "torch": "2.6.0",
+      "numpy": "2.0.2"
+    },
+    "limitations": [
+      "not reinforcement learning or RL sample-efficiency evidence",
+      "same signed filter form across models; not calibrated AFD physiology",
+      "chemical topology ablation keeps real gap/input/output assumptions",
+      "generic GRU has different dynamics and readout; GRU2 is only near parameter matched",
+      "all rewired topologies crossed with training seeds, not selected for success",
+      "64 behavior episodes are not 64 independent trained models",
+      "holdouts are exploratory and retired after inspection"
+    ]
+  },
+  "constant_predictor_mse": 0.08367128670215607,
+  "teacher_behavior": {
+    "residence_fraction": 0.6028645833333334,
+    "mean_absolute_error_K": 0.31515143066508083,
+    "entered_fraction": 0.984375
+  },
+  "runs": [
+    {
+      "architecture": "anatomical",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 7,
+      "parameters": 37,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08778629451990128
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08391833305358887
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.0838700532913208
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08386369794607162
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08862847222222223,
+        "mean_absolute_error_K": 0.8508756716416315,
+        "entered_fraction": 0.390625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.08602430555555556,
+          "mean_absolute_error_K": 0.8426763177652604,
+          "entered_fraction": 0.421875
+        },
+        "more_noise": {
+          "residence_fraction": 0.08602430555555556,
+          "mean_absolute_error_K": 0.8426763177652604,
+          "entered_fraction": 0.421875
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.1361111111111111,
+          "mean_absolute_error_K": 0.5941071540574238,
+          "entered_fraction": 0.5
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09379725158214569,
+          "away": 0.09372738003730774
+        },
+        "hot": {
+          "toward": 0.09355510026216507,
+          "away": 0.09358008205890656
+        }
+      },
+      "wall_time_s": 24.164987790999998
+    },
+    {
+      "architecture": "anatomical",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 17,
+      "parameters": 37,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08822757005691528
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08392690122127533
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08386238664388657
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08385706692934036
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08862847222222223,
+        "mean_absolute_error_K": 0.8508756716416315,
+        "entered_fraction": 0.390625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.0921875,
+          "mean_absolute_error_K": 0.834342908486667,
+          "entered_fraction": 0.421875
+        },
+        "more_noise": {
+          "residence_fraction": 0.0921875,
+          "mean_absolute_error_K": 0.834342908486667,
+          "entered_fraction": 0.421875
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.1467013888888889,
+          "mean_absolute_error_K": 0.5840400359406669,
+          "entered_fraction": 0.515625
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09366915374994278,
+          "away": 0.09364475309848785
+        },
+        "hot": {
+          "toward": 0.0935915932059288,
+          "away": 0.09359654039144516
+        }
+      },
+      "wall_time_s": 24.225057542
+    },
+    {
+      "architecture": "anatomical",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 27,
+      "parameters": 37,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.0878351479768753
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08391096442937851
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08386388421058655
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08385685086250305
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08862847222222223,
+        "mean_absolute_error_K": 0.8508756716416315,
+        "entered_fraction": 0.390625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.09461805555555555,
+          "mean_absolute_error_K": 0.8282947204556077,
+          "entered_fraction": 0.4375
+        },
+        "more_noise": {
+          "residence_fraction": 0.09461805555555555,
+          "mean_absolute_error_K": 0.8282947204556077,
+          "entered_fraction": 0.4375
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.1467013888888889,
+          "mean_absolute_error_K": 0.5840400359406669,
+          "entered_fraction": 0.515625
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.0938451960682869,
+          "away": 0.0937354639172554
+        },
+        "hot": {
+          "toward": 0.0935131162405014,
+          "away": 0.09354207664728165
+        }
+      },
+      "wall_time_s": 23.169804833
+    },
+    {
+      "architecture": "anatomical",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 7,
+      "parameters": 37,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08737221360206604
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08339626342058182
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08236180245876312
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.0820915624499321
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.07013888888888889,
+        "mean_absolute_error_K": 0.8986554896337433,
+        "entered_fraction": 0.328125
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.09600694444444445,
+          "mean_absolute_error_K": 0.8212561801014985,
+          "entered_fraction": 0.484375
+        },
+        "more_noise": {
+          "residence_fraction": 0.11024305555555555,
+          "mean_absolute_error_K": 0.802015554450225,
+          "entered_fraction": 0.515625
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.15590277777777778,
+          "mean_absolute_error_K": 0.5656108689957391,
+          "entered_fraction": 0.59375
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.08692116290330887,
+          "away": 0.08517670631408691
+        },
+        "hot": {
+          "toward": 0.08540415018796921,
+          "away": 0.16801147162914276
+        }
+      },
+      "wall_time_s": 25.292795125000012
+    },
+    {
+      "architecture": "anatomical",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 17,
+      "parameters": 37,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08806125819683075
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08386924862861633
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08370482176542282
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.0825049951672554
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08298611111111111,
+        "mean_absolute_error_K": 0.8658309859187016,
+        "entered_fraction": 0.375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.09392361111111111,
+          "mean_absolute_error_K": 0.8424340075460404,
+          "entered_fraction": 0.46875
+        },
+        "more_noise": {
+          "residence_fraction": 0.10347222222222222,
+          "mean_absolute_error_K": 0.822966866715022,
+          "entered_fraction": 0.4375
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.17178819444444443,
+          "mean_absolute_error_K": 0.5583573311924519,
+          "entered_fraction": 0.5625
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09145115315914154,
+          "away": 0.08937641978263855
+        },
+        "hot": {
+          "toward": 0.0895167887210846,
+          "away": 0.14700090885162354
+        }
+      },
+      "wall_time_s": 26.033876125000006
+    },
+    {
+      "architecture": "anatomical",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 27,
+      "parameters": 37,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08740132302045822
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08364464342594147
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08313537389039993
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08292645215988159
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.07890625,
+        "mean_absolute_error_K": 0.8753818544722571,
+        "entered_fraction": 0.328125
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.09270833333333334,
+          "mean_absolute_error_K": 0.8393437269307337,
+          "entered_fraction": 0.4375
+        },
+        "more_noise": {
+          "residence_fraction": 0.09401041666666667,
+          "mean_absolute_error_K": 0.8156935019011633,
+          "entered_fraction": 0.46875
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.159375,
+          "mean_absolute_error_K": 0.5770474115473821,
+          "entered_fraction": 0.546875
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.08874634653329849,
+          "away": 0.14794155955314636
+        },
+        "hot": {
+          "toward": 0.08985588699579239,
+          "away": 0.08860184252262115
+        }
+      },
+      "wall_time_s": 25.127344375000007
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10001,
+      "seed": 7,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 109,
+        "changed_entries": 18
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08859560638666153
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08391706645488739
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.0838572233915329
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08385281264781952
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08862847222222223,
+        "mean_absolute_error_K": 0.8508756716416315,
+        "entered_fraction": 0.390625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.0921875,
+          "mean_absolute_error_K": 0.834342908486667,
+          "entered_fraction": 0.421875
+        },
+        "more_noise": {
+          "residence_fraction": 0.0921875,
+          "mean_absolute_error_K": 0.834342908486667,
+          "entered_fraction": 0.421875
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.1467013888888889,
+          "mean_absolute_error_K": 0.5840400359406669,
+          "entered_fraction": 0.515625
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09371808916330338,
+          "away": 0.09369145333766937
+        },
+        "hot": {
+          "toward": 0.09357017278671265,
+          "away": 0.0935809537768364
+        }
+      },
+      "wall_time_s": 23.409961665999987
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10001,
+      "seed": 17,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 109,
+        "changed_entries": 18
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08861308544874191
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08397047966718674
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08387257903814316
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08386707305908203
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08489583333333334,
+        "mean_absolute_error_K": 0.8570471823611401,
+        "entered_fraction": 0.390625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.08359375,
+          "mean_absolute_error_K": 0.8470890891296531,
+          "entered_fraction": 0.40625
+        },
+        "more_noise": {
+          "residence_fraction": 0.08359375,
+          "mean_absolute_error_K": 0.8470890891296531,
+          "entered_fraction": 0.40625
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.1361111111111111,
+          "mean_absolute_error_K": 0.5937717373907572,
+          "entered_fraction": 0.5
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09353037923574448,
+          "away": 0.09354211390018463
+        },
+        "hot": {
+          "toward": 0.0937204509973526,
+          "away": 0.09368068724870682
+        }
+      },
+      "wall_time_s": 23.220775541999984
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10001,
+      "seed": 27,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 109,
+        "changed_entries": 18
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.0881071537733078
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08392507582902908
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08386079967021942
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08385573327541351
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08862847222222223,
+        "mean_absolute_error_K": 0.8508756716416315,
+        "entered_fraction": 0.390625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.09461805555555555,
+          "mean_absolute_error_K": 0.8282947204556077,
+          "entered_fraction": 0.4375
+        },
+        "more_noise": {
+          "residence_fraction": 0.09461805555555555,
+          "mean_absolute_error_K": 0.8282947204556077,
+          "entered_fraction": 0.4375
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.1467013888888889,
+          "mean_absolute_error_K": 0.5840400359406669,
+          "entered_fraction": 0.515625
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09381059557199478,
+          "away": 0.09375680238008499
+        },
+        "hot": {
+          "toward": 0.09354213625192642,
+          "away": 0.09355788677930832
+        }
+      },
+      "wall_time_s": 27.531324792,
+      "artifact_directory": "shards/rewired-raw-topo10001-seed27"
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10002,
+      "seed": 7,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 120,
+        "changed_entries": 20
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08871114253997803
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08394181728363037
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08386406302452087
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08385884761810303
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08862847222222223,
+        "mean_absolute_error_K": 0.8508756716416315,
+        "entered_fraction": 0.390625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.0921875,
+          "mean_absolute_error_K": 0.834342908486667,
+          "entered_fraction": 0.421875
+        },
+        "more_noise": {
+          "residence_fraction": 0.0921875,
+          "mean_absolute_error_K": 0.834342908486667,
+          "entered_fraction": 0.421875
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.1467013888888889,
+          "mean_absolute_error_K": 0.5840400359406669,
+          "entered_fraction": 0.515625
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09375786036252975,
+          "away": 0.0936964899301529
+        },
+        "hot": {
+          "toward": 0.09358314424753189,
+          "away": 0.09359586238861084
+        }
+      },
+      "wall_time_s": 27.543364541,
+      "artifact_directory": "shards/rewired-raw-topo10002-seed7"
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10002,
+      "seed": 17,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 120,
+        "changed_entries": 20
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.0885392427444458
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08396358042955399
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08387266844511032
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08386669307947159
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08428819444444445,
+        "mean_absolute_error_K": 0.8595020434722512,
+        "entered_fraction": 0.375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.08359375,
+          "mean_absolute_error_K": 0.8487245057963198,
+          "entered_fraction": 0.40625
+        },
+        "more_noise": {
+          "residence_fraction": 0.08359375,
+          "mean_absolute_error_K": 0.8487245057963198,
+          "entered_fraction": 0.40625
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.1361111111111111,
+          "mean_absolute_error_K": 0.5941071540574238,
+          "entered_fraction": 0.5
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09352956712245941,
+          "away": 0.09353896975517273
+        },
+        "hot": {
+          "toward": 0.09362521022558212,
+          "away": 0.09359345585107803
+        }
+      },
+      "wall_time_s": 27.618602416,
+      "artifact_directory": "shards/rewired-raw-topo10002-seed17"
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10002,
+      "seed": 27,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 120,
+        "changed_entries": 20
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08800908923149109
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08392199128866196
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.0838664248585701
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.0838615894317627
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08862847222222223,
+        "mean_absolute_error_K": 0.8508756716416315,
+        "entered_fraction": 0.390625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.08359375,
+          "mean_absolute_error_K": 0.8487245057963198,
+          "entered_fraction": 0.40625
+        },
+        "more_noise": {
+          "residence_fraction": 0.08359375,
+          "mean_absolute_error_K": 0.8487245057963198,
+          "entered_fraction": 0.40625
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.1361111111111111,
+          "mean_absolute_error_K": 0.5941071540574238,
+          "entered_fraction": 0.5
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09370402991771698,
+          "away": 0.0936756283044815
+        },
+        "hot": {
+          "toward": 0.09359574317932129,
+          "away": 0.09360800683498383
+        }
+      },
+      "wall_time_s": 27.343657708000002,
+      "artifact_directory": "shards/rewired-raw-topo10002-seed27"
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10003,
+      "seed": 7,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 120,
+        "changed_entries": 16
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08989965915679932
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.0840708389878273
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08387630432844162
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08386866748332977
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08923611111111111,
+        "mean_absolute_error_K": 0.8484208105305204,
+        "entered_fraction": 0.40625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.08359375,
+          "mean_absolute_error_K": 0.8470890891296531,
+          "entered_fraction": 0.40625
+        },
+        "more_noise": {
+          "residence_fraction": 0.08359375,
+          "mean_absolute_error_K": 0.8470890891296531,
+          "entered_fraction": 0.40625
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.1361111111111111,
+          "mean_absolute_error_K": 0.5929623623907571,
+          "entered_fraction": 0.5
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09373649954795837,
+          "away": 0.09373047947883606
+        },
+        "hot": {
+          "toward": 0.09372904896736145,
+          "away": 0.09372575581073761
+        }
+      },
+      "wall_time_s": 26.286845583999998,
+      "artifact_directory": "shards/rewired-raw-topo10003-seed7"
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10003,
+      "seed": 17,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 120,
+        "changed_entries": 16
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08811691403388977
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08394055813550949
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08387581259012222
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08386914432048798
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08489583333333334,
+        "mean_absolute_error_K": 0.8570471823611401,
+        "entered_fraction": 0.390625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.08576388888888889,
+          "mean_absolute_error_K": 0.8428862600738468,
+          "entered_fraction": 0.421875
+        },
+        "more_noise": {
+          "residence_fraction": 0.08576388888888889,
+          "mean_absolute_error_K": 0.8428862600738468,
+          "entered_fraction": 0.421875
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.13958333333333334,
+          "mean_absolute_error_K": 0.5900203820516927,
+          "entered_fraction": 0.515625
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09348662197589874,
+          "away": 0.09350251406431198
+        },
+        "hot": {
+          "toward": 0.0936444103717804,
+          "away": 0.0935986116528511
+        }
+      },
+      "wall_time_s": 26.428427583999998,
+      "artifact_directory": "shards/rewired-raw-topo10003-seed17"
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "raw",
+      "topology_seed": 10003,
+      "seed": 27,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 120,
+        "changed_entries": 16
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08842112123966217
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08394933491945267
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08386622369289398
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08386161923408508
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08923611111111111,
+        "mean_absolute_error_K": 0.8484208105305204,
+        "entered_fraction": 0.40625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.08359375,
+          "mean_absolute_error_K": 0.848245339129653,
+          "entered_fraction": 0.40625
+        },
+        "more_noise": {
+          "residence_fraction": 0.08359375,
+          "mean_absolute_error_K": 0.848245339129653,
+          "entered_fraction": 0.40625
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.1361111111111111,
+          "mean_absolute_error_K": 0.5941071540574238,
+          "entered_fraction": 0.5
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09361086040735245,
+          "away": 0.09361197799444199
+        },
+        "hot": {
+          "toward": 0.09367869049310684,
+          "away": 0.09365525841712952
+        }
+      },
+      "wall_time_s": 26.627770375,
+      "artifact_directory": "shards/rewired-raw-topo10003-seed27"
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10001,
+      "seed": 7,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 109,
+        "changed_entries": 18
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08849043399095535
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08379168808460236
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08334115147590637
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08110620826482773
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.06640625,
+        "mean_absolute_error_K": 0.875898220113577,
+        "entered_fraction": 0.421875
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.08263888888888889,
+          "mean_absolute_error_K": 0.8514345620658019,
+          "entered_fraction": 0.40625
+        },
+        "more_noise": {
+          "residence_fraction": 0.08107638888888889,
+          "mean_absolute_error_K": 0.8479119630886048,
+          "entered_fraction": 0.421875
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.140625,
+          "mean_absolute_error_K": 0.5852006434638758,
+          "entered_fraction": 0.53125
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.08794230967760086,
+          "away": 0.08543355017900467
+        },
+        "hot": {
+          "toward": 0.08574232459068298,
+          "away": 0.16739238798618317
+        }
+      },
+      "wall_time_s": 28.92415975,
+      "artifact_directory": "shards/rewired-adaptive-topo10001-seed7"
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10001,
+      "seed": 17,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 109,
+        "changed_entries": 18
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08843204379081726
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08358509093523026
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.0813383162021637
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.07947935163974762
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08107638888888889,
+        "mean_absolute_error_K": 0.8564414146175782,
+        "entered_fraction": 0.40625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.07855902777777778,
+          "mean_absolute_error_K": 0.8684986817034109,
+          "entered_fraction": 0.40625
+        },
+        "more_noise": {
+          "residence_fraction": 0.07326388888888889,
+          "mean_absolute_error_K": 0.8660556980957627,
+          "entered_fraction": 0.390625
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.10512152777777778,
+          "mean_absolute_error_K": 0.6019273880316485,
+          "entered_fraction": 0.515625
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.08320911973714828,
+          "away": 0.08226799964904785
+        },
+        "hot": {
+          "toward": 0.08276252448558807,
+          "away": 0.1823587268590927
+        }
+      },
+      "wall_time_s": 29.021620959000003,
+      "artifact_directory": "shards/rewired-adaptive-topo10001-seed17"
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10001,
+      "seed": 27,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 109,
+        "changed_entries": 18
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08797993510961533
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08372560888528824
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08312076330184937
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.07789886742830276
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.09782986111111111,
+        "mean_absolute_error_K": 0.8525994099484725,
+        "entered_fraction": 0.375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.10954861111111111,
+          "mean_absolute_error_K": 0.870080797128276,
+          "entered_fraction": 0.375
+        },
+        "more_noise": {
+          "residence_fraction": 0.10321180555555555,
+          "mean_absolute_error_K": 0.8493066500778459,
+          "entered_fraction": 0.40625
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.15902777777777777,
+          "mean_absolute_error_K": 0.5832334056681354,
+          "entered_fraction": 0.5
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.08666685968637466,
+          "away": 0.1720009446144104
+        },
+        "hot": {
+          "toward": 0.08669566363096237,
+          "away": 0.0858190730214119
+        }
+      },
+      "wall_time_s": 32.540616209,
+      "artifact_directory": "shards/rewired-adaptive-topo10001-seed27"
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10002,
+      "seed": 7,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 120,
+        "changed_entries": 20
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08831624686717987
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08383259177207947
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.0836012065410614
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08179622143507004
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.09401041666666667,
+        "mean_absolute_error_K": 0.8510660774299144,
+        "entered_fraction": 0.390625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.09019097222222222,
+          "mean_absolute_error_K": 0.8378437591390503,
+          "entered_fraction": 0.453125
+        },
+        "more_noise": {
+          "residence_fraction": 0.10112847222222222,
+          "mean_absolute_error_K": 0.8150786675736806,
+          "entered_fraction": 0.484375
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.16293402777777777,
+          "mean_absolute_error_K": 0.5596390889288452,
+          "entered_fraction": 0.59375
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.08914901316165924,
+          "away": 0.08821617811918259
+        },
+        "hot": {
+          "toward": 0.0887877494096756,
+          "away": 0.15153740346431732
+        }
+      },
+      "wall_time_s": 33.204803416,
+      "artifact_directory": "shards/rewired-adaptive-topo10002-seed7"
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10002,
+      "seed": 17,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 120,
+        "changed_entries": 20
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08844759315252304
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08383184671401978
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08292150497436523
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08222305029630661
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.07899305555555555,
+        "mean_absolute_error_K": 0.8637631364089999,
+        "entered_fraction": 0.390625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.09383680555555556,
+          "mean_absolute_error_K": 0.8288639068564322,
+          "entered_fraction": 0.46875
+        },
+        "more_noise": {
+          "residence_fraction": 0.10859375,
+          "mean_absolute_error_K": 0.8138961256284812,
+          "entered_fraction": 0.515625
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.16953125,
+          "mean_absolute_error_K": 0.5575160168952837,
+          "entered_fraction": 0.59375
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.08755718916654587,
+          "away": 0.08680929988622665
+        },
+        "hot": {
+          "toward": 0.08696486055850983,
+          "away": 0.15592032670974731
+        }
+      },
+      "wall_time_s": 31.694144375,
+      "artifact_directory": "shards/rewired-adaptive-topo10002-seed17"
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10002,
+      "seed": 27,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 120,
+        "changed_entries": 20
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08790583163499832
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08385445177555084
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.0836842879652977
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08313791453838348
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.06302083333333333,
+        "mean_absolute_error_K": 0.8947964871908304,
+        "entered_fraction": 0.28125
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.09236111111111112,
+          "mean_absolute_error_K": 0.829333099325257,
+          "entered_fraction": 0.421875
+        },
+        "more_noise": {
+          "residence_fraction": 0.08949652777777778,
+          "mean_absolute_error_K": 0.8271182303042247,
+          "entered_fraction": 0.453125
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.15885416666666666,
+          "mean_absolute_error_K": 0.5712047432272166,
+          "entered_fraction": 0.5625
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09133945405483246,
+          "away": 0.12418026477098465
+        },
+        "hot": {
+          "toward": 0.0917232558131218,
+          "away": 0.09127695113420486
+        }
+      },
+      "wall_time_s": 31.723368667,
+      "artifact_directory": "shards/rewired-adaptive-topo10002-seed27"
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10003,
+      "seed": 7,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 120,
+        "changed_entries": 16
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08986937999725342
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08399508893489838
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08355814963579178
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.0817868709564209
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.09487847222222222,
+        "mean_absolute_error_K": 0.8615766658650819,
+        "entered_fraction": 0.390625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.08793402777777778,
+          "mean_absolute_error_K": 0.8396130854058729,
+          "entered_fraction": 0.484375
+        },
+        "more_noise": {
+          "residence_fraction": 0.0954861111111111,
+          "mean_absolute_error_K": 0.8245874960836662,
+          "entered_fraction": 0.46875
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.15824652777777778,
+          "mean_absolute_error_K": 0.5688854771492886,
+          "entered_fraction": 0.59375
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.0899786576628685,
+          "away": 0.08950896561145782
+        },
+        "hot": {
+          "toward": 0.08950784057378769,
+          "away": 0.15908870100975037
+        }
+      },
+      "wall_time_s": 31.677959124999997,
+      "artifact_directory": "shards/rewired-adaptive-topo10003-seed7"
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10003,
+      "seed": 17,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 120,
+        "changed_entries": 16
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08800765872001648
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08380931615829468
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08265969157218933
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08221432566642761
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08203125,
+        "mean_absolute_error_K": 0.8600617407238277,
+        "entered_fraction": 0.390625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.0954861111111111,
+          "mean_absolute_error_K": 0.822697686185673,
+          "entered_fraction": 0.484375
+        },
+        "more_noise": {
+          "residence_fraction": 0.1072048611111111,
+          "mean_absolute_error_K": 0.8070035630839919,
+          "entered_fraction": 0.484375
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.16241319444444444,
+          "mean_absolute_error_K": 0.5625962466574864,
+          "entered_fraction": 0.5625
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.08786921203136444,
+          "away": 0.08600199222564697
+        },
+        "hot": {
+          "toward": 0.08621580898761749,
+          "away": 0.16234242916107178
+        }
+      },
+      "wall_time_s": 32.512478375,
+      "artifact_directory": "shards/rewired-adaptive-topo10003-seed17"
+    },
+    {
+      "architecture": "rewired",
+      "encoding": "adaptive",
+      "topology_seed": 10003,
+      "seed": 27,
+      "parameters": 37,
+      "rewiring": {
+        "accepted_swaps": 120,
+        "changed_entries": 16
+      },
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08795101940631866
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08382491022348404
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.0834924504160881
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08258110284805298
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08949652777777778,
+        "mean_absolute_error_K": 0.8633266448666236,
+        "entered_fraction": 0.375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.08958333333333333,
+          "mean_absolute_error_K": 0.8460582558304413,
+          "entered_fraction": 0.40625
+        },
+        "more_noise": {
+          "residence_fraction": 0.07178819444444444,
+          "mean_absolute_error_K": 0.8748905566866259,
+          "entered_fraction": 0.34375
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.13984375,
+          "mean_absolute_error_K": 0.5948964508954789,
+          "entered_fraction": 0.53125
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09063373506069183,
+          "away": 0.09822647273540497
+        },
+        "hot": {
+          "toward": 0.09083627909421921,
+          "away": 0.11359202861785889
+        }
+      },
+      "wall_time_s": 34.785307042,
+      "artifact_directory": "shards/rewired-adaptive-topo10003-seed27"
+    },
+    {
+      "architecture": "dense",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 7,
+      "parameters": 83,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.09124839305877686
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08424928784370422
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08388327807188034
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08386355638504028
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.09826388888888889,
+        "mean_absolute_error_K": 0.8358592390563611,
+        "entered_fraction": 0.421875
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.09574652777777778,
+          "mean_absolute_error_K": 0.8179591638374858,
+          "entered_fraction": 0.453125
+        },
+        "more_noise": {
+          "residence_fraction": 0.09461805555555555,
+          "mean_absolute_error_K": 0.8255629053748184,
+          "entered_fraction": 0.4375
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.15052083333333333,
+          "mean_absolute_error_K": 0.5786615126522587,
+          "entered_fraction": 0.53125
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09387795627117157,
+          "away": 0.0938790887594223
+        },
+        "hot": {
+          "toward": 0.09390237182378769,
+          "away": 0.0938972681760788
+        }
+      },
+      "wall_time_s": 32.489965333,
+      "artifact_directory": "shards/dense-raw-topo0-seed7"
+    },
+    {
+      "architecture": "dense",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 17,
+      "parameters": 83,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.0901719406247139
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08417003601789474
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.0839126706123352
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08389752358198166
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08880208333333334,
+        "mean_absolute_error_K": 0.8481603931003093,
+        "entered_fraction": 0.390625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.08472222222222223,
+          "mean_absolute_error_K": 0.8333815374011779,
+          "entered_fraction": 0.421875
+        },
+        "more_noise": {
+          "residence_fraction": 0.08472222222222223,
+          "mean_absolute_error_K": 0.8333815374011779,
+          "entered_fraction": 0.421875
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.1388888888888889,
+          "mean_absolute_error_K": 0.5876816394247385,
+          "entered_fraction": 0.515625
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09366362541913986,
+          "away": 0.09366475045681
+        },
+        "hot": {
+          "toward": 0.09368474781513214,
+          "away": 0.09368064999580383
+        }
+      },
+      "wall_time_s": 32.332706083,
+      "artifact_directory": "shards/dense-raw-topo0-seed17"
+    },
+    {
+      "architecture": "dense",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 27,
+      "parameters": 83,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.09110511839389801
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08425210416316986
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08389870077371597
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08387725800275803
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.09314236111111111,
+        "mean_absolute_error_K": 0.8388152712696897,
+        "entered_fraction": 0.40625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.09461805555555555,
+          "mean_absolute_error_K": 0.8255629053748184,
+          "entered_fraction": 0.4375
+        },
+        "more_noise": {
+          "residence_fraction": 0.09461805555555555,
+          "mean_absolute_error_K": 0.8255629053748184,
+          "entered_fraction": 0.4375
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.15052083333333333,
+          "mean_absolute_error_K": 0.5786615126522587,
+          "entered_fraction": 0.53125
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09374923259019852,
+          "away": 0.09374995529651642
+        },
+        "hot": {
+          "toward": 0.09377533942461014,
+          "away": 0.09377127140760422
+        }
+      },
+      "wall_time_s": 30.015809541,
+      "artifact_directory": "shards/dense-raw-topo0-seed27"
+    },
+    {
+      "architecture": "dense",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 7,
+      "parameters": 83,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.0910445973277092
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08420997858047485
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08386317640542984
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08383028954267502
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.09236111111111112,
+        "mean_absolute_error_K": 0.8506651809220037,
+        "entered_fraction": 0.390625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.09461805555555555,
+          "mean_absolute_error_K": 0.8255073498192628,
+          "entered_fraction": 0.4375
+        },
+        "more_noise": {
+          "residence_fraction": 0.09461805555555555,
+          "mean_absolute_error_K": 0.8255073498192628,
+          "entered_fraction": 0.4375
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.15052083333333333,
+          "mean_absolute_error_K": 0.5778940337623728,
+          "entered_fraction": 0.53125
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09387340396642685,
+          "away": 0.0938076600432396
+        },
+        "hot": {
+          "toward": 0.0937771201133728,
+          "away": 0.09424891322851181
+        }
+      },
+      "wall_time_s": 32.318215916999996,
+      "artifact_directory": "shards/dense-adaptive-topo0-seed7"
+    },
+    {
+      "architecture": "dense",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 17,
+      "parameters": 83,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08982902020215988
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.0840442031621933
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08383934199810028
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.0838291198015213
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.0837673611111111,
+        "mean_absolute_error_K": 0.8606260571881742,
+        "entered_fraction": 0.359375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.08463541666666667,
+          "mean_absolute_error_K": 0.8412970276525615,
+          "entered_fraction": 0.40625
+        },
+        "more_noise": {
+          "residence_fraction": 0.08463541666666667,
+          "mean_absolute_error_K": 0.8408178609858948,
+          "entered_fraction": 0.40625
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.13723958333333333,
+          "mean_absolute_error_K": 0.5931805864905928,
+          "entered_fraction": 0.5
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.0936281755566597,
+          "away": 0.09357589483261108
+        },
+        "hot": {
+          "toward": 0.09357795119285583,
+          "away": 0.09383644163608551
+        }
+      },
+      "wall_time_s": 32.180660916,
+      "artifact_directory": "shards/dense-adaptive-topo0-seed17"
+    },
+    {
+      "architecture": "dense",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 27,
+      "parameters": 83,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.0900907963514328
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08409528434276581
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08375223726034164
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08107922971248627
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08185763888888889,
+        "mean_absolute_error_K": 0.8534052920548638,
+        "entered_fraction": 0.390625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.07777777777777778,
+          "mean_absolute_error_K": 0.867858194624038,
+          "entered_fraction": 0.390625
+        },
+        "more_noise": {
+          "residence_fraction": 0.08333333333333333,
+          "mean_absolute_error_K": 0.851873149312133,
+          "entered_fraction": 0.421875
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.14210069444444445,
+          "mean_absolute_error_K": 0.5902548208240292,
+          "entered_fraction": 0.546875
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.08993259072303772,
+          "away": 0.08931504189968109
+        },
+        "hot": {
+          "toward": 0.09026842564344406,
+          "away": 0.16370026767253876
+        }
+      },
+      "wall_time_s": 31.510479791999998,
+      "artifact_directory": "shards/dense-adaptive-topo0-seed27"
+    },
+    {
+      "architecture": "gru2",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 7,
+      "parameters": 39,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.09288037568330765
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08395522087812424
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.0836697444319725
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.083659827709198
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08663194444444444,
+        "mean_absolute_error_K": 0.8755409752910842,
+        "entered_fraction": 0.359375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.09487847222222222,
+          "mean_absolute_error_K": 0.8515609129905422,
+          "entered_fraction": 0.40625
+        },
+        "more_noise": {
+          "residence_fraction": 0.09487847222222222,
+          "mean_absolute_error_K": 0.8515609129905422,
+          "entered_fraction": 0.40625
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.1440972222222222,
+          "mean_absolute_error_K": 0.5885574223596809,
+          "entered_fraction": 0.515625
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09388024359941483,
+          "away": 0.0939580649137497
+        },
+        "hot": {
+          "toward": 0.09493643790483475,
+          "away": 0.09486053884029388
+        }
+      },
+      "wall_time_s": 23.315927541,
+      "artifact_directory": "shards/gru2-raw-topo0-seed7"
+    },
+    {
+      "architecture": "gru2",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 17,
+      "parameters": 39,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.09462863206863403
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08402295410633087
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08367552608251572
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08364465832710266
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.09123263888888888,
+        "mean_absolute_error_K": 0.8723605459560276,
+        "entered_fraction": 0.359375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.08993055555555556,
+          "mean_absolute_error_K": 0.8511393095155227,
+          "entered_fraction": 0.390625
+        },
+        "more_noise": {
+          "residence_fraction": 0.08993055555555556,
+          "mean_absolute_error_K": 0.8511393095155227,
+          "entered_fraction": 0.390625
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.1326388888888889,
+          "mean_absolute_error_K": 0.5955131416608659,
+          "entered_fraction": 0.484375
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09428515285253525,
+          "away": 0.09433650970458984
+        },
+        "hot": {
+          "toward": 0.09528413414955139,
+          "away": 0.09521102905273438
+        }
+      },
+      "wall_time_s": 23.152461084000002,
+      "artifact_directory": "shards/gru2-raw-topo0-seed17"
+    },
+    {
+      "architecture": "gru2",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 27,
+      "parameters": 39,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.09244000166654587
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08387216925621033
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08366066962480545
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.0836571455001831
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08454861111111112,
+        "mean_absolute_error_K": 0.8856289224847204,
+        "entered_fraction": 0.328125
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.09487847222222222,
+          "mean_absolute_error_K": 0.8477477065455759,
+          "entered_fraction": 0.40625
+        },
+        "more_noise": {
+          "residence_fraction": 0.09487847222222222,
+          "mean_absolute_error_K": 0.8477477065455759,
+          "entered_fraction": 0.40625
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.14184027777777777,
+          "mean_absolute_error_K": 0.5959486665442703,
+          "entered_fraction": 0.5
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09412270039319992,
+          "away": 0.09416056424379349
+        },
+        "hot": {
+          "toward": 0.0947563499212265,
+          "away": 0.09469818323850632
+        }
+      },
+      "wall_time_s": 23.707487417,
+      "artifact_directory": "shards/gru2-raw-topo0-seed27"
+    },
+    {
+      "architecture": "gru2",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 7,
+      "parameters": 39,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.09211936593055725
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.07788222283124924
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.07266071438789368
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.06986045092344284
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.11510416666666666,
+        "mean_absolute_error_K": 0.7840603382110768,
+        "entered_fraction": 0.53125
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.09184027777777778,
+          "mean_absolute_error_K": 0.8384176368275615,
+          "entered_fraction": 0.515625
+        },
+        "more_noise": {
+          "residence_fraction": 0.09609375,
+          "mean_absolute_error_K": 0.8285578800844005,
+          "entered_fraction": 0.453125
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.14774305555555556,
+          "mean_absolute_error_K": 0.5804202139806255,
+          "entered_fraction": 0.5625
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.07585534453392029,
+          "away": 0.07241646200418472
+        },
+        "hot": {
+          "toward": 0.07673428952693939,
+          "away": 0.24024680256843567
+        }
+      },
+      "wall_time_s": 25.730735083,
+      "artifact_directory": "shards/gru2-adaptive-topo0-seed7"
+    },
+    {
+      "architecture": "gru2",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 17,
+      "parameters": 39,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.09178164601325989
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.07504924386739731
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.06335543841123581
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.056651897728443146
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.17543402777777778,
+        "mean_absolute_error_K": 0.6921703827533082,
+        "entered_fraction": 0.625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.11796875,
+          "mean_absolute_error_K": 0.7782843176408003,
+          "entered_fraction": 0.546875
+        },
+        "more_noise": {
+          "residence_fraction": 0.0954861111111111,
+          "mean_absolute_error_K": 0.8152833516680544,
+          "entered_fraction": 0.421875
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.19565972222222222,
+          "mean_absolute_error_K": 0.5256799271362199,
+          "entered_fraction": 0.671875
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.06885573267936707,
+          "away": 0.16806086897850037
+        },
+        "hot": {
+          "toward": 0.06543555110692978,
+          "away": 0.16828665137290955
+        }
+      },
+      "wall_time_s": 26.526450333,
+      "artifact_directory": "shards/gru2-adaptive-topo0-seed17"
+    },
+    {
+      "architecture": "gru2",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 27,
+      "parameters": 39,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.09198972582817078
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.0778702050447464
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.0718999058008194
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.07010981440544128
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.13428819444444445,
+        "mean_absolute_error_K": 0.7831284191885127,
+        "entered_fraction": 0.46875
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.12612847222222223,
+          "mean_absolute_error_K": 0.8002587373549428,
+          "entered_fraction": 0.5625
+        },
+        "more_noise": {
+          "residence_fraction": 0.12482638888888889,
+          "mean_absolute_error_K": 0.8052767980921717,
+          "entered_fraction": 0.5
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.14878472222222222,
+          "mean_absolute_error_K": 0.5867438667413046,
+          "entered_fraction": 0.53125
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.07634125649929047,
+          "away": 0.07107008248567581
+        },
+        "hot": {
+          "toward": 0.07217272371053696,
+          "away": 0.25603312253952026
+        }
+      },
+      "wall_time_s": 29.776403333,
+      "artifact_directory": "shards/gru2-adaptive-topo0-seed27"
+    },
+    {
+      "architecture": "gru16",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 7,
+      "parameters": 977,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08399467170238495
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08394411206245422
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08390402793884277
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.08387045562267303
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08038194444444445,
+        "mean_absolute_error_K": 0.8659751974252715,
+        "entered_fraction": 0.34375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.09878472222222222,
+          "mean_absolute_error_K": 0.8320775613439679,
+          "entered_fraction": 0.4375
+        },
+        "more_noise": {
+          "residence_fraction": 0.09878472222222222,
+          "mean_absolute_error_K": 0.8320775613439679,
+          "entered_fraction": 0.4375
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.1525173611111111,
+          "mean_absolute_error_K": 0.5788593128325485,
+          "entered_fraction": 0.53125
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09274768084287643,
+          "away": 0.09281681478023529
+        },
+        "hot": {
+          "toward": 0.09509201347827911,
+          "away": 0.09499632567167282
+        }
+      },
+      "wall_time_s": 25.887335584000002,
+      "artifact_directory": "shards/gru16-raw-topo0-seed7"
+    },
+    {
+      "architecture": "gru16",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 17,
+      "parameters": 977,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08394081890583038
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08389146625995636
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08381648361682892
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.0836578756570816
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08645833333333333,
+        "mean_absolute_error_K": 0.8680091065299188,
+        "entered_fraction": 0.359375
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.08168402777777778,
+          "mean_absolute_error_K": 0.8846788842269546,
+          "entered_fraction": 0.34375
+        },
+        "more_noise": {
+          "residence_fraction": 0.08038194444444445,
+          "mean_absolute_error_K": 0.8856227410211188,
+          "entered_fraction": 0.328125
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.1254340277777778,
+          "mean_absolute_error_K": 0.6067417302463303,
+          "entered_fraction": 0.4375
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09362983703613281,
+          "away": 0.09319359809160233
+        },
+        "hot": {
+          "toward": 0.0951700359582901,
+          "away": 0.09764684736728668
+        }
+      },
+      "wall_time_s": 26.218438375,
+      "artifact_directory": "shards/gru16-raw-topo0-seed17"
+    },
+    {
+      "architecture": "gru16",
+      "encoding": "raw",
+      "topology_seed": 0,
+      "seed": 27,
+      "parameters": 977,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08395977318286896
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.08389420062303543
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.08384811133146286
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.083791583776474
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.08680555555555555,
+        "mean_absolute_error_K": 0.8560731814523861,
+        "entered_fraction": 0.390625
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.10355902777777778,
+          "mean_absolute_error_K": 0.8177799987839545,
+          "entered_fraction": 0.46875
+        },
+        "more_noise": {
+          "residence_fraction": 0.10355902777777778,
+          "mean_absolute_error_K": 0.8177799987839545,
+          "entered_fraction": 0.46875
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.16223958333333333,
+          "mean_absolute_error_K": 0.5727582184513588,
+          "entered_fraction": 0.546875
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.09284547716379166,
+          "away": 0.09286896884441376
+        },
+        "hot": {
+          "toward": 0.09369762241840363,
+          "away": 0.09366211295127869
+        }
+      },
+      "wall_time_s": 27.636866542,
+      "artifact_directory": "shards/gru16-raw-topo0-seed27"
+    },
+    {
+      "architecture": "gru16",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 7,
+      "parameters": 977,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08061590790748596
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.05265297740697861
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.02176392264664173
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.006673149764537811
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.46102430555555557,
+        "mean_absolute_error_K": 0.42954037140623685,
+        "entered_fraction": 0.953125
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.5165798611111111,
+          "mean_absolute_error_K": 0.38088538077480466,
+          "entered_fraction": 0.953125
+        },
+        "more_noise": {
+          "residence_fraction": 0.35538194444444443,
+          "mean_absolute_error_K": 0.5257487066039599,
+          "entered_fraction": 0.84375
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.5566840277777778,
+          "mean_absolute_error_K": 0.29823535241509913,
+          "entered_fraction": 0.96875
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.01781664416193962,
+          "away": 0.28479287028312683
+        },
+        "hot": {
+          "toward": 0.01643703319132328,
+          "away": 0.26965153217315674
+        }
+      },
+      "wall_time_s": 30.407727875,
+      "artifact_directory": "shards/gru16-adaptive-topo0-seed7"
+    },
+    {
+      "architecture": "gru16",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 17,
+      "parameters": 977,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08064021915197372
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.059321921318769455
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.01634734682738781
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.006008635740727186
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.4853298611111111,
+        "mean_absolute_error_K": 0.40693545623373817,
+        "entered_fraction": 0.96875
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.5216145833333333,
+          "mean_absolute_error_K": 0.37575760091737637,
+          "entered_fraction": 0.984375
+        },
+        "more_noise": {
+          "residence_fraction": 0.3638888888888889,
+          "mean_absolute_error_K": 0.5127789682211861,
+          "entered_fraction": 0.90625
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.5032118055555556,
+          "mean_absolute_error_K": 0.3304579702231292,
+          "entered_fraction": 0.9375
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.022523026913404465,
+          "away": 0.258652925491333
+        },
+        "hot": {
+          "toward": 0.015868932008743286,
+          "away": 0.28974559903144836
+        }
+      },
+      "wall_time_s": 29.494511167,
+      "artifact_directory": "shards/gru16-adaptive-topo0-seed17"
+    },
+    {
+      "architecture": "gru16",
+      "encoding": "adaptive",
+      "topology_seed": 0,
+      "seed": 27,
+      "parameters": 977,
+      "rewiring": null,
+      "curves": [
+        {
+          "update": 0,
+          "validation_mse": 0.1891525834798813
+        },
+        {
+          "update": 128,
+          "validation_mse": 0.08296985924243927
+        },
+        {
+          "update": 256,
+          "validation_mse": 0.06068169325590134
+        },
+        {
+          "update": 384,
+          "validation_mse": 0.03324541077017784
+        },
+        {
+          "update": 512,
+          "validation_mse": 0.011130383238196373
+        }
+      ],
+      "behavior_validation": {
+        "residence_fraction": 0.43645833333333334,
+        "mean_absolute_error_K": 0.42955676449892494,
+        "entered_fraction": 0.96875
+      },
+      "exploratory_holdouts": {
+        "new_random_draws": {
+          "residence_fraction": 0.4623263888888889,
+          "mean_absolute_error_K": 0.425816709932832,
+          "entered_fraction": 0.9375
+        },
+        "more_noise": {
+          "residence_fraction": 0.2677083333333333,
+          "mean_absolute_error_K": 0.6286434579536855,
+          "entered_fraction": 0.734375
+        },
+        "shallower_gradient": {
+          "residence_fraction": 0.415625,
+          "mean_absolute_error_K": 0.3908698128001068,
+          "entered_fraction": 0.890625
+        }
+      },
+      "history_response": {
+        "cold": {
+          "toward": 0.026691723614931107,
+          "away": 0.23394443094730377
+        },
+        "hot": {
+          "toward": 0.020970497280359268,
+          "away": 0.2814668118953705
+        }
+      },
+      "wall_time_s": 25.342289416,
+      "artifact_directory": "shards/gru16-adaptive-topo0-seed27"
+    }
+  ],
+  "execution": {
+    "strategy": "unchanged original CLI in isolated per-case subprocesses",
+    "workers": 3,
+    "initial_completed_cases": [
+      [
+        "anatomical",
+        "raw",
+        0,
+        7
+      ],
+      [
+        "anatomical",
+        "raw",
+        0,
+        17
+      ],
+      [
+        "anatomical",
+        "raw",
+        0,
+        27
+      ],
+      [
+        "anatomical",
+        "adaptive",
+        0,
+        7
+      ],
+      [
+        "anatomical",
+        "adaptive",
+        0,
+        17
+      ],
+      [
+        "anatomical",
+        "adaptive",
+        0,
+        27
+      ],
+      [
+        "rewired",
+        "raw",
+        10001,
+        7
+      ],
+      [
+        "rewired",
+        "raw",
+        10001,
+        17
+      ]
+    ],
+    "planned_cases": 42,
+    "scheduler_sha256": "cb4aeeb2c30fc121a7c59263946abc9ca549eea7d8daf70d35762826d6c52c9b",
+    "original_sources_verified": true,
+    "completed_cases": 42
+  }
+}

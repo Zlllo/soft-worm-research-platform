@@ -1,0 +1,3171 @@
+{
+  "status": "kinematic_scene_validation_no_neural_training",
+  "config": {
+    "schema_version": 2,
+    "field": "linear",
+    "preferred_K": 293.15,
+    "gradient_K_m": 40.0,
+    "target_radius_m": 0.005,
+    "uniform_wave_amplitude_K": 0.0,
+    "uniform_wave_period_s": 60.0,
+    "length_m": 0.001,
+    "head_lateral_amplitude_m": 0.00015,
+    "head_frequency_Hz": 0.5,
+    "speed_m_s": 0.0002,
+    "max_turn_rate_rad_s": 0.3,
+    "turn_response_tau_s": 0.3,
+    "physics_dt_s": 0.01,
+    "sensor_dt_s": 0.1,
+    "control_dt_s": 0.2,
+    "duration_s": 120.0,
+    "noise_std_K": 0.002,
+    "comfort_half_width_K": 0.05,
+    "tracking_angle_tolerance_rad": 0.4363323129985824,
+    "initial_error_fraction": 0.4,
+    "initial_heading_jitter_rad": 0.35
+  },
+  "control": {
+    "preferred_K": 293.15,
+    "comfort_scale_K": 0.05,
+    "speed_m_s": 0.0002,
+    "head_forward_offset_m": 0.0005,
+    "head_lateral_amplitude_m": 0.00015,
+    "window_s": 4.0,
+    "reference_gradient_K_m": 40.0,
+    "error_gain_rad_s": 0.2,
+    "alignment_gain_rad_s": 0.4,
+    "max_turn_rate_rad_s": 0.3,
+    "max_condition_number": 100.0
+  },
+  "paired_cases": [
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 112
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 112
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 112
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 112
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 112
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 112
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 112
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 112
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 112
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 112
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 112
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 112
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 112
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 112
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.0,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "blind",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_phase",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "center_phase",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_quarter_offset",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.01,
+      "turn_response_tau_s": 0.3,
+      "condition": "head_scrambled",
+      "seed": 112
+    }
+  ],
+  "response_cases": [
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 112
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 112
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 101
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 102
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 103
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 104
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 105
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 106
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 107
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 108
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 109
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 110
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 111
+    },
+    {
+      "field": "linear",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 0.0,
+      "condition": "head_phase",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 1.2,
+      "condition": "head_phase",
+      "seed": 112
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 101
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 102
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 103
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 104
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 105
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 106
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 107
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 108
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 109
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 110
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 111
+    },
+    {
+      "field": "radial",
+      "noise_std_K": 0.002,
+      "turn_response_tau_s": 3.0,
+      "condition": "head_phase",
+      "seed": 112
+    }
+  ],
+  "convergence_cases": [
+    {
+      "field": "linear",
+      "seed": 101,
+      "physics_dt_s": 0.02
+    },
+    {
+      "field": "linear",
+      "seed": 101,
+      "physics_dt_s": 0.01
+    },
+    {
+      "field": "linear",
+      "seed": 101,
+      "physics_dt_s": 0.005
+    },
+    {
+      "field": "linear",
+      "seed": 102,
+      "physics_dt_s": 0.02
+    },
+    {
+      "field": "linear",
+      "seed": 102,
+      "physics_dt_s": 0.01
+    },
+    {
+      "field": "linear",
+      "seed": 102,
+      "physics_dt_s": 0.005
+    },
+    {
+      "field": "radial",
+      "seed": 101,
+      "physics_dt_s": 0.02
+    },
+    {
+      "field": "radial",
+      "seed": 101,
+      "physics_dt_s": 0.01
+    },
+    {
+      "field": "radial",
+      "seed": 101,
+      "physics_dt_s": 0.005
+    },
+    {
+      "field": "radial",
+      "seed": 102,
+      "physics_dt_s": 0.02
+    },
+    {
+      "field": "radial",
+      "seed": 102,
+      "physics_dt_s": 0.01
+    },
+    {
+      "field": "radial",
+      "seed": 102,
+      "physics_dt_s": 0.005
+    }
+  ],
+  "observation_contract": "tracking_local_temperature_and_motor_phase_v2",
+  "measures": {
+    "primary": "center-temperature comfort AND tangent heading error <=25deg while prescribed forward motion",
+    "secondary": [
+      "head temperature error",
+      "longest tracking duration",
+      "along-contour travel",
+      "absolute turn"
+    ],
+    "evaluation_only": [
+      "true position",
+      "heading",
+      "gradient orientation"
+    ]
+  },
+  "random_streams": [
+    "environment field orientation",
+    "initial state",
+    "temperature noise",
+    "reported phase intervention"
+  ],
+  "sampling_signal_K": 0.005999999999999999,
+  "signal_noise_description": "0.006K maximum lateral thermal amplitude; scan .002/.01K measurement noise",
+  "selection": "all cases and fixed gains retained; no controller tuning after outcomes",
+  "construction_checks": "Before preregistration, 10 noiseless seed100 smoke checks; no gains changed. Main seeds101..112.",
+  "limitations": [
+    "prescribed kinematic motion, not RFT/elastic/crawling physics",
+    "starts near preference: maintenance task, not target seeking",
+    "phase-regression controller has explicit task/geometry priors",
+    "center sensor lacks the assumed head-sweep temperature modulation",
+    "fixed phase and scramble are frozen-controller interventions, not retrained learning comparisons",
+    "time trend is only an approximate longitudinal gradient in static slowly changing geometry",
+    "no claim that head sampling or phase is necessary for every possible controller",
+    "global temperature waves not evaluated in this batch"
+  ],
+  "source_sha256": {
+    "analysis/isothermal_scene_baseline.py": "15113c7c667f1db64e23d9590e1a0c027d806b5931e02476b5cbf6e79d7f57fb",
+    "src/thermotaxis/isothermal_scene.py": "ce47bb13e44ac3eeaf270dd3a2019bee96388d1764fa08aa2b4a95f277ed9b3d"
+  },
+  "git_commit": "922ca2ef5dfbdcf39fa56e4d588583c4879a4daa",
+  "numpy": "2.0.2"
+}

@@ -1,0 +1,216 @@
+{
+  "status": "supervised_neural_tracking_with_conditional_data_aggregation_not_RL",
+  "scene": {
+    "schema_version": 2,
+    "field": "linear",
+    "preferred_K": 293.15,
+    "gradient_K_m": 40.0,
+    "target_radius_m": 0.005,
+    "uniform_wave_amplitude_K": 0.0,
+    "uniform_wave_period_s": 60.0,
+    "length_m": 0.001,
+    "head_lateral_amplitude_m": 0.00015,
+    "head_frequency_Hz": 0.5,
+    "speed_m_s": 0.0002,
+    "max_turn_rate_rad_s": 0.3,
+    "turn_response_tau_s": 0.3,
+    "physics_dt_s": 0.01,
+    "sensor_dt_s": 0.1,
+    "control_dt_s": 0.2,
+    "duration_s": 120.0,
+    "noise_std_K": 0.002,
+    "comfort_half_width_K": 0.05,
+    "tracking_angle_tolerance_rad": 0.4363323129985824,
+    "initial_error_fraction": 0.4,
+    "initial_heading_jitter_rad": 0.35
+  },
+  "training_scene": {
+    "schema_version": 2,
+    "field": "linear",
+    "preferred_K": 293.15,
+    "gradient_K_m": 40.0,
+    "target_radius_m": 0.005,
+    "uniform_wave_amplitude_K": 0.0,
+    "uniform_wave_period_s": 60.0,
+    "length_m": 0.001,
+    "head_lateral_amplitude_m": 0.00015,
+    "head_frequency_Hz": 0.5,
+    "speed_m_s": 0.0002,
+    "max_turn_rate_rad_s": 0.3,
+    "turn_response_tau_s": 0.3,
+    "physics_dt_s": 0.01,
+    "sensor_dt_s": 0.1,
+    "control_dt_s": 0.2,
+    "duration_s": 60.0,
+    "noise_std_K": 0.002,
+    "comfort_half_width_K": 0.05,
+    "tracking_angle_tolerance_rad": 0.4363323129985824,
+    "initial_error_fraction": 0.8,
+    "initial_heading_jitter_rad": 0.7
+  },
+  "network_defaults": {
+    "architecture": "gru",
+    "encoding": "raw",
+    "window_samples": 41,
+    "sensor_dt_s": 0.1,
+    "preferred_K": 293.15,
+    "temperature_scale_K": 0.05,
+    "max_turn_rate_rad_s": 0.3,
+    "hidden_size": 16
+  },
+  "variants": [
+    "gru_raw",
+    "gru_demeaned",
+    "window_mlp"
+  ],
+  "training_seeds": [
+    7,
+    17,
+    27
+  ],
+  "updates": 512,
+  "optimizer": {
+    "name": "Adam",
+    "lr": 0.003,
+    "batch": 64,
+    "clip_grad_norm": 1.0
+  },
+  "episode_splits": {
+    "train": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004,
+      1005,
+      1006,
+      1007,
+      1008,
+      1009,
+      1010,
+      1011,
+      1012,
+      1013,
+      1014,
+      1015,
+      1016,
+      1017,
+      1018,
+      1019,
+      1020,
+      1021,
+      1022,
+      1023,
+      1024,
+      1025,
+      1026,
+      1027,
+      1028,
+      1029,
+      1030,
+      1031,
+      1032,
+      1033,
+      1034,
+      1035,
+      1036,
+      1037,
+      1038,
+      1039,
+      1040,
+      1041,
+      1042,
+      1043,
+      1044,
+      1045,
+      1046,
+      1047,
+      1048,
+      1049,
+      1050,
+      1051,
+      1052,
+      1053,
+      1054,
+      1055,
+      1056,
+      1057,
+      1058,
+      1059,
+      1060,
+      1061,
+      1062,
+      1063
+    ],
+    "offline_validation": [
+      3000,
+      3001,
+      3002,
+      3003,
+      3004,
+      3005,
+      3006,
+      3007
+    ],
+    "closed_loop_validation": [
+      4001,
+      4002
+    ],
+    "final_exploratory": [
+      5001,
+      5002,
+      5003,
+      5004
+    ],
+    "transfer": [
+      6001,
+      6002
+    ]
+  },
+  "input": "right-aligned 41-sample causal local-temperature/phase window; availability mask; GRU h0=0 for every decision",
+  "label": "same-tick expert requested angular rate, not realized angular velocity or future target",
+  "aggregation": {
+    "trigger": "stage1 validation mean tracking < .8",
+    "rounds": 3,
+    "expert_mixture_betas": [
+      0.5,
+      0.25,
+      0.0
+    ],
+    "updates_per_round": 128,
+    "episodes_per_field_per_round": 4,
+    "seed_rule": "7000+100*round+episode index",
+    "label_rule": "expert observes exactly the learner-visited history; no geometry truth input",
+    "checkpoint_rule": "fixed final stage, no best-checkpoint selection"
+  },
+  "transfer_conditions": {
+    "more_noise": {
+      "noise_std_K": 0.01
+    },
+    "steeper_gradient": {
+      "gradient_K_m": 70.0
+    },
+    "slower_response": {
+      "turn_response_tau_s": 1.2
+    }
+  },
+  "source_sha256": {
+    "analysis/train_tracking_network.py": "3cb1a2fabc2266039c5c03fe3de726319b86b2d116a954309b6e1aba0e43499e",
+    "src/thermotaxis/tracking_learning.py": "95cdac69a7997a8ea848076bf2282cdd69e688da03c86ab0c8f01c7eb3f19c2a",
+    "src/thermotaxis/isothermal_scene.py": "ce47bb13e44ac3eeaf270dd3a2019bee96388d1764fa08aa2b4a95f277ed9b3d"
+  },
+  "git_commit": "922ca2ef5dfbdcf39fa56e4d588583c4879a4daa",
+  "versions": {
+    "torch": "2.6.0",
+    "numpy": "2.0.2"
+  },
+  "limitations": [
+    "expert imitation and extra labels, not RL sample efficiency",
+    "history horizon informed by expert window",
+    "aggregation uses model-specific data and expert-query budgets",
+    "training starts broader in position/heading than basic maintenance evaluation",
+    "GRU16 and MLP parameter counts differ; no biological topology compared",
+    "validation controls aggregation trigger; final exploratory seeds inspected only after fitting",
+    "all final cases remain exploratory, not a definitive generalization test"
+  ]
+}

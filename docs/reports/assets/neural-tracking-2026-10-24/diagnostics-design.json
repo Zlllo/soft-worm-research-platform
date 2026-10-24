@@ -1,0 +1,40 @@
+{
+  "status": "posthoc_exploratory_evaluation_no_training",
+  "original_planned_transfer_baselines": "expert/blind added at original transfer seeds6001/6002",
+  "paired_stage1": "all stage1 checkpoints evaluated on same final basic cases as final models; no training follows",
+  "additional_conditions": {
+    "more_noise": {
+      "noise_std_K": 0.01
+    },
+    "steeper_gradient": {
+      "gradient_K_m": 70.0
+    },
+    "slower_response": {
+      "turn_response_tau_s": 1.2
+    },
+    "smaller_radius": {
+      "target_radius_m": 0.003
+    },
+    "larger_radius": {
+      "target_radius_m": 0.008
+    },
+    "slower_sweep": {
+      "head_frequency_Hz": 0.4
+    },
+    "faster_sweep": {
+      "head_frequency_Hz": 0.75
+    }
+  },
+  "additional_seeds": [
+    6101,
+    6102
+  ],
+  "phase_intervention": "frozen final model, scrambled reported phase, same physical sweep and noise",
+  "expert_caveat": "expert window is two known actuator cycles; network horizon fixed at 4s",
+  "source_sha256": {
+    "analysis/diagnose_tracking_network.py": "c6aa9b8206a4e2907a2c566da98a119b8cbbfcfa2ee7cc6477b04f4fc3b57d10",
+    "analysis/train_tracking_network.py": "3cb1a2fabc2266039c5c03fe3de726319b86b2d116a954309b6e1aba0e43499e",
+    "src/thermotaxis/tracking_learning.py": "95cdac69a7997a8ea848076bf2282cdd69e688da03c86ab0c8f01c7eb3f19c2a",
+    "src/thermotaxis/isothermal_scene.py": "ce47bb13e44ac3eeaf270dd3a2019bee96388d1764fa08aa2b4a95f277ed9b3d"
+  }
+}
