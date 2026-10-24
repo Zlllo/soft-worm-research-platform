@@ -1,0 +1,74 @@
+{
+  "status": "exploratory_frozen_policy_physical_response_not_training",
+  "models": [
+    "real8",
+    "rewired8-11",
+    "gru3",
+    "gru16"
+  ],
+  "training_seeds": [
+    7,
+    17,
+    27
+  ],
+  "training_episodes_per_field": 16,
+  "training_updates": 2048,
+  "training_response_tau_s": 0.3,
+  "tested_response_tau_s": [
+    0.0,
+    0.3,
+    1.2
+  ],
+  "noise_std_K": [
+    0.002,
+    0.01
+  ],
+  "case_seeds": [
+    9501,
+    9502
+  ],
+  "fields": [
+    "linear",
+    "radial"
+  ],
+  "scene": {
+    "schema_version": 2,
+    "field": "linear",
+    "preferred_K": 293.15,
+    "gradient_K_m": 40.0,
+    "target_radius_m": 0.005,
+    "uniform_wave_amplitude_K": 0.0,
+    "uniform_wave_period_s": 60.0,
+    "length_m": 0.001,
+    "head_lateral_amplitude_m": 0.00015,
+    "head_frequency_Hz": 0.5,
+    "speed_m_s": 0.0002,
+    "max_turn_rate_rad_s": 0.3,
+    "turn_response_tau_s": 0.3,
+    "physics_dt_s": 0.01,
+    "sensor_dt_s": 0.1,
+    "control_dt_s": 0.2,
+    "duration_s": 120.0,
+    "noise_std_K": 0.002,
+    "comfort_half_width_K": 0.05,
+    "tracking_angle_tolerance_rad": 0.4363323129985824,
+    "initial_error_fraction": 0.4,
+    "initial_heading_jitter_rad": 0.35
+  },
+  "observation": "same local noisy head temperature, actuator phase and causal window",
+  "limits": [
+    "no fitting in altered physical conditions",
+    "not a sample-efficiency experiment",
+    "angular acceleration and command variation are not mechanical energy or metabolism",
+    "one rewired graph is a mechanism reference, not the whole random-graph ensemble"
+  ],
+  "source_sha256": {
+    "analysis/tracking_response_probe.py": "e834d10b7c4584ed06e3347f69309613036b0411f676214c9cd22528cbbeabd0",
+    "analysis/tracking_learning_surface.py": "06d645461f7c1b33e523f0e8136335806f7205ae71953659ebf81302d981942c",
+    "analysis/compare_tracking_topology.py": "8d06785bf444d51ee274e24a0b8c10ebea6ab4a804749861f57f53b50ab8fc25",
+    "analysis/train_tracking_network.py": "3cb1a2fabc2266039c5c03fe3de726319b86b2d116a954309b6e1aba0e43499e",
+    "src/thermotaxis/tracking_circuit.py": "76a0622a4525896c7915d6dc3af0a1dae0c1355196d522da4dbb480f64668a0c",
+    "src/thermotaxis/tracking_learning.py": "95cdac69a7997a8ea848076bf2282cdd69e688da03c86ab0c8f01c7eb3f19c2a",
+    "src/thermotaxis/isothermal_scene.py": "ce47bb13e44ac3eeaf270dd3a2019bee96388d1764fa08aa2b4a95f277ed9b3d"
+  }
+}

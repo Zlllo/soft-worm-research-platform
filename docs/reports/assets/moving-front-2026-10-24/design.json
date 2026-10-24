@@ -1,0 +1,54 @@
+{
+  "status": "posthoc_all_graph_and_fresh_case_frozen_replication_no_training",
+  "models": [
+    "real8",
+    "rewired8-11",
+    "rewired8-22",
+    "rewired8-33",
+    "gru3",
+    "gru16"
+  ],
+  "training_seeds": [
+    7,
+    17,
+    27
+  ],
+  "cohorts": {
+    "previous": [
+      9701,
+      9702
+    ],
+    "fresh": [
+      9901,
+      9902
+    ]
+  },
+  "conditions": {
+    "static": [
+      0.0,
+      60.0
+    ],
+    "wave_005_60": [
+      0.05,
+      60.0
+    ],
+    "wave_010_120": [
+      0.1,
+      120.0
+    ]
+  },
+  "data_episodes_per_field": 16,
+  "updates": 2048,
+  "interface": "full",
+  "previous_results_sha256": "1e767affdb8216e6d7ad6e9b5c23a2586ffe23a19bf68d9cc9b3bdf36667a8ba",
+  "limitation": "New cases and all three graphs check robustness; neither cohort is a formal final population estimate.",
+  "source_sha256": {
+    "analysis/check_moving_front_graphs.py": "24fb98d3f9cfe2b3ad654c24feec1c6fa64a379037e13c57e90af264cfac1062",
+    "src/thermotaxis/moving_isotherm.py": "b280bdfc6203f73b3f234e6223223d5de3205e1f7b8f434e58d7e7f702727d9b",
+    "src/thermotaxis/isothermal_scene.py": "ce47bb13e44ac3eeaf270dd3a2019bee96388d1764fa08aa2b4a95f277ed9b3d",
+    "src/thermotaxis/tracking_circuit.py": "76a0622a4525896c7915d6dc3af0a1dae0c1355196d522da4dbb480f64668a0c",
+    "src/thermotaxis/tracking_learning.py": "95cdac69a7997a8ea848076bf2282cdd69e688da03c86ab0c8f01c7eb3f19c2a",
+    "analysis/compare_tracking_topology.py": "8d06785bf444d51ee274e24a0b8c10ebea6ab4a804749861f57f53b50ab8fc25",
+    "analysis/train_tracking_network.py": "3cb1a2fabc2266039c5c03fe3de726319b86b2d116a954309b6e1aba0e43499e"
+  }
+}

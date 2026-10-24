@@ -1,0 +1,172 @@
+{
+  "design": {
+    "status": "offline_linear_algebra_not_neural_training",
+    "windows_s": [
+      4.0,
+      20.0,
+      60.0
+    ],
+    "sampling_dt_s": 0.1,
+    "head_frequency_Hz": 0.5,
+    "speed_m_s": 0.0002,
+    "turn_rate_rad_s": [
+      0.0,
+      0.08
+    ],
+    "models": [
+      "unknown linear ambient trend",
+      "unknown sine/cosine coefficients, known60s period"
+    ],
+    "scope": "Regression treats gradient components as unconstrained; condition numbers are not an impossibility theorem for networks with extra priors.",
+    "source_sha256": "a7addd52bcb84516be5b3e09cbcb38cdf46b3d9eada6119b50372c877cb686eb"
+  },
+  "rows": [
+    {
+      "window_s": 4.0,
+      "turn_rate_rad_s": 0.0,
+      "ambient": "linear",
+      "rank": 3,
+      "columns": 4,
+      "full_rank": false,
+      "normalized_condition_number": null,
+      "unconstrained_gradient_x_standard_error_K_m": null
+    },
+    {
+      "window_s": 4.0,
+      "turn_rate_rad_s": 0.0,
+      "ambient": "sine",
+      "rank": 5,
+      "columns": 5,
+      "full_rank": true,
+      "normalized_condition_number": 1284.9927978233493,
+      "unconstrained_gradient_x_standard_error_K_m": 692.1062131800448
+    },
+    {
+      "window_s": 4.0,
+      "turn_rate_rad_s": 0.08,
+      "ambient": "linear",
+      "rank": 4,
+      "columns": 4,
+      "full_rank": true,
+      "normalized_condition_number": 64.33865920469033,
+      "unconstrained_gradient_x_standard_error_K_m": 40.22521081060777
+    },
+    {
+      "window_s": 4.0,
+      "turn_rate_rad_s": 0.08,
+      "ambient": "sine",
+      "rank": 5,
+      "columns": 5,
+      "full_rank": true,
+      "normalized_condition_number": 84.91881551768238,
+      "unconstrained_gradient_x_standard_error_K_m": 46.7724096113306
+    },
+    {
+      "window_s": 20.0,
+      "turn_rate_rad_s": 0.0,
+      "ambient": "linear",
+      "rank": 3,
+      "columns": 4,
+      "full_rank": false,
+      "normalized_condition_number": null,
+      "unconstrained_gradient_x_standard_error_K_m": null
+    },
+    {
+      "window_s": 20.0,
+      "turn_rate_rad_s": 0.0,
+      "ambient": "sine",
+      "rank": 5,
+      "columns": 5,
+      "full_rank": true,
+      "normalized_condition_number": 42.72839503736313,
+      "unconstrained_gradient_x_standard_error_K_m": 2.408965173594652
+    },
+    {
+      "window_s": 20.0,
+      "turn_rate_rad_s": 0.08,
+      "ambient": "linear",
+      "rank": 4,
+      "columns": 4,
+      "full_rank": true,
+      "normalized_condition_number": 40.78712223919842,
+      "unconstrained_gradient_x_standard_error_K_m": 1.4976974782238335
+    },
+    {
+      "window_s": 20.0,
+      "turn_rate_rad_s": 0.08,
+      "ambient": "sine",
+      "rank": 5,
+      "columns": 5,
+      "full_rank": true,
+      "normalized_condition_number": 45.693614641885915,
+      "unconstrained_gradient_x_standard_error_K_m": 2.2073306482400668
+    },
+    {
+      "window_s": 60.0,
+      "turn_rate_rad_s": 0.0,
+      "ambient": "linear",
+      "rank": 3,
+      "columns": 4,
+      "full_rank": false,
+      "normalized_condition_number": null,
+      "unconstrained_gradient_x_standard_error_K_m": null
+    },
+    {
+      "window_s": 60.0,
+      "turn_rate_rad_s": 0.0,
+      "ambient": "sine",
+      "rank": 5,
+      "columns": 5,
+      "full_rank": true,
+      "normalized_condition_number": 2.831121407933352,
+      "unconstrained_gradient_x_standard_error_K_m": 0.03743421457567031
+    },
+    {
+      "window_s": 60.0,
+      "turn_rate_rad_s": 0.08,
+      "ambient": "linear",
+      "rank": 4,
+      "columns": 4,
+      "full_rank": true,
+      "normalized_condition_number": 6.02920731040683,
+      "unconstrained_gradient_x_standard_error_K_m": 0.11165449841657772
+    },
+    {
+      "window_s": 60.0,
+      "turn_rate_rad_s": 0.08,
+      "ambient": "sine",
+      "rank": 5,
+      "columns": 5,
+      "full_rank": true,
+      "normalized_condition_number": 15.875555049023294,
+      "unconstrained_gradient_x_standard_error_K_m": 0.2274344761488448
+    }
+  ],
+  "counterexample": {
+    "maximum_head_temperature_difference_K": 1.0408340855860843e-17,
+    "gradient_vectors_K_m": [
+      [
+        20.0,
+        34.64101615137755
+      ],
+      [
+        -20.0,
+        34.64101615137755
+      ]
+    ],
+    "ambient_linear_rates_K_s": [
+      -0.004,
+      0.004
+    ],
+    "offsets_K": [
+      -0.01,
+      0.01
+    ],
+    "center_temperature_errors_K": [
+      -0.01,
+      0.01
+    ],
+    "both_gradient_norms_K_m": 40.0,
+    "limit": "Exact for unknown linear ambient trends and straight motion; not asserted for fixed-phase sine probes."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "status": "exploratory_new_graph_and_case_replication",
+  "old_graph_seeds": [
+    11,
+    22,
+    33
+  ],
+  "new_graph_seeds": [
+    44,
+    55,
+    66,
+    77,
+    88,
+    99,
+    110
+  ],
+  "training_seeds": [
+    7,
+    17,
+    27
+  ],
+  "episodes_per_field": 16,
+  "updates": 2048,
+  "interface": "full",
+  "case_seeds": [
+    10301,
+    10302
+  ],
+  "phases_rad": [
+    0.0,
+    1.5707963267948966,
+    3.141592653589793,
+    4.71238898038469
+  ],
+  "wave_amplitude_K": 0.05,
+  "wave_period_s": 60.0,
+  "fields": [
+    "linear",
+    "radial"
+  ],
+  "primary_metric": "Mean relative-to-front tracking across phases, fields and cases, averaged over training seeds per graph.",
+  "failure_threshold": 0.5,
+  "static_competence_threshold": 0.99,
+  "hierarchy": "Graph, training seed and case reported separately; new7 and combined10 graph summaries both retained.",
+  "retention": "Keep all graphs, repeated layouts and failed static fits; no performance-dependent exclusions.",
+  "source_sha256": {
+    "analysis/expand_tracking_null_graphs.py": "5aa5f174f7134ca5ce4db737ea0bf558e3313d2e5d13beefdcb72defb3eb29ec",
+    "analysis/tracking_learning_surface.py": "06d645461f7c1b33e523f0e8136335806f7205ae71953659ebf81302d981942c",
+    "analysis/compare_tracking_topology.py": "8d06785bf444d51ee274e24a0b8c10ebea6ab4a804749861f57f53b50ab8fc25",
+    "analysis/train_tracking_network.py": "3cb1a2fabc2266039c5c03fe3de726319b86b2d116a954309b6e1aba0e43499e",
+    "src/thermotaxis/tracking_circuit.py": "76a0622a4525896c7915d6dc3af0a1dae0c1355196d522da4dbb480f64668a0c",
+    "src/thermotaxis/tracking_learning.py": "95cdac69a7997a8ea848076bf2282cdd69e688da03c86ab0c8f01c7eb3f19c2a",
+    "src/thermotaxis/isothermal_scene.py": "ce47bb13e44ac3eeaf270dd3a2019bee96388d1764fa08aa2b4a95f277ed9b3d",
+    "src/thermotaxis/moving_isotherm.py": "b280bdfc6203f73b3f234e6223223d5de3205e1f7b8f434e58d7e7f702727d9b",
+    "src/thermotaxis/phased_field.py": "dfbff96dd22bb6e6032eefe25b5dfc18b7fad29ebd048de89af942575c23c1fb"
+  }
+}

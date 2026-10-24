@@ -1,0 +1,310 @@
+{
+  "design": {
+    "status": "posthoc_no_training_time_step_check",
+    "models": [
+      "real8",
+      "gru16"
+    ],
+    "training_seed": 7,
+    "field": "radial",
+    "case_seed": 9501,
+    "noise_std_K": 0.01,
+    "response_tau_s": [
+      0.0,
+      0.3,
+      1.2
+    ],
+    "physics_dt_s": [
+      0.01,
+      0.005
+    ],
+    "purpose": "Tracking convergence; instantaneous-actuator acceleration RMS is grid dependent.",
+    "fixed_observation_interval_s": 0.2,
+    "source_sha256": {
+      "analysis/check_tracking_response_dt.py": "4417207b55df5b6e82ce2004256e1b3fbc5f9944edeade14ea0a75cb1ab84931",
+      "src/thermotaxis/isothermal_scene.py": "ce47bb13e44ac3eeaf270dd3a2019bee96388d1764fa08aa2b4a95f277ed9b3d"
+    }
+  },
+  "runs": [
+    {
+      "model": "real8",
+      "tau_s": 0.0,
+      "dt_s": 0.01,
+      "metrics": {
+        "center_residence_fraction": 1.0,
+        "head_residence_fraction": 1.0,
+        "tracking_fraction": 1.0,
+        "longest_tracking_s": 120.0,
+        "center_error_rms_K": 0.011578548184771918,
+        "center_error_mae_K": 0.011187184655564017,
+        "head_error_rms_K": 0.013047604447987039,
+        "tangent_error_mean_rad": 0.061814923523694255,
+        "tracking_tangential_distance_m": 0.02392547983383663,
+        "tracking_net_tangential_distance_m": 0.02392547983383663,
+        "prescribed_forward_distance_m": 0.024,
+        "net_displacement_m": 0.008179914232310896,
+        "integrated_abs_turn_rad": 5.748421754427364,
+        "max_abs_turn_rate_rad_s": 0.20772919058799744
+      },
+      "physics_grid_acceleration_rms": 0.519419569715212,
+      "control_grid_rate_change_rms": 0.11614574667269051
+    },
+    {
+      "model": "real8",
+      "tau_s": 0.0,
+      "dt_s": 0.005,
+      "metrics": {
+        "center_residence_fraction": 1.0,
+        "head_residence_fraction": 1.0,
+        "tracking_fraction": 1.0,
+        "longest_tracking_s": 120.0,
+        "center_error_rms_K": 0.011578294461437807,
+        "center_error_mae_K": 0.011186959367918945,
+        "head_error_rms_K": 0.013047510478399192,
+        "tangent_error_mean_rad": 0.06180870674474136,
+        "tracking_tangential_distance_m": 0.02392550246457276,
+        "tracking_net_tangential_distance_m": 0.02392550246457276,
+        "prescribed_forward_distance_m": 0.024,
+        "net_displacement_m": 0.008179914499704002,
+        "integrated_abs_turn_rad": 5.748431316792958,
+        "max_abs_turn_rate_rad_s": 0.20772920548915863
+      },
+      "physics_grid_acceleration_rms": 0.7345702110573092,
+      "control_grid_rate_change_rms": 0.11614574841258504
+    },
+    {
+      "model": "real8",
+      "tau_s": 0.3,
+      "dt_s": 0.01,
+      "metrics": {
+        "center_residence_fraction": 1.0,
+        "head_residence_fraction": 1.0,
+        "tracking_fraction": 1.0,
+        "longest_tracking_s": 120.0,
+        "center_error_rms_K": 0.011742095599616663,
+        "center_error_mae_K": 0.011356302916493533,
+        "head_error_rms_K": 0.013199159285643193,
+        "tangent_error_mean_rad": 0.06370049109915903,
+        "tracking_tangential_distance_m": 0.023921194439382034,
+        "tracking_net_tangential_distance_m": 0.023921194439382034,
+        "prescribed_forward_distance_m": 0.024,
+        "net_displacement_m": 0.008197764455517724,
+        "integrated_abs_turn_rad": 5.508474622212667,
+        "max_abs_turn_rate_rad_s": 0.18462653821138295
+      },
+      "physics_grid_acceleration_rms": 0.07200209048813457,
+      "control_grid_rate_change_rms": 0.07071717931436153
+    },
+    {
+      "model": "real8",
+      "tau_s": 0.3,
+      "dt_s": 0.005,
+      "metrics": {
+        "center_residence_fraction": 1.0,
+        "head_residence_fraction": 1.0,
+        "tracking_fraction": 1.0,
+        "longest_tracking_s": 120.0,
+        "center_error_rms_K": 0.01174184422675113,
+        "center_error_mae_K": 0.011356077930037614,
+        "head_error_rms_K": 0.01319906428135582,
+        "tangent_error_mean_rad": 0.0636946406301993,
+        "tracking_tangential_distance_m": 0.023921216698454043,
+        "tracking_net_tangential_distance_m": 0.023921216698454043,
+        "prescribed_forward_distance_m": 0.024,
+        "net_displacement_m": 0.008197764350492227,
+        "integrated_abs_turn_rad": 5.5084613945412855,
+        "max_abs_turn_rate_rad_s": 0.18462653135239415
+      },
+      "physics_grid_acceleration_rms": 0.07200458735271811,
+      "control_grid_rate_change_rms": 0.07071717632000912
+    },
+    {
+      "model": "real8",
+      "tau_s": 1.2,
+      "dt_s": 0.01,
+      "metrics": {
+        "center_residence_fraction": 1.0,
+        "head_residence_fraction": 1.0,
+        "tracking_fraction": 1.0,
+        "longest_tracking_s": 120.0,
+        "center_error_rms_K": 0.012072294869019146,
+        "center_error_mae_K": 0.011664350892350916,
+        "head_error_rms_K": 0.01351056827101737,
+        "tangent_error_mean_rad": 0.06260214013497284,
+        "tracking_tangential_distance_m": 0.02391922335670812,
+        "tracking_net_tangential_distance_m": 0.02391922335670812,
+        "prescribed_forward_distance_m": 0.024,
+        "net_displacement_m": 0.008213560888869568,
+        "integrated_abs_turn_rad": 4.798223241157684,
+        "max_abs_turn_rate_rad_s": 0.13811247489502979
+      },
+      "physics_grid_acceleration_rms": 0.031462455424059226,
+      "control_grid_rate_change_rms": 0.03142621136477231
+    },
+    {
+      "model": "real8",
+      "tau_s": 1.2,
+      "dt_s": 0.005,
+      "metrics": {
+        "center_residence_fraction": 1.0,
+        "head_residence_fraction": 1.0,
+        "tracking_fraction": 1.0,
+        "longest_tracking_s": 120.0,
+        "center_error_rms_K": 0.012072046460442075,
+        "center_error_mae_K": 0.01166411825203221,
+        "head_error_rms_K": 0.013510471584056362,
+        "tangent_error_mean_rad": 0.06259626091490628,
+        "tracking_tangential_distance_m": 0.023919245600150362,
+        "tracking_net_tangential_distance_m": 0.023919245600150362,
+        "prescribed_forward_distance_m": 0.024,
+        "net_displacement_m": 0.008213560953190502,
+        "integrated_abs_turn_rad": 4.798239319830294,
+        "max_abs_turn_rate_rad_s": 0.13811246168596758
+      },
+      "physics_grid_acceleration_rms": 0.031462522854141695,
+      "control_grid_rate_change_rms": 0.031426210518206564
+    },
+    {
+      "model": "gru16",
+      "tau_s": 0.0,
+      "dt_s": 0.01,
+      "metrics": {
+        "center_residence_fraction": 1.0,
+        "head_residence_fraction": 1.0,
+        "tracking_fraction": 1.0,
+        "longest_tracking_s": 120.0,
+        "center_error_rms_K": 0.012054195054265386,
+        "center_error_mae_K": 0.011811835608700463,
+        "head_error_rms_K": 0.013587973114199334,
+        "tangent_error_mean_rad": 0.07922578000323435,
+        "tracking_tangential_distance_m": 0.023886393513605348,
+        "tracking_net_tangential_distance_m": 0.023886393513605348,
+        "prescribed_forward_distance_m": 0.024,
+        "net_displacement_m": 0.008318251398069932,
+        "integrated_abs_turn_rad": 7.614604640938341,
+        "max_abs_turn_rate_rad_s": 0.2445833832025528
+      },
+      "physics_grid_acceleration_rms": 0.5907234101077735,
+      "control_grid_rate_change_rms": 0.1320897700901468
+    },
+    {
+      "model": "gru16",
+      "tau_s": 0.0,
+      "dt_s": 0.005,
+      "metrics": {
+        "center_residence_fraction": 1.0,
+        "head_residence_fraction": 1.0,
+        "tracking_fraction": 1.0,
+        "longest_tracking_s": 120.0,
+        "center_error_rms_K": 0.012054005848303472,
+        "center_error_mae_K": 0.011811681271336975,
+        "head_error_rms_K": 0.013587945307329057,
+        "tangent_error_mean_rad": 0.07921931560899945,
+        "tracking_tangential_distance_m": 0.02388641665335782,
+        "tracking_net_tangential_distance_m": 0.02388641665335782,
+        "prescribed_forward_distance_m": 0.024,
+        "net_displacement_m": 0.008318251607855121,
+        "integrated_abs_turn_rad": 7.614650031536585,
+        "max_abs_turn_rate_rad_s": 0.2445833832025528
+      },
+      "physics_grid_acceleration_rms": 0.8354090963745693,
+      "control_grid_rate_change_rms": 0.13208977612833767
+    },
+    {
+      "model": "gru16",
+      "tau_s": 0.3,
+      "dt_s": 0.01,
+      "metrics": {
+        "center_residence_fraction": 1.0,
+        "head_residence_fraction": 1.0,
+        "tracking_fraction": 1.0,
+        "longest_tracking_s": 120.0,
+        "center_error_rms_K": 0.01200113676932056,
+        "center_error_mae_K": 0.011722335480336736,
+        "head_error_rms_K": 0.013536882773270415,
+        "tangent_error_mean_rad": 0.08380712094207017,
+        "tracking_tangential_distance_m": 0.0238745590240952,
+        "tracking_net_tangential_distance_m": 0.0238745590240952,
+        "prescribed_forward_distance_m": 0.024,
+        "net_displacement_m": 0.008305058392829806,
+        "integrated_abs_turn_rad": 7.3141550407850415,
+        "max_abs_turn_rate_rad_s": 0.2383919474352417
+      },
+      "physics_grid_acceleration_rms": 0.0961049649178926,
+      "control_grid_rate_change_rms": 0.09438992661218652
+    },
+    {
+      "model": "gru16",
+      "tau_s": 0.3,
+      "dt_s": 0.005,
+      "metrics": {
+        "center_residence_fraction": 1.0,
+        "head_residence_fraction": 1.0,
+        "tracking_fraction": 1.0,
+        "longest_tracking_s": 120.0,
+        "center_error_rms_K": 0.01200093526933096,
+        "center_error_mae_K": 0.01172216832786074,
+        "head_error_rms_K": 0.01353684198251735,
+        "tangent_error_mean_rad": 0.08380091406020407,
+        "tracking_tangential_distance_m": 0.023874581412091346,
+        "tracking_net_tangential_distance_m": 0.023874581412091346,
+        "prescribed_forward_distance_m": 0.024,
+        "net_displacement_m": 0.008305058583659333,
+        "integrated_abs_turn_rad": 7.314191858042802,
+        "max_abs_turn_rate_rad_s": 0.2383919278142644
+      },
+      "physics_grid_acceleration_rms": 0.09610829331997824,
+      "control_grid_rate_change_rms": 0.09438991839826845
+    },
+    {
+      "model": "gru16",
+      "tau_s": 1.2,
+      "dt_s": 0.01,
+      "metrics": {
+        "center_residence_fraction": 1.0,
+        "head_residence_fraction": 1.0,
+        "tracking_fraction": 1.0,
+        "longest_tracking_s": 120.0,
+        "center_error_rms_K": 0.011873796912986666,
+        "center_error_mae_K": 0.011586603848440362,
+        "head_error_rms_K": 0.013387373323798817,
+        "tangent_error_mean_rad": 0.07827384029618467,
+        "tracking_tangential_distance_m": 0.023886649321918262,
+        "tracking_net_tangential_distance_m": 0.023886649321918262,
+        "prescribed_forward_distance_m": 0.024,
+        "net_displacement_m": 0.008264642097341226,
+        "integrated_abs_turn_rad": 5.560799159534421,
+        "max_abs_turn_rate_rad_s": 0.18128258026279592
+      },
+      "physics_grid_acceleration_rms": 0.04644047788474685,
+      "control_grid_rate_change_rms": 0.04638697947176284
+    },
+    {
+      "model": "gru16",
+      "tau_s": 1.2,
+      "dt_s": 0.005,
+      "metrics": {
+        "center_residence_fraction": 1.0,
+        "head_residence_fraction": 1.0,
+        "tracking_fraction": 1.0,
+        "longest_tracking_s": 120.0,
+        "center_error_rms_K": 0.011873572952961188,
+        "center_error_mae_K": 0.011586411941505413,
+        "head_error_rms_K": 0.01338732570174808,
+        "tangent_error_mean_rad": 0.07826843357327287,
+        "tracking_tangential_distance_m": 0.023886671205005826,
+        "tracking_net_tangential_distance_m": 0.023886671205005826,
+        "prescribed_forward_distance_m": 0.024,
+        "net_displacement_m": 0.008264642320496231,
+        "integrated_abs_turn_rad": 5.560807161209921,
+        "max_abs_turn_rate_rad_s": 0.1812825912624371
+      },
+      "physics_grid_acceleration_rms": 0.046440578746689186,
+      "control_grid_rate_change_rms": 0.046386979551726666
+    }
+  ],
+  "source_hashes_unchanged": {
+    "analysis/check_tracking_response_dt.py": true,
+    "src/thermotaxis/isothermal_scene.py": true
+  }
+}

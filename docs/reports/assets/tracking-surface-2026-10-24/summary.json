@@ -1,0 +1,629 @@
+{
+  "status": "exploratory_fixed_full_io_fresh_cases",
+  "training_configs": 63,
+  "new_fits": 54,
+  "reused_full_fits": 9,
+  "endpoints": 126,
+  "verified_parent_512_prefixes": 36,
+  "case_seeds": [
+    9301,
+    9302,
+    9303,
+    9304
+  ],
+  "updates": {
+    "512": {
+      "real8": {
+        "4": {
+          "tracking": {
+            "mean": 0.7103020833333332,
+            "minimum": 0.597625,
+            "maximum": 0.8330833333333333,
+            "n": 3
+          },
+          "per_graph": {
+            "real8": {
+              "mean": 0.7103020833333332,
+              "minimum": 0.597625,
+              "maximum": 0.8330833333333333,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 1
+        },
+        "16": {
+          "tracking": {
+            "mean": 0.4957743055555556,
+            "minimum": 0.21946875,
+            "maximum": 1.0,
+            "n": 3
+          },
+          "per_graph": {
+            "real8": {
+              "mean": 0.4957743055555556,
+              "minimum": 0.21946875,
+              "maximum": 1.0,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 1
+        },
+        "64": {
+          "tracking": {
+            "mean": 0.7152604166666666,
+            "minimum": 0.48414583333333333,
+            "maximum": 0.8869270833333334,
+            "n": 3
+          },
+          "per_graph": {
+            "real8": {
+              "mean": 0.7152604166666666,
+              "minimum": 0.48414583333333333,
+              "maximum": 0.8869270833333334,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 1
+        }
+      },
+      "rewired": {
+        "4": {
+          "tracking": {
+            "mean": 0.7050706018518518,
+            "minimum": 0.64665625,
+            "maximum": 0.8681979166666667,
+            "n": 9
+          },
+          "per_graph": {
+            "rewired8-11": {
+              "mean": 0.7332534722222223,
+              "minimum": 0.6488854166666667,
+              "maximum": 0.8681979166666667,
+              "n": 3
+            },
+            "rewired8-22": {
+              "mean": 0.705861111111111,
+              "minimum": 0.6526770833333333,
+              "maximum": 0.8068125,
+              "n": 3
+            },
+            "rewired8-33": {
+              "mean": 0.676097222222222,
+              "minimum": 0.64665625,
+              "maximum": 0.7065729166666666,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 2
+        },
+        "16": {
+          "tracking": {
+            "mean": 0.34377893518518515,
+            "minimum": 0.22102083333333333,
+            "maximum": 0.9920416666666667,
+            "n": 9
+          },
+          "per_graph": {
+            "rewired8-11": {
+              "mean": 0.48040972222222217,
+              "minimum": 0.22102083333333333,
+              "maximum": 0.9920416666666667,
+              "n": 3
+            },
+            "rewired8-22": {
+              "mean": 0.2415590277777778,
+              "minimum": 0.22136458333333334,
+              "maximum": 0.26678124999999997,
+              "n": 3
+            },
+            "rewired8-33": {
+              "mean": 0.3093680555555556,
+              "minimum": 0.22503125,
+              "maximum": 0.4507083333333334,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 1
+        },
+        "64": {
+          "tracking": {
+            "mean": 0.5941967592592593,
+            "minimum": 0.4867604166666667,
+            "maximum": 0.7721875,
+            "n": 9
+          },
+          "per_graph": {
+            "rewired8-11": {
+              "mean": 0.5858333333333333,
+              "minimum": 0.4867604166666667,
+              "maximum": 0.7700208333333333,
+              "n": 3
+            },
+            "rewired8-22": {
+              "mean": 0.5963298611111112,
+              "minimum": 0.5076666666666667,
+              "maximum": 0.7698958333333334,
+              "n": 3
+            },
+            "rewired8-33": {
+              "mean": 0.6004270833333333,
+              "minimum": 0.4883645833333333,
+              "maximum": 0.7721875,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 0
+        }
+      },
+      "gru2": {
+        "4": {
+          "tracking": {
+            "mean": 0.4562847222222222,
+            "minimum": 0.3835729166666667,
+            "maximum": 0.5074791666666667,
+            "n": 3
+          },
+          "per_graph": {
+            "gru2": {
+              "mean": 0.4562847222222222,
+              "minimum": 0.3835729166666667,
+              "maximum": 0.5074791666666667,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 0
+        },
+        "16": {
+          "tracking": {
+            "mean": 0.26200347222222226,
+            "minimum": 0.2104375,
+            "maximum": 0.3204791666666667,
+            "n": 3
+          },
+          "per_graph": {
+            "gru2": {
+              "mean": 0.26200347222222226,
+              "minimum": 0.2104375,
+              "maximum": 0.3204791666666667,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 0
+        },
+        "64": {
+          "tracking": {
+            "mean": 0.732138888888889,
+            "minimum": 0.61128125,
+            "maximum": 0.8129166666666667,
+            "n": 3
+          },
+          "per_graph": {
+            "gru2": {
+              "mean": 0.732138888888889,
+              "minimum": 0.61128125,
+              "maximum": 0.8129166666666667,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 1
+        }
+      },
+      "gru3": {
+        "4": {
+          "tracking": {
+            "mean": 0.5308194444444445,
+            "minimum": 0.4643333333333334,
+            "maximum": 0.6579270833333334,
+            "n": 3
+          },
+          "per_graph": {
+            "gru3": {
+              "mean": 0.5308194444444445,
+              "minimum": 0.4643333333333334,
+              "maximum": 0.6579270833333334,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 0
+        },
+        "16": {
+          "tracking": {
+            "mean": 0.3297013888888889,
+            "minimum": 0.26435416666666667,
+            "maximum": 0.38745833333333335,
+            "n": 3
+          },
+          "per_graph": {
+            "gru3": {
+              "mean": 0.3297013888888889,
+              "minimum": 0.26435416666666667,
+              "maximum": 0.38745833333333335,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 0
+        },
+        "64": {
+          "tracking": {
+            "mean": 0.6482604166666667,
+            "minimum": 0.4896770833333334,
+            "maximum": 0.7819479166666666,
+            "n": 3
+          },
+          "per_graph": {
+            "gru3": {
+              "mean": 0.6482604166666667,
+              "minimum": 0.4896770833333334,
+              "maximum": 0.7819479166666666,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 0
+        }
+      },
+      "gru16": {
+        "4": {
+          "tracking": {
+            "mean": 0.5011388888888888,
+            "minimum": 0.3964270833333333,
+            "maximum": 0.5615416666666666,
+            "n": 3
+          },
+          "per_graph": {
+            "gru16": {
+              "mean": 0.5011388888888888,
+              "minimum": 0.3964270833333333,
+              "maximum": 0.5615416666666666,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 0
+        },
+        "16": {
+          "tracking": {
+            "mean": 0.9042152777777778,
+            "minimum": 0.79515625,
+            "maximum": 1.0,
+            "n": 3
+          },
+          "per_graph": {
+            "gru16": {
+              "mean": 0.9042152777777778,
+              "minimum": 0.79515625,
+              "maximum": 1.0,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 2
+        },
+        "64": {
+          "tracking": {
+            "mean": 0.9997083333333334,
+            "minimum": 0.999125,
+            "maximum": 1.0,
+            "n": 3
+          },
+          "per_graph": {
+            "gru16": {
+              "mean": 0.9997083333333334,
+              "minimum": 0.999125,
+              "maximum": 1.0,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 3
+        }
+      }
+    },
+    "2048": {
+      "real8": {
+        "4": {
+          "tracking": {
+            "mean": 0.9003923611111112,
+            "minimum": 0.7011770833333333,
+            "maximum": 1.0,
+            "n": 3
+          },
+          "per_graph": {
+            "real8": {
+              "mean": 0.9003923611111112,
+              "minimum": 0.7011770833333333,
+              "maximum": 1.0,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 2
+        },
+        "16": {
+          "tracking": {
+            "mean": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0,
+            "n": 3
+          },
+          "per_graph": {
+            "real8": {
+              "mean": 1.0,
+              "minimum": 1.0,
+              "maximum": 1.0,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 3
+        },
+        "64": {
+          "tracking": {
+            "mean": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0,
+            "n": 3
+          },
+          "per_graph": {
+            "real8": {
+              "mean": 1.0,
+              "minimum": 1.0,
+              "maximum": 1.0,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 3
+        }
+      },
+      "rewired": {
+        "4": {
+          "tracking": {
+            "mean": 0.8598900462962962,
+            "minimum": 0.35960416666666667,
+            "maximum": 1.0,
+            "n": 9
+          },
+          "per_graph": {
+            "rewired8-11": {
+              "mean": 0.904892361111111,
+              "minimum": 0.7146770833333334,
+              "maximum": 1.0,
+              "n": 3
+            },
+            "rewired8-22": {
+              "mean": 0.8882430555555555,
+              "minimum": 0.7233645833333333,
+              "maximum": 1.0,
+              "n": 3
+            },
+            "rewired8-33": {
+              "mean": 0.7865347222222222,
+              "minimum": 0.35960416666666667,
+              "maximum": 1.0,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 6
+        },
+        "16": {
+          "tracking": {
+            "mean": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0,
+            "n": 9
+          },
+          "per_graph": {
+            "rewired8-11": {
+              "mean": 1.0,
+              "minimum": 1.0,
+              "maximum": 1.0,
+              "n": 3
+            },
+            "rewired8-22": {
+              "mean": 1.0,
+              "minimum": 1.0,
+              "maximum": 1.0,
+              "n": 3
+            },
+            "rewired8-33": {
+              "mean": 1.0,
+              "minimum": 1.0,
+              "maximum": 1.0,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 9
+        },
+        "64": {
+          "tracking": {
+            "mean": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0,
+            "n": 9
+          },
+          "per_graph": {
+            "rewired8-11": {
+              "mean": 1.0,
+              "minimum": 1.0,
+              "maximum": 1.0,
+              "n": 3
+            },
+            "rewired8-22": {
+              "mean": 1.0,
+              "minimum": 1.0,
+              "maximum": 1.0,
+              "n": 3
+            },
+            "rewired8-33": {
+              "mean": 1.0,
+              "minimum": 1.0,
+              "maximum": 1.0,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 9
+        }
+      },
+      "gru2": {
+        "4": {
+          "tracking": {
+            "mean": 0.5867708333333334,
+            "minimum": 0.46187500000000004,
+            "maximum": 0.6910416666666668,
+            "n": 3
+          },
+          "per_graph": {
+            "gru2": {
+              "mean": 0.5867708333333334,
+              "minimum": 0.46187500000000004,
+              "maximum": 0.6910416666666668,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 0
+        },
+        "16": {
+          "tracking": {
+            "mean": 0.7990104166666666,
+            "minimum": 0.39703125000000006,
+            "maximum": 1.0,
+            "n": 3
+          },
+          "per_graph": {
+            "gru2": {
+              "mean": 0.7990104166666666,
+              "minimum": 0.39703125000000006,
+              "maximum": 1.0,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 2
+        },
+        "64": {
+          "tracking": {
+            "mean": 0.7878506944444444,
+            "minimum": 0.7798854166666667,
+            "maximum": 0.8022604166666667,
+            "n": 3
+          },
+          "per_graph": {
+            "gru2": {
+              "mean": 0.7878506944444444,
+              "minimum": 0.7798854166666667,
+              "maximum": 0.8022604166666667,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 1
+        }
+      },
+      "gru3": {
+        "4": {
+          "tracking": {
+            "mean": 0.7223576388888889,
+            "minimum": 0.5356666666666667,
+            "maximum": 1.0,
+            "n": 3
+          },
+          "per_graph": {
+            "gru3": {
+              "mean": 0.7223576388888889,
+              "minimum": 0.5356666666666667,
+              "maximum": 1.0,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 1
+        },
+        "16": {
+          "tracking": {
+            "mean": 0.8137569444444445,
+            "minimum": 0.44127083333333333,
+            "maximum": 1.0,
+            "n": 3
+          },
+          "per_graph": {
+            "gru3": {
+              "mean": 0.8137569444444445,
+              "minimum": 0.44127083333333333,
+              "maximum": 1.0,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 2
+        },
+        "64": {
+          "tracking": {
+            "mean": 0.9448298611111111,
+            "minimum": 0.8344895833333333,
+            "maximum": 1.0,
+            "n": 3
+          },
+          "per_graph": {
+            "gru3": {
+              "mean": 0.9448298611111111,
+              "minimum": 0.8344895833333333,
+              "maximum": 1.0,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 3
+        }
+      },
+      "gru16": {
+        "4": {
+          "tracking": {
+            "mean": 0.9992777777777778,
+            "minimum": 0.9978333333333333,
+            "maximum": 1.0,
+            "n": 3
+          },
+          "per_graph": {
+            "gru16": {
+              "mean": 0.9992777777777778,
+              "minimum": 0.9978333333333333,
+              "maximum": 1.0,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 3
+        },
+        "16": {
+          "tracking": {
+            "mean": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0,
+            "n": 3
+          },
+          "per_graph": {
+            "gru16": {
+              "mean": 1.0,
+              "minimum": 1.0,
+              "maximum": 1.0,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 3
+        },
+        "64": {
+          "tracking": {
+            "mean": 1.0,
+            "minimum": 1.0,
+            "maximum": 1.0,
+            "n": 3
+          },
+          "per_graph": {
+            "gru16": {
+              "mean": 1.0,
+              "minimum": 1.0,
+              "maximum": 1.0,
+              "n": 3
+            }
+          },
+          "training_runs_ge_80_percent": 3
+        }
+      }
+    }
+  },
+  "notes": [
+    "Ranges are observed extrema, not confidence intervals.",
+    "Three rewired graphs crossed with three training seeds; nine runs are not nine graph samples.",
+    "GRU2/3 are parameter-near comparisons, not equal hidden-state or computational-capacity controls.",
+    "A single fixed nested trajectory subset is used; no data-order replication.",
+    "Eight fresh cases were viewed only after both fitting shards finished."
+  ]
+}

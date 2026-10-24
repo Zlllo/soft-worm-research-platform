@@ -1,0 +1,348 @@
+{
+  "status": "frozen_policy_response_not_training",
+  "rows": 336,
+  "conditions": {
+    "0.002": {
+      "real8": {
+        "0.0": {
+          "tracking": 1.0,
+          "training_seed_range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.006775256467487392,
+          "executed_turn_rms_rad_s": 0.033075689152210826
+        },
+        "0.3": {
+          "tracking": 1.0,
+          "training_seed_range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.006809446037557027,
+          "executed_turn_rms_rad_s": 0.03312200181574893
+        },
+        "1.2": {
+          "tracking": 1.0,
+          "training_seed_range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.006875915487787773,
+          "executed_turn_rms_rad_s": 0.029006592575589508
+        }
+      },
+      "rewired8-11": {
+        "0.0": {
+          "tracking": 1.0,
+          "training_seed_range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.006848129592521704,
+          "executed_turn_rms_rad_s": 0.031614979349165934
+        },
+        "0.3": {
+          "tracking": 1.0,
+          "training_seed_range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.006907592578639749,
+          "executed_turn_rms_rad_s": 0.03121141034162855
+        },
+        "1.2": {
+          "tracking": 1.0,
+          "training_seed_range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.007005749354402838,
+          "executed_turn_rms_rad_s": 0.027624777618611637
+        }
+      },
+      "gru3": {
+        "0.0": {
+          "tracking": 0.7771319444444446,
+          "training_seed_range": [
+            0.33139583333333333,
+            1.0
+          ],
+          "center_error_rms_K": 0.06075056481498731,
+          "executed_turn_rms_rad_s": 0.035616410261000625
+        },
+        "0.3": {
+          "tracking": 0.7771944444444445,
+          "training_seed_range": [
+            0.33158333333333334,
+            1.0
+          ],
+          "center_error_rms_K": 0.060830646751374985,
+          "executed_turn_rms_rad_s": 0.034841684597401695
+        },
+        "1.2": {
+          "tracking": 0.7765763888888889,
+          "training_seed_range": [
+            0.32972916666666663,
+            1.0
+          ],
+          "center_error_rms_K": 0.06131535911518863,
+          "executed_turn_rms_rad_s": 0.03315668551165516
+        }
+      },
+      "gru16": {
+        "0.0": {
+          "tracking": 1.0,
+          "training_seed_range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.006908782597328582,
+          "executed_turn_rms_rad_s": 0.03319183313371659
+        },
+        "0.3": {
+          "tracking": 1.0,
+          "training_seed_range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.0069172695359459545,
+          "executed_turn_rms_rad_s": 0.03310646482649451
+        },
+        "1.2": {
+          "tracking": 1.0,
+          "training_seed_range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.006969476611786862,
+          "executed_turn_rms_rad_s": 0.028773310023559928
+        }
+      },
+      "expert": {
+        "0.0": {
+          "tracking": 1.0,
+          "training_seed_range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.006601879657078983,
+          "executed_turn_rms_rad_s": 0.03314969557240468
+        },
+        "0.3": {
+          "tracking": 1.0,
+          "training_seed_range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.00661300724620009,
+          "executed_turn_rms_rad_s": 0.033422180642465174
+        },
+        "1.2": {
+          "tracking": 1.0,
+          "training_seed_range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.00666147334691556,
+          "executed_turn_rms_rad_s": 0.029325488069660635
+        }
+      }
+    },
+    "0.01": {
+      "real8": {
+        "0.0": {
+          "tracking": 0.9845069444444444,
+          "training_seed_range": [
+            0.9606250000000001,
+            1.0
+          ],
+          "center_error_rms_K": 0.011996350571560786,
+          "executed_turn_rms_rad_s": 0.058742229247245155
+        },
+        "0.3": {
+          "tracking": 0.9759097222222222,
+          "training_seed_range": [
+            0.935,
+            1.0
+          ],
+          "center_error_rms_K": 0.01233754862860826,
+          "executed_turn_rms_rad_s": 0.05421765518267713
+        },
+        "1.2": {
+          "tracking": 0.9214930555555556,
+          "training_seed_range": [
+            0.7694375,
+            1.0
+          ],
+          "center_error_rms_K": 0.01667351884391352,
+          "executed_turn_rms_rad_s": 0.04420258113166086
+        }
+      },
+      "rewired8-11": {
+        "0.0": {
+          "tracking": 0.8954236111111111,
+          "training_seed_range": [
+            0.7087708333333333,
+            1.0
+          ],
+          "center_error_rms_K": 0.03481551098570769,
+          "executed_turn_rms_rad_s": 0.051340125017550524
+        },
+        "0.3": {
+          "tracking": 0.8871527777777778,
+          "training_seed_range": [
+            0.7024375,
+            1.0
+          ],
+          "center_error_rms_K": 0.03539506171561714,
+          "executed_turn_rms_rad_s": 0.0477233272780154
+        },
+        "1.2": {
+          "tracking": 0.8490972222222223,
+          "training_seed_range": [
+            0.6912916666666666,
+            1.0
+          ],
+          "center_error_rms_K": 0.03914027941640034,
+          "executed_turn_rms_rad_s": 0.043561741409835514
+        }
+      },
+      "gru3": {
+        "0.0": {
+          "tracking": 0.6761597222222222,
+          "training_seed_range": [
+            0.32479166666666665,
+            1.0
+          ],
+          "center_error_rms_K": 0.07665830734115354,
+          "executed_turn_rms_rad_s": 0.054765670385797695
+        },
+        "0.3": {
+          "tracking": 0.6522847222222222,
+          "training_seed_range": [
+            0.32356250000000003,
+            1.0
+          ],
+          "center_error_rms_K": 0.0822102696371468,
+          "executed_turn_rms_rad_s": 0.05122078242424254
+        },
+        "1.2": {
+          "tracking": 0.6509722222222222,
+          "training_seed_range": [
+            0.31816666666666665,
+            1.0
+          ],
+          "center_error_rms_K": 0.09420965758739307,
+          "executed_turn_rms_rad_s": 0.04492827011922479
+        }
+      },
+      "gru16": {
+        "0.0": {
+          "tracking": 0.9985347222222222,
+          "training_seed_range": [
+            0.9956041666666666,
+            1.0
+          ],
+          "center_error_rms_K": 0.010140545782064728,
+          "executed_turn_rms_rad_s": 0.0836351256788755
+        },
+        "0.3": {
+          "tracking": 0.9993958333333334,
+          "training_seed_range": [
+            0.9981875,
+            1.0
+          ],
+          "center_error_rms_K": 0.009989279800682526,
+          "executed_turn_rms_rad_s": 0.08026494757044593
+        },
+        "1.2": {
+          "tracking": 1.0,
+          "training_seed_range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.009524772221890966,
+          "executed_turn_rms_rad_s": 0.057486233515378564
+        }
+      },
+      "expert": {
+        "0.0": {
+          "tracking": 1.0,
+          "training_seed_range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.007156627735347857,
+          "executed_turn_rms_rad_s": 0.1129396034167986
+        },
+        "0.3": {
+          "tracking": 0.99875,
+          "training_seed_range": [
+            0.99875,
+            0.99875
+          ],
+          "center_error_rms_K": 0.007357037344085808,
+          "executed_turn_rms_rad_s": 0.11216494785151043
+        },
+        "1.2": {
+          "tracking": 1.0,
+          "training_seed_range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.007582727692908889,
+          "executed_turn_rms_rad_s": 0.07942533579730686
+        }
+      }
+    }
+  },
+  "caveat": "Physics-grid acceleration RMS for tau=0 diverges with grid refinement; not used as an energy or cross-grid smoothness metric.",
+  "dt_check": {
+    "cases": 12,
+    "comparisons": [
+      {
+        "model": "real8",
+        "tau_s": 0.0,
+        "tracking_delta": 0.0,
+        "physics_grid_acceleration_rms_ratio": 1.4142135835583944,
+        "control_grid_rate_change_rms_ratio": 1.000000014980269
+      },
+      {
+        "model": "real8",
+        "tau_s": 0.3,
+        "tracking_delta": 0.0,
+        "physics_grid_acceleration_rms_ratio": 1.0000346776679208,
+        "control_grid_rate_change_rms_ratio": 0.9999999576573552
+      },
+      {
+        "model": "real8",
+        "tau_s": 1.2,
+        "tracking_delta": 0.0,
+        "physics_grid_acceleration_rms_ratio": 1.0000021431919905,
+        "control_grid_rate_change_rms_ratio": 0.9999999730617942
+      },
+      {
+        "model": "gru16",
+        "tau_s": 0.0,
+        "tracking_delta": 0.0,
+        "physics_grid_acceleration_rms_ratio": 1.4142136270207313,
+        "control_grid_rate_change_rms_ratio": 1.000000045712782
+      },
+      {
+        "model": "gru16",
+        "tau_s": 0.3,
+        "tracking_delta": 0.0,
+        "physics_grid_acceleration_rms_ratio": 1.0000346329878844,
+        "control_grid_rate_change_rms_ratio": 0.99999991297887
+      },
+      {
+        "model": "gru16",
+        "tau_s": 1.2,
+        "tracking_delta": 0.0,
+        "physics_grid_acceleration_rms_ratio": 1.0000021718541008,
+        "control_grid_rate_change_rms_ratio": 1.0000000017238422
+      }
+    ]
+  }
+}

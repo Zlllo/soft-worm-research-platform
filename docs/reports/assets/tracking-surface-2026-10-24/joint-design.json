@@ -1,0 +1,40 @@
+{
+  "status": "predeclared_joint_run",
+  "models": {
+    "rates": [
+      "real8",
+      "rewired8-11",
+      "rewired8-22",
+      "rewired8-33"
+    ],
+    "grus": [
+      "gru2",
+      "gru3",
+      "gru16"
+    ]
+  },
+  "seeds": [
+    7,
+    17,
+    27
+  ],
+  "episodes_per_field": [
+    4,
+    16,
+    64
+  ],
+  "updates": [
+    512,
+    2048
+  ],
+  "new_case_seeds": [
+    9301,
+    9302,
+    9303,
+    9304
+  ],
+  "fitting_before_any_new_case_evaluation": true,
+  "parallel_workers": 2,
+  "inherited_endpoints": "Exact prior 512 and selected 2048 fits reused; only missing fits generated.",
+  "comparison_scope": "Full learned input/output; chemical layout, capacity and optimizer budgets, not biological reconstruction."
+}

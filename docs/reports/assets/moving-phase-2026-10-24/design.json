@@ -1,0 +1,51 @@
+{
+  "status": "posthoc_frozen_phase_replication_no_fitting",
+  "models": [
+    "real8",
+    "rewired8-11",
+    "rewired8-22",
+    "rewired8-33",
+    "gru16"
+  ],
+  "training_seeds": [
+    7,
+    17,
+    27
+  ],
+  "phases_rad": [
+    0.0,
+    1.5707963267948966,
+    3.141592653589793,
+    4.71238898038469
+  ],
+  "case_seeds": [
+    10101,
+    10102
+  ],
+  "conditions": {
+    "wave_005_60": [
+      0.05,
+      60.0
+    ],
+    "wave_010_120": [
+      0.1,
+      120.0
+    ]
+  },
+  "temperature_wave": "A*(sin(2*pi*t/P+phi)-sin(phi)) in the initial-isotherm coordinate frame; initial error comparable",
+  "radial_scope": "Physical mean radius fixed5mm; initialize at R_mean-A*sin(phi)/gradient. Mean field and entire radius range stay fixed.",
+  "linear_scope": "Translated initial-isotherm coordinates; physical start position shifts by -A*sin(phi)/gradient along field normal.",
+  "discarded_design": "First anchored fixed-initial-radius design stopped: A=.1K phi=3pi/2 would collapse the target to origin; retained separately, excluded.",
+  "late_start_s": 20.0,
+  "late_scope": "Late interval is a startup diagnostic, not a steady-state claim.",
+  "source_sha256": {
+    "analysis/check_moving_front_phase.py": "654dc21ef3daad6e82f1c4fe77c9f2aae5ac247f6084d2dbbf1884ca213f1401",
+    "src/thermotaxis/phased_field.py": "dfbff96dd22bb6e6032eefe25b5dfc18b7fad29ebd048de89af942575c23c1fb",
+    "src/thermotaxis/moving_isotherm.py": "b280bdfc6203f73b3f234e6223223d5de3205e1f7b8f434e58d7e7f702727d9b",
+    "src/thermotaxis/isothermal_scene.py": "ce47bb13e44ac3eeaf270dd3a2019bee96388d1764fa08aa2b4a95f277ed9b3d",
+    "src/thermotaxis/tracking_learning.py": "95cdac69a7997a8ea848076bf2282cdd69e688da03c86ab0c8f01c7eb3f19c2a",
+    "src/thermotaxis/tracking_circuit.py": "76a0622a4525896c7915d6dc3af0a1dae0c1355196d522da4dbb480f64668a0c",
+    "analysis/compare_tracking_topology.py": "8d06785bf444d51ee274e24a0b8c10ebea6ab4a804749861f57f53b50ab8fc25",
+    "analysis/train_tracking_network.py": "3cb1a2fabc2266039c5c03fe3de726319b86b2d116a954309b6e1aba0e43499e"
+  }
+}

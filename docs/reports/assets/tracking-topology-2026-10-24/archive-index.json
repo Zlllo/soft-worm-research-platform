@@ -1,0 +1,42 @@
+{
+  "tracking-topology-preflight": {
+    "runs": 5,
+    "kind": "fitting"
+  },
+  "tracking-topology-interface": {
+    "runs": 3,
+    "kind": "fitting"
+  },
+  "tracking-topology-budgets": {
+    "runs": 63,
+    "kind": "fitting"
+  },
+  "tracking-topology-fullio-budgets": {
+    "runs": 36,
+    "kind": "fitting"
+  },
+  "tracking-topology-optimization": {
+    "runs": 9,
+    "kind": "fitting"
+  },
+  "tracking-topology-diagnostics": {
+    "runs": 99,
+    "kind": "frozen_evaluation"
+  },
+  "tracking-topology-optimization-diagnostics": {
+    "runs": 9,
+    "kind": "frozen_evaluation"
+  },
+  "execution_counts": {
+    "fits": 116,
+    "primary": 99,
+    "optimization_controls": 9,
+    "preflight": 8,
+    "deterministic_preflight_duplicates": 7
+  },
+  "execution_notes": [
+    "Two main matrices used separate single-thread CPU processes concurrently; wall times not used as compute-efficiency evidence.",
+    "Initial frozen-check plan failed before evaluation because an absolute source path resolved to the same copy target; failed plan retained locally; corrected design used for all checks.",
+    "Data arrays not in archive; identical source fingerprints, seeds and array SHA256 records permit regeneration."
+  ]
+}

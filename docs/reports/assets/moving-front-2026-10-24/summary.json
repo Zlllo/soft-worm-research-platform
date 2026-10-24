@@ -1,0 +1,418 @@
+{
+  "status": "frozen_zero_shot_transfer_not_training",
+  "rows": 480,
+  "reused": 168,
+  "new_rollouts": 312,
+  "cohorts": {
+    "previous": {
+      "real8": {
+        "static": {
+          "tracking": 1.0,
+          "range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.005207367494026911,
+          "per_graph": {
+            "real8": 1.0
+          }
+        },
+        "wave_005_60": {
+          "tracking": 0.7131319444444445,
+          "range": [
+            0.616625,
+            0.8653125
+          ],
+          "center_error_rms_K": 0.032876408174332045,
+          "per_graph": {
+            "real8": 0.7131319444444445
+          }
+        },
+        "wave_010_120": {
+          "tracking": 0.9547152777777778,
+          "range": [
+            0.9479791666666667,
+            0.9629375
+          ],
+          "center_error_rms_K": 0.017387448126995296,
+          "per_graph": {
+            "real8": 0.9547152777777779
+          }
+        }
+      },
+      "rewired": {
+        "static": {
+          "tracking": 1.0,
+          "range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.005623849481729591,
+          "per_graph": {
+            "rewired8-11": 1.0,
+            "rewired8-22": 1.0,
+            "rewired8-33": 1.0
+          }
+        },
+        "wave_005_60": {
+          "tracking": 0.5315069444444445,
+          "range": [
+            0.13152083333333334,
+            0.8999791666666667
+          ],
+          "center_error_rms_K": 0.059979051982903236,
+          "per_graph": {
+            "rewired8-11": 0.47885416666666675,
+            "rewired8-22": 0.48318749999999994,
+            "rewired8-33": 0.6324791666666667
+          }
+        },
+        "wave_010_120": {
+          "tracking": 0.9041018518518518,
+          "range": [
+            0.6672291666666667,
+            0.9617916666666667
+          ],
+          "center_error_rms_K": 0.018998191697392572,
+          "per_graph": {
+            "rewired8-11": 0.9281041666666666,
+            "rewired8-22": 0.9265972222222221,
+            "rewired8-33": 0.8576041666666665
+          }
+        }
+      },
+      "gru3": {
+        "static": {
+          "tracking": 0.7766180555555556,
+          "range": [
+            0.32985416666666667,
+            1.0
+          ],
+          "center_error_rms_K": 0.058635826860521816,
+          "per_graph": {
+            "gru3": 0.7766180555555556
+          }
+        },
+        "wave_005_60": {
+          "tracking": 0.4052708333333333,
+          "range": [
+            0.12333333333333334,
+            0.8485625
+          ],
+          "center_error_rms_K": 0.08780492657665999,
+          "per_graph": {
+            "gru3": 0.4052708333333333
+          }
+        },
+        "wave_010_120": {
+          "tracking": 0.4881805555555556,
+          "range": [
+            0.0025625,
+            0.9635625000000001
+          ],
+          "center_error_rms_K": 0.1337604323939765,
+          "per_graph": {
+            "gru3": 0.48818055555555556
+          }
+        }
+      },
+      "gru16": {
+        "static": {
+          "tracking": 1.0,
+          "range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.005094859748703752,
+          "per_graph": {
+            "gru16": 1.0
+          }
+        },
+        "wave_005_60": {
+          "tracking": 0.9389861111111112,
+          "range": [
+            0.9202708333333334,
+            0.9503958333333333
+          ],
+          "center_error_rms_K": 0.018715782336002653,
+          "per_graph": {
+            "gru16": 0.9389861111111113
+          }
+        },
+        "wave_010_120": {
+          "tracking": 0.9619375,
+          "range": [
+            0.9597083333333333,
+            0.96475
+          ],
+          "center_error_rms_K": 0.015776535715758037,
+          "per_graph": {
+            "gru16": 0.9619374999999999
+          }
+        }
+      },
+      "expert": {
+        "static": {
+          "tracking": 1.0,
+          "range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.004742419529955258,
+          "per_graph": {
+            "expert": 1.0
+          }
+        },
+        "wave_005_60": {
+          "tracking": 0.9565833333333333,
+          "range": [
+            0.9565833333333333,
+            0.9565833333333333
+          ],
+          "center_error_rms_K": 0.01825585151985209,
+          "per_graph": {
+            "expert": 0.9565833333333333
+          }
+        },
+        "wave_010_120": {
+          "tracking": 0.9597083333333334,
+          "range": [
+            0.9597083333333334,
+            0.9597083333333334
+          ],
+          "center_error_rms_K": 0.0153982021903999,
+          "per_graph": {
+            "expert": 0.9597083333333334
+          }
+        }
+      }
+    },
+    "fresh": {
+      "real8": {
+        "static": {
+          "tracking": 1.0,
+          "range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.007978040445147407,
+          "per_graph": {
+            "real8": 1.0
+          }
+        },
+        "wave_005_60": {
+          "tracking": 0.7801944444444445,
+          "range": [
+            0.7596458333333332,
+            0.8116041666666667
+          ],
+          "center_error_rms_K": 0.02660777036243253,
+          "per_graph": {
+            "real8": 0.7801944444444445
+          }
+        },
+        "wave_010_120": {
+          "tracking": 0.940152777777778,
+          "range": [
+            0.9204791666666667,
+            0.9516875
+          ],
+          "center_error_rms_K": 0.017818783413444884,
+          "per_graph": {
+            "real8": 0.9401527777777777
+          }
+        }
+      },
+      "rewired": {
+        "static": {
+          "tracking": 1.0,
+          "range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.008410707182589957,
+          "per_graph": {
+            "rewired8-11": 1.0,
+            "rewired8-22": 1.0,
+            "rewired8-33": 1.0
+          }
+        },
+        "wave_005_60": {
+          "tracking": 0.5823055555555556,
+          "range": [
+            0.24052083333333335,
+            0.9097916666666666
+          ],
+          "center_error_rms_K": 0.0445463544415159,
+          "per_graph": {
+            "rewired8-11": 0.5679444444444445,
+            "rewired8-22": 0.46070833333333333,
+            "rewired8-33": 0.7182638888888889
+          }
+        },
+        "wave_010_120": {
+          "tracking": 0.8871041666666667,
+          "range": [
+            0.6806041666666667,
+            0.9717916666666666
+          ],
+          "center_error_rms_K": 0.020122202237595404,
+          "per_graph": {
+            "rewired8-11": 0.924673611111111,
+            "rewired8-22": 0.8680486111111111,
+            "rewired8-33": 0.8685902777777779
+          }
+        }
+      },
+      "gru3": {
+        "static": {
+          "tracking": 0.8431041666666667,
+          "range": [
+            0.5293125,
+            1.0
+          ],
+          "center_error_rms_K": 0.0386643758349325,
+          "per_graph": {
+            "gru3": 0.8431041666666667
+          }
+        },
+        "wave_005_60": {
+          "tracking": 0.46913194444444456,
+          "range": [
+            0.18502083333333333,
+            0.8829375000000002
+          ],
+          "center_error_rms_K": 0.07822383015570472,
+          "per_graph": {
+            "gru3": 0.4691319444444444
+          }
+        },
+        "wave_010_120": {
+          "tracking": 0.6668402777777778,
+          "range": [
+            0.3174166666666667,
+            0.9744999999999999
+          ],
+          "center_error_rms_K": 0.08442094717931821,
+          "per_graph": {
+            "gru3": 0.6668402777777778
+          }
+        }
+      },
+      "gru16": {
+        "static": {
+          "tracking": 1.0,
+          "range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.007568510142092623,
+          "per_graph": {
+            "gru16": 1.0
+          }
+        },
+        "wave_005_60": {
+          "tracking": 0.9383194444444444,
+          "range": [
+            0.9254374999999999,
+            0.9479166666666667
+          ],
+          "center_error_rms_K": 0.018888296736041407,
+          "per_graph": {
+            "gru16": 0.9383194444444444
+          }
+        },
+        "wave_010_120": {
+          "tracking": 0.9591597222222221,
+          "range": [
+            0.9536666666666667,
+            0.964
+          ],
+          "center_error_rms_K": 0.015933371996890214,
+          "per_graph": {
+            "gru16": 0.9591597222222221
+          }
+        }
+      },
+      "expert": {
+        "static": {
+          "tracking": 1.0,
+          "range": [
+            1.0,
+            1.0
+          ],
+          "center_error_rms_K": 0.0076982465104308805,
+          "per_graph": {
+            "expert": 1.0
+          }
+        },
+        "wave_005_60": {
+          "tracking": 0.9474583333333334,
+          "range": [
+            0.9474583333333334,
+            0.9474583333333334
+          ],
+          "center_error_rms_K": 0.01877714075001817,
+          "per_graph": {
+            "expert": 0.9474583333333334
+          }
+        },
+        "wave_010_120": {
+          "tracking": 0.9594166666666667,
+          "range": [
+            0.9594166666666667,
+            0.9594166666666667
+          ],
+          "center_error_rms_K": 0.015992116456261543,
+          "per_graph": {
+            "expert": 0.9594166666666667
+          }
+        }
+      }
+    }
+  },
+  "analytic_reference": {
+    "static": {
+      "metrics": {
+        "moving_tracking_fraction": 1.0,
+        "static_tangent_tracking_fraction": 1.0,
+        "center_error_rms_K": 0.0,
+        "normal_velocity_error_rms_m_s": 1.2246467991473531e-20,
+        "relative_tangent_error_mean_rad": 6.123233995736766e-17,
+        "moving_tracking_tangential_distance_m": 0.024000000000000007,
+        "maximum_front_speed_m_s": 0.0,
+        "necessary_speed_feasible_fraction": 1.0
+      },
+      "max_required_heading_deviation_deg": 0.0,
+      "max_required_turn_rate_rad_s": 0.0
+    },
+    "wave_005_60": {
+      "metrics": {
+        "moving_tracking_fraction": 1.0,
+        "static_tangent_tracking_fraction": 0.447,
+        "center_error_rms_K": 1.8907090727515038e-18,
+        "normal_velocity_error_rms_m_s": 1.6767636259147076e-20,
+        "relative_tangent_error_mean_rad": 7.028074801610572e-17,
+        "moving_tracking_tangential_distance_m": 0.021174539640443017,
+        "maximum_front_speed_m_s": 0.00013089969389957473,
+        "necessary_speed_feasible_fraction": 1.0
+      },
+      "max_required_heading_deviation_deg": 40.881632189169125,
+      "max_required_turn_rate_rad_s": 0.06853891229127163
+    },
+    "wave_010_120": {
+      "metrics": {
+        "moving_tracking_fraction": 1.0,
+        "static_tangent_tracking_fraction": 0.44683333333333336,
+        "center_error_rms_K": 3.709745740126483e-18,
+        "normal_velocity_error_rms_m_s": 1.6790966428893623e-20,
+        "relative_tangent_error_mean_rad": 7.015662696054766e-17,
+        "moving_tracking_tangential_distance_m": 0.021174539640443017,
+        "maximum_front_speed_m_s": 0.00013089969389957473,
+        "necessary_speed_feasible_fraction": 1.0
+      },
+      "max_required_heading_deviation_deg": 40.881632189169125,
+      "max_required_turn_rate_rad_s": 0.03426945883092669
+    }
+  }
+}

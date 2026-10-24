@@ -1,0 +1,5 @@
+{
+  "valid_cases": 544,
+  "invalid_first_attempt_retained_cases": 192,
+  "invalid_reason": "Fixed initial radius plus anchored A=.1K/phase3pi/2 made target reach origin; aborted; not used in estimates."
+}
