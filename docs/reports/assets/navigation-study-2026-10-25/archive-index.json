@@ -1,0 +1,33 @@
+{
+  "fits": 105,
+  "unique_setting_groups": 35,
+  "training_seeds": [
+    7,
+    17,
+    27
+  ],
+  "shared_teacher_episodes": 32,
+  "teacher_control_interactions_per_model": 38400,
+  "learner_control_interactions_per_model": 262144,
+  "primary_rollouts": 10080,
+  "frozen_transfer_rollouts": 6720,
+  "center_sensor_rollouts": 1680,
+  "supplemental_zero_sweep_rollouts": 1680,
+  "physics_replication_RL_fits": 42,
+  "physics_replication_rollouts": 6048,
+  "unique_primary_case_seeds": 32,
+  "paired_transfer_case_seeds": 16,
+  "failed_fits": 0,
+  "pilot_notes": [
+    "All development cases retired.",
+    "Pilot prefix/checkpoint reruns are not independent fits.",
+    "Plan0 predates a zero-event-jitter validation fix and contains no training.",
+    "Initial mechanism assay differs only by missing paired no-pulse analysis; no extra independent evidence."
+  ],
+  "runtime": {
+    "python": "3.9.6 (default, Dec  2 2025, 07:27:58) \n[Clang 17.0.0 (clang-1700.6.3.2)]",
+    "platform": "macOS-26.2-arm64-arm-64bit",
+    "torch": "2.6.0",
+    "numpy": "2.0.2"
+  }
+}

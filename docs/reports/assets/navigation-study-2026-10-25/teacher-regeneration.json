@@ -1,0 +1,17 @@
+{
+  "exact_cache_replay": {
+    "x": true,
+    "y": true,
+    "threshold": true,
+    "initialized": true,
+    "seeds": true,
+    "config": true
+  },
+  "sha256": {
+    "x": "43f5c0b234bf2e40773a8b9e7064eda84191073292b0e7fb8b02bb38ee29e951",
+    "y": "d57522477ce22d7b192f5c043dca96b1de22004c9dce88d4ced941adefa023dd",
+    "threshold": "b238a9b5d86585aa83a1d708637afc15b6491814753de25349c54a899426a401",
+    "initialized": "74d5f207c1b774e9e351100d5070a498819e2ab921247efa09ddea79800284f9",
+    "seeds": "580956ebf907560b76d920dbba7b8bf22e7fdcfde703f27060a29ea1968c5d0b"
+  }
+}

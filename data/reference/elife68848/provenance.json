@@ -1,0 +1,10 @@
+{
+  "article": "https://elifesciences.org/articles/68848",
+  "attachment": "https://cdn.elifesciences.org/articles/68848/elife-68848-fig7-data1-v3.zip",
+  "author": "Ji et al. 2021",
+  "article_license": "CC BY; https://creativecommons.org/licenses/by/4.0/",
+  "original_sha256": "e2a9d5be4be436e30dfce7d59c4c95110cda189fbd54dc423128d0fc991b21c7",
+  "archive_sha256": "efa17d718018df4e8ad5058c82f5996488f085451433f6664374e394c29482ed",
+  "reading_copy_sha256": "33c407a98a657fe160df5ec7a797c69b63afc6d89e3b58a64d29b5b31f7b964e",
+  "reading_copy_note": "Whitespace-normalized MATLAB reading copy; original bytes retained in ZIP."
+}

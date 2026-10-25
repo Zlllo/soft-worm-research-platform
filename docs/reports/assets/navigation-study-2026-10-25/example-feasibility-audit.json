@@ -1,0 +1,65 @@
+{
+  "status": "posthoc_physics_audit_of_predeclared_examples",
+  "examples": [
+    {
+      "model": "real8",
+      "training_seed": 7,
+      "case_seed": 61001,
+      "event_s": 126.80000000000001,
+      "event_error_K": -0.9180058912286161,
+      "optimistic_entry_plus_dwell_s": 118.50073640357701,
+      "remaining_s": 113.19999999999999,
+      "ruled_out": true
+    },
+    {
+      "model": "real8",
+      "training_seed": 7,
+      "case_seed": 61002,
+      "event_s": 133.4,
+      "event_error_K": 0.00872464457198352,
+      "optimistic_entry_plus_dwell_s": 10.0,
+      "remaining_s": 106.6,
+      "ruled_out": false
+    },
+    {
+      "model": "rewired8-11",
+      "training_seed": 7,
+      "case_seed": 61001,
+      "event_s": 126.80000000000001,
+      "event_error_K": 0.06057425664546061,
+      "optimistic_entry_plus_dwell_s": 11.321782080682576,
+      "remaining_s": 113.19999999999999,
+      "ruled_out": false
+    },
+    {
+      "model": "rewired8-11",
+      "training_seed": 7,
+      "case_seed": 61002,
+      "event_s": 133.4,
+      "event_error_K": -0.03551395470301345,
+      "optimistic_entry_plus_dwell_s": 10.0,
+      "remaining_s": 106.6,
+      "ruled_out": false
+    },
+    {
+      "model": "gru16",
+      "training_seed": 7,
+      "case_seed": 61001,
+      "event_s": 126.80000000000001,
+      "event_error_K": 0.6728478413048976,
+      "optimistic_entry_plus_dwell_s": 87.85598016311219,
+      "remaining_s": 113.19999999999999,
+      "ruled_out": false
+    },
+    {
+      "model": "gru16",
+      "training_seed": 7,
+      "case_seed": 61002,
+      "event_s": 133.4,
+      "event_error_K": 0.058085458208620676,
+      "optimistic_entry_plus_dwell_s": 11.010682276077585,
+      "remaining_s": 106.6,
+      "ruled_out": false
+    }
+  ]
+}

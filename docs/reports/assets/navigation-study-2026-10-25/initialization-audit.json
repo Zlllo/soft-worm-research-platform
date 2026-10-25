@@ -1,0 +1,782 @@
+[
+  {
+    "interface": "full",
+    "training_seed": 7,
+    "graph_seed": 11,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 7,
+    "graph_seed": 22,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 7,
+    "graph_seed": 33,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 7,
+    "graph_seed": 44,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 7,
+    "graph_seed": 55,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 7,
+    "graph_seed": 66,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 7,
+    "graph_seed": 77,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 7,
+    "graph_seed": 88,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 7,
+    "graph_seed": 99,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 7,
+    "graph_seed": 110,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 17,
+    "graph_seed": 11,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 17,
+    "graph_seed": 22,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 17,
+    "graph_seed": 33,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 17,
+    "graph_seed": 44,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 17,
+    "graph_seed": 55,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 17,
+    "graph_seed": 66,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 17,
+    "graph_seed": 77,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 17,
+    "graph_seed": 88,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 17,
+    "graph_seed": 99,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 17,
+    "graph_seed": 110,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 27,
+    "graph_seed": 11,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 27,
+    "graph_seed": 22,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 27,
+    "graph_seed": 33,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 27,
+    "graph_seed": 44,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 27,
+    "graph_seed": 55,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 27,
+    "graph_seed": 66,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 27,
+    "graph_seed": 77,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 27,
+    "graph_seed": 88,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 27,
+    "graph_seed": 99,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "full",
+    "training_seed": 27,
+    "graph_seed": 110,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 7,
+    "graph_seed": 11,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 7,
+    "graph_seed": 22,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 7,
+    "graph_seed": 33,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 7,
+    "graph_seed": 44,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 7,
+    "graph_seed": 55,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 7,
+    "graph_seed": 66,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 7,
+    "graph_seed": 77,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 7,
+    "graph_seed": 88,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 7,
+    "graph_seed": 99,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 7,
+    "graph_seed": 110,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 17,
+    "graph_seed": 11,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 17,
+    "graph_seed": 22,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 17,
+    "graph_seed": 33,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 17,
+    "graph_seed": 44,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 17,
+    "graph_seed": 55,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 17,
+    "graph_seed": 66,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 17,
+    "graph_seed": 77,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 17,
+    "graph_seed": 88,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 17,
+    "graph_seed": 99,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 17,
+    "graph_seed": 110,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 27,
+    "graph_seed": 11,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 27,
+    "graph_seed": 22,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 27,
+    "graph_seed": 33,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 27,
+    "graph_seed": 44,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 27,
+    "graph_seed": 55,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 27,
+    "graph_seed": 66,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 27,
+    "graph_seed": 77,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 27,
+    "graph_seed": 88,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 27,
+    "graph_seed": 99,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  },
+  {
+    "interface": "restricted",
+    "training_seed": 27,
+    "graph_seed": 110,
+    "checks": {
+      "all_parameter_values": true,
+      "in_degrees": true,
+      "out_degrees": true,
+      "self_mask": true,
+      "self_initial_values": true,
+      "layout_changed": true
+    }
+  }
+]

@@ -1,0 +1,2712 @@
+{
+  "design": {
+    "status": "posthoc_signal_diagnostic",
+    "windows": 512,
+    "selection_seed": 26801,
+    "temperature_delta_K": 0.001,
+    "data": "shared training teacher windows, not unseen behavior cases",
+    "eligible": "full history and mean temperature within comfort band",
+    "selected_indices": [
+      32247,
+      3015,
+      13297,
+      24145,
+      22589,
+      19803,
+      8331,
+      25269,
+      8333,
+      21342,
+      21827,
+      34737,
+      4825,
+      25177,
+      34217,
+      30081,
+      14712,
+      4175,
+      36570,
+      32038,
+      7014,
+      16696,
+      7341,
+      21497,
+      11591,
+      10039,
+      1266,
+      3374,
+      5332,
+      17597,
+      7824,
+      24673,
+      27231,
+      15959,
+      15712,
+      9311,
+      25593,
+      11054,
+      9448,
+      16353,
+      20295,
+      5068,
+      22373,
+      32001,
+      13013,
+      34303,
+      24493,
+      26873,
+      4184,
+      11489,
+      2938,
+      18735,
+      37847,
+      7898,
+      9374,
+      32353,
+      21137,
+      27969,
+      37781,
+      17197,
+      13369,
+      35135,
+      15906,
+      29023,
+      29829,
+      10971,
+      15501,
+      14096,
+      6645,
+      7730,
+      6400,
+      17229,
+      11985,
+      37942,
+      29157,
+      8310,
+      24071,
+      18978,
+      8733,
+      16299,
+      27003,
+      15996,
+      30287,
+      31657,
+      18900,
+      21987,
+      2344,
+      1609,
+      11738,
+      29935,
+      3636,
+      29903,
+      2071,
+      21213,
+      14224,
+      28741,
+      4105,
+      15113,
+      12736,
+      30381,
+      26183,
+      11530,
+      17019,
+      36215,
+      16448,
+      12014,
+      4002,
+      8274,
+      28113,
+      8277,
+      18055,
+      13758,
+      27167,
+      5128,
+      15719,
+      30812,
+      27903,
+      12072,
+      6757,
+      30092,
+      34587,
+      30143,
+      11758,
+      11610,
+      872,
+      28271,
+      33009,
+      7646,
+      33939,
+      38295,
+      20563,
+      12431,
+      38355,
+      20411,
+      13480,
+      13812,
+      29155,
+      13723,
+      9084,
+      25829,
+      5959,
+      12929,
+      14936,
+      19531,
+      7229,
+      3271,
+      37990,
+      12906,
+      8999,
+      22017,
+      34725,
+      28169,
+      25781,
+      24985,
+      4384,
+      36517,
+      19243,
+      37306,
+      20801,
+      2983,
+      18031,
+      36463,
+      37769,
+      15082,
+      38292,
+      12127,
+      14779,
+      33081,
+      12131,
+      15965,
+      11916,
+      19769,
+      15654,
+      36129,
+      24983,
+      10810,
+      12772,
+      18901,
+      13864,
+      9043,
+      38173,
+      9806,
+      4540,
+      10672,
+      7103,
+      10216,
+      34611,
+      13928,
+      17338,
+      7170,
+      8086,
+      18558,
+      15398,
+      22265,
+      29573,
+      17352,
+      11402,
+      30159,
+      30919,
+      12945,
+      37053,
+      29293,
+      7239,
+      35669,
+      13732,
+      7749,
+      30769,
+      7452,
+      30549,
+      13625,
+      34415,
+      12186,
+      21535,
+      8817,
+      30105,
+      3479,
+      9066,
+      2810,
+      12317,
+      13646,
+      3795,
+      32949,
+      32631,
+      3150,
+      26825,
+      26739,
+      38362,
+      13183,
+      34665,
+      34087,
+      10876,
+      17014,
+      15252,
+      37224,
+      14282,
+      34935,
+      9359,
+      20414,
+      15949,
+      24111,
+      35068,
+      33875,
+      4512,
+      5534,
+      31041,
+      12482,
+      13411,
+      32189,
+      36051,
+      11112,
+      5397,
+      17793,
+      35331,
+      11390,
+      34586,
+      33707,
+      20153,
+      11094,
+      20224,
+      12399,
+      17697,
+      34894,
+      12315,
+      7764,
+      19039,
+      36065,
+      18846,
+      9396,
+      36687,
+      24571,
+      12195,
+      19261,
+      15054,
+      9675,
+      4495,
+      8618,
+      17263,
+      17412,
+      8379,
+      25349,
+      6441,
+      27051,
+      7603,
+      38120,
+      35961,
+      28943,
+      11764,
+      19320,
+      12472,
+      10286,
+      19615,
+      34950,
+      11183,
+      38394,
+      27569,
+      15130,
+      5364,
+      10939,
+      11714,
+      24671,
+      20481,
+      35149,
+      13041,
+      5155,
+      26799,
+      11658,
+      22095,
+      33895,
+      38293,
+      3540,
+      4881,
+      19947,
+      18727,
+      3242,
+      36007,
+      38397,
+      9945,
+      21225,
+      4089,
+      8939,
+      38337,
+      14549,
+      4860,
+      7687,
+      14708,
+      14065,
+      31387,
+      5780,
+      2409,
+      21509,
+      38005,
+      14539,
+      5028,
+      35789,
+      6406,
+      16261,
+      19018,
+      15493,
+      13621,
+      4990,
+      19936,
+      12540,
+      30165,
+      18314,
+      29420,
+      32316,
+      7742,
+      15515,
+      5252,
+      37867,
+      17128,
+      10895,
+      23347,
+      12078,
+      29277,
+      16691,
+      5999,
+      37618,
+      14872,
+      35644,
+      32395,
+      13137,
+      32294,
+      25657,
+      13098,
+      6446,
+      3981,
+      34983,
+      18835,
+      9874,
+      22831,
+      7232,
+      18322,
+      34135,
+      38348,
+      7295,
+      29083,
+      15175,
+      15966,
+      13633,
+      8809,
+      7831,
+      14077,
+      20693,
+      28489,
+      12020,
+      35725,
+      7367,
+      16275,
+      36721,
+      11376,
+      17967,
+      38109,
+      13227,
+      37004,
+      8911,
+      33683,
+      20985,
+      6463,
+      33137,
+      17495,
+      7288,
+      37905,
+      4551,
+      24383,
+      3702,
+      12290,
+      35269,
+      16332,
+      30611,
+      15543,
+      30639,
+      20057,
+      37007,
+      34920,
+      2425,
+      17063,
+      38228,
+      4303,
+      12936,
+      13547,
+      10757,
+      12958,
+      34585,
+      16231,
+      15451,
+      28839,
+      17490,
+      18953,
+      3223,
+      23139,
+      38368,
+      5779,
+      35193,
+      18590,
+      20673,
+      25671,
+      9440,
+      8301,
+      15886,
+      8116,
+      12013,
+      28483,
+      13455,
+      10914,
+      24053,
+      15828,
+      4931,
+      29401,
+      10321,
+      29555,
+      9384,
+      20322,
+      34653,
+      23839,
+      5752,
+      33127,
+      32780,
+      11689,
+      10992,
+      16590,
+      31163,
+      9422,
+      36661,
+      17552,
+      14871,
+      37362,
+      3669,
+      4710,
+      38074,
+      15364,
+      19851,
+      2076,
+      3759,
+      29947,
+      29385,
+      28127,
+      26599,
+      23805,
+      5674,
+      26801,
+      16453,
+      4504,
+      17842,
+      34623,
+      3556,
+      28481,
+      15674,
+      5225,
+      33084,
+      19060,
+      5017,
+      30161,
+      11421,
+      12649,
+      12187,
+      9444,
+      34108,
+      13023,
+      10707,
+      20243,
+      36253,
+      28125,
+      21537,
+      9558,
+      7104,
+      3119,
+      10033,
+      35962,
+      13128,
+      4124,
+      4877
+    ],
+    "script_sha256": "2f6db02918a6364ffc5aad5ddfd412588aff846ae2f0e92ac6b921ec73aac426"
+  },
+  "runs": [
+    {
+      "spec": {
+        "name": "real8",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 0
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.02968668006360531,
+      "one_mK_level_rms_change_rad_s": 0.0016263455618172884,
+      "one_mK_phase_rms_change_rad_s": 0.00772075867280364,
+      "teacher_mse_normalized": 0.018816422671079636
+    },
+    {
+      "spec": {
+        "name": "real8",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 0
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.05727274343371391,
+      "one_mK_level_rms_change_rad_s": 0.005425537936389446,
+      "one_mK_phase_rms_change_rad_s": 0.01398350391536951,
+      "teacher_mse_normalized": 0.04182027652859688
+    },
+    {
+      "spec": {
+        "name": "real8",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 1
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.028656722977757454,
+      "one_mK_level_rms_change_rad_s": 0.0006264582625590265,
+      "one_mK_phase_rms_change_rad_s": 0.006919725798070431,
+      "teacher_mse_normalized": 0.019747473299503326
+    },
+    {
+      "spec": {
+        "name": "real8",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 1
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.060545098036527634,
+      "one_mK_level_rms_change_rad_s": 0.0033842886332422495,
+      "one_mK_phase_rms_change_rad_s": 0.010201776400208473,
+      "teacher_mse_normalized": 0.03672802448272705
+    },
+    {
+      "spec": {
+        "name": "real8",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 2
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.02200331911444664,
+      "one_mK_level_rms_change_rad_s": 0.0004200833791401237,
+      "one_mK_phase_rms_change_rad_s": 0.00534386420622468,
+      "teacher_mse_normalized": 0.02010943368077278
+    },
+    {
+      "spec": {
+        "name": "real8",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 2
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.06774052232503891,
+      "one_mK_level_rms_change_rad_s": 0.004141444340348244,
+      "one_mK_phase_rms_change_rad_s": 0.01708315871655941,
+      "teacher_mse_normalized": 0.0403091199696064
+    },
+    {
+      "spec": {
+        "name": "real8",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 3
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0027304349932819605,
+      "one_mK_level_rms_change_rad_s": 4.005495793535374e-05,
+      "one_mK_phase_rms_change_rad_s": 3.738523810170591e-05,
+      "teacher_mse_normalized": 0.026713453233242035
+    },
+    {
+      "spec": {
+        "name": "real8",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 3
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.005272559355944395,
+      "one_mK_level_rms_change_rad_s": 0.00021323295368347317,
+      "one_mK_phase_rms_change_rad_s": 0.0001557706418680027,
+      "teacher_mse_normalized": 0.056039221584796906
+    },
+    {
+      "spec": {
+        "name": "real8",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 4
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.003276181872934103,
+      "one_mK_level_rms_change_rad_s": 0.00015469981008209288,
+      "one_mK_phase_rms_change_rad_s": 0.00011329589324304834,
+      "teacher_mse_normalized": 0.026720838621258736
+    },
+    {
+      "spec": {
+        "name": "real8",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 4
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.004163285251706839,
+      "one_mK_level_rms_change_rad_s": 0.00021267255942802876,
+      "one_mK_phase_rms_change_rad_s": 0.00015354083734564483,
+      "teacher_mse_normalized": 0.028278827667236328
+    },
+    {
+      "spec": {
+        "name": "real8",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 5
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0011816307669505477,
+      "one_mK_level_rms_change_rad_s": 1.3751471215073252e-06,
+      "one_mK_phase_rms_change_rad_s": 7.033205520201591e-07,
+      "teacher_mse_normalized": 0.026886552572250366
+    },
+    {
+      "spec": {
+        "name": "real8",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 5
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.001079790759831667,
+      "one_mK_level_rms_change_rad_s": 2.211506625826587e-06,
+      "one_mK_phase_rms_change_rad_s": 1.6370102002838394e-06,
+      "teacher_mse_normalized": 0.02779196947813034
+    },
+    {
+      "spec": {
+        "name": "rewired8-11",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 6
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.005782030522823334,
+      "one_mK_level_rms_change_rad_s": 7.424676005030051e-05,
+      "one_mK_phase_rms_change_rad_s": 0.00043505459325388074,
+      "teacher_mse_normalized": 0.02606058679521084
+    },
+    {
+      "spec": {
+        "name": "rewired8-11",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 6
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.00762394443154335,
+      "one_mK_level_rms_change_rad_s": 0.0003286466817371547,
+      "one_mK_phase_rms_change_rad_s": 0.0005146978073753417,
+      "teacher_mse_normalized": 0.026496782898902893
+    },
+    {
+      "spec": {
+        "name": "rewired8-11",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 7
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.015702156350016594,
+      "one_mK_level_rms_change_rad_s": 0.00038127601146698,
+      "one_mK_phase_rms_change_rad_s": 0.002179942326620221,
+      "teacher_mse_normalized": 0.021257396787405014
+    },
+    {
+      "spec": {
+        "name": "rewired8-11",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 7
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.02764205075800419,
+      "one_mK_level_rms_change_rad_s": 0.001854949165135622,
+      "one_mK_phase_rms_change_rad_s": 0.003259367775171995,
+      "teacher_mse_normalized": 0.033245787024497986
+    },
+    {
+      "spec": {
+        "name": "rewired8-11",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 8
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.024459119886159897,
+      "one_mK_level_rms_change_rad_s": 0.00031898540328256786,
+      "one_mK_phase_rms_change_rad_s": 0.003485002787783742,
+      "teacher_mse_normalized": 0.01967005990445614
+    },
+    {
+      "spec": {
+        "name": "rewired8-11",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 8
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.06760377436876297,
+      "one_mK_level_rms_change_rad_s": 0.0035672252997756004,
+      "one_mK_phase_rms_change_rad_s": 0.008230889216065407,
+      "teacher_mse_normalized": 0.04435289651155472
+    },
+    {
+      "spec": {
+        "name": "rewired8-11",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 9
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0023751978296786547,
+      "one_mK_level_rms_change_rad_s": 1.9139306459692307e-06,
+      "one_mK_phase_rms_change_rad_s": 2.7591684556682594e-05,
+      "teacher_mse_normalized": 0.02682078257203102
+    },
+    {
+      "spec": {
+        "name": "rewired8-11",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 9
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.004648480098694563,
+      "one_mK_level_rms_change_rad_s": 2.4724338345549768e-06,
+      "one_mK_phase_rms_change_rad_s": 8.960194463725202e-06,
+      "teacher_mse_normalized": 0.04373729228973389
+    },
+    {
+      "spec": {
+        "name": "rewired8-11",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 10
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0020440206862986088,
+      "one_mK_level_rms_change_rad_s": 5.312653229339048e-05,
+      "one_mK_phase_rms_change_rad_s": 3.7991918361512944e-05,
+      "teacher_mse_normalized": 0.026852477341890335
+    },
+    {
+      "spec": {
+        "name": "rewired8-11",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 10
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.004102668724954128,
+      "one_mK_level_rms_change_rad_s": 6.330291944323108e-05,
+      "one_mK_phase_rms_change_rad_s": 7.431484118569642e-05,
+      "teacher_mse_normalized": 0.029122699052095413
+    },
+    {
+      "spec": {
+        "name": "rewired8-11",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 11
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0011168302735313773,
+      "one_mK_level_rms_change_rad_s": 2.6867892302107066e-06,
+      "one_mK_phase_rms_change_rad_s": 8.310128578159492e-06,
+      "teacher_mse_normalized": 0.02691008895635605
+    },
+    {
+      "spec": {
+        "name": "rewired8-11",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 11
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0016127113485708833,
+      "one_mK_level_rms_change_rad_s": 7.422979251714423e-06,
+      "one_mK_phase_rms_change_rad_s": 1.8131910110241733e-05,
+      "teacher_mse_normalized": 0.029382018372416496
+    },
+    {
+      "spec": {
+        "name": "rewired8-22",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 12
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.01956823281943798,
+      "one_mK_level_rms_change_rad_s": 0.0006022971938364208,
+      "one_mK_phase_rms_change_rad_s": 0.002889096736907959,
+      "teacher_mse_normalized": 0.021105311810970306
+    },
+    {
+      "spec": {
+        "name": "rewired8-22",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 12
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.05077395215630531,
+      "one_mK_level_rms_change_rad_s": 0.0038980734534561634,
+      "one_mK_phase_rms_change_rad_s": 0.006092386785894632,
+      "teacher_mse_normalized": 0.044797152280807495
+    },
+    {
+      "spec": {
+        "name": "rewired8-22",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 13
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.02254471927881241,
+      "one_mK_level_rms_change_rad_s": 0.001249914988875389,
+      "one_mK_phase_rms_change_rad_s": 0.0037550318520516157,
+      "teacher_mse_normalized": 0.01939619705080986
+    },
+    {
+      "spec": {
+        "name": "rewired8-22",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 13
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.062306202948093414,
+      "one_mK_level_rms_change_rad_s": 0.004990990739315748,
+      "one_mK_phase_rms_change_rad_s": 0.00868401862680912,
+      "teacher_mse_normalized": 0.035648077726364136
+    },
+    {
+      "spec": {
+        "name": "rewired8-22",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 14
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.02278311923146248,
+      "one_mK_level_rms_change_rad_s": 0.00035452653537504375,
+      "one_mK_phase_rms_change_rad_s": 0.006260559428483248,
+      "teacher_mse_normalized": 0.020852934569120407
+    },
+    {
+      "spec": {
+        "name": "rewired8-22",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 14
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.05890195816755295,
+      "one_mK_level_rms_change_rad_s": 0.003865842940285802,
+      "one_mK_phase_rms_change_rad_s": 0.013412637636065483,
+      "teacher_mse_normalized": 0.05327342078089714
+    },
+    {
+      "spec": {
+        "name": "rewired8-22",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 15
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0028955512680113316,
+      "one_mK_level_rms_change_rad_s": 4.1585441067581996e-05,
+      "one_mK_phase_rms_change_rad_s": 1.1244770576013252e-05,
+      "teacher_mse_normalized": 0.02672683075070381
+    },
+    {
+      "spec": {
+        "name": "rewired8-22",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 15
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.007699880748987198,
+      "one_mK_level_rms_change_rad_s": 0.00022321188589558005,
+      "one_mK_phase_rms_change_rad_s": 5.160464206710458e-05,
+      "teacher_mse_normalized": 0.04763301834464073
+    },
+    {
+      "spec": {
+        "name": "rewired8-22",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 16
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0009709851583465934,
+      "one_mK_level_rms_change_rad_s": 8.980657185020391e-06,
+      "one_mK_phase_rms_change_rad_s": 7.554555168098886e-07,
+      "teacher_mse_normalized": 0.026746030896902084
+    },
+    {
+      "spec": {
+        "name": "rewired8-22",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 16
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0014076880179345608,
+      "one_mK_level_rms_change_rad_s": 5.71673126614769e-06,
+      "one_mK_phase_rms_change_rad_s": 5.558638918046199e-07,
+      "teacher_mse_normalized": 0.032287657260894775
+    },
+    {
+      "spec": {
+        "name": "rewired8-22",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 17
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0011773800943046808,
+      "one_mK_level_rms_change_rad_s": 2.3247987428476335e-06,
+      "one_mK_phase_rms_change_rad_s": 9.007659173221327e-06,
+      "teacher_mse_normalized": 0.026906661689281464
+    },
+    {
+      "spec": {
+        "name": "rewired8-22",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 17
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0001730958028929308,
+      "one_mK_level_rms_change_rad_s": 3.4408529359097884e-07,
+      "one_mK_phase_rms_change_rad_s": 2.201858933403855e-06,
+      "teacher_mse_normalized": 0.02693050354719162
+    },
+    {
+      "spec": {
+        "name": "rewired8-33",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 18
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.022350439801812172,
+      "one_mK_level_rms_change_rad_s": 0.0005169663927517831,
+      "one_mK_phase_rms_change_rad_s": 0.004576901905238628,
+      "teacher_mse_normalized": 0.0198025144636631
+    },
+    {
+      "spec": {
+        "name": "rewired8-33",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 18
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0615706704556942,
+      "one_mK_level_rms_change_rad_s": 0.003005280392244458,
+      "one_mK_phase_rms_change_rad_s": 0.011600909754633904,
+      "teacher_mse_normalized": 0.044246867299079895
+    },
+    {
+      "spec": {
+        "name": "rewired8-33",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 19
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.018797466531395912,
+      "one_mK_level_rms_change_rad_s": 0.0005872466717846692,
+      "one_mK_phase_rms_change_rad_s": 0.003221750259399414,
+      "teacher_mse_normalized": 0.020245982334017754
+    },
+    {
+      "spec": {
+        "name": "rewired8-33",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 19
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.03896526247262955,
+      "one_mK_level_rms_change_rad_s": 0.0031571981962770224,
+      "one_mK_phase_rms_change_rad_s": 0.005345511715859175,
+      "teacher_mse_normalized": 0.04357709735631943
+    },
+    {
+      "spec": {
+        "name": "rewired8-33",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 20
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.016295554116368294,
+      "one_mK_level_rms_change_rad_s": 0.0002847755968105048,
+      "one_mK_phase_rms_change_rad_s": 0.0025183013640344143,
+      "teacher_mse_normalized": 0.020961381494998932
+    },
+    {
+      "spec": {
+        "name": "rewired8-33",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 20
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.04734596237540245,
+      "one_mK_level_rms_change_rad_s": 0.003015369176864624,
+      "one_mK_phase_rms_change_rad_s": 0.006005698349326849,
+      "teacher_mse_normalized": 0.045798689126968384
+    },
+    {
+      "spec": {
+        "name": "rewired8-33",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 21
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0019183941185474396,
+      "one_mK_level_rms_change_rad_s": 7.903052392066456e-06,
+      "one_mK_phase_rms_change_rad_s": 3.508642839733511e-05,
+      "teacher_mse_normalized": 0.026803860440850258
+    },
+    {
+      "spec": {
+        "name": "rewired8-33",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 21
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.002594518708065152,
+      "one_mK_level_rms_change_rad_s": 1.7557198589202017e-05,
+      "one_mK_phase_rms_change_rad_s": 3.9560298318974674e-05,
+      "teacher_mse_normalized": 0.04446800798177719
+    },
+    {
+      "spec": {
+        "name": "rewired8-33",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 22
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0018621907802298665,
+      "one_mK_level_rms_change_rad_s": 4.004760558018461e-05,
+      "one_mK_phase_rms_change_rad_s": 2.5599374566809274e-05,
+      "teacher_mse_normalized": 0.026951801031827927
+    },
+    {
+      "spec": {
+        "name": "rewired8-33",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 22
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0024248079862445593,
+      "one_mK_level_rms_change_rad_s": 7.372850086539984e-05,
+      "one_mK_phase_rms_change_rad_s": 3.507376095512882e-05,
+      "teacher_mse_normalized": 0.038615815341472626
+    },
+    {
+      "spec": {
+        "name": "rewired8-33",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 23
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0009908281499519944,
+      "one_mK_level_rms_change_rad_s": 6.185360916788341e-07,
+      "one_mK_phase_rms_change_rad_s": 4.4433782022679225e-06,
+      "teacher_mse_normalized": 0.026874341070652008
+    },
+    {
+      "spec": {
+        "name": "rewired8-33",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 23
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0001259101991308853,
+      "one_mK_level_rms_change_rad_s": 1.3859230207913242e-08,
+      "one_mK_phase_rms_change_rad_s": 1.080452648238861e-06,
+      "teacher_mse_normalized": 0.02677607163786888
+    },
+    {
+      "spec": {
+        "name": "rewired8-44",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 24
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.020208915695548058,
+      "one_mK_level_rms_change_rad_s": 0.0005834631738252938,
+      "one_mK_phase_rms_change_rad_s": 0.004581247456371784,
+      "teacher_mse_normalized": 0.019915757700800896
+    },
+    {
+      "spec": {
+        "name": "rewired8-44",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 24
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.059797197580337524,
+      "one_mK_level_rms_change_rad_s": 0.005171284079551697,
+      "one_mK_phase_rms_change_rad_s": 0.009763160720467567,
+      "teacher_mse_normalized": 0.05013085901737213
+    },
+    {
+      "spec": {
+        "name": "rewired8-44",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 25
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.023306669667363167,
+      "one_mK_level_rms_change_rad_s": 0.0007920030038803816,
+      "one_mK_phase_rms_change_rad_s": 0.005080630537122488,
+      "teacher_mse_normalized": 0.01900956965982914
+    },
+    {
+      "spec": {
+        "name": "rewired8-44",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 25
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.06222058832645416,
+      "one_mK_level_rms_change_rad_s": 0.00443162489682436,
+      "one_mK_phase_rms_change_rad_s": 0.00750953983515501,
+      "teacher_mse_normalized": 0.05754444748163223
+    },
+    {
+      "spec": {
+        "name": "rewired8-44",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 26
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.015442868694663048,
+      "one_mK_level_rms_change_rad_s": 0.00041785070789046586,
+      "one_mK_phase_rms_change_rad_s": 0.002522855531424284,
+      "teacher_mse_normalized": 0.020993031561374664
+    },
+    {
+      "spec": {
+        "name": "rewired8-44",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 26
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0532049722969532,
+      "one_mK_level_rms_change_rad_s": 0.0036002935376018286,
+      "one_mK_phase_rms_change_rad_s": 0.008996009826660156,
+      "teacher_mse_normalized": 0.04327350854873657
+    },
+    {
+      "spec": {
+        "name": "rewired8-44",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 27
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.00016656160005368292,
+      "one_mK_level_rms_change_rad_s": 3.0538583359884797e-06,
+      "one_mK_phase_rms_change_rad_s": 8.100090781226754e-06,
+      "teacher_mse_normalized": 0.026723619550466537
+    },
+    {
+      "spec": {
+        "name": "rewired8-44",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 27
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.002960519166663289,
+      "one_mK_level_rms_change_rad_s": 0.00016491620044689626,
+      "one_mK_phase_rms_change_rad_s": 0.0001840997429098934,
+      "teacher_mse_normalized": 0.06631523370742798
+    },
+    {
+      "spec": {
+        "name": "rewired8-44",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 28
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0001111383899115026,
+      "one_mK_level_rms_change_rad_s": 6.455274615291273e-06,
+      "one_mK_phase_rms_change_rad_s": 3.1560894058202393e-06,
+      "teacher_mse_normalized": 0.026729347184300423
+    },
+    {
+      "spec": {
+        "name": "rewired8-44",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 28
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 9.002341539599001e-05,
+      "one_mK_level_rms_change_rad_s": 5.9144672377442475e-06,
+      "one_mK_phase_rms_change_rad_s": 2.420248392809299e-06,
+      "teacher_mse_normalized": 0.03001181222498417
+    },
+    {
+      "spec": {
+        "name": "rewired8-44",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 29
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.006125421263277531,
+      "one_mK_level_rms_change_rad_s": 5.364364551496692e-05,
+      "one_mK_phase_rms_change_rad_s": 0.0007253705989569426,
+      "teacher_mse_normalized": 0.025754600763320923
+    },
+    {
+      "spec": {
+        "name": "rewired8-44",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 29
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.006294239312410355,
+      "one_mK_level_rms_change_rad_s": 4.905857713310979e-05,
+      "one_mK_phase_rms_change_rad_s": 0.0007694349624216557,
+      "teacher_mse_normalized": 0.027202079072594643
+    },
+    {
+      "spec": {
+        "name": "rewired8-55",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 30
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.021893765777349472,
+      "one_mK_level_rms_change_rad_s": 0.0005113334627822042,
+      "one_mK_phase_rms_change_rad_s": 0.0032913507893681526,
+      "teacher_mse_normalized": 0.020471572875976562
+    },
+    {
+      "spec": {
+        "name": "rewired8-55",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 30
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.05565156042575836,
+      "one_mK_level_rms_change_rad_s": 0.004089409951120615,
+      "one_mK_phase_rms_change_rad_s": 0.007250017020851374,
+      "teacher_mse_normalized": 0.05370769649744034
+    },
+    {
+      "spec": {
+        "name": "rewired8-55",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 31
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0259791761636734,
+      "one_mK_level_rms_change_rad_s": 0.0011590311769396067,
+      "one_mK_phase_rms_change_rad_s": 0.003674351843073964,
+      "teacher_mse_normalized": 0.01770235225558281
+    },
+    {
+      "spec": {
+        "name": "rewired8-55",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 31
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.04470861330628395,
+      "one_mK_level_rms_change_rad_s": 0.003665335476398468,
+      "one_mK_phase_rms_change_rad_s": 0.005791699048131704,
+      "teacher_mse_normalized": 0.03539469838142395
+    },
+    {
+      "spec": {
+        "name": "rewired8-55",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 32
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.00748218921944499,
+      "one_mK_level_rms_change_rad_s": 0.00027221336495131254,
+      "one_mK_phase_rms_change_rad_s": 0.0009192703873850405,
+      "teacher_mse_normalized": 0.02372177317738533
+    },
+    {
+      "spec": {
+        "name": "rewired8-55",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 32
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.011821637861430645,
+      "one_mK_level_rms_change_rad_s": 0.00023460437660105526,
+      "one_mK_phase_rms_change_rad_s": 0.0014202597085386515,
+      "teacher_mse_normalized": 0.023064468055963516
+    },
+    {
+      "spec": {
+        "name": "rewired8-55",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 33
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0022941455245018005,
+      "one_mK_level_rms_change_rad_s": 3.3643129171423425e-08,
+      "one_mK_phase_rms_change_rad_s": 1.2021052498312201e-05,
+      "teacher_mse_normalized": 0.026789842173457146
+    },
+    {
+      "spec": {
+        "name": "rewired8-55",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 33
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.006050592754036188,
+      "one_mK_level_rms_change_rad_s": 1.3958096133137587e-05,
+      "one_mK_phase_rms_change_rad_s": 6.298088555922732e-05,
+      "teacher_mse_normalized": 0.04308713972568512
+    },
+    {
+      "spec": {
+        "name": "rewired8-55",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 34
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0009931742679327726,
+      "one_mK_level_rms_change_rad_s": 1.6713894410713692e-06,
+      "one_mK_phase_rms_change_rad_s": 2.251710498057946e-07,
+      "teacher_mse_normalized": 0.026731453835964203
+    },
+    {
+      "spec": {
+        "name": "rewired8-55",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 34
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0019333157688379288,
+      "one_mK_level_rms_change_rad_s": 4.729059583041817e-06,
+      "one_mK_phase_rms_change_rad_s": 4.5951355787110515e-07,
+      "teacher_mse_normalized": 0.03444451838731766
+    },
+    {
+      "spec": {
+        "name": "rewired8-55",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 35
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.001119266846217215,
+      "one_mK_level_rms_change_rad_s": 5.545693056774326e-06,
+      "one_mK_phase_rms_change_rad_s": 5.977569799142657e-06,
+      "teacher_mse_normalized": 0.026859883219003677
+    },
+    {
+      "spec": {
+        "name": "rewired8-55",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 35
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0017280533211305737,
+      "one_mK_level_rms_change_rad_s": 1.5241743312799372e-05,
+      "one_mK_phase_rms_change_rad_s": 1.4456827557296492e-05,
+      "teacher_mse_normalized": 0.028182905167341232
+    },
+    {
+      "spec": {
+        "name": "rewired8-66",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 36
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.02296939678490162,
+      "one_mK_level_rms_change_rad_s": 0.0004623324202839285,
+      "one_mK_phase_rms_change_rad_s": 0.003768334398046136,
+      "teacher_mse_normalized": 0.020282192155718803
+    },
+    {
+      "spec": {
+        "name": "rewired8-66",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 36
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.06572896242141724,
+      "one_mK_level_rms_change_rad_s": 0.004731588996946812,
+      "one_mK_phase_rms_change_rad_s": 0.008461562916636467,
+      "teacher_mse_normalized": 0.05370360240340233
+    },
+    {
+      "spec": {
+        "name": "rewired8-66",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 37
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.028470885008573532,
+      "one_mK_level_rms_change_rad_s": 0.001501728780567646,
+      "one_mK_phase_rms_change_rad_s": 0.006708940025418997,
+      "teacher_mse_normalized": 0.017927221953868866
+    },
+    {
+      "spec": {
+        "name": "rewired8-66",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 37
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.08084464073181152,
+      "one_mK_level_rms_change_rad_s": 0.0054033310152590275,
+      "one_mK_phase_rms_change_rad_s": 0.012427265755832195,
+      "teacher_mse_normalized": 0.05914229527115822
+    },
+    {
+      "spec": {
+        "name": "rewired8-66",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 38
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.024259068071842194,
+      "one_mK_level_rms_change_rad_s": 0.0004266809846740216,
+      "one_mK_phase_rms_change_rad_s": 0.004953606054186821,
+      "teacher_mse_normalized": 0.019385777413845062
+    },
+    {
+      "spec": {
+        "name": "rewired8-66",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 38
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.08016476780176163,
+      "one_mK_level_rms_change_rad_s": 0.0050925505347549915,
+      "one_mK_phase_rms_change_rad_s": 0.012689934112131596,
+      "teacher_mse_normalized": 0.056441158056259155
+    },
+    {
+      "spec": {
+        "name": "rewired8-66",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 39
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.002478764159604907,
+      "one_mK_level_rms_change_rad_s": 1.6070667925305315e-06,
+      "one_mK_phase_rms_change_rad_s": 3.4868855891545536e-06,
+      "teacher_mse_normalized": 0.02684026025235653
+    },
+    {
+      "spec": {
+        "name": "rewired8-66",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 39
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.00369910872541368,
+      "one_mK_level_rms_change_rad_s": 1.7545202126711956e-06,
+      "one_mK_phase_rms_change_rad_s": 2.7688972750183893e-06,
+      "teacher_mse_normalized": 0.04314688965678215
+    },
+    {
+      "spec": {
+        "name": "rewired8-66",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 40
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0018041166476905346,
+      "one_mK_level_rms_change_rad_s": 5.963889634585939e-06,
+      "one_mK_phase_rms_change_rad_s": 7.152860689529916e-06,
+      "teacher_mse_normalized": 0.026776906102895737
+    },
+    {
+      "spec": {
+        "name": "rewired8-66",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 40
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0025542692746967077,
+      "one_mK_level_rms_change_rad_s": 4.3397809349698946e-05,
+      "one_mK_phase_rms_change_rad_s": 1.9028078895644285e-05,
+      "teacher_mse_normalized": 0.042925357818603516
+    },
+    {
+      "spec": {
+        "name": "rewired8-66",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 41
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0007320804870687425,
+      "one_mK_level_rms_change_rad_s": 7.814139735273784e-07,
+      "one_mK_phase_rms_change_rad_s": 9.71718691289425e-07,
+      "teacher_mse_normalized": 0.026881136000156403
+    },
+    {
+      "spec": {
+        "name": "rewired8-66",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 41
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.00046726857544854283,
+      "one_mK_level_rms_change_rad_s": 2.4768889943516115e-06,
+      "one_mK_phase_rms_change_rad_s": 3.0707115001860075e-06,
+      "teacher_mse_normalized": 0.028696417808532715
+    },
+    {
+      "spec": {
+        "name": "rewired8-77",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 42
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.034119583666324615,
+      "one_mK_level_rms_change_rad_s": 0.0015764429699629545,
+      "one_mK_phase_rms_change_rad_s": 0.008391940034925938,
+      "teacher_mse_normalized": 0.014850884675979614
+    },
+    {
+      "spec": {
+        "name": "rewired8-77",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 42
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0668518915772438,
+      "one_mK_level_rms_change_rad_s": 0.002996060997247696,
+      "one_mK_phase_rms_change_rad_s": 0.013141579926013947,
+      "teacher_mse_normalized": 0.033548157662153244
+    },
+    {
+      "spec": {
+        "name": "rewired8-77",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 43
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.019326694309711456,
+      "one_mK_level_rms_change_rad_s": 0.0008482687408104539,
+      "one_mK_phase_rms_change_rad_s": 0.0036464978475123644,
+      "teacher_mse_normalized": 0.02025124989449978
+    },
+    {
+      "spec": {
+        "name": "rewired8-77",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 43
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.04571869969367981,
+      "one_mK_level_rms_change_rad_s": 0.0038334049750119448,
+      "one_mK_phase_rms_change_rad_s": 0.005754788871854544,
+      "teacher_mse_normalized": 0.035851575434207916
+    },
+    {
+      "spec": {
+        "name": "rewired8-77",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 44
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.007391457911580801,
+      "one_mK_level_rms_change_rad_s": 0.00027042996953241527,
+      "one_mK_phase_rms_change_rad_s": 0.0009045183542184532,
+      "teacher_mse_normalized": 0.023818733170628548
+    },
+    {
+      "spec": {
+        "name": "rewired8-77",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 44
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.03114895522594452,
+      "one_mK_level_rms_change_rad_s": 0.002676653675734997,
+      "one_mK_phase_rms_change_rad_s": 0.003073788248002529,
+      "teacher_mse_normalized": 0.033549755811691284
+    },
+    {
+      "spec": {
+        "name": "rewired8-77",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 45
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.027106381952762604,
+      "one_mK_level_rms_change_rad_s": 0.0005293070571497083,
+      "one_mK_phase_rms_change_rad_s": 0.005534743424504995,
+      "teacher_mse_normalized": 0.019434351474046707
+    },
+    {
+      "spec": {
+        "name": "rewired8-77",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 45
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.06026183068752289,
+      "one_mK_level_rms_change_rad_s": 0.0025047771632671356,
+      "one_mK_phase_rms_change_rad_s": 0.010132712312042713,
+      "teacher_mse_normalized": 0.03350163251161575
+    },
+    {
+      "spec": {
+        "name": "rewired8-77",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 46
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0007173347985371947,
+      "one_mK_level_rms_change_rad_s": 6.503970780613599e-06,
+      "one_mK_phase_rms_change_rad_s": 1.802711153686687e-07,
+      "teacher_mse_normalized": 0.026712510734796524
+    },
+    {
+      "spec": {
+        "name": "rewired8-77",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 46
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.002591450698673725,
+      "one_mK_level_rms_change_rad_s": 4.9466856580693275e-05,
+      "one_mK_phase_rms_change_rad_s": 2.357581024625688e-06,
+      "teacher_mse_normalized": 0.036936137825250626
+    },
+    {
+      "spec": {
+        "name": "rewired8-77",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 47
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0008165492909029126,
+      "one_mK_level_rms_change_rad_s": 2.4850928639352787e-06,
+      "one_mK_phase_rms_change_rad_s": 6.680679689452518e-06,
+      "teacher_mse_normalized": 0.026891883462667465
+    },
+    {
+      "spec": {
+        "name": "rewired8-77",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 47
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0006308418232947588,
+      "one_mK_level_rms_change_rad_s": 2.8410725008143345e-06,
+      "one_mK_phase_rms_change_rad_s": 7.200181698863162e-06,
+      "teacher_mse_normalized": 0.02706032805144787
+    },
+    {
+      "spec": {
+        "name": "rewired8-88",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 48
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.02358122542500496,
+      "one_mK_level_rms_change_rad_s": 0.0006401124992407858,
+      "one_mK_phase_rms_change_rad_s": 0.006578517146408558,
+      "teacher_mse_normalized": 0.02003423310816288
+    },
+    {
+      "spec": {
+        "name": "rewired8-88",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 48
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.061165791004896164,
+      "one_mK_level_rms_change_rad_s": 0.005276472307741642,
+      "one_mK_phase_rms_change_rad_s": 0.01388565357774496,
+      "teacher_mse_normalized": 0.051492124795913696
+    },
+    {
+      "spec": {
+        "name": "rewired8-88",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 49
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.02716170623898506,
+      "one_mK_level_rms_change_rad_s": 0.0010572094470262527,
+      "one_mK_phase_rms_change_rad_s": 0.006005430594086647,
+      "teacher_mse_normalized": 0.017623871564865112
+    },
+    {
+      "spec": {
+        "name": "rewired8-88",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 49
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0651787742972374,
+      "one_mK_level_rms_change_rad_s": 0.004648326430469751,
+      "one_mK_phase_rms_change_rad_s": 0.007882489822804928,
+      "teacher_mse_normalized": 0.05103320628404617
+    },
+    {
+      "spec": {
+        "name": "rewired8-88",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 50
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.012535763904452324,
+      "one_mK_level_rms_change_rad_s": 0.0001560778182465583,
+      "one_mK_phase_rms_change_rad_s": 0.001496930723078549,
+      "teacher_mse_normalized": 0.022507652640342712
+    },
+    {
+      "spec": {
+        "name": "rewired8-88",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 50
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.041594501584768295,
+      "one_mK_level_rms_change_rad_s": 0.0024330085143446922,
+      "one_mK_phase_rms_change_rad_s": 0.004155325703322887,
+      "teacher_mse_normalized": 0.04887736961245537
+    },
+    {
+      "spec": {
+        "name": "rewired8-88",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 51
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0019036259036511183,
+      "one_mK_level_rms_change_rad_s": 7.872716309975658e-07,
+      "one_mK_phase_rms_change_rad_s": 4.335132416599663e-06,
+      "teacher_mse_normalized": 0.02679448202252388
+    },
+    {
+      "spec": {
+        "name": "rewired8-88",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 51
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.003786879125982523,
+      "one_mK_level_rms_change_rad_s": 4.7364490455947816e-05,
+      "one_mK_phase_rms_change_rad_s": 9.425001189811155e-05,
+      "teacher_mse_normalized": 0.04248712956905365
+    },
+    {
+      "spec": {
+        "name": "rewired8-88",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 52
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.00229070708155632,
+      "one_mK_level_rms_change_rad_s": 7.170678145484999e-05,
+      "one_mK_phase_rms_change_rad_s": 6.542988103319658e-06,
+      "teacher_mse_normalized": 0.026806941255927086
+    },
+    {
+      "spec": {
+        "name": "rewired8-88",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 52
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0029318835586309433,
+      "one_mK_level_rms_change_rad_s": 0.00012278686335776,
+      "one_mK_phase_rms_change_rad_s": 8.23978643893497e-06,
+      "teacher_mse_normalized": 0.03515765070915222
+    },
+    {
+      "spec": {
+        "name": "rewired8-88",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 53
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.002132331021130085,
+      "one_mK_level_rms_change_rad_s": 1.7274200217798352e-05,
+      "one_mK_phase_rms_change_rad_s": 4.171863474766724e-05,
+      "teacher_mse_normalized": 0.02689693309366703
+    },
+    {
+      "spec": {
+        "name": "rewired8-88",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 53
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.002100973390042782,
+      "one_mK_level_rms_change_rad_s": 1.6943598893703893e-05,
+      "one_mK_phase_rms_change_rad_s": 4.048582923132926e-05,
+      "teacher_mse_normalized": 0.026990052312612534
+    },
+    {
+      "spec": {
+        "name": "rewired8-99",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 54
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.023614201694726944,
+      "one_mK_level_rms_change_rad_s": 0.001014286419376731,
+      "one_mK_phase_rms_change_rad_s": 0.0045684343203902245,
+      "teacher_mse_normalized": 0.0186802688986063
+    },
+    {
+      "spec": {
+        "name": "rewired8-99",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 54
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.048854973167181015,
+      "one_mK_level_rms_change_rad_s": 0.0038845748640596867,
+      "one_mK_phase_rms_change_rad_s": 0.005766317248344421,
+      "teacher_mse_normalized": 0.034322142601013184
+    },
+    {
+      "spec": {
+        "name": "rewired8-99",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 55
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0189740601927042,
+      "one_mK_level_rms_change_rad_s": 0.0007171347388066351,
+      "one_mK_phase_rms_change_rad_s": 0.004511108156293631,
+      "teacher_mse_normalized": 0.021136203780770302
+    },
+    {
+      "spec": {
+        "name": "rewired8-99",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 55
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.04666759818792343,
+      "one_mK_level_rms_change_rad_s": 0.0036421578843146563,
+      "one_mK_phase_rms_change_rad_s": 0.008654930628836155,
+      "teacher_mse_normalized": 0.04517047852277756
+    },
+    {
+      "spec": {
+        "name": "rewired8-99",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 56
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.018361501395702362,
+      "one_mK_level_rms_change_rad_s": 0.0003200348583050072,
+      "one_mK_phase_rms_change_rad_s": 0.0020962508860975504,
+      "teacher_mse_normalized": 0.02065831422805786
+    },
+    {
+      "spec": {
+        "name": "rewired8-99",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 56
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.05476786568760872,
+      "one_mK_level_rms_change_rad_s": 0.003746276954188943,
+      "one_mK_phase_rms_change_rad_s": 0.006686844862997532,
+      "teacher_mse_normalized": 0.038799870759248734
+    },
+    {
+      "spec": {
+        "name": "rewired8-99",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 57
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0024467615876346827,
+      "one_mK_level_rms_change_rad_s": 6.083605967432959e-06,
+      "one_mK_phase_rms_change_rad_s": 1.5828507457626984e-05,
+      "teacher_mse_normalized": 0.026789916679263115
+    },
+    {
+      "spec": {
+        "name": "rewired8-99",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 57
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0051934137009084225,
+      "one_mK_level_rms_change_rad_s": 7.185906724771485e-05,
+      "one_mK_phase_rms_change_rad_s": 7.455919694621116e-05,
+      "teacher_mse_normalized": 0.04087323695421219
+    },
+    {
+      "spec": {
+        "name": "rewired8-99",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 58
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0013666365994140506,
+      "one_mK_level_rms_change_rad_s": 6.685448170173913e-06,
+      "one_mK_phase_rms_change_rad_s": 5.554300059884554e-07,
+      "teacher_mse_normalized": 0.026779789477586746
+    },
+    {
+      "spec": {
+        "name": "rewired8-99",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 58
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0015004179440438747,
+      "one_mK_level_rms_change_rad_s": 3.310925649202545e-06,
+      "one_mK_phase_rms_change_rad_s": 2.5683272042442695e-07,
+      "teacher_mse_normalized": 0.03168835490942001
+    },
+    {
+      "spec": {
+        "name": "rewired8-99",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 59
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0008243423653766513,
+      "one_mK_level_rms_change_rad_s": 3.59200043931196e-07,
+      "one_mK_phase_rms_change_rad_s": 2.449280145810917e-06,
+      "teacher_mse_normalized": 0.02687196433544159
+    },
+    {
+      "spec": {
+        "name": "rewired8-99",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 59
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0005657202564179897,
+      "one_mK_level_rms_change_rad_s": 2.9411058477535335e-08,
+      "one_mK_phase_rms_change_rad_s": 1.641398853280407e-06,
+      "teacher_mse_normalized": 0.02907279133796692
+    },
+    {
+      "spec": {
+        "name": "rewired8-110",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 60
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.02199464477598667,
+      "one_mK_level_rms_change_rad_s": 0.0007806731737218797,
+      "one_mK_phase_rms_change_rad_s": 0.004946243949234486,
+      "teacher_mse_normalized": 0.019012754783034325
+    },
+    {
+      "spec": {
+        "name": "rewired8-110",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 60
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.04656147584319115,
+      "one_mK_level_rms_change_rad_s": 0.003214129712432623,
+      "one_mK_phase_rms_change_rad_s": 0.008736329153180122,
+      "teacher_mse_normalized": 0.03405100852251053
+    },
+    {
+      "spec": {
+        "name": "rewired8-110",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 61
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.029809460043907166,
+      "one_mK_level_rms_change_rad_s": 0.0008063747081905603,
+      "one_mK_phase_rms_change_rad_s": 0.008477207273244858,
+      "teacher_mse_normalized": 0.019059520214796066
+    },
+    {
+      "spec": {
+        "name": "rewired8-110",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 61
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.06828800588846207,
+      "one_mK_level_rms_change_rad_s": 0.004578007850795984,
+      "one_mK_phase_rms_change_rad_s": 0.01694554276764393,
+      "teacher_mse_normalized": 0.04724534600973129
+    },
+    {
+      "spec": {
+        "name": "rewired8-110",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 62
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.02095041796565056,
+      "one_mK_level_rms_change_rad_s": 0.0003371396742295474,
+      "one_mK_phase_rms_change_rad_s": 0.0032679445575922728,
+      "teacher_mse_normalized": 0.02047913521528244
+    },
+    {
+      "spec": {
+        "name": "rewired8-110",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 62
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.05005359277129173,
+      "one_mK_level_rms_change_rad_s": 0.0030654510483145714,
+      "one_mK_phase_rms_change_rad_s": 0.00847255252301693,
+      "teacher_mse_normalized": 0.035749152302742004
+    },
+    {
+      "spec": {
+        "name": "rewired8-110",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 63
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.004970583599060774,
+      "one_mK_level_rms_change_rad_s": 0.00019812918617390096,
+      "one_mK_phase_rms_change_rad_s": 0.0004312983655836433,
+      "teacher_mse_normalized": 0.026331793516874313
+    },
+    {
+      "spec": {
+        "name": "rewired8-110",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 63
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.008420148864388466,
+      "one_mK_level_rms_change_rad_s": 0.00046913299593143165,
+      "one_mK_phase_rms_change_rad_s": 0.0007033550064079463,
+      "teacher_mse_normalized": 0.04470119625329971
+    },
+    {
+      "spec": {
+        "name": "rewired8-110",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 64
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0022317725233733654,
+      "one_mK_level_rms_change_rad_s": 6.217027112143114e-05,
+      "one_mK_phase_rms_change_rad_s": 1.1438789442763664e-05,
+      "teacher_mse_normalized": 0.026750419288873672
+    },
+    {
+      "spec": {
+        "name": "rewired8-110",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 64
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0028682241681963205,
+      "one_mK_level_rms_change_rad_s": 0.00010313955135643482,
+      "one_mK_phase_rms_change_rad_s": 1.1757151696656365e-05,
+      "teacher_mse_normalized": 0.041024819016456604
+    },
+    {
+      "spec": {
+        "name": "rewired8-110",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 65
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0009992503328248858,
+      "one_mK_level_rms_change_rad_s": 3.068989599341876e-06,
+      "one_mK_phase_rms_change_rad_s": 1.005168815026991e-05,
+      "teacher_mse_normalized": 0.02690700814127922
+    },
+    {
+      "spec": {
+        "name": "rewired8-110",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 65
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0010775158880278468,
+      "one_mK_level_rms_change_rad_s": 8.774227353569586e-06,
+      "one_mK_phase_rms_change_rad_s": 1.6530007997062057e-05,
+      "teacher_mse_normalized": 0.028619349002838135
+    },
+    {
+      "spec": {
+        "name": "isolated8",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 66
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.008802029304206371,
+      "one_mK_level_rms_change_rad_s": 0.00012575300934258848,
+      "one_mK_phase_rms_change_rad_s": 0.0010008836397901177,
+      "teacher_mse_normalized": 0.02426624298095703
+    },
+    {
+      "spec": {
+        "name": "isolated8",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 66
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.010431199334561825,
+      "one_mK_level_rms_change_rad_s": 0.00012390140909701586,
+      "one_mK_phase_rms_change_rad_s": 0.00097515998641029,
+      "teacher_mse_normalized": 0.025706913322210312
+    },
+    {
+      "spec": {
+        "name": "isolated8",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 67
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.011109620332717896,
+      "one_mK_level_rms_change_rad_s": 0.00030507336487062275,
+      "one_mK_phase_rms_change_rad_s": 0.0015698258066549897,
+      "teacher_mse_normalized": 0.02307066135108471
+    },
+    {
+      "spec": {
+        "name": "isolated8",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 67
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.013699401170015335,
+      "one_mK_level_rms_change_rad_s": 0.0003041953023057431,
+      "one_mK_phase_rms_change_rad_s": 0.0017231515375897288,
+      "teacher_mse_normalized": 0.02508232742547989
+    },
+    {
+      "spec": {
+        "name": "isolated8",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 68
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.005433367565274239,
+      "one_mK_level_rms_change_rad_s": 0.00023301487090066075,
+      "one_mK_phase_rms_change_rad_s": 0.0007017985917627811,
+      "teacher_mse_normalized": 0.02467186376452446
+    },
+    {
+      "spec": {
+        "name": "isolated8",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 68
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.01644044555723667,
+      "one_mK_level_rms_change_rad_s": 0.0006093576084822416,
+      "one_mK_phase_rms_change_rad_s": 0.0012415195815265179,
+      "teacher_mse_normalized": 0.030504591763019562
+    },
+    {
+      "spec": {
+        "name": "isolated8",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 69
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 9.313225746154785e-10,
+      "one_mK_level_rms_change_rad_s": 0.0,
+      "one_mK_phase_rms_change_rad_s": 0.0,
+      "teacher_mse_normalized": 0.026735205203294754
+    },
+    {
+      "spec": {
+        "name": "isolated8",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 69
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 7.450580596923828e-09,
+      "one_mK_level_rms_change_rad_s": 0.0,
+      "one_mK_phase_rms_change_rad_s": 0.0,
+      "teacher_mse_normalized": 0.045773379504680634
+    },
+    {
+      "spec": {
+        "name": "isolated8",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 70
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.0,
+      "one_mK_level_rms_change_rad_s": 0.0,
+      "one_mK_phase_rms_change_rad_s": 0.0,
+      "teacher_mse_normalized": 0.026713676750659943
+    },
+    {
+      "spec": {
+        "name": "isolated8",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 70
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0,
+      "one_mK_level_rms_change_rad_s": 0.0,
+      "one_mK_phase_rms_change_rad_s": 0.0,
+      "teacher_mse_normalized": 0.03645991533994675
+    },
+    {
+      "spec": {
+        "name": "isolated8",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 71
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 4.656612873077393e-10,
+      "one_mK_level_rms_change_rad_s": 0.0,
+      "one_mK_phase_rms_change_rad_s": 0.0,
+      "teacher_mse_normalized": 0.026855070143938065
+    },
+    {
+      "spec": {
+        "name": "isolated8",
+        "interface": "restricted",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 71
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 1.862645149230957e-09,
+      "one_mK_level_rms_change_rad_s": 0.0,
+      "one_mK_phase_rms_change_rad_s": 0.0,
+      "teacher_mse_normalized": 0.02853487990796566
+    },
+    {
+      "spec": {
+        "name": "gru2",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 72
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.02495531179010868,
+      "one_mK_level_rms_change_rad_s": 0.001184601685963571,
+      "one_mK_phase_rms_change_rad_s": 0.010543760843575,
+      "teacher_mse_normalized": 0.01923181861639023
+    },
+    {
+      "spec": {
+        "name": "gru2",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 72
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.05366505682468414,
+      "one_mK_level_rms_change_rad_s": 0.005751979537308216,
+      "one_mK_phase_rms_change_rad_s": 0.03303459286689758,
+      "teacher_mse_normalized": 0.03146614879369736
+    },
+    {
+      "spec": {
+        "name": "gru2",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 73
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.006025150418281555,
+      "one_mK_level_rms_change_rad_s": 0.0004911708529107273,
+      "one_mK_phase_rms_change_rad_s": 0.0005032637272961438,
+      "teacher_mse_normalized": 0.026191802695393562
+    },
+    {
+      "spec": {
+        "name": "gru2",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 73
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.0041129449382424355,
+      "one_mK_level_rms_change_rad_s": 0.0001340366288786754,
+      "one_mK_phase_rms_change_rad_s": 0.0002608468057587743,
+      "teacher_mse_normalized": 0.02916838601231575
+    },
+    {
+      "spec": {
+        "name": "gru2",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 74
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.028850195929408073,
+      "one_mK_level_rms_change_rad_s": 0.0011030511232092977,
+      "one_mK_phase_rms_change_rad_s": 0.0075407614931464195,
+      "teacher_mse_normalized": 0.018365075811743736
+    },
+    {
+      "spec": {
+        "name": "gru2",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 74
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.05713675916194916,
+      "one_mK_level_rms_change_rad_s": 0.0030615543946623802,
+      "one_mK_phase_rms_change_rad_s": 0.012971526943147182,
+      "teacher_mse_normalized": 0.031501613557338715
+    },
+    {
+      "spec": {
+        "name": "gru16",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 75
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.043543145060539246,
+      "one_mK_level_rms_change_rad_s": 0.0029552895575761795,
+      "one_mK_phase_rms_change_rad_s": 0.014520321041345596,
+      "teacher_mse_normalized": 0.006047714035958052
+    },
+    {
+      "spec": {
+        "name": "gru16",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 7,
+        "id": 75
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.11733824014663696,
+      "one_mK_level_rms_change_rad_s": 0.008507439866662025,
+      "one_mK_phase_rms_change_rad_s": 0.022082721814513206,
+      "teacher_mse_normalized": 0.08649948984384537
+    },
+    {
+      "spec": {
+        "name": "gru16",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 76
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.041024867445230484,
+      "one_mK_level_rms_change_rad_s": 0.0024651966523379087,
+      "one_mK_phase_rms_change_rad_s": 0.01358071155846119,
+      "teacher_mse_normalized": 0.008739347569644451
+    },
+    {
+      "spec": {
+        "name": "gru16",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 17,
+        "id": 76
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.13195236027240753,
+      "one_mK_level_rms_change_rad_s": 0.007711334154009819,
+      "one_mK_phase_rms_change_rad_s": 0.021521499380469322,
+      "teacher_mse_normalized": 0.14689549803733826
+    },
+    {
+      "spec": {
+        "name": "gru16",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 77
+      },
+      "learner_interactions": 0,
+      "command_std_rad_s": 0.03559257090091705,
+      "one_mK_level_rms_change_rad_s": 0.0021066814661026,
+      "one_mK_phase_rms_change_rad_s": 0.013469292782247066,
+      "teacher_mse_normalized": 0.009894001297652721
+    },
+    {
+      "spec": {
+        "name": "gru16",
+        "interface": "full",
+        "encoding": "raw",
+        "seed": 27,
+        "id": 77
+      },
+      "learner_interactions": 262144,
+      "command_std_rad_s": 0.12371362745761871,
+      "one_mK_level_rms_change_rad_s": 0.0071501596830785275,
+      "one_mK_phase_rms_change_rad_s": 0.026573065668344498,
+      "teacher_mse_normalized": 0.14916014671325684
+    }
+  ],
+  "complete": true
+}

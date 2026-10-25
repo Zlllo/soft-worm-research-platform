@@ -1,0 +1,56 @@
+{
+  "scope": "full interface homogeneous nodes; chemical and gap masks both preserved",
+  "candidate_permutations": 1,
+  "checks": [
+    {
+      "graph_seed": 11,
+      "isomorphic_to_real_with_shared_gap": false,
+      "permutation": null
+    },
+    {
+      "graph_seed": 22,
+      "isomorphic_to_real_with_shared_gap": false,
+      "permutation": null
+    },
+    {
+      "graph_seed": 33,
+      "isomorphic_to_real_with_shared_gap": false,
+      "permutation": null
+    },
+    {
+      "graph_seed": 44,
+      "isomorphic_to_real_with_shared_gap": false,
+      "permutation": null
+    },
+    {
+      "graph_seed": 55,
+      "isomorphic_to_real_with_shared_gap": false,
+      "permutation": null
+    },
+    {
+      "graph_seed": 66,
+      "isomorphic_to_real_with_shared_gap": false,
+      "permutation": null
+    },
+    {
+      "graph_seed": 77,
+      "isomorphic_to_real_with_shared_gap": false,
+      "permutation": null
+    },
+    {
+      "graph_seed": 88,
+      "isomorphic_to_real_with_shared_gap": false,
+      "permutation": null
+    },
+    {
+      "graph_seed": 99,
+      "isomorphic_to_real_with_shared_gap": false,
+      "permutation": null
+    },
+    {
+      "graph_seed": 110,
+      "isomorphic_to_real_with_shared_gap": false,
+      "permutation": null
+    }
+  ]
+}

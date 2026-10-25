@@ -1,0 +1,891 @@
+{
+  "status": "exploratory_preregistered_bc_initialized_ppo_factorial",
+  "specs": [
+    {
+      "name": "real8",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 0
+    },
+    {
+      "name": "real8",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 1
+    },
+    {
+      "name": "real8",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 2
+    },
+    {
+      "name": "real8",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 3
+    },
+    {
+      "name": "real8",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 4
+    },
+    {
+      "name": "real8",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 5
+    },
+    {
+      "name": "rewired8-11",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 6
+    },
+    {
+      "name": "rewired8-11",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 7
+    },
+    {
+      "name": "rewired8-11",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 8
+    },
+    {
+      "name": "rewired8-11",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 9
+    },
+    {
+      "name": "rewired8-11",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 10
+    },
+    {
+      "name": "rewired8-11",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 11
+    },
+    {
+      "name": "rewired8-22",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 12
+    },
+    {
+      "name": "rewired8-22",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 13
+    },
+    {
+      "name": "rewired8-22",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 14
+    },
+    {
+      "name": "rewired8-22",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 15
+    },
+    {
+      "name": "rewired8-22",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 16
+    },
+    {
+      "name": "rewired8-22",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 17
+    },
+    {
+      "name": "rewired8-33",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 18
+    },
+    {
+      "name": "rewired8-33",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 19
+    },
+    {
+      "name": "rewired8-33",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 20
+    },
+    {
+      "name": "rewired8-33",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 21
+    },
+    {
+      "name": "rewired8-33",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 22
+    },
+    {
+      "name": "rewired8-33",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 23
+    },
+    {
+      "name": "rewired8-44",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 24
+    },
+    {
+      "name": "rewired8-44",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 25
+    },
+    {
+      "name": "rewired8-44",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 26
+    },
+    {
+      "name": "rewired8-44",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 27
+    },
+    {
+      "name": "rewired8-44",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 28
+    },
+    {
+      "name": "rewired8-44",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 29
+    },
+    {
+      "name": "rewired8-55",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 30
+    },
+    {
+      "name": "rewired8-55",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 31
+    },
+    {
+      "name": "rewired8-55",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 32
+    },
+    {
+      "name": "rewired8-55",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 33
+    },
+    {
+      "name": "rewired8-55",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 34
+    },
+    {
+      "name": "rewired8-55",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 35
+    },
+    {
+      "name": "rewired8-66",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 36
+    },
+    {
+      "name": "rewired8-66",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 37
+    },
+    {
+      "name": "rewired8-66",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 38
+    },
+    {
+      "name": "rewired8-66",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 39
+    },
+    {
+      "name": "rewired8-66",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 40
+    },
+    {
+      "name": "rewired8-66",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 41
+    },
+    {
+      "name": "rewired8-77",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 42
+    },
+    {
+      "name": "rewired8-77",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 43
+    },
+    {
+      "name": "rewired8-77",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 44
+    },
+    {
+      "name": "rewired8-77",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 45
+    },
+    {
+      "name": "rewired8-77",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 46
+    },
+    {
+      "name": "rewired8-77",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 47
+    },
+    {
+      "name": "rewired8-88",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 48
+    },
+    {
+      "name": "rewired8-88",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 49
+    },
+    {
+      "name": "rewired8-88",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 50
+    },
+    {
+      "name": "rewired8-88",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 51
+    },
+    {
+      "name": "rewired8-88",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 52
+    },
+    {
+      "name": "rewired8-88",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 53
+    },
+    {
+      "name": "rewired8-99",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 54
+    },
+    {
+      "name": "rewired8-99",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 55
+    },
+    {
+      "name": "rewired8-99",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 56
+    },
+    {
+      "name": "rewired8-99",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 57
+    },
+    {
+      "name": "rewired8-99",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 58
+    },
+    {
+      "name": "rewired8-99",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 59
+    },
+    {
+      "name": "rewired8-110",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 60
+    },
+    {
+      "name": "rewired8-110",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 61
+    },
+    {
+      "name": "rewired8-110",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 62
+    },
+    {
+      "name": "rewired8-110",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 63
+    },
+    {
+      "name": "rewired8-110",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 64
+    },
+    {
+      "name": "rewired8-110",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 65
+    },
+    {
+      "name": "isolated8",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 66
+    },
+    {
+      "name": "isolated8",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 67
+    },
+    {
+      "name": "isolated8",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 68
+    },
+    {
+      "name": "isolated8",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 69
+    },
+    {
+      "name": "isolated8",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 70
+    },
+    {
+      "name": "isolated8",
+      "interface": "restricted",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 71
+    },
+    {
+      "name": "gru2",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 72
+    },
+    {
+      "name": "gru2",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 73
+    },
+    {
+      "name": "gru2",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 74
+    },
+    {
+      "name": "gru16",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 7,
+      "id": 75
+    },
+    {
+      "name": "gru16",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 17,
+      "id": 76
+    },
+    {
+      "name": "gru16",
+      "interface": "full",
+      "encoding": "raw",
+      "seed": 27,
+      "id": 77
+    },
+    {
+      "name": "real8",
+      "interface": "full",
+      "encoding": "adaptive",
+      "seed": 7,
+      "id": 78
+    },
+    {
+      "name": "real8",
+      "interface": "full",
+      "encoding": "adaptive",
+      "seed": 17,
+      "id": 79
+    },
+    {
+      "name": "real8",
+      "interface": "full",
+      "encoding": "adaptive",
+      "seed": 27,
+      "id": 80
+    },
+    {
+      "name": "real8",
+      "interface": "restricted",
+      "encoding": "adaptive",
+      "seed": 7,
+      "id": 81
+    },
+    {
+      "name": "real8",
+      "interface": "restricted",
+      "encoding": "adaptive",
+      "seed": 17,
+      "id": 82
+    },
+    {
+      "name": "real8",
+      "interface": "restricted",
+      "encoding": "adaptive",
+      "seed": 27,
+      "id": 83
+    },
+    {
+      "name": "rewired8-11",
+      "interface": "full",
+      "encoding": "adaptive",
+      "seed": 7,
+      "id": 84
+    },
+    {
+      "name": "rewired8-11",
+      "interface": "full",
+      "encoding": "adaptive",
+      "seed": 17,
+      "id": 85
+    },
+    {
+      "name": "rewired8-11",
+      "interface": "full",
+      "encoding": "adaptive",
+      "seed": 27,
+      "id": 86
+    },
+    {
+      "name": "rewired8-11",
+      "interface": "restricted",
+      "encoding": "adaptive",
+      "seed": 7,
+      "id": 87
+    },
+    {
+      "name": "rewired8-11",
+      "interface": "restricted",
+      "encoding": "adaptive",
+      "seed": 17,
+      "id": 88
+    },
+    {
+      "name": "rewired8-11",
+      "interface": "restricted",
+      "encoding": "adaptive",
+      "seed": 27,
+      "id": 89
+    },
+    {
+      "name": "rewired8-44",
+      "interface": "full",
+      "encoding": "adaptive",
+      "seed": 7,
+      "id": 90
+    },
+    {
+      "name": "rewired8-44",
+      "interface": "full",
+      "encoding": "adaptive",
+      "seed": 17,
+      "id": 91
+    },
+    {
+      "name": "rewired8-44",
+      "interface": "full",
+      "encoding": "adaptive",
+      "seed": 27,
+      "id": 92
+    },
+    {
+      "name": "rewired8-44",
+      "interface": "restricted",
+      "encoding": "adaptive",
+      "seed": 7,
+      "id": 93
+    },
+    {
+      "name": "rewired8-44",
+      "interface": "restricted",
+      "encoding": "adaptive",
+      "seed": 17,
+      "id": 94
+    },
+    {
+      "name": "rewired8-44",
+      "interface": "restricted",
+      "encoding": "adaptive",
+      "seed": 27,
+      "id": 95
+    },
+    {
+      "name": "isolated8",
+      "interface": "full",
+      "encoding": "adaptive",
+      "seed": 7,
+      "id": 96
+    },
+    {
+      "name": "isolated8",
+      "interface": "full",
+      "encoding": "adaptive",
+      "seed": 17,
+      "id": 97
+    },
+    {
+      "name": "isolated8",
+      "interface": "full",
+      "encoding": "adaptive",
+      "seed": 27,
+      "id": 98
+    },
+    {
+      "name": "isolated8",
+      "interface": "restricted",
+      "encoding": "adaptive",
+      "seed": 7,
+      "id": 99
+    },
+    {
+      "name": "isolated8",
+      "interface": "restricted",
+      "encoding": "adaptive",
+      "seed": 17,
+      "id": 100
+    },
+    {
+      "name": "isolated8",
+      "interface": "restricted",
+      "encoding": "adaptive",
+      "seed": 27,
+      "id": 101
+    },
+    {
+      "name": "gru16",
+      "interface": "full",
+      "encoding": "adaptive",
+      "seed": 7,
+      "id": 102
+    },
+    {
+      "name": "gru16",
+      "interface": "full",
+      "encoding": "adaptive",
+      "seed": 17,
+      "id": 103
+    },
+    {
+      "name": "gru16",
+      "interface": "full",
+      "encoding": "adaptive",
+      "seed": 27,
+      "id": 104
+    }
+  ],
+  "config": {
+    "schema_version": 3,
+    "duration_s": 240.0,
+    "event_s": 120.0,
+    "event_jitter_s": 20.0,
+    "initial_error_min_K": 0.06,
+    "initial_error_max_K": 0.15,
+    "preferred_K": 293.15,
+    "comfort_K": 0.05,
+    "gradient_K_m": 40.0,
+    "radius_m": 0.005,
+    "field_turn_rad": 1.0471975511965976,
+    "field_shift_K": 0.08,
+    "radial_shift_m": 0.002,
+    "speed_m_s": 0.0002,
+    "turn_limit_rad_s": 0.3,
+    "response_tau_s": 0.3,
+    "length_m": 0.001,
+    "sweep_m": 0.00015,
+    "frequency_Hz": 0.5,
+    "noise_K": 0.002,
+    "physics_dt_s": 0.02,
+    "sensor_dt_s": 0.1,
+    "control_dt_s": 0.2,
+    "stable_s": 10.0,
+    "angle_tolerance_rad": 0.4363323129985824,
+    "allow_reverse": false
+  },
+  "bc": {
+    "teacher_episodes": 32,
+    "teacher_interactions": 38400,
+    "updates": 2048,
+    "lr": 0.003,
+    "batch": 64
+  },
+  "rl": {
+    "budgets": [
+      65536,
+      262144
+    ],
+    "batch": 32,
+    "rollout": 64,
+    "epochs": 2,
+    "minibatch": 512,
+    "lr": 0.0003,
+    "gamma": 0.9933555062550344,
+    "gae_lambda": 0.95,
+    "policy_clip": 0.2,
+    "value_clip": 0.2,
+    "entropy_coef": 0.001,
+    "grad_clip": 1.0
+  },
+  "endpoint_rule": "BC0, learner65536, learner262144; fixed endpoints; no best selection",
+  "heldout_seeds": [
+    61001,
+    61002,
+    61003,
+    61004,
+    61005,
+    61006,
+    61007,
+    61008,
+    61009,
+    61010,
+    61011,
+    61012,
+    61013,
+    61014,
+    61015,
+    61016,
+    61017,
+    61018,
+    61019,
+    61020,
+    61021,
+    61022,
+    61023,
+    61024,
+    61025,
+    61026,
+    61027,
+    61028,
+    61029,
+    61030,
+    61031,
+    61032
+  ],
+  "transfer_seeds": [
+    61001,
+    61002,
+    61003,
+    61004,
+    61005,
+    61006,
+    61007,
+    61008,
+    61009,
+    61010,
+    61011,
+    61012,
+    61013,
+    61014,
+    61015,
+    61016
+  ],
+  "transfer_conditions": [
+    "phase_none",
+    "phase_shifted",
+    "frequency_075",
+    "event_early90"
+  ],
+  "learning_threshold": {
+    "complete_success": 0.75,
+    "post_tracking": 0.5
+  },
+  "phases": [
+    "all105fits",
+    "then all heldout evaluations",
+    "final endpoint transfer only"
+  ],
+  "source_sha256": {
+    "analysis/navigation_factorial.py": "2c2fa7870bcaeda9149835fe6fe526e5f13c2ba6677ea689d95eca5cddcba7d9",
+    "analysis/navigation_window_ppo.py": "ece100556a81359643f73c619d99f8bbf8935e5b054953f8cbf3cd1b5ac54157",
+    "analysis/navigation_teacher.py": "5c8e5754a3c5388f7489b64f99323e94ad74ded6c655200471d33ce7375c65c6",
+    "analysis/navigation_preflight.py": "95ba3974e05983b3415b773787b607dc756fc23ecec9e9a490ae3da8a266af64",
+    "analysis/tracking_learning_surface.py": "06d645461f7c1b33e523f0e8136335806f7205ae71953659ebf81302d981942c",
+    "src/thermotaxis/navigation.py": "9562ecaa9331e8c6f7a4b3c124e2a1614c38e1ca51d6aaf9c6bf0f7d881d0ce2",
+    "src/thermotaxis/navigation_window_policy.py": "0c6aeba043fc983f75dfa1865f3d3a06d8a436901e8c506edbe6bf1ac9c33aba",
+    "src/thermotaxis/sensory_adaptation.py": "7678da2fd4d8580a09d285c1ca06ab04ea7f75b91adf4748dc2a6233a2cc3def",
+    "src/thermotaxis/connectome.py": "007b6e7eaf144e7b0f0f2c101e0346a6823fa4770470c7686dd976b08be4aeb0",
+    "src/thermotaxis/isothermal_scene.py": "ce47bb13e44ac3eeaf270dd3a2019bee96388d1764fa08aa2b4a95f277ed9b3d"
+  },
+  "input_sha256": {
+    "results/navigation-teacher-2026-10-25.npz": "35b411bb0955b00834eb7d295869ad4815f4e6b85a7a8e92689ab72993c41f56",
+    "results/navigation-feature-teacher-raw-2026-10-25.npz": "eb2970451b5d94141a31788a718f38830fee063cc59543dce89bc08ea4812161",
+    "results/navigation-feature-teacher-adaptive-2026-10-25.npz": "024faf2703538f909c107e6d40b6103d491f5f5376a75355be935e9af8327a24"
+  },
+  "versions": {
+    "torch": "2.6.0",
+    "numpy": "2.0.2"
+  },
+  "limitations": [
+    "Conditional on common demonstrations, not from-scratch RL efficiency.",
+    "Exploratory ten graph layouts x three training seeds; no uniform random graph sampling claim.",
+    "Adaptive subset graphs11/44 fixed in advance, not selected from task performance.",
+    "I/O projection and scalar rate nodes remain engineering approximations.",
+    "Auxiliary adaptive channels add causal long history; response amplitudes not calcium calibrated.",
+    "Actor effective capacities differ; critic architecture and initial values common.",
+    "Raw auxiliary inputs are zero-masked; nominal/active capacity differ.",
+    "Old online A2C and recurrent-chunk pilots retained; development cases retired."
+  ]
+}
