@@ -1,0 +1,140 @@
+{
+  "status": "exploratory_frozen_timescale_intervention",
+  "parent": "results/tracking-expanded-graphs-2026-10-24",
+  "parent_results_sha256": "cfc2db911caee36a01360ee5dca1706c49143f69be0136c865816ded77a78bf0",
+  "models": [
+    "real8",
+    "rewired8-11",
+    "rewired8-22",
+    "rewired8-33",
+    "rewired8-44",
+    "rewired8-55",
+    "rewired8-66",
+    "rewired8-77",
+    "rewired8-88",
+    "rewired8-99",
+    "rewired8-110"
+  ],
+  "training_seeds": [
+    7,
+    17,
+    27
+  ],
+  "tau_s": [
+    0.1,
+    0.3,
+    0.9
+  ],
+  "trained_tau_s": 0.3,
+  "case_seeds": [
+    10501,
+    10502
+  ],
+  "phases_rad": [
+    0.0,
+    1.5707963267948966
+  ],
+  "fields": [
+    "linear",
+    "radial"
+  ],
+  "wave_amplitude_K": 0.05,
+  "wave_period_s": 60.0,
+  "late_start_s": 20.0,
+  "baseline_scene": {
+    "schema_version": 2,
+    "field": "linear",
+    "preferred_K": 293.15,
+    "gradient_K_m": 40.0,
+    "target_radius_m": 0.005,
+    "uniform_wave_amplitude_K": 0.0,
+    "uniform_wave_period_s": 60.0,
+    "length_m": 0.001,
+    "head_lateral_amplitude_m": 0.00015,
+    "head_frequency_Hz": 0.5,
+    "speed_m_s": 0.0002,
+    "max_turn_rate_rad_s": 0.3,
+    "turn_response_tau_s": 0.3,
+    "physics_dt_s": 0.01,
+    "sensor_dt_s": 0.1,
+    "control_dt_s": 0.2,
+    "duration_s": 120.0,
+    "noise_std_K": 0.002,
+    "comfort_half_width_K": 0.05,
+    "tracking_angle_tolerance_rad": 0.4363323129985824,
+    "initial_error_fraction": 0.4,
+    "initial_heading_jitter_rad": 0.35
+  },
+  "primary": "Within each trained model, paired moving-tracking change relative to tau=.3; graph and training seed separate.",
+  "secondary": "Static tracking and late moving tracking; inspect startup separately.",
+  "controls": [
+    "GRU16 unchanged",
+    "engineered expert",
+    "blind"
+  ],
+  "expected_conditions": 104,
+  "expected_trajectories": 1248,
+  "limits": [
+    "Frozen weight sensitivity, not optimal tau or retraining benefit.",
+    "Finite four-second history resets each query; tau is a neuronal relaxation coefficient, not total memory duration.",
+    "Full-node input/output and demeaning remain engineering choices.",
+    "Two new cases per field and two starting phases only; no population significance claim.",
+    "Three training seeds crossed with ten graph layouts; graphs and seeds are not interchangeable.",
+    "Tau changes all node relaxation equally; it affects chemical and gap terms through the same integration coefficient."
+  ],
+  "source_sha256": {
+    "analysis/probe_tracking_timescale.py": "23d44f1773de608678f44462b97cb2acc2ecbde746ff24771a0234aed18628bd",
+    "analysis/compare_tracking_topology.py": "8d06785bf444d51ee274e24a0b8c10ebea6ab4a804749861f57f53b50ab8fc25",
+    "analysis/train_tracking_network.py": "3cb1a2fabc2266039c5c03fe3de726319b86b2d116a954309b6e1aba0e43499e",
+    "analysis/tracking_learning_surface.py": "06d645461f7c1b33e523f0e8136335806f7205ae71953659ebf81302d981942c",
+    "src/thermotaxis/tracking_interventions.py": "f639340db75ff7b0c854e471611f1ba598a837a2cc28bfd9f28cde5d853b2262",
+    "src/thermotaxis/tracking_circuit.py": "76a0622a4525896c7915d6dc3af0a1dae0c1355196d522da4dbb480f64668a0c",
+    "src/thermotaxis/tracking_learning.py": "95cdac69a7997a8ea848076bf2282cdd69e688da03c86ab0c8f01c7eb3f19c2a",
+    "src/thermotaxis/isothermal_scene.py": "ce47bb13e44ac3eeaf270dd3a2019bee96388d1764fa08aa2b4a95f277ed9b3d",
+    "src/thermotaxis/phased_field.py": "dfbff96dd22bb6e6032eefe25b5dfc18b7fad29ebd048de89af942575c23c1fb",
+    "src/thermotaxis/moving_isotherm.py": "b280bdfc6203f73b3f234e6223223d5de3205e1f7b8f434e58d7e7f702727d9b",
+    "src/thermotaxis/connectome.py": "007b6e7eaf144e7b0f0f2c101e0346a6823fa4770470c7686dd976b08be4aeb0"
+  },
+  "checkpoints": {
+    "real8-7-B16-U2048.pt": "d39c266215264b90f02c61b57c457e34762e2723974bc0884e9df0fe6bbe8173",
+    "real8-17-B16-U2048.pt": "877b9c7194b88b4a99ea8d79a1eb6a2018fba6552f7731365dafe2a693cdfb22",
+    "real8-27-B16-U2048.pt": "e9011bceb4e2da22649e77f7ca9065cc36ad5a7beaffe2a3500f67261e88bd16",
+    "gru16-7-B16-U2048.pt": "1b063eb59a34cb62a7c14491c6c839d21b11ce15edfc9567a8739f7f169ef5be",
+    "gru16-17-B16-U2048.pt": "e833fa238b0780ea8b984de9022cced12720f0ddfec3e0bbd69188fbdcec6e15",
+    "gru16-27-B16-U2048.pt": "b3bf933d8bdd80207170170f0a98adde5211c0ba8ba495dde81a90f4303a83dc",
+    "rewired8-11-7-B16-U2048.pt": "28dcd6c6b55cf5486e3e5a87719dacea9b9f5efbeed5e33627def1a697d771ad",
+    "rewired8-11-17-B16-U2048.pt": "508ac2256a243eb38b3b58805888b098e164de8028c44369e222df7d10863e07",
+    "rewired8-11-27-B16-U2048.pt": "7f3b716784495da2655a362e09804ac502a26a9d822718c75ef43162cadc4ef9",
+    "rewired8-22-7-B16-U2048.pt": "c690175f2a4d2154755e45b222eafe8e88fb2542bec1708d850a670d1c345a66",
+    "rewired8-22-17-B16-U2048.pt": "cdfd3b76f8c6697fe082498e4c60cc2959727dbb8a430635fd1b35596be3c2e8",
+    "rewired8-22-27-B16-U2048.pt": "b7bb0012fd8e4cf6d50ed18750181f19b0563baf97aeea2861fc3aa7fe88fddf",
+    "rewired8-33-7-B16-U2048.pt": "8b0cd4ee6f214aa432c4a2e055f3327010d31c5e23037cd538bfd3cf1031c3ad",
+    "rewired8-33-17-B16-U2048.pt": "4f39bef227c6a85bd364070e498981ecfa32d9148e04571ac9d99f494fa27671",
+    "rewired8-33-27-B16-U2048.pt": "a053e94ae60d24b5716dc94dbf2ed661ed1ae0fbd5090d8079fbc038c404cc04",
+    "rewired8-44-7-B16-U2048.pt": "81a9542c294ae9a9af4c25339bb37392a8a001dc2d5592830cacbe24ab3c1fe4",
+    "rewired8-44-17-B16-U2048.pt": "04e324efeccaa3b810193ba292d44bc8fc74668385fe8bd7f39d177ad283bd64",
+    "rewired8-44-27-B16-U2048.pt": "16978e2762df27f64d7a2fcc80986226ccdfb98a5bbce26d3c6505bce7ab82a5",
+    "rewired8-55-7-B16-U2048.pt": "d86820d60c4b3560043b100235a6fe8f05da314337308e2f5d85483965ab8fec",
+    "rewired8-55-17-B16-U2048.pt": "6e54322e165ae0d93028df700f36cacff749c31a254268859f02bc77f2e1b14b",
+    "rewired8-55-27-B16-U2048.pt": "e83b9835ad67937457329388f85522305beffbf4368696be3fb079b1ef4dea9c",
+    "rewired8-66-7-B16-U2048.pt": "a8b2ccfa402d270671b91e042491ec93f20e1a59661ca39f4546710a02c76759",
+    "rewired8-66-17-B16-U2048.pt": "e71a88b12989cce7fc093498e82ff3f86911641c92001c062c13c4c8f7a97a8f",
+    "rewired8-66-27-B16-U2048.pt": "a29cb93dba5739199a658d52217ddc031fed33e66f7d93395604bb43a800ce17",
+    "rewired8-77-7-B16-U2048.pt": "18df429046968a4cde8cad96f09c2aa31b6ff250a81e5c3fe88f9ee4c6e78aa9",
+    "rewired8-77-17-B16-U2048.pt": "711fc99e164f43a4da252a2d52765adabecc79b577ee14c4c0823cc9594ad2ae",
+    "rewired8-77-27-B16-U2048.pt": "1445eba6ba661df78c6f88c9c1d582877a2c1b89b7568b0214051f64e88725ad",
+    "rewired8-88-7-B16-U2048.pt": "a47240dbf4f20e59a92c77845cac21689f3bb2c6a8f2762222f241e415e69b28",
+    "rewired8-88-17-B16-U2048.pt": "66f4d7b0e9e5b9df699aa9832edc593330422b7aa7481ce302a432b6d4fbf61b",
+    "rewired8-88-27-B16-U2048.pt": "277e43e3d55f29b879e0daeca2010760e88d055d6bc52f3ed61670b7246073d3",
+    "rewired8-99-7-B16-U2048.pt": "3166bee309a29893bd8b9231d7b8d9a148be347449ecf313230004e125daf4e7",
+    "rewired8-99-17-B16-U2048.pt": "07eea532d0d8b807c00a17e4b4e0b242e90226f0f3e748d343efe8b1b213ac91",
+    "rewired8-99-27-B16-U2048.pt": "14aa9f2eadbdfa5d5d16766b27e011756fb6ad077378224e1dd061c24c298969",
+    "rewired8-110-7-B16-U2048.pt": "8080ac5766d5ddcdf603612dbbc3a3000ad9860298799738df3a158fcb5a0863",
+    "rewired8-110-17-B16-U2048.pt": "dffb88119e35ce71067f4c63b049b3cce1bcb343b0d6586b2ff8d8d4ea07d983",
+    "rewired8-110-27-B16-U2048.pt": "7399dd3211d4a10d108e7e58e0247dcc850126b6b2368a818aa02af38b3653d3"
+  },
+  "versions": {
+    "torch": "2.6.0",
+    "numpy": "2.0.2"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "status": "exploratory_real_graph_refit_only",
+  "model": "real8",
+  "training_seeds": [
+    7,
+    17,
+    27
+  ],
+  "tau_s": [
+    0.1,
+    0.9
+  ],
+  "episodes_per_field": 16,
+  "total_training_episodes": 32,
+  "updates": 2048,
+  "optimizer": {
+    "name": "Adam",
+    "lr": 0.003,
+    "batch": 64,
+    "clipping": 1.0
+  },
+  "data_fingerprint": "296ad137a1985b6a0b403a3c587e55e641ab4872fe6d639580ab5e9dcd4da633",
+  "training_digest": {
+    "x": {
+      "shape": [
+        9632,
+        41,
+        4
+      ],
+      "sha256": "cae8a964438aaf0099d5cb2a8159879ededdd34991b9460e3eb0651467ce3b42"
+    },
+    "y": {
+      "shape": [
+        9632
+      ],
+      "sha256": "76ae8622a0440e5b3b513e3ac46408bd652f1c2ee108e68537f6835414ea0cfc"
+    },
+    "times": {
+      "shape": [
+        9632
+      ],
+      "sha256": "cc46515066eb91374b6a8b77023910ca5d4a7e5cf16cb85a9b2d984c98e8d58d"
+    },
+    "fields": {
+      "shape": [
+        9632
+      ],
+      "sha256": "e023e3dc15399f4229c503ae97deff213f24d666bcf709e24ee50d6645fd3cf0"
+    }
+  },
+  "validation_digest": {
+    "x": {
+      "shape": [
+        4816,
+        41,
+        4
+      ],
+      "sha256": "de4a25ca93116626bdaebc29bf386bab306435f7284dc1de0420fc3a34766a76"
+    },
+    "y": {
+      "shape": [
+        4816
+      ],
+      "sha256": "ba093982990650500bb98ffc5546039dd0fdc49ca8dd2dc76a5b9408a5c8ec59"
+    },
+    "times": {
+      "shape": [
+        4816
+      ],
+      "sha256": "e473f9a0ebe848236e7c45dbb887c8073cfa330d093b7b066c691f62c072475f"
+    },
+    "fields": {
+      "shape": [
+        4816
+      ],
+      "sha256": "0e20649bc62783199b28f07ae385ffaf628a67f74575a7bfa7c66eb3957c91c7"
+    }
+  },
+  "case_seeds": [
+    10501,
+    10502
+  ],
+  "phases_rad": [
+    0.0,
+    1.5707963267948966
+  ],
+  "fields": [
+    "linear",
+    "radial"
+  ],
+  "wave_amplitude_K": 0.05,
+  "wave_period_s": 60.0,
+  "late_start_s": 20.0,
+  "intent": "Distinguish frozen real-graph damage from fixed-budget learnability; no topology advantage claim.",
+  "constraints": [
+    "All six fits finish before behavior evaluation.",
+    "Tau=.3 parent is reused, not independently fitted.",
+    "Behavior cases match frozen probes for paired diagnostic; not an untouched final test.",
+    "Same seed reproduces initial weight values and optimizer minibatch sequence."
+  ],
+  "source_sha256": {
+    "analysis/probe_tracking_timescale.py": "23d44f1773de608678f44462b97cb2acc2ecbde746ff24771a0234aed18628bd",
+    "analysis/compare_tracking_topology.py": "8d06785bf444d51ee274e24a0b8c10ebea6ab4a804749861f57f53b50ab8fc25",
+    "analysis/train_tracking_network.py": "3cb1a2fabc2266039c5c03fe3de726319b86b2d116a954309b6e1aba0e43499e",
+    "analysis/tracking_learning_surface.py": "06d645461f7c1b33e523f0e8136335806f7205ae71953659ebf81302d981942c",
+    "src/thermotaxis/tracking_interventions.py": "f639340db75ff7b0c854e471611f1ba598a837a2cc28bfd9f28cde5d853b2262",
+    "src/thermotaxis/tracking_circuit.py": "76a0622a4525896c7915d6dc3af0a1dae0c1355196d522da4dbb480f64668a0c",
+    "src/thermotaxis/tracking_learning.py": "95cdac69a7997a8ea848076bf2282cdd69e688da03c86ab0c8f01c7eb3f19c2a",
+    "src/thermotaxis/isothermal_scene.py": "ce47bb13e44ac3eeaf270dd3a2019bee96388d1764fa08aa2b4a95f277ed9b3d",
+    "src/thermotaxis/phased_field.py": "dfbff96dd22bb6e6032eefe25b5dfc18b7fad29ebd048de89af942575c23c1fb",
+    "src/thermotaxis/moving_isotherm.py": "b280bdfc6203f73b3f234e6223223d5de3205e1f7b8f434e58d7e7f702727d9b",
+    "src/thermotaxis/connectome.py": "007b6e7eaf144e7b0f0f2c101e0346a6823fa4770470c7686dd976b08be4aeb0",
+    "analysis/refit_tracking_timescale.py": "a83879b0ccdb76a2758664762bf0551ba9e47d46129410ddcd573ce7846dfe9f"
+  }
+}
