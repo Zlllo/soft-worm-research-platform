@@ -1,6 +1,7 @@
 """The diagnostic replay must agree with production and preserve input meaning."""
 import importlib.util
 from pathlib import Path
+import shutil
 import sys
 
 import numpy as np
@@ -14,6 +15,30 @@ sys.path.insert(0, str(ANALYSIS))
 spec = importlib.util.spec_from_file_location('navigation_diagnosis', ANALYSIS / 'diagnose_navigation_failures.py')
 diagnosis = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(diagnosis)
+
+
+def test_source_hashes_are_relative_and_survive_checkout_relocation(tmp_path, monkeypatch):
+    original = tmp_path / 'original-checkout'
+    source = original / 'analysis' / 'probe.py'
+    source.parent.mkdir(parents=True)
+    source.write_text('source snapshot\n')
+    inputs = original / 'results' / 'input.bin'
+    inputs.parent.mkdir()
+    inputs.write_bytes(b'immutable input')
+    monkeypatch.setattr(diagnosis, 'REPO_ROOT', original)
+    plan = dict(source_sha256=diagnosis.source_fingerprints([source]),
+                inputs_sha256={'results/input.bin': diagnosis.digest(inputs)})
+    assert set(plan['source_sha256']) == {'analysis/probe.py'}
+    diagnosis.check(plan)
+    moved = tmp_path / 'relocated-checkout'
+    shutil.copytree(original, moved)
+    shutil.rmtree(original)
+    monkeypatch.setattr(diagnosis, 'REPO_ROOT', moved)
+    monkeypatch.chdir(tmp_path)
+    diagnosis.check(plan)
+    (moved / 'analysis' / 'probe.py').write_text('changed source\n')
+    with pytest.raises(RuntimeError, match='input/source changed: analysis/probe.py'):
+        diagnosis.check(plan)
 
 
 @pytest.mark.parametrize('name', ['real8', 'rewired8-44', 'isolated8'])

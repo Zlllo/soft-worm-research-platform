@@ -20,6 +20,7 @@ from navigation_feasibility_replication import evaluate
 from navigation_preflight import summary
 
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
 ROOT = Path('results/navigation-diagnosis-2026-11-02')
 ASSETS = Path('docs/reports/assets/navigation-study-2026-10-25')
 PARENT = Path('results/navigation-factorial-2026-10-25')
@@ -32,6 +33,12 @@ def write(path, value):
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def source_fingerprints(paths):
+    """Keep archive keys independent of the machine's checkout location."""
+    return {Path(p).resolve().relative_to(REPO_ROOT).as_posix(): digest(Path(p))
+            for p in paths}
 
 
 def trace_actor(model, x):
@@ -148,14 +155,17 @@ def prepare():
                              'Synthetic response probes are engineering assays, not calibrated cell physiology.',
                              'No cell-function calibration or whole-circuit retraining in this batch.'],
                 inputs_sha256={str(teacher):digest(teacher), **checkpoints},
-                source_sha256={str(p):digest(p) for p in sources},
+                source_sha256=source_fingerprints(sources),
                 versions=dict(torch=torch.__version__, numpy=np.__version__))
     write(ROOT / 'design.json', plan)
 
 
 def check(plan):
     for path, expected in {**plan['source_sha256'], **plan['inputs_sha256']}.items():
-        if digest(Path(path)) != expected:
+        relative = Path(path)
+        if relative.is_absolute() or '..' in relative.parts:
+            raise ValueError('hash paths must be repository-relative: ' + path)
+        if digest(REPO_ROOT / relative) != expected:
             raise RuntimeError('input/source changed: ' + path)
 
 

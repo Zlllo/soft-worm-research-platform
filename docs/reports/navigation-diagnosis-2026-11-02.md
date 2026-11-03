@@ -96,6 +96,10 @@ full的补训集MSE从0.16327略降至0.16146，另8条既有episode的MSE从0.1
 
 新诊断测试10项通过；完整回归235项通过（本次运行无警告摘要）。新增测试验证诊断回放与生产输出一致、温度扰动保留相位与padding、教师重建、增益恒等及失败分类，不以检查数代替科学证据。
 
+2026-11-03可移植性修正：源码哈希改用仓库相对路径，检查时从当前检出根目录解析。新增迁移测试会复制检出、删除原目录，再核对源码和输入哈希，并验证篡改仍会报错。修正后诊断测试11项、完整回归236项通过；本机出现14条既有Matplotlib/Pyparsing弃用警告。
+
+归档中的活动`design.json`与`source/`已更新为可迁移版本；原实验设计和源码保存在结果目录下的`source-at-run/`，同目录的`archive-maintenance.json`记录维护前后哈希。本次只维护复现路径与测试，全部实验结果、教师数据和模型检查点保持原字节，不重新计算或替换科学结果。
+
 运行目录为仓库根目录，先按旧归档说明恢复`results/`。使用本项目`.venv/bin/python`及`PYTHONPATH=src`；每个新输出目录只prepare一次：
 
 ```bash
@@ -105,7 +109,7 @@ PYTHONPATH=src .venv/bin/python analysis/diagnose_navigation_failures.py signals
 PYTHONPATH=src .venv/bin/python analysis/diagnose_navigation_failures.py rescue
 PYTHONPATH=src .venv/bin/python analysis/probe_navigation_teacher.py
 PYTHONPATH=src .venv/bin/python analysis/probe_navigation_temperature_gain.py
-MPLCONFIGDIR=/workspace/.cache/matplotlib PYTHONPATH=src .venv/bin/python analysis/report_navigation_diagnosis.py
+MPLCONFIGDIR=/tmp/worm-matplotlib PYTHONPATH=src .venv/bin/python analysis/report_navigation_diagnosis.py
 ```
 
 使用脚本设置的单线程CPU。源文件及原模型/教师数据哈希固定在design中。重新实验应使用新输出目录，不覆盖本轮记录；源代码或输入变化会使原设计检查失败。
