@@ -1,0 +1,2397 @@
+{
+  "status": "completed_posthoc_diagnosis_not_confirmation",
+  "teacher_positive_control": {
+    "reconstruction_mse_normalized": 3.543376186080179e-16,
+    "reconstruction_max_abs_rad_s": 4.230956301976008e-08,
+    "zero_action_mse_normalized": 0.1666610687971115
+  },
+  "counts": {
+    "archived_specifications": 78,
+    "teacher_windows": 1024,
+    "actor_snapshots": 234,
+    "signal_conditions": 5616,
+    "temporal_conditions": 624,
+    "new_readout_fits": 6,
+    "readout_evaluation_episodes": 384,
+    "gain_evaluation_episodes": 288
+  },
+  "stages": [
+    {
+      "name": "real8",
+      "budget": 0,
+      "group": "all",
+      "first_entry": 0.8229166666666666,
+      "pre_stable": 0.6041666666666666,
+      "post_stable": 0.53125,
+      "complete": 0.3125
+    },
+    {
+      "name": "real8",
+      "budget": 0,
+      "group": "linear",
+      "first_entry": 0.875,
+      "pre_stable": 0.6666666666666666,
+      "post_stable": 0.375,
+      "complete": 0.16666666666666666
+    },
+    {
+      "name": "real8",
+      "budget": 0,
+      "group": "radial",
+      "first_entry": 0.7708333333333334,
+      "pre_stable": 0.5416666666666666,
+      "post_stable": 0.6875,
+      "complete": 0.4583333333333333
+    },
+    {
+      "name": "real8",
+      "budget": 0,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.7333333333333334,
+      "post_stable": 0.4666666666666666,
+      "complete": 0.3333333333333333
+    },
+    {
+      "name": "real8",
+      "budget": 0,
+      "group": "hot",
+      "first_entry": 0.7424242424242425,
+      "pre_stable": 0.5454545454545454,
+      "post_stable": 0.5606060606060607,
+      "complete": 0.303030303030303
+    },
+    {
+      "name": "real8",
+      "budget": 65536,
+      "group": "all",
+      "first_entry": 0.8958333333333334,
+      "pre_stable": 0.78125,
+      "post_stable": 0.5625,
+      "complete": 0.4791666666666667
+    },
+    {
+      "name": "real8",
+      "budget": 65536,
+      "group": "linear",
+      "first_entry": 0.9166666666666666,
+      "pre_stable": 0.8541666666666666,
+      "post_stable": 0.3333333333333333,
+      "complete": 0.2916666666666667
+    },
+    {
+      "name": "real8",
+      "budget": 65536,
+      "group": "radial",
+      "first_entry": 0.875,
+      "pre_stable": 0.7083333333333334,
+      "post_stable": 0.7916666666666666,
+      "complete": 0.6666666666666666
+    },
+    {
+      "name": "real8",
+      "budget": 65536,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.9333333333333332,
+      "post_stable": 0.5,
+      "complete": 0.5
+    },
+    {
+      "name": "real8",
+      "budget": 65536,
+      "group": "hot",
+      "first_entry": 0.8484848484848485,
+      "pre_stable": 0.712121212121212,
+      "post_stable": 0.5909090909090909,
+      "complete": 0.4696969696969697
+    },
+    {
+      "name": "real8",
+      "budget": 262144,
+      "group": "all",
+      "first_entry": 0.9791666666666666,
+      "pre_stable": 0.9583333333333334,
+      "post_stable": 0.625,
+      "complete": 0.59375
+    },
+    {
+      "name": "real8",
+      "budget": 262144,
+      "group": "linear",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 0.2708333333333333,
+      "complete": 0.2708333333333333
+    },
+    {
+      "name": "real8",
+      "budget": 262144,
+      "group": "radial",
+      "first_entry": 0.9583333333333334,
+      "pre_stable": 0.9166666666666666,
+      "post_stable": 0.9791666666666666,
+      "complete": 0.9166666666666666
+    },
+    {
+      "name": "real8",
+      "budget": 262144,
+      "group": "cold",
+      "first_entry": 0.9666666666666667,
+      "pre_stable": 0.9333333333333332,
+      "post_stable": 0.5666666666666667,
+      "complete": 0.5
+    },
+    {
+      "name": "real8",
+      "budget": 262144,
+      "group": "hot",
+      "first_entry": 0.9848484848484849,
+      "pre_stable": 0.9696969696969697,
+      "post_stable": 0.6515151515151515,
+      "complete": 0.6363636363636364
+    },
+    {
+      "name": "rewired8-11",
+      "budget": 0,
+      "group": "all",
+      "first_entry": 0.6875,
+      "pre_stable": 0.40625,
+      "post_stable": 0.16666666666666666,
+      "complete": 0.10416666666666667
+    },
+    {
+      "name": "rewired8-11",
+      "budget": 0,
+      "group": "linear",
+      "first_entry": 0.7291666666666666,
+      "pre_stable": 0.4791666666666667,
+      "post_stable": 0.16666666666666666,
+      "complete": 0.08333333333333333
+    },
+    {
+      "name": "rewired8-11",
+      "budget": 0,
+      "group": "radial",
+      "first_entry": 0.6458333333333334,
+      "pre_stable": 0.3333333333333333,
+      "post_stable": 0.16666666666666666,
+      "complete": 0.125
+    },
+    {
+      "name": "rewired8-11",
+      "budget": 0,
+      "group": "cold",
+      "first_entry": 0.9333333333333332,
+      "pre_stable": 0.3333333333333333,
+      "post_stable": 0.16666666666666666,
+      "complete": 0.03333333333333333
+    },
+    {
+      "name": "rewired8-11",
+      "budget": 0,
+      "group": "hot",
+      "first_entry": 0.5757575757575757,
+      "pre_stable": 0.4393939393939394,
+      "post_stable": 0.16666666666666666,
+      "complete": 0.13636363636363635
+    },
+    {
+      "name": "rewired8-11",
+      "budget": 65536,
+      "group": "all",
+      "first_entry": 0.8020833333333334,
+      "pre_stable": 0.5833333333333334,
+      "post_stable": 0.4270833333333333,
+      "complete": 0.3229166666666667
+    },
+    {
+      "name": "rewired8-11",
+      "budget": 65536,
+      "group": "linear",
+      "first_entry": 0.8333333333333334,
+      "pre_stable": 0.625,
+      "post_stable": 0.3125,
+      "complete": 0.25
+    },
+    {
+      "name": "rewired8-11",
+      "budget": 65536,
+      "group": "radial",
+      "first_entry": 0.7708333333333334,
+      "pre_stable": 0.5416666666666666,
+      "post_stable": 0.5416666666666666,
+      "complete": 0.3958333333333333
+    },
+    {
+      "name": "rewired8-11",
+      "budget": 65536,
+      "group": "cold",
+      "first_entry": 0.9,
+      "pre_stable": 0.5333333333333333,
+      "post_stable": 0.4666666666666666,
+      "complete": 0.3333333333333333
+    },
+    {
+      "name": "rewired8-11",
+      "budget": 65536,
+      "group": "hot",
+      "first_entry": 0.7575757575757577,
+      "pre_stable": 0.6060606060606061,
+      "post_stable": 0.4090909090909091,
+      "complete": 0.3181818181818182
+    },
+    {
+      "name": "rewired8-11",
+      "budget": 262144,
+      "group": "all",
+      "first_entry": 0.84375,
+      "pre_stable": 0.625,
+      "post_stable": 0.4166666666666667,
+      "complete": 0.2916666666666667
+    },
+    {
+      "name": "rewired8-11",
+      "budget": 262144,
+      "group": "linear",
+      "first_entry": 0.875,
+      "pre_stable": 0.6666666666666666,
+      "post_stable": 0.14583333333333334,
+      "complete": 0.041666666666666664
+    },
+    {
+      "name": "rewired8-11",
+      "budget": 262144,
+      "group": "radial",
+      "first_entry": 0.8125,
+      "pre_stable": 0.5833333333333334,
+      "post_stable": 0.6875,
+      "complete": 0.5416666666666666
+    },
+    {
+      "name": "rewired8-11",
+      "budget": 262144,
+      "group": "cold",
+      "first_entry": 0.8666666666666667,
+      "pre_stable": 0.7000000000000001,
+      "post_stable": 0.39999999999999997,
+      "complete": 0.3
+    },
+    {
+      "name": "rewired8-11",
+      "budget": 262144,
+      "group": "hot",
+      "first_entry": 0.8333333333333334,
+      "pre_stable": 0.5909090909090909,
+      "post_stable": 0.42424242424242425,
+      "complete": 0.2878787878787879
+    },
+    {
+      "name": "rewired8-22",
+      "budget": 0,
+      "group": "all",
+      "first_entry": 0.7604166666666666,
+      "pre_stable": 0.5104166666666666,
+      "post_stable": 0.21875,
+      "complete": 0.14583333333333334
+    },
+    {
+      "name": "rewired8-22",
+      "budget": 0,
+      "group": "linear",
+      "first_entry": 0.8125,
+      "pre_stable": 0.6041666666666666,
+      "post_stable": 0.0625,
+      "complete": 0.020833333333333332
+    },
+    {
+      "name": "rewired8-22",
+      "budget": 0,
+      "group": "radial",
+      "first_entry": 0.7083333333333334,
+      "pre_stable": 0.4166666666666667,
+      "post_stable": 0.375,
+      "complete": 0.2708333333333333
+    },
+    {
+      "name": "rewired8-22",
+      "budget": 0,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.5333333333333333,
+      "post_stable": 0.16666666666666666,
+      "complete": 0.09999999999999999
+    },
+    {
+      "name": "rewired8-22",
+      "budget": 0,
+      "group": "hot",
+      "first_entry": 0.6515151515151515,
+      "pre_stable": 0.5,
+      "post_stable": 0.24242424242424243,
+      "complete": 0.16666666666666666
+    },
+    {
+      "name": "rewired8-22",
+      "budget": 65536,
+      "group": "all",
+      "first_entry": 0.9270833333333334,
+      "pre_stable": 0.7604166666666666,
+      "post_stable": 0.625,
+      "complete": 0.4791666666666667
+    },
+    {
+      "name": "rewired8-22",
+      "budget": 65536,
+      "group": "linear",
+      "first_entry": 0.9791666666666666,
+      "pre_stable": 0.8125,
+      "post_stable": 0.4166666666666667,
+      "complete": 0.2916666666666667
+    },
+    {
+      "name": "rewired8-22",
+      "budget": 65536,
+      "group": "radial",
+      "first_entry": 0.875,
+      "pre_stable": 0.7083333333333334,
+      "post_stable": 0.8333333333333334,
+      "complete": 0.6666666666666666
+    },
+    {
+      "name": "rewired8-22",
+      "budget": 65536,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.8333333333333334,
+      "post_stable": 0.6,
+      "complete": 0.4666666666666666
+    },
+    {
+      "name": "rewired8-22",
+      "budget": 65536,
+      "group": "hot",
+      "first_entry": 0.8939393939393939,
+      "pre_stable": 0.7272727272727272,
+      "post_stable": 0.6363636363636364,
+      "complete": 0.48484848484848486
+    },
+    {
+      "name": "rewired8-22",
+      "budget": 262144,
+      "group": "all",
+      "first_entry": 0.9583333333333334,
+      "pre_stable": 0.875,
+      "post_stable": 0.5520833333333334,
+      "complete": 0.4479166666666667
+    },
+    {
+      "name": "rewired8-22",
+      "budget": 262144,
+      "group": "linear",
+      "first_entry": 1.0,
+      "pre_stable": 0.9166666666666666,
+      "post_stable": 0.14583333333333334,
+      "complete": 0.0625
+    },
+    {
+      "name": "rewired8-22",
+      "budget": 262144,
+      "group": "radial",
+      "first_entry": 0.9166666666666666,
+      "pre_stable": 0.8333333333333334,
+      "post_stable": 0.9583333333333334,
+      "complete": 0.8333333333333334
+    },
+    {
+      "name": "rewired8-22",
+      "budget": 262144,
+      "group": "cold",
+      "first_entry": 0.9666666666666667,
+      "pre_stable": 0.9333333333333332,
+      "post_stable": 0.5,
+      "complete": 0.43333333333333335
+    },
+    {
+      "name": "rewired8-22",
+      "budget": 262144,
+      "group": "hot",
+      "first_entry": 0.9545454545454546,
+      "pre_stable": 0.8484848484848485,
+      "post_stable": 0.5757575757575758,
+      "complete": 0.45454545454545453
+    },
+    {
+      "name": "rewired8-33",
+      "budget": 0,
+      "group": "all",
+      "first_entry": 0.8333333333333334,
+      "pre_stable": 0.5,
+      "post_stable": 0.40625,
+      "complete": 0.16666666666666666
+    },
+    {
+      "name": "rewired8-33",
+      "budget": 0,
+      "group": "linear",
+      "first_entry": 0.8958333333333334,
+      "pre_stable": 0.6875,
+      "post_stable": 0.3125,
+      "complete": 0.125
+    },
+    {
+      "name": "rewired8-33",
+      "budget": 0,
+      "group": "radial",
+      "first_entry": 0.7708333333333334,
+      "pre_stable": 0.3125,
+      "post_stable": 0.5,
+      "complete": 0.20833333333333334
+    },
+    {
+      "name": "rewired8-33",
+      "budget": 0,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.43333333333333335,
+      "post_stable": 0.3666666666666667,
+      "complete": 0.03333333333333333
+    },
+    {
+      "name": "rewired8-33",
+      "budget": 0,
+      "group": "hot",
+      "first_entry": 0.7575757575757575,
+      "pre_stable": 0.5303030303030303,
+      "post_stable": 0.42424242424242425,
+      "complete": 0.2272727272727273
+    },
+    {
+      "name": "rewired8-33",
+      "budget": 65536,
+      "group": "all",
+      "first_entry": 0.96875,
+      "pre_stable": 0.7604166666666666,
+      "post_stable": 0.6875,
+      "complete": 0.4895833333333333
+    },
+    {
+      "name": "rewired8-33",
+      "budget": 65536,
+      "group": "linear",
+      "first_entry": 0.9375,
+      "pre_stable": 0.8541666666666666,
+      "post_stable": 0.4583333333333333,
+      "complete": 0.3125
+    },
+    {
+      "name": "rewired8-33",
+      "budget": 65536,
+      "group": "radial",
+      "first_entry": 1.0,
+      "pre_stable": 0.6666666666666666,
+      "post_stable": 0.9166666666666666,
+      "complete": 0.6666666666666666
+    },
+    {
+      "name": "rewired8-33",
+      "budget": 65536,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.8666666666666667,
+      "post_stable": 0.6333333333333333,
+      "complete": 0.5
+    },
+    {
+      "name": "rewired8-33",
+      "budget": 65536,
+      "group": "hot",
+      "first_entry": 0.9545454545454546,
+      "pre_stable": 0.7121212121212123,
+      "post_stable": 0.7121212121212123,
+      "complete": 0.48484848484848486
+    },
+    {
+      "name": "rewired8-33",
+      "budget": 262144,
+      "group": "all",
+      "first_entry": 0.9791666666666666,
+      "pre_stable": 0.9166666666666666,
+      "post_stable": 0.5833333333333334,
+      "complete": 0.5208333333333334
+    },
+    {
+      "name": "rewired8-33",
+      "budget": 262144,
+      "group": "linear",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 0.20833333333333334,
+      "complete": 0.20833333333333334
+    },
+    {
+      "name": "rewired8-33",
+      "budget": 262144,
+      "group": "radial",
+      "first_entry": 0.9583333333333334,
+      "pre_stable": 0.8333333333333334,
+      "post_stable": 0.9583333333333334,
+      "complete": 0.8333333333333334
+    },
+    {
+      "name": "rewired8-33",
+      "budget": 262144,
+      "group": "cold",
+      "first_entry": 0.9666666666666667,
+      "pre_stable": 0.9,
+      "post_stable": 0.5,
+      "complete": 0.4000000000000001
+    },
+    {
+      "name": "rewired8-33",
+      "budget": 262144,
+      "group": "hot",
+      "first_entry": 0.9848484848484849,
+      "pre_stable": 0.9242424242424243,
+      "post_stable": 0.6212121212121212,
+      "complete": 0.5757575757575758
+    },
+    {
+      "name": "rewired8-44",
+      "budget": 0,
+      "group": "all",
+      "first_entry": 0.6979166666666666,
+      "pre_stable": 0.4583333333333333,
+      "post_stable": 0.1875,
+      "complete": 0.09375
+    },
+    {
+      "name": "rewired8-44",
+      "budget": 0,
+      "group": "linear",
+      "first_entry": 0.75,
+      "pre_stable": 0.6458333333333334,
+      "post_stable": 0.14583333333333334,
+      "complete": 0.041666666666666664
+    },
+    {
+      "name": "rewired8-44",
+      "budget": 0,
+      "group": "radial",
+      "first_entry": 0.6458333333333334,
+      "pre_stable": 0.2708333333333333,
+      "post_stable": 0.22916666666666666,
+      "complete": 0.14583333333333334
+    },
+    {
+      "name": "rewired8-44",
+      "budget": 0,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.5,
+      "post_stable": 0.13333333333333333,
+      "complete": 0.0
+    },
+    {
+      "name": "rewired8-44",
+      "budget": 0,
+      "group": "hot",
+      "first_entry": 0.5606060606060606,
+      "pre_stable": 0.4393939393939394,
+      "post_stable": 0.21212121212121213,
+      "complete": 0.13636363636363635
+    },
+    {
+      "name": "rewired8-44",
+      "budget": 65536,
+      "group": "all",
+      "first_entry": 0.9270833333333334,
+      "pre_stable": 0.8125,
+      "post_stable": 0.7604166666666666,
+      "complete": 0.6666666666666666
+    },
+    {
+      "name": "rewired8-44",
+      "budget": 65536,
+      "group": "linear",
+      "first_entry": 0.9791666666666666,
+      "pre_stable": 0.8958333333333334,
+      "post_stable": 0.7083333333333334,
+      "complete": 0.6458333333333334
+    },
+    {
+      "name": "rewired8-44",
+      "budget": 65536,
+      "group": "radial",
+      "first_entry": 0.875,
+      "pre_stable": 0.7291666666666666,
+      "post_stable": 0.8125,
+      "complete": 0.6875
+    },
+    {
+      "name": "rewired8-44",
+      "budget": 65536,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.8666666666666667,
+      "post_stable": 0.7666666666666666,
+      "complete": 0.6333333333333333
+    },
+    {
+      "name": "rewired8-44",
+      "budget": 65536,
+      "group": "hot",
+      "first_entry": 0.8939393939393939,
+      "pre_stable": 0.7878787878787877,
+      "post_stable": 0.7575757575757575,
+      "complete": 0.6818181818181818
+    },
+    {
+      "name": "rewired8-44",
+      "budget": 262144,
+      "group": "all",
+      "first_entry": 1.0,
+      "pre_stable": 0.96875,
+      "post_stable": 0.5833333333333334,
+      "complete": 0.5520833333333334
+    },
+    {
+      "name": "rewired8-44",
+      "budget": 262144,
+      "group": "linear",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 0.16666666666666666,
+      "complete": 0.16666666666666666
+    },
+    {
+      "name": "rewired8-44",
+      "budget": 262144,
+      "group": "radial",
+      "first_entry": 1.0,
+      "pre_stable": 0.9375,
+      "post_stable": 1.0,
+      "complete": 0.9375
+    },
+    {
+      "name": "rewired8-44",
+      "budget": 262144,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.9666666666666667,
+      "post_stable": 0.5,
+      "complete": 0.4666666666666666
+    },
+    {
+      "name": "rewired8-44",
+      "budget": 262144,
+      "group": "hot",
+      "first_entry": 1.0,
+      "pre_stable": 0.9696969696969697,
+      "post_stable": 0.6212121212121212,
+      "complete": 0.5909090909090909
+    },
+    {
+      "name": "rewired8-55",
+      "budget": 0,
+      "group": "all",
+      "first_entry": 0.7083333333333334,
+      "pre_stable": 0.4375,
+      "post_stable": 0.16666666666666666,
+      "complete": 0.07291666666666667
+    },
+    {
+      "name": "rewired8-55",
+      "budget": 0,
+      "group": "linear",
+      "first_entry": 0.7708333333333334,
+      "pre_stable": 0.6041666666666666,
+      "post_stable": 0.16666666666666666,
+      "complete": 0.0
+    },
+    {
+      "name": "rewired8-55",
+      "budget": 0,
+      "group": "radial",
+      "first_entry": 0.6458333333333334,
+      "pre_stable": 0.2708333333333333,
+      "post_stable": 0.16666666666666666,
+      "complete": 0.14583333333333334
+    },
+    {
+      "name": "rewired8-55",
+      "budget": 0,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.46666666666666673,
+      "post_stable": 0.06666666666666667,
+      "complete": 0.03333333333333333
+    },
+    {
+      "name": "rewired8-55",
+      "budget": 0,
+      "group": "hot",
+      "first_entry": 0.5757575757575757,
+      "pre_stable": 0.4242424242424243,
+      "post_stable": 0.21212121212121213,
+      "complete": 0.0909090909090909
+    },
+    {
+      "name": "rewired8-55",
+      "budget": 65536,
+      "group": "all",
+      "first_entry": 0.8020833333333334,
+      "pre_stable": 0.5833333333333334,
+      "post_stable": 0.3541666666666667,
+      "complete": 0.22916666666666666
+    },
+    {
+      "name": "rewired8-55",
+      "budget": 65536,
+      "group": "linear",
+      "first_entry": 0.8541666666666666,
+      "pre_stable": 0.6458333333333334,
+      "post_stable": 0.22916666666666666,
+      "complete": 0.08333333333333333
+    },
+    {
+      "name": "rewired8-55",
+      "budget": 65536,
+      "group": "radial",
+      "first_entry": 0.75,
+      "pre_stable": 0.5208333333333334,
+      "post_stable": 0.4791666666666667,
+      "complete": 0.375
+    },
+    {
+      "name": "rewired8-55",
+      "budget": 65536,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.6333333333333334,
+      "post_stable": 0.3333333333333333,
+      "complete": 0.2333333333333333
+    },
+    {
+      "name": "rewired8-55",
+      "budget": 65536,
+      "group": "hot",
+      "first_entry": 0.712121212121212,
+      "pre_stable": 0.5606060606060606,
+      "post_stable": 0.3636363636363636,
+      "complete": 0.2272727272727273
+    },
+    {
+      "name": "rewired8-55",
+      "budget": 262144,
+      "group": "all",
+      "first_entry": 0.8958333333333334,
+      "pre_stable": 0.7708333333333334,
+      "post_stable": 0.5520833333333334,
+      "complete": 0.4270833333333333
+    },
+    {
+      "name": "rewired8-55",
+      "budget": 262144,
+      "group": "linear",
+      "first_entry": 0.9791666666666666,
+      "pre_stable": 0.8958333333333334,
+      "post_stable": 0.2708333333333333,
+      "complete": 0.20833333333333334
+    },
+    {
+      "name": "rewired8-55",
+      "budget": 262144,
+      "group": "radial",
+      "first_entry": 0.8125,
+      "pre_stable": 0.6458333333333334,
+      "post_stable": 0.8333333333333334,
+      "complete": 0.6458333333333334
+    },
+    {
+      "name": "rewired8-55",
+      "budget": 262144,
+      "group": "cold",
+      "first_entry": 0.9333333333333332,
+      "pre_stable": 0.8000000000000002,
+      "post_stable": 0.5,
+      "complete": 0.3333333333333333
+    },
+    {
+      "name": "rewired8-55",
+      "budget": 262144,
+      "group": "hot",
+      "first_entry": 0.8787878787878789,
+      "pre_stable": 0.7575757575757577,
+      "post_stable": 0.5757575757575758,
+      "complete": 0.4696969696969697
+    },
+    {
+      "name": "rewired8-66",
+      "budget": 0,
+      "group": "all",
+      "first_entry": 0.7708333333333334,
+      "pre_stable": 0.5729166666666666,
+      "post_stable": 0.3541666666666667,
+      "complete": 0.25
+    },
+    {
+      "name": "rewired8-66",
+      "budget": 0,
+      "group": "linear",
+      "first_entry": 0.8125,
+      "pre_stable": 0.7083333333333334,
+      "post_stable": 0.25,
+      "complete": 0.10416666666666667
+    },
+    {
+      "name": "rewired8-66",
+      "budget": 0,
+      "group": "radial",
+      "first_entry": 0.7291666666666666,
+      "pre_stable": 0.4375,
+      "post_stable": 0.4583333333333333,
+      "complete": 0.3958333333333333
+    },
+    {
+      "name": "rewired8-66",
+      "budget": 0,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.6999999999999998,
+      "post_stable": 0.3,
+      "complete": 0.26666666666666666
+    },
+    {
+      "name": "rewired8-66",
+      "budget": 0,
+      "group": "hot",
+      "first_entry": 0.6666666666666666,
+      "pre_stable": 0.5151515151515151,
+      "post_stable": 0.37878787878787884,
+      "complete": 0.24242424242424243
+    },
+    {
+      "name": "rewired8-66",
+      "budget": 65536,
+      "group": "all",
+      "first_entry": 0.875,
+      "pre_stable": 0.7708333333333334,
+      "post_stable": 0.5833333333333334,
+      "complete": 0.4791666666666667
+    },
+    {
+      "name": "rewired8-66",
+      "budget": 65536,
+      "group": "linear",
+      "first_entry": 0.9166666666666666,
+      "pre_stable": 0.875,
+      "post_stable": 0.375,
+      "complete": 0.3333333333333333
+    },
+    {
+      "name": "rewired8-66",
+      "budget": 65536,
+      "group": "radial",
+      "first_entry": 0.8333333333333334,
+      "pre_stable": 0.6666666666666666,
+      "post_stable": 0.7916666666666666,
+      "complete": 0.625
+    },
+    {
+      "name": "rewired8-66",
+      "budget": 65536,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.9,
+      "post_stable": 0.6333333333333333,
+      "complete": 0.5333333333333333
+    },
+    {
+      "name": "rewired8-66",
+      "budget": 65536,
+      "group": "hot",
+      "first_entry": 0.8181818181818182,
+      "pre_stable": 0.712121212121212,
+      "post_stable": 0.5606060606060607,
+      "complete": 0.4545454545454546
+    },
+    {
+      "name": "rewired8-66",
+      "budget": 262144,
+      "group": "all",
+      "first_entry": 0.9583333333333334,
+      "pre_stable": 0.9270833333333334,
+      "post_stable": 0.5520833333333334,
+      "complete": 0.4895833333333333
+    },
+    {
+      "name": "rewired8-66",
+      "budget": 262144,
+      "group": "linear",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 0.125,
+      "complete": 0.125
+    },
+    {
+      "name": "rewired8-66",
+      "budget": 262144,
+      "group": "radial",
+      "first_entry": 0.9166666666666666,
+      "pre_stable": 0.8541666666666666,
+      "post_stable": 0.9791666666666666,
+      "complete": 0.8541666666666666
+    },
+    {
+      "name": "rewired8-66",
+      "budget": 262144,
+      "group": "cold",
+      "first_entry": 0.9333333333333332,
+      "pre_stable": 0.9,
+      "post_stable": 0.5,
+      "complete": 0.39999999999999997
+    },
+    {
+      "name": "rewired8-66",
+      "budget": 262144,
+      "group": "hot",
+      "first_entry": 0.9696969696969697,
+      "pre_stable": 0.9393939393939394,
+      "post_stable": 0.5757575757575757,
+      "complete": 0.5303030303030303
+    },
+    {
+      "name": "rewired8-77",
+      "budget": 0,
+      "group": "all",
+      "first_entry": 0.71875,
+      "pre_stable": 0.40625,
+      "post_stable": 0.10416666666666667,
+      "complete": 0.020833333333333332
+    },
+    {
+      "name": "rewired8-77",
+      "budget": 0,
+      "group": "linear",
+      "first_entry": 0.7708333333333334,
+      "pre_stable": 0.5,
+      "post_stable": 0.16666666666666666,
+      "complete": 0.0
+    },
+    {
+      "name": "rewired8-77",
+      "budget": 0,
+      "group": "radial",
+      "first_entry": 0.6666666666666666,
+      "pre_stable": 0.3125,
+      "post_stable": 0.041666666666666664,
+      "complete": 0.041666666666666664
+    },
+    {
+      "name": "rewired8-77",
+      "budget": 0,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.39999999999999997,
+      "post_stable": 0.03333333333333333,
+      "complete": 0.0
+    },
+    {
+      "name": "rewired8-77",
+      "budget": 0,
+      "group": "hot",
+      "first_entry": 0.5909090909090909,
+      "pre_stable": 0.4090909090909091,
+      "post_stable": 0.13636363636363635,
+      "complete": 0.030303030303030304
+    },
+    {
+      "name": "rewired8-77",
+      "budget": 65536,
+      "group": "all",
+      "first_entry": 0.84375,
+      "pre_stable": 0.625,
+      "post_stable": 0.4895833333333333,
+      "complete": 0.3333333333333333
+    },
+    {
+      "name": "rewired8-77",
+      "budget": 65536,
+      "group": "linear",
+      "first_entry": 0.9166666666666666,
+      "pre_stable": 0.6666666666666666,
+      "post_stable": 0.2916666666666667,
+      "complete": 0.1875
+    },
+    {
+      "name": "rewired8-77",
+      "budget": 65536,
+      "group": "radial",
+      "first_entry": 0.7708333333333334,
+      "pre_stable": 0.5833333333333334,
+      "post_stable": 0.6875,
+      "complete": 0.4791666666666667
+    },
+    {
+      "name": "rewired8-77",
+      "budget": 65536,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.6666666666666666,
+      "post_stable": 0.5,
+      "complete": 0.3
+    },
+    {
+      "name": "rewired8-77",
+      "budget": 65536,
+      "group": "hot",
+      "first_entry": 0.7727272727272728,
+      "pre_stable": 0.6060606060606061,
+      "post_stable": 0.48484848484848486,
+      "complete": 0.34848484848484845
+    },
+    {
+      "name": "rewired8-77",
+      "budget": 262144,
+      "group": "all",
+      "first_entry": 0.9375,
+      "pre_stable": 0.8645833333333334,
+      "post_stable": 0.6145833333333334,
+      "complete": 0.5104166666666666
+    },
+    {
+      "name": "rewired8-77",
+      "budget": 262144,
+      "group": "linear",
+      "first_entry": 1.0,
+      "pre_stable": 0.9375,
+      "post_stable": 0.2916666666666667,
+      "complete": 0.22916666666666666
+    },
+    {
+      "name": "rewired8-77",
+      "budget": 262144,
+      "group": "radial",
+      "first_entry": 0.875,
+      "pre_stable": 0.7916666666666666,
+      "post_stable": 0.9375,
+      "complete": 0.7916666666666666
+    },
+    {
+      "name": "rewired8-77",
+      "budget": 262144,
+      "group": "cold",
+      "first_entry": 0.9666666666666667,
+      "pre_stable": 0.9,
+      "post_stable": 0.5666666666666667,
+      "complete": 0.46666666666666673
+    },
+    {
+      "name": "rewired8-77",
+      "budget": 262144,
+      "group": "hot",
+      "first_entry": 0.9242424242424243,
+      "pre_stable": 0.8484848484848486,
+      "post_stable": 0.6363636363636364,
+      "complete": 0.5303030303030304
+    },
+    {
+      "name": "rewired8-88",
+      "budget": 0,
+      "group": "all",
+      "first_entry": 0.8541666666666666,
+      "pre_stable": 0.65625,
+      "post_stable": 0.5520833333333334,
+      "complete": 0.4583333333333333
+    },
+    {
+      "name": "rewired8-88",
+      "budget": 0,
+      "group": "linear",
+      "first_entry": 0.8958333333333334,
+      "pre_stable": 0.7291666666666666,
+      "post_stable": 0.5625,
+      "complete": 0.4791666666666667
+    },
+    {
+      "name": "rewired8-88",
+      "budget": 0,
+      "group": "radial",
+      "first_entry": 0.8125,
+      "pre_stable": 0.5833333333333334,
+      "post_stable": 0.5416666666666666,
+      "complete": 0.4375
+    },
+    {
+      "name": "rewired8-88",
+      "budget": 0,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.7000000000000001,
+      "post_stable": 0.5666666666666667,
+      "complete": 0.5
+    },
+    {
+      "name": "rewired8-88",
+      "budget": 0,
+      "group": "hot",
+      "first_entry": 0.787878787878788,
+      "pre_stable": 0.6363636363636364,
+      "post_stable": 0.5454545454545454,
+      "complete": 0.4393939393939394
+    },
+    {
+      "name": "rewired8-88",
+      "budget": 65536,
+      "group": "all",
+      "first_entry": 0.90625,
+      "pre_stable": 0.7291666666666666,
+      "post_stable": 0.5625,
+      "complete": 0.40625
+    },
+    {
+      "name": "rewired8-88",
+      "budget": 65536,
+      "group": "linear",
+      "first_entry": 0.9583333333333334,
+      "pre_stable": 0.8541666666666666,
+      "post_stable": 0.3541666666666667,
+      "complete": 0.2708333333333333
+    },
+    {
+      "name": "rewired8-88",
+      "budget": 65536,
+      "group": "radial",
+      "first_entry": 0.8541666666666666,
+      "pre_stable": 0.6041666666666666,
+      "post_stable": 0.7708333333333334,
+      "complete": 0.5416666666666666
+    },
+    {
+      "name": "rewired8-88",
+      "budget": 65536,
+      "group": "cold",
+      "first_entry": 0.9666666666666667,
+      "pre_stable": 0.7000000000000001,
+      "post_stable": 0.4666666666666666,
+      "complete": 0.3
+    },
+    {
+      "name": "rewired8-88",
+      "budget": 65536,
+      "group": "hot",
+      "first_entry": 0.8787878787878788,
+      "pre_stable": 0.7424242424242425,
+      "post_stable": 0.6060606060606061,
+      "complete": 0.4545454545454546
+    },
+    {
+      "name": "rewired8-88",
+      "budget": 262144,
+      "group": "all",
+      "first_entry": 0.9791666666666666,
+      "pre_stable": 0.90625,
+      "post_stable": 0.5833333333333334,
+      "complete": 0.5
+    },
+    {
+      "name": "rewired8-88",
+      "budget": 262144,
+      "group": "linear",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 0.1875,
+      "complete": 0.1875
+    },
+    {
+      "name": "rewired8-88",
+      "budget": 262144,
+      "group": "radial",
+      "first_entry": 0.9583333333333334,
+      "pre_stable": 0.8125,
+      "post_stable": 0.9791666666666666,
+      "complete": 0.8125
+    },
+    {
+      "name": "rewired8-88",
+      "budget": 262144,
+      "group": "cold",
+      "first_entry": 0.9666666666666667,
+      "pre_stable": 0.8666666666666667,
+      "post_stable": 0.5,
+      "complete": 0.3666666666666667
+    },
+    {
+      "name": "rewired8-88",
+      "budget": 262144,
+      "group": "hot",
+      "first_entry": 0.9848484848484849,
+      "pre_stable": 0.9242424242424243,
+      "post_stable": 0.6212121212121212,
+      "complete": 0.5606060606060606
+    },
+    {
+      "name": "rewired8-99",
+      "budget": 0,
+      "group": "all",
+      "first_entry": 0.7395833333333334,
+      "pre_stable": 0.4791666666666667,
+      "post_stable": 0.3229166666666667,
+      "complete": 0.125
+    },
+    {
+      "name": "rewired8-99",
+      "budget": 0,
+      "group": "linear",
+      "first_entry": 0.7916666666666666,
+      "pre_stable": 0.6666666666666666,
+      "post_stable": 0.22916666666666666,
+      "complete": 0.0625
+    },
+    {
+      "name": "rewired8-99",
+      "budget": 0,
+      "group": "radial",
+      "first_entry": 0.6875,
+      "pre_stable": 0.2916666666666667,
+      "post_stable": 0.4166666666666667,
+      "complete": 0.1875
+    },
+    {
+      "name": "rewired8-99",
+      "budget": 0,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.4666666666666666,
+      "post_stable": 0.16666666666666666,
+      "complete": 0.0
+    },
+    {
+      "name": "rewired8-99",
+      "budget": 0,
+      "group": "hot",
+      "first_entry": 0.6212121212121212,
+      "pre_stable": 0.48484848484848486,
+      "post_stable": 0.393939393939394,
+      "complete": 0.1818181818181818
+    },
+    {
+      "name": "rewired8-99",
+      "budget": 65536,
+      "group": "all",
+      "first_entry": 0.9166666666666666,
+      "pre_stable": 0.7708333333333334,
+      "post_stable": 0.6145833333333334,
+      "complete": 0.5
+    },
+    {
+      "name": "rewired8-99",
+      "budget": 65536,
+      "group": "linear",
+      "first_entry": 0.9583333333333334,
+      "pre_stable": 0.8333333333333334,
+      "post_stable": 0.4166666666666667,
+      "complete": 0.3333333333333333
+    },
+    {
+      "name": "rewired8-99",
+      "budget": 65536,
+      "group": "radial",
+      "first_entry": 0.875,
+      "pre_stable": 0.7083333333333334,
+      "post_stable": 0.8125,
+      "complete": 0.6666666666666666
+    },
+    {
+      "name": "rewired8-99",
+      "budget": 65536,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.8666666666666667,
+      "post_stable": 0.6333333333333333,
+      "complete": 0.5333333333333333
+    },
+    {
+      "name": "rewired8-99",
+      "budget": 65536,
+      "group": "hot",
+      "first_entry": 0.8787878787878788,
+      "pre_stable": 0.7272727272727272,
+      "post_stable": 0.606060606060606,
+      "complete": 0.48484848484848486
+    },
+    {
+      "name": "rewired8-99",
+      "budget": 262144,
+      "group": "all",
+      "first_entry": 0.96875,
+      "pre_stable": 0.90625,
+      "post_stable": 0.5729166666666666,
+      "complete": 0.5
+    },
+    {
+      "name": "rewired8-99",
+      "budget": 262144,
+      "group": "linear",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 0.1875,
+      "complete": 0.1875
+    },
+    {
+      "name": "rewired8-99",
+      "budget": 262144,
+      "group": "radial",
+      "first_entry": 0.9375,
+      "pre_stable": 0.8125,
+      "post_stable": 0.9583333333333334,
+      "complete": 0.8125
+    },
+    {
+      "name": "rewired8-99",
+      "budget": 262144,
+      "group": "cold",
+      "first_entry": 0.9666666666666667,
+      "pre_stable": 0.8666666666666667,
+      "post_stable": 0.5333333333333333,
+      "complete": 0.39999999999999997
+    },
+    {
+      "name": "rewired8-99",
+      "budget": 262144,
+      "group": "hot",
+      "first_entry": 0.9696969696969697,
+      "pre_stable": 0.9242424242424243,
+      "post_stable": 0.5909090909090909,
+      "complete": 0.5454545454545454
+    },
+    {
+      "name": "rewired8-110",
+      "budget": 0,
+      "group": "all",
+      "first_entry": 0.8125,
+      "pre_stable": 0.5625,
+      "post_stable": 0.53125,
+      "complete": 0.3958333333333333
+    },
+    {
+      "name": "rewired8-110",
+      "budget": 0,
+      "group": "linear",
+      "first_entry": 0.8541666666666666,
+      "pre_stable": 0.7291666666666666,
+      "post_stable": 0.5208333333333334,
+      "complete": 0.4166666666666667
+    },
+    {
+      "name": "rewired8-110",
+      "budget": 0,
+      "group": "radial",
+      "first_entry": 0.7708333333333334,
+      "pre_stable": 0.3958333333333333,
+      "post_stable": 0.5416666666666666,
+      "complete": 0.375
+    },
+    {
+      "name": "rewired8-110",
+      "budget": 0,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.6333333333333333,
+      "post_stable": 0.4666666666666666,
+      "complete": 0.3333333333333333
+    },
+    {
+      "name": "rewired8-110",
+      "budget": 0,
+      "group": "hot",
+      "first_entry": 0.7272727272727272,
+      "pre_stable": 0.5303030303030304,
+      "post_stable": 0.5606060606060607,
+      "complete": 0.42424242424242425
+    },
+    {
+      "name": "rewired8-110",
+      "budget": 65536,
+      "group": "all",
+      "first_entry": 0.9479166666666666,
+      "pre_stable": 0.84375,
+      "post_stable": 0.625,
+      "complete": 0.5833333333333334
+    },
+    {
+      "name": "rewired8-110",
+      "budget": 65536,
+      "group": "linear",
+      "first_entry": 0.9791666666666666,
+      "pre_stable": 0.875,
+      "post_stable": 0.4166666666666667,
+      "complete": 0.3958333333333333
+    },
+    {
+      "name": "rewired8-110",
+      "budget": 65536,
+      "group": "radial",
+      "first_entry": 0.9166666666666666,
+      "pre_stable": 0.8125,
+      "post_stable": 0.8333333333333334,
+      "complete": 0.7708333333333334
+    },
+    {
+      "name": "rewired8-110",
+      "budget": 65536,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.9333333333333332,
+      "post_stable": 0.6333333333333333,
+      "complete": 0.6
+    },
+    {
+      "name": "rewired8-110",
+      "budget": 65536,
+      "group": "hot",
+      "first_entry": 0.9242424242424242,
+      "pre_stable": 0.8030303030303031,
+      "post_stable": 0.6212121212121212,
+      "complete": 0.5757575757575757
+    },
+    {
+      "name": "rewired8-110",
+      "budget": 262144,
+      "group": "all",
+      "first_entry": 0.9895833333333334,
+      "pre_stable": 0.9479166666666666,
+      "post_stable": 0.6041666666666666,
+      "complete": 0.5520833333333334
+    },
+    {
+      "name": "rewired8-110",
+      "budget": 262144,
+      "group": "linear",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 0.20833333333333334,
+      "complete": 0.20833333333333334
+    },
+    {
+      "name": "rewired8-110",
+      "budget": 262144,
+      "group": "radial",
+      "first_entry": 0.9791666666666666,
+      "pre_stable": 0.8958333333333334,
+      "post_stable": 1.0,
+      "complete": 0.8958333333333334
+    },
+    {
+      "name": "rewired8-110",
+      "budget": 262144,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.9,
+      "post_stable": 0.5333333333333333,
+      "complete": 0.43333333333333335
+    },
+    {
+      "name": "rewired8-110",
+      "budget": 262144,
+      "group": "hot",
+      "first_entry": 0.9848484848484849,
+      "pre_stable": 0.9696969696969697,
+      "post_stable": 0.6363636363636364,
+      "complete": 0.6060606060606061
+    },
+    {
+      "name": "isolated8",
+      "budget": 0,
+      "group": "all",
+      "first_entry": 0.6666666666666666,
+      "pre_stable": 0.3020833333333333,
+      "post_stable": 0.010416666666666666,
+      "complete": 0.0
+    },
+    {
+      "name": "isolated8",
+      "budget": 0,
+      "group": "linear",
+      "first_entry": 0.7083333333333334,
+      "pre_stable": 0.2916666666666667,
+      "post_stable": 0.020833333333333332,
+      "complete": 0.0
+    },
+    {
+      "name": "isolated8",
+      "budget": 0,
+      "group": "radial",
+      "first_entry": 0.625,
+      "pre_stable": 0.3125,
+      "post_stable": 0.0,
+      "complete": 0.0
+    },
+    {
+      "name": "isolated8",
+      "budget": 0,
+      "group": "cold",
+      "first_entry": 0.9333333333333332,
+      "pre_stable": 0.2333333333333333,
+      "post_stable": 0.03333333333333333,
+      "complete": 0.0
+    },
+    {
+      "name": "isolated8",
+      "budget": 0,
+      "group": "hot",
+      "first_entry": 0.5454545454545454,
+      "pre_stable": 0.3333333333333333,
+      "post_stable": 0.0,
+      "complete": 0.0
+    },
+    {
+      "name": "isolated8",
+      "budget": 65536,
+      "group": "all",
+      "first_entry": 0.6666666666666666,
+      "pre_stable": 0.3125,
+      "post_stable": 0.08333333333333333,
+      "complete": 0.041666666666666664
+    },
+    {
+      "name": "isolated8",
+      "budget": 65536,
+      "group": "linear",
+      "first_entry": 0.7083333333333334,
+      "pre_stable": 0.3125,
+      "post_stable": 0.10416666666666667,
+      "complete": 0.020833333333333332
+    },
+    {
+      "name": "isolated8",
+      "budget": 65536,
+      "group": "radial",
+      "first_entry": 0.625,
+      "pre_stable": 0.3125,
+      "post_stable": 0.0625,
+      "complete": 0.0625
+    },
+    {
+      "name": "isolated8",
+      "budget": 65536,
+      "group": "cold",
+      "first_entry": 0.9333333333333332,
+      "pre_stable": 0.20000000000000004,
+      "post_stable": 0.0,
+      "complete": 0.0
+    },
+    {
+      "name": "isolated8",
+      "budget": 65536,
+      "group": "hot",
+      "first_entry": 0.5454545454545454,
+      "pre_stable": 0.3636363636363636,
+      "post_stable": 0.12121212121212122,
+      "complete": 0.06060606060606061
+    },
+    {
+      "name": "isolated8",
+      "budget": 262144,
+      "group": "all",
+      "first_entry": 0.8541666666666666,
+      "pre_stable": 0.625,
+      "post_stable": 0.375,
+      "complete": 0.22916666666666666
+    },
+    {
+      "name": "isolated8",
+      "budget": 262144,
+      "group": "linear",
+      "first_entry": 0.9375,
+      "pre_stable": 0.6666666666666666,
+      "post_stable": 0.14583333333333334,
+      "complete": 0.041666666666666664
+    },
+    {
+      "name": "isolated8",
+      "budget": 262144,
+      "group": "radial",
+      "first_entry": 0.7708333333333334,
+      "pre_stable": 0.5833333333333334,
+      "post_stable": 0.6041666666666666,
+      "complete": 0.4166666666666667
+    },
+    {
+      "name": "isolated8",
+      "budget": 262144,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 0.6333333333333334,
+      "post_stable": 0.43333333333333335,
+      "complete": 0.19999999999999998
+    },
+    {
+      "name": "isolated8",
+      "budget": 262144,
+      "group": "hot",
+      "first_entry": 0.787878787878788,
+      "pre_stable": 0.6212121212121212,
+      "post_stable": 0.34848484848484845,
+      "complete": 0.24242424242424243
+    },
+    {
+      "name": "gru16",
+      "budget": 0,
+      "group": "all",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 1.0,
+      "complete": 1.0
+    },
+    {
+      "name": "gru16",
+      "budget": 0,
+      "group": "linear",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 1.0,
+      "complete": 1.0
+    },
+    {
+      "name": "gru16",
+      "budget": 0,
+      "group": "radial",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 1.0,
+      "complete": 1.0
+    },
+    {
+      "name": "gru16",
+      "budget": 0,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 1.0,
+      "complete": 1.0
+    },
+    {
+      "name": "gru16",
+      "budget": 0,
+      "group": "hot",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 1.0,
+      "complete": 1.0
+    },
+    {
+      "name": "gru16",
+      "budget": 65536,
+      "group": "all",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 1.0,
+      "complete": 1.0
+    },
+    {
+      "name": "gru16",
+      "budget": 65536,
+      "group": "linear",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 1.0,
+      "complete": 1.0
+    },
+    {
+      "name": "gru16",
+      "budget": 65536,
+      "group": "radial",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 1.0,
+      "complete": 1.0
+    },
+    {
+      "name": "gru16",
+      "budget": 65536,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 1.0,
+      "complete": 1.0
+    },
+    {
+      "name": "gru16",
+      "budget": 65536,
+      "group": "hot",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 1.0,
+      "complete": 1.0
+    },
+    {
+      "name": "gru16",
+      "budget": 262144,
+      "group": "all",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 1.0,
+      "complete": 1.0
+    },
+    {
+      "name": "gru16",
+      "budget": 262144,
+      "group": "linear",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 1.0,
+      "complete": 1.0
+    },
+    {
+      "name": "gru16",
+      "budget": 262144,
+      "group": "radial",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 1.0,
+      "complete": 1.0
+    },
+    {
+      "name": "gru16",
+      "budget": 262144,
+      "group": "cold",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 1.0,
+      "complete": 1.0
+    },
+    {
+      "name": "gru16",
+      "budget": 262144,
+      "group": "hot",
+      "first_entry": 1.0,
+      "pre_stable": 1.0,
+      "post_stable": 1.0,
+      "complete": 1.0
+    }
+  ],
+  "signal": [
+    {
+      "interface": "full",
+      "checkpoint": "initial",
+      "action_rms_delta_rad_s": 6.0060791535458215e-05,
+      "node_final_rms_delta": [
+        0.006155189747611682,
+        0.0060035773397733765,
+        0.011376827489584684,
+        0.00584818438316385,
+        0.0024465660486991205,
+        0.004208303076059868,
+        0.007068209427719315,
+        0.0050728364537159605
+      ],
+      "tanh_saturation": [
+        0.07083333532015483,
+        0.23150406032800674,
+        0.05060975750287374,
+        0.00223577239861091,
+        0.0,
+        0.0010162601247429848,
+        0.03221544623374939,
+        0.0
+      ],
+      "teacher_mse": 0.16724488139152527
+    },
+    {
+      "interface": "full",
+      "checkpoint": "BC.pt",
+      "action_rms_delta_rad_s": 0.011512960928181807,
+      "node_final_rms_delta": [
+        0.03200151026248932,
+        0.037288911951084934,
+        0.029559314561386902,
+        0.052253233889738716,
+        0.04576921587189039,
+        0.023895541050781805,
+        0.091065247853597,
+        0.09005216291795175
+      ],
+      "tanh_saturation": [
+        0.03556910653909048,
+        0.07408536489432056,
+        0.05497967374200622,
+        0.11270325382550557,
+        0.027540651460488636,
+        0.06595528622468312,
+        0.1914634108543396,
+        0.005081300934155782
+      ],
+      "teacher_mse": 0.15486410756905875
+    },
+    {
+      "interface": "full",
+      "checkpoint": "model-RL262144.pt",
+      "action_rms_delta_rad_s": 0.017739980792005856,
+      "node_final_rms_delta": [
+        0.04028887860476971,
+        0.035811571714778744,
+        0.03658498544245958,
+        0.052410442382097244,
+        0.04709439352154732,
+        0.028395756768683594,
+        0.09297376622756322,
+        0.07930688622097175
+      ],
+      "tanh_saturation": [
+        0.03282520244829357,
+        0.09451219563682874,
+        0.05487805108229319,
+        0.13912601272265115,
+        0.04654471576213837,
+        0.06849593544999759,
+        0.22367886205514273,
+        0.014837397883335749
+      ],
+      "teacher_mse": 0.21224903066953024
+    },
+    {
+      "interface": "restricted",
+      "checkpoint": "initial",
+      "action_rms_delta_rad_s": 8.311544850888216e-06,
+      "node_final_rms_delta": [
+        0.00477526561007835,
+        0.01222187482441465,
+        0.0010974454004705574,
+        0.0020985357696190476,
+        0.0001660603341709551,
+        0.00038460934107812744,
+        0.00015349710520240478,
+        0.0008432561153313145
+      ],
+      "tanh_saturation": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "teacher_mse": 0.16671652098496756
+    },
+    {
+      "interface": "restricted",
+      "checkpoint": "BC.pt",
+      "action_rms_delta_rad_s": 7.117447974754516e-05,
+      "node_final_rms_delta": [
+        0.012559316528495401,
+        0.016909968961651128,
+        0.004102752262648816,
+        0.0025433789123781025,
+        0.0007425883629063416,
+        0.0011966030433541164,
+        0.0017007812784868293,
+        0.0005145031997623543
+      ],
+      "tanh_saturation": [
+        0.22550813357035318,
+        0.08607723315556844,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "teacher_mse": 0.16647822658220926
+    },
+    {
+      "interface": "restricted",
+      "checkpoint": "model-RL262144.pt",
+      "action_rms_delta_rad_s": 0.00014405372606537034,
+      "node_final_rms_delta": [
+        0.01267248098156415,
+        0.016463747558494408,
+        0.004579499363899231,
+        0.0032685138867236674,
+        0.0008938283899624366,
+        0.0014866158405008416,
+        0.002179088919850377,
+        0.000842153929018726
+      ],
+      "tanh_saturation": [
+        0.21422763665517172,
+        0.08780487378438313,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "teacher_mse": 0.17866004010041556
+    }
+  ],
+  "readout": [
+    {
+      "interface": "full",
+      "circuit_unchanged": true,
+      "by_seed": [
+        {
+          "seed": 7,
+          "before": 0.15625,
+          "after": 0.625
+        },
+        {
+          "seed": 17,
+          "before": 0.46875,
+          "after": 0.78125
+        },
+        {
+          "seed": 27,
+          "before": 0.3125,
+          "after": 0.3125
+        }
+      ],
+      "baseline": {
+        "success": 0.3125,
+        "train_mse": 0.16326742867628732,
+        "diagnostic_mse": 0.14380671083927155
+      },
+      "readout_refit": {
+        "success": 0.5729166666666666,
+        "train_mse": 0.1614636331796646,
+        "diagnostic_mse": 0.14490249256292978
+      }
+    },
+    {
+      "interface": "restricted",
+      "circuit_unchanged": true,
+      "by_seed": [
+        {
+          "seed": 7,
+          "before": 0.0,
+          "after": 0.0
+        },
+        {
+          "seed": 17,
+          "before": 0.0,
+          "after": 0.0
+        },
+        {
+          "seed": 27,
+          "before": 0.0,
+          "after": 0.03125
+        }
+      ],
+      "baseline": {
+        "success": 0.0,
+        "train_mse": 0.17207598189512888,
+        "diagnostic_mse": 0.15410864353179932
+      },
+      "readout_refit": {
+        "success": 0.010416666666666666,
+        "train_mse": 0.17200000087420145,
+        "diagnostic_mse": 0.1544169783592224
+      }
+    }
+  ],
+  "temporal": [
+    {
+      "name": "real8",
+      "interface": "full",
+      "sample_bin": [
+        0,
+        10
+      ],
+      "actor_rms": 0.002797975088469684,
+      "teacher_rms": 0.022725489388554444
+    },
+    {
+      "name": "real8",
+      "interface": "full",
+      "sample_bin": [
+        10,
+        20
+      ],
+      "actor_rms": 0.0029792674661924443,
+      "teacher_rms": 0.0299010267077966
+    },
+    {
+      "name": "real8",
+      "interface": "full",
+      "sample_bin": [
+        20,
+        30
+      ],
+      "actor_rms": 0.006496248068287969,
+      "teacher_rms": 0.029871550898915966
+    },
+    {
+      "name": "real8",
+      "interface": "full",
+      "sample_bin": [
+        30,
+        41
+      ],
+      "actor_rms": 0.006552946753799915,
+      "teacher_rms": 0.025830537457099567
+    },
+    {
+      "name": "real8",
+      "interface": "restricted",
+      "sample_bin": [
+        0,
+        10
+      ],
+      "actor_rms": 1.5183559251378634e-05,
+      "teacher_rms": 0.022725489388554444
+    },
+    {
+      "name": "real8",
+      "interface": "restricted",
+      "sample_bin": [
+        10,
+        20
+      ],
+      "actor_rms": 1.5000592621087586e-05,
+      "teacher_rms": 0.0299010267077966
+    },
+    {
+      "name": "real8",
+      "interface": "restricted",
+      "sample_bin": [
+        20,
+        30
+      ],
+      "actor_rms": 5.957379560565338e-05,
+      "teacher_rms": 0.029871550898915966
+    },
+    {
+      "name": "real8",
+      "interface": "restricted",
+      "sample_bin": [
+        30,
+        41
+      ],
+      "actor_rms": 5.6634618545103876e-05,
+      "teacher_rms": 0.025830537457099567
+    },
+    {
+      "name": "gru16",
+      "interface": "full",
+      "sample_bin": [
+        0,
+        10
+      ],
+      "actor_rms": 0.01489268522709608,
+      "teacher_rms": 0.022725489388554444
+    },
+    {
+      "name": "gru16",
+      "interface": "full",
+      "sample_bin": [
+        10,
+        20
+      ],
+      "actor_rms": 0.030040646592775982,
+      "teacher_rms": 0.0299010267077966
+    },
+    {
+      "name": "gru16",
+      "interface": "full",
+      "sample_bin": [
+        20,
+        30
+      ],
+      "actor_rms": 0.028520649299025536,
+      "teacher_rms": 0.029871550898915966
+    },
+    {
+      "name": "gru16",
+      "interface": "full",
+      "sample_bin": [
+        30,
+        41
+      ],
+      "actor_rms": 0.015707737145324547,
+      "teacher_rms": 0.025830537457099567
+    }
+  ],
+  "temperature_gain": [
+    {
+      "gain": 1.0,
+      "success": 0.020833333333333332,
+      "by_seed": [
+        {
+          "seed": 7,
+          "summary": {
+            "complete_success": 0.0625,
+            "full_tracking": 0.0571875,
+            "pre_tracking": 0.06006071874981391,
+            "post_tracking": 0.05540816233267666,
+            "residence": 0.21559895833333334,
+            "first_entry_s": {
+              "successes": 24,
+              "conditional_mean_s": 19.358333333333334
+            },
+            "pre_stable_s": {
+              "successes": 6,
+              "conditional_mean_s": 17.9
+            },
+            "reentry_s": {
+              "successes": 24,
+              "conditional_mean_s": 14.133333333333331
+            },
+            "post_stable_s": {
+              "successes": 7,
+              "conditional_mean_s": 39.65714285714286
+            }
+          }
+        },
+        {
+          "seed": 17,
+          "summary": {
+            "complete_success": 0.0,
+            "full_tracking": 0.023880208333333333,
+            "pre_tracking": 0.044897384533138955,
+            "post_tracking": 0.002875434027777778,
+            "residence": 0.07322916666666666,
+            "first_entry_s": {
+              "successes": 21,
+              "conditional_mean_s": 11.809523809523808
+            },
+            "pre_stable_s": {
+              "successes": 6,
+              "conditional_mean_s": 19.433333333333334
+            },
+            "reentry_s": {
+              "successes": 3,
+              "conditional_mean_s": 97.2
+            },
+            "post_stable_s": {
+              "successes": 1,
+              "conditional_mean_s": 85.19999999999999
+            }
+          }
+        },
+        {
+          "seed": 27,
+          "summary": {
+            "complete_success": 0.0,
+            "full_tracking": 0.04869791666666667,
+            "pre_tracking": 0.09221917148116743,
+            "post_tracking": 0.0,
+            "residence": 0.07888020833333334,
+            "first_entry_s": {
+              "successes": 21,
+              "conditional_mean_s": 15.01904761904762
+            },
+            "pre_stable_s": {
+              "successes": 9,
+              "conditional_mean_s": 23.422222222222224
+            },
+            "reentry_s": {
+              "successes": 1,
+              "conditional_mean_s": 21.0
+            },
+            "post_stable_s": {
+              "successes": 0,
+              "conditional_mean_s": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "gain": 3.0,
+      "success": 0.041666666666666664,
+      "by_seed": [
+        {
+          "seed": 7,
+          "summary": {
+            "complete_success": 0.125,
+            "full_tracking": 0.08640625,
+            "pre_tracking": 0.07261509891313278,
+            "post_tracking": 0.10083279993782646,
+            "residence": 0.241015625,
+            "first_entry_s": {
+              "successes": 25,
+              "conditional_mean_s": 22.848
+            },
+            "pre_stable_s": {
+              "successes": 8,
+              "conditional_mean_s": 30.85
+            },
+            "reentry_s": {
+              "successes": 25,
+              "conditional_mean_s": 14.343999999999996
+            },
+            "post_stable_s": {
+              "successes": 12,
+              "conditional_mean_s": 50.45000000000001
+            }
+          }
+        },
+        {
+          "seed": 17,
+          "summary": {
+            "complete_success": 0.0,
+            "full_tracking": 0.024713541666666665,
+            "pre_tracking": 0.047626331881859774,
+            "post_tracking": 0.0011393229166666667,
+            "residence": 0.07338541666666666,
+            "first_entry_s": {
+              "successes": 21,
+              "conditional_mean_s": 11.828571428571427
+            },
+            "pre_stable_s": {
+              "successes": 6,
+              "conditional_mean_s": 19.733333333333334
+            },
+            "reentry_s": {
+              "successes": 3,
+              "conditional_mean_s": 96.46666666666665
+            },
+            "post_stable_s": {
+              "successes": 0,
+              "conditional_mean_s": null
+            }
+          }
+        },
+        {
+          "seed": 27,
+          "summary": {
+            "complete_success": 0.0,
+            "full_tracking": 0.048854166666666664,
+            "pre_tracking": 0.09251015559268251,
+            "post_tracking": 0.0,
+            "residence": 0.07911458333333334,
+            "first_entry_s": {
+              "successes": 21,
+              "conditional_mean_s": 14.923809523809526
+            },
+            "pre_stable_s": {
+              "successes": 9,
+              "conditional_mean_s": 23.177777777777777
+            },
+            "reentry_s": {
+              "successes": 1,
+              "conditional_mean_s": 19.599999999999994
+            },
+            "post_stable_s": {
+              "successes": 0,
+              "conditional_mean_s": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "gain": 10.0,
+      "success": 0.07291666666666667,
+      "by_seed": [
+        {
+          "seed": 7,
+          "summary": {
+            "complete_success": 0.21875,
+            "full_tracking": 0.10223958333333333,
+            "pre_tracking": 0.08657655024082171,
+            "post_tracking": 0.11511610420499407,
+            "residence": 0.25882812499999996,
+            "first_entry_s": {
+              "successes": 28,
+              "conditional_mean_s": 26.96428571428572
+            },
+            "pre_stable_s": {
+              "successes": 11,
+              "conditional_mean_s": 40.12727272727273
+            },
+            "reentry_s": {
+              "successes": 25,
+              "conditional_mean_s": 21.88
+            },
+            "post_stable_s": {
+              "successes": 12,
+              "conditional_mean_s": 32.633333333333326
+            }
+          }
+        },
+        {
+          "seed": 17,
+          "summary": {
+            "complete_success": 0.0,
+            "full_tracking": 0.03247395833333334,
+            "pre_tracking": 0.06299542743906208,
+            "post_tracking": 0.0,
+            "residence": 0.07572916666666667,
+            "first_entry_s": {
+              "successes": 21,
+              "conditional_mean_s": 13.104761904761904
+            },
+            "pre_stable_s": {
+              "successes": 7,
+              "conditional_mean_s": 22.08571428571429
+            },
+            "reentry_s": {
+              "successes": 3,
+              "conditional_mean_s": 88.73333333333335
+            },
+            "post_stable_s": {
+              "successes": 0,
+              "conditional_mean_s": null
+            }
+          }
+        },
+        {
+          "seed": 27,
+          "summary": {
+            "complete_success": 0.0,
+            "full_tracking": 0.04893229166666666,
+            "pre_tracking": 0.09263824165096128,
+            "post_tracking": 0.0,
+            "residence": 0.07950520833333333,
+            "first_entry_s": {
+              "successes": 21,
+              "conditional_mean_s": 14.761904761904763
+            },
+            "pre_stable_s": {
+              "successes": 9,
+              "conditional_mean_s": 22.8
+            },
+            "reentry_s": {
+              "successes": 1,
+              "conditional_mean_s": 17.399999999999977
+            },
+            "post_stable_s": {
+              "successes": 0,
+              "conditional_mean_s": null
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "All teacher episodes were used in original fitting; episode split is not an independent test.",
+    "Existing evaluation cases reused for paired diagnosis, not final confirmation.",
+    "Readout intervention uses BC checkpoints trained under original60deg; evaluates both arms at15deg.",
+    "Synthetic response probes are engineering assays, not calibrated cell physiology.",
+    "No cell-function calibration or whole-circuit retraining in this batch."
+  ],
+  "archived_baseline_reproduction": [
+    {
+      "seed": 7,
+      "cases": 32,
+      "differing_fields": 0
+    },
+    {
+      "seed": 17,
+      "cases": 32,
+      "differing_fields": 0
+    },
+    {
+      "seed": 27,
+      "cases": 32,
+      "differing_fields": 0
+    }
+  ]
+}
