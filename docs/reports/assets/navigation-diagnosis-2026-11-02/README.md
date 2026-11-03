@@ -1,0 +1,10 @@
+# 2026-11-02 导航网络原因诊断材料
+
+主报告：`docs/reports/navigation-diagnosis-2026-11-02.md`。
+
+- `summary.json`：完整汇总、逐种子干预、计数、正对照与基线复现。
+- `diagnosis.png` / `.svg`：四面板结果图。均值不是置信区间。
+- `diagnostic-records.zip`：路径以`results/navigation-diagnosis-2026-11-02/`及`source/`开头；含所有设计、原始结果、6个读出检查点及本批源码。解压前保留既有文件；不覆盖生产源码。
+- `manifest.json`：本目录文件SHA256，清单本身不递归计算。
+
+这批数据为既有病例上的事后机制诊断，不是独立确认性测试；原模型和教师数据在`navigation-study-2026-10-25`的归档中。先恢复原归档，再运行设计中的哈希检查。主实验、补充时间探针、补充增益实验的登记顺序及边界均保留。
