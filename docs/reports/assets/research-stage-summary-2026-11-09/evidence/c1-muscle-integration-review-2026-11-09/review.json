@@ -1,0 +1,172 @@
+{
+  "status": "review_complete",
+  "scope": "read-only algebra and saved-data audit; zero NEURON imports, compiles, simulations or writes into A/legacy-B directories",
+  "protocol_sha256": "1ab547aba2bfc5982e5806ee5777a51a6a87066c0a1714d1c5cdcc4b7d10e33f",
+  "A_summary_sha256": "2cd083a64a237d6d0ae137b0f57e41d2cc81bd2d7108d5457be7132f629ca32b",
+  "A_reference_hashes": {
+    "results/c1-muscle-integration-isolation-2026-11-09/protocol.json": "1ab547aba2bfc5982e5806ee5777a51a6a87066c0a1714d1c5cdcc4b7d10e33f",
+    "results/c1-muscle-integration-isolation-2026-11-09/protocol-lock.json": "795fbf11fe089ccc1090ae32c252a8b9acfde430deccc3826beac1066d6d29ac",
+    "results/c1-muscle-integration-isolation-2026-11-09/summary.json": "2cd083a64a237d6d0ae137b0f57e41d2cc81bd2d7108d5457be7132f629ca32b",
+    "results/c1-muscle-integration-isolation-2026-11-09/build-evidence.json": "19fd3cf1751b7c149e5de794eb43d452f44c4753507969968e03ae8d908d2de6",
+    "results/c1-muscle-integration-isolation-2026-11-09/sources.json": "999c5244ee6be90f5bc36626d642685e1d1e0b0110908aeab17760ddc2bf23c2",
+    "results/c1-muscle-integration-isolation-2026-11-09/harness/integration_prepare_at_lock.py": "3fc9f61be6dafd7160606e227ed2db74fdc2bd7186f940353daed11762c7c94b",
+    "analysis/neuromechanics/b_motor_validation/integration_prepare.py": "b688c31bf7ef1619c8547cb842feb25a7771e0808ddc42257b8eeb59294561d5",
+    "analysis/neuromechanics/b_motor_validation/integration_run.py": "a28e6b1ccdbdff9c2acee3062ca33a7f578a1b8813da681887752deef1bacc9b",
+    "analysis/neuromechanics/b_motor_validation/integration_analyze.py": "86c8669a347ac4509d822e491005f2689264d69afefd4a630033f215ba043f33",
+    "analysis/neuromechanics/b_motor_validation/integration_batch.py": "3e60e63872e7c88720ac97d1185329ee4fc0d75c5115a8b23d69954e1f32873b",
+    "docs/reports/c1-muscle-integration-isolation-2026-11-09.md": "8380e8db09c09358c0e81c2822a7942b1669f896a3a4a20fb2103bcdd2765042"
+  },
+  "raw_trace_sha256": {
+    "gates_original_dt0.025": "3b3b81ad1d6126eb42ba398789bc4f641d55f70f9dda56fa6d72edb997e0c437",
+    "gates_original_dt0.0125": "28350d779f8a02628306e3d0ce58893ef3789bb73921cbad8528e2c2b5cf76a7",
+    "gates_original_dt0.00625": "f3765501d85984567b5e89e04cc96adc96cff210f791ff106aa4d326bc468305",
+    "gates_both_dt0.025": "4c5c2b94d81ed0574bc7817dc0ca5b881c908ead767ad7b69c926d7b60410c39",
+    "gates_both_dt0.0125": "2592bb2addf2c6501e01b120790dbcac9275e1b2e788903eca0d9bd93300c8ac",
+    "gates_both_dt0.00625": "e4ee9a2e169d16fa3586d08d81789f0bce0a7c53c5338641a59c37eaea0c1886",
+    "pool_original_dt0.025": "b24edf5d4d82cd8f07fe885e9aa475f90599bde63ee0456704ae71b72db6dda1",
+    "pool_original_dt0.0125": "5684cc3ccc48b4234fe77e0ace266b5ca73ac53d756e59ffc1f83b69f2ed512b",
+    "pool_original_dt0.00625": "230aa05df02c0ef21ea5643a6fee1bf1ea7798e3404b1cd36640109af7a801e9",
+    "pool_both_dt0.025": "3a96337e7f68c803fbadc2df3baeb127129303ed4cd23bdbd230016c2fa0df8d",
+    "pool_both_dt0.0125": "0f620843953060cfb08d441891da03be47eedc1b32d37f7ae3357d3cb0b60eae",
+    "pool_both_dt0.00625": "6d04888556ef50a382f1c9ffcb5caa9ac69cbc36d5bc399a7f86b81f025c79fd",
+    "main_original_dt0.025": "7174dc4ff4e66c7b7e60e3827201607b5774a6ddf5d179c0336287b6b1ce3c41",
+    "main_original_dt0.0125": "466dadfef5be2f778964ae6c458ea3efb3b34b6a2a3b2bfa5e4930d7a765960c",
+    "main_original_dt0.00625": "6b3d52bb84b8404afb7d0d50e90f36fea93e98e6a1cad5b5d0e94f39d880b7bc",
+    "main_gates_dt0.025": "cd0cf99191223bce36005972f1f9684a1d5061d7ba52b498dd3f45f97b0be0ed",
+    "main_gates_dt0.0125": "ea1c4110ca48ef090c34f6d4adc110228229409a840ee80a30b3133e518befaf",
+    "main_gates_dt0.00625": "06c1f4f691ccfa14d4688b83a81e8846f48f258205dfa48f8d6b8b23ad7adf6b",
+    "main_pool_dt0.025": "452ca21fee5213bad9af31c85ffcde58819bf5550203937133b476b3fcd85c8b",
+    "main_pool_dt0.0125": "66da67853982a6535bf3b1bbcd2f12574f3c559bd698a7c33b40990fcec58538",
+    "main_pool_dt0.00625": "1d344223696bd84c13b8383328f15c90853040c19ef730bf4d622de1c527aa95",
+    "main_both_dt0.025": "dd2000dc2fc926f4c44bca5a303e7de87917ed86376e85a976ffa8297b7184a3",
+    "main_both_dt0.0125": "ecea1bea1176565a706f28a616d0f8f726ea1f7f3f9817a49bb74d20053d12ff",
+    "main_both_dt0.00625": "8daa52fb5fb65d59d586b3da8273aae91fd25e31b2ac036a18450370708e284d"
+  },
+  "setup_failures_preserved": [
+    {
+      "case": "gates_both_dt0.025",
+      "failure_sha256": "cf1bd80a16ea2c163aa7bcdd769586d4b531451d2549b8fbe0654e852d21c682",
+      "log_sha256": "d96802079f2dfbee813f91e6c9eeabd325429a581c45b8baebe489df3bfa2065",
+      "stage": "before first fadvance"
+    },
+    {
+      "case": "pool_both_dt0.025",
+      "failure_sha256": "cf1bd80a16ea2c163aa7bcdd769586d4b531451d2549b8fbe0654e852d21c682",
+      "log_sha256": "d96802079f2dfbee813f91e6c9eeabd325429a581c45b8baebe489df3bfa2065",
+      "stage": "before first fadvance"
+    }
+  ],
+  "review_errors": [],
+  "issues": [
+    {
+      "id": "R1",
+      "kind": "negative_scientific_result",
+      "status": "confirmed_and_retained",
+      "message": "Combined fixed-coefficient STATE controls pass, but all four main last-pair error magnitudes rise by about 2.1x versus original; the preregistered improvement requirement fails for voltage and does not justify the next full-system validation.",
+      "evidence": "saved-data-review.json / paired errors and independently recomputed ratios"
+    },
+    {
+      "id": "R2",
+      "kind": "unchanged_model_limitation",
+      "status": "confirmed_already_disclosed_by_A",
+      "message": "All main endpoint gate-power caches match the state before the most recent neural update, not the simultaneously saved new state. This does not establish the complete runtime current evaluation delay. No cache repair was mixed into the patch.",
+      "max_cache_previous_power_error": 1.1102230246251565e-16
+    },
+    {
+      "id": "R3",
+      "kind": "unchanged_model_limitation",
+      "status": "confirmed_already_disclosed_by_A",
+      "message": "Outward-source stress clips STATE to zero after cai assignment, leaving exposed negative cai. The 12 main runs have exactly synchronized STATE/cai, so the stress result does not establish the cause of their step errors.",
+      "combined_min_cai_mM": -1.1933080132320698e-10,
+      "main_max_STATE_cai_difference_mM": 0.0
+    },
+    {
+      "id": "R4",
+      "kind": "observation_timing_note",
+      "status": "additional_independent_observation",
+      "message": "At t=0 the global pool iCa cache is still zero while measured helper density is -0.002mA/cm2, equivalent to +0.0062831853nA inward. From the first advanced state onward the cache agrees with measured current. Use measured density for the analytic input; do not treat the initial global cache as the actual source.",
+      "initial_global_cache_error_nA": 0.006283185307179587
+    }
+  ],
+  "checked": {
+    "four_variants_only_derivative_RHS_changed": true,
+    "protected_parameters_geometry_initialization_caches_sync_unchanged": true,
+    "actual_generated_state_equations_exponential_as_intended": true,
+    "gate_nonsteady_initials_actual_fixed_voltage_and_exact_solution": true,
+    "calcium_measured_density_sign_area_conversion_and_analytic_STATE": true,
+    "all_24_traces_hashed_finite_correct_clock": true,
+    "all_12_main_inputs_and_same_dt_synapse_gates_match": true,
+    "dense_sampling_and_previous_interval_indices_match": true,
+    "all_12_step_pairs_independently_recomputed": true,
+    "A_pair_and_control_metrics_reproduced": true,
+    "predeclared_error_rules_unchanged": true,
+    "no_full_system_success_inferred_from_component_controls": true
+  },
+  "numbers": {
+    "combined_gate_max_abs_error": 1.9528823003156504e-13,
+    "combined_pool_max_abs_error_mM": 1.376428539288238e-21,
+    "pair_metric_max_difference_from_A": 0.0,
+    "cached_previous_gate_max_error": 1.1102230246251565e-16,
+    "max_single_gate_cached_vs_current_RMS_difference": 0.0006388165282118079
+  },
+  "main_last_pair_passes": {
+    "original": true,
+    "gates": true,
+    "pool": true,
+    "both": true
+  },
+  "text_review": {
+    "A_summary_conclusion_boundary_checked": true,
+    "A_final_prose_report_reviewed": false,
+    "reason": "A prose report was not saved at the time of this independent data review"
+  },
+  "improvement": {
+    "voltage_RMS_mV": {
+      "original": 0.07988901603547824,
+      "combined": 0.16862669564475896,
+      "ratio": 2.1107619546831424,
+      "original_below_small_error_exception": false,
+      "preregistered_improvement_rule_satisfied": false,
+      "actual_step_difference_decreased": false
+    },
+    "STATE_calcium_scaled_RMS": {
+      "original": 0.0021132503113288265,
+      "combined": 0.004527219383718691,
+      "ratio": 2.142301534015601,
+      "original_below_small_error_exception": true,
+      "preregistered_improvement_rule_satisfied": true,
+      "actual_step_difference_decreased": false
+    },
+    "cai_scaled_RMS": {
+      "original": 0.0021132503113288265,
+      "combined": 0.004527219383718691,
+      "ratio": 2.142301534015601,
+      "original_below_small_error_exception": true,
+      "preregistered_improvement_rule_satisfied": true,
+      "actual_step_difference_decreased": false
+    },
+    "drive_scaled_RMS": {
+      "original": 0.0017814018337792515,
+      "combined": 0.003828807518085064,
+      "ratio": 2.149322766757365,
+      "original_below_small_error_exception": true,
+      "preregistered_improvement_rule_satisfied": true,
+      "actual_step_difference_decreased": false
+    }
+  },
+  "independent_recommend_next_full_system_validation": false,
+  "interpretation_notes": [
+    "Small-error exception flags satisfy a preregistered rule; they are not evidence that calcium/drive errors decreased.",
+    "Input is prescribed for a component assay. Same dt gives identical synapse s; synaptic current itself varies with postsynaptic voltage.",
+    "Different dt uses the same dense source with different left-hold durations; pair differences include input-discretization effects.",
+    "Default channel initialization is steady state; control initial states were explicitly displaced and checked.",
+    "Preparer changed only build-resume logic/checker spelling after protocol lock; locked source hash and prepare() AST match, physical patch unchanged."
+  ],
+  "not_verified": [
+    "Continuous-input true solution or cause of larger main pair error",
+    "Complete current evaluation delay from endpoint cache observations",
+    "Shared mechanism effects on 284 C1 neurons",
+    "Full302/body convergence after any repair",
+    "Locomotion or thermotaxis improvements"
+  ]
+}

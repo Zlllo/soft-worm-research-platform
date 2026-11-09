@@ -1,0 +1,22 @@
+{
+  "recorded_on": "2026-10-27",
+  "purpose": "stage-0 source reproduction; no neural training",
+  "c302": {
+    "url": "https://github.com/openworm/c302.git",
+    "ref": "master",
+    "commit": "d542a44bf2662f79e0ad23342a959a181a920877",
+    "license_file": "LICENSE"
+  },
+  "sibernetic": {
+    "url": "https://github.com/openworm/sibernetic.git",
+    "ref": "development",
+    "commit": "2b3f1eb3770cb9e3142cf38391b40a1adf27c89d",
+    "license_file": "LICENSE"
+  },
+  "sibernetic_signal_order": {
+    "layout": "quadrant blocks, 24 anatomical names in each block",
+    "quadrants": ["MDR", "MVR", "MVL", "MDL"],
+    "evidence": "main_sim.py MuscleSimulation.run and C302NRNSimulation.run; src/owWorldSimulation.cpp muscle display indices",
+    "warning": "main_sim.get_muscle_names instead interleaves quadrants and must not be used as signal-array order"
+  }
+}

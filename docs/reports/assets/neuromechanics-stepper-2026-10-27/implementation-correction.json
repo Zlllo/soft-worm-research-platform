@@ -1,0 +1,8 @@
+{
+  "superseded_build": "build",
+  "selected_build": "build-v2",
+  "initial_check": "first 100 microsteps: output time 0.1 s, internal IDA time 0.10002400000000007 s; Python causality check rejected this packet",
+  "cause": "Sundials 2.3 IDA_NORMAL ignores stop time; it requires IDA_NORMAL_TSTOP",
+  "fix": "causal worker uses IDA_NORMAL_TSTOP and per-tick stop time; keep old build as failed implementation evidence",
+  "status": "fixed; selected build passed native integration checks"
+}

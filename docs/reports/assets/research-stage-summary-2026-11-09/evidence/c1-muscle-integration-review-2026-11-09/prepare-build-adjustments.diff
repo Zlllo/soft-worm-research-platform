@@ -1,0 +1,36 @@
+--- at_protocol_lock
++++ current_build_resume
+@@ -100,9 +100,9 @@
+ def build():
+     assert sha(ROOT/'protocol.json')==read(ROOT/'protocol-lock.json')['protocol_sha256']
+     for path,d in read(ROOT/'sources.json').items(): assert sha(ROOT/path)==d['sha256']
+-    (ROOT/'variants').mkdir(exist_ok=False);evidence={}
++    (ROOT/'variants').mkdir(exist_ok=True);evidence={}
+     for variant in VARIANTS:
+-        target=ROOT/'variants'/variant;target.mkdir()
++        target=ROOT/'variants'/variant;target.mkdir(exist_ok=True)
+         changed=[]
+         for source in sorted((ROOT/'frozen').iterdir()):
+             if source.suffix not in ['.mod','.hoc']:continue
+@@ -123,15 +123,18 @@
+         for name in changed:
+             diff.extend(difflib.unified_diff((ROOT/'frozen'/name).read_text().splitlines(True),(target/name).read_text().splitlines(True),fromfile='frozen/'+name,tofile=variant+'/'+name))
+         (target/'patch.diff').write_text(''.join(diff))
+-        with (target/'build.log').open('w') as log:
+-            subprocess.run([str(Path(sys.executable).parent/'nrnivmodl')],cwd=target,stdout=log,stderr=subprocess.STDOUT,check=True)
++        if not (target/'arm64/libnrnmech.dylib').exists():
++            with (target/'build.log').open('w') as log:
++                subprocess.run([str(Path(sys.executable).parent/'nrnivmodl')],cwd=target,stdout=log,stderr=subprocess.STDOUT,check=True)
+         states={}
+         for mech in ['ca_boyle','k_fast','k_slow','CaPool']:
+             block=state_function(target/'arm64'/f'{mech}.cpp')
+             expected_exp=(variant in ['gates','both'] and mech!='CaPool') or (variant in ['pool','both'] and mech=='CaPool')
+             assert ('exp(' in block)==expected_exp,(variant,mech,block)
+             if expected_exp:
+-                assert '- 1.0' in block and ('decayConstant' in block if mech=='CaPool' else '_tau' in block)
++                assert ('decayConstant' in block if mech=='CaPool' else '_tau' in block)
++                compact=re.sub(r'\s+','',block)
++                assert ('-((1.0))/' in compact if mech=='CaPool' else '-1.0' in compact)
+             states[mech]=dict(exponential_generated=expected_exp,code=block)
+             if variant=='original':
+                 assert re.sub(r'\s+','',block)==re.sub(r'\s+','',state_function(ROOT/'frozen/arm64'/f'{mech}.cpp'))

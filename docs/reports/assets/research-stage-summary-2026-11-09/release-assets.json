@@ -1,0 +1,55 @@
+{
+  "repository": "https://github.com/Zlllo/soft-worm-research-platform",
+  "tag": "research-stage-2026-11-09",
+  "assets": [
+    {
+      "original_path": "docs/reports/assets/b-motor-convergence-2026-11-09/reproduction.zip",
+      "asset_name": "b-motor-convergence-2026-11-09-reproduction.zip",
+      "bytes": 72610151,
+      "sha256": "ab63155a8c5b45a96c4f3c183b59886ba96934190b89fc268d4b8cf547c9780d",
+      "download_url": "https://github.com/Zlllo/soft-worm-research-platform/releases/download/research-stage-2026-11-09/b-motor-convergence-2026-11-09-reproduction.zip"
+    },
+    {
+      "original_path": "docs/reports/assets/b-motor-feedback-causality-2026-11-09/reproduction.zip",
+      "asset_name": "b-motor-feedback-causality-2026-11-09-reproduction.zip",
+      "bytes": 153630907,
+      "sha256": "b172afbf84b0a9a7f9aba23287fe395aa55c32bb522c4d40183324a14bd8b071",
+      "download_url": "https://github.com/Zlllo/soft-worm-research-platform/releases/download/research-stage-2026-11-09/b-motor-feedback-causality-2026-11-09-reproduction.zip"
+    },
+    {
+      "original_path": "docs/reports/assets/body-load-stage2-2026-11-03/reproduction.zip",
+      "asset_name": "body-load-stage2-2026-11-03-reproduction.zip",
+      "bytes": 258962483,
+      "sha256": "93abe22631b082951057135f6dcc7fea045b4561fee8b287a09a934a13deeeb2",
+      "download_url": "https://github.com/Zlllo/soft-worm-research-platform/releases/download/research-stage-2026-11-09/body-load-stage2-2026-11-03-reproduction.zip"
+    },
+    {
+      "original_path": "docs/reports/assets/body-topology-calibration-2026-11-03/reproduction.zip",
+      "asset_name": "body-topology-calibration-2026-11-03-reproduction.zip",
+      "bytes": 128129814,
+      "sha256": "e3cc759119a4bfba53c263b8c32f6eaa89e969299609a60e13335c7bac2e5fe1",
+      "download_url": "https://github.com/Zlllo/soft-worm-research-platform/releases/download/research-stage-2026-11-09/body-topology-calibration-2026-11-03-reproduction.zip"
+    },
+    {
+      "original_path": "docs/reports/assets/c1-muscle-integration-isolation-2026-11-09/reproduction.zip",
+      "asset_name": "c1-muscle-integration-isolation-2026-11-09-reproduction.zip",
+      "bytes": 664252418,
+      "sha256": "f58e10f59e9aa28432eb4b958c58b2192b1251e59cb5a6500493f58ccdd5086d",
+      "download_url": "https://github.com/Zlllo/soft-worm-research-platform/releases/download/research-stage-2026-11-09/c1-muscle-integration-isolation-2026-11-09-reproduction.zip"
+    },
+    {
+      "original_path": "docs/reports/assets/full302-closed-loop-2026-11-05/reproduction.zip",
+      "asset_name": "full302-closed-loop-2026-11-05-reproduction.zip",
+      "bytes": 63226301,
+      "sha256": "1b8d1cf6c5a8c900257198f14e9721b5a884d13573e347599086e9a0cb2c1d27",
+      "download_url": "https://github.com/Zlllo/soft-worm-research-platform/releases/download/research-stage-2026-11-09/full302-closed-loop-2026-11-05-reproduction.zip"
+    },
+    {
+      "original_path": "docs/reports/assets/full302-mechanisms-2026-11-07/reproduction.zip",
+      "asset_name": "full302-mechanisms-2026-11-07-reproduction.zip",
+      "bytes": 74171761,
+      "sha256": "39a317c9da848b945a9dfe6297cf581424bdb1fd61809756d03189235eb3b6d3",
+      "download_url": "https://github.com/Zlllo/soft-worm-research-platform/releases/download/research-stage-2026-11-09/full302-mechanisms-2026-11-07-reproduction.zip"
+    }
+  ]
+}

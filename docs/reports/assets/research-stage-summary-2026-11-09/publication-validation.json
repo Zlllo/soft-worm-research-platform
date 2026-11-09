@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-09",
+  "tests": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "10",
+    "tests": "225",
+    "time": "11.478",
+    "timestamp": "2026-11-09T20:23:38.675241+08:00",
+    "hostname": "zzdeMacBook-Air.local"
+  },
+  "passed": 215,
+  "skipped": 10,
+  "skip_details": [
+    {
+      "name": "test_chunking_reset_and_independent_workers",
+      "reason": "build native worker and set BOYLE_WORKER to run integration checks"
+    },
+    {
+      "name": "test_causal_clock_and_accepted_geometry",
+      "reason": "build native worker and set BOYLE_WORKER to run integration checks"
+    },
+    {
+      "name": "test_invalid_control_does_not_advance",
+      "reason": "build native worker and set BOYLE_WORKER to run integration checks"
+    },
+    {
+      "name": "test_actual_head_temperature_and_noise_reset",
+      "reason": "build native worker and set BOYLE_WORKER to run integration checks"
+    },
+    {
+      "name": "test_initial_rigid_transform",
+      "reason": "build native worker and set BOYLE_WORKER to run integration checks"
+    },
+    {
+      "name": "test_native_replay_identity_and_load_counterfactual",
+      "reason": "set BOYLE_UPSTREAM and BOYLE_BASE_BUILD for native load check"
+    },
+    {
+      "name": "test_direct_drive_bypasses_background_and_respects_filter",
+      "reason": "set BOYLE_MUSCLE_WORKER to exercise native muscle integration"
+    },
+    {
+      "name": "test_invalid_muscle_command_preserves_state",
+      "reason": "set BOYLE_MUSCLE_WORKER to exercise native muscle integration"
+    },
+    {
+      "name": "test_native_muscle_chunking_and_reset",
+      "reason": "set BOYLE_MUSCLE_WORKER to exercise native muscle integration"
+    },
+    {
+      "name": "test_legacy_neural_output_replay_preserves_mechanics",
+      "reason": "set BOYLE_MUSCLE_WORKER to exercise native muscle integration"
+    }
+  ],
+  "publication_new_scientific_runs": 0,
+  "isolated_archive_payloads_verified": 325,
+  "isolated_summary_recomputed_byte_identical": true,
+  "source_syntax_files_parsed": 75,
+  "new_summary_and_index_local_links_passed": true,
+  "large_archives_in_git": 0,
+  "potential_credential_pattern_findings": 0,
+  "test_environment_dependency_failures_resolved": [
+    "pytest and torch missing",
+    "streamlit missing"
+  ],
+  "whitespace_check": {
+    "ordinary_code_and_prose_passed": true,
+    "generated_svg_and_patch_context_warning_files": 9,
+    "generated_or_frozen_bytes_preserved": true
+  }
+}

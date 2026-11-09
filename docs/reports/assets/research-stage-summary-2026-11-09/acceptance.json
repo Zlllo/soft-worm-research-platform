@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-09",
+  "status": "paused_by_user",
+  "progress_percent": 60,
+  "completed_milestones": 3,
+  "total_milestones": 5,
+  "feedback_causality_accepted": true,
+  "full_system_convergence_accepted": false,
+  "sustained_neural_propulsion_accepted": false,
+  "component_analytic_controls_accepted": true,
+  "component_overall_step_difference_improved": false,
+  "combined_to_original_voltage_step_difference_ratio": 2.1107619546831424,
+  "component_main_conditions": 12,
+  "component_analytic_control_conditions": 12,
+  "publication_new_simulations": 0,
+  "next_stage_started": false
+}

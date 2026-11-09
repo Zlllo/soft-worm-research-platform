@@ -1,0 +1,13 @@
+{
+  "progress_percent": 60,
+  "completed_acceptance_milestones": 3,
+  "total_acceptance_milestones": 5,
+  "feedback_causality_accepted": true,
+  "full_system_convergence_accepted": false,
+  "sustained_neural_propulsion_accepted": false,
+  "new_full_runs": 14,
+  "parent_independent_recomputation_passed": true,
+  "summary_report": "docs/reports/b-motor-validation-2026-11-09.md",
+  "summary_report_sha256": "490f6f19e86671b2003fc1968802a02afbcaf80ed14735e8478494b946f4123c",
+  "next_work": "Isolated muscle fast-dynamics numerical repair and revalidation, using branchA diagnostic; no training"
+}

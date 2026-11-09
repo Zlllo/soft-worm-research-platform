@@ -1,0 +1,780 @@
+{
+  "status": "stage_paused_at_user_request",
+  "checks": {
+    "all_nine_full302_traces_complete_hashed_and_finite": true,
+    "population_shapes_and_end_times": true,
+    "all_neuron_voltages_inside_declared_guard": true,
+    "all_gap_currents_balanced": true,
+    "AVB_gap_masks_and_total_conductance_per_B_match_design": true,
+    "no_external_muscle_waveform_in_full302_trials": true,
+    "actual_body_strain_feedback_reconstructed": true,
+    "independent_neuron_scipy_voltage_agreement": true,
+    "component_error_decreases_with_half_dt": true,
+    "corrected_nonlinear_capacitance_3pF": true,
+    "isolated_NMJ_trials_have_identical_presynaptic_waveform": true
+  },
+  "full302_runs": 9,
+  "metrics": {
+    "prototype_off": {
+      "duration_s": 4,
+      "B_peak_counts": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "B_frequency_Hz": [
+        1.9108280255055132,
+        1.8987341772428201,
+        1.9108280255055134,
+        1.9230769231049072,
+        1.9108280255055132,
+        1.9230769231049072,
+        1.8750000000272848,
+        1.8518518518787999,
+        1.8750000000272848,
+        1.8633540372941966,
+        1.863354037294196,
+        1.973684210555037,
+        1.9480519480802962,
+        1.935483870995907,
+        1.9480519480802954,
+        1.9480519480802962,
+        1.9480519480802954,
+        1.9108280255055134
+      ],
+      "B_mean_sd_mV": 3.2441351084759904,
+      "B_voltage_range_mV": [
+        -37.67233618230349,
+        -24.718574089456517
+      ],
+      "dorsal_ventral_voltage_correlation": 0.9536670232044386,
+      "late_drive_sd": 0.00029789310055368796,
+      "maximum_drive": 0.07716026388124264,
+      "late_speed_um_s": -1.1502861339167413e-08,
+      "late_displacement_um": 2.3072582278475935e-08,
+      "body_lateral_amplitude_um": 0.0005714408328666538,
+      "maximum_feedback_pA": 0.0,
+      "feedback_reconstruction_error_pA": 0.0
+    },
+    "prototype_live": {
+      "duration_s": 4,
+      "B_peak_counts": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        3,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "B_frequency_Hz": [
+        1.9108280255055132,
+        1.9108280255055134,
+        1.9108280255055134,
+        1.9230769231049072,
+        1.9108280255055132,
+        1.9230769231049072,
+        1.8691588785318731,
+        1.8518518518787999,
+        1.8750000000272848,
+        1.8633540372941966,
+        1.863354037294196,
+        1.973684210555037,
+        1.9480519480802962,
+        1.935483870995907,
+        1.9480519480802954,
+        1.9480519480802962,
+        1.9480519480802954,
+        1.9108280255055134
+      ],
+      "B_mean_sd_mV": 3.244640640647779,
+      "B_voltage_range_mV": [
+        -37.67274247811228,
+        -24.71745661337678
+      ],
+      "dorsal_ventral_voltage_correlation": 0.9518718169988336,
+      "late_drive_sd": 0.0002978398082780892,
+      "maximum_drive": 0.07716026391121827,
+      "late_speed_um_s": -1.1369643692476414e-08,
+      "late_displacement_um": 2.28082540765611e-08,
+      "body_lateral_amplitude_um": 0.0005708469638849127,
+      "maximum_feedback_pA": 0.008318872464974298,
+      "feedback_reconstruction_error_pA": 3.469446951953614e-18
+    },
+    "prototype_gap0": {
+      "duration_s": 4,
+      "B_peak_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "B_frequency_Hz": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "B_mean_sd_mV": 2.309489161936882e-07,
+      "B_voltage_range_mV": [
+        -59.8053515057236,
+        -58.694675735064926
+      ],
+      "dorsal_ventral_voltage_correlation": null,
+      "late_drive_sd": 1.1848443990397248e-12,
+      "maximum_drive": 4.426270552574667e-06,
+      "late_speed_um_s": -7.447838537053715e-16,
+      "late_displacement_um": 1.6841321027623518e-22,
+      "body_lateral_amplitude_um": 2.626610697100747e-11,
+      "maximum_feedback_pA": 0.0,
+      "feedback_reconstruction_error_pA": 0.0
+    },
+    "prototype_off8": {
+      "duration_s": 8.0,
+      "B_peak_counts": [
+        7,
+        7,
+        7,
+        8,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        7
+      ],
+      "B_frequency_Hz": [
+        1.916932907376138,
+        1.9230769231049072,
+        1.935483870995907,
+        1.9498607242623573,
+        1.9292604501888462,
+        1.916932907376138,
+        1.8404907975727947,
+        1.8292682927095456,
+        1.892744479522811,
+        1.8691588785318725,
+        1.8237082067134684,
+        1.960784313754024,
+        1.9774011299722776,
+        1.9662921348600741,
+        1.9498607242623576,
+        1.9498607242623576,
+        1.9390581717733697,
+        1.916932907376138
+      ],
+      "B_mean_sd_mV": 3.2432508086855214,
+      "B_voltage_range_mV": [
+        -37.75411557840636,
+        -24.51627374736395
+      ],
+      "dorsal_ventral_voltage_correlation": 0.4726012342317391,
+      "late_drive_sd": 0.00027120688395188653,
+      "maximum_drive": 0.07716026388124264,
+      "late_speed_um_s": -3.5786213929581484e-09,
+      "late_displacement_um": 1.4279483182329272e-08,
+      "body_lateral_amplitude_um": 0.0004128984415867699,
+      "maximum_feedback_pA": 0.0,
+      "feedback_reconstruction_error_pA": 0.0
+    },
+    "prototype_live8": {
+      "duration_s": 8.0,
+      "B_peak_counts": [
+        7,
+        7,
+        7,
+        8,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        7
+      ],
+      "B_frequency_Hz": [
+        1.916932907376138,
+        1.9292604501888457,
+        1.935483870995907,
+        1.9498607242623573,
+        1.9292604501888462,
+        1.916932907376138,
+        1.8348623853478014,
+        1.8292682927095456,
+        1.892744479522811,
+        1.863354037294196,
+        1.8237082067134684,
+        1.960784313754024,
+        1.971830985944187,
+        1.9662921348600741,
+        1.9498607242623576,
+        1.9444444444727398,
+        1.9390581717733697,
+        1.916932907376138
+      ],
+      "B_mean_sd_mV": 3.243368600209436,
+      "B_voltage_range_mV": [
+        -37.757478626916345,
+        -24.515375113652674
+      ],
+      "dorsal_ventral_voltage_correlation": 0.47034601877419013,
+      "late_drive_sd": 0.000270807224354709,
+      "maximum_drive": 0.07716026391121827,
+      "late_speed_um_s": -3.5012602058359383e-09,
+      "late_displacement_um": 1.3971251222590581e-08,
+      "body_lateral_amplitude_um": 0.00041301923350197024,
+      "maximum_feedback_pA": 0.008318872464974298,
+      "feedback_reconstruction_error_pA": 3.469446951953614e-18
+    },
+    "calcium0_8": {
+      "duration_s": 8.0,
+      "B_peak_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "B_frequency_Hz": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "B_mean_sd_mV": 1.5154953427314348e-08,
+      "B_voltage_range_mV": [
+        -40.77477858168057,
+        -38.756844463429765
+      ],
+      "dorsal_ventral_voltage_correlation": null,
+      "late_drive_sd": 1.777353290392839e-13,
+      "maximum_drive": 0.0001037314386742061,
+      "late_speed_um_s": -5.076779288888771e-15,
+      "late_displacement_um": 1.4094628242311642e-12,
+      "body_lateral_amplitude_um": 5.791122220027685e-07,
+      "maximum_feedback_pA": 0.0,
+      "feedback_reconstruction_error_pA": 0.0
+    },
+    "generic_C1_8": {
+      "duration_s": 8.0,
+      "B_peak_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "B_frequency_Hz": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "B_mean_sd_mV": 7.105427357601002e-15,
+      "B_voltage_range_mV": [
+        -36.43508399279986,
+        -33.71808676956862
+      ],
+      "dorsal_ventral_voltage_correlation": null,
+      "late_drive_sd": 1.7221034738782967e-17,
+      "maximum_drive": 0.0007233907687317702,
+      "late_speed_um_s": -3.1586575242767905e-12,
+      "late_displacement_um": 1.1600963245621718e-11,
+      "body_lateral_amplitude_um": 1.6110785980481257e-05,
+      "maximum_feedback_pA": 0.0,
+      "feedback_reconstruction_error_pA": 0.0
+    },
+    "nmj9_off8": {
+      "duration_s": 8.0,
+      "B_peak_counts": [
+        7,
+        7,
+        7,
+        8,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        7
+      ],
+      "B_frequency_Hz": [
+        1.916932907376138,
+        1.9230769231049072,
+        1.935483870995907,
+        1.9498607242623573,
+        1.9292604501888462,
+        1.916932907376138,
+        1.8404907975727947,
+        1.8292682927095456,
+        1.892744479522811,
+        1.8691588785318725,
+        1.8237082067134684,
+        1.960784313754024,
+        1.9774011299722776,
+        1.9662921348600741,
+        1.9498607242623576,
+        1.9498607242623576,
+        1.9390581717733697,
+        1.916932907376138
+      ],
+      "B_mean_sd_mV": 3.243289072834254,
+      "B_voltage_range_mV": [
+        -37.75400372953568,
+        -24.516265207389605
+      ],
+      "dorsal_ventral_voltage_correlation": 0.47331122897364136,
+      "late_drive_sd": 0.02727385752799653,
+      "maximum_drive": 0.155573779477151,
+      "late_speed_um_s": -0.008584481357010539,
+      "late_displacement_um": 0.03388327895282821,
+      "body_lateral_amplitude_um": 0.967538494279039,
+      "maximum_feedback_pA": 0.0,
+      "feedback_reconstruction_error_pA": 0.0
+    },
+    "nmj9_live8": {
+      "duration_s": 8.0,
+      "B_peak_counts": [
+        7,
+        9,
+        8,
+        7,
+        8,
+        8,
+        7,
+        7,
+        8,
+        8,
+        7,
+        7,
+        7,
+        7,
+        9,
+        9,
+        7,
+        7
+      ],
+      "B_frequency_Hz": [
+        1.9480519480802962,
+        2.395209580873179,
+        1.9444444444727398,
+        1.9292604501888462,
+        1.8766756032444674,
+        1.9125683060387608,
+        1.8867924528576454,
+        1.9108280255055132,
+        1.971830985944187,
+        1.9607843137540235,
+        1.9108280255055132,
+        1.9108280255055134,
+        1.916932907376138,
+        1.9292604501888462,
+        2.1857923497585836,
+        2.1857923497585836,
+        1.94174757284379,
+        1.9607843137540235
+      ],
+      "B_mean_sd_mV": 3.7715252633912684,
+      "B_voltage_range_mV": [
+        -40.327596360153045,
+        -22.65224075124548
+      ],
+      "dorsal_ventral_voltage_correlation": 0.24434130233062532,
+      "late_drive_sd": 0.027906479438760328,
+      "maximum_drive": 0.15536277810269677,
+      "late_speed_um_s": 0.021303303311475827,
+      "late_displacement_um": 0.0850007414065253,
+      "body_lateral_amplitude_um": 2.111927967480772,
+      "maximum_feedback_pA": 0.3213023379731664,
+      "feedback_reconstruction_error_pA": 1.6653345369377348e-16
+    }
+  },
+  "component_comparison": [
+    {
+      "dt_ms": 0.025,
+      "max_voltage_error_mV": 0.01461393593589122,
+      "voltage_RMS_error_mV": 0.004397323492579165,
+      "frequency_Hz": 1.923693491531681,
+      "reference_frequency_Hz": 1.9230769231049072,
+      "neuron_capacitance_pF": 3.0
+    },
+    {
+      "dt_ms": 0.0125,
+      "max_voltage_error_mV": 0.007306848764947915,
+      "voltage_RMS_error_mV": 0.0021986592849408903,
+      "frequency_Hz": 1.9230769229649856,
+      "reference_frequency_Hz": 1.9230769229649856,
+      "neuron_capacitance_pF": 3.0
+    }
+  ],
+  "isolated_candidates": 12,
+  "isolated_failed_candidates": 9,
+  "isolated_NMJ": {
+    "0.09": {
+      "nmj_nS": 0.09,
+      "neural_dt_ms": 0.025,
+      "duration_s": 8,
+      "late_neuron_voltage_amplitude_mV": 9.556385218331702,
+      "late_muscle_voltage_amplitude_mV": 8.933209498961325,
+      "late_calcium_range_mM": [
+        1.82101011996218e-11,
+        2.1869510511798195e-10
+      ],
+      "late_drive_range": [
+        2.185052983810769e-05,
+        0.000262204754556138
+      ],
+      "late_drive_sd": 8.154511449170501e-05
+    },
+    "0.3": {
+      "nmj_nS": 0.3,
+      "neural_dt_ms": 0.025,
+      "duration_s": 8,
+      "late_neuron_voltage_amplitude_mV": 9.556385218331702,
+      "late_muscle_voltage_amplitude_mV": 10.03599206407673,
+      "late_calcium_range_mM": [
+        2.3006435004512655e-10,
+        3.4524006335620903e-09
+      ],
+      "late_drive_range": [
+        0.00027582339153694714,
+        0.004086448530294479
+      ],
+      "late_drive_sd": 0.0012954886017179246
+    },
+    "0.9": {
+      "nmj_nS": 0.9,
+      "neural_dt_ms": 0.025,
+      "duration_s": 8,
+      "late_neuron_voltage_amplitude_mV": 9.556385218331702,
+      "late_muscle_voltage_amplitude_mV": 37.30469309308879,
+      "late_calcium_range_mM": [
+        2.7994009936269088e-09,
+        2.5902248195998627e-07
+      ],
+      "late_drive_range": [
+        0.0033220818355864878,
+        0.15265876722927205
+      ],
+      "late_drive_sd": 0.041480537485541556
+    }
+  },
+  "NMJ_drive_sd_gain_10x_conductance": 508.6820681300419,
+  "bifurcation": [
+    {
+      "gap_nS": 0,
+      "fixed_points": [
+        {
+          "voltage_mV": -59.80779943608788,
+          "eigenvalue_real_per_s": [
+            -32.046780139664406,
+            -4.01230756062324
+          ],
+          "eigenvalue_imag_per_s": [
+            0.0,
+            0.0
+          ],
+          "stable": true
+        }
+      ],
+      "late_amplitude_mV": 0.0,
+      "peaks": 0,
+      "frequency_Hz": null
+    },
+    {
+      "gap_nS": 0.025,
+      "fixed_points": [
+        {
+          "voltage_mV": -51.26188484007798,
+          "eigenvalue_real_per_s": [
+            -35.33896543661219,
+            -4.086502746516512
+          ],
+          "eigenvalue_imag_per_s": [
+            0.0,
+            0.0
+          ],
+          "stable": true
+        }
+      ],
+      "late_amplitude_mV": 0.0,
+      "peaks": 0,
+      "frequency_Hz": null
+    },
+    {
+      "gap_nS": 0.05,
+      "fixed_points": [
+        {
+          "voltage_mV": -44.71101952792501,
+          "eigenvalue_real_per_s": [
+            -29.792816243037787,
+            -4.476578656402701
+          ],
+          "eigenvalue_imag_per_s": [
+            0.0,
+            0.0
+          ],
+          "stable": true
+        }
+      ],
+      "late_amplitude_mV": 0.0,
+      "peaks": 0,
+      "frequency_Hz": null
+    },
+    {
+      "gap_nS": 0.075,
+      "fixed_points": [
+        {
+          "voltage_mV": -38.176359462117716,
+          "eigenvalue_real_per_s": [
+            -5.685124804462035,
+            -5.685124804462035
+          ],
+          "eigenvalue_imag_per_s": [
+            7.087775399477765,
+            -7.087775399477765
+          ],
+          "stable": true
+        }
+      ],
+      "late_amplitude_mV": 0.0,
+      "peaks": 0,
+      "frequency_Hz": null
+    },
+    {
+      "gap_nS": 0.1,
+      "fixed_points": [
+        {
+          "voltage_mV": -32.56028641207712,
+          "eigenvalue_real_per_s": [
+            2.592457336518408,
+            2.592457336518408
+          ],
+          "eigenvalue_imag_per_s": [
+            11.596607970828638,
+            -11.596607970828638
+          ],
+          "stable": false
+        }
+      ],
+      "late_amplitude_mV": 9.556038561611679,
+      "peaks": 15,
+      "frequency_Hz": 1.923341118285479
+    },
+    {
+      "gap_nS": 0.125,
+      "fixed_points": [
+        {
+          "voltage_mV": -30.62375145540722,
+          "eigenvalue_real_per_s": [
+            -2.359727405186743,
+            -2.359727405186743
+          ],
+          "eigenvalue_imag_per_s": [
+            16.210888345834867,
+            -16.210888345834867
+          ],
+          "stable": true
+        }
+      ],
+      "late_amplitude_mV": 4.7644537204405424e-08,
+      "peaks": 0,
+      "frequency_Hz": null
+    },
+    {
+      "gap_nS": 0.15,
+      "fixed_points": [
+        {
+          "voltage_mV": -29.579889095823063,
+          "eigenvalue_real_per_s": [
+            -8.589202041955687,
+            -8.589202041955687
+          ],
+          "eigenvalue_imag_per_s": [
+            17.50825877291371,
+            -17.50825877291371
+          ],
+          "stable": true
+        }
+      ],
+      "late_amplitude_mV": 0.0,
+      "peaks": 0,
+      "frequency_Hz": null
+    },
+    {
+      "gap_nS": 0.2,
+      "fixed_points": [
+        {
+          "voltage_mV": -28.318493508348045,
+          "eigenvalue_real_per_s": [
+            -20.92459922162929,
+            -20.92459922162929
+          ],
+          "eigenvalue_imag_per_s": [
+            11.54329779705831,
+            -11.54329779705831
+          ],
+          "stable": true
+        }
+      ],
+      "late_amplitude_mV": 0.0,
+      "peaks": 0,
+      "frequency_Hz": null
+    }
+  ],
+  "hypothesis_results": {
+    "all18_B_oscillate_in_intact_full302": true,
+    "removing_AVB_gap_eliminates_observed_rhythm": true,
+    "removing_active_calcium_eliminates_observed_rhythm": true,
+    "matched_generic_C1_rhythm_count": 0,
+    "gap_point_one_fixed_point_unstable": true,
+    "stronger_gap_point_one_two_five_returns_to_rest": true,
+    "propulsion_gate_passed": {
+      "prototype_off8": false,
+      "prototype_live8": false,
+      "calcium0_8": false,
+      "generic_C1_8": false,
+      "nmj9_off8": false,
+      "nmj9_live8": false
+    }
+  },
+  "not_verified": [
+    "Exact Xu SI parameter reproduction",
+    "Cell-specific biological calibration",
+    "Full-body half-step refinement for new B branch",
+    "Body perturbation vs frozen feedback replay",
+    "Mechanical phase entrainment or feedback propulsion benefit"
+  ],
+  "boundary": "Engineering model mechanisms, not biological thermotaxis or measured B-cell physiology"
+}

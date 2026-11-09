@@ -1,0 +1,116 @@
+{
+  "created_utc": "2026-11-09T11:58:04.295168+00:00",
+  "variants": [
+    "original",
+    "gates",
+    "pool",
+    "both"
+  ],
+  "dt_ms": [
+    0.025,
+    0.0125,
+    0.00625
+  ],
+  "boundary": "Isolated C1 muscle and analytic component controls only; no full302/body runs, no physical parameter tuning",
+  "patches": "Only five gate derivative RHS and/or CaPool concentration derivative RHS; retain rate observers, initialization, caches and ion/clipping order",
+  "main": {
+    "duration_ms": 8000,
+    "window_ms": [
+      4000,
+      8000
+    ],
+    "record_ms": 0.025,
+    "conditions": 12,
+    "geometry": "Frozen GenericMuscleCell.hoc, 20 um length / 5 um diameter, cm=1 uF/cm2",
+    "init": "Frozen -45 mV and cai=0/cao=2; original gate initialization, no extra reset",
+    "nmj_conductance_nS": 0.9,
+    "nmj_Vth_mV": -30,
+    "nmj_weight": 1,
+    "input": "Dense .00625 ms file from analytic -60 mV then cubic smooth blend over 250..350 ms into -32+6sin(2*pi*1.9*t/1000) mV; original frozen NMJ",
+    "input_convention": "Each neural interval [k*dt,(k+1)*dt) uses input file at its left endpoint. At record endpoints record the currently set peer input and separately the actually used previous-interval input. Common endpoint peer inputs must be bitwise identical. Same-dt synapse gates must be bitwise identical across four variants.",
+    "refinement": "Exactly the three stated steps for all four variants; no additional conditions or parameter search"
+  },
+  "controls": {
+    "variants": [
+      "original",
+      "both"
+    ],
+    "dt_ms": [
+      0.025,
+      0.0125,
+      0.00625
+    ],
+    "gates": {
+      "duration_ms": 600,
+      "voltage_mV": -10,
+      "SEClamp_rs_MOhm": 1e-09,
+      "gmax_all_zero": true,
+      "initial_states": [
+        0.8,
+        0.2,
+        0.7,
+        0.1,
+        0.6
+      ],
+      "reference": "xinf+(x0-xinf)*exp(-t/tau), coefficients from frozen MOD and measured fixed voltage",
+      "voltage_guard_mV": 1e-06,
+      "initial_distance_min": 0.05,
+      "max_state_abs_error": 1e-09
+    },
+    "pool": {
+      "duration_ms": 105,
+      "voltage_mV": -45,
+      "SEClamp_rs_MOhm": 1e-09,
+      "gmax_all_zero": true,
+      "initial_concentration_mM": 2e-07,
+      "actual_ica_mA_cm2": [
+        [
+          -0.002,
+          0,
+          50
+        ],
+        [
+          0,
+          50,
+          100
+        ],
+        [
+          0.002,
+          100,
+          105
+        ]
+      ],
+      "reference_window_ms": [
+        0,
+        100
+      ],
+      "stress_window_ms": [
+        100,
+        105
+      ],
+      "reference": "For actual measured source density J, dC/dt=(-1e6*J)*rho-(C-rest)/tau; piecewise analytic input/zero decay. Outward segment is sync/clipping stress only.",
+      "source_density_abs_tolerance_mA_cm2": 1e-12,
+      "total_current_abs_tolerance_nA": 1e-12,
+      "state_max_abs_error_mM": 1e-15,
+      "ion_sync_abs_tolerance_mM": 1e-15
+    }
+  },
+  "acceptance": {
+    "voltage_RMS_mV": 0.5,
+    "voltage_mean_abs_mV": 0.2,
+    "voltage_amplitude_relative": 0.05,
+    "voltage_amplitude_floor_mV": 1,
+    "calcium_scaled_stats_and_RMS": 0.05,
+    "calcium_scale_floor_mM": 1e-09,
+    "drive_scaled_stats_and_RMS": 0.05,
+    "drive_scale_floor": 0.001,
+    "gate_state_RMS": 0.01,
+    "scaling": "Finer reference q95-q05 with floors; statistics = mean/std/q05/q95; report state concentration and cai separately",
+    "improvement": "For combined vs original compare last-pair V RMS, STATE calcium scaled RMS, cai scaled RMS, drive scaled RMS. Report every ratio. Strong improvement requires all ratios<=0.5, except any original error already <=1/10 of its acceptance tolerance.",
+    "recommendation": "Consider full-system numerical validation only if code and combined analytic STATE controls pass, combined last-pair main gates all pass, and strong improvement holds. Any cache/ion residual remains separately disclosed; full-system convergence is never inferred."
+  },
+  "input_sha256": "c55ce5e1939e5faf7f4eefba8665ff4e3b441be6f1981d07f4ac75c05d14c920",
+  "source_manifest_sha256": "999c5244ee6be90f5bc36626d642685e1d1e0b0110908aeab17760ddc2bf23c2",
+  "helper_sha256": "970acd3408c48f4a454529d52b2f1bad4a6e4642f22a52766f65d2e28da735ac",
+  "prepare_script_sha256": "3fc9f61be6dafd7160606e227ed2db74fdc2bd7186f940353daed11762c7c94b"
+}

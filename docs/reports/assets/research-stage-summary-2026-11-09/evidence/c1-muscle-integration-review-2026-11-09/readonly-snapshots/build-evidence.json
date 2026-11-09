@@ -1,0 +1,265 @@
+{
+  "original": {
+    "changed_original_files": [],
+    "generated_states": {
+      "ca_boyle": {
+        "exponential_generated": false,
+        "code": "static int states (_internalthreadargsproto_) { {\n   rates ( _threadargs_ ) ;\n    e_q = e_q - dt*(- ( rate_e_q ) ) ;\n    f_q = f_q - dt*(- ( rate_f_q ) ) ;\n   }\n  return 0;\n}\n \n"
+      },
+      "k_fast": {
+        "exponential_generated": false,
+        "code": "static int states (_internalthreadargsproto_) { {\n   rates ( _threadargs_ ) ;\n    p_q = p_q - dt*(- ( rate_p_q ) ) ;\n    q_q = q_q - dt*(- ( rate_q_q ) ) ;\n   }\n  return 0;\n}\n \n"
+      },
+      "k_slow": {
+        "exponential_generated": false,
+        "code": "static int states (_internalthreadargsproto_) { {\n   rates ( _threadargs_ ) ;\n    n_q = n_q - dt*(- ( rate_n_q ) ) ;\n   }\n  return 0;\n}\n \n"
+      },
+      "CaPool": {
+        "exponential_generated": false,
+        "code": "static int states () {_reset=0;\n {\n   rates ( _threadargs_ ) ;\n    concentration = concentration - dt*(- ( rate_concentration ) ) ;\n   cai = concentration ;\n   }\n  return 0;\n}\n \n"
+      }
+    },
+    "sha256": {
+      "k_slow.mod": "bc382ba0f40324f79ce5edade3585dc6b5b4161c22284bb60ab9ff69801b076f",
+      "patch.diff": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ca_boyle.mod": "b6ba16dd9cd470ab57bcaadd5cbb4b0b8dcd967c50f5c9c990c5fd6e6eea60c0",
+      "CaPool.mod": "6d8758a9d0df1e051db8578971d1fadfebbaa6cf5c9689fe40a99cc47c927734",
+      "neuron_to_neuron_inh_syn.mod": "c0bd5d22756004612b6b01d522506e0b1240a4291e3114491aab45aa062fec87",
+      "neuron_to_neuron_elec_syn.mod": "f251b272cba1c1ad8a7090b05412fc4f2b4f95a9675be9325d24dc84ea4b988a",
+      "IntegrationCaInput.mod": "970acd3408c48f4a454529d52b2f1bad4a6e4642f22a52766f65d2e28da735ac",
+      "k_fast.mod": "64a040921099e2656cc1164bcb81e95fb6146052718192ac963f1b4ab2380e94",
+      "Leak.mod": "b71c3f17a72fe13576b7508917c4c51ba84e487e452f1bd36e0fc443732927ae",
+      "GenericNeuronCell.hoc": "9ae66653c0cb723c8918f9651b991ec27be446da53f40da480151e14ed5be05f",
+      "GenericMuscleCell.hoc": "261f0078d3d403cfdacc111368eb58a1210503decc531f32a5d78080d970adb2",
+      "BMotorPoint.mod": "f1cb3d1dccfafb702c1cc3ef52aef729cdc3dd06651e4877b527e03567c2a86a",
+      "neuron_to_neuron_exc_syn.mod": "3c3dd74d70952f77245fd4a0902f7e15ef4884e52dfce60a99923e2f31643816",
+      "build.log": "689640c838db9b46abcacdc09b8de36e9cd81ce607446811f4e58898a098bdc8",
+      "arm64/ca_boyle.o": "1e57a19a75442e3ee2ab87d9d6a5573fc1d40163b7712d0665a8bcaaf9cf0d5b",
+      "arm64/neuron_to_neuron_exc_syn.o": "59c884853065779128190fef8b684d007c120b82d7ac5327be16e6dcc1b528c1",
+      "arm64/neuron_to_neuron_inh_syn.cpp": "c1f08b52836822ed6e49538fe23c913592d820239e06e02be4c5c56a0fe54e3a",
+      "arm64/libnrnmech.dylib": "badce6e9ebefb3fdbf64557a29c8888a4807c01be5057484c86b5cc145441756",
+      "arm64/neuron_to_neuron_elec_syn.cpp": "f9c04d3bc4a4227f1ffdeebe7a866f238430a7d8063a5c2729bdb29cbe0635e3",
+      "arm64/IntegrationCaInput.cpp": "1faee387ae8d1228c2eaa8816fc753a39a633b1ca0d7854279d8890423a56993",
+      "arm64/BMotorPoint.o": "e7fd0721cd7194c4e1a840520336b60b7cddc3e50a76a6cb90a00d11f8aa422c",
+      "arm64/Leak.o": "60a8a3df8546eb8b970c74795a1b3c2e989bfeb7fdcc1888c13a1e850654251d",
+      "arm64/neuron_to_neuron_inh_syn.o": "f8a5242123179fbdc1c1297c2af09e35bc6ccee40acf981fbc4950d2287b2371",
+      "arm64/k_slow.cpp": "1a6170957b7de5b15b4d08ac7a9a316cd37da338b53e3d1cd1c3b229585cbae0",
+      "arm64/k_fast.o": "58aa4a59cd03c4f8c912dbd7ae6efde56495b80e54d335e2785c400b3d3ae41f",
+      "arm64/CaPool.cpp": "863b8c2741e0a148a00d14e359c83ad663c096f85695546f51b320cfeb73fce7",
+      "arm64/CaPool.o": "954101b8ac811ccb5270d2ad34876822edaff4cdaedea222e19c674933185d56",
+      "arm64/special.nrn": "70cac5f9118166eadca81fd7949d374a4b528771f71e712b0a9563f2faa6486b",
+      "arm64/IntegrationCaInput.o": "e338e13d891c624d05ea9a9ed5dd04f1e512f0e7e5682a7b32c5ff751bf26505",
+      "arm64/ca_boyle.cpp": "14eaa549e061c633a70ac0097af5d26e222a03962ab14ae138a90401e1e6a128",
+      "arm64/special": "bf79366269c98db445e6f3d475611c22e202702fafd790f84ab3b753c63daff1",
+      "arm64/neuron_to_neuron_elec_syn.o": "9ea306190cb395480cfedbe99dc2187310e036396e0b342a948e2c1e5f129d48",
+      "arm64/neuron_to_neuron_exc_syn.cpp": "2a9a8928c70a3b34543d9ef207cbb04fc10548f992f8f4463022054ba372169d",
+      "arm64/mod_func.o": "39a7afc11b343b7708a3c4a7f0de7d89c32703b31e554fa15063c9482e79aa67",
+      "arm64/BMotorPoint.cpp": "d844faa40a903d7642a9b76b6bf318b4ebb1c572fcd415a20d780ded3557b555",
+      "arm64/mod_func.cpp": "60aa113e560853a9a4cbb70211e1c78db91c9a81b24c56b01804f34fc2d8633f",
+      "arm64/k_fast.cpp": "a46a374b9b6caaae615e33c61f6da7771f51c6b6b70ce62b3657178ea901a03b",
+      "arm64/makemod2c_inc": "64989d6c51791c5defdc4d199ea7beca57d542b6b49fbcd197f0babbd811690e",
+      "arm64/Leak.cpp": "05038b93814d9e18bf5a935b58106ade0e775bbb1412ae0ca805e0e2c4e74da4",
+      "arm64/k_slow.o": "3efafef0e93c6425eaf9c1eb43f41ec0beed70dbee21ee8d5d0eb9c980722c19"
+    }
+  },
+  "gates": {
+    "changed_original_files": [
+      "ca_boyle.mod",
+      "k_fast.mod",
+      "k_slow.mod"
+    ],
+    "generated_states": {
+      "ca_boyle": {
+        "exponential_generated": true,
+        "code": "static int states (_internalthreadargsproto_) { {\n   rates ( _threadargs_ ) ;\n    e_q = e_q + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / e_tau)))*(- ( ( ( e_inf ) ) / e_tau ) / ( ( ( ( - 1.0 ) ) ) / e_tau ) - e_q) ;\n    f_q = f_q + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / f_tau)))*(- ( ( ( f_inf ) ) / f_tau ) / ( ( ( ( - 1.0 ) ) ) / f_tau ) - f_q) ;\n   }\n  return 0;\n}\n \n"
+      },
+      "k_fast": {
+        "exponential_generated": true,
+        "code": "static int states (_internalthreadargsproto_) { {\n   rates ( _threadargs_ ) ;\n    p_q = p_q + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / p_tau)))*(- ( ( ( p_inf ) ) / p_tau ) / ( ( ( ( - 1.0 ) ) ) / p_tau ) - p_q) ;\n    q_q = q_q + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / q_tau)))*(- ( ( ( q_inf ) ) / q_tau ) / ( ( ( ( - 1.0 ) ) ) / q_tau ) - q_q) ;\n   }\n  return 0;\n}\n \n"
+      },
+      "k_slow": {
+        "exponential_generated": true,
+        "code": "static int states (_internalthreadargsproto_) { {\n   rates ( _threadargs_ ) ;\n    n_q = n_q + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / n_tau)))*(- ( ( ( n_inf ) ) / n_tau ) / ( ( ( ( - 1.0 ) ) ) / n_tau ) - n_q) ;\n   }\n  return 0;\n}\n \n"
+      },
+      "CaPool": {
+        "exponential_generated": false,
+        "code": "static int states () {_reset=0;\n {\n   rates ( _threadargs_ ) ;\n    concentration = concentration - dt*(- ( rate_concentration ) ) ;\n   cai = concentration ;\n   }\n  return 0;\n}\n \n"
+      }
+    },
+    "sha256": {
+      "k_slow.mod": "e3d37dcfc6d808f3462ed949321842b58af07e0a52312c22df1c253c7fde4ed9",
+      "patch.diff": "9a966d169bdffdaa2fac1ce18258bc6ea23a458b8ec7439f62b7a0f98e290688",
+      "ca_boyle.mod": "9b2a6bcc4c7c36ae90536fcbaa6ae4a1cb71b2e446d9192ba8c48ab649059622",
+      "CaPool.mod": "6d8758a9d0df1e051db8578971d1fadfebbaa6cf5c9689fe40a99cc47c927734",
+      "neuron_to_neuron_inh_syn.mod": "c0bd5d22756004612b6b01d522506e0b1240a4291e3114491aab45aa062fec87",
+      "neuron_to_neuron_elec_syn.mod": "f251b272cba1c1ad8a7090b05412fc4f2b4f95a9675be9325d24dc84ea4b988a",
+      "IntegrationCaInput.mod": "970acd3408c48f4a454529d52b2f1bad4a6e4642f22a52766f65d2e28da735ac",
+      "k_fast.mod": "363e4e2e6422665c96fc74e559413bd160f5981a72bf80a2001572174aeb7ccd",
+      "Leak.mod": "b71c3f17a72fe13576b7508917c4c51ba84e487e452f1bd36e0fc443732927ae",
+      "GenericNeuronCell.hoc": "9ae66653c0cb723c8918f9651b991ec27be446da53f40da480151e14ed5be05f",
+      "GenericMuscleCell.hoc": "261f0078d3d403cfdacc111368eb58a1210503decc531f32a5d78080d970adb2",
+      "BMotorPoint.mod": "f1cb3d1dccfafb702c1cc3ef52aef729cdc3dd06651e4877b527e03567c2a86a",
+      "neuron_to_neuron_exc_syn.mod": "3c3dd74d70952f77245fd4a0902f7e15ef4884e52dfce60a99923e2f31643816",
+      "build.log": "368790cf28507ed39f4e0fa017d0d21c7aeb6cc97eff8d0ab4f33253808be44d",
+      "arm64/ca_boyle.o": "ea2feba631d6ec49ac4c4dd55d534534f008980713292485adaa9892507fb1f7",
+      "arm64/neuron_to_neuron_exc_syn.o": "23dd09b8e99255de988914fcd8318f9300c4fecaa25985f4d8c65958d8bfd197",
+      "arm64/neuron_to_neuron_inh_syn.cpp": "e0218c7bece6eef28b2c0944d93460d2fb3dfba56945416a52c95bf55b8222ae",
+      "arm64/libnrnmech.dylib": "34bb11b17fe8d85d60cf4718669407239e1c1677e61fce7850f9a58e1488968e",
+      "arm64/neuron_to_neuron_elec_syn.cpp": "76c936efe1678387ca2a852327a49d85f4ba516e7294fd78faf0956b5a784d7f",
+      "arm64/IntegrationCaInput.cpp": "d7cfc78f27348f998b9a590250077126ed1ea3c50baaa2123cc638d51112342d",
+      "arm64/BMotorPoint.o": "0af6caede2ccae4e62df40ed955bf6df9fa71e50fc5d6fffe32cace9c24ce809",
+      "arm64/Leak.o": "afd989d3fd0f277dab7474e171cd53cc8589b380b6acb31fbe210608e5e0d679",
+      "arm64/neuron_to_neuron_inh_syn.o": "aac8599949798cbb6f1dea5335787fddf145210e5bf30177221956e5bbcbb740",
+      "arm64/k_slow.cpp": "06ebbebd4dcc99f93059b22c33743f1faced2df4d7e28f87d67f33b788b05ac5",
+      "arm64/k_fast.o": "14b5bd65f4fc14f0fb2f88253a3eaff86a4c9416ebf442db276c6ec8f5ccbb00",
+      "arm64/CaPool.cpp": "c1ce9179233b20bd806e6614cfbd6369185b6549713d42a4dd740191acc37009",
+      "arm64/CaPool.o": "2624b15b0faf1bcf424f48a7605fbcffea00a8520ff7a958c0144d31a203f128",
+      "arm64/special.nrn": "70cac5f9118166eadca81fd7949d374a4b528771f71e712b0a9563f2faa6486b",
+      "arm64/IntegrationCaInput.o": "10657126c46cc1d99e9b0c7a59533906f063f859b49ae5fb5a2809564056f570",
+      "arm64/ca_boyle.cpp": "f6b84607ea7f78d0bd6184973f45805c6243ebeb4fb1773d11d1e033802a6304",
+      "arm64/special": "bf79366269c98db445e6f3d475611c22e202702fafd790f84ab3b753c63daff1",
+      "arm64/neuron_to_neuron_elec_syn.o": "512d49f8314057967648e5a381aac5cc68920d25f5295359d0017fcceef04790",
+      "arm64/neuron_to_neuron_exc_syn.cpp": "f8da5d86d383a1d9541f22d917777102575343891afae54ba5ca2cad29376606",
+      "arm64/mod_func.o": "39a7afc11b343b7708a3c4a7f0de7d89c32703b31e554fa15063c9482e79aa67",
+      "arm64/BMotorPoint.cpp": "ce2495bee7dc45e2531c5f1bab80274265e6c3ea5279e9ee03778c9c34595bde",
+      "arm64/mod_func.cpp": "60aa113e560853a9a4cbb70211e1c78db91c9a81b24c56b01804f34fc2d8633f",
+      "arm64/k_fast.cpp": "479c9ad74428bf0ea90e6f205dca9c6ff82b2299d3396c057da7f3859086ecd4",
+      "arm64/makemod2c_inc": "68e527814e5deb007beca3ad59dc17909d538ca47cf8055224380ea4ceb51443",
+      "arm64/Leak.cpp": "c03fc157cb3cd06b15f1c29677f1bd9bd6522143c7c6d009d2cfc137bf8d9cde",
+      "arm64/k_slow.o": "8b272bb743a641447735f81a2dd6ebc933c5b87c34c14b986eab35951c460dbb"
+    }
+  },
+  "pool": {
+    "changed_original_files": [
+      "CaPool.mod"
+    ],
+    "generated_states": {
+      "ca_boyle": {
+        "exponential_generated": false,
+        "code": "static int states (_internalthreadargsproto_) { {\n   rates ( _threadargs_ ) ;\n    e_q = e_q - dt*(- ( rate_e_q ) ) ;\n    f_q = f_q - dt*(- ( rate_f_q ) ) ;\n   }\n  return 0;\n}\n \n"
+      },
+      "k_fast": {
+        "exponential_generated": false,
+        "code": "static int states (_internalthreadargsproto_) { {\n   rates ( _threadargs_ ) ;\n    p_q = p_q - dt*(- ( rate_p_q ) ) ;\n    q_q = q_q - dt*(- ( rate_q_q ) ) ;\n   }\n  return 0;\n}\n \n"
+      },
+      "k_slow": {
+        "exponential_generated": false,
+        "code": "static int states (_internalthreadargsproto_) { {\n   rates ( _threadargs_ ) ;\n    n_q = n_q - dt*(- ( rate_n_q ) ) ;\n   }\n  return 0;\n}\n \n"
+      },
+      "CaPool": {
+        "exponential_generated": true,
+        "code": "static int states () {_reset=0;\n {\n   rates ( _threadargs_ ) ;\n    concentration = concentration + (1. - exp(dt*(( - ( ( 1.0 ) ) / decayConstant ))))*(- ( ( ( ( iCa ) / surfaceArea ) )*( rho ) - ( ( ( - restingConc ) ) ) / decayConstant ) / ( ( - ( ( 1.0 ) ) / decayConstant ) ) - concentration) ;\n   cai = concentration ;\n   }\n  return 0;\n}\n \n"
+      }
+    },
+    "sha256": {
+      "k_slow.mod": "bc382ba0f40324f79ce5edade3585dc6b5b4161c22284bb60ab9ff69801b076f",
+      "patch.diff": "1301d1a52480dce0b756ee4d30bfefa2b7ee21d423b8f0ba26529d694e07662a",
+      "ca_boyle.mod": "b6ba16dd9cd470ab57bcaadd5cbb4b0b8dcd967c50f5c9c990c5fd6e6eea60c0",
+      "CaPool.mod": "599ae95eab1e3f452ff5d3ba706400790e0f65e49723f8fde65e81a9e46cae9a",
+      "neuron_to_neuron_inh_syn.mod": "c0bd5d22756004612b6b01d522506e0b1240a4291e3114491aab45aa062fec87",
+      "neuron_to_neuron_elec_syn.mod": "f251b272cba1c1ad8a7090b05412fc4f2b4f95a9675be9325d24dc84ea4b988a",
+      "IntegrationCaInput.mod": "970acd3408c48f4a454529d52b2f1bad4a6e4642f22a52766f65d2e28da735ac",
+      "k_fast.mod": "64a040921099e2656cc1164bcb81e95fb6146052718192ac963f1b4ab2380e94",
+      "Leak.mod": "b71c3f17a72fe13576b7508917c4c51ba84e487e452f1bd36e0fc443732927ae",
+      "GenericNeuronCell.hoc": "9ae66653c0cb723c8918f9651b991ec27be446da53f40da480151e14ed5be05f",
+      "GenericMuscleCell.hoc": "261f0078d3d403cfdacc111368eb58a1210503decc531f32a5d78080d970adb2",
+      "BMotorPoint.mod": "f1cb3d1dccfafb702c1cc3ef52aef729cdc3dd06651e4877b527e03567c2a86a",
+      "neuron_to_neuron_exc_syn.mod": "3c3dd74d70952f77245fd4a0902f7e15ef4884e52dfce60a99923e2f31643816",
+      "build.log": "da5121869181972c23a6cc648c4c04f537bf1b886f2a64f90d9b9e8b80bb4cb0",
+      "arm64/ca_boyle.o": "c904ca0bb224dd88c1b188300118791d4e8440ec072ef6c2c46edf3639a7830c",
+      "arm64/neuron_to_neuron_exc_syn.o": "37c9cb4dd9d1f552b7f77549b40cac4d424acbef33e78ad4e24d0433e8c124d9",
+      "arm64/neuron_to_neuron_inh_syn.cpp": "0a2d54b48d66b2538410fc70430e09365df0da2c00671980a8da48467c4bb7fe",
+      "arm64/libnrnmech.dylib": "972a01975d925bd2c7b39fa6f1d43f77a595a1847c5d407c00746189c62c5970",
+      "arm64/neuron_to_neuron_elec_syn.cpp": "414b73eb46dd226755c79a8e0d2962fc333872d36e52e76ef2ad8c6f9f50bdd9",
+      "arm64/IntegrationCaInput.cpp": "4bf1ec765fa30669a758111b47cf6307db8aee12b385cfd4ff2e76d45489e48d",
+      "arm64/BMotorPoint.o": "15c38c453d8d2382b88cf6642aa4f661700bb78e1708ea69a686e95c9cc80df2",
+      "arm64/Leak.o": "ce5d3499816002eb6ed4e0082342d979ce844807b5a8578d4d945329be07031e",
+      "arm64/neuron_to_neuron_inh_syn.o": "c981dea761ec71e5613b6f7ede982692c680c4122125d50587708b2146a3b7af",
+      "arm64/k_slow.cpp": "9cbf94744b3f61eee0ee92c9ee620fa2f47ec5e2c57f626c481e5e8468fdb52e",
+      "arm64/k_fast.o": "1df7152c63a9d2de3ff4f56d1b1c47fc90bdda5b99f1c60bb16a75e4a6d71886",
+      "arm64/CaPool.cpp": "95949cda0718a002c9d82199f13e8a506c0973fd6706bf07927342d83c71edaf",
+      "arm64/CaPool.o": "f17e378cefa338f547d66151088836215d06d232ff6e10d93fecea422c499249",
+      "arm64/special.nrn": "70cac5f9118166eadca81fd7949d374a4b528771f71e712b0a9563f2faa6486b",
+      "arm64/IntegrationCaInput.o": "fb8e94aeceae3eb11aebafeddc71b2effc06ab48f59f5cdc29a8c42c16f463ba",
+      "arm64/ca_boyle.cpp": "94c1b65756b263c1e0aa491daf6ebabbd803fc438ddaeba2a21e4003ea0845b2",
+      "arm64/special": "bf79366269c98db445e6f3d475611c22e202702fafd790f84ab3b753c63daff1",
+      "arm64/neuron_to_neuron_elec_syn.o": "3b5bba7815462dd1a90e98e1339baa76a5c69e8a08a522112c1c3725cf580209",
+      "arm64/neuron_to_neuron_exc_syn.cpp": "261a8194a2ea5fec50c42f80c2ee06304851b847d38467e19596bd7f7c92e5a5",
+      "arm64/mod_func.o": "39a7afc11b343b7708a3c4a7f0de7d89c32703b31e554fa15063c9482e79aa67",
+      "arm64/BMotorPoint.cpp": "59c340d80ccb26f44caacfb222e276386f091a6ad40f9e87a31dae8ac7f8481e",
+      "arm64/mod_func.cpp": "60aa113e560853a9a4cbb70211e1c78db91c9a81b24c56b01804f34fc2d8633f",
+      "arm64/k_fast.cpp": "5e992cfe951d47cb8bfcae13efc3c18f75dd2d2dab41c9f78d5ebf58cec0df9f",
+      "arm64/makemod2c_inc": "e1dfae9d692ae18c9aff4b31a92491d2ae426ed75413d7415bf9d5f3da597209",
+      "arm64/Leak.cpp": "c1aef5a5b9701f7db070ab85a2a82db352550908765462a14c02966ca0af773f",
+      "arm64/k_slow.o": "ac88bac0510d9f778fd7729ff6de1b3afbd64c50ad00ed1979de068c1ee9d153"
+    }
+  },
+  "both": {
+    "changed_original_files": [
+      "CaPool.mod",
+      "ca_boyle.mod",
+      "k_fast.mod",
+      "k_slow.mod"
+    ],
+    "generated_states": {
+      "ca_boyle": {
+        "exponential_generated": true,
+        "code": "static int states (_internalthreadargsproto_) { {\n   rates ( _threadargs_ ) ;\n    e_q = e_q + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / e_tau)))*(- ( ( ( e_inf ) ) / e_tau ) / ( ( ( ( - 1.0 ) ) ) / e_tau ) - e_q) ;\n    f_q = f_q + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / f_tau)))*(- ( ( ( f_inf ) ) / f_tau ) / ( ( ( ( - 1.0 ) ) ) / f_tau ) - f_q) ;\n   }\n  return 0;\n}\n \n"
+      },
+      "k_fast": {
+        "exponential_generated": true,
+        "code": "static int states (_internalthreadargsproto_) { {\n   rates ( _threadargs_ ) ;\n    p_q = p_q + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / p_tau)))*(- ( ( ( p_inf ) ) / p_tau ) / ( ( ( ( - 1.0 ) ) ) / p_tau ) - p_q) ;\n    q_q = q_q + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / q_tau)))*(- ( ( ( q_inf ) ) / q_tau ) / ( ( ( ( - 1.0 ) ) ) / q_tau ) - q_q) ;\n   }\n  return 0;\n}\n \n"
+      },
+      "k_slow": {
+        "exponential_generated": true,
+        "code": "static int states (_internalthreadargsproto_) { {\n   rates ( _threadargs_ ) ;\n    n_q = n_q + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / n_tau)))*(- ( ( ( n_inf ) ) / n_tau ) / ( ( ( ( - 1.0 ) ) ) / n_tau ) - n_q) ;\n   }\n  return 0;\n}\n \n"
+      },
+      "CaPool": {
+        "exponential_generated": true,
+        "code": "static int states () {_reset=0;\n {\n   rates ( _threadargs_ ) ;\n    concentration = concentration + (1. - exp(dt*(( - ( ( 1.0 ) ) / decayConstant ))))*(- ( ( ( ( iCa ) / surfaceArea ) )*( rho ) - ( ( ( - restingConc ) ) ) / decayConstant ) / ( ( - ( ( 1.0 ) ) / decayConstant ) ) - concentration) ;\n   cai = concentration ;\n   }\n  return 0;\n}\n \n"
+      }
+    },
+    "sha256": {
+      "k_slow.mod": "e3d37dcfc6d808f3462ed949321842b58af07e0a52312c22df1c253c7fde4ed9",
+      "patch.diff": "b2c7d5f3380e9e054664378aef1bceda1d6593fdde7a703a7c7bc88282e18d66",
+      "ca_boyle.mod": "9b2a6bcc4c7c36ae90536fcbaa6ae4a1cb71b2e446d9192ba8c48ab649059622",
+      "CaPool.mod": "599ae95eab1e3f452ff5d3ba706400790e0f65e49723f8fde65e81a9e46cae9a",
+      "neuron_to_neuron_inh_syn.mod": "c0bd5d22756004612b6b01d522506e0b1240a4291e3114491aab45aa062fec87",
+      "neuron_to_neuron_elec_syn.mod": "f251b272cba1c1ad8a7090b05412fc4f2b4f95a9675be9325d24dc84ea4b988a",
+      "IntegrationCaInput.mod": "970acd3408c48f4a454529d52b2f1bad4a6e4642f22a52766f65d2e28da735ac",
+      "k_fast.mod": "363e4e2e6422665c96fc74e559413bd160f5981a72bf80a2001572174aeb7ccd",
+      "Leak.mod": "b71c3f17a72fe13576b7508917c4c51ba84e487e452f1bd36e0fc443732927ae",
+      "GenericNeuronCell.hoc": "9ae66653c0cb723c8918f9651b991ec27be446da53f40da480151e14ed5be05f",
+      "GenericMuscleCell.hoc": "261f0078d3d403cfdacc111368eb58a1210503decc531f32a5d78080d970adb2",
+      "BMotorPoint.mod": "f1cb3d1dccfafb702c1cc3ef52aef729cdc3dd06651e4877b527e03567c2a86a",
+      "neuron_to_neuron_exc_syn.mod": "3c3dd74d70952f77245fd4a0902f7e15ef4884e52dfce60a99923e2f31643816",
+      "build.log": "90044fcd78ace9a64b8aac4d42c50a88a0fe89300fe76efdd9857c9b19cf8c21",
+      "arm64/ca_boyle.o": "c1e606ac08c3343803cd53bb87c46d6e2a011d5b3067a729b8f900f8243dc87e",
+      "arm64/neuron_to_neuron_exc_syn.o": "7476bf21795f36fe3ef18a6b1f08842db508360f629355f0ed38b71afcbbf480",
+      "arm64/neuron_to_neuron_inh_syn.cpp": "b0b6d9c2e7796bf376c0dbcd7fdb82da4c86c24a596df3a012532af351d0840c",
+      "arm64/libnrnmech.dylib": "b2245e992100e876780ae7e7cec6925cb8882042fad17219270ba086aff568c6",
+      "arm64/neuron_to_neuron_elec_syn.cpp": "11690f0de3fd969ac1aa4fc2e98887d4483ece019fe17910b99e6e7f109177c6",
+      "arm64/IntegrationCaInput.cpp": "c8aeaff073abd9b07e40fc1c79cd5f37754192186072f2c7256b60c01ad76d0d",
+      "arm64/BMotorPoint.o": "eb8c487f4b9595e7f7022de2a140efc5e781856b2ec9fd2c52fe5606a2e33105",
+      "arm64/Leak.o": "5d4e4342e3fb06234d8995ebe983f3b7f06c736539b17e43299f59a32fc3f77c",
+      "arm64/neuron_to_neuron_inh_syn.o": "20f0cee5bf25a0d58b1229568a1a668fe32b0983985a91836f348f6e8978a8a4",
+      "arm64/k_slow.cpp": "51e6aa7ad93af47f2f8642e705ab87f0eb6d502b0b6d09fa2d04abde7d152b71",
+      "arm64/k_fast.o": "9095ac754bdb53317bc6cb72f61696750808f88f73c73d4f0a58aa56c6b91745",
+      "arm64/CaPool.cpp": "eab06a3100c494195c56529337fae03b0a77284b23caf03a200ac9ac02f318b2",
+      "arm64/CaPool.o": "31e014f512403307c208d86543612ae364abfa9385a2599663c0dc614179dc2b",
+      "arm64/special.nrn": "70cac5f9118166eadca81fd7949d374a4b528771f71e712b0a9563f2faa6486b",
+      "arm64/IntegrationCaInput.o": "fa30190dce279986002cd72af98054237d9d2915def88bdab7652ca944a38250",
+      "arm64/ca_boyle.cpp": "dd41f77d95a155ae14a61e6611d1b7b68b85f91a42204bbc5d3fc839f3aa5820",
+      "arm64/special": "bf79366269c98db445e6f3d475611c22e202702fafd790f84ab3b753c63daff1",
+      "arm64/neuron_to_neuron_elec_syn.o": "7ade51d21d58b78d9a8374ef3195a5c32a32b1e27f18c6499627321d637485fc",
+      "arm64/neuron_to_neuron_exc_syn.cpp": "d9eacbca13e6b005a0c891122b5650442520cc81fbd7fe07b5794bf189e6735d",
+      "arm64/mod_func.o": "39a7afc11b343b7708a3c4a7f0de7d89c32703b31e554fa15063c9482e79aa67",
+      "arm64/BMotorPoint.cpp": "ba6ee9a9b2ac840f65cec976daffa3c9626f5839d110243526e6adea5a9fe5c6",
+      "arm64/mod_func.cpp": "60aa113e560853a9a4cbb70211e1c78db91c9a81b24c56b01804f34fc2d8633f",
+      "arm64/k_fast.cpp": "e6f9132464174c41437ca1f44c9023726bc5b2daaf59d1dd352a347b426dba9d",
+      "arm64/makemod2c_inc": "7b66f8a38ca5da5833691160aced021e9d9004007147127836e96a4698002e16",
+      "arm64/Leak.cpp": "404d2d412c2c34003aacedc84afab2c1c3b9f1768a3cf73b6220c776bf4228fc",
+      "arm64/k_slow.o": "a51bcd8f83282c69885cf6b2c609b6779be9dc4f826355de816f782ec4ac5eee"
+    }
+  }
+}

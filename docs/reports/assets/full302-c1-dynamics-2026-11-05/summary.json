@@ -1,0 +1,321 @@
+{
+  "complete": true,
+  "full302_dynamics_run": true,
+  "neurons": 302,
+  "muscles": 95,
+  "chemical_connections": 4665,
+  "chemical_neuron_entries": 3709,
+  "chemical_nmj_entries": 956,
+  "gap_pairs": 1192,
+  "gap_point_processes": 2384,
+  "diagonal_gap_entries_omitted": 14,
+  "component_pair": {
+    "max_abs_difference": {
+      "neuron_voltage_V": 4.999881945966234e-09,
+      "muscle_voltage_V": 4.99996179875728e-09,
+      "muscle_calcium_mM": 4.999568563376939e-14
+    },
+    "passed": true,
+    "scope": "two-cell kernel reconstruction, not the full302 test"
+  },
+  "records": [
+    {
+      "path": "background",
+      "name": "background",
+      "dt_ms": 0.05,
+      "duration_s": 1.0,
+      "neurons": 302,
+      "muscles": 95,
+      "chemical_connections": 4665,
+      "gap_pairs": 1192,
+      "lesioned_edges": 0,
+      "neuron_voltage_range_mV": [
+        -58.13720071437577,
+        -45.0
+      ],
+      "muscle_voltage_range_mV": [
+        -58.87084007360053,
+        -45.0
+      ],
+      "calcium_range_mM": [
+        0.0,
+        3.675472868525741e-12
+      ],
+      "max_gap_pair_current_imbalance_nA": 0.0,
+      "nonfinite": false,
+      "neural_training": false,
+      "mechanical_feedback_injected": false,
+      "wall_s": 10.437342916964553,
+      "trace_sha256": "6d326da4a5a5c9607848537436435d08e15275374c2f21e9ccfa2ee2ef7bbc5c",
+      "complete": true
+    },
+    {
+      "path": "AS2_pulse",
+      "name": "AS2_pulse",
+      "dt_ms": 0.05,
+      "duration_s": 1.0,
+      "neurons": 302,
+      "muscles": 95,
+      "chemical_connections": 4665,
+      "gap_pairs": 1192,
+      "lesioned_edges": 0,
+      "neuron_voltage_range_mV": [
+        -59.03186803078536,
+        34.74146081919704
+      ],
+      "muscle_voltage_range_mV": [
+        -58.87084032673414,
+        -29.669086183156654
+      ],
+      "calcium_range_mM": [
+        0.0,
+        4.2455283602399486e-10
+      ],
+      "max_gap_pair_current_imbalance_nA": 0.0,
+      "nonfinite": false,
+      "neural_training": false,
+      "mechanical_feedback_injected": false,
+      "wall_s": 10.86036895797588,
+      "trace_sha256": "1e1af37edb63c0462255aa4dbaf2fd5473f7a120b5daa11a93d8e59b36e54cd2",
+      "complete": true
+    },
+    {
+      "path": "AS2_nmj_lesion",
+      "name": "AS2_nmj_lesion",
+      "dt_ms": 0.05,
+      "duration_s": 1.0,
+      "neurons": 302,
+      "muscles": 95,
+      "chemical_connections": 4665,
+      "gap_pairs": 1192,
+      "lesioned_edges": 6,
+      "neuron_voltage_range_mV": [
+        -59.031868274011465,
+        34.74146081913579
+      ],
+      "muscle_voltage_range_mV": [
+        -58.870840326754916,
+        -45.0
+      ],
+      "calcium_range_mM": [
+        0.0,
+        3.675472868525741e-12
+      ],
+      "max_gap_pair_current_imbalance_nA": 0.0,
+      "nonfinite": false,
+      "neural_training": false,
+      "mechanical_feedback_injected": false,
+      "wall_s": 10.850012250011787,
+      "trace_sha256": "cd038bc3e0e3665ad57f4bf532471d23d185d28371a6ec995e54ff5e896f43f6",
+      "complete": true
+    },
+    {
+      "path": "AFD_pulse",
+      "name": "AFD_pulse",
+      "dt_ms": 0.05,
+      "duration_s": 1.0,
+      "neurons": 302,
+      "muscles": 95,
+      "chemical_connections": 4665,
+      "gap_pairs": 1192,
+      "lesioned_edges": 0,
+      "neuron_voltage_range_mV": [
+        -67.88564029803548,
+        34.27503146260837
+      ],
+      "muscle_voltage_range_mV": [
+        -58.61291715446929,
+        18.2246996659171
+      ],
+      "calcium_range_mM": [
+        0.0,
+        2.39605505607079e-07
+      ],
+      "max_gap_pair_current_imbalance_nA": 0.0,
+      "nonfinite": false,
+      "neural_training": false,
+      "mechanical_feedback_injected": false,
+      "wall_s": 10.867278791964054,
+      "trace_sha256": "c9d1b8f4623bc43b78acc90980ba87c1ae118cc16ccb10555b2b4c52337dafb5",
+      "complete": true
+    },
+    {
+      "path": "AS2_pulse-halfdt",
+      "name": "AS2_pulse",
+      "dt_ms": 0.025,
+      "duration_s": 1.0,
+      "neurons": 302,
+      "muscles": 95,
+      "chemical_connections": 4665,
+      "gap_pairs": 1192,
+      "lesioned_edges": 0,
+      "neuron_voltage_range_mV": [
+        -59.03245194437666,
+        34.88680428796443
+      ],
+      "muscle_voltage_range_mV": [
+        -58.87085993027949,
+        -29.68513479289177
+      ],
+      "calcium_range_mM": [
+        0.0,
+        4.228086735385493e-10
+      ],
+      "max_gap_pair_current_imbalance_nA": 0.0,
+      "nonfinite": false,
+      "neural_training": false,
+      "mechanical_feedback_injected": false,
+      "wall_s": 18.660309540922754,
+      "trace_sha256": "883d1d5572077180077064f468f735729fce309a9ae8de506495c246e5ae0dd8",
+      "complete": true
+    },
+    {
+      "path": "AFD_pulse-halfdt",
+      "name": "AFD_pulse",
+      "dt_ms": 0.025,
+      "duration_s": 1.0,
+      "neurons": 302,
+      "muscles": 95,
+      "chemical_connections": 4665,
+      "gap_pairs": 1192,
+      "lesioned_edges": 0,
+      "neuron_voltage_range_mV": [
+        -67.87642213095843,
+        34.52526293373082
+      ],
+      "muscle_voltage_range_mV": [
+        -58.61340730940983,
+        18.551712394210547
+      ],
+      "calcium_range_mM": [
+        0.0,
+        2.400620383223737e-07
+      ],
+      "max_gap_pair_current_imbalance_nA": 0.0,
+      "nonfinite": false,
+      "neural_training": false,
+      "mechanical_feedback_injected": false,
+      "wall_s": 18.67105995793827,
+      "trace_sha256": "3d49e74a30c46b683b1a265a1a17d052edde937baef3adf13ad63f12dde420e0",
+      "complete": true
+    },
+    {
+      "path": "numerical-quarterstep/AFD_pulse-halfdt",
+      "name": "AFD_pulse",
+      "dt_ms": 0.0125,
+      "duration_s": 1.0,
+      "neurons": 302,
+      "muscles": 95,
+      "chemical_connections": 4665,
+      "gap_pairs": 1192,
+      "lesioned_edges": 0,
+      "neuron_voltage_range_mV": [
+        -67.87160009384391,
+        34.630269560266264
+      ],
+      "muscle_voltage_range_mV": [
+        -58.613655629300645,
+        18.625385478243004
+      ],
+      "calcium_range_mM": [
+        0.0,
+        2.402636729667199e-07
+      ],
+      "max_gap_pair_current_imbalance_nA": 0.0,
+      "nonfinite": false,
+      "neural_training": false,
+      "mechanical_feedback_injected": false,
+      "wall_s": 36.27185570797883,
+      "trace_sha256": "2a162f2674a921ab03338ded842b4c47b291cf02adfdd81c58e0a47664f95235",
+      "complete": true
+    }
+  ],
+  "responses": [
+    {
+      "name": "background",
+      "max_neuron_voltage_change_mV": 0.0,
+      "max_muscle_voltage_change_mV": 0.0,
+      "max_muscle_calcium_change_mM": 0.0,
+      "AS2_target_calcium_delta_rms_mM": 0.0,
+      "max_body_point_displacement_um": 0.0,
+      "max_rod_angle_change_rad": 0.0,
+      "max_command": 4.410256946388943e-06,
+      "max_filtered_muscle": 1.4649129154834238e-06
+    },
+    {
+      "name": "AS2_pulse",
+      "max_neuron_voltage_change_mV": 92.85401400365072,
+      "max_muscle_voltage_change_mV": 27.067012780612437,
+      "max_muscle_calcium_change_mM": 4.242982243824441e-10,
+      "AS2_target_calcium_delta_rms_mM": 7.425838656390823e-11,
+      "max_body_point_displacement_um": 1.059770656618022e-06,
+      "max_rod_angle_change_rad": 3.7121692608721446e-08,
+      "max_command": 0.0005085860968125576,
+      "max_filtered_muscle": 0.00015434675866837137
+    },
+    {
+      "name": "AS2_nmj_lesion",
+      "max_neuron_voltage_change_mV": 92.85401400358947,
+      "max_muscle_voltage_change_mV": 0.38145705733185764,
+      "max_muscle_calcium_change_mM": 2.4022021368031472e-14,
+      "AS2_target_calcium_delta_rms_mM": 4.8096093662108926e-15,
+      "max_body_point_displacement_um": 7.153961364620915e-13,
+      "max_rod_angle_change_rad": 3.1308289294429414e-14,
+      "max_command": 4.410256946388943e-06,
+      "max_filtered_muscle": 1.4649129154834685e-06
+    },
+    {
+      "name": "AFD_pulse",
+      "max_neuron_voltage_change_mV": 92.38493291602325,
+      "max_muscle_voltage_change_mV": 74.96221854736743,
+      "max_muscle_calcium_change_mM": 2.396052501088502e-07,
+      "AS2_target_calcium_delta_rms_mM": 3.1204872161395517e-08,
+      "max_body_point_displacement_um": 0.09831599335712066,
+      "max_rod_angle_change_rad": 0.001688865304805498,
+      "max_command": 0.1454142668210064,
+      "max_filtered_muscle": 0.03832082625253447
+    }
+  ],
+  "AS2_lesion": {
+    "edges_removed": 6,
+    "AS2_voltage_max_difference_mV": 4.4695681822304323e-07,
+    "target_calcium_delta_rms_ratio": 6.476856808721057e-05
+  },
+  "numerical_checks": [
+    {
+      "reference": "AS2_pulse",
+      "refined": "AS2_pulse-halfdt",
+      "max_neuron_voltage_difference_mV": 0.4934894132665253,
+      "neuron_voltage_difference_rms_mV": 0.005982031709755577,
+      "max_muscle_voltage_difference_mV": 0.10617407606493146,
+      "calcium_relative_rms": 0.004120398983641996,
+      "max_body_point_difference_um": 5.041543770297188e-09
+    },
+    {
+      "reference": "AFD_pulse",
+      "refined": "AFD_pulse-halfdt",
+      "max_neuron_voltage_difference_mV": 11.57000160815561,
+      "neuron_voltage_difference_rms_mV": 0.378878770231332,
+      "max_muscle_voltage_difference_mV": 2.491046768323276,
+      "calcium_relative_rms": 0.025027829260879802,
+      "max_body_point_difference_um": 0.0008438765965509077
+    },
+    {
+      "reference": "AFD_pulse-halfdt",
+      "refined": "numerical-quarterstep/AFD_pulse-halfdt",
+      "max_neuron_voltage_difference_mV": 7.088320000922501,
+      "neuron_voltage_difference_rms_mV": 0.1963694311546748,
+      "max_muscle_voltage_difference_mV": 1.2209651575690152,
+      "calcium_relative_rms": 0.01272698122814263,
+      "max_body_point_difference_um": 0.00042415206352182985
+    }
+  ],
+  "all_source_and_input_hashes_match": true,
+  "project_tests": 221,
+  "neural_fits": 0,
+  "physical_feedback_injected": false,
+  "local_temperature_input": false,
+  "scope": "persistent c302 C1 components with all302 anatomy and feedforward mechanical coupling; not cellwise physiological calibration or thermotaxis",
+  "unresolved_sign_policy": "GABA-labelled sources inhibitory; every other source explicitly assumed excitatory, not receptor resolved",
+  "efficacy_policy": "unit anatomical mask times C1 base conductance; no EM-to-efficacy inference, no fitted weights"
+}

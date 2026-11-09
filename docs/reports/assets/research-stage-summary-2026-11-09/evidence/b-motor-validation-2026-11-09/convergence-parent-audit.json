@@ -1,0 +1,13 @@
+{
+  "branch": "convergence",
+  "parent_independent_review": true,
+  "archive_sha256": "ab63155a8c5b45a96c4f3c183b59886ba96934190b89fc268d4b8cf547c9780d",
+  "payload_files": 140,
+  "CRC_passed": true,
+  "payload_hashes_passed": true,
+  "summary_byte_identical": true,
+  "analysis_and_independent_audit_passed": true,
+  "convergence_accepted": false,
+  "new_simulations": 0,
+  "extracted_to": "/var/folders/0g/wkglj6h97wjfjd3jyv54n7_00000gn/T/worm-main-review-convergence-bjhkq9gj"
+}

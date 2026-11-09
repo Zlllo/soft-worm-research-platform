@@ -1,0 +1,268 @@
+{
+  "status": "static_source_review_complete_waiting_for_A_materials",
+  "scope": "independent read-only; zero NEURON imports or scientific simulations",
+  "source_hashes": {
+    "results/b-motor-convergence-2026-11-09/kernels/ca_boyle.mod": "b6ba16dd9cd470ab57bcaadd5cbb4b0b8dcd967c50f5c9c990c5fd6e6eea60c0",
+    "results/b-motor-convergence-2026-11-09/kernels/k_fast.mod": "64a040921099e2656cc1164bcb81e95fb6146052718192ac963f1b4ab2380e94",
+    "results/b-motor-convergence-2026-11-09/kernels/k_slow.mod": "bc382ba0f40324f79ce5edade3585dc6b5b4161c22284bb60ab9ff69801b076f",
+    "results/b-motor-convergence-2026-11-09/kernels/CaPool.mod": "6d8758a9d0df1e051db8578971d1fadfebbaa6cf5c9689fe40a99cc47c927734",
+    "results/b-motor-convergence-2026-11-09/kernels/GenericMuscleCell.hoc": "261f0078d3d403cfdacc111368eb58a1210503decc531f32a5d78080d970adb2",
+    "results/b-motor-convergence-2026-11-09/kernels/GenericNeuronCell.hoc": "9ae66653c0cb723c8918f9651b991ec27be446da53f40da480151e14ed5be05f",
+    "results/b-motor-convergence-2026-11-09/kernels/neuron_to_neuron_exc_syn.mod": "3c3dd74d70952f77245fd4a0902f7e15ef4884e52dfce60a99923e2f31643816",
+    "results/b-motor-convergence-2026-11-09/kernels/arm64/ca_boyle.cpp": "b6827344d3633b0aefa99cc99c347e537e9885b03685ccdd4297fd813cfafeaa",
+    "results/b-motor-convergence-2026-11-09/kernels/arm64/k_fast.cpp": "2b158679239030e6c6941050a4216cb980beff57bcae49d238104517bb2a211f",
+    "results/b-motor-convergence-2026-11-09/kernels/arm64/k_slow.cpp": "96ff2ca7e47c056a1d6aaba667e845e5ebc222491533a873c014724d08631b76",
+    "results/b-motor-convergence-2026-11-09/kernels/arm64/CaPool.cpp": "df739980ade1775be8118fbd9b73914cc7ac63a5ab29c2296c2b071eb316c7a2",
+    "docs/c1-muscle-integration-isolation-2026-11-09.md": "421b0cee8eaeea432ad0827b4f4500b3f616f9bea170f1aa4f35b14125a5a892",
+    "results/b-motor-convergence-2026-11-09/numerical-diagnostic.md": "a7d54cfac5ee166f245beff8499eee46de16483a8062662299669ba279bdf53d",
+    "results/b-motor-convergence-2026-11-09/numerical-diagnostic-evidence.json": "f25274fe427a8208672815b8963f3d29b7d31a0fb8ada584c0906763667db531"
+  },
+  "verified_facts": {
+    "source_files_match_frozen_input_manifest": true,
+    "all_five_generated_gate_updates_are_Euler": true,
+    "CaPool_generated_update_is_Euler": true,
+    "gate_default_initial_values_are_steady_state": true,
+    "gate_power_caches_are_preupdate_and_not_refreshed_in_current": true,
+    "pool_cai_assignment_precedes_separate_negative_clip": true,
+    "shared_mechanisms_used_by_neurons_and_muscles": true
+  },
+  "gates": [
+    {
+      "mechanism": "ca_boyle",
+      "state": "e_q",
+      "tau_ms": 0.100027,
+      "default_initial": "steady state, so analytic tests must override after initialization",
+      "frozen_state_method": "explicit Euler confirmed from generated states()",
+      "cached_power_in_rates_before_state_update": true,
+      "current_reads_cached_power_without_refresh": true,
+      "closed_form": "x_inf+(x0-x_inf)*exp(-t/tau)",
+      "scalar_relaxation": [
+        {
+          "dt_ms": 0.025,
+          "dt_over_tau": 0.24993251822008059,
+          "Euler_fraction": 0.24993251822008059,
+          "exact_fraction": 0.2211466602922631,
+          "relative_increment_error": 0.13016636963802508
+        },
+        {
+          "dt_ms": 0.0125,
+          "dt_over_tau": 0.12496625911004029,
+          "Euler_fraction": 0.12496625911004029,
+          "exact_fraction": 0.11747332068218079,
+          "relative_increment_error": 0.06378417145567328
+        },
+        {
+          "dt_ms": 0.00625,
+          "dt_over_tau": 0.062483129555020146,
+          "Euler_fraction": 0.062483129555020146,
+          "exact_fraction": 0.060571088736449834,
+          "relative_increment_error": 0.031566888732837084
+        }
+      ]
+    },
+    {
+      "mechanism": "ca_boyle",
+      "state": "f_q",
+      "tau_ms": 150.88,
+      "default_initial": "steady state, so analytic tests must override after initialization",
+      "frozen_state_method": "explicit Euler confirmed from generated states()",
+      "cached_power_in_rates_before_state_update": true,
+      "current_reads_cached_power_without_refresh": true,
+      "closed_form": "x_inf+(x0-x_inf)*exp(-t/tau)",
+      "scalar_relaxation": [
+        {
+          "dt_ms": 0.025,
+          "dt_over_tau": 0.000165694591728526,
+          "Euler_fraction": 0.000165694591728526,
+          "exact_fraction": 0.00016568086513781303,
+          "relative_increment_error": 8.284958375570639e-05
+        },
+        {
+          "dt_ms": 0.0125,
+          "dt_over_tau": 8.2847295864263e-05,
+          "Euler_fraction": 8.2847295864263e-05,
+          "exact_fraction": 8.284386412181784e-05,
+          "relative_increment_error": 4.142421990493972e-05
+        },
+        {
+          "dt_ms": 0.00625,
+          "dt_over_tau": 4.14236479321315e-05,
+          "Euler_fraction": 4.14236479321315e-05,
+          "exact_fraction": 4.1422789984673974e-05,
+          "relative_increment_error": 2.0711966959297e-05
+        }
+      ]
+    },
+    {
+      "mechanism": "k_fast",
+      "state": "p_q",
+      "tau_ms": 2.25518,
+      "default_initial": "steady state, so analytic tests must override after initialization",
+      "frozen_state_method": "explicit Euler confirmed from generated states()",
+      "cached_power_in_rates_before_state_update": true,
+      "current_reads_cached_power_without_refresh": true,
+      "closed_form": "x_inf+(x0-x_inf)*exp(-t/tau)",
+      "scalar_relaxation": [
+        {
+          "dt_ms": 0.025,
+          "dt_over_tau": 0.011085589620340727,
+          "Euler_fraction": 0.011085589620340727,
+          "exact_fraction": 0.011024370895767495,
+          "relative_increment_error": 0.005553035647297921
+        },
+        {
+          "dt_ms": 0.0125,
+          "dt_over_tau": 0.005542794810170363,
+          "Euler_fraction": 0.005542794810170363,
+          "exact_fraction": 0.005527461865219476,
+          "relative_increment_error": 0.002773957618299905
+        },
+        {
+          "dt_ms": 0.00625,
+          "dt_over_tau": 0.0027713974050851816,
+          "Euler_fraction": 0.0027713974050851816,
+          "exact_fraction": 0.0027675606285260217,
+          "relative_increment_error": 0.0013863387560919538
+        }
+      ]
+    },
+    {
+      "mechanism": "k_fast",
+      "state": "q_q",
+      "tau_ms": 149.963,
+      "default_initial": "steady state, so analytic tests must override after initialization",
+      "frozen_state_method": "explicit Euler confirmed from generated states()",
+      "cached_power_in_rates_before_state_update": true,
+      "current_reads_cached_power_without_refresh": true,
+      "closed_form": "x_inf+(x0-x_inf)*exp(-t/tau)",
+      "scalar_relaxation": [
+        {
+          "dt_ms": 0.025,
+          "dt_over_tau": 0.00016670778792102054,
+          "Euler_fraction": 0.00016670778792102054,
+          "exact_fraction": 0.00016669389294988782,
+          "relative_increment_error": 8.335620991761772e-05
+        },
+        {
+          "dt_ms": 0.0125,
+          "dt_over_tau": 8.335389396051027e-05,
+          "Euler_fraction": 8.335389396051027e-05,
+          "exact_fraction": 8.33504201212111e-05,
+          "relative_increment_error": 4.167752596950791e-05
+        },
+        {
+          "dt_ms": 0.00625,
+          "dt_over_tau": 4.1676946980255136e-05,
+          "Euler_fraction": 4.1676946980255136e-05,
+          "exact_fraction": 4.1676078508365464e-05,
+          "relative_increment_error": 2.083861823742872e-05
+        }
+      ]
+    },
+    {
+      "mechanism": "k_slow",
+      "state": "n_q",
+      "tau_ms": 25.0007,
+      "default_initial": "steady state, so analytic tests must override after initialization",
+      "frozen_state_method": "explicit Euler confirmed from generated states()",
+      "cached_power_in_rates_before_state_update": true,
+      "current_reads_cached_power_without_refresh": true,
+      "closed_form": "x_inf+(x0-x_inf)*exp(-t/tau)",
+      "scalar_relaxation": [
+        {
+          "dt_ms": 0.025,
+          "dt_over_tau": 0.0009999720007839781,
+          "Euler_fraction": 0.0009999720007839781,
+          "exact_fraction": 0.0009994721953938159,
+          "relative_increment_error": 0.0005000693290575509
+        },
+        {
+          "dt_ms": 0.0125,
+          "dt_over_tau": 0.0004999860003919891,
+          "Euler_fraction": 0.0004999860003919891,
+          "exact_fraction": 0.0004998610282206749,
+          "relative_increment_error": 0.00025001383236267216
+        },
+        {
+          "dt_ms": 0.00625,
+          "dt_over_tau": 0.00024999300019599454,
+          "Euler_fraction": 0.00024999300019599454,
+          "exact_fraction": 0.00024996175454970623,
+          "relative_increment_error": 0.0001250017081397825
+        }
+      ]
+    }
+  ],
+  "CaPool_units": {
+    "ica_units": "mA/cm2, outward positive",
+    "surface_area_cm2": "area_um2 * 1e-8",
+    "iCa_nA": "-ica_mA_per_cm2 * surface_area_cm2 * 1e6",
+    "source_units": "umol/cm3/ms = mM/ms",
+    "rho_value": 2.38919e-12,
+    "rho_units": "umol/cm/nA/ms",
+    "rho_SI_equivalent_mol_per_m_A_s": 0.00023891899999999998,
+    "decay_ms": 11.5943,
+    "resting_mM": 0.0,
+    "source_per_density": -2.3891899999999997e-06,
+    "source_expression": "S_mM_per_ms = -1e6 * rho * measured_ica_mA_per_cm2",
+    "fixed_input_closed_form": "C(t)=C_inf+(C0-C_inf)*exp(-t/decay); C_inf=rest+decay*S",
+    "exact_step": "C_next=C_inf+(C_old-C_inf)*exp(-dt/decay)",
+    "clipping_boundary": "unclipped analytic solution applies while C>=0; negative-input clipping and cai synchronization are separate diagnostics",
+    "illustrative_not_measured": [
+      {
+        "ica_mA_per_cm2": -0.01,
+        "source_mM_per_ms": 2.3891899999999998e-08,
+        "unclipped_steady_mM": 2.7700985617e-07
+      },
+      {
+        "ica_mA_per_cm2": -0.001,
+        "source_mM_per_ms": 2.3891899999999997e-09,
+        "unclipped_steady_mM": 2.7700985617e-08
+      },
+      {
+        "ica_mA_per_cm2": 0.0,
+        "source_mM_per_ms": -0.0,
+        "unclipped_steady_mM": 0.0
+      },
+      {
+        "ica_mA_per_cm2": 0.001,
+        "source_mM_per_ms": -2.3891899999999997e-09,
+        "unclipped_steady_mM": -2.7700985617e-08
+      }
+    ]
+  },
+  "review_contract": {
+    "variants": [
+      "frozen",
+      "gates_only",
+      "pool_only",
+      "combined"
+    ],
+    "allowed_changes": "only derivative RHS for five gate states and/or CaPool.concentration",
+    "protected": [
+      "all PARAMETER/UNITS/NEURON/INITIAL blocks",
+      "rates() and current cache operations",
+      "CaPool cai assignment and negative clipping order",
+      "hoc geometry, capacitance and conductances",
+      "synaptic mechanism, conductance and actual input",
+      "initialization and concentration synchronization"
+    ],
+    "saved_data_checks": [
+      "non-steady actual first gate states, actual fixed voltage and constant tau",
+      "CaPool measured ica converted using density units, not nominal point current",
+      "STATE concentration compared to analytic recurrence independently of cai",
+      "all four actual presynaptic inputs identical at common times; distinguish voltage input from output synaptic s/current",
+      "dense data sufficient to resolve 0.100027ms gate; all state/cache/current/concentration/drive arrays saved",
+      "preregistered duration, windows, floors and error gates unchanged after runs",
+      "paired-step errors and original failures retained; no full-system inference from isolated muscle"
+    ]
+  },
+  "issues": [],
+  "pending": [
+    "A frozen new protocol and lock",
+    "four MOD variants and generated states()",
+    "fixed-voltage gate and measured-CaPool-input saved controls",
+    "12 isolated muscle datasets and dense applied inputs",
+    "A summary and conclusion boundary"
+  ]
+}

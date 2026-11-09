@@ -1,0 +1,1316 @@
+{
+  "protocol_sha256": "1ab547aba2bfc5982e5806ee5777a51a6a87066c0a1714d1c5cdcc4b7d10e33f",
+  "controls": {
+    "gates_original_dt0.025": {
+      "max_voltage_deviation_mV": 0.0,
+      "states": {
+        "e_q": {
+          "initial": 0.8,
+          "steady": 0.27201190994014923,
+          "tau_ms": 0.100027,
+          "analytic_max_error": 0.027169535501964825,
+          "Euler_closed_form_max_error": 1.1102230246251565e-16,
+          "analytic_pass": false
+        },
+        "f_q": {
+          "initial": 0.2,
+          "steady": 0.9990815346860011,
+          "tau_ms": 150.88,
+          "analytic_max_error": 2.4355942269904673e-05,
+          "Euler_closed_form_max_error": 3.552713678800501e-15,
+          "analytic_pass": false
+        },
+        "p_q": {
+          "initial": 0.7,
+          "steady": 0.43480681432484464,
+          "tau_ms": 2.25518,
+          "analytic_max_error": 0.0005432638887080676,
+          "Euler_closed_form_max_error": 2.4980018054066022e-15,
+          "analytic_pass": false
+        },
+        "q_q": {
+          "initial": 0.1,
+          "steady": 0.3621619105006223,
+          "tau_ms": 149.963,
+          "analytic_max_error": 8.039539487747493e-06,
+          "Euler_closed_form_max_error": 1.3877787807814457e-15,
+          "analytic_pass": false
+        },
+        "n_q": {
+          "initial": 0.6,
+          "steady": 0.13185469582043138,
+          "tau_ms": 25.0007,
+          "analytic_max_error": 8.614400130740885e-05,
+          "Euler_closed_form_max_error": 6.106226635438361e-16,
+          "analytic_pass": false
+        }
+      },
+      "analytic_pass": false
+    },
+    "gates_original_dt0.0125": {
+      "max_voltage_deviation_mV": 0.0,
+      "states": {
+        "e_q": {
+          "initial": 0.8,
+          "steady": 0.27201190994014923,
+          "tau_ms": 0.100027,
+          "analytic_max_error": 0.012811011055089583,
+          "Euler_closed_form_max_error": 2.220446049250313e-16,
+          "analytic_pass": false
+        },
+        "f_q": {
+          "initial": 0.2,
+          "steady": 0.9990815346860011,
+          "tau_ms": 150.88,
+          "analytic_max_error": 1.2177550726466535e-05,
+          "Euler_closed_form_max_error": 4.3298697960381105e-15,
+          "analytic_pass": false
+        },
+        "p_q": {
+          "initial": 0.7,
+          "steady": 0.43480681432484464,
+          "tau_ms": 2.25518,
+          "analytic_max_error": 0.00027100141066105365,
+          "Euler_closed_form_max_error": 4.9960036108132044e-15,
+          "analytic_pass": false
+        },
+        "q_q": {
+          "initial": 0.1,
+          "steady": 0.3621619105006223,
+          "tau_ms": 149.963,
+          "analytic_max_error": 4.019630127249929e-06,
+          "Euler_closed_form_max_error": 2.0539125955565396e-15,
+          "analytic_pass": false
+        },
+        "n_q": {
+          "initial": 0.6,
+          "steady": 0.13185469582043138,
+          "tau_ms": 25.0007,
+          "analytic_max_error": 4.306302442891319e-05,
+          "Euler_closed_form_max_error": 9.992007221626409e-16,
+          "analytic_pass": false
+        }
+      },
+      "analytic_pass": false
+    },
+    "gates_original_dt0.00625": {
+      "max_voltage_deviation_mV": 0.0,
+      "states": {
+        "e_q": {
+          "initial": 0.8,
+          "steady": 0.27201190994014923,
+          "tau_ms": 0.100027,
+          "analytic_max_error": 0.006231362564038834,
+          "Euler_closed_form_max_error": 4.440892098500626e-16,
+          "analytic_pass": false
+        },
+        "f_q": {
+          "initial": 0.2,
+          "steady": 0.9990815346860011,
+          "tau_ms": 150.88,
+          "analytic_max_error": 6.0886702636375745e-06,
+          "Euler_closed_form_max_error": 8.659739592076221e-15,
+          "analytic_pass": false
+        },
+        "p_q": {
+          "initial": 0.7,
+          "steady": 0.43480681432484464,
+          "tau_ms": 2.25518,
+          "analytic_max_error": 0.0001353438118573136,
+          "Euler_closed_form_max_error": 9.992007221626409e-15,
+          "analytic_pass": false
+        },
+        "q_q": {
+          "initial": 0.1,
+          "steady": 0.3621619105006223,
+          "tau_ms": 149.963,
+          "analytic_max_error": 2.0097801613494504e-06,
+          "Euler_closed_form_max_error": 3.83026943495679e-15,
+          "analytic_pass": false
+        },
+        "n_q": {
+          "initial": 0.6,
+          "steady": 0.13185469582043138,
+          "tau_ms": 25.0007,
+          "analytic_max_error": 2.152926899878782e-05,
+          "Euler_closed_form_max_error": 1.27675647831893e-15,
+          "analytic_pass": false
+        }
+      },
+      "analytic_pass": false
+    },
+    "gates_both_dt0.025": {
+      "max_voltage_deviation_mV": 0.0,
+      "states": {
+        "e_q": {
+          "initial": 0.8,
+          "steady": 0.27201190994014923,
+          "tau_ms": 0.100027,
+          "analytic_max_error": 1.1102230246251565e-16,
+          "Euler_closed_form_max_error": 0.02716953550196488,
+          "analytic_pass": true
+        },
+        "f_q": {
+          "initial": 0.2,
+          "steady": 0.9990815346860011,
+          "tau_ms": 150.88,
+          "analytic_max_error": 2.8310687127941492e-14,
+          "Euler_closed_form_max_error": 2.435594229621696e-05,
+          "analytic_pass": true
+        },
+        "p_q": {
+          "initial": 0.7,
+          "steady": 0.43480681432484464,
+          "tau_ms": 2.25518,
+          "analytic_max_error": 2.4980018054066022e-15,
+          "Euler_closed_form_max_error": 0.0005432638887080676,
+          "analytic_pass": true
+        },
+        "q_q": {
+          "initial": 0.1,
+          "steady": 0.3621619105006223,
+          "tau_ms": 149.963,
+          "analytic_max_error": 7.327471962526033e-15,
+          "Euler_closed_form_max_error": 8.039539495352521e-06,
+          "analytic_pass": true
+        },
+        "n_q": {
+          "initial": 0.6,
+          "steady": 0.13185469582043138,
+          "tau_ms": 25.0007,
+          "analytic_max_error": 9.103828801926284e-15,
+          "Euler_closed_form_max_error": 8.614400129886013e-05,
+          "analytic_pass": true
+        }
+      },
+      "analytic_pass": true
+    },
+    "gates_both_dt0.0125": {
+      "max_voltage_deviation_mV": 0.0,
+      "states": {
+        "e_q": {
+          "initial": 0.8,
+          "steady": 0.27201190994014923,
+          "tau_ms": 0.100027,
+          "analytic_max_error": 2.220446049250313e-16,
+          "Euler_closed_form_max_error": 0.01281101105508975,
+          "analytic_pass": true
+        },
+        "f_q": {
+          "initial": 0.2,
+          "steady": 0.9990815346860011,
+          "tau_ms": 150.88,
+          "analytic_max_error": 3.652633751016765e-14,
+          "Euler_closed_form_max_error": 1.2177550688829974e-05,
+          "analytic_pass": true
+        },
+        "p_q": {
+          "initial": 0.7,
+          "steady": 0.43480681432484464,
+          "tau_ms": 2.25518,
+          "analytic_max_error": 4.9960036108132044e-15,
+          "Euler_closed_form_max_error": 0.0002710014106607206,
+          "analytic_pass": true
+        },
+        "q_q": {
+          "initial": 0.1,
+          "steady": 0.3621619105006223,
+          "tau_ms": 149.963,
+          "analytic_max_error": 1.6819878823071122e-14,
+          "Euler_closed_form_max_error": 4.019630143126118e-06,
+          "analytic_pass": true
+        },
+        "n_q": {
+          "initial": 0.6,
+          "steady": 0.13185469582043138,
+          "tau_ms": 25.0007,
+          "analytic_max_error": 1.2712053631958042e-14,
+          "Euler_closed_form_max_error": 4.3063024440792574e-05,
+          "analytic_pass": true
+        }
+      },
+      "analytic_pass": true
+    },
+    "gates_both_dt0.00625": {
+      "max_voltage_deviation_mV": 0.0,
+      "states": {
+        "e_q": {
+          "initial": 0.8,
+          "steady": 0.27201190994014923,
+          "tau_ms": 0.100027,
+          "analytic_max_error": 4.440892098500626e-16,
+          "Euler_closed_form_max_error": 0.006231362564039222,
+          "analytic_pass": true
+        },
+        "f_q": {
+          "initial": 0.2,
+          "steady": 0.9990815346860011,
+          "tau_ms": 150.88,
+          "analytic_max_error": 1.9528823003156504e-13,
+          "Euler_closed_form_max_error": 6.088670460924206e-06,
+          "analytic_pass": true
+        },
+        "p_q": {
+          "initial": 0.7,
+          "steady": 0.43480681432484464,
+          "tau_ms": 2.25518,
+          "analytic_max_error": 9.992007221626409e-15,
+          "Euler_closed_form_max_error": 0.0001353438118564254,
+          "analytic_pass": true
+        },
+        "q_q": {
+          "initial": 0.1,
+          "steady": 0.3621619105006223,
+          "tau_ms": 149.963,
+          "analytic_max_error": 2.1149748619109232e-14,
+          "Euler_closed_form_max_error": 2.0097801812779537e-06,
+          "analytic_pass": true
+        },
+        "n_q": {
+          "initial": 0.6,
+          "steady": 0.13185469582043138,
+          "tau_ms": 25.0007,
+          "analytic_max_error": 1.049160758270773e-14,
+          "Euler_closed_form_max_error": 2.1529268989517458e-05,
+          "analytic_pass": true
+        }
+      },
+      "analytic_pass": true
+    },
+    "pool_original_dt0.025": {
+      "measured_density_max_error_mA_cm2": 0.0,
+      "total_inward_current_max_error_nA": 8.673617379884035e-19,
+      "initial_total_current_cache_error_nA": 0.006283185307179587,
+      "source_mM_per_ms": 4.778379999999999e-09,
+      "inward_steady_mM": 5.5401971233999995e-08,
+      "reference_state_max_error_mM": 5.7401551522829485e-11,
+      "reference_cai_max_error_mM": 5.7401551522829485e-11,
+      "analytic_STATE_pass": false,
+      "reference_sync_max_error_mM": 0.0,
+      "zero_input_decay_max_error_mM": 2.275873725731704e-11,
+      "stress_sync_max_error_mM": 1.1945950000000002e-10,
+      "stress_min_STATE_mM": 0.0,
+      "stress_min_cai_mM": -1.1945950000000002e-10,
+      "clipped_saved_state_recurrence_max_error_mM": 2.6469779601696886e-23,
+      "exposed_cai_vs_unclipped_step_max_error_mM": 2.6469779601696886e-23
+    },
+    "pool_original_dt0.0125": {
+      "measured_density_max_error_mA_cm2": 0.0,
+      "total_inward_current_max_error_nA": 8.673617379884035e-19,
+      "initial_total_current_cache_error_nA": 0.006283185307179587,
+      "source_mM_per_ms": 4.778379999999999e-09,
+      "inward_steady_mM": 5.5401971233999995e-08,
+      "reference_state_max_error_mM": 2.8687884347126835e-11,
+      "reference_cai_max_error_mM": 2.8687884347126835e-11,
+      "analytic_STATE_pass": false,
+      "reference_sync_max_error_mM": 0.0,
+      "zero_input_decay_max_error_mM": 1.1375149888269944e-11,
+      "stress_sync_max_error_mM": 5.972975000000001e-11,
+      "stress_min_STATE_mM": 0.0,
+      "stress_min_cai_mM": -5.972975000000001e-11,
+      "clipped_saved_state_recurrence_max_error_mM": 2.6469779601696886e-23,
+      "exposed_cai_vs_unclipped_step_max_error_mM": 2.6469779601696886e-23
+    },
+    "pool_original_dt0.00625": {
+      "measured_density_max_error_mA_cm2": 0.0,
+      "total_inward_current_max_error_nA": 8.673617379884035e-19,
+      "initial_total_current_cache_error_nA": 0.006283185307179587,
+      "source_mM_per_ms": 4.778379999999999e-09,
+      "inward_steady_mM": 5.5401971233999995e-08,
+      "reference_state_max_error_mM": 1.4340719533172428e-11,
+      "reference_cai_max_error_mM": 1.4340719533172428e-11,
+      "analytic_STATE_pass": false,
+      "reference_sync_max_error_mM": 0.0,
+      "zero_input_decay_max_error_mM": 5.686520342013556e-12,
+      "stress_sync_max_error_mM": 2.9864875000000004e-11,
+      "stress_min_STATE_mM": 0.0,
+      "stress_min_cai_mM": -2.9864875000000004e-11,
+      "clipped_saved_state_recurrence_max_error_mM": 6.617444900424222e-24,
+      "exposed_cai_vs_unclipped_step_max_error_mM": 6.617444900424222e-24
+    },
+    "pool_both_dt0.025": {
+      "measured_density_max_error_mA_cm2": 0.0,
+      "total_inward_current_max_error_nA": 8.673617379884035e-19,
+      "initial_total_current_cache_error_nA": 0.006283185307179587,
+      "source_mM_per_ms": 4.778379999999999e-09,
+      "inward_steady_mM": 5.5401971233999995e-08,
+      "reference_state_max_error_mM": 2.117582368135751e-22,
+      "reference_cai_max_error_mM": 2.117582368135751e-22,
+      "analytic_STATE_pass": true,
+      "reference_sync_max_error_mM": 0.0,
+      "zero_input_decay_max_error_mM": 4.632211430296955e-23,
+      "stress_sync_max_error_mM": 1.1933080132320698e-10,
+      "stress_min_STATE_mM": 0.0,
+      "stress_min_cai_mM": -1.1933080132320698e-10,
+      "clipped_saved_state_recurrence_max_error_mM": 2.6469779601696886e-23,
+      "exposed_cai_vs_unclipped_step_max_error_mM": 2.6469779601696886e-23
+    },
+    "pool_both_dt0.0125": {
+      "measured_density_max_error_mA_cm2": 0.0,
+      "total_inward_current_max_error_nA": 8.673617379884035e-19,
+      "initial_total_current_cache_error_nA": 0.006283185307179587,
+      "source_mM_per_ms": 4.778379999999999e-09,
+      "inward_steady_mM": 5.5401971233999995e-08,
+      "reference_state_max_error_mM": 1.376428539288238e-21,
+      "reference_cai_max_error_mM": 1.376428539288238e-21,
+      "analytic_STATE_pass": true,
+      "reference_sync_max_error_mM": 0.0,
+      "zero_input_decay_max_error_mM": 4.963083675318166e-22,
+      "stress_sync_max_error_mM": 5.969756376916474e-11,
+      "stress_min_STATE_mM": 0.0,
+      "stress_min_cai_mM": -5.969756376916474e-11,
+      "clipped_saved_state_recurrence_max_error_mM": 2.6469779601696886e-23,
+      "exposed_cai_vs_unclipped_step_max_error_mM": 2.6469779601696886e-23
+    },
+    "pool_both_dt0.00625": {
+      "measured_density_max_error_mA_cm2": 0.0,
+      "total_inward_current_max_error_nA": 8.673617379884035e-19,
+      "initial_total_current_cache_error_nA": 0.006283185307179587,
+      "source_mM_per_ms": 4.778379999999999e-09,
+      "inward_steady_mM": 5.5401971233999995e-08,
+      "reference_state_max_error_mM": 4.367513634279986e-22,
+      "reference_cai_max_error_mM": 4.367513634279986e-22,
+      "analytic_STATE_pass": true,
+      "reference_sync_max_error_mM": 0.0,
+      "zero_input_decay_max_error_mM": 1.0587911840678754e-22,
+      "stress_sync_max_error_mM": 2.9856826996502614e-11,
+      "stress_min_STATE_mM": 0.0,
+      "stress_min_cai_mM": -2.9856826996502614e-11,
+      "clipped_saved_state_recurrence_max_error_mM": 2.6469779601696886e-23,
+      "exposed_cai_vs_unclipped_step_max_error_mM": 2.6469779601696886e-23
+    }
+  },
+  "main_runs": {
+    "main_original_dt0.025": {
+      "trace_sha256": "7174dc4ff4e66c7b7e60e3827201607b5774a6ddf5d179c0336287b6b1ce3c41",
+      "runner_sha256": "a28e6b1ccdbdff9c2acee3062ca33a7f578a1b8813da681887752deef1bacc9b",
+      "rows": 320001,
+      "input_endpoint_and_previous_interval_exact": true,
+      "caches": {
+        "e": {
+          "previous_state_power_max_error": 1.1102230246251565e-16,
+          "current_state_power_RMS_difference": 0.0006387079260686888,
+          "initial_cache_difference": -4.346355949287135e-06
+        },
+        "f": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 2.1878529961417345e-06,
+          "initial_cache_difference": -0.9999991238294378
+        },
+        "p": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 0.0005412585017403652,
+          "initial_cache_difference": -2.2142273730617894e-09
+        },
+        "q": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 2.951097997159183e-05,
+          "initial_cache_difference": -0.949926438824327
+        },
+        "n": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 6.118287301426605e-05,
+          "initial_cache_difference": -0.01642009003820853
+        }
+      },
+      "max_cai_STATE_difference_mM": 0.0,
+      "voltage_range_mV": [
+        -53.076082745364644,
+        13.890049094606214
+      ]
+    },
+    "main_original_dt0.0125": {
+      "trace_sha256": "466dadfef5be2f778964ae6c458ea3efb3b34b6a2a3b2bfa5e4930d7a765960c",
+      "runner_sha256": "a28e6b1ccdbdff9c2acee3062ca33a7f578a1b8813da681887752deef1bacc9b",
+      "rows": 320001,
+      "input_endpoint_and_previous_interval_exact": true,
+      "caches": {
+        "e": {
+          "previous_state_power_max_error": 1.1102230246251565e-16,
+          "current_state_power_RMS_difference": 0.0003201049611211146,
+          "initial_cache_difference": -4.346355949287135e-06
+        },
+        "f": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 1.094907605247146e-06,
+          "initial_cache_difference": -0.9999991238294378
+        },
+        "p": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 0.0002708406763474733,
+          "initial_cache_difference": -2.2142273730617894e-09
+        },
+        "q": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 1.474470540506488e-05,
+          "initial_cache_difference": -0.949926438824327
+        },
+        "n": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 3.058083592800579e-05,
+          "initial_cache_difference": -0.01642009003820853
+        }
+      },
+      "max_cai_STATE_difference_mM": 0.0,
+      "voltage_range_mV": [
+        -53.07605491002126,
+        13.905290672600932
+      ]
+    },
+    "main_original_dt0.00625": {
+      "trace_sha256": "6b3d52bb84b8404afb7d0d50e90f36fea93e98e6a1cad5b5d0e94f39d880b7bc",
+      "runner_sha256": "a28e6b1ccdbdff9c2acee3062ca33a7f578a1b8813da681887752deef1bacc9b",
+      "rows": 320001,
+      "input_endpoint_and_previous_interval_exact": true,
+      "caches": {
+        "e": {
+          "previous_state_power_max_error": 1.1102230246251565e-16,
+          "current_state_power_RMS_difference": 0.00016024129443530859,
+          "initial_cache_difference": -4.346355949287135e-06
+        },
+        "f": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 5.477010561408039e-07,
+          "initial_cache_difference": -0.9999991238294378
+        },
+        "p": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 0.00013547310677318903,
+          "initial_cache_difference": -2.2142273730617894e-09
+        },
+        "q": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 7.369662533773849e-06,
+          "initial_cache_difference": -0.949926438824327
+        },
+        "n": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 1.5287774048079344e-05,
+          "initial_cache_difference": -0.01642009003820853
+        }
+      },
+      "max_cai_STATE_difference_mM": 0.0,
+      "voltage_range_mV": [
+        -53.076040967767035,
+        13.912938163373296
+      ]
+    },
+    "main_gates_dt0.025": {
+      "trace_sha256": "cd0cf99191223bce36005972f1f9684a1d5061d7ba52b498dd3f45f97b0be0ed",
+      "runner_sha256": "a28e6b1ccdbdff9c2acee3062ca33a7f578a1b8813da681887752deef1bacc9b",
+      "rows": 320001,
+      "input_endpoint_and_previous_interval_exact": true,
+      "caches": {
+        "e": {
+          "previous_state_power_max_error": 1.1102230246251565e-16,
+          "current_state_power_RMS_difference": 0.0006349936070862902,
+          "initial_cache_difference": -4.346355949287135e-06
+        },
+        "f": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 2.180722366804449e-06,
+          "initial_cache_difference": -0.9999991238294378
+        },
+        "p": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 0.0005388487158538987,
+          "initial_cache_difference": -2.2142273730617894e-09
+        },
+        "q": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 2.954673088777604e-05,
+          "initial_cache_difference": -0.949926438824327
+        },
+        "n": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 6.114498392133695e-05,
+          "initial_cache_difference": -0.01642009003820853
+        }
+      },
+      "max_cai_STATE_difference_mM": 0.0,
+      "voltage_range_mV": [
+        -53.076159067311075,
+        13.855464874110963
+      ]
+    },
+    "main_gates_dt0.0125": {
+      "trace_sha256": "ea1c4110ca48ef090c34f6d4adc110228229409a840ee80a30b3133e518befaf",
+      "runner_sha256": "a28e6b1ccdbdff9c2acee3062ca33a7f578a1b8813da681887752deef1bacc9b",
+      "rows": 320001,
+      "input_endpoint_and_previous_interval_exact": true,
+      "caches": {
+        "e": {
+          "previous_state_power_max_error": 1.1102230246251565e-16,
+          "current_state_power_RMS_difference": 0.0003191851941793493,
+          "initial_cache_difference": -4.346355949287135e-06
+        },
+        "f": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 1.0931693853603672e-06,
+          "initial_cache_difference": -0.9999991238294378
+        },
+        "p": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 0.00027024624638810873,
+          "initial_cache_difference": -2.2142273730617894e-09
+        },
+        "q": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 1.4753374338006457e-05,
+          "initial_cache_difference": -0.949926438824327
+        },
+        "n": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 3.057150510254124e-05,
+          "initial_cache_difference": -0.01642009003820853
+        }
+      },
+      "max_cai_STATE_difference_mM": 0.0,
+      "voltage_range_mV": [
+        -53.076093073292895,
+        13.888453112951199
+      ]
+    },
+    "main_gates_dt0.00625": {
+      "trace_sha256": "06c1f4f691ccfa14d4688b83a81e8846f48f258205dfa48f8d6b8b23ad7adf6b",
+      "runner_sha256": "a28e6b1ccdbdff9c2acee3062ca33a7f578a1b8813da681887752deef1bacc9b",
+      "rows": 320001,
+      "input_endpoint_and_previous_interval_exact": true,
+      "caches": {
+        "e": {
+          "previous_state_power_max_error": 1.1102230246251565e-16,
+          "current_state_power_RMS_difference": 0.00016001248605282978,
+          "initial_cache_difference": -4.346355949287135e-06
+        },
+        "f": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 5.47272112503275e-07,
+          "initial_cache_difference": -0.9999991238294378
+        },
+        "p": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 0.00013532550994889623,
+          "initial_cache_difference": -2.2142273730617894e-09
+        },
+        "q": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 7.371795994290883e-06,
+          "initial_cache_difference": -0.949926438824327
+        },
+        "n": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 1.528545891622522e-05,
+          "initial_cache_difference": -0.01642009003820853
+        }
+      },
+      "max_cai_STATE_difference_mM": 0.0,
+      "voltage_range_mV": [
+        -53.076060051967026,
+        13.904633405664802
+      ]
+    },
+    "main_pool_dt0.025": {
+      "trace_sha256": "452ca21fee5213bad9af31c85ffcde58819bf5550203937133b476b3fcd85c8b",
+      "runner_sha256": "a28e6b1ccdbdff9c2acee3062ca33a7f578a1b8813da681887752deef1bacc9b",
+      "rows": 320001,
+      "input_endpoint_and_previous_interval_exact": true,
+      "caches": {
+        "e": {
+          "previous_state_power_max_error": 1.1102230246251565e-16,
+          "current_state_power_RMS_difference": 0.0006388165282118079,
+          "initial_cache_difference": -4.346355949287135e-06
+        },
+        "f": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 2.18820001573821e-06,
+          "initial_cache_difference": -0.9999991238294378
+        },
+        "p": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 0.0005413014778816157,
+          "initial_cache_difference": -2.2142273730617894e-09
+        },
+        "q": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 2.951072667392176e-05,
+          "initial_cache_difference": -0.949926438824327
+        },
+        "n": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 6.118501121748402e-05,
+          "initial_cache_difference": -0.01642009003820853
+        }
+      },
+      "max_cai_STATE_difference_mM": 0.0,
+      "voltage_range_mV": [
+        -53.076082745364644,
+        13.891404891949412
+      ]
+    },
+    "main_pool_dt0.0125": {
+      "trace_sha256": "66da67853982a6535bf3b1bbcd2f12574f3c559bd698a7c33b40990fcec58538",
+      "runner_sha256": "a28e6b1ccdbdff9c2acee3062ca33a7f578a1b8813da681887752deef1bacc9b",
+      "rows": 320001,
+      "input_endpoint_and_previous_interval_exact": true,
+      "caches": {
+        "e": {
+          "previous_state_power_max_error": 1.1102230246251565e-16,
+          "current_state_power_RMS_difference": 0.00032013222938010973,
+          "initial_cache_difference": -4.346355949287135e-06
+        },
+        "f": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 1.094994446505616e-06,
+          "initial_cache_difference": -0.9999991238294378
+        },
+        "p": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 0.00027085135771795607,
+          "initial_cache_difference": -2.2142273730617894e-09
+        },
+        "q": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 1.4744642921011093e-05,
+          "initial_cache_difference": -0.949926438824327
+        },
+        "n": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 3.058137027145704e-05,
+          "initial_cache_difference": -0.01642009003820853
+        }
+      },
+      "max_cai_STATE_difference_mM": 0.0,
+      "voltage_range_mV": [
+        -53.07605491002125,
+        13.905968375700978
+      ]
+    },
+    "main_pool_dt0.00625": {
+      "trace_sha256": "1d344223696bd84c13b8383328f15c90853040c19ef730bf4d622de1c527aa95",
+      "runner_sha256": "a28e6b1ccdbdff9c2acee3062ca33a7f578a1b8813da681887752deef1bacc9b",
+      "rows": 320001,
+      "input_endpoint_and_previous_interval_exact": true,
+      "caches": {
+        "e": {
+          "previous_state_power_max_error": 1.1102230246251565e-16,
+          "current_state_power_RMS_difference": 0.0001602481263670902,
+          "initial_cache_difference": -4.346355949287135e-06
+        },
+        "f": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 5.477227775161035e-07,
+          "initial_cache_difference": -0.9999991238294378
+        },
+        "p": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 0.00013547576927697025,
+          "initial_cache_difference": -2.2142273730617894e-09
+        },
+        "q": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 7.369647019048326e-06,
+          "initial_cache_difference": -0.949926438824327
+        },
+        "n": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 1.5287907609810226e-05,
+          "initial_cache_difference": -0.01642009003820853
+        }
+      },
+      "max_cai_STATE_difference_mM": 0.0,
+      "voltage_range_mV": [
+        -53.07604096776703,
+        13.91327725858637
+      ]
+    },
+    "main_both_dt0.025": {
+      "trace_sha256": "dd2000dc2fc926f4c44bca5a303e7de87917ed86376e85a976ffa8297b7184a3",
+      "runner_sha256": "a28e6b1ccdbdff9c2acee3062ca33a7f578a1b8813da681887752deef1bacc9b",
+      "rows": 320001,
+      "input_endpoint_and_previous_interval_exact": true,
+      "caches": {
+        "e": {
+          "previous_state_power_max_error": 1.1102230246251565e-16,
+          "current_state_power_RMS_difference": 0.0006351008476301463,
+          "initial_cache_difference": -4.346355949287135e-06
+        },
+        "f": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 2.1810679706815386e-06,
+          "initial_cache_difference": -0.9999991238294378
+        },
+        "p": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 0.0005388916522235154,
+          "initial_cache_difference": -2.2142273730617894e-09
+        },
+        "q": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 2.9546468804735176e-05,
+          "initial_cache_difference": -0.949926438824327
+        },
+        "n": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 6.11471231917934e-05,
+          "initial_cache_difference": -0.01642009003820853
+        }
+      },
+      "max_cai_STATE_difference_mM": 0.0,
+      "voltage_range_mV": [
+        -53.07615906731107,
+        13.856818852759208
+      ]
+    },
+    "main_both_dt0.0125": {
+      "trace_sha256": "ecea1bea1176565a706f28a616d0f8f726ea1f7f3f9817a49bb74d20053d12ff",
+      "runner_sha256": "a28e6b1ccdbdff9c2acee3062ca33a7f578a1b8813da681887752deef1bacc9b",
+      "rows": 320001,
+      "input_endpoint_and_previous_interval_exact": true,
+      "caches": {
+        "e": {
+          "previous_state_power_max_error": 1.1102230246251565e-16,
+          "current_state_power_RMS_difference": 0.0003192122916868782,
+          "initial_cache_difference": -4.346355949287135e-06
+        },
+        "f": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 1.0932560523945916e-06,
+          "initial_cache_difference": -0.9999991238294378
+        },
+        "p": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 0.0002702569224628282,
+          "initial_cache_difference": -2.2142273730617894e-09
+        },
+        "q": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 1.4753310751301958e-05,
+          "initial_cache_difference": -0.949926438824327
+        },
+        "n": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 3.057203955138276e-05,
+          "initial_cache_difference": -0.01642009003820853
+        }
+      },
+      "max_cai_STATE_difference_mM": 0.0,
+      "voltage_range_mV": [
+        -53.07609307329289,
+        13.889130503700144
+      ]
+    },
+    "main_both_dt0.00625": {
+      "trace_sha256": "8daa52fb5fb65d59d586b3da8273aae91fd25e31b2ac036a18450370708e284d",
+      "runner_sha256": "a28e6b1ccdbdff9c2acee3062ca33a7f578a1b8813da681887752deef1bacc9b",
+      "rows": 320001,
+      "input_endpoint_and_previous_interval_exact": true,
+      "caches": {
+        "e": {
+          "previous_state_power_max_error": 1.1102230246251565e-16,
+          "current_state_power_RMS_difference": 0.00016001929660726586,
+          "initial_cache_difference": -4.346355949287135e-06
+        },
+        "f": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 5.472938122743287e-07,
+          "initial_cache_difference": -0.9999991238294378
+        },
+        "p": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 0.00013532817176918515,
+          "initial_cache_difference": -2.2142273730617894e-09
+        },
+        "q": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 7.371780341309254e-06,
+          "initial_cache_difference": -0.949926438824327
+        },
+        "n": {
+          "previous_state_power_max_error": 0.0,
+          "current_state_power_RMS_difference": 1.5285592489304838e-05,
+          "initial_cache_difference": -0.01642009003820853
+        }
+      },
+      "max_cai_STATE_difference_mM": 0.0,
+      "voltage_range_mV": [
+        -53.07606005196702,
+        13.9049722185626
+      ]
+    }
+  },
+  "pairs": {
+    "original_0.025_vs_0.0125": {
+      "metrics": {
+        "voltage_RMS_mV": 0.15951963766638208,
+        "voltage_mean_abs_mV": 0.003180442770208458,
+        "voltage_amplitude_relative": 0.00016764774909900832,
+        "concentration_mM_scaled_RMS": 0.004222362472366235,
+        "concentration_mM_scaled_statistics_max": 0.0010518519938198917,
+        "cai_mM_scaled_RMS": 0.004222362472366235,
+        "cai_mM_scaled_statistics_max": 0.0010518519938198917,
+        "drive_cai_scaled_RMS": 0.0035590282867862194,
+        "drive_cai_scaled_statistics_max": 0.0005400917695551475,
+        "drive_STATE_scaled_RMS": 0.0035590282867862194,
+        "drive_STATE_scaled_statistics_max": 0.0005400917695551475,
+        "gate_state_RMS_per_gate": {
+          "e_q": 0.004249985881350509,
+          "f_q": 1.5452583855363383e-05,
+          "p_q": 0.003626388393620245,
+          "q_q": 0.00019800388367338943,
+          "n_q": 0.0004566107386205455
+        }
+      },
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "concentration_mM_trajectory": true,
+        "concentration_mM_statistics": true,
+        "cai_mM_trajectory": true,
+        "cai_mM_statistics": true,
+        "drive_cai_trajectory": true,
+        "drive_cai_statistics": true,
+        "drive_STATE_trajectory": true,
+        "drive_STATE_statistics": true,
+        "gate_state_RMS": true
+      },
+      "all_pass": true
+    },
+    "original_0.0125_vs_0.00625": {
+      "metrics": {
+        "voltage_RMS_mV": 0.07988901603547824,
+        "voltage_mean_abs_mV": 0.001581706069485378,
+        "voltage_amplitude_relative": 5.5413674889247914e-05,
+        "concentration_mM_scaled_RMS": 0.0021132503113288265,
+        "concentration_mM_scaled_statistics_max": 0.0005057437908628477,
+        "cai_mM_scaled_RMS": 0.0021132503113288265,
+        "cai_mM_scaled_statistics_max": 0.0005057437908628477,
+        "drive_cai_scaled_RMS": 0.0017814018337792515,
+        "drive_cai_scaled_statistics_max": 0.00025981583490982963,
+        "drive_STATE_scaled_RMS": 0.0017814018337792515,
+        "drive_STATE_scaled_statistics_max": 0.00025981583490982963,
+        "gate_state_RMS_per_gate": {
+          "e_q": 0.0021290862985188373,
+          "f_q": 7.731691169105096e-06,
+          "p_q": 0.0018150723014101237,
+          "q_q": 9.895086359758082e-05,
+          "n_q": 0.0002283597140023965
+        }
+      },
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "concentration_mM_trajectory": true,
+        "concentration_mM_statistics": true,
+        "cai_mM_trajectory": true,
+        "cai_mM_statistics": true,
+        "drive_cai_trajectory": true,
+        "drive_cai_statistics": true,
+        "drive_STATE_trajectory": true,
+        "drive_STATE_statistics": true,
+        "gate_state_RMS": true
+      },
+      "all_pass": true
+    },
+    "original_0.025_vs_0.00625": {
+      "metrics": {
+        "voltage_RMS_mV": 0.2393554464169455,
+        "voltage_mean_abs_mV": 0.004762148839693836,
+        "voltage_amplitude_relative": 0.0002230707139661207,
+        "concentration_mM_scaled_RMS": 0.006337231625432727,
+        "concentration_mM_scaled_statistics_max": 0.0015581278913184744,
+        "cai_mM_scaled_RMS": 0.006337231625432727,
+        "cai_mM_scaled_statistics_max": 0.0015581278913184744,
+        "drive_cai_scaled_RMS": 0.005341031216612373,
+        "drive_cai_scaled_statistics_max": 0.0008000480677747408,
+        "drive_STATE_scaled_RMS": 0.005341031216612373,
+        "drive_STATE_scaled_statistics_max": 0.0008000480677747408,
+        "gate_state_RMS_per_gate": {
+          "e_q": 0.0063773090493147505,
+          "f_q": 2.3181477647362936e-05,
+          "p_q": 0.005440520511611074,
+          "q_q": 0.00029694199941265257,
+          "n_q": 0.0006849315990350128
+        }
+      },
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "concentration_mM_trajectory": true,
+        "concentration_mM_statistics": true,
+        "cai_mM_trajectory": true,
+        "cai_mM_statistics": true,
+        "drive_cai_trajectory": true,
+        "drive_cai_statistics": true,
+        "drive_STATE_trajectory": true,
+        "drive_STATE_statistics": true,
+        "gate_state_RMS": true
+      },
+      "all_pass": true
+    },
+    "gates_0.025_vs_0.0125": {
+      "metrics": {
+        "voltage_RMS_mV": 0.34351178433682716,
+        "voltage_mean_abs_mV": 0.006701380037874571,
+        "voltage_amplitude_relative": 0.00020217221217521883,
+        "concentration_mM_scaled_RMS": 0.009189589983506823,
+        "concentration_mM_scaled_statistics_max": 0.0019343555619980826,
+        "cai_mM_scaled_RMS": 0.009189589983506823,
+        "cai_mM_scaled_statistics_max": 0.0019343555619980826,
+        "drive_cai_scaled_RMS": 0.007759342649852431,
+        "drive_cai_scaled_statistics_max": 0.0009923687802486465,
+        "drive_STATE_scaled_RMS": 0.007759342649852431,
+        "drive_STATE_scaled_statistics_max": 0.0009923687802486465,
+        "gate_state_RMS_per_gate": {
+          "e_q": 0.009585706139210984,
+          "f_q": 3.3588490990710075e-05,
+          "p_q": 0.008143327742103164,
+          "q_q": 0.0004377051423699702,
+          "n_q": 0.0010060848266493167
+        }
+      },
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "concentration_mM_trajectory": true,
+        "concentration_mM_statistics": true,
+        "cai_mM_trajectory": true,
+        "cai_mM_statistics": true,
+        "drive_cai_trajectory": true,
+        "drive_cai_statistics": true,
+        "drive_STATE_trajectory": true,
+        "drive_STATE_statistics": true,
+        "gate_state_RMS": true
+      },
+      "all_pass": true
+    },
+    "gates_0.0125_vs_0.00625": {
+      "metrics": {
+        "voltage_RMS_mV": 0.16951170808922605,
+        "voltage_mean_abs_mV": 0.0032491969856796032,
+        "voltage_amplitude_relative": 8.798388729903115e-05,
+        "concentration_mM_scaled_RMS": 0.0045270573797886685,
+        "concentration_mM_scaled_statistics_max": 0.0009836192266017242,
+        "cai_mM_scaled_RMS": 0.0045270573797886685,
+        "cai_mM_scaled_statistics_max": 0.0009836192266017242,
+        "drive_cai_scaled_RMS": 0.003823325517673355,
+        "drive_cai_scaled_statistics_max": 0.0005050942462580583,
+        "drive_STATE_scaled_RMS": 0.003823325517673355,
+        "drive_STATE_scaled_statistics_max": 0.0005050942462580583,
+        "gate_state_RMS_per_gate": {
+          "e_q": 0.004730594632580082,
+          "f_q": 1.654062153001556e-05,
+          "p_q": 0.004014190918395126,
+          "q_q": 0.00021483127517022454,
+          "n_q": 0.0004948700474465239
+        }
+      },
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "concentration_mM_trajectory": true,
+        "concentration_mM_statistics": true,
+        "cai_mM_trajectory": true,
+        "cai_mM_statistics": true,
+        "drive_cai_trajectory": true,
+        "drive_cai_statistics": true,
+        "drive_STATE_trajectory": true,
+        "drive_STATE_statistics": true,
+        "gate_state_RMS": true
+      },
+      "all_pass": true
+    },
+    "gates_0.025_vs_0.00625": {
+      "metrics": {
+        "voltage_RMS_mV": 0.5124756544993755,
+        "voltage_mean_abs_mV": 0.009950577023554175,
+        "voltage_amplitude_relative": 0.000290173887371381,
+        "concentration_mM_scaled_RMS": 0.013720277751073656,
+        "concentration_mM_scaled_statistics_max": 0.002919878040407415,
+        "cai_mM_scaled_RMS": 0.013720277751073656,
+        "cai_mM_scaled_statistics_max": 0.002919878040407415,
+        "drive_cai_scaled_RMS": 0.011583161863151984,
+        "drive_cai_scaled_statistics_max": 0.0014979648479276845,
+        "drive_STATE_scaled_RMS": 0.011583161863151984,
+        "drive_STATE_scaled_statistics_max": 0.0014979648479276845,
+        "gate_state_RMS_per_gate": {
+          "e_q": 0.01429637377549562,
+          "f_q": 5.0098129710872726e-05,
+          "p_q": 0.012147239836479687,
+          "q_q": 0.0006523978484346319,
+          "n_q": 0.0015005281826690484
+        }
+      },
+      "gates": {
+        "voltage_RMS_mV": false,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "concentration_mM_trajectory": true,
+        "concentration_mM_statistics": true,
+        "cai_mM_trajectory": true,
+        "cai_mM_statistics": true,
+        "drive_cai_trajectory": true,
+        "drive_cai_statistics": true,
+        "drive_STATE_trajectory": true,
+        "drive_STATE_statistics": true,
+        "gate_state_RMS": false
+      },
+      "all_pass": false
+    },
+    "pool_0.025_vs_0.0125": {
+      "metrics": {
+        "voltage_RMS_mV": 0.15774962516594504,
+        "voltage_mean_abs_mV": 0.0031372576298167587,
+        "voltage_amplitude_relative": 0.00015350035760767984,
+        "concentration_mM_scaled_RMS": 0.0042231631872671985,
+        "concentration_mM_scaled_statistics_max": 0.0009039908416457138,
+        "cai_mM_scaled_RMS": 0.0042231631872671985,
+        "cai_mM_scaled_statistics_max": 0.0009039908416457138,
+        "drive_cai_scaled_RMS": 0.003570676560301331,
+        "drive_cai_scaled_statistics_max": 0.0004642429873569543,
+        "drive_STATE_scaled_RMS": 0.003570676560301331,
+        "drive_STATE_scaled_statistics_max": 0.0004642429873569543,
+        "gate_state_RMS_per_gate": {
+          "e_q": 0.004200843963709535,
+          "f_q": 1.527404555454234e-05,
+          "p_q": 0.0035859084519978997,
+          "q_q": 0.00019561294018654256,
+          "n_q": 0.00045141296494782156
+        }
+      },
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "concentration_mM_trajectory": true,
+        "concentration_mM_statistics": true,
+        "cai_mM_trajectory": true,
+        "cai_mM_statistics": true,
+        "drive_cai_trajectory": true,
+        "drive_cai_statistics": true,
+        "drive_STATE_trajectory": true,
+        "drive_STATE_statistics": true,
+        "gate_state_RMS": true
+      },
+      "all_pass": true
+    },
+    "pool_0.0125_vs_0.00625": {
+      "metrics": {
+        "voltage_RMS_mV": 0.07900599943319961,
+        "voltage_mean_abs_mV": 0.0015603885109900517,
+        "voltage_amplitude_relative": 5.4528719246488475e-05,
+        "concentration_mM_scaled_RMS": 0.002114004238644715,
+        "concentration_mM_scaled_statistics_max": 0.0004118914848990626,
+        "cai_mM_scaled_RMS": 0.002114004238644715,
+        "cai_mM_scaled_statistics_max": 0.0004118914848990626,
+        "drive_cai_scaled_RMS": 0.0017875153745981586,
+        "drive_cai_scaled_statistics_max": 0.00021161914876034085,
+        "drive_STATE_scaled_RMS": 0.0017875153745981586,
+        "drive_STATE_scaled_statistics_max": 0.00021161914876034085,
+        "gate_state_RMS_per_gate": {
+          "e_q": 0.0021045646069165016,
+          "f_q": 7.64241622406195e-06,
+          "p_q": 0.001794924062724745,
+          "q_q": 9.776431692073042e-05,
+          "n_q": 0.00022577562971296921
+        }
+      },
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "concentration_mM_trajectory": true,
+        "concentration_mM_statistics": true,
+        "cai_mM_trajectory": true,
+        "cai_mM_statistics": true,
+        "drive_cai_trajectory": true,
+        "drive_cai_statistics": true,
+        "drive_STATE_trajectory": true,
+        "drive_STATE_statistics": true,
+        "gate_state_RMS": true
+      },
+      "all_pass": true
+    },
+    "pool_0.025_vs_0.00625": {
+      "metrics": {
+        "voltage_RMS_mV": 0.23670418323300327,
+        "voltage_mean_abs_mV": 0.00469764614080681,
+        "voltage_amplitude_relative": 0.00020803744703207255,
+        "concentration_mM_scaled_RMS": 0.006338401434149822,
+        "concentration_mM_scaled_statistics_max": 0.0013162546247744474,
+        "cai_mM_scaled_RMS": 0.006338401434149822,
+        "cai_mM_scaled_statistics_max": 0.0013162546247744474,
+        "drive_cai_scaled_RMS": 0.005358630455839731,
+        "drive_cai_scaled_statistics_max": 0.0006759603309532979,
+        "drive_STATE_scaled_RMS": 0.005358630455839731,
+        "drive_STATE_scaled_statistics_max": 0.0006759603309532979,
+        "gate_state_RMS_per_gate": {
+          "e_q": 0.006303703620388228,
+          "f_q": 2.2913772486040377e-05,
+          "p_q": 0.005379921765282917,
+          "q_q": 0.00029336488420158663,
+          "n_q": 0.0006771510757102142
+        }
+      },
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "concentration_mM_trajectory": true,
+        "concentration_mM_statistics": true,
+        "cai_mM_trajectory": true,
+        "cai_mM_statistics": true,
+        "drive_cai_trajectory": true,
+        "drive_cai_statistics": true,
+        "drive_STATE_trajectory": true,
+        "drive_STATE_statistics": true,
+        "gate_state_RMS": true
+      },
+      "all_pass": true
+    },
+    "both_0.025_vs_0.0125": {
+      "metrics": {
+        "voltage_RMS_mV": 0.34172703808036187,
+        "voltage_mean_abs_mV": 0.006656738350262259,
+        "voltage_amplitude_relative": 0.00021344881320466873,
+        "concentration_mM_scaled_RMS": 0.009188030547298644,
+        "concentration_mM_scaled_statistics_max": 0.0017653508626901352,
+        "cai_mM_scaled_RMS": 0.009188030547298644,
+        "cai_mM_scaled_statistics_max": 0.0017653508626901352,
+        "drive_cai_scaled_RMS": 0.007768796011261187,
+        "drive_cai_scaled_statistics_max": 0.0009058119655471576,
+        "drive_STATE_scaled_RMS": 0.007768796011261187,
+        "drive_STATE_scaled_statistics_max": 0.0009058119655471576,
+        "gate_state_RMS_per_gate": {
+          "e_q": 0.00953609409201651,
+          "f_q": 3.337946513550012e-05,
+          "p_q": 0.008102236338997915,
+          "q_q": 0.00043526081027545386,
+          "n_q": 0.0010007874684423348
+        }
+      },
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "concentration_mM_trajectory": true,
+        "concentration_mM_statistics": true,
+        "cai_mM_trajectory": true,
+        "cai_mM_statistics": true,
+        "drive_cai_trajectory": true,
+        "drive_cai_statistics": true,
+        "drive_STATE_trajectory": true,
+        "drive_STATE_statistics": true,
+        "gate_state_RMS": true
+      },
+      "all_pass": true
+    },
+    "both_0.0125_vs_0.00625": {
+      "metrics": {
+        "voltage_RMS_mV": 0.16862669564475896,
+        "voltage_mean_abs_mV": 0.0032275149879623655,
+        "voltage_amplitude_relative": 9.665260345383245e-05,
+        "concentration_mM_scaled_RMS": 0.004527219383718691,
+        "concentration_mM_scaled_statistics_max": 0.0009003868192686417,
+        "cai_mM_scaled_RMS": 0.004527219383718691,
+        "cai_mM_scaled_statistics_max": 0.0009003868192686417,
+        "drive_cai_scaled_RMS": 0.003828807518085064,
+        "drive_cai_scaled_statistics_max": 0.0004623906058092084,
+        "drive_STATE_scaled_RMS": 0.003828807518085064,
+        "drive_STATE_scaled_statistics_max": 0.0004623906058092084,
+        "gate_state_RMS_per_gate": {
+          "e_q": 0.004705964823998049,
+          "f_q": 1.6437121700067902e-05,
+          "p_q": 0.003993901817577542,
+          "q_q": 0.00021363326116066806,
+          "n_q": 0.0004922633425952041
+        }
+      },
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "concentration_mM_trajectory": true,
+        "concentration_mM_statistics": true,
+        "cai_mM_trajectory": true,
+        "cai_mM_statistics": true,
+        "drive_cai_trajectory": true,
+        "drive_cai_statistics": true,
+        "drive_STATE_trajectory": true,
+        "drive_STATE_statistics": true,
+        "gate_state_RMS": true
+      },
+      "all_pass": true
+    },
+    "both_0.025_vs_0.00625": {
+      "metrics": {
+        "voltage_RMS_mV": 0.5098142791421297,
+        "voltage_mean_abs_mV": 0.009884253338224624,
+        "voltage_amplitude_relative": 0.00031012204704200156,
+        "concentration_mM_scaled_RMS": 0.013718185240457158,
+        "concentration_mM_scaled_statistics_max": 0.0026673274343661556,
+        "cai_mM_scaled_RMS": 0.013718185240457158,
+        "cai_mM_scaled_statistics_max": 0.0026673274343661556,
+        "drive_cai_scaled_RMS": 0.011597816009454259,
+        "drive_cai_scaled_statistics_max": 0.0013686216637304105,
+        "drive_STATE_scaled_RMS": 0.011597816009454259,
+        "drive_STATE_scaled_statistics_max": 0.0013686216637304105,
+        "gate_state_RMS_per_gate": {
+          "e_q": 0.014222425802738836,
+          "f_q": 4.978610546992615e-05,
+          "p_q": 0.012086005924951916,
+          "q_q": 0.0006487573432373404,
+          "n_q": 0.0014926307326086645
+        }
+      },
+      "gates": {
+        "voltage_RMS_mV": false,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "concentration_mM_trajectory": true,
+        "concentration_mM_statistics": true,
+        "cai_mM_trajectory": true,
+        "cai_mM_statistics": true,
+        "drive_cai_trajectory": true,
+        "drive_cai_statistics": true,
+        "drive_STATE_trajectory": true,
+        "drive_STATE_statistics": true,
+        "gate_state_RMS": false
+      },
+      "all_pass": false
+    }
+  },
+  "issues": [],
+  "pending": [],
+  "raw_hashes": {
+    "gates_original_dt0.025": "3b3b81ad1d6126eb42ba398789bc4f641d55f70f9dda56fa6d72edb997e0c437",
+    "gates_original_dt0.0125": "28350d779f8a02628306e3d0ce58893ef3789bb73921cbad8528e2c2b5cf76a7",
+    "gates_original_dt0.00625": "f3765501d85984567b5e89e04cc96adc96cff210f791ff106aa4d326bc468305",
+    "gates_both_dt0.025": "4c5c2b94d81ed0574bc7817dc0ca5b881c908ead767ad7b69c926d7b60410c39",
+    "gates_both_dt0.0125": "2592bb2addf2c6501e01b120790dbcac9275e1b2e788903eca0d9bd93300c8ac",
+    "gates_both_dt0.00625": "e4ee9a2e169d16fa3586d08d81789f0bce0a7c53c5338641a59c37eaea0c1886",
+    "pool_original_dt0.025": "b24edf5d4d82cd8f07fe885e9aa475f90599bde63ee0456704ae71b72db6dda1",
+    "pool_original_dt0.0125": "5684cc3ccc48b4234fe77e0ace266b5ca73ac53d756e59ffc1f83b69f2ed512b",
+    "pool_original_dt0.00625": "230aa05df02c0ef21ea5643a6fee1bf1ea7798e3404b1cd36640109af7a801e9",
+    "pool_both_dt0.025": "3a96337e7f68c803fbadc2df3baeb127129303ed4cd23bdbd230016c2fa0df8d",
+    "pool_both_dt0.0125": "0f620843953060cfb08d441891da03be47eedc1b32d37f7ae3357d3cb0b60eae",
+    "pool_both_dt0.00625": "6d04888556ef50a382f1c9ffcb5caa9ac69cbc36d5bc399a7f86b81f025c79fd",
+    "main_original_dt0.025": "7174dc4ff4e66c7b7e60e3827201607b5774a6ddf5d179c0336287b6b1ce3c41",
+    "main_original_dt0.0125": "466dadfef5be2f778964ae6c458ea3efb3b34b6a2a3b2bfa5e4930d7a765960c",
+    "main_original_dt0.00625": "6b3d52bb84b8404afb7d0d50e90f36fea93e98e6a1cad5b5d0e94f39d880b7bc",
+    "main_gates_dt0.025": "cd0cf99191223bce36005972f1f9684a1d5061d7ba52b498dd3f45f97b0be0ed",
+    "main_gates_dt0.0125": "ea1c4110ca48ef090c34f6d4adc110228229409a840ee80a30b3133e518befaf",
+    "main_gates_dt0.00625": "06c1f4f691ccfa14d4688b83a81e8846f48f258205dfa48f8d6b8b23ad7adf6b",
+    "main_pool_dt0.025": "452ca21fee5213bad9af31c85ffcde58819bf5550203937133b476b3fcd85c8b",
+    "main_pool_dt0.0125": "66da67853982a6535bf3b1bbcd2f12574f3c559bd698a7c33b40990fcec58538",
+    "main_pool_dt0.00625": "1d344223696bd84c13b8383328f15c90853040c19ef730bf4d622de1c527aa95",
+    "main_both_dt0.025": "dd2000dc2fc926f4c44bca5a303e7de87917ed86376e85a976ffa8297b7184a3",
+    "main_both_dt0.0125": "ecea1bea1176565a706f28a616d0f8f726ea1f7f3f9817a49bb74d20053d12ff",
+    "main_both_dt0.00625": "8daa52fb5fb65d59d586b3da8273aae91fd25e31b2ac036a18450370708e284d"
+  },
+  "reviewed_runs": 24
+}

@@ -1,0 +1,372 @@
+{
+  "status": "completed_mechanism_stage_full302_locomotion_not_achieved",
+  "checks": {
+    "complete_neural_trace_shapes_times_finite_voltage_guards": true,
+    "failed_cases_kept_separate": true,
+    "constant_voltage_exact_solution": true,
+    "original_instability_reproduced": true,
+    "synaptic_variant_changes_only_two_explicit_state_expressions": true,
+    "half_dt_release_metric_agreement": true,
+    "finest_two_resolutions_final_drive_agreement": true,
+    "half_dt_motion_difference_below_1e_minus3_um_per_s": true,
+    "physical_input_dose_matched": true,
+    "physical_input_squared_integral_matched": true,
+    "same_muscle_commands_across_drag_conditions": true,
+    "isotropic_centroid_stationary": true,
+    "isotropic_body_still_deforms": true,
+    "drag_variant_only_changes_two_eigenvalues": true,
+    "mean_drag_preserved": true,
+    "upstream_modworm_snapshot_hashes": true
+  },
+  "neural_complete_runs": 18,
+  "neural_failed_runs": [
+    {
+      "name": "nmj30_AVB",
+      "failure": "nonfinite or voltage outside prespecified [-100,60] mV guard",
+      "duration_s": 0.21999999999993686
+    },
+    {
+      "name": "nn20_AVB",
+      "failure": "nonfinite or voltage outside prespecified [-100,60] mV guard",
+      "duration_s": 0.2139999999999423
+    }
+  ],
+  "initial_untraced_failed_runs": 1,
+  "neural": {
+    "base_AVB": {
+      "mean_nmj_gate": 2.4925209361789887e-05,
+      "mean_nn_gate": 8.946770674623977e-05,
+      "duration_s": 2,
+      "late_speed_um_s": 8.785227965667888e-08,
+      "displacement_um": 6.090956116475877e-06,
+      "late_max_drive": 3.1551417535276667e-07,
+      "final_max_drive": 2.914117237757499e-07,
+      "voltage_range_mV": [
+        -68.06453667104154,
+        30.63495425029055
+      ]
+    },
+    "base_AVB_cnexp": {
+      "mean_nmj_gate": 2.4925137535901284e-05,
+      "mean_nn_gate": 8.9467642462294e-05,
+      "duration_s": 2,
+      "late_speed_um_s": 8.880545724885709e-08,
+      "displacement_um": 6.108390164692781e-06,
+      "late_max_drive": 3.155362290419801e-07,
+      "final_max_drive": 2.9141176501721614e-07,
+      "voltage_range_mV": [
+        -68.06508757889614,
+        30.64669988883863
+      ]
+    },
+    "base_none": {
+      "mean_nmj_gate": 8.978008648021534e-06,
+      "mean_nn_gate": 8.987683178030786e-06,
+      "duration_s": 2,
+      "late_speed_um_s": 4.3003408254755447e-16,
+      "displacement_um": 5.312590645178972e-12,
+      "late_max_drive": 1.66630972542849e-07,
+      "final_max_drive": 1.6463577133364573e-07,
+      "voltage_range_mV": [
+        -58.13728460890017,
+        -45.0
+      ]
+    },
+    "both30_AVB_cnexp": {
+      "mean_nmj_gate": 0.90675511323834,
+      "mean_nn_gate": 0.9408633135890673,
+      "duration_s": 2,
+      "late_speed_um_s": 8.819985001061029e-05,
+      "displacement_um": 4.2179576981521274e-05,
+      "late_max_drive": 0.15249101996011322,
+      "final_max_drive": 0.10218039320716049,
+      "voltage_range_mV": [
+        -68.63804246366374,
+        27.412591224740112
+      ]
+    },
+    "both30_AVB_cnexp4s": {
+      "mean_nmj_gate": 0.9067308700657183,
+      "mean_nn_gate": 0.9408274923573486,
+      "duration_s": 4.0,
+      "late_speed_um_s": -0.00029062233195137723,
+      "displacement_um": 0.0005770333500397322,
+      "late_max_drive": 0.1516924350904621,
+      "final_max_drive": 0.0944445419974706,
+      "voltage_range_mV": [
+        -68.63804246366374,
+        27.412591224740112
+      ]
+    },
+    "both30_AVB_cnexp_halfdt": {
+      "mean_nmj_gate": 0.9067437811165511,
+      "mean_nn_gate": 0.9408604784305835,
+      "duration_s": 2,
+      "late_speed_um_s": 0.00010358012475828222,
+      "displacement_um": 5.956920917328024e-05,
+      "late_max_drive": 0.15166492264909626,
+      "final_max_drive": 0.10516185090353813,
+      "voltage_range_mV": [
+        -68.63797873513079,
+        27.56246853210908
+      ]
+    },
+    "both30_AVB_cnexp_quarterdt": {
+      "mean_nmj_gate": 0.9067628589217626,
+      "mean_nn_gate": 0.9408666859031521,
+      "duration_s": 2,
+      "late_speed_um_s": 9.679652557342887e-05,
+      "displacement_um": 5.708250545735909e-05,
+      "late_max_drive": 0.15187208722188028,
+      "final_max_drive": 0.10668534440235505,
+      "voltage_range_mV": [
+        -68.6380520292064,
+        27.67468881699697
+      ]
+    },
+    "both30_none_cnexp": {
+      "mean_nmj_gate": 0.9067429807003479,
+      "mean_nn_gate": 0.9408526008730166,
+      "duration_s": 2,
+      "late_speed_um_s": 8.778454658026366e-05,
+      "displacement_um": 4.196937057135974e-05,
+      "late_max_drive": 0.15249132553966815,
+      "final_max_drive": 0.10267929079897442,
+      "voltage_range_mV": [
+        -68.63803866992421,
+        27.412591224740112
+      ]
+    },
+    "both30_none_cnexp4s": {
+      "mean_nmj_gate": 0.906724933348935,
+      "mean_nn_gate": 0.940822114595727,
+      "duration_s": 4.0,
+      "late_speed_um_s": -0.000287763180551505,
+      "displacement_um": 0.0005708734059671999,
+      "late_max_drive": 0.1516850736265562,
+      "final_max_drive": 0.0944612103053393,
+      "voltage_range_mV": [
+        -68.63803866992421,
+        27.412591224740112
+      ]
+    },
+    "nmj30_AFD_cnexp": {
+      "mean_nmj_gate": 0.003621217000073448,
+      "mean_nn_gate": 3.47579544407168e-05,
+      "duration_s": 2,
+      "late_speed_um_s": -1.939901020846829e-06,
+      "displacement_um": 5.8834051412694766e-05,
+      "late_max_drive": 2.3091294078624313e-06,
+      "final_max_drive": 2.2944340204853395e-06,
+      "voltage_range_mV": [
+        -67.87667978032646,
+        34.5252378069648
+      ]
+    },
+    "nmj30_AFD_fine2s": {
+      "mean_nmj_gate": 0.0036212167371507484,
+      "mean_nn_gate": 3.475795208790727e-05,
+      "duration_s": 2.0,
+      "late_speed_um_s": -1.9260085769716913e-06,
+      "displacement_um": 5.875702424750601e-05,
+      "late_max_drive": 2.3090329331749625e-06,
+      "final_max_drive": 2.294434020554093e-06,
+      "voltage_range_mV": [
+        -67.86863710014764,
+        34.68683865718201
+      ]
+    },
+    "nmj30_AVB_cnexp": {
+      "mean_nmj_gate": 0.005535259979511113,
+      "mean_nn_gate": 8.946995201052423e-05,
+      "duration_s": 2,
+      "late_speed_um_s": -2.169055047468732e-06,
+      "displacement_um": 5.3096698920683374e-05,
+      "late_max_drive": 0.00046873479117669886,
+      "final_max_drive": 0.000468713195394307,
+      "voltage_range_mV": [
+        -68.06509025532814,
+        30.64682556141854
+      ]
+    },
+    "nmj30_AVB_fine": {
+      "mean_nmj_gate": 0.3742311023491726,
+      "mean_nn_gate": 0.14900526608625994,
+      "duration_s": 0.5,
+      "late_speed_um_s": 0.00021394822436212831,
+      "displacement_um": 5.514523994385039e-05,
+      "late_max_drive": 0.14655450238363707,
+      "final_max_drive": 0.0010441206404242234,
+      "voltage_range_mV": [
+        -68.05938691625904,
+        31.15129758981438
+      ]
+    },
+    "nmj30_AVB_fine2s": {
+      "mean_nmj_gate": 0.005535259701367866,
+      "mean_nn_gate": 8.946994934805214e-05,
+      "duration_s": 2.0,
+      "late_speed_um_s": -2.163553863347772e-06,
+      "displacement_um": 5.3504960238998024e-05,
+      "late_max_drive": 0.0004687346030531859,
+      "final_max_drive": 0.0004687131954186271,
+      "voltage_range_mV": [
+        -68.05938691625904,
+        31.15129758981438
+      ]
+    },
+    "nmj30_AVB_finer": {
+      "mean_nmj_gate": 0.35355804341136987,
+      "mean_nn_gate": 0.12487500676708553,
+      "duration_s": 0.5,
+      "late_speed_um_s": 0.00022297808403260727,
+      "displacement_um": 5.522704814602747e-05,
+      "late_max_drive": 0.14650439815724225,
+      "final_max_drive": 0.0010435100796636636,
+      "voltage_range_mV": [
+        -68.05869208463746,
+        31.211934443638157
+      ]
+    },
+    "nmj30_none": {
+      "mean_nmj_gate": 0.0036118348003033557,
+      "mean_nn_gate": 8.989520057686087e-06,
+      "duration_s": 2,
+      "late_speed_um_s": -4.596848259870356e-16,
+      "displacement_um": 5.854691731421724e-12,
+      "late_max_drive": 2.2898480781401566e-06,
+      "final_max_drive": 2.289846407793163e-06,
+      "voltage_range_mV": [
+        -58.13726625610763,
+        -45.0
+      ]
+    },
+    "nn20_AVB_fine": {
+      "mean_nmj_gate": 0.18106566612321146,
+      "mean_nn_gate": 0.7154965447606166,
+      "duration_s": 0.5,
+      "late_speed_um_s": -7.715876277229829e-07,
+      "displacement_um": 2.459655328308022e-06,
+      "late_max_drive": 0.14650909890003802,
+      "final_max_drive": 0.003513236444571658,
+      "voltage_range_mV": [
+        -68.1135956340452,
+        32.53625411875193
+      ]
+    },
+    "nn20_AVB_finer": {
+      "mean_nmj_gate": 0.16309204406112637,
+      "mean_nn_gate": 0.7097022432498675,
+      "duration_s": 0.5,
+      "late_speed_um_s": -4.835446469547149e-07,
+      "displacement_um": 2.4226014703947884e-06,
+      "late_max_drive": 0.1465356203342865,
+      "final_max_drive": 0.003516810451207878,
+      "voltage_range_mV": [
+        -68.11285367201859,
+        32.53148432928359
+      ]
+    }
+  },
+  "physical": {
+    "directional/head_to_tail": {
+      "late_signed_speed_um_s": 28.11402618929736,
+      "late_net_displacement_um": 168.59863173208873,
+      "late_centroid_path_um": 168.61389583271927
+    },
+    "directional/phase_shuffled": {
+      "late_signed_speed_um_s": 3.284085838148461,
+      "late_net_displacement_um": 19.67167759020316,
+      "late_centroid_path_um": 19.71447762958053
+    },
+    "directional/standing": {
+      "late_signed_speed_um_s": 0.4946852979787193,
+      "late_net_displacement_um": 2.9725050748069113,
+      "late_centroid_path_um": 5.321962650807896
+    },
+    "directional/tail_to_head": {
+      "late_signed_speed_um_s": -26.97545047988176,
+      "late_net_displacement_um": 161.7634769281962,
+      "late_centroid_path_um": 161.7785471377416
+    },
+    "directional/zero": {
+      "late_signed_speed_um_s": -1.180028838472927e-18,
+      "late_net_displacement_um": 2.4657044470770917e-24,
+      "late_centroid_path_um": 2.6637795807365206e-22
+    },
+    "isotropic/head_to_tail": {
+      "late_signed_speed_um_s": -3.69300671948706e-17,
+      "late_net_displacement_um": 3.007831282086699e-15,
+      "late_centroid_path_um": 5.033646217387959e-11
+    },
+    "isotropic/standing": {
+      "late_signed_speed_um_s": -1.4241680525041375e-16,
+      "late_net_displacement_um": 2.1684068323681756e-13,
+      "late_centroid_path_um": 4.838581381696898e-11
+    },
+    "isotropic/tail_to_head": {
+      "late_signed_speed_um_s": 4.9091244224332335e-17,
+      "late_net_displacement_um": 1.0842063927865383e-13,
+      "late_centroid_path_um": 5.261277505892755e-11
+    },
+    "isotropic/zero": {
+      "late_signed_speed_um_s": -3.84545080410097e-30,
+      "late_net_displacement_um": 1.145535714354329e-28,
+      "late_centroid_path_um": 7.030278272115974e-28
+    }
+  },
+  "reference": {
+    "PLM3000_preset_v2": {
+      "voltage_range_mV": [
+        -7.801280085680136,
+        1577.616532050036
+      ],
+      "centroid_displacement_BL": 0.19174915104596696,
+      "late_path_speed_BL_s": 0.0651202707679233
+    },
+    "PLM50_equilibrium": {
+      "voltage_range_mV": [
+        -7.497481092716407,
+        20.10171949927875
+      ],
+      "centroid_displacement_BL": 0.004573159591800007,
+      "late_path_speed_BL_s": 0.0004068293633639686
+    },
+    "PLM5_equilibrium": {
+      "voltage_range_mV": [
+        -7.497480995764619,
+        0.0684055640346873
+      ],
+      "centroid_displacement_BL": 4.4329826006152605e-05,
+      "late_path_speed_BL_s": 9.459427851332642e-06
+    },
+    "no_input_equilibrium": {
+      "voltage_range_mV": [
+        -7.497484330995482,
+        -0.22981021405483443
+      ],
+      "centroid_displacement_BL": 2.346689160574784e-05,
+      "late_path_speed_BL_s": 4.6545790414084215e-06
+    }
+  },
+  "synapse_exact_check": {
+    "original_error": 1.2188169224344534e+50,
+    "fixed_error": 2.220446049250313e-16
+  },
+  "numerical_refinement": {
+    "gate_relative_error": 1.249760078308849e-05,
+    "final_drive_relative_error": 0.02835113371209533,
+    "initial_coarse_peak_check_passed": false,
+    "finest_final_drive_relative_error": 0.014280251025587807,
+    "finest_peak_check_passed": true,
+    "speed_absolute_difference_um_s": 1.5380274747671925e-05
+  },
+  "nmj_only_gate_gain": 222.07540365778607,
+  "global_shift_avb_vs_none_late_gate_abs_difference": 5.936716783283558e-06,
+  "limitations": [
+    "Thresholds are sensitivity interventions, not calibrated physiology",
+    "Visible Boyle motion uses prescribed muscle waves, no neural controller",
+    "modWorm reference uses delayed neural voltage, not body strain",
+    "High-current modWorm adaptation excluded from biological interpretation"
+  ]
+}

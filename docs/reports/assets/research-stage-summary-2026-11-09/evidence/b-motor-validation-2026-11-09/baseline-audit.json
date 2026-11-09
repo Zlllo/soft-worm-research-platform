@@ -1,0 +1,37 @@
+{
+  "archive_hash_passed": true,
+  "baseline_payload_matches": {
+    "results/b-motor-mechanisms-2026-11-07/connection-plan.json": true,
+    "results/b-motor-mechanisms-2026-11-07/selected-parameters.json": true,
+    "results/b-motor-mechanisms-2026-11-07/kernels/arm64/libnrnmech.dylib": true,
+    "results/b-motor-mechanisms-2026-11-07/summary.json": true,
+    "results/b-motor-mechanisms-2026-11-07/prototype_off8/record.json": true,
+    "results/b-motor-mechanisms-2026-11-07/prototype_off8/trace.npz": true,
+    "results/b-motor-mechanisms-2026-11-07/prototype_live8/record.json": true,
+    "results/b-motor-mechanisms-2026-11-07/prototype_live8/trace.npz": true,
+    "results/b-motor-mechanisms-2026-11-07/nmj9_off8/record.json": true,
+    "results/b-motor-mechanisms-2026-11-07/nmj9_off8/trace.npz": true,
+    "results/b-motor-mechanisms-2026-11-07/nmj9_live8/record.json": true,
+    "results/b-motor-mechanisms-2026-11-07/nmj9_live8/trace.npz": true,
+    "results/b-motor-mechanisms-2026-11-07/calcium0_8/record.json": true,
+    "results/b-motor-mechanisms-2026-11-07/calcium0_8/trace.npz": true,
+    "results/b-motor-mechanisms-2026-11-07/generic_C1_8/record.json": true,
+    "results/b-motor-mechanisms-2026-11-07/generic_C1_8/trace.npz": true,
+    "results/b-motor-mechanisms-2026-11-07/prototype_gap0/record.json": true,
+    "results/b-motor-mechanisms-2026-11-07/prototype_gap0/trace.npz": true
+  },
+  "frozen_source_matches": {
+    "analysis/neuromechanics/archive_b_motor_stage.py": true,
+    "analysis/neuromechanics/calibrate_b_motor_oscillator.py": true,
+    "analysis/neuromechanics/patches/BMotorPoint.mod": true,
+    "analysis/neuromechanics/plot_b_motor_stage.py": true,
+    "analysis/neuromechanics/probe_b_motor_bifurcation.py": true,
+    "analysis/neuromechanics/probe_b_motor_nmj.py": true,
+    "analysis/neuromechanics/run_full302_b_motor.py": true,
+    "analysis/neuromechanics/summarize_b_motor_stage.py": true,
+    "analysis/neuromechanics/validate_b_motor_neuron.py": true,
+    "src/thermotaxis/neuromechanics/b_motor_oscillator.py": true
+  },
+  "previous_physical_stage_checks_passed": true,
+  "scope": "Read-only baseline audit; no simulations and no historical files changed"
+}

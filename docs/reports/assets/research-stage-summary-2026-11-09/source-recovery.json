@@ -1,0 +1,20 @@
+[
+  {
+    "path": "src/thermotaxis/neuromechanics/muscle_mapping.py",
+    "archive": "docs/reports/assets/full302-mechanisms-2026-11-07/reproduction.zip",
+    "sha256": "b626d67ee708c2240bb4bfc1fc0ef877f61d095fc1b7da742d2918b7a6cc92cb",
+    "note": "Publishing copy recovered from frozen archive; local cloud placeholder untouched"
+  },
+  {
+    "path": "src/thermotaxis/neuromechanics/thermal_body.py",
+    "archive": "docs/reports/assets/full302-mechanisms-2026-11-07/reproduction.zip",
+    "sha256": "440214195c940ba2b76afca3e4f91980260c0b85a584e63caf29bde7a5985a02",
+    "note": "Publishing copy recovered from frozen archive; local cloud placeholder untouched"
+  },
+  {
+    "path": "tests/test_pathway_stage1.py",
+    "archive": "docs/reports/assets/pathway-stage1-2026-11-03/reproduction.zip",
+    "sha256": "803e78f734faaee73ecfa016752a1732ef041c25ef3bab93732ef1b83bce4e05",
+    "note": "Publishing copy recovered from frozen archive; local cloud placeholder untouched"
+  }
+]

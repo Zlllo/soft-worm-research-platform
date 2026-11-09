@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-09",
+  "status": "branch_validations_complete_convergence_not_accepted",
+  "scope": "recent neural-body mechanism stage, excluding thermotaxis training",
+  "progress_method": "five equally weighted acceptance milestones",
+  "completed_milestones": 3,
+  "total_milestones": 5,
+  "estimated_percent": 60,
+  "milestones": [
+    {
+      "name": "full302_95muscles_body_interface",
+      "status": "passed"
+    },
+    {
+      "name": "B_rhythm_and_ablation_controls",
+      "status": "passed"
+    },
+    {
+      "name": "NMJ_and_body_physical_controls",
+      "status": "passed"
+    },
+    {
+      "name": "full_system_convergence_and_feedback_causality",
+      "status": "partial_not_passed",
+      "subchecks": {
+        "feedback_causality": "passed",
+        "full_system_convergence": "not_passed"
+      }
+    },
+    {
+      "name": "sustained_neural_propulsion_and_replication",
+      "status": "not_passed"
+    }
+  ],
+  "branches": {
+    "convergence": {
+      "threadId": "01a1c003-3076-7cf1-8746-650a888b18a1",
+      "hostId": "local",
+      "status": "completed_parent_audit_passed_convergence_failed",
+      "read_only_diagnostic": "completed",
+      "diagnostic_path": "results/b-motor-convergence-2026-11-09/numerical-diagnostic.md"
+    },
+    "feedback_causality": {
+      "threadId": "01a1c003-852e-7bb0-82f5-7f884fd68690",
+      "hostId": "local",
+      "status": "completed_parent_audit_passed"
+    }
+  },
+  "new_full_runs": {
+    "convergence": 6,
+    "feedback_causality": 8
+  },
+  "next_action": "Isolate muscle fast dynamics and numerical implementation; no thermotaxis training",
+  "all_branch_simulations_finished": true
+}

@@ -1,0 +1,12 @@
+{
+  "branch": "feedback_causality",
+  "parent_independent_review": true,
+  "archive_sha256": "b172afbf84b0a9a7f9aba23287fe395aa55c32bb522c4d40183324a14bd8b071",
+  "payload_files": 159,
+  "CRC_passed": true,
+  "payload_hashes_passed": true,
+  "summary_byte_identical": true,
+  "checks_passed": true,
+  "new_simulations": 0,
+  "extracted_to": "/var/folders/0g/wkglj6h97wjfjd3jyv54n7_00000gn/T/worm-main-review-feedback-ju07v2ne"
+}

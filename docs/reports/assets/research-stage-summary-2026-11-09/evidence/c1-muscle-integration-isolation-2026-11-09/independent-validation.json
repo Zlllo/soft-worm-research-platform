@@ -1,0 +1,37 @@
+{
+  "independent_audit_passed": true,
+  "protected_full_source_files_checked": 44,
+  "analytic_controls_checked": 12,
+  "main_conditions_checked": 12,
+  "paired_gate_values_checked": 120,
+  "actual_input_and_synapse_identity_checked": true,
+  "measured_current_pool_recurrence_and_clip_cai_order_checked": {
+    "original_0.025": {
+      "max_STATE_error_mM": 2.6469779601696886e-23,
+      "max_cai_error_mM": 2.6469779601696886e-23
+    },
+    "original_0.0125": {
+      "max_STATE_error_mM": 2.6469779601696886e-23,
+      "max_cai_error_mM": 2.6469779601696886e-23
+    },
+    "original_0.00625": {
+      "max_STATE_error_mM": 6.617444900424222e-24,
+      "max_cai_error_mM": 6.617444900424222e-24
+    },
+    "both_0.025": {
+      "max_STATE_error_mM": 1.2176098616780567e-21,
+      "max_cai_error_mM": 1.2176098616780567e-21
+    },
+    "both_0.0125": {
+      "max_STATE_error_mM": 2.2499312661442353e-21,
+      "max_cai_error_mM": 2.2499312661442353e-21
+    },
+    "both_0.00625": {
+      "max_STATE_error_mM": 4.367513634279986e-21,
+      "max_cai_error_mM": 4.367513634279986e-21
+    }
+  },
+  "main_analyzer_imported": false,
+  "NEURON_imported": false,
+  "summary_sha256": "2cd083a64a237d6d0ae137b0f57e41d2cc81bd2d7108d5457be7132f629ca32b"
+}

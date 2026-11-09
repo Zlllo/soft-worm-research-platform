@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-05",
+  "status": "thermal_and_mechanical_interfaces_verified_locomotion_gate_not_reached_no_thermotaxis_training",
+  "neural_population": {
+    "main": "all names in data/connectome/herm_neurons.json",
+    "count": 302,
+    "neural_data": "data/connectome/cook2019_herm.json",
+    "scope": "all named hermaphrodite neurons; not all 473 cells",
+    "historical_baseline_only": "real8"
+  },
+  "neuromuscular_population": {
+    "body_wall_muscles": 95,
+    "chemical_entries": 956,
+    "chemical_presynaptic_cells": 162,
+    "neuron_muscle_gap_pairs": 5,
+    "muscle_gap_directed_entries": 192,
+    "absent_anatomical_muscle": "MVL24",
+    "efficacy_policy": "explicit functional parameters required; EM counts are not signs or conductances",
+    "electrical_coupling_policy": "retain anatomical arrays; implement with muscle membrane voltage, never replace with mechanical strain"
+  },
+  "neuron_dynamics_next": {
+    "candidate": "pinned c302 C1 conductance-based single compartments and graded synapses",
+    "c302_commit": "d542a44bf2662f79e0ad23342a959a181a920877",
+    "data_reader": "fixed Cook arrays directly assembled in NEURON using pinned C1 exported components; no default spreadsheet",
+    "parameter_provenance": "keep C1 BlindGuess parameters labelled as assumptions",
+    "default_demo_currents": "remove c302_Full PLM stimulation and 5pA unphysiological offset from the main condition",
+    "state": "persistent; do not reconstruct from a sliding four-second window",
+    "chemical_sign_policy": "GABA-labelled sources inhibitory, all other sources explicitly assumed excitatory; per-cell table archived"
+  },
+  "mechanical_body": {
+    "backend": "separate BoyleMuscleBody / external_muscle_drive worker",
+    "segments": 48,
+    "drive_shape": [
+      48,
+      2
+    ],
+    "drive_order": [
+      "dorsal",
+      "ventral"
+    ],
+    "drive_range": [
+      -1,
+      1
+    ],
+    "drive_units": "dimensionless signed pre-filter drive, not mV, calcium or force",
+    "physical_dt_s": 0.001,
+    "muscle_filter_tau_s": 0.1,
+    "legacy_motor_network": "not called",
+    "causal_order": "accepted physical state -> strain observation -> command -> muscle filter; new muscle state affects following physical interval"
+  },
+  "planar_projection": {
+    "name": "provisional_symmetric_rank_bins",
+    "anatomical_to_effective_shape": [
+      95,
+      96
+    ],
+    "matrix_rank": 48,
+    "mapping": "average L/R slots at each ordinal rank and hold across two neighboring segments",
+    "missing_MVL24": "zero contribution with denominator two retained",
+    "assumptions": [
+      "ordinal rank used as nominal longitudinal bin",
+      "not measured muscle attachment geometry"
+    ],
+    "lost_information": [
+      "left-right activation difference",
+      "torsion",
+      "out-of-plane movement"
+    ],
+    "valid_use": "bounded planar input/force/shape interface probes",
+    "requires_3D_reference": "claims about distinct left-right muscle roles or torsion"
+  },
+  "sensory_and_feedback_next": {
+    "temperature": "implemented local head sampling -> explicit0.1s lowpass/45s-840s threshold -> AFD0-5pA; not fitted physiology",
+    "mechanical_feedback": "implemented rectified ipsilateral bending contrast to18 DB/VB cells; nominal anterior200um fields and500pA/strain are assumptions",
+    "corollary_discharge": "network motor-state pathway; distinct from mechanical measurements",
+    "forbidden_policy_inputs": [
+      "global position",
+      "gradient vector",
+      "target direction",
+      "future state"
+    ],
+    "minimum_state_labels": [
+      "neuron_voltage",
+      "muscle_voltage_or_calcium",
+      "muscle_drive",
+      "actual_shape",
+      "actual_strain"
+    ]
+  },
+  "next_gates": [
+    "AFD and graded-synapse dynamic working-range calibration",
+    "sustained forward/reverse/turn capability before thermotaxis comparisons",
+    "validate proprioceptive field and gain against functional data",
+    "separate intrinsic neural memory, muscle filtering and mechanical state persistence"
+  ],
+  "execution_update": {
+    "date": "2026-11-05",
+    "report": "docs/reports/full302-closed-loop-2026-11-05.md",
+    "neurons": 302,
+    "muscles": 95,
+    "primary_full_network_runs": 17,
+    "signed_prototype_runs": 17,
+    "input_order_diagnostic_runs": 2,
+    "neural_fits": 0,
+    "project_tests": 225,
+    "temperature_input": true,
+    "mechanical_feedback": true,
+    "mechanical_feedback_version": "nonnegative_excitation_of_bending_inside_B_cells",
+    "voltage_guard_mV": [
+      -100,
+      60
+    ],
+    "motor_gate": false,
+    "thermotaxis_training": false
+  },
+  "execution_history": [
+    {
+      "date": "2026-11-05",
+      "runtime": "src/thermotaxis/neuromechanics/full302_c1.py",
+      "report": "docs/reports/full302-c1-dynamics-2026-11-05.md",
+      "neurons": 302,
+      "muscles": 95,
+      "chemical_connections": 4665,
+      "gap_pairs": 1192,
+      "full_network_runs": 7,
+      "neural_fits": 0,
+      "project_tests": 221,
+      "temperature_input": false,
+      "mechanical_feedback": false,
+      "voltage_waveform_convergence": "not established; timestep sensitivity recorded"
+    }
+  ]
+}

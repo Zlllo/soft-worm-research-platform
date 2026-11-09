@@ -1,0 +1,10 @@
+{
+  "archive_sha256": "f58e10f59e9aa28432eb4b958c58b2192b1251e59cb5a6500493f58ccdd5086d",
+  "archive_bytes": 664252418,
+  "payload_files": 325,
+  "CRC_passed": true,
+  "all_extracted_SHA_passed": true,
+  "isolated_extracted_analysis_and_independent_audit_passed": true,
+  "summary_sha256": "2cd083a64a237d6d0ae137b0f57e41d2cc81bd2d7108d5457be7132f629ca32b",
+  "report_sha256": "0e15b613558e8d5e78da0de8e3a0e3ebd27544776fe9c23a954772fca58f3c9c"
+}

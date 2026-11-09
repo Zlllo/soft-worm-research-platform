@@ -1,0 +1,218 @@
+{
+  "complete": true,
+  "full302_runs": 17,
+  "neurons": 302,
+  "muscles": 95,
+  "replay_identities": {
+    "warm_live": true,
+    "bend_D_live": true
+  },
+  "effects": [
+    {
+      "a": "bend_D_live",
+      "b": "bend_D_off",
+      "neuron_voltage_rms_mV": 1.5484325414999522,
+      "neuron_voltage_max_mV": 27.824328025289155,
+      "max_point_difference_um": 1.7589074290723793e-08
+    },
+    {
+      "a": "bend_V_live",
+      "b": "bend_V_replay_D",
+      "neuron_voltage_rms_mV": 2.19927895822767,
+      "neuron_voltage_max_mV": 27.000401660859637,
+      "max_point_difference_um": 1.0601217032701652e-08
+    },
+    {
+      "a": "warm_live",
+      "b": "warm_off",
+      "neuron_voltage_rms_mV": 1.0555433013928751e-11,
+      "neuron_voltage_max_mV": 2.490949668754183e-10,
+      "max_point_difference_um": 1.8236636751552907e-24
+    },
+    {
+      "a": "warm_live",
+      "b": "warm_frozen_head",
+      "neuron_voltage_rms_mV": 0.0,
+      "neuron_voltage_max_mV": 0.0,
+      "max_point_difference_um": 0.0
+    }
+  ],
+  "motor_gates": [
+    {
+      "name": "motor_AVB_off",
+      "last2s_mean_forward_um_s": 3.7243120841582585e-08,
+      "last2s_axis_progress_um": 7.448653239376982e-08,
+      "passed": false
+    },
+    {
+      "name": "motor_AVB_live",
+      "last2s_mean_forward_um_s": 3.7262228943729864e-08,
+      "last2s_axis_progress_um": 7.452447946980587e-08,
+      "passed": false
+    }
+  ],
+  "temporal_probe": [
+    {
+      "name": "slow",
+      "integral_pA_s": 4.903041981500939,
+      "peak_pA": 4.932483880730842,
+      "maximum_calcium_mM": 3.671952643145842e-12,
+      "maximum_drive": 4.406032408095266e-06,
+      "max_point_difference_from_flat_um": 2.1686500841105326e-13
+    },
+    {
+      "name": "frontloaded",
+      "integral_pA_s": 4.903041981500939,
+      "peak_pA": 4.932483880730842,
+      "maximum_calcium_mM": 2.3981051714266586e-07,
+      "maximum_drive": 0.14508341486584514,
+      "max_point_difference_from_flat_um": 0.09806710665475121
+    }
+  ],
+  "numerical": [
+    {
+      "name": "bend_D_live-half-neural",
+      "voltage_rms_difference_mV": 0.0004902568892565787,
+      "voltage_max_difference_mV": 0.007746953753589025,
+      "max_point_difference_um": 2.4660343062934066e-09
+    },
+    {
+      "name": "bend_D_live-exchange2ms",
+      "voltage_rms_difference_mV": 0.0015950053824466206,
+      "voltage_max_difference_mV": 0.0984027036559354,
+      "max_point_difference_um": 4.2138939231235384e-08
+    }
+  ],
+  "active_sampling_verification": {
+    "max_head_displacement_um": 3.5209839094397366,
+    "max_temperature_delivery_difference_K": 0.0001408372926903212,
+    "max_AFD_current_difference_pA": 0.012736073244923318,
+    "max_neuron_voltage_difference_mV": 0.2147908037755144,
+    "externally_perturbed": true
+  },
+  "maximum_motion_induced_temperature_K": 2.4820948066349667e-18,
+  "all_sampled_neuron_voltage_range_mV": [
+    -67.70256976339581,
+    30.870986243389883
+  ],
+  "prototype_rejection": {
+    "status": "signed_feedback_prototype_rejected_for_biophysical_interpretation",
+    "guard_mV": [
+      -100,
+      60
+    ],
+    "reason": "negative current clamp caused out-of-range hyperpolarization; replacement rectifies feedback at zero",
+    "cases": [
+      {
+        "case": "motor_AVB_live",
+        "min_voltage_mV": -67.7025697633968,
+        "max_voltage_mV": 30.870986243389883,
+        "within_wide_engineering_guard": true
+      },
+      {
+        "case": "bend_D_live",
+        "min_voltage_mV": -403.40336527587715,
+        "max_voltage_mV": -30.739105583541132,
+        "within_wide_engineering_guard": false
+      },
+      {
+        "case": "warm_replay",
+        "min_voltage_mV": -58.13728460890017,
+        "max_voltage_mV": -23.846849704002572,
+        "within_wide_engineering_guard": true
+      },
+      {
+        "case": "warm_frozen_head",
+        "min_voltage_mV": -58.13728460890017,
+        "max_voltage_mV": -23.846849704002572,
+        "within_wide_engineering_guard": true
+      },
+      {
+        "case": "bend_V_live",
+        "min_voltage_mV": -402.1217312971679,
+        "max_voltage_mV": -32.08032587601923,
+        "within_wide_engineering_guard": false
+      },
+      {
+        "case": "warm_live",
+        "min_voltage_mV": -58.13728460890017,
+        "max_voltage_mV": -23.846849704002572,
+        "within_wide_engineering_guard": true
+      },
+      {
+        "case": "flat_off",
+        "min_voltage_mV": -58.13728460890017,
+        "max_voltage_mV": -45.0,
+        "within_wide_engineering_guard": true
+      },
+      {
+        "case": "bend_D_off",
+        "min_voltage_mV": -58.13728460890017,
+        "max_voltage_mV": -45.0,
+        "within_wide_engineering_guard": true
+      },
+      {
+        "case": "bend_V_replay_D",
+        "min_voltage_mV": -403.40336527587715,
+        "max_voltage_mV": -30.739105583541132,
+        "within_wide_engineering_guard": false
+      },
+      {
+        "case": "bend_D_live-exchange2ms",
+        "min_voltage_mV": -403.4064221990844,
+        "max_voltage_mV": -30.738045955852076,
+        "within_wide_engineering_guard": false
+      },
+      {
+        "case": "bend_D_live-half-neural",
+        "min_voltage_mV": -403.4075007545502,
+        "max_voltage_mV": -30.739217371035352,
+        "within_wide_engineering_guard": false
+      },
+      {
+        "case": "warm_noisy",
+        "min_voltage_mV": -58.137284608670846,
+        "max_voltage_mV": -23.824403077973827,
+        "within_wide_engineering_guard": true
+      },
+      {
+        "case": "bend_D_replay",
+        "min_voltage_mV": -403.40336527587715,
+        "max_voltage_mV": -30.739105583541132,
+        "within_wide_engineering_guard": false
+      },
+      {
+        "case": "warm_off",
+        "min_voltage_mV": -58.13728460890017,
+        "max_voltage_mV": -23.846849704002572,
+        "within_wide_engineering_guard": true
+      },
+      {
+        "case": "warm_live-exchange2ms",
+        "min_voltage_mV": -58.13728460890017,
+        "max_voltage_mV": -23.846705105424398,
+        "within_wide_engineering_guard": true
+      },
+      {
+        "case": "warm_live-half-neural",
+        "min_voltage_mV": -58.13732646613316,
+        "max_voltage_mV": -23.846849521555374,
+        "within_wide_engineering_guard": true
+      },
+      {
+        "case": "motor_AVB_off",
+        "min_voltage_mV": -67.70256976339581,
+        "max_voltage_mV": 30.870986243389883,
+        "within_wide_engineering_guard": true
+      }
+    ],
+    "notes": "guard added after observing prototype, before any rectified runs; no claim it is a universal physiological bound"
+  },
+  "project_tests": 225,
+  "neural_fits": 0,
+  "limits": [
+    "sensor transduction and mechanical field/gain are declared engineering assumptions",
+    "no effective locomotion established; no thermotaxis training",
+    "native1ms exchange and generic C1 parameters; fine spike-waveform convergence not claimed"
+  ]
+}

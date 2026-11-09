@@ -1,0 +1,11 @@
+--- a/src/owOpenCLSolver.cpp
++++ b/src/owOpenCLSolver.cpp
+@@ -407,7 +407,7 @@
+       1, std::make_pair(programSource.c_str(), programSource.length() + 1));
+   program = cl::Program(context, source);
+ #if defined(__APPLE__)
+-  err = program.build(devices, "-g -cl-opt-disable");
++  err = program.build(devices, "");
+ #else
+ #if INTEL_OPENCL_DEBUG
+   err =

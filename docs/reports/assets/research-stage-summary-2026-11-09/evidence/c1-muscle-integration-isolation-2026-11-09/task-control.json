@@ -1,0 +1,14 @@
+{
+  "status": "paused_by_user",
+  "date": "2026-11-09",
+  "owner_thread": "01a1c003-3076-7cf1-8746-650a888b18a1",
+  "scope": "isolated gates,CaPool and C1 muscle only",
+  "full302_new_runs_allowed": 0,
+  "primary_isolated_conditions_limit": 12,
+  "progress_percent_unchanged": 60,
+  "review_thread": "01a1c003-852e-7bb0-82f5-7f884fd68690",
+  "review_scope": "independent read-only algebra and saved-data review; no simulations",
+  "pause_date": "2026-11-09",
+  "pause_reason": "用户要求暂时不进行下一步",
+  "next_stage_authorized": false
+}

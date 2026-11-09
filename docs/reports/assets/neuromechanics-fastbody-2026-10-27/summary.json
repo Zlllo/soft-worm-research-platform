@@ -1,0 +1,718 @@
+{
+  "source_commit": "1f825daff066d56e5c26384d71648914ca169d6b",
+  "source": "Boyle, Berri & Cohen 2012 WormSim; OpenSourceBrain archive",
+  "scope": "forward neuromechanical model evaluation; no thermotaxis or full connectome",
+  "recording_check": {
+    "max_position_difference_m": 4.994657566443489e-09,
+    "max_rod_angle_difference_rad": 4.998161323266359e-06,
+    "scope": "original CSV has six significant digits; instrumentation preserves the model"
+  },
+  "effects": {
+    "no_feedback_speed_fraction": 0.06414020209686404,
+    "accepted_feedback_speed_fraction": 0.9986900386021692
+  },
+  "timestep_check": {
+    "common_saved_interval_s": [
+      0.0,
+      9.96
+    ],
+    "warmup_s": 3.0,
+    "reference_speed_m_s": 0.0001978603290466327,
+    "half_dt_speed_m_s": 0.00019752221677220449,
+    "relative_speed_difference": 0.0017088431827509964,
+    "scope": "one timestep-halving diagnostic; not full convergence across media or interventions"
+  },
+  "runs": {
+    "agar-60s": {
+      "status": "completed",
+      "design": {
+        "source_commit": "1f825daff066d56e5c26384d71648914ca169d6b",
+        "source_sha256": "46866c21c12a4ce8289fdc6382938d1f75b3ed54d63973f6439a6c835ef045dc",
+        "generated_sha256": "71ae540253de95a5ebfe09f352df15cfd88d61689cbb4d6daf967fa2116474a7",
+        "duration_s": 60.0,
+        "medium": 1.0,
+        "proprioceptive_gain": 1.0,
+        "AVB_drive": 0.675,
+        "update_dt_s": 0.001,
+        "output_interval_s": 0.04,
+        "build_command": [
+          "g++",
+          "-O3",
+          "-Wno-deprecated",
+          "-I",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/include",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/agar-60s/worm-probe.cc",
+          "-L",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/lib",
+          "-lsundials_ida",
+          "-lsundials_cvode",
+          "-lsundials_nvecserial",
+          "-lm",
+          "-o",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/agar-60s/program"
+        ],
+        "neuromuscle_columns": "time; for each of 48 segments, dorsal then ventral: effective neural drive, muscle state, stretch signal, side length",
+        "scope": "published simplified forward-locomotion system; no connectome, thermal input or anatomical muscle mapping"
+      },
+      "process": {
+        "build_returncode": 0,
+        "build_wall_s": 0.469454791,
+        "binary_sha256": "d771a1706e498b083f286faef84eafe8757a2dd1d0cc5ec12ee0d0c9f6dcb173",
+        "returncode": 0,
+        "timed_out": false,
+        "wall_s": 8.152759875
+      },
+      "metrics": {
+        "saved_end_s": 59.999999999950866,
+        "frames": 1501,
+        "warmup_s": 3.0,
+        "center_path_m": 0.011279119260490241,
+        "mean_center_speed_m_s": 0.00019787928527192843,
+        "net_center_displacement_m": 0.009426787918041747,
+        "material_centerline_length_min_m": 0.000966427287023179,
+        "material_centerline_length_max_m": 0.0010043602317512871,
+        "head_curvature_std_per_m": 7296.00299894545,
+        "head_curvature_dominant_frequency_Hz": 0.4032258064518364,
+        "scope": "geometric diagnostics of source model, not measured-animal calibration",
+        "body_axis_change_deg": -107.60837175459419
+      },
+      "feedback_geometry_check": {
+        "max_stretch_length_error_m": 2.213161332377078e-07,
+        "rms_stretch_length_error_m": 1.7001011732187063e-08,
+        "muscle_state_min_max": [
+          -0.6912471430334158,
+          0.6912471430334158
+        ]
+      },
+      "output_sha256": "ee738aae1c9b9153d1c6471273faee6cb7e614408fc2e277ddee6bb7ccb3fbf0"
+    },
+    "agar-accepted-feedback-10s": {
+      "status": "completed",
+      "design": {
+        "source_commit": "1f825daff066d56e5c26384d71648914ca169d6b",
+        "source_sha256": "46866c21c12a4ce8289fdc6382938d1f75b3ed54d63973f6439a6c835ef045dc",
+        "generated_sha256": "4cb541f5834887c08f613063d7757597aee5dd82b95a31c5b37bd594f6914b0f",
+        "duration_s": 10.0,
+        "medium": 1.0,
+        "proprioceptive_gain": 1.0,
+        "AVB_drive": 0.675,
+        "feedback_geometry": "accepted control-time state",
+        "update_dt_s": 0.001,
+        "output_interval_s": 0.04,
+        "build_command": [
+          "g++",
+          "-O3",
+          "-Wno-deprecated",
+          "-I",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/include",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/agar-accepted-feedback-10s/worm-probe.cc",
+          "-L",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/lib",
+          "-lsundials_ida",
+          "-lsundials_cvode",
+          "-lsundials_nvecserial",
+          "-lm",
+          "-o",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/agar-accepted-feedback-10s/program"
+        ],
+        "neuromuscle_columns": "time; for each of 48 segments, dorsal then ventral: effective neural drive, muscle state, stretch signal, side length; last IDA residual evaluation time",
+        "scope": "published simplified forward-locomotion system; no connectome, thermal input or anatomical muscle mapping"
+      },
+      "process": {
+        "build_returncode": 0,
+        "build_wall_s": 0.397162709,
+        "binary_sha256": "94bdcd97445ca06888d6bfbd6dd64264f373cb0041be5900a18d4f3a14914782",
+        "returncode": 0,
+        "timed_out": false,
+        "wall_s": 1.990611792
+      },
+      "metrics": {
+        "saved_end_s": 9.999999999999897,
+        "frames": 251,
+        "warmup_s": 3.0,
+        "center_path_m": 0.001382959890479363,
+        "mean_center_speed_m_s": 0.00019756569863990572,
+        "net_center_displacement_m": 0.0013701143460997465,
+        "material_centerline_length_min_m": 0.000966427287023179,
+        "material_centerline_length_max_m": 0.0010029973189518747,
+        "head_curvature_std_per_m": 7005.566762748602,
+        "head_curvature_dominant_frequency_Hz": 0.4261363636362213,
+        "scope": "geometric diagnostics of source model, not measured-animal calibration",
+        "body_axis_change_deg": -7.293725557499177
+      },
+      "feedback_geometry_check": {
+        "max_stretch_length_error_m": 2.0667603913004928e-19,
+        "rms_stretch_length_error_m": 2.7340974039007533e-20,
+        "muscle_state_min_max": [
+          -0.6912464655400307,
+          0.6912464655400307
+        ],
+        "residual_time_minus_control_time_min_max_s": [
+          1.573161501511322e-06,
+          0.011259707429522758
+        ],
+        "saved_frames_with_future_residual_cache": 250
+      },
+      "output_sha256": "0afb7a58e0cbd25072a5c7b79a561b58a701aceb17fcb455fdc1f7f45fd00d89"
+    },
+    "agar-half-dt-10s": {
+      "status": "completed",
+      "design": {
+        "source_commit": "1f825daff066d56e5c26384d71648914ca169d6b",
+        "source_sha256": "46866c21c12a4ce8289fdc6382938d1f75b3ed54d63973f6439a6c835ef045dc",
+        "generated_sha256": "748eb7dcf337b42c085e6f0d29446ce917505a3f9ab502699f39f78f56e55a4c",
+        "duration_s": 10.0,
+        "medium": 1.0,
+        "proprioceptive_gain": 1.0,
+        "AVB_drive": 0.675,
+        "update_dt_s": 0.0005,
+        "output_interval_s": 0.04,
+        "build_command": [
+          "g++",
+          "-O3",
+          "-Wno-deprecated",
+          "-I",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/include",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/agar-half-dt-10s/worm-probe.cc",
+          "-L",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/lib",
+          "-lsundials_ida",
+          "-lsundials_cvode",
+          "-lsundials_nvecserial",
+          "-lm",
+          "-o",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/agar-half-dt-10s/program"
+        ],
+        "neuromuscle_columns": "time; for each of 48 segments, dorsal then ventral: effective neural drive, muscle state, stretch signal, side length",
+        "scope": "published simplified forward-locomotion system; no connectome, thermal input or anatomical muscle mapping"
+      },
+      "process": {
+        "build_returncode": 0,
+        "build_wall_s": 0.372018333,
+        "binary_sha256": "6303bb421b8ea64ff1f9092e1df45aa136ca7f21b6d2182ed08041ee17277f61",
+        "returncode": 0,
+        "timed_out": false,
+        "wall_s": 1.876398542
+      },
+      "metrics": {
+        "saved_end_s": 9.960000000000681,
+        "frames": 250,
+        "warmup_s": 3.0,
+        "center_path_m": 0.0013747546287346444,
+        "mean_center_speed_m_s": 0.00019752221677220449,
+        "net_center_displacement_m": 0.00136210410809,
+        "material_centerline_length_min_m": 0.0009664335383634541,
+        "material_centerline_length_max_m": 0.0010027364839270136,
+        "head_curvature_std_per_m": 6991.611428340935,
+        "head_curvature_dominant_frequency_Hz": 0.4285714285716661,
+        "scope": "geometric diagnostics of source model, not measured-animal calibration",
+        "body_axis_change_deg": -6.845122399789496
+      },
+      "feedback_geometry_check": {
+        "max_stretch_length_error_m": 2.078424768445294e-07,
+        "rms_stretch_length_error_m": 1.6464190319704293e-08,
+        "muscle_state_min_max": [
+          -0.6912464664509175,
+          0.6912464664509175
+        ]
+      },
+      "output_sha256": "52480b272bbe58e4cda31fec8e64c4ce736d05887cc64416b161ec69c02829a4"
+    },
+    "agar-head-minus-10s": {
+      "status": "completed",
+      "design": {
+        "source_commit": "1f825daff066d56e5c26384d71648914ca169d6b",
+        "source_sha256": "46866c21c12a4ce8289fdc6382938d1f75b3ed54d63973f6439a6c835ef045dc",
+        "generated_sha256": "c1c2be59700b18f2b76e1305103b9f97178e471f3c3521a9ed7e700678e845e8",
+        "duration_s": 10.0,
+        "medium": 1.0,
+        "proprioceptive_gain": 1.0,
+        "AVB_drive": 0.675,
+        "feedback_geometry": "accepted control-time state",
+        "engineering_head_bias": -0.05,
+        "head_bias_scope": "constant opposite effective drive added to dorsal/ventral first 8 segments; not an anatomical synapse",
+        "update_dt_s": 0.001,
+        "output_interval_s": 0.04,
+        "build_command": [
+          "g++",
+          "-O3",
+          "-Wno-deprecated",
+          "-I",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/include",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/agar-head-minus-10s/worm-probe.cc",
+          "-L",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/lib",
+          "-lsundials_ida",
+          "-lsundials_cvode",
+          "-lsundials_nvecserial",
+          "-lm",
+          "-o",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/agar-head-minus-10s/program"
+        ],
+        "neuromuscle_columns": "time; for each of 48 segments, dorsal then ventral: effective neural drive, muscle state, stretch signal, side length; last IDA residual evaluation time",
+        "scope": "published simplified forward-locomotion system; no connectome, thermal input or anatomical muscle mapping"
+      },
+      "process": {
+        "build_returncode": 0,
+        "build_wall_s": 0.394194375,
+        "binary_sha256": "c1dc731a4834739e0e3c29de8506c8b7b5d05f6f93d35bc67ef200099cf665cc",
+        "returncode": 0,
+        "timed_out": false,
+        "wall_s": 2.016409167
+      },
+      "metrics": {
+        "saved_end_s": 9.999999999999897,
+        "frames": 251,
+        "warmup_s": 3.0,
+        "center_path_m": 0.0013884874692673584,
+        "mean_center_speed_m_s": 0.00019835535275247647,
+        "net_center_displacement_m": 0.0013761423877809602,
+        "material_centerline_length_min_m": 0.0009662254931575298,
+        "material_centerline_length_max_m": 0.0010015734740996013,
+        "head_curvature_std_per_m": 6865.587148698723,
+        "head_curvature_dominant_frequency_Hz": 0.4261363636362213,
+        "scope": "geometric diagnostics of source model, not measured-animal calibration",
+        "body_axis_change_deg": 8.382514811481611
+      },
+      "feedback_geometry_check": {
+        "max_stretch_length_error_m": 3.015437292225309e-19,
+        "rms_stretch_length_error_m": 2.830114624456771e-20,
+        "muscle_state_min_max": [
+          -0.7412129976812932,
+          0.7412129976812932
+        ],
+        "residual_time_minus_control_time_min_max_s": [
+          6.489934182951629e-06,
+          0.008149321387198705
+        ],
+        "saved_frames_with_future_residual_cache": 250
+      },
+      "output_sha256": "40e7edca075982d000e4bcae73167cfd10f019afc1c920607b6bd82d9eeb1bc3"
+    },
+    "agar-head-plus-10s": {
+      "status": "completed",
+      "design": {
+        "source_commit": "1f825daff066d56e5c26384d71648914ca169d6b",
+        "source_sha256": "46866c21c12a4ce8289fdc6382938d1f75b3ed54d63973f6439a6c835ef045dc",
+        "generated_sha256": "a693af6e61107c0cd2b4984ea91e6a61c0618ab6b36a1ed85f3f89f858be1370",
+        "duration_s": 10.0,
+        "medium": 1.0,
+        "proprioceptive_gain": 1.0,
+        "AVB_drive": 0.675,
+        "feedback_geometry": "accepted control-time state",
+        "engineering_head_bias": 0.05,
+        "head_bias_scope": "constant opposite effective drive added to dorsal/ventral first 8 segments; not an anatomical synapse",
+        "update_dt_s": 0.001,
+        "output_interval_s": 0.04,
+        "build_command": [
+          "g++",
+          "-O3",
+          "-Wno-deprecated",
+          "-I",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/include",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/agar-head-plus-10s/worm-probe.cc",
+          "-L",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/lib",
+          "-lsundials_ida",
+          "-lsundials_cvode",
+          "-lsundials_nvecserial",
+          "-lm",
+          "-o",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/agar-head-plus-10s/program"
+        ],
+        "neuromuscle_columns": "time; for each of 48 segments, dorsal then ventral: effective neural drive, muscle state, stretch signal, side length; last IDA residual evaluation time",
+        "scope": "published simplified forward-locomotion system; no connectome, thermal input or anatomical muscle mapping"
+      },
+      "process": {
+        "build_returncode": 0,
+        "build_wall_s": 0.5556282920000001,
+        "binary_sha256": "8cea42befa886b8fff75f2fba2508a073efffdc1521d52b214fcc42350e80ba7",
+        "returncode": 0,
+        "timed_out": false,
+        "wall_s": 2.367796083
+      },
+      "metrics": {
+        "saved_end_s": 9.999999999999897,
+        "frames": 251,
+        "warmup_s": 3.0,
+        "center_path_m": 0.001349782631123679,
+        "mean_center_speed_m_s": 0.00019282609016052236,
+        "net_center_displacement_m": 0.0013323615689983753,
+        "material_centerline_length_min_m": 0.0009667009012502922,
+        "material_centerline_length_max_m": 0.0010041136478385218,
+        "head_curvature_std_per_m": 6966.673538407759,
+        "head_curvature_dominant_frequency_Hz": 0.4261363636362213,
+        "scope": "geometric diagnostics of source model, not measured-animal calibration",
+        "body_axis_change_deg": -19.73216496056988
+      },
+      "feedback_geometry_check": {
+        "max_stretch_length_error_m": 3.1170812458958252e-19,
+        "rms_stretch_length_error_m": 2.6412394725871608e-20,
+        "muscle_state_min_max": [
+          -0.7412404919553862,
+          0.7412404919553862
+        ],
+        "residual_time_minus_control_time_min_max_s": [
+          2.842590664187128e-06,
+          0.008933877508886079
+        ],
+        "saved_frames_with_future_residual_cache": 250
+      },
+      "output_sha256": "92cf2e9ac03838f9c6cab8c738b30e82cbd6ba3f598c239882a49e3f3b029a24"
+    },
+    "agar-no-drive-10s": {
+      "status": "completed",
+      "design": {
+        "source_commit": "1f825daff066d56e5c26384d71648914ca169d6b",
+        "source_sha256": "46866c21c12a4ce8289fdc6382938d1f75b3ed54d63973f6439a6c835ef045dc",
+        "generated_sha256": "7f15caacf915ca599427538d2d735c25af957598303803e5578df400b3a141e0",
+        "duration_s": 10.0,
+        "medium": 1.0,
+        "proprioceptive_gain": 1.0,
+        "AVB_drive": 0.0,
+        "update_dt_s": 0.001,
+        "output_interval_s": 0.04,
+        "build_command": [
+          "g++",
+          "-O3",
+          "-Wno-deprecated",
+          "-I",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/include",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/agar-no-drive-10s/worm-probe.cc",
+          "-L",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/lib",
+          "-lsundials_ida",
+          "-lsundials_cvode",
+          "-lsundials_nvecserial",
+          "-lm",
+          "-o",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/agar-no-drive-10s/program"
+        ],
+        "neuromuscle_columns": "time; for each of 48 segments, dorsal then ventral: effective neural drive, muscle state, stretch signal, side length",
+        "scope": "published simplified forward-locomotion system; no connectome, thermal input or anatomical muscle mapping"
+      },
+      "process": {
+        "build_returncode": 0,
+        "build_wall_s": 0.363067667,
+        "binary_sha256": "6ccc29c73cd093b9d5fd4920972e40c8e9084b615f5188f3fd5e258c9c2f49da",
+        "returncode": 0,
+        "timed_out": false,
+        "wall_s": 0.7273282919999999
+      },
+      "metrics": {
+        "saved_end_s": 9.999999999999897,
+        "frames": 251,
+        "warmup_s": 3.0,
+        "center_path_m": 9.639616064837963e-27,
+        "mean_center_speed_m_s": 1.3770880092625433e-27,
+        "net_center_displacement_m": 1.8604659952532566e-27,
+        "material_centerline_length_min_m": 0.0009999999999999998,
+        "material_centerline_length_max_m": 0.0010000000000000002,
+        "head_curvature_std_per_m": 1.9074927162118223e-13,
+        "head_curvature_dominant_frequency_Hz": null,
+        "scope": "geometric diagnostics of source model, not measured-animal calibration",
+        "body_axis_change_deg": 0.0
+      },
+      "feedback_geometry_check": {
+        "max_stretch_length_error_m": 4.8426933636254313e-11,
+        "rms_stretch_length_error_m": 6.989812472412234e-12,
+        "muscle_state_min_max": [
+          0.0,
+          0.0
+        ]
+      },
+      "output_sha256": "0e22905fecd52376a551bac6293d5082227b52d950d438386ed24b6f2f466508"
+    },
+    "agar-no-feedback-10s": {
+      "status": "completed",
+      "design": {
+        "source_commit": "1f825daff066d56e5c26384d71648914ca169d6b",
+        "source_sha256": "46866c21c12a4ce8289fdc6382938d1f75b3ed54d63973f6439a6c835ef045dc",
+        "generated_sha256": "da5843e12b1e2b0384f9e1031422109c27ffabd9df9f644655fe9d134545013d",
+        "duration_s": 10.0,
+        "medium": 1.0,
+        "proprioceptive_gain": 0.0,
+        "AVB_drive": 0.675,
+        "update_dt_s": 0.001,
+        "output_interval_s": 0.04,
+        "build_command": [
+          "g++",
+          "-O3",
+          "-Wno-deprecated",
+          "-I",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/include",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/agar-no-feedback-10s/worm-probe.cc",
+          "-L",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/lib",
+          "-lsundials_ida",
+          "-lsundials_cvode",
+          "-lsundials_nvecserial",
+          "-lm",
+          "-o",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/agar-no-feedback-10s/program"
+        ],
+        "neuromuscle_columns": "time; for each of 48 segments, dorsal then ventral: effective neural drive, muscle state, stretch signal, side length",
+        "scope": "published simplified forward-locomotion system; no connectome, thermal input or anatomical muscle mapping"
+      },
+      "process": {
+        "build_returncode": 0,
+        "build_wall_s": 0.46784287500000005,
+        "binary_sha256": "c7e5f59e1b00e972daeecc8dc2db59c9b2acae4650eee914af740904de01ef29",
+        "returncode": 0,
+        "timed_out": false,
+        "wall_s": 1.154313375
+      },
+      "metrics": {
+        "saved_end_s": 9.999999999999897,
+        "frames": 251,
+        "warmup_s": 3.0,
+        "center_path_m": 8.881967721572369e-05,
+        "mean_center_speed_m_s": 1.2688525316531744e-05,
+        "net_center_displacement_m": 8.873107940449721e-05,
+        "material_centerline_length_min_m": 0.000966427287023179,
+        "material_centerline_length_max_m": 0.0010077170751795752,
+        "head_curvature_std_per_m": 78.35500419512958,
+        "head_curvature_dominant_frequency_Hz": 0.1420454545454071,
+        "scope": "geometric diagnostics of source model, not measured-animal calibration",
+        "body_axis_change_deg": -17.62978348318794
+      },
+      "feedback_geometry_check": {
+        "max_stretch_length_error_m": 5.727217190008201e-08,
+        "rms_stretch_length_error_m": 9.953639704865948e-09,
+        "muscle_state_min_max": [
+          -0.6912500262260383,
+          0.6912500262260383
+        ]
+      },
+      "output_sha256": "2d9d0c413088b8fcd7224fe778f371236a4aa5ac60b0010c286e339d3f9e3651"
+    },
+    "agar-residual-time-audit-10s": {
+      "status": "completed",
+      "design": {
+        "source_commit": "1f825daff066d56e5c26384d71648914ca169d6b",
+        "source_sha256": "46866c21c12a4ce8289fdc6382938d1f75b3ed54d63973f6439a6c835ef045dc",
+        "generated_sha256": "4dfc22a7d2c5383937ee715e4db1803a03beb306cafc537ccf69f5299bff0ba1",
+        "duration_s": 10.0,
+        "medium": 1.0,
+        "proprioceptive_gain": 1.0,
+        "AVB_drive": 0.675,
+        "feedback_geometry": "upstream residual cache",
+        "update_dt_s": 0.001,
+        "output_interval_s": 0.04,
+        "build_command": [
+          "g++",
+          "-O3",
+          "-Wno-deprecated",
+          "-I",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/include",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/agar-residual-time-audit-10s/worm-probe.cc",
+          "-L",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/lib",
+          "-lsundials_ida",
+          "-lsundials_cvode",
+          "-lsundials_nvecserial",
+          "-lm",
+          "-o",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/agar-residual-time-audit-10s/program"
+        ],
+        "neuromuscle_columns": "time; for each of 48 segments, dorsal then ventral: effective neural drive, muscle state, stretch signal, side length; last IDA residual evaluation time",
+        "scope": "published simplified forward-locomotion system; no connectome, thermal input or anatomical muscle mapping"
+      },
+      "process": {
+        "build_returncode": 0,
+        "build_wall_s": 0.70061925,
+        "binary_sha256": "2179f251e5e715ee35ea62fcb21e697d726125f8b7cf103241bc73bd0eaae401",
+        "returncode": 0,
+        "timed_out": false,
+        "wall_s": 2.1875560000000003
+      },
+      "metrics": {
+        "saved_end_s": 9.999999999999897,
+        "frames": 251,
+        "warmup_s": 3.0,
+        "center_path_m": 0.0013847738908210625,
+        "mean_center_speed_m_s": 0.0001978248415458628,
+        "net_center_displacement_m": 0.0013719331524511237,
+        "material_centerline_length_min_m": 0.000966427287023179,
+        "material_centerline_length_max_m": 0.0010029364084913246,
+        "head_curvature_std_per_m": 7008.422737895158,
+        "head_curvature_dominant_frequency_Hz": 0.4261363636362213,
+        "scope": "geometric diagnostics of source model, not measured-animal calibration",
+        "body_axis_change_deg": -7.769186952548075
+      },
+      "feedback_geometry_check": {
+        "max_stretch_length_error_m": 1.1722283694992771e-07,
+        "rms_stretch_length_error_m": 1.3693457255166092e-08,
+        "muscle_state_min_max": [
+          -0.6912469944533111,
+          0.6912469944533111
+        ],
+        "residual_time_minus_control_time_min_max_s": [
+          3.0555881602722934e-07,
+          0.011259707429522758
+        ],
+        "saved_frames_with_future_residual_cache": 250
+      },
+      "output_sha256": "c155b3d8b17f6ccdc071ef6f6a6751e32a89d433d032199881df7eef83d408e8"
+    },
+    "audited-agar-10s": {
+      "status": "completed",
+      "design": {
+        "source_commit": "1f825daff066d56e5c26384d71648914ca169d6b",
+        "source_sha256": "46866c21c12a4ce8289fdc6382938d1f75b3ed54d63973f6439a6c835ef045dc",
+        "generated_sha256": "f97aced935ba0f1b127059004205f8f356495c42281c44935bab2c0bc75882f6",
+        "duration_s": 10.0,
+        "medium": 1.0,
+        "proprioceptive_gain": 1.0,
+        "AVB_drive": 0.675,
+        "update_dt_s": 0.001,
+        "output_interval_s": 0.04,
+        "build_command": [
+          "g++",
+          "-O3",
+          "-Wno-deprecated",
+          "-I",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/include",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/audited-agar-10s/worm-probe.cc",
+          "-L",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/lib",
+          "-lsundials_ida",
+          "-lsundials_cvode",
+          "-lsundials_nvecserial",
+          "-lm",
+          "-o",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/audited-agar-10s/program"
+        ],
+        "neuromuscle_columns": "time; for each of 48 segments, dorsal then ventral: effective neural drive, muscle state, stretch signal, side length",
+        "scope": "published simplified forward-locomotion system; no connectome, thermal input or anatomical muscle mapping"
+      },
+      "process": {
+        "build_returncode": 0,
+        "build_wall_s": 0.735622542,
+        "binary_sha256": "92e98dfe9fb7e9d8c2b51129ae87f2c5d316bbf32d55c17d548f6c327d79b082",
+        "returncode": 0,
+        "timed_out": false,
+        "wall_s": 2.148020875
+      },
+      "metrics": {
+        "saved_end_s": 9.999999999999897,
+        "frames": 251,
+        "warmup_s": 3.0,
+        "center_path_m": 0.0013847738908210625,
+        "mean_center_speed_m_s": 0.0001978248415458628,
+        "net_center_displacement_m": 0.0013719331524511237,
+        "material_centerline_length_min_m": 0.000966427287023179,
+        "material_centerline_length_max_m": 0.0010029364084913246,
+        "head_curvature_std_per_m": 7008.422737895158,
+        "head_curvature_dominant_frequency_Hz": 0.4261363636362213,
+        "scope": "geometric diagnostics of source model, not measured-animal calibration",
+        "body_axis_change_deg": -7.769186952548075
+      },
+      "feedback_geometry_check": {
+        "max_stretch_length_error_m": 1.1722283694992771e-07,
+        "rms_stretch_length_error_m": 1.3693457255166092e-08,
+        "muscle_state_min_max": [
+          -0.6912469944533111,
+          0.6912469944533111
+        ]
+      },
+      "output_sha256": "c155b3d8b17f6ccdc071ef6f6a6751e32a89d433d032199881df7eef83d408e8"
+    },
+    "original-agar-10s": {
+      "status": "completed",
+      "design": {
+        "source_commit": "1f825daff066d56e5c26384d71648914ca169d6b",
+        "source_sha256": "46866c21c12a4ce8289fdc6382938d1f75b3ed54d63973f6439a6c835ef045dc",
+        "binary_sha256": "116f80b0a7f49a8fa714c0a187b47f64d14357877087cd77b9db76768587729e",
+        "duration_s": 10,
+        "medium": 1.0,
+        "objects": 0,
+        "source_modified": false
+      },
+      "process": {
+        "returncode": 0,
+        "timed_out": false,
+        "wall_s": 1.870518084
+      },
+      "metrics": {
+        "saved_end_s": 10.0,
+        "frames": 251,
+        "warmup_s": 3.0,
+        "center_path_m": 0.0013847738206343692,
+        "mean_center_speed_m_s": 0.0001978248315191956,
+        "net_center_displacement_m": 0.00137193309249834,
+        "material_centerline_length_min_m": 0.0009664273419049837,
+        "material_centerline_length_max_m": 0.001002937796955248,
+        "head_curvature_std_per_m": 7008.5038301864715,
+        "head_curvature_dominant_frequency_Hz": 0.42613636363636326,
+        "scope": "geometric diagnostics of source model, not measured-animal calibration",
+        "body_axis_change_deg": -7.769167416081196
+      },
+      "feedback_geometry_check": {},
+      "output_sha256": "cb0c3479891dd5c41526540d8bb6a45c48a0bb0152bb81a5324cf4d0a99bd9dd"
+    },
+    "water-10s": {
+      "status": "completed",
+      "design": {
+        "source_commit": "1f825daff066d56e5c26384d71648914ca169d6b",
+        "source_sha256": "46866c21c12a4ce8289fdc6382938d1f75b3ed54d63973f6439a6c835ef045dc",
+        "generated_sha256": "46e18a689f12a681da6f4b308a8d30940e509d83a81293e54c25d92ea28050f1",
+        "duration_s": 10.0,
+        "medium": 0.0,
+        "proprioceptive_gain": 1.0,
+        "AVB_drive": 0.675,
+        "update_dt_s": 0.001,
+        "output_interval_s": 0.04,
+        "build_command": [
+          "g++",
+          "-O3",
+          "-Wno-deprecated",
+          "-I",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/include",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/water-10s/worm-probe.cc",
+          "-L",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/upstream/boyle2012/WormSim/Sundials/lib",
+          "-lsundials_ida",
+          "-lsundials_cvode",
+          "-lsundials_nvecserial",
+          "-lm",
+          "-o",
+          "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b/results/neuromechanics-fastbody-2026-10-27/outputs/water-10s/program"
+        ],
+        "neuromuscle_columns": "time; for each of 48 segments, dorsal then ventral: effective neural drive, muscle state, stretch signal, side length",
+        "scope": "published simplified forward-locomotion system; no connectome, thermal input or anatomical muscle mapping"
+      },
+      "process": {
+        "build_returncode": 0,
+        "build_wall_s": 0.468603125,
+        "binary_sha256": "a5f94c2b0cd1a8a5fa2ff0677004776c203f916e4f1aecf476079c45b23511af",
+        "returncode": 0,
+        "timed_out": false,
+        "wall_s": 88.739962166
+      },
+      "metrics": {
+        "saved_end_s": 9.999999999999897,
+        "frames": 251,
+        "warmup_s": 3.0,
+        "center_path_m": 0.0005884758115823196,
+        "mean_center_speed_m_s": 8.406797308318711e-05,
+        "net_center_displacement_m": 0.0005676277105065998,
+        "material_centerline_length_min_m": 0.0009990020121292509,
+        "material_centerline_length_max_m": 0.0010008238293484687,
+        "head_curvature_std_per_m": 2566.4368188275084,
+        "head_curvature_dominant_frequency_Hz": 2.2727272727265135,
+        "scope": "geometric diagnostics of source model, not measured-animal calibration",
+        "body_axis_change_deg": -39.94592358787924
+      },
+      "feedback_geometry_check": {
+        "max_stretch_length_error_m": 8.669481014666542e-09,
+        "rms_stretch_length_error_m": 1.168233042448807e-09,
+        "muscle_state_min_max": [
+          -0.6788417058038967,
+          0.6788417058038967
+        ]
+      },
+      "output_sha256": "6ca90dc009e3cb5e0c24a8426efbe69a53280c1a74873b3a6afa5d2f11c2d583"
+    }
+  }
+}

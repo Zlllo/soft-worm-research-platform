@@ -1,0 +1,11 @@
+{
+  "date": "2026-11-09",
+  "archive_sha256": "f58e10f59e9aa28432eb4b958c58b2192b1251e59cb5a6500493f58ccdd5086d",
+  "payload_files": 325,
+  "all_payload_crc_and_sha256_passed": true,
+  "independent_directory_analysis_and_audit_passed": true,
+  "summary_byte_identical": true,
+  "summary_sha256": "2cd083a64a237d6d0ae137b0f57e41d2cc81bd2d7108d5457be7132f629ca32b",
+  "new_simulations": 0,
+  "full_system_convergence_accepted": false
+}

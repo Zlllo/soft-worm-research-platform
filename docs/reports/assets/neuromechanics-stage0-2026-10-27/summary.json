@@ -1,0 +1,126 @@
+{
+  "status": "source probes executed; closed-loop coupling pending",
+  "platform": {
+    "system": "Darwin",
+    "machine": "arm64",
+    "python": "3.12.14"
+  },
+  "sources": {
+    "c302": {
+      "commit": "d542a44bf2662f79e0ad23342a959a181a920877",
+      "license_sha256": "f5f2ef95445989d242132d0d1e72c9993b6da5e107170c24eaddffd3a81dfa65"
+    },
+    "sibernetic": {
+      "commit": "2b3f1eb3770cb9e3142cf38391b40a1adf27c89d",
+      "license_sha256": "7b41a0c372cfcfc08116d70720fd39b1ca6c8099291d352daf6b6dd16422d2aa"
+    }
+  },
+  "connectome_sha256": "6e2bd37286570c7af6f87f82a453c8113d3b30429e134cb934218ca7342097da",
+  "anatomical_muscles": 95,
+  "simulator_slots": 96,
+  "inactive_slots": [
+    "MVL24"
+  ],
+  "nmj_probe": {
+    "presynaptic_voltage_max_abs_difference_V": 0.0,
+    "intact_muscle_calcium_peak": 2.4889206e-07,
+    "disconnected_muscle_calcium_peak": 3.732136e-12,
+    "calcium_units": "mol/m3 in exported model traces; not experimental calibration",
+    "scope": "isolating one simulated AS2->MDL07 projection"
+  },
+  "body_probes": {
+    "sibernetic-body-20ms": {
+      "physical_steps": 1000,
+      "physics_dt_s": 2e-05,
+      "integrated_s": 0.02,
+      "saved_frames": 20,
+      "last_saved_time_s": 0.019,
+      "elastic_particles": 2290,
+      "liquid_particles": 388,
+      "boundary_particles": 31408,
+      "wall_s": 17.809593999991193,
+      "muscle_min": 0.0,
+      "muscle_max": 0.177571,
+      "particle_data_finite": true,
+      "rms_displacement_last_saved_upstream_units": 3.1883901955407534,
+      "seconds_wall_per_second_simulated": 890.4796999995597,
+      "coordinate_units": "raw upstream units; absolute length calibration pending",
+      "scope": "short numerical run; no steady locomotion, sensory feedback or thermotaxis"
+    },
+    "sibernetic-body-20ms-optimized": {
+      "physical_steps": 1000,
+      "physics_dt_s": 2e-05,
+      "integrated_s": 0.02,
+      "saved_frames": 20,
+      "last_saved_time_s": 0.019,
+      "elastic_particles": 2290,
+      "liquid_particles": 388,
+      "boundary_particles": 31408,
+      "wall_s": 11.877223040995887,
+      "muscle_min": 0.0,
+      "muscle_max": 0.177571,
+      "particle_data_finite": true,
+      "rms_displacement_last_saved_upstream_units": 3.1883901955407534,
+      "seconds_wall_per_second_simulated": 593.8611520497943,
+      "coordinate_units": "raw upstream units; absolute length calibration pending",
+      "scope": "short numerical run; no steady locomotion, sensory feedback or thermotaxis"
+    },
+    "sibernetic-body-2ms": {
+      "physical_steps": 100,
+      "physics_dt_s": 2e-05,
+      "integrated_s": 0.002,
+      "saved_frames": 10,
+      "last_saved_time_s": 0.0018000000000000002,
+      "elastic_particles": 2290,
+      "liquid_particles": 388,
+      "boundary_particles": 31408,
+      "wall_s": 1.756116208009189,
+      "muscle_min": 0.0,
+      "muscle_max": 0.01784282,
+      "particle_data_finite": true,
+      "rms_displacement_last_saved_upstream_units": 0.22655392861997367,
+      "seconds_wall_per_second_simulated": 878.0581040045945,
+      "coordinate_units": "raw upstream units; absolute length calibration pending",
+      "scope": "short numerical run; no steady locomotion, sensory feedback or thermotaxis"
+    },
+    "sibernetic-smoke-gpu": {
+      "physical_steps": 2,
+      "physics_dt_s": 2e-05,
+      "integrated_s": 4e-05,
+      "saved_frames": 2,
+      "last_saved_time_s": 2e-05,
+      "elastic_particles": 2290,
+      "liquid_particles": 388,
+      "boundary_particles": 31408,
+      "wall_s": 1.1548885840165894,
+      "muscle_min": 0.0,
+      "muscle_max": 0.0002000109,
+      "particle_data_finite": true,
+      "rms_displacement_last_saved_upstream_units": 0.014358966567039643,
+      "seconds_wall_per_second_simulated": 28872.214600414733,
+      "coordinate_units": "raw upstream units; absolute length calibration pending",
+      "scope": "short numerical run; no steady locomotion, sensory feedback or thermotaxis"
+    }
+  },
+  "body_optimization_comparison": {
+    "max_saved_elastic_position_abs_difference": 0.0,
+    "scope": "saved decimal precision over 20ms only; not full numerical equivalence"
+  },
+  "neuron_engine_comparison": {
+    "samples": 72001,
+    "simulated_s": 3.6,
+    "muscle_calcium_peak": 2.480634e-07,
+    "relative_calcium_peak_difference": 0.0033293950799394637,
+    "scope": "same model in jNeuroML and NEURON; peak comparison is not a convergence proof"
+  },
+  "packages": {
+    "c302": "0.12.1",
+    "cect": "0.3.5",
+    "pyNeuroML": "1.3.22",
+    "neuron": "9.0.2",
+    "jdk4py": "25.0.2.1",
+    "numpy": "2.3.5"
+  },
+  "redacted_environment_lines": 126,
+  "source_data_reader": "c302 upstream default SpreadsheetDataReader; not current Cook import"
+}

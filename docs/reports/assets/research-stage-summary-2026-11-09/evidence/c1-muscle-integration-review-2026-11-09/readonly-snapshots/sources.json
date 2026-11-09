@@ -1,0 +1,166 @@
+{
+  "frozen/BMotorPoint.mod": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/BMotorPoint.mod",
+    "sha256": "f1cb3d1dccfafb702c1cc3ef52aef729cdc3dd06651e4877b527e03567c2a86a"
+  },
+  "frozen/CaPool.mod": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/CaPool.mod",
+    "sha256": "6d8758a9d0df1e051db8578971d1fadfebbaa6cf5c9689fe40a99cc47c927734"
+  },
+  "frozen/GenericMuscleCell.hoc": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/GenericMuscleCell.hoc",
+    "sha256": "261f0078d3d403cfdacc111368eb58a1210503decc531f32a5d78080d970adb2"
+  },
+  "frozen/GenericNeuronCell.hoc": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/GenericNeuronCell.hoc",
+    "sha256": "9ae66653c0cb723c8918f9651b991ec27be446da53f40da480151e14ed5be05f"
+  },
+  "frozen/Leak.mod": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/Leak.mod",
+    "sha256": "b71c3f17a72fe13576b7508917c4c51ba84e487e452f1bd36e0fc443732927ae"
+  },
+  "frozen/arm64/BMotorPoint.cpp": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/BMotorPoint.cpp",
+    "sha256": "7f6a5139ebc286b16dbff75ea12ace76437734f1d9e44a9b33f614933855b70c"
+  },
+  "frozen/arm64/BMotorPoint.o": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/BMotorPoint.o",
+    "sha256": "d26b23a92ac63248e1cb69286ff7a2949174f884583611464ce31544399b7903"
+  },
+  "frozen/arm64/CaPool.cpp": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/CaPool.cpp",
+    "sha256": "df739980ade1775be8118fbd9b73914cc7ac63a5ab29c2296c2b071eb316c7a2"
+  },
+  "frozen/arm64/CaPool.o": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/CaPool.o",
+    "sha256": "4226f3e5424f5809db16a1c39269c6d452cb841d43d22263c6328066e15f3e03"
+  },
+  "frozen/arm64/Leak.cpp": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/Leak.cpp",
+    "sha256": "b1636f2f39080f27aaa7e0def60edd41e05dab577445991a858f55291fe19e92"
+  },
+  "frozen/arm64/Leak.o": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/Leak.o",
+    "sha256": "04fb958ece4370239e5cb654de64561c03101cd48f1e09c7da956f7313b3260f"
+  },
+  "frozen/arm64/ca_boyle.cpp": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/ca_boyle.cpp",
+    "sha256": "b6827344d3633b0aefa99cc99c347e537e9885b03685ccdd4297fd813cfafeaa"
+  },
+  "frozen/arm64/ca_boyle.o": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/ca_boyle.o",
+    "sha256": "9f291f9abfadcc78ab8d249a0857e9aa7d238bd98c02220bd9e475134fa87e4f"
+  },
+  "frozen/arm64/k_fast.cpp": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/k_fast.cpp",
+    "sha256": "2b158679239030e6c6941050a4216cb980beff57bcae49d238104517bb2a211f"
+  },
+  "frozen/arm64/k_fast.o": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/k_fast.o",
+    "sha256": "b05812fec237b1d18528f3bbd17a3285f799c1cadc7d80bbbe5e3d2b0eb3fcbb"
+  },
+  "frozen/arm64/k_slow.cpp": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/k_slow.cpp",
+    "sha256": "96ff2ca7e47c056a1d6aaba667e845e5ebc222491533a873c014724d08631b76"
+  },
+  "frozen/arm64/k_slow.o": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/k_slow.o",
+    "sha256": "1ecfebece16aad4de1b712e509b3b2c60e92d731b29121fbef2caf4bce8e3f09"
+  },
+  "frozen/arm64/libnrnmech.dylib": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/libnrnmech.dylib",
+    "sha256": "eee31eede6c4233e8ceb3e97a94a03d68ac100747e8e9c56df2ef4d5abfbc92b"
+  },
+  "frozen/arm64/makemod2c_inc": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/makemod2c_inc",
+    "sha256": "c26d11ef0d398d42e703c3a9ea070cbf408d5af7fcbe9520b840724c90aa97d4"
+  },
+  "frozen/arm64/mod_func.cpp": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/mod_func.cpp",
+    "sha256": "de149baa73b1261bca47d2194f29643168bcf03fd84f61666255706b83d43880"
+  },
+  "frozen/arm64/mod_func.o": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/mod_func.o",
+    "sha256": "5105d1b851db78577cc859d42e7df8412c8c5a91b6768650d1a4f7211368b7ac"
+  },
+  "frozen/arm64/neuron_to_neuron_elec_syn.cpp": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/neuron_to_neuron_elec_syn.cpp",
+    "sha256": "672e80bec3f501a6b869f7795c6f487fb5400ad9b621e674595b6ece0f88711f"
+  },
+  "frozen/arm64/neuron_to_neuron_elec_syn.o": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/neuron_to_neuron_elec_syn.o",
+    "sha256": "1736794d99debe531137aa5afc221df5bbc28e076a3fba65c1d4a65bd728adb6"
+  },
+  "frozen/arm64/neuron_to_neuron_exc_syn.cpp": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/neuron_to_neuron_exc_syn.cpp",
+    "sha256": "fb10a8d4cbc0f08ebdd8b2e965a987fbb7ff74a345bfd48b63f6787efdca2ef8"
+  },
+  "frozen/arm64/neuron_to_neuron_exc_syn.o": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/neuron_to_neuron_exc_syn.o",
+    "sha256": "205cdb6586a139c2978facc7c2388d47eec8a982bc9b9247e6143b927e9bd43c"
+  },
+  "frozen/arm64/neuron_to_neuron_inh_syn.cpp": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/neuron_to_neuron_inh_syn.cpp",
+    "sha256": "b5bbe39ce5422eddc7c46de3da0bdf96a4a2f9d692a2f59d42dc9ba0286eca18"
+  },
+  "frozen/arm64/neuron_to_neuron_inh_syn.o": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/neuron_to_neuron_inh_syn.o",
+    "sha256": "c385f3d961f68a4d70bb131f75db3402eecbda4a55bd722a8be4655caadc62a6"
+  },
+  "frozen/arm64/special": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/special",
+    "sha256": "bf79366269c98db445e6f3d475611c22e202702fafd790f84ab3b753c63daff1"
+  },
+  "frozen/arm64/special.nrn": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/arm64/special.nrn",
+    "sha256": "bf79366269c98db445e6f3d475611c22e202702fafd790f84ab3b753c63daff1"
+  },
+  "frozen/build-bmotor.log": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/build-bmotor.log",
+    "sha256": "3fafd5c1faf7b31eb46be3a3018dd4498527ec3a661e13eabfcb2989f8d5a3b2"
+  },
+  "frozen/build.log": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/build.log",
+    "sha256": "cbf74e36af7609e3375f651f0d0c54607f7a72e70f8d0fcf3b540ce2a94e5b87"
+  },
+  "frozen/ca_boyle.mod": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/ca_boyle.mod",
+    "sha256": "b6ba16dd9cd470ab57bcaadd5cbb4b0b8dcd967c50f5c9c990c5fd6e6eea60c0"
+  },
+  "frozen/k_fast.mod": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/k_fast.mod",
+    "sha256": "64a040921099e2656cc1164bcb81e95fb6146052718192ac963f1b4ab2380e94"
+  },
+  "frozen/k_slow.mod": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/k_slow.mod",
+    "sha256": "bc382ba0f40324f79ce5edade3585dc6b5b4161c22284bb60ab9ff69801b076f"
+  },
+  "frozen/neuron_to_neuron_elec_syn.mod": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/neuron_to_neuron_elec_syn.mod",
+    "sha256": "f251b272cba1c1ad8a7090b05412fc4f2b4f95a9675be9325d24dc84ea4b988a"
+  },
+  "frozen/neuron_to_neuron_exc_syn.mod": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/neuron_to_neuron_exc_syn.mod",
+    "sha256": "3c3dd74d70952f77245fd4a0902f7e15ef4884e52dfce60a99923e2f31643816"
+  },
+  "frozen/neuron_to_neuron_inh_syn.mod": {
+    "source": "results/b-motor-convergence-2026-11-09/kernels/neuron_to_neuron_inh_syn.mod",
+    "sha256": "c0bd5d22756004612b6b01d522506e0b1240a4291e3114491aab45aa062fec87"
+  },
+  "historical/summary.json": {
+    "source": "results/b-motor-convergence-2026-11-09/summary.json",
+    "sha256": "69f3972f85f41171ba0ff0809318b489ec3cff015114741c41f8d12f5e4b3610"
+  },
+  "historical/archive-validation.json": {
+    "source": "results/b-motor-convergence-2026-11-09/archive-validation.json",
+    "sha256": "ea43c1e3b859b78fdea0d43fe8901aecbb028ca67a8622f4f05f73b9b9d8584b"
+  },
+  "historical/numerical-diagnostic.md": {
+    "source": "results/b-motor-convergence-2026-11-09/numerical-diagnostic.md",
+    "sha256": "a7d54cfac5ee166f245beff8499eee46de16483a8062662299669ba279bdf53d"
+  },
+  "historical/numerical-diagnostic-evidence.json": {
+    "source": "results/b-motor-convergence-2026-11-09/numerical-diagnostic-evidence.json",
+    "sha256": "f25274fe427a8208672815b8963f3d29b7d31a0fb8ada584c0906763667db531"
+  }
+}

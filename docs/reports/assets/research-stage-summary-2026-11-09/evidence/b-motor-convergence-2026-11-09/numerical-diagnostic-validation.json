@@ -1,0 +1,7 @@
+{
+  "diagnostic_note_sha256": "a7d54cfac5ee166f245beff8499eee46de16483a8062662299669ba279bdf53d",
+  "diagnostic_evidence_sha256": "f25274fe427a8208672815b8963f3d29b7d31a0fb8ada584c0906763667db531",
+  "frozen_inputs_and_formal_evidence_unchanged": true,
+  "full_run_count_still": 6,
+  "new_simulations": 0
+}

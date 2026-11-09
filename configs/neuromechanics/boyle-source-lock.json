@@ -1,0 +1,12 @@
+{
+  "recorded_on": "2026-10-27",
+  "repository": "https://github.com/OpenSourceBrain/CelegansNeuromechanicalGaitModulation.git",
+  "commit": "1f825daff066d56e5c26384d71648914ca169d6b",
+  "source": "WormSim/Model/worm.cc",
+  "paper_doi": "10.3389/fncom.2012.00010",
+  "dependency": "bundled Sundials 2.3.0, built inside the experiment checkout",
+  "source_use_notice": "research, teaching and other non-commercial use; retain notice at top of worm.cc and cite associated publication",
+  "model_scope": "48 mechanical segments, 49 rods, 12 neural units each with two binary dorsal/ventral states, 48 effective dorsal/ventral muscle pairs; no named 302-neuron network",
+  "anatomical_muscle_mapping": "not supplied; effective dorsal/ventral segments are not the 95 named muscle cells",
+  "variants": "explicit source copies and patches per output; original checkout unmodified"
+}

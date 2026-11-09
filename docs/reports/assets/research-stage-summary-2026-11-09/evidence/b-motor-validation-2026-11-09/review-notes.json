@@ -1,0 +1,26 @@
+{
+  "protocol_snapshots": {
+    "convergence": {
+      "path": "results/b-motor-convergence-2026-11-09/protocol.json",
+      "sha256": "d28be678008c5cfdfb409e8cd1b1b727a36ac0506f7b81aa187b4729b2176ea8"
+    },
+    "feedback_causality": {
+      "path": "results/b-motor-feedback-causality-2026-11-09/protocol.json",
+      "sha256": "be7d172d948883270bb193bc38ca5e11c7f5faa3a4fe27784d14b0a8ed294e4b"
+    }
+  },
+  "review_notes": [
+    "Numerical protocol separates unshifted trajectories from frequency and amplitude statistics; it does not permit distribution-only success.",
+    "Historical 10ms vs new1ms neural sampling must be addressed before interpreting peak timing.",
+    "Body-frame deformation and laboratory-frame transverse coordinates are distinct metrics.",
+    "Parent independently reconstructed the feedback summary from159 archived payloads; all12 causality checks remain passed."
+  ],
+  "status": "parent_review_complete",
+  "parent_audits": [
+    "convergence-parent-audit.json",
+    "feedback-parent-audit.json"
+  ],
+  "overall_numeric_acceptance": false,
+  "feedback_causality_acceptance": true,
+  "convergence_review": "Independent extracted analysis and96-gate audit reproduced the failed numerical acceptance"
+}

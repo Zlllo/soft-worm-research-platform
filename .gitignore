@@ -27,3 +27,13 @@ env/
 /进度汇报_2026-10-06/阶段进展汇报.md
 /进度汇报_2026-10-06/阶段进展汇报与讲述稿.md
 /进度汇报_2026-10-06/讲述稿配图/
+
+# Frozen large experiment archives are published as GitHub Release assets.
+/docs/reports/assets/b-motor-convergence-2026-11-09/reproduction.zip
+/docs/reports/assets/b-motor-feedback-causality-2026-11-09/reproduction.zip
+/docs/reports/assets/body-load-stage2-2026-11-03/reproduction.zip
+/docs/reports/assets/body-topology-calibration-2026-11-03/reproduction.zip
+/docs/reports/assets/c1-muscle-integration-isolation-2026-11-09/reproduction.zip
+/docs/reports/assets/full302-closed-loop-2026-11-05/reproduction.zip
+/docs/reports/assets/full302-mechanisms-2026-11-07/reproduction.zip
+!docs/reports/assets/full302-mechanisms-2026-11-07/same-muscle-wave-different-drag.gif

@@ -1,0 +1,1508 @@
+{
+  "protocol_sha256": "1ab547aba2bfc5982e5806ee5777a51a6a87066c0a1714d1c5cdcc4b7d10e33f",
+  "main_conditions": 12,
+  "analytic_control_conditions": 12,
+  "new_full302_or_body_runs": 0,
+  "checks": {
+    "source_hashes_verified": true,
+    "actual_input_arrays_identical_at_all_common_points": true,
+    "actual_left_interval_input_matches_dense_file": true,
+    "same_dt_synaptic_state_bitwise_identical_across_variants": true,
+    "code_update_forms_passed": true,
+    "combined_analytic_STATE_controls_passed": true
+  },
+  "analytic_controls": {
+    "gates_original_0.025": {
+      "max_abs_state_error": {
+        "e_q": 0.027169535501964825,
+        "f_q": 2.4355942269904673e-05,
+        "p_q": 0.0005432638887080676,
+        "q_q": 8.039539487747493e-06,
+        "n_q": 8.614400130740885e-05
+      },
+      "initial_distance_to_inf": {
+        "e_q": 0.5279880900598508,
+        "f_q": 0.7990815346860012,
+        "p_q": 0.2651931856751553,
+        "q_q": 0.2621619105006223,
+        "n_q": 0.46814530417956857
+      },
+      "voltage_max_abs_error_mV": 0.0,
+      "passed": false,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.1937244194758242,
+        "RMS_to_current_state_after_t0": 0.0007324068018167035,
+        "max_abs_to_recorded_previous_neural_state": 0.0,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.6400000000000001
+      }
+    },
+    "pool_original_0.025": {
+      "actual_ica_unique_mA_cm2": [
+        -0.002,
+        0.0,
+        0.002
+      ],
+      "area_um2": 314.1592653589793,
+      "actual_iCa_nA_levels": [
+        -0.0062831853071795875,
+        -0.0,
+        0.0062831853071795875
+      ],
+      "density_max_abs_error": 0.0,
+      "total_current_max_abs_error_nA": 0.0,
+      "STATE_max_abs_error_mM": 5.7401551522829485e-11,
+      "cai_max_abs_error_mM": 5.7401551522829485e-11,
+      "zero_input_decay_max_abs_error_mM": 2.275873725731704e-11,
+      "positive_window_max_sync_error_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": -1.1945950000000002e-10,
+      "outward_stress_max_sync_error_mM": 1.1945950000000002e-10,
+      "STATE_analytic_passed": false,
+      "positive_window_cai_analytic_passed": false,
+      "STATE_nonnegative_passed": true,
+      "stress_ion_sync_passed": false,
+      "source_and_units_passed": true
+    },
+    "gates_original_0.0125": {
+      "max_abs_state_error": {
+        "e_q": 0.012811011055089583,
+        "f_q": 1.2177550726466535e-05,
+        "p_q": 0.00027100141066105365,
+        "q_q": 4.019630127249929e-06,
+        "n_q": 4.306302442891319e-05
+      },
+      "initial_distance_to_inf": {
+        "e_q": 0.5279880900598508,
+        "f_q": 0.7990815346860012,
+        "p_q": 0.2651931856751553,
+        "q_q": 0.2621619105006223,
+        "n_q": 0.46814530417956857
+      },
+      "voltage_max_abs_error_mV": 0.0,
+      "passed": false,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.10121566204450372,
+        "RMS_to_current_state_after_t0": 0.0003552818999218204,
+        "max_abs_to_recorded_previous_neural_state": 0.0,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.6400000000000001
+      }
+    },
+    "pool_original_0.0125": {
+      "actual_ica_unique_mA_cm2": [
+        -0.002,
+        0.0,
+        0.002
+      ],
+      "area_um2": 314.1592653589793,
+      "actual_iCa_nA_levels": [
+        -0.0062831853071795875,
+        -0.0,
+        0.0062831853071795875
+      ],
+      "density_max_abs_error": 0.0,
+      "total_current_max_abs_error_nA": 0.0,
+      "STATE_max_abs_error_mM": 2.8687884347126835e-11,
+      "cai_max_abs_error_mM": 2.8687884347126835e-11,
+      "zero_input_decay_max_abs_error_mM": 1.1375149888269944e-11,
+      "positive_window_max_sync_error_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": -5.972975000000001e-11,
+      "outward_stress_max_sync_error_mM": 5.972975000000001e-11,
+      "STATE_analytic_passed": false,
+      "positive_window_cai_analytic_passed": false,
+      "STATE_nonnegative_passed": true,
+      "stress_ion_sync_passed": false,
+      "source_and_units_passed": true
+    },
+    "gates_original_0.00625": {
+      "max_abs_state_error": {
+        "e_q": 0.006231362564038834,
+        "f_q": 6.0886702636375745e-06,
+        "p_q": 0.0001353438118573136,
+        "q_q": 2.0097801613494504e-06,
+        "n_q": 2.152926899878782e-05
+      },
+      "initial_distance_to_inf": {
+        "e_q": 0.5279880900598508,
+        "f_q": 0.7990815346860012,
+        "p_q": 0.2651931856751553,
+        "q_q": 0.2621619105006223,
+        "n_q": 0.46814530417956857
+      },
+      "voltage_max_abs_error_mV": 0.0,
+      "passed": false,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.051696194098899695,
+        "RMS_to_current_state_after_t0": 0.00017492591101869422,
+        "max_abs_to_recorded_previous_neural_state": 0.0,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.6400000000000001
+      }
+    },
+    "pool_original_0.00625": {
+      "actual_ica_unique_mA_cm2": [
+        -0.002,
+        0.0,
+        0.002
+      ],
+      "area_um2": 314.1592653589793,
+      "actual_iCa_nA_levels": [
+        -0.0062831853071795875,
+        -0.0,
+        0.0062831853071795875
+      ],
+      "density_max_abs_error": 0.0,
+      "total_current_max_abs_error_nA": 0.0,
+      "STATE_max_abs_error_mM": 1.4340719533172428e-11,
+      "cai_max_abs_error_mM": 1.4340719533172428e-11,
+      "zero_input_decay_max_abs_error_mM": 5.686520342013556e-12,
+      "positive_window_max_sync_error_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": -2.9864875000000004e-11,
+      "outward_stress_max_sync_error_mM": 2.9864875000000004e-11,
+      "STATE_analytic_passed": false,
+      "positive_window_cai_analytic_passed": false,
+      "STATE_nonnegative_passed": true,
+      "stress_ion_sync_passed": false,
+      "source_and_units_passed": true
+    },
+    "gates_both_0.025": {
+      "max_abs_state_error": {
+        "e_q": 1.1102230246251565e-16,
+        "f_q": 2.8310687127941492e-14,
+        "p_q": 2.4980018054066022e-15,
+        "q_q": 7.327471962526033e-15,
+        "n_q": 9.103828801926284e-15
+      },
+      "initial_distance_to_inf": {
+        "e_q": 0.5279880900598508,
+        "f_q": 0.7990815346860012,
+        "p_q": 0.2651931856751553,
+        "q_q": 0.2621619105006223,
+        "n_q": 0.46814530417956857
+      },
+      "voltage_max_abs_error_mV": 0.0,
+      "passed": true,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.1731869323497532,
+        "RMS_to_current_state_after_t0": 0.0006845839353794448,
+        "max_abs_to_recorded_previous_neural_state": 0.0,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.6400000000000001
+      }
+    },
+    "pool_both_0.025": {
+      "actual_ica_unique_mA_cm2": [
+        -0.002,
+        0.0,
+        0.002
+      ],
+      "area_um2": 314.1592653589793,
+      "actual_iCa_nA_levels": [
+        -0.0062831853071795875,
+        -0.0,
+        0.0062831853071795875
+      ],
+      "density_max_abs_error": 0.0,
+      "total_current_max_abs_error_nA": 0.0,
+      "STATE_max_abs_error_mM": 2.117582368135751e-22,
+      "cai_max_abs_error_mM": 2.117582368135751e-22,
+      "zero_input_decay_max_abs_error_mM": 4.632211430296955e-23,
+      "positive_window_max_sync_error_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": -1.1933080132320698e-10,
+      "outward_stress_max_sync_error_mM": 1.1933080132320698e-10,
+      "STATE_analytic_passed": true,
+      "positive_window_cai_analytic_passed": true,
+      "STATE_nonnegative_passed": true,
+      "stress_ion_sync_passed": false,
+      "source_and_units_passed": true
+    },
+    "gates_both_0.0125": {
+      "max_abs_state_error": {
+        "e_q": 2.220446049250313e-16,
+        "f_q": 3.652633751016765e-14,
+        "p_q": 4.9960036108132044e-15,
+        "q_q": 1.6819878823071122e-14,
+        "n_q": 1.2712053631958042e-14
+      },
+      "initial_distance_to_inf": {
+        "e_q": 0.5279880900598508,
+        "f_q": 0.7990815346860012,
+        "p_q": 0.2651931856751553,
+        "q_q": 0.2621619105006223,
+        "n_q": 0.46814530417956857
+      },
+      "voltage_max_abs_error_mV": 0.0,
+      "passed": true,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.09539218238773328,
+        "RMS_to_current_state_after_t0": 0.0003439281331611571,
+        "max_abs_to_recorded_previous_neural_state": 0.0,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.6400000000000001
+      }
+    },
+    "pool_both_0.0125": {
+      "actual_ica_unique_mA_cm2": [
+        -0.002,
+        0.0,
+        0.002
+      ],
+      "area_um2": 314.1592653589793,
+      "actual_iCa_nA_levels": [
+        -0.0062831853071795875,
+        -0.0,
+        0.0062831853071795875
+      ],
+      "density_max_abs_error": 0.0,
+      "total_current_max_abs_error_nA": 0.0,
+      "STATE_max_abs_error_mM": 1.376428539288238e-21,
+      "cai_max_abs_error_mM": 1.376428539288238e-21,
+      "zero_input_decay_max_abs_error_mM": 4.963083675318166e-22,
+      "positive_window_max_sync_error_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": -5.969756376916474e-11,
+      "outward_stress_max_sync_error_mM": 5.969756376916474e-11,
+      "STATE_analytic_passed": true,
+      "positive_window_cai_analytic_passed": true,
+      "STATE_nonnegative_passed": true,
+      "stress_ion_sync_passed": false,
+      "source_and_units_passed": true
+    },
+    "gates_both_0.00625": {
+      "max_abs_state_error": {
+        "e_q": 4.440892098500626e-16,
+        "f_q": 1.9528823003156504e-13,
+        "p_q": 9.992007221626409e-15,
+        "q_q": 2.1149748619109232e-14,
+        "n_q": 1.049160758270773e-14
+      },
+      "initial_distance_to_inf": {
+        "e_q": 0.5279880900598508,
+        "f_q": 0.7990815346860012,
+        "p_q": 0.2651931856751553,
+        "q_q": 0.2621619105006223,
+        "n_q": 0.46814530417956857
+      },
+      "voltage_max_abs_error_mV": 0.0,
+      "passed": true,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.050146529098455295,
+        "RMS_to_current_state_after_t0": 0.00017217164975962204,
+        "max_abs_to_recorded_previous_neural_state": 0.0,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.6400000000000001
+      }
+    },
+    "pool_both_0.00625": {
+      "actual_ica_unique_mA_cm2": [
+        -0.002,
+        0.0,
+        0.002
+      ],
+      "area_um2": 314.1592653589793,
+      "actual_iCa_nA_levels": [
+        -0.0062831853071795875,
+        -0.0,
+        0.0062831853071795875
+      ],
+      "density_max_abs_error": 0.0,
+      "total_current_max_abs_error_nA": 0.0,
+      "STATE_max_abs_error_mM": 4.367513634279986e-22,
+      "cai_max_abs_error_mM": 4.367513634279986e-22,
+      "zero_input_decay_max_abs_error_mM": 1.0587911840678754e-22,
+      "positive_window_max_sync_error_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": -2.9856826996502614e-11,
+      "outward_stress_max_sync_error_mM": 2.9856826996502614e-11,
+      "STATE_analytic_passed": true,
+      "positive_window_cai_analytic_passed": true,
+      "STATE_nonnegative_passed": true,
+      "stress_ion_sync_passed": false,
+      "source_and_units_passed": true
+    }
+  },
+  "main_metrics": {
+    "original_0.025": {
+      "voltage_min_max_mV": [
+        -24.028732371696563,
+        13.890048809573734
+      ],
+      "STATE_calcium_mean_mM": 5.1139355688283425e-08,
+      "STATE_calcium_std_mM": 7.413923287685034e-08,
+      "drive_mean": 0.03960958367642567,
+      "drive_std": 0.04665949235385644,
+      "drive_max": 0.15243832276748828,
+      "synapse_s_min_max": [
+        0.18080050633755554,
+        0.6869873045318554
+      ],
+      "STATE_cai_sync_max_abs_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": 0.0,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.004607157119663086,
+        "RMS_to_current_state_after_t0": 0.00037564014937679034,
+        "max_abs_to_recorded_previous_neural_state": 1.1102230246251565e-16,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.9999991238294378
+      },
+      "trace_sha256": "7174dc4ff4e66c7b7e60e3827201607b5774a6ddf5d179c0336287b6b1ce3c41",
+      "wall_s": 8.372232041903771
+    },
+    "original_0.0125": {
+      "voltage_min_max_mV": [
+        -24.02874138377558,
+        13.905290672600932
+      ],
+      "STATE_calcium_mean_mM": 5.1070870973705936e-08,
+      "STATE_calcium_std_mM": 7.402818323566347e-08,
+      "drive_mean": 0.03957951738090166,
+      "drive_std": 0.04660951664100099,
+      "drive_max": 0.1523881495725699,
+      "synapse_s_min_max": [
+        0.18080050678448556,
+        0.68698730378288
+      ],
+      "STATE_cai_sync_max_abs_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": 0.0,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.002318361854749762,
+        "RMS_to_current_state_after_t0": 0.0001881359353153506,
+        "max_abs_to_recorded_previous_neural_state": 1.1102230246251565e-16,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.9999991238294378
+      },
+      "trace_sha256": "466dadfef5be2f778964ae6c458ea3efb3b34b6a2a3b2bfa5e4930d7a765960c",
+      "wall_s": 10.384685583994724
+    },
+    "original_0.00625": {
+      "voltage_min_max_mV": [
+        -24.028745808974115,
+        13.912938163373296
+      ],
+      "STATE_calcium_mean_mM": 5.1036696590700645e-08,
+      "STATE_calcium_std_mM": 7.397254860972674e-08,
+      "drive_mean": 0.03956455386669142,
+      "drive_std": 0.0465844802440083,
+      "drive_max": 0.15236299006120166,
+      "synapse_s_min_max": [
+        0.1808005068987487,
+        0.686987303579993
+      ],
+      "STATE_cai_sync_max_abs_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": 0.0,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.001162906604301961,
+        "RMS_to_current_state_after_t0": 9.414729208929683e-05,
+        "max_abs_to_recorded_previous_neural_state": 1.1102230246251565e-16,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.9999991238294378
+      },
+      "trace_sha256": "6b3d52bb84b8404afb7d0d50e90f36fea93e98e6a1cad5b5d0e94f39d880b7bc",
+      "wall_s": 12.959998207981698
+    },
+    "gates_0.025": {
+      "voltage_min_max_mV": [
+        -24.029005611177357,
+        13.855464874110963
+      ],
+      "STATE_calcium_mean_mM": 5.1277070712767365e-08,
+      "STATE_calcium_std_mM": 7.434207489303352e-08,
+      "drive_mean": 0.03967381620438912,
+      "drive_std": 0.046756816409119176,
+      "drive_max": 0.15251783415976392,
+      "synapse_s_min_max": [
+        0.18080050633755554,
+        0.6869873045318554
+      ],
+      "STATE_cai_sync_max_abs_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": 0.0,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.004540323624703357,
+        "RMS_to_current_state_after_t0": 0.00037368202887824026,
+        "max_abs_to_recorded_previous_neural_state": 1.1102230246251565e-16,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.9999991238294378
+      },
+      "trace_sha256": "cd0cf99191223bce36005972f1f9684a1d5061d7ba52b498dd3f45f97b0be0ed",
+      "wall_s": 8.50612629193347
+    },
+    "gates_0.0125": {
+      "voltage_min_max_mV": [
+        -24.028879028682578,
+        13.888452611209855
+      ],
+      "STATE_calcium_mean_mM": 5.113774116622379e-08,
+      "STATE_calcium_std_mM": 7.412788821271225e-08,
+      "drive_mean": 0.039610449883712706,
+      "drive_std": 0.0466573297242232,
+      "drive_max": 0.15242505209227672,
+      "synapse_s_min_max": [
+        0.18080050678448556,
+        0.68698730378288
+      ],
+      "STATE_cai_sync_max_abs_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": 0.0,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.0023016825381165784,
+        "RMS_to_current_state_after_t0": 0.00018765164314125704,
+        "max_abs_to_recorded_previous_neural_state": 1.1102230246251565e-16,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.9999991238294378
+      },
+      "trace_sha256": "ea1c4110ca48ef090c34f6d4adc110228229409a840ee80a30b3133e518befaf",
+      "wall_s": 9.913070417009294
+    },
+    "gates_0.00625": {
+      "voltage_min_max_mV": [
+        -24.028814875022423,
+        13.904633405664802
+      ],
+      "STATE_calcium_mean_mM": 5.106963385559449e-08,
+      "STATE_calcium_std_mM": 7.402196771258821e-08,
+      "drive_mean": 0.03957972381443614,
+      "drive_std": 0.046608172050192215,
+      "drive_max": 0.15238129147516516,
+      "synapse_s_min_max": [
+        0.1808005068987487,
+        0.686987303579993
+      ],
+      "STATE_cai_sync_max_abs_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": 0.0,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.0011587413279900982,
+        "RMS_to_current_state_after_t0": 9.40268870833891e-05,
+        "max_abs_to_recorded_previous_neural_state": 1.1102230246251565e-16,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.9999991238294378
+      },
+      "trace_sha256": "06c1f4f691ccfa14d4688b83a81e8846f48f258205dfa48f8d6b8b23ad7adf6b",
+      "wall_s": 12.867386542027816
+    },
+    "pool_0.025": {
+      "voltage_min_max_mV": [
+        -24.02873284690633,
+        13.891404891949412
+      ],
+      "STATE_calcium_mean_mM": 5.113818260198279e-08,
+      "STATE_calcium_std_mM": 7.411640651906959e-08,
+      "drive_mean": 0.03961358153562648,
+      "drive_std": 0.046653180865628384,
+      "drive_max": 0.15241395813374786,
+      "synapse_s_min_max": [
+        0.18080050633755554,
+        0.6869873045318554
+      ],
+      "STATE_cai_sync_max_abs_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": 0.0,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.004610004672146117,
+        "RMS_to_current_state_after_t0": 0.0003756895323213635,
+        "max_abs_to_recorded_previous_neural_state": 1.1102230246251565e-16,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.9999991238294378
+      },
+      "trace_sha256": "452ca21fee5213bad9af31c85ffcde58819bf5550203937133b476b3fcd85c8b",
+      "wall_s": 8.434482958982699
+    },
+    "pool_0.0125": {
+      "voltage_min_max_mV": [
+        -24.028741618009263,
+        13.905967620463114
+      ],
+      "STATE_calcium_mean_mM": 5.107028865872564e-08,
+      "STATE_calcium_std_mM": 7.40167769639418e-08,
+      "drive_mean": 0.03958151577795973,
+      "drive_std": 0.04660636322509182,
+      "drive_max": 0.15237594932215537,
+      "synapse_s_min_max": [
+        0.18080050678448556,
+        0.68698730378288
+      ],
+      "STATE_cai_sync_max_abs_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": 0.0,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.0023190789162611525,
+        "RMS_to_current_state_after_t0": 0.00018814830638670408,
+        "max_abs_to_recorded_previous_neural_state": 1.1102230246251565e-16,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.9999991238294378
+      },
+      "trace_sha256": "66da67853982a6535bf3b1bbcd2f12574f3c559bd698a7c33b40990fcec58538",
+      "wall_s": 9.839138166978955
+    },
+    "pool_0.00625": {
+      "voltage_min_max_mV": [
+        -24.028745925268918,
+        13.91327725858637
+      ],
+      "STATE_calcium_mean_mM": 5.103640649823658e-08,
+      "STATE_calcium_std_mM": 7.396684720213056e-08,
+      "drive_mean": 0.039565552938937536,
+      "drive_std": 0.04658290411336834,
+      "drive_max": 0.15235688516751061,
+      "synapse_s_min_max": [
+        0.1808005068987487,
+        0.686987303579993
+      ],
+      "STATE_cai_sync_max_abs_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": 0.0,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.0011630864940881391,
+        "RMS_to_current_state_after_t0": 9.415038808402464e-05,
+        "max_abs_to_recorded_previous_neural_state": 1.1102230246251565e-16,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.9999991238294378
+      },
+      "trace_sha256": "1d344223696bd84c13b8383328f15c90853040c19ef730bf4d622de1c527aa95",
+      "wall_s": 13.251630624989048
+    },
+    "both_0.025": {
+      "voltage_min_max_mV": [
+        -24.02900610772546,
+        13.856818852759208
+      ],
+      "STATE_calcium_mean_mM": 5.127587287735854e-08,
+      "STATE_calcium_std_mM": 7.431923963530932e-08,
+      "drive_mean": 0.03967780558765879,
+      "drive_std": 0.04675049837580883,
+      "drive_max": 0.15249489544717015,
+      "synapse_s_min_max": [
+        0.18080050633755554,
+        0.6869873045318554
+      ],
+      "STATE_cai_sync_max_abs_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": 0.0,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.0045430937598184284,
+        "RMS_to_current_state_after_t0": 0.0003737309248771567,
+        "max_abs_to_recorded_previous_neural_state": 1.1102230246251565e-16,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.9999991238294378
+      },
+      "trace_sha256": "dd2000dc2fc926f4c44bca5a303e7de87917ed86376e85a976ffa8297b7184a3",
+      "wall_s": 8.565261790994555
+    },
+    "both_0.0125": {
+      "voltage_min_max_mV": [
+        -24.02887926788347,
+        13.889130503700144
+      ],
+      "STATE_calcium_mean_mM": 5.113715268242761e-08,
+      "STATE_calcium_std_mM": 7.411647973498868e-08,
+      "drive_mean": 0.03961244611436347,
+      "drive_std": 0.046654174743344816,
+      "drive_max": 0.1524128693994595,
+      "synapse_s_min_max": [
+        0.18080050678448556,
+        0.68698730378288
+      ],
+      "STATE_cai_sync_max_abs_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": 0.0,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.00230239124939402,
+        "RMS_to_current_state_after_t0": 0.0001876639530076672,
+        "max_abs_to_recorded_previous_neural_state": 1.1102230246251565e-16,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.9999991238294378
+      },
+      "trace_sha256": "ecea1bea1176565a706f28a616d0f8f726ea1f7f3f9817a49bb74d20053d12ff",
+      "wall_s": 10.137358582927845
+    },
+    "both_0.00625": {
+      "voltage_min_max_mV": [
+        -24.02881499251071,
+        13.9049722185626
+      ],
+      "STATE_calcium_mean_mM": 5.106934222191758e-08,
+      "STATE_calcium_std_mM": 7.401626575648387e-08,
+      "drive_mean": 0.039580722337829694,
+      "drive_std": 0.04660659553737182,
+      "drive_max": 0.15237519082552262,
+      "synapse_s_min_max": [
+        0.1808005068987487,
+        0.686987303579993
+      ],
+      "STATE_cai_sync_max_abs_mM": 0.0,
+      "STATE_min_mM": 0.0,
+      "cai_min_mM": 0.0,
+      "cache": {
+        "max_abs_to_current_state_after_t0": 0.0011589199220866098,
+        "RMS_to_current_state_after_t0": 9.402997540650615e-05,
+        "max_abs_to_recorded_previous_neural_state": 1.1102230246251565e-16,
+        "cached_previous_state_identity_passed": true,
+        "initialization_max_abs_cache_state_mismatch": 0.9999991238294378
+      },
+      "trace_sha256": "8daa52fb5fb65d59d586b3da8273aae91fd25e31b2ac036a18450370708e284d",
+      "wall_s": 12.839735832996666
+    }
+  },
+  "paired_step_comparisons": {
+    "original_0.025_vs_0.0125": {
+      "passed": true,
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "STATE_calcium_scaled_RMS": true,
+        "STATE_calcium_scaled_stats": true,
+        "cai_scaled_RMS": true,
+        "cai_scaled_stats": true,
+        "drive_scaled_RMS": true,
+        "drive_scaled_stats": true,
+        "gate_state_RMS": true
+      },
+      "errors": {
+        "voltage_RMS_mV": {
+          "value": 0.15951963766638208,
+          "limit": 0.5
+        },
+        "voltage_mean_abs_mV": {
+          "value": 0.003180442770208458,
+          "limit": 0.2
+        },
+        "voltage_amplitude_relative": {
+          "value": 0.00016764774909900832,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_RMS": {
+          "value": 0.004222362472366235,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_stats": {
+          "value": 0.0010518519938198917,
+          "limit": 0.05
+        },
+        "cai_scaled_RMS": {
+          "value": 0.004222362472366235,
+          "limit": 0.05
+        },
+        "cai_scaled_stats": {
+          "value": 0.0010518519938198917,
+          "limit": 0.05
+        },
+        "drive_scaled_RMS": {
+          "value": 0.0035590282867862194,
+          "limit": 0.05
+        },
+        "drive_scaled_stats": {
+          "value": 0.0005400917695551475,
+          "limit": 0.05
+        },
+        "gate_state_RMS": {
+          "value": 0.004249985881350509,
+          "limit": 0.01
+        }
+      },
+      "gate_RMS_per_state": [
+        0.004249985881350509,
+        1.5452583855363383e-05,
+        0.003626388393620245,
+        0.00019800388367338943,
+        0.0004566107386205455
+      ],
+      "failed_gates": []
+    },
+    "original_0.0125_vs_0.00625": {
+      "passed": true,
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "STATE_calcium_scaled_RMS": true,
+        "STATE_calcium_scaled_stats": true,
+        "cai_scaled_RMS": true,
+        "cai_scaled_stats": true,
+        "drive_scaled_RMS": true,
+        "drive_scaled_stats": true,
+        "gate_state_RMS": true
+      },
+      "errors": {
+        "voltage_RMS_mV": {
+          "value": 0.07988901603547824,
+          "limit": 0.5
+        },
+        "voltage_mean_abs_mV": {
+          "value": 0.001581706069485378,
+          "limit": 0.2
+        },
+        "voltage_amplitude_relative": {
+          "value": 5.5413674889247914e-05,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_RMS": {
+          "value": 0.0021132503113288265,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_stats": {
+          "value": 0.0005057437908628477,
+          "limit": 0.05
+        },
+        "cai_scaled_RMS": {
+          "value": 0.0021132503113288265,
+          "limit": 0.05
+        },
+        "cai_scaled_stats": {
+          "value": 0.0005057437908628477,
+          "limit": 0.05
+        },
+        "drive_scaled_RMS": {
+          "value": 0.0017814018337792515,
+          "limit": 0.05
+        },
+        "drive_scaled_stats": {
+          "value": 0.00025981583490982963,
+          "limit": 0.05
+        },
+        "gate_state_RMS": {
+          "value": 0.0021290862985188373,
+          "limit": 0.01
+        }
+      },
+      "gate_RMS_per_state": [
+        0.0021290862985188373,
+        7.731691169105096e-06,
+        0.0018150723014101237,
+        9.895086359758082e-05,
+        0.0002283597140023965
+      ],
+      "failed_gates": []
+    },
+    "original_0.025_vs_0.00625": {
+      "passed": true,
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "STATE_calcium_scaled_RMS": true,
+        "STATE_calcium_scaled_stats": true,
+        "cai_scaled_RMS": true,
+        "cai_scaled_stats": true,
+        "drive_scaled_RMS": true,
+        "drive_scaled_stats": true,
+        "gate_state_RMS": true
+      },
+      "errors": {
+        "voltage_RMS_mV": {
+          "value": 0.2393554464169455,
+          "limit": 0.5
+        },
+        "voltage_mean_abs_mV": {
+          "value": 0.004762148839693836,
+          "limit": 0.2
+        },
+        "voltage_amplitude_relative": {
+          "value": 0.0002230707139661207,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_RMS": {
+          "value": 0.006337231625432727,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_stats": {
+          "value": 0.0015581278913184744,
+          "limit": 0.05
+        },
+        "cai_scaled_RMS": {
+          "value": 0.006337231625432727,
+          "limit": 0.05
+        },
+        "cai_scaled_stats": {
+          "value": 0.0015581278913184744,
+          "limit": 0.05
+        },
+        "drive_scaled_RMS": {
+          "value": 0.005341031216612373,
+          "limit": 0.05
+        },
+        "drive_scaled_stats": {
+          "value": 0.0008000480677747408,
+          "limit": 0.05
+        },
+        "gate_state_RMS": {
+          "value": 0.0063773090493147505,
+          "limit": 0.01
+        }
+      },
+      "gate_RMS_per_state": [
+        0.0063773090493147505,
+        2.3181477647362936e-05,
+        0.005440520511611074,
+        0.00029694199941265257,
+        0.0006849315990350128
+      ],
+      "failed_gates": []
+    },
+    "gates_0.025_vs_0.0125": {
+      "passed": true,
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "STATE_calcium_scaled_RMS": true,
+        "STATE_calcium_scaled_stats": true,
+        "cai_scaled_RMS": true,
+        "cai_scaled_stats": true,
+        "drive_scaled_RMS": true,
+        "drive_scaled_stats": true,
+        "gate_state_RMS": true
+      },
+      "errors": {
+        "voltage_RMS_mV": {
+          "value": 0.34351178433682716,
+          "limit": 0.5
+        },
+        "voltage_mean_abs_mV": {
+          "value": 0.006701380037874571,
+          "limit": 0.2
+        },
+        "voltage_amplitude_relative": {
+          "value": 0.00020217221217521883,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_RMS": {
+          "value": 0.009189589983506823,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_stats": {
+          "value": 0.0019343555619980826,
+          "limit": 0.05
+        },
+        "cai_scaled_RMS": {
+          "value": 0.009189589983506823,
+          "limit": 0.05
+        },
+        "cai_scaled_stats": {
+          "value": 0.0019343555619980826,
+          "limit": 0.05
+        },
+        "drive_scaled_RMS": {
+          "value": 0.007759342649852431,
+          "limit": 0.05
+        },
+        "drive_scaled_stats": {
+          "value": 0.0009923687802486465,
+          "limit": 0.05
+        },
+        "gate_state_RMS": {
+          "value": 0.009585706139210984,
+          "limit": 0.01
+        }
+      },
+      "gate_RMS_per_state": [
+        0.009585706139210984,
+        3.3588490990710075e-05,
+        0.008143327742103164,
+        0.0004377051423699702,
+        0.0010060848266493167
+      ],
+      "failed_gates": []
+    },
+    "gates_0.0125_vs_0.00625": {
+      "passed": true,
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "STATE_calcium_scaled_RMS": true,
+        "STATE_calcium_scaled_stats": true,
+        "cai_scaled_RMS": true,
+        "cai_scaled_stats": true,
+        "drive_scaled_RMS": true,
+        "drive_scaled_stats": true,
+        "gate_state_RMS": true
+      },
+      "errors": {
+        "voltage_RMS_mV": {
+          "value": 0.16951170808922605,
+          "limit": 0.5
+        },
+        "voltage_mean_abs_mV": {
+          "value": 0.0032491969856796032,
+          "limit": 0.2
+        },
+        "voltage_amplitude_relative": {
+          "value": 8.798388729903115e-05,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_RMS": {
+          "value": 0.0045270573797886685,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_stats": {
+          "value": 0.0009836192266017242,
+          "limit": 0.05
+        },
+        "cai_scaled_RMS": {
+          "value": 0.0045270573797886685,
+          "limit": 0.05
+        },
+        "cai_scaled_stats": {
+          "value": 0.0009836192266017242,
+          "limit": 0.05
+        },
+        "drive_scaled_RMS": {
+          "value": 0.003823325517673355,
+          "limit": 0.05
+        },
+        "drive_scaled_stats": {
+          "value": 0.0005050942462580583,
+          "limit": 0.05
+        },
+        "gate_state_RMS": {
+          "value": 0.004730594632580082,
+          "limit": 0.01
+        }
+      },
+      "gate_RMS_per_state": [
+        0.004730594632580082,
+        1.654062153001556e-05,
+        0.004014190918395126,
+        0.00021483127517022454,
+        0.0004948700474465239
+      ],
+      "failed_gates": []
+    },
+    "gates_0.025_vs_0.00625": {
+      "passed": false,
+      "gates": {
+        "voltage_RMS_mV": false,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "STATE_calcium_scaled_RMS": true,
+        "STATE_calcium_scaled_stats": true,
+        "cai_scaled_RMS": true,
+        "cai_scaled_stats": true,
+        "drive_scaled_RMS": true,
+        "drive_scaled_stats": true,
+        "gate_state_RMS": false
+      },
+      "errors": {
+        "voltage_RMS_mV": {
+          "value": 0.5124756544993755,
+          "limit": 0.5
+        },
+        "voltage_mean_abs_mV": {
+          "value": 0.009950577023554175,
+          "limit": 0.2
+        },
+        "voltage_amplitude_relative": {
+          "value": 0.000290173887371381,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_RMS": {
+          "value": 0.013720277751073656,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_stats": {
+          "value": 0.002919878040407415,
+          "limit": 0.05
+        },
+        "cai_scaled_RMS": {
+          "value": 0.013720277751073656,
+          "limit": 0.05
+        },
+        "cai_scaled_stats": {
+          "value": 0.002919878040407415,
+          "limit": 0.05
+        },
+        "drive_scaled_RMS": {
+          "value": 0.011583161863151984,
+          "limit": 0.05
+        },
+        "drive_scaled_stats": {
+          "value": 0.0014979648479276845,
+          "limit": 0.05
+        },
+        "gate_state_RMS": {
+          "value": 0.01429637377549562,
+          "limit": 0.01
+        }
+      },
+      "gate_RMS_per_state": [
+        0.01429637377549562,
+        5.0098129710872726e-05,
+        0.012147239836479687,
+        0.0006523978484346319,
+        0.0015005281826690484
+      ],
+      "failed_gates": [
+        "voltage_RMS_mV",
+        "gate_state_RMS"
+      ]
+    },
+    "pool_0.025_vs_0.0125": {
+      "passed": true,
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "STATE_calcium_scaled_RMS": true,
+        "STATE_calcium_scaled_stats": true,
+        "cai_scaled_RMS": true,
+        "cai_scaled_stats": true,
+        "drive_scaled_RMS": true,
+        "drive_scaled_stats": true,
+        "gate_state_RMS": true
+      },
+      "errors": {
+        "voltage_RMS_mV": {
+          "value": 0.15774962516594504,
+          "limit": 0.5
+        },
+        "voltage_mean_abs_mV": {
+          "value": 0.0031372576298167587,
+          "limit": 0.2
+        },
+        "voltage_amplitude_relative": {
+          "value": 0.00015350035760767984,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_RMS": {
+          "value": 0.0042231631872671985,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_stats": {
+          "value": 0.0009039908416457138,
+          "limit": 0.05
+        },
+        "cai_scaled_RMS": {
+          "value": 0.0042231631872671985,
+          "limit": 0.05
+        },
+        "cai_scaled_stats": {
+          "value": 0.0009039908416457138,
+          "limit": 0.05
+        },
+        "drive_scaled_RMS": {
+          "value": 0.003570676560301331,
+          "limit": 0.05
+        },
+        "drive_scaled_stats": {
+          "value": 0.0004642429873569543,
+          "limit": 0.05
+        },
+        "gate_state_RMS": {
+          "value": 0.004200843963709535,
+          "limit": 0.01
+        }
+      },
+      "gate_RMS_per_state": [
+        0.004200843963709535,
+        1.527404555454234e-05,
+        0.0035859084519978997,
+        0.00019561294018654256,
+        0.00045141296494782156
+      ],
+      "failed_gates": []
+    },
+    "pool_0.0125_vs_0.00625": {
+      "passed": true,
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "STATE_calcium_scaled_RMS": true,
+        "STATE_calcium_scaled_stats": true,
+        "cai_scaled_RMS": true,
+        "cai_scaled_stats": true,
+        "drive_scaled_RMS": true,
+        "drive_scaled_stats": true,
+        "gate_state_RMS": true
+      },
+      "errors": {
+        "voltage_RMS_mV": {
+          "value": 0.07900599943319961,
+          "limit": 0.5
+        },
+        "voltage_mean_abs_mV": {
+          "value": 0.0015603885109900517,
+          "limit": 0.2
+        },
+        "voltage_amplitude_relative": {
+          "value": 5.4528719246488475e-05,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_RMS": {
+          "value": 0.002114004238644715,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_stats": {
+          "value": 0.0004118914848990626,
+          "limit": 0.05
+        },
+        "cai_scaled_RMS": {
+          "value": 0.002114004238644715,
+          "limit": 0.05
+        },
+        "cai_scaled_stats": {
+          "value": 0.0004118914848990626,
+          "limit": 0.05
+        },
+        "drive_scaled_RMS": {
+          "value": 0.0017875153745981586,
+          "limit": 0.05
+        },
+        "drive_scaled_stats": {
+          "value": 0.00021161914876034085,
+          "limit": 0.05
+        },
+        "gate_state_RMS": {
+          "value": 0.0021045646069165016,
+          "limit": 0.01
+        }
+      },
+      "gate_RMS_per_state": [
+        0.0021045646069165016,
+        7.64241622406195e-06,
+        0.001794924062724745,
+        9.776431692073042e-05,
+        0.00022577562971296921
+      ],
+      "failed_gates": []
+    },
+    "pool_0.025_vs_0.00625": {
+      "passed": true,
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "STATE_calcium_scaled_RMS": true,
+        "STATE_calcium_scaled_stats": true,
+        "cai_scaled_RMS": true,
+        "cai_scaled_stats": true,
+        "drive_scaled_RMS": true,
+        "drive_scaled_stats": true,
+        "gate_state_RMS": true
+      },
+      "errors": {
+        "voltage_RMS_mV": {
+          "value": 0.23670418323300327,
+          "limit": 0.5
+        },
+        "voltage_mean_abs_mV": {
+          "value": 0.00469764614080681,
+          "limit": 0.2
+        },
+        "voltage_amplitude_relative": {
+          "value": 0.00020803744703207255,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_RMS": {
+          "value": 0.006338401434149822,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_stats": {
+          "value": 0.0013162546247744474,
+          "limit": 0.05
+        },
+        "cai_scaled_RMS": {
+          "value": 0.006338401434149822,
+          "limit": 0.05
+        },
+        "cai_scaled_stats": {
+          "value": 0.0013162546247744474,
+          "limit": 0.05
+        },
+        "drive_scaled_RMS": {
+          "value": 0.005358630455839731,
+          "limit": 0.05
+        },
+        "drive_scaled_stats": {
+          "value": 0.0006759603309532979,
+          "limit": 0.05
+        },
+        "gate_state_RMS": {
+          "value": 0.006303703620388228,
+          "limit": 0.01
+        }
+      },
+      "gate_RMS_per_state": [
+        0.006303703620388228,
+        2.2913772486040377e-05,
+        0.005379921765282917,
+        0.00029336488420158663,
+        0.0006771510757102142
+      ],
+      "failed_gates": []
+    },
+    "both_0.025_vs_0.0125": {
+      "passed": true,
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "STATE_calcium_scaled_RMS": true,
+        "STATE_calcium_scaled_stats": true,
+        "cai_scaled_RMS": true,
+        "cai_scaled_stats": true,
+        "drive_scaled_RMS": true,
+        "drive_scaled_stats": true,
+        "gate_state_RMS": true
+      },
+      "errors": {
+        "voltage_RMS_mV": {
+          "value": 0.34172703808036187,
+          "limit": 0.5
+        },
+        "voltage_mean_abs_mV": {
+          "value": 0.006656738350262259,
+          "limit": 0.2
+        },
+        "voltage_amplitude_relative": {
+          "value": 0.00021344881320466873,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_RMS": {
+          "value": 0.009188030547298644,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_stats": {
+          "value": 0.0017653508626901352,
+          "limit": 0.05
+        },
+        "cai_scaled_RMS": {
+          "value": 0.009188030547298644,
+          "limit": 0.05
+        },
+        "cai_scaled_stats": {
+          "value": 0.0017653508626901352,
+          "limit": 0.05
+        },
+        "drive_scaled_RMS": {
+          "value": 0.007768796011261187,
+          "limit": 0.05
+        },
+        "drive_scaled_stats": {
+          "value": 0.0009058119655471576,
+          "limit": 0.05
+        },
+        "gate_state_RMS": {
+          "value": 0.00953609409201651,
+          "limit": 0.01
+        }
+      },
+      "gate_RMS_per_state": [
+        0.00953609409201651,
+        3.337946513550012e-05,
+        0.008102236338997915,
+        0.00043526081027545386,
+        0.0010007874684423348
+      ],
+      "failed_gates": []
+    },
+    "both_0.0125_vs_0.00625": {
+      "passed": true,
+      "gates": {
+        "voltage_RMS_mV": true,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "STATE_calcium_scaled_RMS": true,
+        "STATE_calcium_scaled_stats": true,
+        "cai_scaled_RMS": true,
+        "cai_scaled_stats": true,
+        "drive_scaled_RMS": true,
+        "drive_scaled_stats": true,
+        "gate_state_RMS": true
+      },
+      "errors": {
+        "voltage_RMS_mV": {
+          "value": 0.16862669564475896,
+          "limit": 0.5
+        },
+        "voltage_mean_abs_mV": {
+          "value": 0.0032275149879623655,
+          "limit": 0.2
+        },
+        "voltage_amplitude_relative": {
+          "value": 9.665260345383245e-05,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_RMS": {
+          "value": 0.004527219383718691,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_stats": {
+          "value": 0.0009003868192686417,
+          "limit": 0.05
+        },
+        "cai_scaled_RMS": {
+          "value": 0.004527219383718691,
+          "limit": 0.05
+        },
+        "cai_scaled_stats": {
+          "value": 0.0009003868192686417,
+          "limit": 0.05
+        },
+        "drive_scaled_RMS": {
+          "value": 0.003828807518085064,
+          "limit": 0.05
+        },
+        "drive_scaled_stats": {
+          "value": 0.0004623906058092084,
+          "limit": 0.05
+        },
+        "gate_state_RMS": {
+          "value": 0.004705964823998049,
+          "limit": 0.01
+        }
+      },
+      "gate_RMS_per_state": [
+        0.004705964823998049,
+        1.6437121700067902e-05,
+        0.003993901817577542,
+        0.00021363326116066806,
+        0.0004922633425952041
+      ],
+      "failed_gates": []
+    },
+    "both_0.025_vs_0.00625": {
+      "passed": false,
+      "gates": {
+        "voltage_RMS_mV": false,
+        "voltage_mean_abs_mV": true,
+        "voltage_amplitude_relative": true,
+        "STATE_calcium_scaled_RMS": true,
+        "STATE_calcium_scaled_stats": true,
+        "cai_scaled_RMS": true,
+        "cai_scaled_stats": true,
+        "drive_scaled_RMS": true,
+        "drive_scaled_stats": true,
+        "gate_state_RMS": false
+      },
+      "errors": {
+        "voltage_RMS_mV": {
+          "value": 0.5098142791421297,
+          "limit": 0.5
+        },
+        "voltage_mean_abs_mV": {
+          "value": 0.009884253338224624,
+          "limit": 0.2
+        },
+        "voltage_amplitude_relative": {
+          "value": 0.00031012204704200156,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_RMS": {
+          "value": 0.013718185240457158,
+          "limit": 0.05
+        },
+        "STATE_calcium_scaled_stats": {
+          "value": 0.0026673274343661556,
+          "limit": 0.05
+        },
+        "cai_scaled_RMS": {
+          "value": 0.013718185240457158,
+          "limit": 0.05
+        },
+        "cai_scaled_stats": {
+          "value": 0.0026673274343661556,
+          "limit": 0.05
+        },
+        "drive_scaled_RMS": {
+          "value": 0.011597816009454259,
+          "limit": 0.05
+        },
+        "drive_scaled_stats": {
+          "value": 0.0013686216637304105,
+          "limit": 0.05
+        },
+        "gate_state_RMS": {
+          "value": 0.014222425802738836,
+          "limit": 0.01
+        }
+      },
+      "gate_RMS_per_state": [
+        0.014222425802738836,
+        4.978610546992615e-05,
+        0.012086005924951916,
+        0.0006487573432373404,
+        0.0014926307326086645
+      ],
+      "failed_gates": [
+        "voltage_RMS_mV",
+        "gate_state_RMS"
+      ]
+    }
+  },
+  "input_array_hashes": {
+    "original_0.025": "5e7fc7a93ae04305e85242b0c37e7885c5a793143fd57061e7b56dec6abaca43",
+    "original_0.0125": "5e7fc7a93ae04305e85242b0c37e7885c5a793143fd57061e7b56dec6abaca43",
+    "original_0.00625": "5e7fc7a93ae04305e85242b0c37e7885c5a793143fd57061e7b56dec6abaca43",
+    "gates_0.025": "5e7fc7a93ae04305e85242b0c37e7885c5a793143fd57061e7b56dec6abaca43",
+    "gates_0.0125": "5e7fc7a93ae04305e85242b0c37e7885c5a793143fd57061e7b56dec6abaca43",
+    "gates_0.00625": "5e7fc7a93ae04305e85242b0c37e7885c5a793143fd57061e7b56dec6abaca43",
+    "pool_0.025": "5e7fc7a93ae04305e85242b0c37e7885c5a793143fd57061e7b56dec6abaca43",
+    "pool_0.0125": "5e7fc7a93ae04305e85242b0c37e7885c5a793143fd57061e7b56dec6abaca43",
+    "pool_0.00625": "5e7fc7a93ae04305e85242b0c37e7885c5a793143fd57061e7b56dec6abaca43",
+    "both_0.025": "5e7fc7a93ae04305e85242b0c37e7885c5a793143fd57061e7b56dec6abaca43",
+    "both_0.0125": "5e7fc7a93ae04305e85242b0c37e7885c5a793143fd57061e7b56dec6abaca43",
+    "both_0.00625": "5e7fc7a93ae04305e85242b0c37e7885c5a793143fd57061e7b56dec6abaca43"
+  },
+  "synapse_gate_array_hashes": {
+    "original_0.025": "a6c5bd3a4790ffaa344072f70079056fb397a7f43424bd60f80b23f7a5e7ffa0",
+    "original_0.0125": "9b883830d96c1ed73994f3e04f25ed02c0449bfff4d02a6ae6cf3fb40a027fbb",
+    "original_0.00625": "bdf91c4fd39cff56d3b5b8d98de802b082e041a7245c61352218d255b139754f",
+    "gates_0.025": "a6c5bd3a4790ffaa344072f70079056fb397a7f43424bd60f80b23f7a5e7ffa0",
+    "gates_0.0125": "9b883830d96c1ed73994f3e04f25ed02c0449bfff4d02a6ae6cf3fb40a027fbb",
+    "gates_0.00625": "bdf91c4fd39cff56d3b5b8d98de802b082e041a7245c61352218d255b139754f",
+    "pool_0.025": "a6c5bd3a4790ffaa344072f70079056fb397a7f43424bd60f80b23f7a5e7ffa0",
+    "pool_0.0125": "9b883830d96c1ed73994f3e04f25ed02c0449bfff4d02a6ae6cf3fb40a027fbb",
+    "pool_0.00625": "bdf91c4fd39cff56d3b5b8d98de802b082e041a7245c61352218d255b139754f",
+    "both_0.025": "a6c5bd3a4790ffaa344072f70079056fb397a7f43424bd60f80b23f7a5e7ffa0",
+    "both_0.0125": "9b883830d96c1ed73994f3e04f25ed02c0449bfff4d02a6ae6cf3fb40a027fbb",
+    "both_0.00625": "bdf91c4fd39cff56d3b5b8d98de802b082e041a7245c61352218d255b139754f"
+  },
+  "combined_over_original_improvement": {
+    "voltage_RMS_mV": {
+      "original_error": 0.07988901603547824,
+      "combined_error": 0.16862669564475896,
+      "ratio": 2.1107619546831424,
+      "strong_improvement": false
+    },
+    "STATE_calcium_scaled_RMS": {
+      "original_error": 0.0021132503113288265,
+      "combined_error": 0.004527219383718691,
+      "ratio": 2.142301534015601,
+      "strong_improvement": true
+    },
+    "cai_scaled_RMS": {
+      "original_error": 0.0021132503113288265,
+      "combined_error": 0.004527219383718691,
+      "ratio": 2.142301534015601,
+      "strong_improvement": true
+    },
+    "drive_scaled_RMS": {
+      "original_error": 0.0017814018337792515,
+      "combined_error": 0.003828807518085064,
+      "ratio": 2.149322766757365,
+      "strong_improvement": true
+    }
+  },
+  "combined_main_last_pair_passed": true,
+  "recommend_next_full_system_validation": false,
+  "unresolved": {
+    "cache_previous_state_identity_observed": true,
+    "outward_stress_cai_sync_failed": true,
+    "shared_C1_neuron_effects_not_tested": true,
+    "full_system_convergence_not_tested": true
+  },
+  "implementation_notes": [
+    "Two initial observation setup failures before any fadvance preserved in setup-attempts; no scientific main reruns",
+    "Pool generated negative coefficient uses -(1)/decayConstant; build checker spelling corrected without patch changes; locked preparer source preserved"
+  ]
+}
