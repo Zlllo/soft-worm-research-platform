@@ -4,7 +4,7 @@
 
 - [A原始数据、源代码与分析](https://github.com/Zlllo/soft-worm-research-platform/releases/download/research-mechanisms-2026-11-13/full302-joint-numerics-2026-11-12.zip)（约95.3 MB），[SHA256](../full302-joint-numerics-2026-11-12/reproduction.zip.sha256)。
 - [B独立复核包](https://github.com/Zlllo/soft-worm-research-platform/releases/download/research-mechanisms-2026-11-13/full302-joint-numerics-review-2026-11-12.zip)（约379 KB），[SHA256](../full302-joint-numerics-review-2026-11-12/reproduction.zip.sha256)。
-- [旧父版原始包](../b-motor-convergence-2026-11-09/reproduction.zip)：B的完整父版交叉核对依赖此包，哈希和步骤见其archive-dependencies.json。
+- [旧父版原始包](https://github.com/Zlllo/soft-worm-research-platform/releases/download/research-stage-2026-11-09/b-motor-convergence-2026-11-09-reproduction.zip)：B的完整父版交叉核对依赖此包，哈希和步骤见其archive-dependencies.json。
 - [主线补充验收包](https://github.com/Zlllo/soft-worm-research-platform/releases/download/research-mechanisms-2026-11-13/full302-joint-numerics-main-2026-11-12-main-evidence.zip)：独立原始数组计算、关键旧文件保护、闭环／通道分布描述、最终验收及本报告。
 
 在新的空目录解压A包及主线包，使用Python3.12、NumPy2.3.5、SciPy1.16.3运行以下命令，仅复算已保存数据，不启动NEURON或身体程序：
