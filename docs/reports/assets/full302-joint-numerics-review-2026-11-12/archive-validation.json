@@ -1,0 +1,87 @@
+{
+  "passed": true,
+  "archive_sha256": "5fd4fb24699f0ad1c0603238a474e612a65d5828b017467e1d50044daab88189",
+  "archive_bytes": 379467,
+  "payload_files": 29,
+  "all_payload_hashes_verified": true,
+  "all_archive_CRC_passed": true,
+  "independent_extracted_recomputation_byte_identical": true,
+  "recomputed_hashes": {
+    "source-protocol-review.json": "3d83a09d19e97c8777000a176bab55468cd8f6015c94a555da2c415c276e52d2",
+    "parent-independent.json": "e8605fcb206bb26476c03a11c5f67337e427d22a2b377ac5548179226f1ba13f",
+    "parent-crosscheck.json": "190f9b263a45659e26fc28eae24e4a7d9c2e463db4c0972c1d107e95c550e117",
+    "independent-results.json": "0d970c4a84a23cfdfa33c49cfd9b08270c5ca960dd23d52ff312e58dc3ea4e37",
+    "A-summary-crosscheck.json": "b7fd81625c1bc772735bf0a234872fd4ae7314f9ec4be271ea13e1d7001178a3",
+    "historical-comparison.json": "2095d46580f412e482bb0acabd6228d7168bf69877c0411f5339bcce5a885089"
+  },
+  "saved_report_relative_links_verified": 8,
+  "dependencies": {
+    "candidate_raw_archive": {
+      "path": "docs/reports/assets/full302-joint-numerics-2026-11-12/reproduction.zip",
+      "sha256": "57e209b18b74cfe98abc88c038fcda01501c0eac51382f22142629e3917942c5",
+      "bytes": 95267634
+    },
+    "parent_raw_archive": {
+      "path": "docs/reports/assets/b-motor-convergence-2026-11-09/reproduction.zip",
+      "sha256": "ab63155a8c5b45a96c4f3c183b59886ba96934190b89fc268d4b8cf547c9780d",
+      "bytes": 72610151
+    },
+    "runtime": {
+      "python": "3.12.14",
+      "numpy": "2.3.5",
+      "scipy": "1.16.3",
+      "neuron_required": false
+    },
+    "instructions": "Verify both dependency SHA256, extract parent archive, candidate archive and this review archive into the same empty directory. Run only joint_review*.py in the order recorded below; these do not load the simulator.",
+    "recompute_commands": [
+      "python analysis/neuromechanics/b_motor_validation/joint_review_source.py",
+      "python analysis/neuromechanics/b_motor_validation/joint_review_compute.py --parent",
+      "python analysis/neuromechanics/b_motor_validation/joint_review_compare.py --parent",
+      "python analysis/neuromechanics/b_motor_validation/joint_review_compute.py",
+      "python analysis/neuromechanics/b_motor_validation/joint_review_compare.py",
+      "python analysis/neuromechanics/b_motor_validation/joint_review_report.py"
+    ]
+  },
+  "execution_logs": [
+    {
+      "command": "python analysis/neuromechanics/b_motor_validation/joint_review_source.py",
+      "returncode": 0,
+      "stdout": "{\"complete\": true, \"available_checks_pass\": true, \"pending\": []}\n",
+      "stderr": ""
+    },
+    {
+      "command": "python analysis/neuromechanics/b_motor_validation/joint_review_compute.py --parent",
+      "returncode": 0,
+      "stdout": "{\"new_full_runs\": 6, \"fine_required\": true, \"adaptive_batch_complete\": true, \"neural_step_convergence_accepted\": false}\n",
+      "stderr": ""
+    },
+    {
+      "command": "python analysis/neuromechanics/b_motor_validation/joint_review_compare.py --parent",
+      "returncode": 0,
+      "stdout": "{\"passed\": true, \"review_compare_script_sha256\": \"b36ad6dc7b31807bab9251f85f28d428def6368b8dd4408937f634a44aa2e3bb\", \"numeric_scalars_compared\": 192, \"max_abs_numeric_difference\": 3.167049955621337e-13, \"mismatches\": [], \"all_pair_and_gate_decisions_identical\": true, \"A_functions_imported\": false, \"candidate_final_status_pending\": false, \"independent_sha256\": \"e8605fcb206bb26476c03a11c5f67337e427d22a2b377ac5548179226f1ba13f\", \"published_sha256\": \"69f3972f85f41171ba0ff0809318b489ec3cff015114741c41f8d12f5e4b3610\", \"purpose\": \"Historical formula cross-check; not a new candidate baseline\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": "python analysis/neuromechanics/b_motor_validation/joint_review_compute.py",
+      "returncode": 0,
+      "stdout": "{\"new_full_runs\": 6, \"fine_required\": true, \"adaptive_batch_complete\": true, \"neural_step_convergence_accepted\": false}\n",
+      "stderr": ""
+    },
+    {
+      "command": "python analysis/neuromechanics/b_motor_validation/joint_review_compare.py",
+      "returncode": 0,
+      "stdout": "{\"passed\": true, \"review_compare_script_sha256\": \"b36ad6dc7b31807bab9251f85f28d428def6368b8dd4408937f634a44aa2e3bb\", \"numeric_scalars_compared\": 192, \"max_abs_numeric_difference\": 4.55878390592801e-13, \"mismatches\": [], \"all_pair_and_gate_decisions_identical\": true, \"A_functions_imported\": false, \"candidate_final_status_pending\": false, \"independent_sha256\": \"0d970c4a84a23cfdfa33c49cfd9b08270c5ca960dd23d52ff312e58dc3ea4e37\", \"A_summary_sha256\": \"0f7324e67c6097a2cc448c93fb06c7b9de3f20492a56f6b61a4bb8922b219b3f\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": "python analysis/neuromechanics/b_motor_validation/joint_review_report.py",
+      "returncode": 0,
+      "stdout": "{\"stage\": \"independent_data_review_complete\", \"source_review_complete\": true, \"available_source_checks_pass\": true, \"generated_code_pending\": [], \"parent_formula_crosscheck_passed\": true, \"candidate_raw_runs_reviewed\": 6, \"candidate_operational_acceptance\": false, \"scientific_runs_started_by_B\": 0, \"simulator_imported_by_B\": false, \"compiled_by_B\": false, \"other_chat_messages_sent\": 0}\n",
+      "stderr": ""
+    }
+  ],
+  "simulator_imported": false,
+  "scientific_runs": 0,
+  "original_workspace_reads_forbidden": true,
+  "simulator_import_forbidden": true
+}

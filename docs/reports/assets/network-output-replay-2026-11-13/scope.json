@@ -1,0 +1,6 @@
+{
+  "interpretation": "All causal comparisons are internal to this common open-loop replay framework.",
+  "original_closed_loop_comparison": "Differences from the old closed loop can include 10ms resampling, fixed historical input, and removal of real-time feedback. They are not intervention effects.",
+  "source_numerics": "Frozen full302 source has unresolved full-system timestep sensitivity.",
+  "time_dilation": "32s time-dilation trials cover the same source sequence more slowly and provide longer physical relaxation; report per-unit-time quantities and do not claim equal-time advantages."
+}

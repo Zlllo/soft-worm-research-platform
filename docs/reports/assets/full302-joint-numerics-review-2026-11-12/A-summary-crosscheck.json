@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "review_compare_script_sha256": "b36ad6dc7b31807bab9251f85f28d428def6368b8dd4408937f634a44aa2e3bb",
+  "numeric_scalars_compared": 192,
+  "max_abs_numeric_difference": 4.55878390592801e-13,
+  "mismatches": [],
+  "all_pair_and_gate_decisions_identical": true,
+  "A_functions_imported": false,
+  "candidate_final_status_pending": false,
+  "independent_sha256": "0d970c4a84a23cfdfa33c49cfd9b08270c5ca960dd23d52ff312e58dc3ea4e37",
+  "A_summary_sha256": "0f7324e67c6097a2cc448c93fb06c7b9de3f20492a56f6b61a4bb8922b219b3f"
+}

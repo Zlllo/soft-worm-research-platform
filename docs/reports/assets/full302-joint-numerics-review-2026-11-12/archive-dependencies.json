@@ -1,0 +1,27 @@
+{
+  "candidate_raw_archive": {
+    "path": "docs/reports/assets/full302-joint-numerics-2026-11-12/reproduction.zip",
+    "sha256": "57e209b18b74cfe98abc88c038fcda01501c0eac51382f22142629e3917942c5",
+    "bytes": 95267634
+  },
+  "parent_raw_archive": {
+    "path": "docs/reports/assets/b-motor-convergence-2026-11-09/reproduction.zip",
+    "sha256": "ab63155a8c5b45a96c4f3c183b59886ba96934190b89fc268d4b8cf547c9780d",
+    "bytes": 72610151
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.16.3",
+    "neuron_required": false
+  },
+  "instructions": "Verify both dependency SHA256, extract parent archive, candidate archive and this review archive into the same empty directory. Run only joint_review*.py in the order recorded below; these do not load the simulator.",
+  "recompute_commands": [
+    "python analysis/neuromechanics/b_motor_validation/joint_review_source.py",
+    "python analysis/neuromechanics/b_motor_validation/joint_review_compute.py --parent",
+    "python analysis/neuromechanics/b_motor_validation/joint_review_compare.py --parent",
+    "python analysis/neuromechanics/b_motor_validation/joint_review_compute.py",
+    "python analysis/neuromechanics/b_motor_validation/joint_review_compare.py",
+    "python analysis/neuromechanics/b_motor_validation/joint_review_report.py"
+  ]
+}

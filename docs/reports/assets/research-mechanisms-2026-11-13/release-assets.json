@@ -1,0 +1,50 @@
+[
+  {
+    "stage": "calcium-body-transfer-2026-11-13",
+    "name": "calcium-body-transfer-2026-11-13.zip",
+    "size": 128670471,
+    "sha256": "1659cc17c22517818f0ddf35aabad6e8316c97ec2d6926fa9d52e34203a66d8b"
+  },
+  {
+    "stage": "physical-thermal-readout-2026-11-13",
+    "name": "physical-thermal-readout-2026-11-13.zip",
+    "size": 17696917,
+    "sha256": "fa3d87bac056cf9c0895e010cab3c7fbaf88694ee41eb2f39e8bdf9f97ef9d13"
+  },
+  {
+    "stage": "full302-joint-numerics-2026-11-12",
+    "name": "full302-joint-numerics-2026-11-12.zip",
+    "size": 95267634,
+    "sha256": "57e209b18b74cfe98abc88c038fcda01501c0eac51382f22142629e3917942c5"
+  },
+  {
+    "stage": "c1-current-timing-2026-11-10",
+    "name": "c1-current-timing-2026-11-10.zip",
+    "size": 977834216,
+    "sha256": "6c0ddf8fad681ead9d0338b2b654e5c63f2f3fcbb623dbccb526572ea4954426"
+  },
+  {
+    "stage": "passive-body-stiffness-2026-11-13",
+    "name": "passive-body-stiffness-2026-11-13.zip",
+    "size": 60991843,
+    "sha256": "a3947481f517a9d0191eb34d6887852bdafc5b18a742050a21dedbe490d48ea6"
+  },
+  {
+    "stage": "full302-joint-numerics-review-2026-11-12",
+    "name": "full302-joint-numerics-review-2026-11-12.zip",
+    "size": 379467,
+    "sha256": "5fd4fb24699f0ad1c0603238a474e612a65d5828b017467e1d50044daab88189"
+  },
+  {
+    "stage": "network-output-replay-2026-11-13",
+    "name": "network-output-replay-2026-11-13.zip",
+    "size": 39826044,
+    "sha256": "98237018db63f865ed93ae84a70459a39e705803271382edce3e151a1dfa0bfa"
+  },
+  {
+    "stage": "c1-current-timing-review-2026-11-10",
+    "name": "c1-current-timing-review-2026-11-10.zip",
+    "size": 978036261,
+    "sha256": "cad38d8bcda16cc9192f87e7e2cace7e9fdc53c2522eb735eb38d7196eaac181"
+  }
+]

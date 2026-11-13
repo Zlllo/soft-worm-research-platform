@@ -1,0 +1,13 @@
+{
+  "payload_files": 31,
+  "crc_passed": true,
+  "all_payload_sha256_passed": true,
+  "independent_summary_csv_geometry_controls_byte_identical": true,
+  "all_saved_estimator_inputs_and_outputs_array_identical": true,
+  "archive_sha256": "fa3d87bac056cf9c0895e010cab3c7fbaf88694ee41eb2f39e8bdf9f97ef9d13",
+  "archive_bytes": 17696917,
+  "original_worktree_reads": false,
+  "new_simulations": 0,
+  "new_training": 0,
+  "extracted_to": "/var/folders/0g/wkglj6h97wjfjd3jyv54n7_00000gn/T/worm-physical-thermal-002h8x0b"
+}

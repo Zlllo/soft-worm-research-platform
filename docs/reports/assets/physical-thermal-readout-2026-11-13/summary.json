@@ -1,0 +1,537 @@
+{
+  "protocol_sha256": "a41d4c77c594f6c47a8b72a30ace09e9bcfe128d8e0c858b20d95b369f46dc29",
+  "conditions": [
+    {
+      "case": "wave_r1_f0.5",
+      "mode": "matched",
+      "noise_mK": 0.1,
+      "balanced_accuracy": 0.9558823529411764,
+      "correct_fraction_all_eligible": 0.9558823529411764,
+      "coverage": 1.0,
+      "observations": 544,
+      "eligible": 544,
+      "weak_target": 0,
+      "unresolved": 0,
+      "normal_gradient_RMSE_K_per_m": 13.035768617391835,
+      "predicted_matched_accuracy": 0.939585773917334,
+      "normal_excursion_um_median": 1.222841640275424,
+      "condition_number_median": 2.40935334714704,
+      "predicted_sigma_normal_K_per_m_median": 12.771380753229064,
+      "noise_seed_results": [
+        {
+          "seed": 3201,
+          "balanced_accuracy": 0.9852941176470589,
+          "correct_fraction_all_eligible": 0.9852941176470589,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3202,
+          "balanced_accuracy": 0.9411764705882353,
+          "correct_fraction_all_eligible": 0.9411764705882353,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3203,
+          "balanced_accuracy": 0.9779411764705883,
+          "correct_fraction_all_eligible": 0.9779411764705883,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3204,
+          "balanced_accuracy": 0.9191176470588236,
+          "correct_fraction_all_eligible": 0.9191176470588236,
+          "coverage": 1.0
+        }
+      ]
+    },
+    {
+      "case": "wave_r1_f0.5",
+      "mode": "matched",
+      "noise_mK": 1.0,
+      "balanced_accuracy": 0.6323529411764706,
+      "correct_fraction_all_eligible": 0.6323529411764706,
+      "coverage": 1.0,
+      "observations": 544,
+      "eligible": 544,
+      "weak_target": 0,
+      "unresolved": 0,
+      "normal_gradient_RMSE_K_per_m": 130.35768616967437,
+      "predicted_matched_accuracy": 0.579682768106708,
+      "normal_excursion_um_median": 1.222841640275424,
+      "condition_number_median": 2.40935334714704,
+      "predicted_sigma_normal_K_per_m_median": 127.71380753229063,
+      "noise_seed_results": [
+        {
+          "seed": 3201,
+          "balanced_accuracy": 0.7352941176470589,
+          "correct_fraction_all_eligible": 0.7352941176470589,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3202,
+          "balanced_accuracy": 0.5735294117647058,
+          "correct_fraction_all_eligible": 0.5735294117647058,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3203,
+          "balanced_accuracy": 0.5588235294117647,
+          "correct_fraction_all_eligible": 0.5588235294117647,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3204,
+          "balanced_accuracy": 0.6617647058823529,
+          "correct_fraction_all_eligible": 0.6617647058823529,
+          "coverage": 1.0
+        }
+      ]
+    },
+    {
+      "case": "wave_r1_f0.5",
+      "mode": "delay_0.6s",
+      "noise_mK": 0.1,
+      "balanced_accuracy": 0.2959558823529412,
+      "correct_fraction_all_eligible": 0.2959558823529412,
+      "coverage": 1.0,
+      "observations": 544,
+      "eligible": 544,
+      "weak_target": 0,
+      "unresolved": 0,
+      "normal_gradient_RMSE_K_per_m": 38.314510843244264,
+      "predicted_matched_accuracy": null,
+      "normal_excursion_um_median": 1.2205310763768191,
+      "condition_number_median": 2.4503884126834388,
+      "predicted_sigma_normal_K_per_m_median": 12.795558008421407,
+      "noise_seed_results": [
+        {
+          "seed": 3201,
+          "balanced_accuracy": 0.2647058823529412,
+          "correct_fraction_all_eligible": 0.2647058823529412,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3202,
+          "balanced_accuracy": 0.3897058823529412,
+          "correct_fraction_all_eligible": 0.3897058823529412,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3203,
+          "balanced_accuracy": 0.3161764705882353,
+          "correct_fraction_all_eligible": 0.3161764705882353,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3204,
+          "balanced_accuracy": 0.21323529411764708,
+          "correct_fraction_all_eligible": 0.21323529411764708,
+          "coverage": 1.0
+        }
+      ]
+    },
+    {
+      "case": "wave_r1_f0.5",
+      "mode": "delay_0.6s",
+      "noise_mK": 1.0,
+      "balanced_accuracy": 0.5055147058823529,
+      "correct_fraction_all_eligible": 0.5055147058823529,
+      "coverage": 1.0,
+      "observations": 544,
+      "eligible": 544,
+      "weak_target": 0,
+      "unresolved": 0,
+      "normal_gradient_RMSE_K_per_m": 123.6704004089474,
+      "predicted_matched_accuracy": null,
+      "normal_excursion_um_median": 1.2205310763768191,
+      "condition_number_median": 2.4503884126834388,
+      "predicted_sigma_normal_K_per_m_median": 127.95558008421408,
+      "noise_seed_results": [
+        {
+          "seed": 3201,
+          "balanced_accuracy": 0.4926470588235294,
+          "correct_fraction_all_eligible": 0.4926470588235294,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3202,
+          "balanced_accuracy": 0.625,
+          "correct_fraction_all_eligible": 0.625,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3203,
+          "balanced_accuracy": 0.5220588235294118,
+          "correct_fraction_all_eligible": 0.5220588235294118,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3204,
+          "balanced_accuracy": 0.38235294117647056,
+          "correct_fraction_all_eligible": 0.38235294117647056,
+          "coverage": 1.0
+        }
+      ]
+    },
+    {
+      "case": "wave_r1_f2",
+      "mode": "matched",
+      "noise_mK": 0.1,
+      "balanced_accuracy": 0.6875,
+      "correct_fraction_all_eligible": 0.6875,
+      "coverage": 1.0,
+      "observations": 544,
+      "eligible": 544,
+      "weak_target": 0,
+      "unresolved": 0,
+      "normal_gradient_RMSE_K_per_m": 50.298592581581126,
+      "predicted_matched_accuracy": 0.6943732977184915,
+      "normal_excursion_um_median": 0.3109027961745138,
+      "condition_number_median": 1.3516584540654903,
+      "predicted_sigma_normal_K_per_m_median": 50.23234393843912,
+      "noise_seed_results": [
+        {
+          "seed": 3201,
+          "balanced_accuracy": 0.6470588235294118,
+          "correct_fraction_all_eligible": 0.6470588235294118,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3202,
+          "balanced_accuracy": 0.6911764705882353,
+          "correct_fraction_all_eligible": 0.6911764705882353,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3203,
+          "balanced_accuracy": 0.6102941176470589,
+          "correct_fraction_all_eligible": 0.6102941176470589,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3204,
+          "balanced_accuracy": 0.8014705882352942,
+          "correct_fraction_all_eligible": 0.8014705882352942,
+          "coverage": 1.0
+        }
+      ]
+    },
+    {
+      "case": "wave_r1_f2",
+      "mode": "matched",
+      "noise_mK": 1.0,
+      "balanced_accuracy": 0.5367647058823529,
+      "correct_fraction_all_eligible": 0.5367647058823529,
+      "coverage": 1.0,
+      "observations": 544,
+      "eligible": 544,
+      "weak_target": 0,
+      "unresolved": 0,
+      "normal_gradient_RMSE_K_per_m": 502.98592582269475,
+      "predicted_matched_accuracy": 0.52073872580501,
+      "normal_excursion_um_median": 0.3109027961745138,
+      "condition_number_median": 1.3516584540654903,
+      "predicted_sigma_normal_K_per_m_median": 502.3234393843912,
+      "noise_seed_results": [
+        {
+          "seed": 3201,
+          "balanced_accuracy": 0.4338235294117647,
+          "correct_fraction_all_eligible": 0.4338235294117647,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3202,
+          "balanced_accuracy": 0.5294117647058822,
+          "correct_fraction_all_eligible": 0.5294117647058822,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3203,
+          "balanced_accuracy": 0.47794117647058826,
+          "correct_fraction_all_eligible": 0.47794117647058826,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3204,
+          "balanced_accuracy": 0.7058823529411764,
+          "correct_fraction_all_eligible": 0.7058823529411764,
+          "coverage": 1.0
+        }
+      ]
+    },
+    {
+      "case": "wave_r1_f2",
+      "mode": "delay_0.6s",
+      "noise_mK": 0.1,
+      "balanced_accuracy": 0.5643382352941176,
+      "correct_fraction_all_eligible": 0.5643382352941176,
+      "coverage": 1.0,
+      "observations": 544,
+      "eligible": 544,
+      "weak_target": 0,
+      "unresolved": 0,
+      "normal_gradient_RMSE_K_per_m": 54.36796091801088,
+      "predicted_matched_accuracy": null,
+      "normal_excursion_um_median": 0.3158898283854154,
+      "condition_number_median": 1.3238170406260894,
+      "predicted_sigma_normal_K_per_m_median": 49.43931328426926,
+      "noise_seed_results": [
+        {
+          "seed": 3201,
+          "balanced_accuracy": 0.5588235294117647,
+          "correct_fraction_all_eligible": 0.5588235294117647,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3202,
+          "balanced_accuracy": 0.5588235294117647,
+          "correct_fraction_all_eligible": 0.5588235294117647,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3203,
+          "balanced_accuracy": 0.4117647058823529,
+          "correct_fraction_all_eligible": 0.4117647058823529,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3204,
+          "balanced_accuracy": 0.7279411764705883,
+          "correct_fraction_all_eligible": 0.7279411764705883,
+          "coverage": 1.0
+        }
+      ]
+    },
+    {
+      "case": "wave_r1_f2",
+      "mode": "delay_0.6s",
+      "noise_mK": 1.0,
+      "balanced_accuracy": 0.5147058823529411,
+      "correct_fraction_all_eligible": 0.5147058823529411,
+      "coverage": 1.0,
+      "observations": 544,
+      "eligible": 544,
+      "weak_target": 0,
+      "unresolved": 0,
+      "normal_gradient_RMSE_K_per_m": 493.406717410428,
+      "predicted_matched_accuracy": null,
+      "normal_excursion_um_median": 0.3158898283854154,
+      "condition_number_median": 1.3238170406260894,
+      "predicted_sigma_normal_K_per_m_median": 494.3931328426926,
+      "noise_seed_results": [
+        {
+          "seed": 3201,
+          "balanced_accuracy": 0.5147058823529411,
+          "correct_fraction_all_eligible": 0.5147058823529411,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3202,
+          "balanced_accuracy": 0.5220588235294118,
+          "correct_fraction_all_eligible": 0.5220588235294118,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3203,
+          "balanced_accuracy": 0.3602941176470588,
+          "correct_fraction_all_eligible": 0.3602941176470588,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3204,
+          "balanced_accuracy": 0.6617647058823529,
+          "correct_fraction_all_eligible": 0.6617647058823529,
+          "coverage": 1.0
+        }
+      ]
+    },
+    {
+      "case": "heavy_drag_r1_f2",
+      "mode": "matched",
+      "noise_mK": 0.1,
+      "balanced_accuracy": 0.5974264705882353,
+      "correct_fraction_all_eligible": 0.5974264705882353,
+      "coverage": 1.0,
+      "observations": 544,
+      "eligible": 544,
+      "weak_target": 0,
+      "unresolved": 0,
+      "normal_gradient_RMSE_K_per_m": 146.00346631117011,
+      "predicted_matched_accuracy": 0.5710178364347024,
+      "normal_excursion_um_median": 0.10725363998561346,
+      "condition_number_median": 3.1211642138929845,
+      "predicted_sigma_normal_K_per_m_median": 145.61161925092196,
+      "noise_seed_results": [
+        {
+          "seed": 3201,
+          "balanced_accuracy": 0.5808823529411764,
+          "correct_fraction_all_eligible": 0.5808823529411764,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3202,
+          "balanced_accuracy": 0.5735294117647058,
+          "correct_fraction_all_eligible": 0.5735294117647058,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3203,
+          "balanced_accuracy": 0.5220588235294118,
+          "correct_fraction_all_eligible": 0.5220588235294118,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3204,
+          "balanced_accuracy": 0.713235294117647,
+          "correct_fraction_all_eligible": 0.713235294117647,
+          "coverage": 1.0
+        }
+      ]
+    },
+    {
+      "case": "heavy_drag_r1_f2",
+      "mode": "matched",
+      "noise_mK": 1.0,
+      "balanced_accuracy": 0.53125,
+      "correct_fraction_all_eligible": 0.53125,
+      "coverage": 1.0,
+      "observations": 544,
+      "eligible": 544,
+      "weak_target": 0,
+      "unresolved": 0,
+      "normal_gradient_RMSE_K_per_m": 1460.0346631195673,
+      "predicted_matched_accuracy": 0.5071588848178584,
+      "normal_excursion_um_median": 0.10725363998561346,
+      "condition_number_median": 3.1211642138929845,
+      "predicted_sigma_normal_K_per_m_median": 1456.1161925092194,
+      "noise_seed_results": [
+        {
+          "seed": 3201,
+          "balanced_accuracy": 0.4411764705882353,
+          "correct_fraction_all_eligible": 0.4411764705882353,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3202,
+          "balanced_accuracy": 0.5294117647058824,
+          "correct_fraction_all_eligible": 0.5294117647058824,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3203,
+          "balanced_accuracy": 0.49264705882352944,
+          "correct_fraction_all_eligible": 0.49264705882352944,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3204,
+          "balanced_accuracy": 0.6617647058823529,
+          "correct_fraction_all_eligible": 0.6617647058823529,
+          "coverage": 1.0
+        }
+      ]
+    },
+    {
+      "case": "heavy_drag_r1_f2",
+      "mode": "delay_0.6s",
+      "noise_mK": 0.1,
+      "balanced_accuracy": 0.525735294117647,
+      "correct_fraction_all_eligible": 0.525735294117647,
+      "coverage": 1.0,
+      "observations": 544,
+      "eligible": 544,
+      "weak_target": 0,
+      "unresolved": 0,
+      "normal_gradient_RMSE_K_per_m": 146.32409363497868,
+      "predicted_matched_accuracy": null,
+      "normal_excursion_um_median": 0.10843057171373771,
+      "condition_number_median": 3.1406861787323943,
+      "predicted_sigma_normal_K_per_m_median": 144.0311154135688,
+      "noise_seed_results": [
+        {
+          "seed": 3201,
+          "balanced_accuracy": 0.5073529411764706,
+          "correct_fraction_all_eligible": 0.5073529411764706,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3202,
+          "balanced_accuracy": 0.5294117647058824,
+          "correct_fraction_all_eligible": 0.5294117647058824,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3203,
+          "balanced_accuracy": 0.36764705882352944,
+          "correct_fraction_all_eligible": 0.36764705882352944,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3204,
+          "balanced_accuracy": 0.6985294117647058,
+          "correct_fraction_all_eligible": 0.6985294117647058,
+          "coverage": 1.0
+        }
+      ]
+    },
+    {
+      "case": "heavy_drag_r1_f2",
+      "mode": "delay_0.6s",
+      "noise_mK": 1.0,
+      "balanced_accuracy": 0.5073529411764706,
+      "correct_fraction_all_eligible": 0.5073529411764706,
+      "coverage": 1.0,
+      "observations": 544,
+      "eligible": 544,
+      "weak_target": 0,
+      "unresolved": 0,
+      "normal_gradient_RMSE_K_per_m": 1438.1000194112044,
+      "predicted_matched_accuracy": null,
+      "normal_excursion_um_median": 0.10843057171373771,
+      "condition_number_median": 3.1406861787323943,
+      "predicted_sigma_normal_K_per_m_median": 1440.3111541356882,
+      "noise_seed_results": [
+        {
+          "seed": 3201,
+          "balanced_accuracy": 0.5,
+          "correct_fraction_all_eligible": 0.5,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3202,
+          "balanced_accuracy": 0.5220588235294117,
+          "correct_fraction_all_eligible": 0.5220588235294117,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3203,
+          "balanced_accuracy": 0.3382352941176471,
+          "correct_fraction_all_eligible": 0.3382352941176471,
+          "coverage": 1.0
+        },
+        {
+          "seed": 3204,
+          "balanced_accuracy": 0.6691176470588235,
+          "correct_fraction_all_eligible": 0.6691176470588235,
+          "coverage": 1.0
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "all_six_numeric_controls_passed": true,
+    "source_and_input_hashes": true,
+    "zero_delay_identity": true,
+    "all_reference_times_causal": true,
+    "exactly_twelve_conditions": true,
+    "exactly_four_paired_noise_seeds": true,
+    "no_new_simulation_or_training": true
+  },
+  "total_window_evaluations": 6528,
+  "physical_trajectories": 3,
+  "windows_per_trajectory": 17,
+  "sensor_noise_pairing": "Same base noise for case/mode/noise-level comparisons; levels only rescale the common Gaussian stream.",
+  "scope": "Fixed physical estimator with ideal ego-odometry, static linear temperature fields and float64 sensors. No biological neural implementation or closed-loop navigation claim.",
+  "estimator_input_boundary": "Only a 41-value temperature vector and a 41x2 ideal ego-displacement history.",
+  "uncertainty": "Four sensor-noise seeds and overlapping windows are descriptive paired evaluations; no biological significance tests or independent-window confidence intervals."
+}

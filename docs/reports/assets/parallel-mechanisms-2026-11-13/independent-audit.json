@@ -1,0 +1,249 @@
+{
+  "shared_baseline_files_unchanged": 39,
+  "new_body_runs": 18,
+  "new_neural_runs": 0,
+  "new_training_runs": 0,
+  "branches": {
+    "network_replay": {
+      "protocol_sha256": "8ef90f458470129052867c60b8887132d0b63b18e33b577e96b86b6ae2116dab",
+      "new_body_runs": 10,
+      "independent_metrics": [
+        {
+          "name": "off_original",
+          "speed_error_um_s": 0.0,
+          "dynamic_curvature_error_per_mm": 6.938893903907228e-18,
+          "static_curvature_error_per_mm": 0.0
+        },
+        {
+          "name": "off_calcium_x2",
+          "speed_error_um_s": 6.938893903907228e-18,
+          "dynamic_curvature_error_per_mm": 0.0,
+          "static_curvature_error_per_mm": 0.0
+        },
+        {
+          "name": "off_calcium_x4",
+          "speed_error_um_s": 0.0,
+          "dynamic_curvature_error_per_mm": 0.0,
+          "static_curvature_error_per_mm": 5.551115123125783e-17
+        },
+        {
+          "name": "off_time_x4",
+          "speed_error_um_s": 1.734723475976807e-18,
+          "dynamic_curvature_error_per_mm": 0.0,
+          "static_curvature_error_per_mm": 2.7755575615628914e-17
+        },
+        {
+          "name": "live_original",
+          "speed_error_um_s": 0.0,
+          "dynamic_curvature_error_per_mm": 0.0,
+          "static_curvature_error_per_mm": 0.0
+        },
+        {
+          "name": "live_calcium_x2",
+          "speed_error_um_s": 0.0,
+          "dynamic_curvature_error_per_mm": 0.0,
+          "static_curvature_error_per_mm": 0.0
+        },
+        {
+          "name": "live_calcium_x4",
+          "speed_error_um_s": 1.3877787807814457e-17,
+          "dynamic_curvature_error_per_mm": 1.3877787807814457e-17,
+          "static_curvature_error_per_mm": 0.0
+        },
+        {
+          "name": "live_time_x4",
+          "speed_error_um_s": 0.0,
+          "dynamic_curvature_error_per_mm": 0.0,
+          "static_curvature_error_per_mm": 0.0
+        },
+        {
+          "name": "live_original_fine",
+          "speed_error_um_s": 0.0,
+          "dynamic_curvature_error_per_mm": 0.0,
+          "static_curvature_error_per_mm": 2.7755575615628914e-17
+        },
+        {
+          "name": "live_time_x4_fine",
+          "speed_error_um_s": 0.0,
+          "dynamic_curvature_error_per_mm": 0.0,
+          "static_curvature_error_per_mm": 0.0
+        }
+      ],
+      "branch_checks": {
+        "all_ten_complete": true,
+        "source_and_program_sha_unchanged": true,
+        "all_inputs_independently_reconstructed": true,
+        "all_finite_and_causal": true,
+        "activation_quadrature_validated": true,
+        "both_half_step_pairs_pass": true,
+        "time_dilation_preserves_continuous_mean_moments": true
+      },
+      "failed_branch_checks": []
+    },
+    "passive_stiffness": {
+      "protocol_sha256": "bcdfe21f7598d09623e63eee443087bedd0132c274032cb248fdc963ec373326",
+      "new_body_runs": 8,
+      "reused_cases": 3,
+      "independent_metrics": [
+        {
+          "name": "s0.5_f0.5",
+          "speed_error_um_s": 0.0,
+          "curvature_amplitude_error_per_mm": 0.0
+        },
+        {
+          "name": "s0.5_f1",
+          "speed_error_um_s": 0.0,
+          "curvature_amplitude_error_per_mm": 1.3877787807814457e-17
+        },
+        {
+          "name": "s0.5_f2",
+          "speed_error_um_s": 0.0,
+          "curvature_amplitude_error_per_mm": 0.0
+        },
+        {
+          "name": "s2_f0.5",
+          "speed_error_um_s": 0.0,
+          "curvature_amplitude_error_per_mm": 5.551115123125783e-17
+        },
+        {
+          "name": "s2_f1",
+          "speed_error_um_s": 2.220446049250313e-16,
+          "curvature_amplitude_error_per_mm": 2.7755575615628914e-17
+        },
+        {
+          "name": "s2_f2",
+          "speed_error_um_s": 0.0,
+          "curvature_amplitude_error_per_mm": 1.3877787807814457e-17
+        },
+        {
+          "name": "s0.5_f2_fine",
+          "speed_error_um_s": 0.0,
+          "curvature_amplitude_error_per_mm": 6.938893903907228e-18
+        },
+        {
+          "name": "s2_f2_fine",
+          "speed_error_um_s": 0.0,
+          "curvature_amplitude_error_per_mm": 1.3877787807814457e-17
+        },
+        {
+          "name": "s1_f0.5",
+          "speed_error_um_s": 0.0,
+          "curvature_amplitude_error_per_mm": 5.551115123125783e-17
+        },
+        {
+          "name": "s1_f1",
+          "speed_error_um_s": 0.0,
+          "curvature_amplitude_error_per_mm": 4.163336342344337e-17
+        },
+        {
+          "name": "s1_f2",
+          "speed_error_um_s": 0.0,
+          "curvature_amplitude_error_per_mm": 2.0816681711721685e-17
+        }
+      ],
+      "branch_checks": {
+        "all_eight_new_cases_complete": true,
+        "all_three_controls_reused_and_hashed": true,
+        "all_finite_causal": true,
+        "only_declared_passive_force_terms_changed": true,
+        "all_active_damping_environment_constants_unchanged": true,
+        "calcium_command_actual_muscle_identical": true,
+        "both_half_step_pairs_pass": true
+      },
+      "failed_branch_checks": []
+    },
+    "physical_thermal_readout": {
+      "protocol_sha256": "a41d4c77c594f6c47a8b72a30ace09e9bcfe128d8e0c858b20d95b369f46dc29",
+      "new_simulations": 0,
+      "conditions": [
+        {
+          "case": "wave_r1_f0.5",
+          "mode": "matched",
+          "noise_mK": 0.1,
+          "recomputed_balanced_accuracy": 0.9558823529411764
+        },
+        {
+          "case": "wave_r1_f0.5",
+          "mode": "matched",
+          "noise_mK": 1.0,
+          "recomputed_balanced_accuracy": 0.6323529411764706
+        },
+        {
+          "case": "wave_r1_f0.5",
+          "mode": "delay_0.6s",
+          "noise_mK": 0.1,
+          "recomputed_balanced_accuracy": 0.2959558823529412
+        },
+        {
+          "case": "wave_r1_f0.5",
+          "mode": "delay_0.6s",
+          "noise_mK": 1.0,
+          "recomputed_balanced_accuracy": 0.5055147058823529
+        },
+        {
+          "case": "wave_r1_f2",
+          "mode": "matched",
+          "noise_mK": 0.1,
+          "recomputed_balanced_accuracy": 0.6875
+        },
+        {
+          "case": "wave_r1_f2",
+          "mode": "matched",
+          "noise_mK": 1.0,
+          "recomputed_balanced_accuracy": 0.5367647058823529
+        },
+        {
+          "case": "wave_r1_f2",
+          "mode": "delay_0.6s",
+          "noise_mK": 0.1,
+          "recomputed_balanced_accuracy": 0.5643382352941176
+        },
+        {
+          "case": "wave_r1_f2",
+          "mode": "delay_0.6s",
+          "noise_mK": 1.0,
+          "recomputed_balanced_accuracy": 0.5147058823529411
+        },
+        {
+          "case": "heavy_drag_r1_f2",
+          "mode": "matched",
+          "noise_mK": 0.1,
+          "recomputed_balanced_accuracy": 0.5974264705882353
+        },
+        {
+          "case": "heavy_drag_r1_f2",
+          "mode": "matched",
+          "noise_mK": 1.0,
+          "recomputed_balanced_accuracy": 0.53125
+        },
+        {
+          "case": "heavy_drag_r1_f2",
+          "mode": "delay_0.6s",
+          "noise_mK": 0.1,
+          "recomputed_balanced_accuracy": 0.525735294117647
+        },
+        {
+          "case": "heavy_drag_r1_f2",
+          "mode": "delay_0.6s",
+          "noise_mK": 1.0,
+          "recomputed_balanced_accuracy": 0.5073529411764706
+        }
+      ],
+      "max_gradient_relative_error": 3.563495578515285e-13,
+      "reference_times_causal": true,
+      "independent_solver": "Centered 2x2 normal-equation inverse; branch used SVD least squares.",
+      "branch_checks": {
+        "all_six_numeric_controls_passed": true,
+        "source_and_input_hashes": true,
+        "zero_delay_identity": true,
+        "all_reference_times_causal": true,
+        "exactly_twelve_conditions": true,
+        "exactly_four_paired_noise_seeds": true,
+        "no_new_simulation_or_training": true
+      },
+      "failed_branch_checks": []
+    }
+  },
+  "all_independent_recomputations_passed": true,
+  "all_branch_checks_passed": true
+}

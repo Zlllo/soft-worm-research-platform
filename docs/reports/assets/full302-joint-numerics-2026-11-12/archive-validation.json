@@ -1,0 +1,33 @@
+{
+  "zip_crc_passed": true,
+  "all_payload_sha256_passed": true,
+  "payload_files": 216,
+  "archive_sha256": "57e209b18b74cfe98abc88c038fcda01501c0eac51382f22142629e3917942c5",
+  "archive_bytes": 95267634,
+  "summary_sha256": "0f7324e67c6097a2cc448c93fb06c7b9de3f20492a56f6b61a4bb8922b219b3f",
+  "offline_reanalysis_identical": true,
+  "offline_files_compared": {
+    "summary.json": "0f7324e67c6097a2cc448c93fb06c7b9de3f20492a56f6b61a4bb8922b219b3f",
+    "validation.json": "92d2d4234f48cc7ca851a2acaec8f130e0b63940091e96b0b3dd16c8485ee4b3",
+    "independent-validation.json": "d3c3440b78275c240eb986c94da0a51659be48008cebe43630602c5c898edd2f"
+  },
+  "original_project_reads_forbidden": true,
+  "NEURON_import_forbidden": true,
+  "new_simulations": 0,
+  "scientific_conditions": 6,
+  "convergence_accepted": false,
+  "logs": [
+    {
+      "script": "joint_analyze.py",
+      "exit_code": 0,
+      "stdout": "{\"runs\": 6, \"fine_required\": true, \"convergence_accepted\": false, \"failed_conditions\": {}, \"failed\": {\"off_0.025_vs_0.0125\": [\"calcium_trajectory\", \"drive_trajectory\"], \"off_0.0125_vs_0.00625\": [\"calcium_trajectory\", \"drive_trajectory\"], \"off_0.025_vs_0.00625\": [\"calcium_trajectory\", \"drive_trajectory\"], \"live_0.025_vs_0.0125\": [\"B_frequency\", \"B_trajectory\", \"B_peak_phase\", \"calcium_statistics\", \"calcium_trajectory\", \"drive_statistics\", \"drive_trajectory\", \"side_strain_trajectory\", \"feedback_trajectory\"], \"live_0.0125_vs_0.00625\": [\"B_frequency\", \"B_trajectory\", \"B_peak_phase\", \"calcium_statistics\", \"calcium_trajectory\", \"drive_statistics\", \"drive_trajectory\", \"body_shape_amplitude\", \"side_strain_trajectory\", \"feedback_trajectory\"], \"live_0.025_vs_0.00625\": [\"B_frequency\", \"B_trajectory\", \"B_peak_phase\", \"calcium_statistics\", \"calcium_trajectory\", \"drive_statistics\", \"drive_trajectory\", \"body_shape_amplitude\", \"side_strain_trajectory\", \"feedback_trajectory\"]}}\n",
+      "stderr": ""
+    },
+    {
+      "script": "joint_verify.py",
+      "exit_code": 0,
+      "stdout": "{\"independent_numpy_audit_passed\": true, \"runs_checked\": 6, \"pair_gate_values_checked\": 96, \"independently_implemented\": [\"Prominent peaks without SciPy\", \"Frequencies and amplitudes\", \"Calcium/drive channel errors\", \"Calcium to 95-muscle / 48x2 planar drive mapping\", \"Body-frame geometry by rotation angle\", \"Speed/displacement/strain/feedback error magnitudes\"], \"summary_sha256\": \"0f7324e67c6097a2cc448c93fb06c7b9de3f20492a56f6b61a4bb8922b219b3f\", \"analyzer_imported\": false}\n{\"independent_candidate_audit_passed\": true, \"incomplete_or_rhythm_failures_retained\": false, \"runs_checked\": 6, \"pair_gate_values_checked\": 96, \"migration_ratio_values_checked\": 96, \"historical_same_parameter_model_changes_checked\": 6, \"sampled_feedback_values_reconstructed\": 86508, \"frozen_independent_script_sha256\": \"94996659923de81975550aa071df3a5f955ab3df318845531e27947060d0af26\", \"summary_sha256\": \"0f7324e67c6097a2cc448c93fb06c7b9de3f20492a56f6b61a4bb8922b219b3f\", \"candidate_convergence_accepted\": false, \"acceptance_unchanged\": true, \"scientific_conditions\": 6, \"retries\": 0, \"analyzer_imported\": false, \"NEURON_imported\": false}\n",
+      "stderr": ""
+    }
+  ]
+}

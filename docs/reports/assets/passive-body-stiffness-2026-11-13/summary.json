@@ -1,0 +1,386 @@
+{
+  "protocol_sha256": "bcdfe21f7598d09623e63eee443087bedd0132c274032cb248fdc963ec373326",
+  "checks": {
+    "all_eight_new_cases_complete": true,
+    "all_three_controls_reused_and_hashed": true,
+    "all_finite_causal": true,
+    "only_declared_passive_force_terms_changed": true,
+    "all_active_damping_environment_constants_unchanged": true,
+    "calcium_command_actual_muscle_identical": true,
+    "both_half_step_pairs_pass": true
+  },
+  "cases": [
+    {
+      "name": "s0.5_f0.5",
+      "scale": 0.5,
+      "frequency_Hz": 0.5,
+      "dt_s": 0.001,
+      "trace_sha256": "cf7a8650423f3638a7cffae01392769f81ceb27578317f4367e0ab2164345ece",
+      "signed_speed_um_s": 2.4275012097340167,
+      "net_displacement_um": 29.129655685595008,
+      "curvature_harmonic_rms_per_mm": 0.2646835486945503,
+      "curvature_per_muscle": 1.9227369002822234,
+      "central_length_min_mm": 0.9938912796757665,
+      "central_length_max_mm": 1.0
+    },
+    {
+      "name": "s0.5_f1",
+      "scale": 0.5,
+      "frequency_Hz": 1.0,
+      "dt_s": 0.001,
+      "trace_sha256": "78c497f86f2dc45878cd3186c14a5fb6cf35731ef7f5afeba2b5cf766c2f98fd",
+      "signed_speed_um_s": 1.1147816866510651,
+      "net_displacement_um": 13.377263695740712,
+      "curvature_harmonic_rms_per_mm": 0.11986877510060749,
+      "curvature_per_muscle": 0.980151434486262,
+      "central_length_min_mm": 0.994181041896887,
+      "central_length_max_mm": 1.0
+    },
+    {
+      "name": "s0.5_f2",
+      "scale": 0.5,
+      "frequency_Hz": 2.0,
+      "dt_s": 0.001,
+      "trace_sha256": "742079dc68da877b4bf434bb0a4d574a048370284233ea7385d8a85ae4787f22",
+      "signed_speed_um_s": 0.3376005704011962,
+      "net_displacement_um": 4.051592084629976,
+      "curvature_harmonic_rms_per_mm": 0.04466068990339197,
+      "curvature_per_muscle": 0.4957657766820115,
+      "central_length_min_mm": 0.9947018933447946,
+      "central_length_max_mm": 1.0
+    },
+    {
+      "name": "s2_f0.5",
+      "scale": 2.0,
+      "frequency_Hz": 0.5,
+      "dt_s": 0.001,
+      "trace_sha256": "48f7df009a789d017a58d02dbfaace2f9855233d2f9066d0ab52942039f82ae0",
+      "signed_speed_um_s": 2.331939350886879,
+      "net_displacement_um": 27.98329102200334,
+      "curvature_harmonic_rms_per_mm": 0.26530724002292316,
+      "curvature_per_muscle": 1.9272675722388415,
+      "central_length_min_mm": 0.9983670925745782,
+      "central_length_max_mm": 1.0
+    },
+    {
+      "name": "s2_f1",
+      "scale": 2.0,
+      "frequency_Hz": 1.0,
+      "dt_s": 0.001,
+      "trace_sha256": "1efabe6c44c960e374c520c6b39453d5d334f780b8504a48d76ac69557c6d584",
+      "signed_speed_um_s": 1.1300253536621678,
+      "net_displacement_um": 13.560382078718849,
+      "curvature_harmonic_rms_per_mm": 0.12633241198167242,
+      "curvature_per_muscle": 1.0330037553317595,
+      "central_length_min_mm": 0.998427433007066,
+      "central_length_max_mm": 1.0
+    },
+    {
+      "name": "s2_f2",
+      "scale": 2.0,
+      "frequency_Hz": 2.0,
+      "dt_s": 0.001,
+      "trace_sha256": "beb307c68d3997cdef2cd239bce4ef8fa72eb767281241c84fe9bac336a72137",
+      "signed_speed_um_s": 0.3515750242052037,
+      "net_displacement_um": 4.219147324588304,
+      "curvature_harmonic_rms_per_mm": 0.04731127524290541,
+      "curvature_per_muscle": 0.5251891801795475,
+      "central_length_min_mm": 0.9985627215027334,
+      "central_length_max_mm": 1.0
+    },
+    {
+      "name": "s0.5_f2_fine",
+      "scale": 0.5,
+      "frequency_Hz": 2.0,
+      "dt_s": 0.0005,
+      "trace_sha256": "068ba765650f3e429600683808b819acfcf9e978a30940ff03f54af2f0275236",
+      "signed_speed_um_s": 0.33669011205474797,
+      "net_displacement_um": 4.04041590656289,
+      "curvature_harmonic_rms_per_mm": 0.04459319972764753,
+      "curvature_per_muscle": 0.4957798737032457,
+      "central_length_min_mm": 0.994703658738477,
+      "central_length_max_mm": 1.0
+    },
+    {
+      "name": "s2_f2_fine",
+      "scale": 2.0,
+      "frequency_Hz": 2.0,
+      "dt_s": 0.0005,
+      "trace_sha256": "caffc386d785cf96386387bd20e826ce369fd28a2930dda8d6d419c3fb947dd2",
+      "signed_speed_um_s": 0.3506412598504161,
+      "net_displacement_um": 4.207656510505664,
+      "curvature_harmonic_rms_per_mm": 0.04724977397256671,
+      "curvature_per_muscle": 0.5253152300282763,
+      "central_length_min_mm": 0.9985632040780124,
+      "central_length_max_mm": 1.0
+    },
+    {
+      "name": "s1_f0.5",
+      "scale": 1.0,
+      "frequency_Hz": 0.5,
+      "dt_s": 0.001,
+      "trace_sha256": "994adeaf0192a9f513b45be2f9366a9fd3b70cbbb1829a041b4cce6b00be9234",
+      "signed_speed_um_s": 2.471610115925621,
+      "net_displacement_um": 29.659003060982517,
+      "curvature_harmonic_rms_per_mm": 0.27030094072659133,
+      "curvature_per_muscle": 1.9635432405199422,
+      "central_length_min_mm": 0.9967961684686031,
+      "central_length_max_mm": 1.0
+    },
+    {
+      "name": "s1_f1",
+      "scale": 1.0,
+      "frequency_Hz": 1.0,
+      "dt_s": 0.001,
+      "trace_sha256": "36a8a97f7536e19414747c21cac4f62b0b01e735a69eacbd86a4c314cb7c91ad",
+      "signed_speed_um_s": 1.152153620936643,
+      "net_displacement_um": 13.82576195003416,
+      "curvature_harmonic_rms_per_mm": 0.12436086700583983,
+      "curvature_per_muscle": 1.0168826876509178,
+      "central_length_min_mm": 0.9969347853383869,
+      "central_length_max_mm": 1.0
+    },
+    {
+      "name": "s1_f2",
+      "scale": 1.0,
+      "frequency_Hz": 2.0,
+      "dt_s": 0.001,
+      "trace_sha256": "ba01a144d56826c25e3496dd09302f8687db695b56e65eeaa0b5ddae3d91bbe5",
+      "signed_speed_um_s": 0.3506635213117139,
+      "net_displacement_um": 4.208104158653449,
+      "curvature_harmonic_rms_per_mm": 0.04623806674307285,
+      "curvature_per_muscle": 0.5132757940090213,
+      "central_length_min_mm": 0.9972039232044501,
+      "central_length_max_mm": 1.0
+    }
+  ],
+  "pointwise_comparisons": [
+    {
+      "scale": 0.5,
+      "frequency_Hz": 0.5,
+      "identical_arrays": {
+        "time_s": true,
+        "calcium_mM": true,
+        "activation": true,
+        "command": true,
+        "muscle": true,
+        "input_moments": true
+      },
+      "passed": true
+    },
+    {
+      "scale": 2.0,
+      "frequency_Hz": 0.5,
+      "identical_arrays": {
+        "time_s": true,
+        "calcium_mM": true,
+        "activation": true,
+        "command": true,
+        "muscle": true,
+        "input_moments": true
+      },
+      "passed": true
+    },
+    {
+      "scale": 0.5,
+      "frequency_Hz": 1.0,
+      "identical_arrays": {
+        "time_s": true,
+        "calcium_mM": true,
+        "activation": true,
+        "command": true,
+        "muscle": true,
+        "input_moments": true
+      },
+      "passed": true
+    },
+    {
+      "scale": 2.0,
+      "frequency_Hz": 1.0,
+      "identical_arrays": {
+        "time_s": true,
+        "calcium_mM": true,
+        "activation": true,
+        "command": true,
+        "muscle": true,
+        "input_moments": true
+      },
+      "passed": true
+    },
+    {
+      "scale": 0.5,
+      "frequency_Hz": 2.0,
+      "identical_arrays": {
+        "time_s": true,
+        "calcium_mM": true,
+        "activation": true,
+        "command": true,
+        "muscle": true,
+        "input_moments": true
+      },
+      "passed": true
+    },
+    {
+      "scale": 2.0,
+      "frequency_Hz": 2.0,
+      "identical_arrays": {
+        "time_s": true,
+        "calcium_mM": true,
+        "activation": true,
+        "command": true,
+        "muscle": true,
+        "input_moments": true
+      },
+      "passed": true
+    }
+  ],
+  "refinement": [
+    {
+      "coarse": "s0.5_f2",
+      "fine": "s0.5_f2_fine",
+      "speed_error_um_s": 0.0009104583464482063,
+      "speed_limit_um_s": 0.2,
+      "curvature_relative_error": 0.0015134634015193296,
+      "passed": true
+    },
+    {
+      "coarse": "s2_f2",
+      "fine": "s2_f2_fine",
+      "speed_error_um_s": 0.0009337643547875918,
+      "speed_limit_um_s": 0.2,
+      "curvature_relative_error": 0.001301620413558149,
+      "passed": true
+    }
+  ],
+  "parameter_audit": [
+    {
+      "parameters": {
+        "k_PE": 0.02,
+        "D_PE": 0.0005,
+        "k_AE": 0.4,
+        "D_AE": 0.05,
+        "k_DE": 7,
+        "D_DE": 0.07,
+        "T_muscle": 0.1,
+        "CL_agar": 3.2989690721649485e-05,
+        "CN_agar": 0.0013195876288659794,
+        "L_seg": 2.0833333333333333e-05,
+        "DELTAT": 0.001,
+        "PASSIVE_ELASTIC_SCALE": 0.5
+      },
+      "unchanged_expected": {
+        "k_PE": 0.02,
+        "D_PE": 0.0005,
+        "k_AE": 0.4,
+        "D_AE": 0.05,
+        "k_DE": 7.0,
+        "D_DE": 0.07,
+        "T_muscle": 0.1,
+        "CL_agar": 3.2989690721649485e-05,
+        "CN_agar": 0.0013195876288659794,
+        "L_seg": 2.0833333333333333e-05
+      },
+      "effective_longitudinal_passive_stiffness_N_m": 0.01,
+      "effective_diagonal_passive_stiffness_N_m": 3.5,
+      "source_reversal_exact": true,
+      "original_macro_note": "NBAR=NSEG+1 without parentheses; original 2.0*NBAR divisor evaluates to 97. Preserved unchanged."
+    },
+    {
+      "parameters": {
+        "k_PE": 0.02,
+        "D_PE": 0.0005,
+        "k_AE": 0.4,
+        "D_AE": 0.05,
+        "k_DE": 7,
+        "D_DE": 0.07,
+        "T_muscle": 0.1,
+        "CL_agar": 3.2989690721649485e-05,
+        "CN_agar": 0.0013195876288659794,
+        "L_seg": 2.0833333333333333e-05,
+        "DELTAT": 0.0005,
+        "PASSIVE_ELASTIC_SCALE": 0.5
+      },
+      "unchanged_expected": {
+        "k_PE": 0.02,
+        "D_PE": 0.0005,
+        "k_AE": 0.4,
+        "D_AE": 0.05,
+        "k_DE": 7.0,
+        "D_DE": 0.07,
+        "T_muscle": 0.1,
+        "CL_agar": 3.2989690721649485e-05,
+        "CN_agar": 0.0013195876288659794,
+        "L_seg": 2.0833333333333333e-05
+      },
+      "effective_longitudinal_passive_stiffness_N_m": 0.01,
+      "effective_diagonal_passive_stiffness_N_m": 3.5,
+      "source_reversal_exact": true,
+      "original_macro_note": "NBAR=NSEG+1 without parentheses; original 2.0*NBAR divisor evaluates to 97. Preserved unchanged."
+    },
+    {
+      "parameters": {
+        "k_PE": 0.02,
+        "D_PE": 0.0005,
+        "k_AE": 0.4,
+        "D_AE": 0.05,
+        "k_DE": 7,
+        "D_DE": 0.07,
+        "T_muscle": 0.1,
+        "CL_agar": 3.2989690721649485e-05,
+        "CN_agar": 0.0013195876288659794,
+        "L_seg": 2.0833333333333333e-05,
+        "DELTAT": 0.001,
+        "PASSIVE_ELASTIC_SCALE": 2
+      },
+      "unchanged_expected": {
+        "k_PE": 0.02,
+        "D_PE": 0.0005,
+        "k_AE": 0.4,
+        "D_AE": 0.05,
+        "k_DE": 7.0,
+        "D_DE": 0.07,
+        "T_muscle": 0.1,
+        "CL_agar": 3.2989690721649485e-05,
+        "CN_agar": 0.0013195876288659794,
+        "L_seg": 2.0833333333333333e-05
+      },
+      "effective_longitudinal_passive_stiffness_N_m": 0.04,
+      "effective_diagonal_passive_stiffness_N_m": 14.0,
+      "source_reversal_exact": true,
+      "original_macro_note": "NBAR=NSEG+1 without parentheses; original 2.0*NBAR divisor evaluates to 97. Preserved unchanged."
+    },
+    {
+      "parameters": {
+        "k_PE": 0.02,
+        "D_PE": 0.0005,
+        "k_AE": 0.4,
+        "D_AE": 0.05,
+        "k_DE": 7,
+        "D_DE": 0.07,
+        "T_muscle": 0.1,
+        "CL_agar": 3.2989690721649485e-05,
+        "CN_agar": 0.0013195876288659794,
+        "L_seg": 2.0833333333333333e-05,
+        "DELTAT": 0.0005,
+        "PASSIVE_ELASTIC_SCALE": 2
+      },
+      "unchanged_expected": {
+        "k_PE": 0.02,
+        "D_PE": 0.0005,
+        "k_AE": 0.4,
+        "D_AE": 0.05,
+        "k_DE": 7.0,
+        "D_DE": 0.07,
+        "T_muscle": 0.1,
+        "CL_agar": 3.2989690721649485e-05,
+        "CN_agar": 0.0013195876288659794,
+        "L_seg": 2.0833333333333333e-05
+      },
+      "effective_longitudinal_passive_stiffness_N_m": 0.04,
+      "effective_diagonal_passive_stiffness_N_m": 14.0,
+      "source_reversal_exact": true,
+      "original_macro_note": "NBAR=NSEG+1 without parentheses; original 2.0*NBAR divisor evaluates to 97. Preserved unchanged."
+    }
+  ],
+  "interpretation": "Model passive skeleton elasticity under prescribed calcium; no neuronal autonomy, animal softness calibration or thermotaxis claim."
+}

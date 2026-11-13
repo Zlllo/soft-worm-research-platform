@@ -1,0 +1,12 @@
+{
+  "estimator_protocol_keys_read": [
+    "minimum_conditional_normal_energy_m2",
+    "minimum_singular_value_m",
+    "rank_relative_tolerance"
+  ],
+  "true_field_parameters_read_by_estimator": false,
+  "source_estimator_unchanged_from_v1": true,
+  "v1_and_v2_window_csv_byte_identical": true,
+  "v1_and_v2_all_estimator_arrays_identical": true,
+  "actual_estimator_input_arrays": "estimator-inputs.npz"
+}

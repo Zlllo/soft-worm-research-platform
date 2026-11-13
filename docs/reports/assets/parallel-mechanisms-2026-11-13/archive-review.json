@@ -1,0 +1,54 @@
+{
+  "network-output-replay-2026-11-13": {
+    "archive_sha256": "98237018db63f865ed93ae84a70459a39e705803271382edce3e151a1dfa0bfa",
+    "archive_bytes": 39826044,
+    "root_crc_verified": true,
+    "root_sha_verified": true,
+    "branch_validation": {
+      "payload_files": 106,
+      "all_crc_passed": true,
+      "all_sha256_passed": true,
+      "archive_only_recompute_byte_identical": true,
+      "new_simulations_during_audit": 0,
+      "archive_sha256": "98237018db63f865ed93ae84a70459a39e705803271382edce3e151a1dfa0bfa",
+      "archive_bytes": 39826044,
+      "extracted_to": "/var/folders/0g/wkglj6h97wjfjd3jyv54n7_00000gn/T/worm-network-replay-f44v37rl"
+    }
+  },
+  "passive-body-stiffness-2026-11-13": {
+    "archive_sha256": "a3947481f517a9d0191eb34d6887852bdafc5b18a742050a21dedbe490d48ea6",
+    "archive_bytes": 60991843,
+    "root_crc_verified": true,
+    "root_sha_verified": true,
+    "branch_validation": {
+      "payload_files": 192,
+      "archive_bytes": 60991843,
+      "archive_sha256": "a3947481f517a9d0191eb34d6887852bdafc5b18a742050a21dedbe490d48ea6",
+      "crc_passed": true,
+      "all_payload_sha256_passed": true,
+      "independent_archive_summary_byte_identical": true,
+      "source_locks_verified_without_original_tree": true,
+      "new_simulations_in_archive_check": 0,
+      "extracted_to": "/var/folders/0g/wkglj6h97wjfjd3jyv54n7_00000gn/T/worm-passive-elasticity-1pxqszfc"
+    }
+  },
+  "physical-thermal-readout-2026-11-13": {
+    "archive_sha256": "fa3d87bac056cf9c0895e010cab3c7fbaf88694ee41eb2f39e8bdf9f97ef9d13",
+    "archive_bytes": 17696917,
+    "root_crc_verified": true,
+    "root_sha_verified": true,
+    "branch_validation": {
+      "payload_files": 31,
+      "crc_passed": true,
+      "all_payload_sha256_passed": true,
+      "independent_summary_csv_geometry_controls_byte_identical": true,
+      "all_saved_estimator_inputs_and_outputs_array_identical": true,
+      "archive_sha256": "fa3d87bac056cf9c0895e010cab3c7fbaf88694ee41eb2f39e8bdf9f97ef9d13",
+      "archive_bytes": 17696917,
+      "original_worktree_reads": false,
+      "new_simulations": 0,
+      "new_training": 0,
+      "extracted_to": "/var/folders/0g/wkglj6h97wjfjd3jyv54n7_00000gn/T/worm-physical-thermal-002h8x0b"
+    }
+  }
+}

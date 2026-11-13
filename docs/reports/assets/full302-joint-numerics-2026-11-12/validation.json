@@ -1,0 +1,17 @@
+{
+  "independent_candidate_audit_passed": true,
+  "incomplete_or_rhythm_failures_retained": false,
+  "runs_checked": 6,
+  "pair_gate_values_checked": 96,
+  "migration_ratio_values_checked": 96,
+  "historical_same_parameter_model_changes_checked": 6,
+  "sampled_feedback_values_reconstructed": 86508,
+  "frozen_independent_script_sha256": "94996659923de81975550aa071df3a5f955ab3df318845531e27947060d0af26",
+  "summary_sha256": "0f7324e67c6097a2cc448c93fb06c7b9de3f20492a56f6b61a4bb8922b219b3f",
+  "candidate_convergence_accepted": false,
+  "acceptance_unchanged": true,
+  "scientific_conditions": 6,
+  "retries": 0,
+  "analyzer_imported": false,
+  "NEURON_imported": false
+}

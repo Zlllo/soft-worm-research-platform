@@ -1,0 +1,11 @@
+{
+  "payload_files": 192,
+  "archive_bytes": 60991843,
+  "archive_sha256": "a3947481f517a9d0191eb34d6887852bdafc5b18a742050a21dedbe490d48ea6",
+  "crc_passed": true,
+  "all_payload_sha256_passed": true,
+  "independent_archive_summary_byte_identical": true,
+  "source_locks_verified_without_original_tree": true,
+  "new_simulations_in_archive_check": 0,
+  "extracted_to": "/var/folders/0g/wkglj6h97wjfjd3jyv54n7_00000gn/T/worm-passive-elasticity-1pxqszfc"
+}

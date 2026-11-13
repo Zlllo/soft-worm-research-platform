@@ -1,0 +1,14 @@
+{
+  "checks": {
+    "noiseless_plane_recovered": true,
+    "unknown_background_and_translation_invariant": true,
+    "world_rotation_invariant": true,
+    "rank_one_reported_unavailable": true,
+    "tiny_motion_reported_unavailable": true,
+    "conditional_energy_matches_inverse_covariance": true
+  },
+  "noiseless_relative_error": 3.095524839690664e-11,
+  "translation_relative_error": 6.804296874734371e-15,
+  "rotation_relative_error": 6.162549843200614e-16,
+  "covariance_relative_error": 3.386711887249583e-16
+}

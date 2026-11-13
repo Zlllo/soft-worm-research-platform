@@ -1,0 +1,10 @@
+{
+  "payload_files": 106,
+  "all_crc_passed": true,
+  "all_sha256_passed": true,
+  "archive_only_recompute_byte_identical": true,
+  "new_simulations_during_audit": 0,
+  "archive_sha256": "98237018db63f865ed93ae84a70459a39e705803271382edce3e151a1dfa0bfa",
+  "archive_bytes": 39826044,
+  "extracted_to": "/var/folders/0g/wkglj6h97wjfjd3jyv54n7_00000gn/T/worm-network-replay-f44v37rl"
+}

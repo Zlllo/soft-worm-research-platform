@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "heavy_drag_f0.5_calcium_command_equal": true,
+    "heavy_drag_f0.5_actual_muscle_equal": true,
+    "fast_muscle_f0.5_calcium_command_equal": true,
+    "heavy_drag_f2_calcium_command_equal": true,
+    "heavy_drag_f2_actual_muscle_equal": true,
+    "fast_muscle_f2_calcium_command_equal": true,
+    "analysis_source_matches_pre_analysis_lock": true
+  },
+  "scope": "Supplemental pointwise intervention audit; no new runs or changed criteria"
+}

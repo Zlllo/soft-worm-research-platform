@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-13",
+  "stage": "complete",
+  "branches": {
+    "network_output_replay": {
+      "state": "complete",
+      "new_body_run_limit": 10
+    },
+    "passive_body_stiffness": {
+      "state": "complete",
+      "new_body_run_limit": 8
+    },
+    "physical_thermal_readout": {
+      "state": "complete",
+      "new_body_run_limit": 0,
+      "conditions_limit": 12,
+      "noise_seeds": 4
+    }
+  },
+  "new_full302_runs_allowed": 0,
+  "new_training_allowed": false,
+  "running_tasks": 0,
+  "actual_new_body_runs": 18,
+  "independent_audit_passed": true,
+  "all_three_archive_reviews_passed": true
+}

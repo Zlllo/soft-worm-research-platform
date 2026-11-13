@@ -1,0 +1,23 @@
+{
+  "attempts": [
+    {
+      "action": "Historical independent saved-data recomputation",
+      "executable": "/tmp/worm-progress-env/bin/python",
+      "result": "ModuleNotFoundError: No module named 'scipy'",
+      "scientific_runs_started": 0,
+      "resolution": "Use the prepared /tmp/worm-joint-env-2026-11-12/bin/python for NumPy/SciPy only; do not import NEURON."
+    },
+    {
+      "action": "Read-only environment discovery",
+      "result": "The system python3 also lacks scipy; a zsh wildcard without matches returned an error.",
+      "resolution": "Used find/rg and located the prepared joint NumPy/SciPy environment.",
+      "scientific_runs_started": 0
+    },
+    {
+      "action": "Read-only process status inspection",
+      "result": "zsh: operation not permitted: ps",
+      "resolution": "Read the bounded batch and per-condition log files instead; no permission escalation.",
+      "scientific_runs_started": 0
+    }
+  ]
+}

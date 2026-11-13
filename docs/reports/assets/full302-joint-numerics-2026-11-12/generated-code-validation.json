@@ -1,0 +1,79 @@
+{
+  "protocol_sha256": "345861d67ed40bbadad7df6de870cc5b2095aa8557725d20ebddc25f6c450490",
+  "passed": true,
+  "mechanism_checks": {
+    "BMotorPoint": {
+      "matches": "frozen 11-09 parent",
+      "passed": true
+    },
+    "CaPool": {
+      "matches": "verified 11-10 exp_direct",
+      "passed": true
+    },
+    "Leak": {
+      "matches": "frozen 11-09 parent",
+      "passed": true
+    },
+    "ca_boyle": {
+      "matches": "verified 11-10 exp_direct",
+      "passed": true
+    },
+    "k_fast": {
+      "matches": "verified 11-10 exp_direct",
+      "passed": true
+    },
+    "k_slow": {
+      "matches": "verified 11-10 exp_direct",
+      "passed": true
+    },
+    "neuron_to_neuron_elec_syn": {
+      "matches": "frozen 11-09 parent",
+      "passed": true
+    },
+    "neuron_to_neuron_exc_syn": {
+      "matches": "frozen 11-09 parent",
+      "passed": true
+    },
+    "neuron_to_neuron_inh_syn": {
+      "matches": "frozen 11-09 parent",
+      "passed": true
+    }
+  },
+  "candidate_functions": {
+    "CaPool": {
+      "states": "static int states () {_reset=0;\n {\n   rates ( _threadargs_ ) ;\n    concentration = concentration + (1. - exp(dt*(( - ( ( 1.0 ) ) / decayConstant ))))*(- ( ( ( ( iCa ) / surfaceArea ) )*( rho ) - ( ( ( - restingConc ) ) ) / decayConstant ) / ( ( - ( ( 1.0 ) ) / decayConstant ) ) - concentration) ;\n   cai = concentration ;\n   }\n  return 0;\n}",
+      "current": "static double _nrn_current(double _v){double _current=0.;v=_v;{\n} return _current;\n}"
+    },
+    "ca_boyle": {
+      "states": "static int states (_internalthreadargsproto_) { {\n   rates ( _threadargs_ ) ;\n    e_q = e_q + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / e_tau)))*(- ( ( ( e_inf ) ) / e_tau ) / ( ( ( ( - 1.0 ) ) ) / e_tau ) - e_q) ;\n    f_q = f_q + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / f_tau)))*(- ( ( ( f_inf ) ) / f_tau ) / ( ( ( ( - 1.0 ) ) ) / f_tau ) - f_q) ;\n   }\n  return 0;\n}",
+      "current": "static double _nrn_current(_internalthreadargsprotocomma_ double _v) {\ndouble _current=0.; v=_v;\n{ {\n   conductanceScale = 1.0 ;\n   fopen0 = ( pow( e_q , e_instances ) ) * ( pow( f_q , f_instances ) ) * h_fcond ;\n   fopen = conductanceScale * fopen0 ;\n   g = conductance * fopen ;\n   gion = gmax * fopen ;\n   ica = gion * ( v - eca ) ;\n   i__ca_boyle = - 1.0 * ica ;\n   }\n _current += ica;\n\n} return _current;\n}"
+    },
+    "k_fast": {
+      "states": "static int states (_internalthreadargsproto_) { {\n   rates ( _threadargs_ ) ;\n    p_q = p_q + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / p_tau)))*(- ( ( ( p_inf ) ) / p_tau ) / ( ( ( ( - 1.0 ) ) ) / p_tau ) - p_q) ;\n    q_q = q_q + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / q_tau)))*(- ( ( ( q_inf ) ) / q_tau ) / ( ( ( ( - 1.0 ) ) ) / q_tau ) - q_q) ;\n   }\n  return 0;\n}",
+      "current": "static double _nrn_current(_internalthreadargsprotocomma_ double _v) {\ndouble _current=0.; v=_v;\n{ {\n   conductanceScale = 1.0 ;\n   fopen0 = ( pow( p_q , p_instances ) ) * ( pow( q_q , q_instances ) ) ;\n   fopen = conductanceScale * fopen0 ;\n   g = conductance * fopen ;\n   gion = gmax * fopen ;\n   ik = gion * ( v - ek ) ;\n   i__k_fast = - 1.0 * ik ;\n   }\n _current += ik;\n\n} return _current;\n}"
+    },
+    "k_slow": {
+      "states": "static int states (_internalthreadargsproto_) { {\n   rates ( _threadargs_ ) ;\n    n_q = n_q + (1. - exp(dt*(( ( ( - 1.0 ) ) ) / n_tau)))*(- ( ( ( n_inf ) ) / n_tau ) / ( ( ( ( - 1.0 ) ) ) / n_tau ) - n_q) ;\n   }\n  return 0;\n}",
+      "current": "static double _nrn_current(_internalthreadargsprotocomma_ double _v) {\ndouble _current=0.; v=_v;\n{ {\n   conductanceScale = 1.0 ;\n   fopen0 = pow( n_q , n_instances ) ;\n   fopen = conductanceScale * fopen0 ;\n   g = conductance * fopen ;\n   gion = gmax * fopen ;\n   ik = gion * ( v - ek ) ;\n   i__k_slow = - 1.0 * ik ;\n   }\n _current += ik;\n\n} return _current;\n}"
+    }
+  },
+  "binary_sha256": "85916aad582ce2b1c7c70511b857b8dc7a214e9791bd8138ba53f4d99e30a565",
+  "generated_sha256": {
+    "neuron_to_neuron_inh_syn.cpp": "a6fe34ead4d38b6260b0c83bc656c785fefee7d16c1e0c7a8adb61f715134b18",
+    "neuron_to_neuron_elec_syn.cpp": "2d08a858ec776c85f1dc482e5c4b9183a5bf9da0649f6b863f74524bd97a5d59",
+    "k_slow.cpp": "167bbd6506c7e4a5cbfaf0839532ba0ab5fc48397710c609288e3ff85c63c9c0",
+    "CaPool.cpp": "c825957916d60355e1e1da8ff7ae05b2082171bc4fdad69fe5fef1b088e5fdf1",
+    "ca_boyle.cpp": "40bf794f1cba691b48800f0367ce967c6c0fbb683544c38c5e5bc6ae9bbe7987",
+    "neuron_to_neuron_exc_syn.cpp": "b2cbefcb7032b8862d2265ab7917bf38512e21684117c3321430e95a073b9329",
+    "BMotorPoint.cpp": "ee64a1f0f46271a99a462fa70bf6d0441d87c931e9cc9b45957fdc47807446a2",
+    "mod_func.cpp": "de149baa73b1261bca47d2194f29643168bcf03fd84f61666255706b83d43880",
+    "k_fast.cpp": "41617f707570f61d926a1af92ac29aaa89ee119adb9aaf296c052921dbf8eb43",
+    "Leak.cpp": "416c59a0ff5df55effd12f20dc97565da50a96ace86f45f11c5eaf573b9e6711"
+  },
+  "untouched_templates": {
+    "GenericNeuronCell.hoc": "9ae66653c0cb723c8918f9651b991ec27be446da53f40da480151e14ed5be05f",
+    "GenericMuscleCell.hoc": "261f0078d3d403cfdacc111368eb58a1210503decc531f32a5d78080d970adb2"
+  },
+  "build_script_sha256": "baf5e1b3bb500e6bd1fdb063a03783ca0f68e866482e5e164ac1981a9817468c",
+  "scientific_runs": 0
+}

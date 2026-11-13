@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "review_compare_script_sha256": "b36ad6dc7b31807bab9251f85f28d428def6368b8dd4408937f634a44aa2e3bb",
+  "numeric_scalars_compared": 192,
+  "max_abs_numeric_difference": 3.167049955621337e-13,
+  "mismatches": [],
+  "all_pair_and_gate_decisions_identical": true,
+  "A_functions_imported": false,
+  "candidate_final_status_pending": false,
+  "independent_sha256": "e8605fcb206bb26476c03a11c5f67337e427d22a2b377ac5548179226f1ba13f",
+  "published_sha256": "69f3972f85f41171ba0ff0809318b489ec3cff015114741c41f8d12f5e4b3610",
+  "purpose": "Historical formula cross-check; not a new candidate baseline"
+}

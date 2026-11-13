@@ -1,0 +1,12 @@
+{
+  "payload_files": 227,
+  "crc_passed": true,
+  "all_payload_sha256_passed": true,
+  "independent_archive_summary_byte_identical": true,
+  "archive_sha256": "1659cc17c22517818f0ddf35aabad6e8316c97ec2d6926fa9d52e34203a66d8b",
+  "archive_bytes": 128670471,
+  "source_and_protocol_rechecked_after_extraction": true,
+  "absolute_lock_path_relocation": "/Users/zzz/Desktop/\u8f6f\u4f53\u7ebf\u866b -> extracted archive root; original hash bytes retained",
+  "new_simulations_in_archive_check": 0,
+  "extracted_to": "/var/folders/0g/wkglj6h97wjfjd3jyv54n7_00000gn/T/worm-calcium-transfer-ujogqu6i"
+}
