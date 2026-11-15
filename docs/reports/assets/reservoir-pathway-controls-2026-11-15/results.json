@@ -1,0 +1,281 @@
+{
+  "protocol": {
+    "status": "post-hoc follow-up to initial controls, whose sample included AFD self and AFD-to-AFD connections",
+    "change": "control destinations exclude both AFDs and intended AIY target; use seed 91824 and four distinct sampled pairs",
+    "all_other_rules": "same as reservoir-pathway-intervention-2026-11-15; same examined task/data so exploratory",
+    "interpretation": "matching origin, edge count and assumed absolute strength does not match graph position, so no unique biological pathway inference"
+  },
+  "rows": [
+    {
+      "seed": 7,
+      "condition": "target",
+      "edges": [
+        [
+          "AFDL",
+          "AIYL"
+        ],
+        [
+          "AFDR",
+          "AIYR"
+        ]
+      ],
+      "baseline": 0.11769456774972753,
+      "frozen": 0.0921416564290497,
+      "refit": 0.11334549327038146,
+      "ria_rms_change": 3.979791010902547e-05
+    },
+    {
+      "seed": 7,
+      "condition": "control-1",
+      "edges": [
+        [
+          "AFDL",
+          "AIBL"
+        ],
+        [
+          "AFDR",
+          "ASEL"
+        ]
+      ],
+      "baseline": 0.11769456774972753,
+      "frozen": 0.10206655833706468,
+      "refit": 0.11171789359134765,
+      "ria_rms_change": 2.8038338870997515e-05
+    },
+    {
+      "seed": 7,
+      "condition": "control-2",
+      "edges": [
+        [
+          "AFDL",
+          "ASER"
+        ],
+        [
+          "AFDR",
+          "ASER"
+        ]
+      ],
+      "baseline": 0.11769456774972753,
+      "frozen": 0.116338173565255,
+      "refit": 0.11629078629549705,
+      "ria_rms_change": 1.772087965795808e-06
+    },
+    {
+      "seed": 7,
+      "condition": "control-3",
+      "edges": [
+        [
+          "AFDL",
+          "AINR"
+        ],
+        [
+          "AFDR",
+          "ASEL"
+        ]
+      ],
+      "baseline": 0.11769456774972753,
+      "frozen": 0.10557938896324004,
+      "refit": 0.11597319316557775,
+      "ria_rms_change": 2.8848053945725364e-05
+    },
+    {
+      "seed": 7,
+      "condition": "control-4",
+      "edges": [
+        [
+          "AFDL",
+          "AWBL"
+        ],
+        [
+          "AFDR",
+          "ASEL"
+        ]
+      ],
+      "baseline": 0.11769456774972753,
+      "frozen": 0.05415271459128579,
+      "refit": 0.04962568499758013,
+      "ria_rms_change": 3.9261725209871e-05
+    },
+    {
+      "seed": 17,
+      "condition": "target",
+      "edges": [
+        [
+          "AFDL",
+          "AIYL"
+        ],
+        [
+          "AFDR",
+          "AIYR"
+        ]
+      ],
+      "baseline": 0.13980476210810522,
+      "frozen": 0.10353661669019809,
+      "refit": 0.11794150808131221,
+      "ria_rms_change": 4.1016343232589074e-05
+    },
+    {
+      "seed": 17,
+      "condition": "control-1",
+      "edges": [
+        [
+          "AFDL",
+          "AIBL"
+        ],
+        [
+          "AFDR",
+          "ASEL"
+        ]
+      ],
+      "baseline": 0.13980476210810522,
+      "frozen": 0.10177123382880993,
+      "refit": 0.10154524202214399,
+      "ria_rms_change": 2.8658660313963758e-05
+    },
+    {
+      "seed": 17,
+      "condition": "control-2",
+      "edges": [
+        [
+          "AFDL",
+          "ASER"
+        ],
+        [
+          "AFDR",
+          "ASER"
+        ]
+      ],
+      "baseline": 0.13980476210810522,
+      "frozen": 0.1418345225414921,
+      "refit": 0.14121097635303892,
+      "ria_rms_change": 2.7688197383927034e-06
+    },
+    {
+      "seed": 17,
+      "condition": "control-3",
+      "edges": [
+        [
+          "AFDL",
+          "AINR"
+        ],
+        [
+          "AFDR",
+          "ASEL"
+        ]
+      ],
+      "baseline": 0.13980476210810522,
+      "frozen": 0.10046273921953541,
+      "refit": 0.09994129456818512,
+      "ria_rms_change": 2.95299400910529e-05
+    },
+    {
+      "seed": 17,
+      "condition": "control-4",
+      "edges": [
+        [
+          "AFDL",
+          "AWBL"
+        ],
+        [
+          "AFDR",
+          "ASEL"
+        ]
+      ],
+      "baseline": 0.13980476210810522,
+      "frozen": 0.100735447258955,
+      "refit": 0.11184389238454273,
+      "ria_rms_change": 3.8852914486108495e-05
+    },
+    {
+      "seed": 27,
+      "condition": "target",
+      "edges": [
+        [
+          "AFDL",
+          "AIYL"
+        ],
+        [
+          "AFDR",
+          "AIYR"
+        ]
+      ],
+      "baseline": 0.040203122081283515,
+      "frozen": -0.00441115492111277,
+      "refit": 0.04643635441699068,
+      "ria_rms_change": 3.81778609514952e-05
+    },
+    {
+      "seed": 27,
+      "condition": "control-1",
+      "edges": [
+        [
+          "AFDL",
+          "AIBL"
+        ],
+        [
+          "AFDR",
+          "ASEL"
+        ]
+      ],
+      "baseline": 0.040203122081283515,
+      "frozen": 0.07776463435356351,
+      "refit": 0.10487517161411497,
+      "ria_rms_change": 2.6753023661901512e-05
+    },
+    {
+      "seed": 27,
+      "condition": "control-2",
+      "edges": [
+        [
+          "AFDL",
+          "ASER"
+        ],
+        [
+          "AFDR",
+          "ASER"
+        ]
+      ],
+      "baseline": 0.040203122081283515,
+      "frozen": 0.04020349151622282,
+      "refit": 0.04020376208396703,
+      "ria_rms_change": 1.0634755488553183e-09
+    },
+    {
+      "seed": 27,
+      "condition": "control-3",
+      "edges": [
+        [
+          "AFDL",
+          "AINR"
+        ],
+        [
+          "AFDR",
+          "ASEL"
+        ]
+      ],
+      "baseline": 0.040203122081283515,
+      "frozen": 0.0801286116690001,
+      "refit": 0.108140998044013,
+      "ria_rms_change": 2.868123228720639e-05
+    },
+    {
+      "seed": 27,
+      "condition": "control-4",
+      "edges": [
+        [
+          "AFDL",
+          "AWBL"
+        ],
+        [
+          "AFDR",
+          "ASEL"
+        ]
+      ],
+      "baseline": 0.040203122081283515,
+      "frozen": 0.07999573058237641,
+      "refit": 0.12085866096090958,
+      "ria_rms_change": 4.182600603766531e-05
+    }
+  ],
+  "source_sha256": "46ac5f6dbbbf53c04cf24e911e2331b777d1ad03b59cfd463cdb97ce226e7729"
+}
