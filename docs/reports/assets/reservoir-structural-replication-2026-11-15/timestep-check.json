@@ -1,0 +1,22 @@
+[
+  {
+    "graph": "real",
+    "readout": "all",
+    "relative_rms": 0.0004750201783928686
+  },
+  {
+    "graph": "real",
+    "readout": "ria",
+    "relative_rms": 0.0006101361501963256
+  },
+  {
+    "graph": "201",
+    "readout": "all",
+    "relative_rms": 0.0004731891428211649
+  },
+  {
+    "graph": "201",
+    "readout": "ria",
+    "relative_rms": 0.0007806920325184665
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "purpose": "Exploratory 302-node fixed-network feasibility and timing pilot; not a biological validation or navigation experiment",
+  "graphs": "real and five directed degree-preserving chemical rewirings, seeds 101-105; preserve gap graph",
+  "weights": "unit chemical edges with source-specific random +/- signs, seeds 7/17/27; normalized by maximum in-degree; gap diffusion weight 0.05 normalized by maximum degree; engineering assumptions",
+  "inputs": "same 96 independent synthetic zero-mean piecewise constant temperature histories; AFDL/AFDR only, common amplitude; 64 train, 16 validation, 16 test histories; 0.1 s samples",
+  "task": "predict signed input difference between current time and 0.5 seconds earlier, target is a toy temperature trend rather than a navigation action",
+  "state": "zero initialization, dx/dt=(-x+tanh(input+chemical+gap diffusion))/0.3 seconds; explicit Euler, dt=0.1 seconds; compare 0.05 seconds with piecewise constant inputs",
+  "readout": "linear ridge regression with intercept, unpenalized intercept; choose regularization from 1e-4, 1e-2, 1, 100 using validation sequences; compare RIAL/RIAR and all 302 nodes",
+  "baselines": "zero prediction and best linear predictor from current input only, fit on the same training data",
+  "evaluation": "sequence-disjoint holdout; mean squared error and coefficient of determination relative to zero; report per graph/weight seed; no selection of best graph",
+  "limits": "chemical signs and strengths are not measured; no neuron-specific physiological calibration; no training of internal weights; gap layout not rewired; no biological proof; no closed-loop navigation or GRU comparison; no claim of training-cost advantage without benchmark"
+}

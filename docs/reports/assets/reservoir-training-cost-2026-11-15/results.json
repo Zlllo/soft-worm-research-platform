@@ -1,0 +1,73 @@
+{
+  "protocol": {
+    "status": "exploratory matched-update computational comparison, not conclusive efficiency or fairness benchmark",
+    "data": "same 112 heldout-split sequences as generalization stage; 64/16/32",
+    "models": "real graph uniform weights, three random sign seeds 7/17/27; same two RIA outputs and initial linear readout",
+    "training": "same 32 preselected minibatch updates, batch 8 whole sequences, Adam lr .003, paired seed-specific batches; either actor only with cached states or chemical weights plus actor with full gradients through time, gap remains fixed; chemical mask fixed; Heun .05 s",
+    "validation": "one terminal heldout score, no checkpoint selection; compare training elapsed and simulation/cache costs separately; no equal-quality efficiency claim",
+    "limitations": "small budget, one learning rate, one machine and artificial task, repeated test data, uncalibrated signs and weights, no biological or RL conclusion; .05s has nonzero integration error"
+  },
+  "rows": [
+    {
+      "seed": 7,
+      "mode": "fixed",
+      "training_seconds": 0.010524484001507517,
+      "cache_seconds": 0.31426193500010413,
+      "heldout_mse": 0.1869826465845108,
+      "r2_vs_zero": -5.435340921389198e-05,
+      "last_batch_loss": 0.19576142728328705,
+      "internal_max_change": 0.0
+    },
+    {
+      "seed": 7,
+      "mode": "trainable",
+      "training_seconds": 4.659796615000232,
+      "cache_seconds": 0.31426193500010413,
+      "heldout_mse": 0.18580149114131927,
+      "r2_vs_zero": 0.006262915410076175,
+      "last_batch_loss": 0.1944035291671753,
+      "internal_max_change": 0.09925661236047745
+    },
+    {
+      "seed": 17,
+      "mode": "fixed",
+      "training_seconds": 0.013226949002273614,
+      "cache_seconds": 0.32622802200057777,
+      "heldout_mse": 0.1869761347770691,
+      "r2_vs_zero": -1.9525784834995008e-05,
+      "last_batch_loss": 0.19177916646003723,
+      "internal_max_change": 0.0
+    },
+    {
+      "seed": 17,
+      "mode": "trainable",
+      "training_seconds": 4.564711744998931,
+      "cache_seconds": 0.32622802200057777,
+      "heldout_mse": 0.1857735514640808,
+      "r2_vs_zero": 0.006412347436874133,
+      "last_batch_loss": 0.19074586033821106,
+      "internal_max_change": 0.09935168921947479
+    },
+    {
+      "seed": 27,
+      "mode": "fixed",
+      "training_seconds": 0.012024878000374883,
+      "cache_seconds": 0.3235359589998552,
+      "heldout_mse": 0.18702875077724457,
+      "r2_vs_zero": -0.00030093617770088343,
+      "last_batch_loss": 0.20964449644088745,
+      "internal_max_change": 0.0
+    },
+    {
+      "seed": 27,
+      "mode": "trainable",
+      "training_seconds": 4.38016008699924,
+      "cache_seconds": 0.3235359589998552,
+      "heldout_mse": 0.18586446344852448,
+      "r2_vs_zero": 0.005926115545943689,
+      "last_batch_loss": 0.20829635858535767,
+      "internal_max_change": 0.09913574904203415
+    }
+  ],
+  "source_sha256": "2cd10a802699a21857d41c9313482d73811ea1c2f480696f0ea23e8e8afbf990"
+}

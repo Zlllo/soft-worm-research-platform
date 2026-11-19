@@ -1,0 +1,737 @@
+{
+  "protocol": {
+    "purpose": "Exploratory 302-node fixed-network feasibility and timing pilot; not a biological validation or navigation experiment",
+    "graphs": "real and five directed degree-preserving chemical rewirings, seeds 101-105; preserve gap graph",
+    "weights": "unit chemical edges with source-specific random +/- signs, seeds 7/17/27; normalized by maximum in-degree; gap diffusion weight 0.05 normalized by maximum degree; engineering assumptions",
+    "inputs": "same 96 independent synthetic zero-mean piecewise constant temperature histories; AFDL/AFDR only, common amplitude; 64 train, 16 validation, 16 test histories; 0.1 s samples",
+    "task": "predict signed input difference between current time and 0.5 seconds earlier, target is a toy temperature trend rather than a navigation action",
+    "state": "zero initialization, dx/dt=(-x+tanh(input+chemical+gap diffusion))/0.3 seconds; explicit Euler, dt=0.1 seconds; compare 0.05 seconds with piecewise constant inputs",
+    "readout": "linear ridge regression with intercept, unpenalized intercept; choose regularization from 1e-4, 1e-2, 1, 100 using validation sequences; compare RIAL/RIAR and all 302 nodes",
+    "baselines": "zero prediction and best linear predictor from current input only, fit on the same training data",
+    "evaluation": "sequence-disjoint holdout; mean squared error and coefficient of determination relative to zero; report per graph/weight seed; no selection of best graph",
+    "limits": "chemical signs and strengths are not measured; no neuron-specific physiological calibration; no training of internal weights; gap layout not rewired; no biological proof; no closed-loop navigation or GRU comparison; no claim of training-cost advantage without benchmark"
+  },
+  "connectome_sha256": "6e2bd37286570c7af6f87f82a453c8113d3b30429e134cb934218ca7342097da",
+  "script_sha256": "ca7f78e23baae730b439d27b2df7830e4266fa70eb1a5f44a1514fa75bbb612e",
+  "current_input_baseline": {
+    "mse": 0.119141889429052,
+    "zero_mse": 0.23084144205284798,
+    "r2_vs_zero": 0.48387998112671593,
+    "penalty": 1.0,
+    "fit_seconds": 0.0072036030014714925
+  },
+  "runs": [
+    {
+      "graph": "real",
+      "seed": 7,
+      "rewiring": {},
+      "simulation_seconds": 0.049714229000528576,
+      "state_max": 0.7230555822856786,
+      "dt_rms_difference": 0.0010443433312189738,
+      "fine_state_rms": 0.018691072911254818,
+      "ria": {
+        "mse": 0.20498417744043998,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.1120130960128396,
+        "penalty": 0.0001,
+        "fit_seconds": 0.00048288600009982474
+      },
+      "all_nodes": {
+        "mse": 0.02200036111324431,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9046949242839697,
+        "penalty": 0.0001,
+        "fit_seconds": 0.15768357799970545
+      },
+      "ria_fine": {
+        "mse": 0.21022387189701866,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.08931485600020295,
+        "penalty": 0.0001,
+        "fit_seconds": 0.00028552900039358065
+      },
+      "all_nodes_fine": {
+        "mse": 0.025713332457721203,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.8886104148845402,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07604127699960372
+      }
+    },
+    {
+      "graph": "real",
+      "seed": 17,
+      "rewiring": {},
+      "simulation_seconds": 0.05179743100052292,
+      "state_max": 0.7231661280147126,
+      "dt_rms_difference": 0.0010440317645734588,
+      "fine_state_rms": 0.018693323807451163,
+      "ria": {
+        "mse": 0.19705058618582622,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.14638123712329698,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0003910979994543595
+      },
+      "all_nodes": {
+        "mse": 0.021072577421545807,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.908714062630394,
+        "penalty": 0.0001,
+        "fit_seconds": 0.16428900099890598
+      },
+      "ria_fine": {
+        "mse": 0.20348601277409312,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.11850311207331743,
+        "penalty": 0.0001,
+        "fit_seconds": 0.00029892000020481646
+      },
+      "all_nodes_fine": {
+        "mse": 0.022991484111273528,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9004014014692824,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07909604199994646
+      }
+    },
+    {
+      "graph": "real",
+      "seed": 27,
+      "rewiring": {},
+      "simulation_seconds": 0.0480048480003461,
+      "state_max": 0.7235126690701245,
+      "dt_rms_difference": 0.0010400066906860468,
+      "fine_state_rms": 0.018841791016660055,
+      "ria": {
+        "mse": 0.22362396659600892,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.03126594337938127,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0004862709993176395
+      },
+      "all_nodes": {
+        "mse": 0.024023400491311193,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.8959311626297527,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07777171999987331
+      },
+      "ria_fine": {
+        "mse": 0.22531801810670224,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.02392734985982814,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0002958650002256036
+      },
+      "all_nodes_fine": {
+        "mse": 0.029782180762720985,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.8709842543961289,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07750694100104738
+      }
+    },
+    {
+      "graph": "rewired-101",
+      "seed": 7,
+      "rewiring": {
+        "accepted_swaps": 60465,
+        "changed_entries": 6610
+      },
+      "simulation_seconds": 0.04810065200035751,
+      "state_max": 0.7230569990270813,
+      "dt_rms_difference": 0.0010424142394745148,
+      "fine_state_rms": 0.01876600137197032,
+      "ria": {
+        "mse": 0.21056611340075818,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.08783227340716426,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0003939929993066471
+      },
+      "all_nodes": {
+        "mse": 0.021034066650008922,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9088808904373702,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07704314399961731
+      },
+      "ria_fine": {
+        "mse": 0.21433514880260607,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.07150489575638252,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0002978770007757703
+      },
+      "all_nodes_fine": {
+        "mse": 0.0226663783652617,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9018097523404288,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07905029299945454
+      }
+    },
+    {
+      "graph": "rewired-101",
+      "seed": 17,
+      "rewiring": {
+        "accepted_swaps": 60465,
+        "changed_entries": 6610
+      },
+      "simulation_seconds": 0.04889710899988131,
+      "state_max": 0.7230563570449866,
+      "dt_rms_difference": 0.0010424160782145414,
+      "fine_state_rms": 0.018765941905115505,
+      "ria": {
+        "mse": 0.2100218403302387,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.09019005226038623,
+        "penalty": 0.0001,
+        "fit_seconds": 0.00041053700078919064
+      },
+      "all_nodes": {
+        "mse": 0.021675345320091268,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9061028854813297,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07887608999953954
+      },
+      "ria_fine": {
+        "mse": 0.21387672973168298,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.07349075699016461,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0002873330013244413
+      },
+      "all_nodes_fine": {
+        "mse": 0.024512957970177402,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.8938104105043431,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07804088499869977
+      }
+    },
+    {
+      "graph": "rewired-101",
+      "seed": 27,
+      "rewiring": {
+        "accepted_swaps": 60465,
+        "changed_entries": 6610
+      },
+      "simulation_seconds": 0.047832959000515984,
+      "state_max": 0.7230550818226267,
+      "dt_rms_difference": 0.001042414731222162,
+      "fine_state_rms": 0.018765996823708816,
+      "ria": {
+        "mse": 0.21080977127666195,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.08677675290037412,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0003521799990267027
+      },
+      "all_nodes": {
+        "mse": 0.02061111678162092,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9107130998735388,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07893806400170433
+      },
+      "ria_fine": {
+        "mse": 0.2145816635503069,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.0704369993444186,
+        "penalty": 0.0001,
+        "fit_seconds": 0.00031029699857754167
+      },
+      "all_nodes_fine": {
+        "mse": 0.02140649007252308,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9072675604425381,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07769120800003293
+      }
+    },
+    {
+      "graph": "rewired-102",
+      "seed": 7,
+      "rewiring": {
+        "accepted_swaps": 60521,
+        "changed_entries": 6630
+      },
+      "simulation_seconds": 0.048099159999765106,
+      "state_max": 0.7230575867440676,
+      "dt_rms_difference": 0.001042421723811808,
+      "fine_state_rms": 0.018766207810232773,
+      "ria": {
+        "mse": 0.2132520198894771,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.07619698615183679,
+        "penalty": 0.0001,
+        "fit_seconds": 0.00035068699980911333
+      },
+      "all_nodes": {
+        "mse": 0.020974486501038146,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9091389903194405,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07725769599892374
+      },
+      "ria_fine": {
+        "mse": 0.21695171295466434,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.060169997963380295,
+        "penalty": 0.0001,
+        "fit_seconds": 0.00032661099976394325
+      },
+      "all_nodes_fine": {
+        "mse": 0.0226103724754196,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9020523686113378,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07759307200103649
+      }
+    },
+    {
+      "graph": "rewired-102",
+      "seed": 17,
+      "rewiring": {
+        "accepted_swaps": 60521,
+        "changed_entries": 6630
+      },
+      "simulation_seconds": 0.04890019400045276,
+      "state_max": 0.7230584101417338,
+      "dt_rms_difference": 0.0010424136198856257,
+      "fine_state_rms": 0.018766026047179345,
+      "ria": {
+        "mse": 0.21713131249715986,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.059391976734183505,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0006401229984476231
+      },
+      "all_nodes": {
+        "mse": 0.021109552720956364,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9085538864545664,
+        "penalty": 0.0001,
+        "fit_seconds": 0.09558934399865393
+      },
+      "ria_fine": {
+        "mse": 0.22019361371577367,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.046126155868653096,
+        "penalty": 0.0001,
+        "fit_seconds": 0.00028383700009726454
+      },
+      "all_nodes_fine": {
+        "mse": 0.023010270410893756,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9003200196365699,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07901745299932372
+      }
+    },
+    {
+      "graph": "rewired-102",
+      "seed": 27,
+      "rewiring": {
+        "accepted_swaps": 60521,
+        "changed_entries": 6630
+      },
+      "simulation_seconds": 0.04831428400029836,
+      "state_max": 0.7230583276723276,
+      "dt_rms_difference": 0.001042397636827855,
+      "fine_state_rms": 0.018766084526363153,
+      "ria": {
+        "mse": 0.2108791405205189,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.0864762468766721,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0003891750002367189
+      },
+      "all_nodes": {
+        "mse": 0.021359462887838278,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.907471281162122,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07732103299895243
+      },
+      "ria_fine": {
+        "mse": 0.2151037580557486,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.06817529754252905,
+        "penalty": 0.0001,
+        "fit_seconds": 0.00032943500082183164
+      },
+      "all_nodes_fine": {
+        "mse": 0.023728182255792613,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.897210041469242,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07838571299907926
+      }
+    },
+    {
+      "graph": "rewired-103",
+      "seed": 7,
+      "rewiring": {
+        "accepted_swaps": 60629,
+        "changed_entries": 6686
+      },
+      "simulation_seconds": 0.048176014999626204,
+      "state_max": 0.7230307223757011,
+      "dt_rms_difference": 0.001042486352393381,
+      "fine_state_rms": 0.018765727777277384,
+      "ria": {
+        "mse": 0.219601587161672,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.04869080175215146,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0003541530004440574
+      },
+      "all_nodes": {
+        "mse": 0.02182170435342569,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9054688613995493,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0779341840006964
+      },
+      "ria_fine": {
+        "mse": 0.22207385075485855,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.037981010775275825,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0004170770007476676
+      },
+      "all_nodes_fine": {
+        "mse": 0.025104280088205356,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.8912488162222706,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0775551649985573
+      }
+    },
+    {
+      "graph": "rewired-103",
+      "seed": 17,
+      "rewiring": {
+        "accepted_swaps": 60629,
+        "changed_entries": 6686
+      },
+      "simulation_seconds": 0.04809063100037747,
+      "state_max": 0.7230898021131128,
+      "dt_rms_difference": 0.001042338381027923,
+      "fine_state_rms": 0.018766916763632978,
+      "ria": {
+        "mse": 0.22420923135542717,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.028730589440272403,
+        "penalty": 0.0001,
+        "fit_seconds": 0.00037048699959996156
+      },
+      "all_nodes": {
+        "mse": 0.021641234174006537,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9062506542085624,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07732860400028585
+      },
+      "ria_fine": {
+        "mse": 0.22575589478705424,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.022030477805754956,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0002930209993792232
+      },
+      "all_nodes_fine": {
+        "mse": 0.02458102241188971,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.8935155568545521,
+        "penalty": 0.0001,
+        "fit_seconds": 0.08557717299845535
+      }
+    },
+    {
+      "graph": "rewired-103",
+      "seed": 27,
+      "rewiring": {
+        "accepted_swaps": 60629,
+        "changed_entries": 6686
+      },
+      "simulation_seconds": 0.05380293999951391,
+      "state_max": 0.7230304040536527,
+      "dt_rms_difference": 0.0010425142501945843,
+      "fine_state_rms": 0.018765543529984847,
+      "ria": {
+        "mse": 0.22396426131175645,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.02979179422868572,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0003517380009725457
+      },
+      "all_nodes": {
+        "mse": 0.02186460410115,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.905283020645208,
+        "penalty": 0.0001,
+        "fit_seconds": 0.08177087600051891
+      },
+      "ria_fine": {
+        "mse": 0.22554115058899069,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.022960744902312036,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0003054190001421375
+      },
+      "all_nodes_fine": {
+        "mse": 0.02512822053053227,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.891145106757826,
+        "penalty": 0.0001,
+        "fit_seconds": 0.08195815699946252
+      }
+    },
+    {
+      "graph": "rewired-104",
+      "seed": 7,
+      "rewiring": {
+        "accepted_swaps": 60741,
+        "changed_entries": 6666
+      },
+      "simulation_seconds": 0.04845112099974358,
+      "state_max": 0.723030778008669,
+      "dt_rms_difference": 0.0010425905264257382,
+      "fine_state_rms": 0.018764986336484647,
+      "ria": {
+        "mse": 0.21715472975283537,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.05929053370269288,
+        "penalty": 0.0001,
+        "fit_seconds": 0.00035817800016957335
+      },
+      "all_nodes": {
+        "mse": 0.020887743386783158,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9095147595638343,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0837563280001632
+      },
+      "ria_fine": {
+        "mse": 0.22004359863628437,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.04677601786117591,
+        "penalty": 0.0001,
+        "fit_seconds": 0.00029217900009825826
+      },
+      "all_nodes_fine": {
+        "mse": 0.022364680056347893,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9031167027139442,
+        "penalty": 0.0001,
+        "fit_seconds": 0.08342747400092776
+      }
+    },
+    {
+      "graph": "rewired-104",
+      "seed": 17,
+      "rewiring": {
+        "accepted_swaps": 60741,
+        "changed_entries": 6666
+      },
+      "simulation_seconds": 0.05125791700083937,
+      "state_max": 0.7230270947978168,
+      "dt_rms_difference": 0.001042596951434137,
+      "fine_state_rms": 0.018764800317401586,
+      "ria": {
+        "mse": 0.193166613955017,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.16320651856439994,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0005217329999140929
+      },
+      "all_nodes": {
+        "mse": 0.02097786080310538,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9091243729178282,
+        "penalty": 0.0001,
+        "fit_seconds": 0.08164525700158265
+      },
+      "ria_fine": {
+        "mse": 0.19998342994930435,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.13367622307817295,
+        "penalty": 0.0001,
+        "fit_seconds": 0.00034098200012522284
+      },
+      "all_nodes_fine": {
+        "mse": 0.022544031610560813,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9023397557644798,
+        "penalty": 0.0001,
+        "fit_seconds": 0.08692071100085741
+      }
+    },
+    {
+      "graph": "rewired-104",
+      "seed": 27,
+      "rewiring": {
+        "accepted_swaps": 60741,
+        "changed_entries": 6666
+      },
+      "simulation_seconds": 0.04940988099951937,
+      "state_max": 0.7230895542746472,
+      "dt_rms_difference": 0.0010422422077612239,
+      "fine_state_rms": 0.01876757943988709,
+      "ria": {
+        "mse": 0.18846490247060244,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.1835742282901872,
+        "penalty": 0.0001,
+        "fit_seconds": 0.000352719000147772
+      },
+      "all_nodes": {
+        "mse": 0.020752262588649244,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.910101659372331,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07955715999923996
+      },
+      "ria_fine": {
+        "mse": 0.19581288944353442,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.1517429119217435,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0002790489998005796
+      },
+      "all_nodes_fine": {
+        "mse": 0.021699678091419546,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9059974764563647,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07847243200012599
+      }
+    },
+    {
+      "graph": "rewired-105",
+      "seed": 7,
+      "rewiring": {
+        "accepted_swaps": 60478,
+        "changed_entries": 6636
+      },
+      "simulation_seconds": 0.048190428999077994,
+      "state_max": 0.7230620118724823,
+      "dt_rms_difference": 0.0010424073631789472,
+      "fine_state_rms": 0.018766281582208704,
+      "ria": {
+        "mse": 0.2306624555788986,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.000775365429871111,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0003519990004861029
+      },
+      "all_nodes": {
+        "mse": 0.02159441692898605,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9064534654741834,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07882981799957633
+      },
+      "ria_fine": {
+        "mse": 0.23068669640367503,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.0006703547153267264,
+        "penalty": 0.0001,
+        "fit_seconds": 0.000294000999929267
+      },
+      "all_nodes_fine": {
+        "mse": 0.024309725127878164,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.8946908106633956,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07799096800044936
+      }
+    },
+    {
+      "graph": "rewired-105",
+      "seed": 17,
+      "rewiring": {
+        "accepted_swaps": 60478,
+        "changed_entries": 6636
+      },
+      "simulation_seconds": 0.04814809600065928,
+      "state_max": 0.7230584610796748,
+      "dt_rms_difference": 0.0010424188710030195,
+      "fine_state_rms": 0.018766327558164847,
+      "ria": {
+        "mse": 0.23069524818273734,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.0006333085983631914,
+        "penalty": 0.0001,
+        "fit_seconds": 0.00036289500167185906
+      },
+      "all_nodes": {
+        "mse": 0.02122331195960736,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9080610839593154,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07848375999856216
+      },
+      "ria_fine": {
+        "mse": 0.2307281268676822,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.0004908788654154339,
+        "penalty": 0.0001,
+        "fit_seconds": 0.00028410699997039046
+      },
+      "all_nodes_fine": {
+        "mse": 0.023330591018313085,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.8989323978795286,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07819472400115046
+      }
+    },
+    {
+      "graph": "rewired-105",
+      "seed": 27,
+      "rewiring": {
+        "accepted_swaps": 60478,
+        "changed_entries": 6636
+      },
+      "simulation_seconds": 0.04847358500046539,
+      "state_max": 0.7230622948618971,
+      "dt_rms_difference": 0.0010424044261442473,
+      "fine_state_rms": 0.018766349789006792,
+      "ria": {
+        "mse": 0.2307257330258516,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.0005012489350586513,
+        "penalty": 0.0001,
+        "fit_seconds": 0.000377768001271761
+      },
+      "all_nodes": {
+        "mse": 0.02140571828776269,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.9072709037969788,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07686571800149977
+      },
+      "ria_fine": {
+        "mse": 0.23074218857301282,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.0004299638702328634,
+        "penalty": 0.0001,
+        "fit_seconds": 0.0002869609998015221
+      },
+      "all_nodes_fine": {
+        "mse": 0.023828280905237663,
+        "zero_mse": 0.23084144205284798,
+        "r2_vs_zero": 0.8967764163430304,
+        "penalty": 0.0001,
+        "fit_seconds": 0.07788677200005623
+      }
+    }
+  ],
+  "timing_note": "Wall-clock seconds on this instance, single BLAS thread, 96 histories of 10 seconds simulated in a batch; no warm-up exclusion."
+}

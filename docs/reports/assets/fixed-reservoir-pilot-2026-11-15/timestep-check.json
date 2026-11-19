@@ -1,0 +1,50 @@
+[
+  {
+    "seed": 7,
+    "readout": "ria",
+    "score_005": 0.08931485600020295,
+    "score_0025_same_readout": 0.08370275311975117,
+    "penalty": 0.0001,
+    "state_relative_rms": 0.03548987936952108
+  },
+  {
+    "seed": 7,
+    "readout": "all",
+    "score_005": 0.8886104148845402,
+    "score_0025_same_readout": 0.8675856238532617,
+    "penalty": 0.0001,
+    "state_relative_rms": 0.02481087622723722
+  },
+  {
+    "seed": 17,
+    "readout": "ria",
+    "score_005": 0.11850311207331743,
+    "score_0025_same_readout": 0.11081775927524729,
+    "penalty": 0.0001,
+    "state_relative_rms": 0.03563270763341453
+  },
+  {
+    "seed": 17,
+    "readout": "all",
+    "score_005": 0.9004014014692828,
+    "score_0025_same_readout": 0.882520624695579,
+    "penalty": 0.0001,
+    "state_relative_rms": 0.024800745003586422
+  },
+  {
+    "seed": 27,
+    "readout": "ria",
+    "score_005": 0.02392734985982814,
+    "score_0025_same_readout": 0.022448181788382593,
+    "penalty": 0.0001,
+    "state_relative_rms": 0.03622663639266395
+  },
+  {
+    "seed": 27,
+    "readout": "all",
+    "score_005": 0.8709842543961268,
+    "score_0025_same_readout": 0.8475257903003833,
+    "penalty": 0.0001,
+    "state_relative_rms": 0.024546345115387603
+  }
+]

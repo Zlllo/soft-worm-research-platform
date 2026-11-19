@@ -1,0 +1,283 @@
+{
+  "protocol": {
+    "status": "exploratory engineering causal intervention; not animal experiment",
+    "model": "real chemical mask, three random source-sign seeds 7/17/27, fixed 302 network, Heun 0.025 seconds, gap unchanged",
+    "input": "new synthetic 112 histories seed 91821 matching generalization stage, 64/16/32 split; clean target is current minus 0.5s past",
+    "interventions": "remove AFDL->AIYL and AFDR->AIYR; compare four deterministic sets of two other existing AFD outgoing chemical edges, one per AFD, chosen without observing results using RNG seed 91823, preserving all other parameters",
+    "evaluation": "train RIA linear output on intact training histories and validation; freeze output for all removals; report heldout score and RMS state differences and direction; refit output after intervention separately as exploratory recovery",
+    "limits": "uncalibrated arbitrary signs and strengths, removal of edges unrealistically complete, controls do not match anatomical effects, no real biological causal inference; same inputs as generalization comparison"
+  },
+  "rows": [
+    {
+      "seed": 7,
+      "condition": "target",
+      "edges": [
+        [
+          "AFDL",
+          "AIYL"
+        ],
+        [
+          "AFDR",
+          "AIYR"
+        ]
+      ],
+      "baseline": 0.11769456774972753,
+      "frozen": 0.0921416564290497,
+      "refit": 0.11334549327038146,
+      "ria_rms_change": 3.979791010902547e-05
+    },
+    {
+      "seed": 7,
+      "condition": "control-1",
+      "edges": [
+        [
+          "AFDL",
+          "AFDL"
+        ],
+        [
+          "AFDR",
+          "AFDL"
+        ]
+      ],
+      "baseline": 0.11769456774972753,
+      "frozen": 0.11922359227927293,
+      "refit": 0.11917331319614388,
+      "ria_rms_change": 1.4125389285772517e-06
+    },
+    {
+      "seed": 7,
+      "condition": "control-2",
+      "edges": [
+        [
+          "AFDL",
+          "ASEL"
+        ],
+        [
+          "AFDR",
+          "ASER"
+        ]
+      ],
+      "baseline": 0.11769456774972753,
+      "frozen": 0.10195551498722077,
+      "refit": 0.11113667864628762,
+      "ria_rms_change": 2.7407328622414678e-05
+    },
+    {
+      "seed": 7,
+      "condition": "control-3",
+      "edges": [
+        [
+          "AFDL",
+          "AIBL"
+        ],
+        [
+          "AFDR",
+          "ASEL"
+        ]
+      ],
+      "baseline": 0.11769456774972753,
+      "frozen": 0.10206655833706468,
+      "refit": 0.11171789359134765,
+      "ria_rms_change": 2.8038338870997515e-05
+    },
+    {
+      "seed": 7,
+      "condition": "control-4",
+      "edges": [
+        [
+          "AFDL",
+          "AFDL"
+        ],
+        [
+          "AFDR",
+          "ASEL"
+        ]
+      ],
+      "baseline": 0.11769456774972753,
+      "frozen": 0.10334777528643446,
+      "refit": 0.11307916238601656,
+      "ria_rms_change": 2.8129166439871933e-05
+    },
+    {
+      "seed": 17,
+      "condition": "target",
+      "edges": [
+        [
+          "AFDL",
+          "AIYL"
+        ],
+        [
+          "AFDR",
+          "AIYR"
+        ]
+      ],
+      "baseline": 0.13980476210810522,
+      "frozen": 0.10353661669019809,
+      "refit": 0.11794150808131221,
+      "ria_rms_change": 4.1016343232589074e-05
+    },
+    {
+      "seed": 17,
+      "condition": "control-1",
+      "edges": [
+        [
+          "AFDL",
+          "AFDL"
+        ],
+        [
+          "AFDR",
+          "AFDL"
+        ]
+      ],
+      "baseline": 0.13980476210810522,
+      "frozen": 0.1402839767389995,
+      "refit": 0.1401063873894467,
+      "ria_rms_change": 6.225221805754871e-07
+    },
+    {
+      "seed": 17,
+      "condition": "control-2",
+      "edges": [
+        [
+          "AFDL",
+          "ASEL"
+        ],
+        [
+          "AFDR",
+          "ASER"
+        ]
+      ],
+      "baseline": 0.13980476210810522,
+      "frozen": 0.10455228519125837,
+      "refit": 0.10490061714951204,
+      "ria_rms_change": 2.6793289405346695e-05
+    },
+    {
+      "seed": 17,
+      "condition": "control-3",
+      "edges": [
+        [
+          "AFDL",
+          "AIBL"
+        ],
+        [
+          "AFDR",
+          "ASEL"
+        ]
+      ],
+      "baseline": 0.13980476210810522,
+      "frozen": 0.10177123382880993,
+      "refit": 0.10154524202214399,
+      "ria_rms_change": 2.8658660313963758e-05
+    },
+    {
+      "seed": 17,
+      "condition": "control-4",
+      "edges": [
+        [
+          "AFDL",
+          "AFDL"
+        ],
+        [
+          "AFDR",
+          "ASEL"
+        ]
+      ],
+      "baseline": 0.13980476210810522,
+      "frozen": 0.10256946701620273,
+      "refit": 0.10252627577945406,
+      "ria_rms_change": 2.813460641932101e-05
+    },
+    {
+      "seed": 27,
+      "condition": "target",
+      "edges": [
+        [
+          "AFDL",
+          "AIYL"
+        ],
+        [
+          "AFDR",
+          "AIYR"
+        ]
+      ],
+      "baseline": 0.040203122081283515,
+      "frozen": -0.00441115492111277,
+      "refit": 0.04643635441699068,
+      "ria_rms_change": 3.81778609514952e-05
+    },
+    {
+      "seed": 27,
+      "condition": "control-1",
+      "edges": [
+        [
+          "AFDL",
+          "AFDL"
+        ],
+        [
+          "AFDR",
+          "AFDL"
+        ]
+      ],
+      "baseline": 0.040203122081283515,
+      "frozen": 0.040203435132432186,
+      "refit": 0.04020365720344643,
+      "ria_rms_change": 3.8689846518414815e-10
+    },
+    {
+      "seed": 27,
+      "condition": "control-2",
+      "edges": [
+        [
+          "AFDL",
+          "ASEL"
+        ],
+        [
+          "AFDR",
+          "ASER"
+        ]
+      ],
+      "baseline": 0.040203122081283515,
+      "frozen": -0.005910072274652567,
+      "refit": 0.00146663605781161,
+      "ria_rms_change": 2.818546701400247e-05
+    },
+    {
+      "seed": 27,
+      "condition": "control-3",
+      "edges": [
+        [
+          "AFDL",
+          "AIBL"
+        ],
+        [
+          "AFDR",
+          "ASEL"
+        ]
+      ],
+      "baseline": 0.040203122081283515,
+      "frozen": 0.07776463435356351,
+      "refit": 0.10487517161411497,
+      "ria_rms_change": 2.6753023661901512e-05
+    },
+    {
+      "seed": 27,
+      "condition": "control-4",
+      "edges": [
+        [
+          "AFDL",
+          "AFDL"
+        ],
+        [
+          "AFDR",
+          "ASEL"
+        ]
+      ],
+      "baseline": 0.040203122081283515,
+      "frozen": 0.07927177486188952,
+      "refit": 0.10700012478815046,
+      "ria_rms_change": 2.8040000753377804e-05
+    }
+  ],
+  "source_sha256": "fad1e5c37b81a94262170e12bfdde60bcf5736bb1b376d3b8e2ad2ff4b579147"
+}

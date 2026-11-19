@@ -1,0 +1,465 @@
+{
+  "protocol": {
+    "scope": "engineering interface sensitivity, not AFD biological validation",
+    "input": "independent seed 53119, 112 piecewise constant temperature histories; background 0 K relative; input = random normal SD 0.007 K with dwell 0.3-0.9s",
+    "interfaces": "raw temperature divided by 0.05 K vs repository ThresholdAdaptation: initial threshold 0 K, read response before updating threshold each 0.1s; 45/840s adaptation from literature, response width 0.05 K and gain uncalibrated",
+    "target": "clean temperature change over 0.5s scaled by 0.05 K; readout input only, RIA or all nodes",
+    "models": "real and rewired 101/104, uniform chemical mask and random source signs 7/17/27; fixed gap, Heun 0.025s; ridge train/validation/test 64/16/32",
+    "limitations": "first-record threshold artificial; no fitted AFD calcium, no biological sign or synaptic efficacy, no behavior, raw and rectified interfaces carry different information and are not causal proof"
+  },
+  "baseline": [
+    {
+      "interface": "raw",
+      "scores": [
+        0.35080783420365713
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.00040982800055644475,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "scores": [
+        0.2586571795345115
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.00018558499868959188,
+      "zero_mse": 0.02653382493563387
+    }
+  ],
+  "rows": [
+    {
+      "interface": "raw",
+      "graph": "real",
+      "seed": 7,
+      "readout": "ria",
+      "scores": [
+        0.04360684638959411
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.0014624890027334914,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "raw",
+      "graph": "real",
+      "seed": 7,
+      "readout": "all",
+      "scores": [
+        0.7987861418016355
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.03650610299882828,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "raw",
+      "graph": "real",
+      "seed": 17,
+      "readout": "ria",
+      "scores": [
+        0.06571896244983033
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.00044474000242189504,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "raw",
+      "graph": "real",
+      "seed": 17,
+      "readout": "all",
+      "scores": [
+        0.827091772757877
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.031945599999744445,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "raw",
+      "graph": "real",
+      "seed": 27,
+      "readout": "ria",
+      "scores": [
+        0.009305472498896905
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.0005367359990486875,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "raw",
+      "graph": "real",
+      "seed": 27,
+      "readout": "all",
+      "scores": [
+        0.7765237227831142
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.03289776200108463,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "raw",
+      "graph": "101",
+      "seed": 7,
+      "readout": "ria",
+      "scores": [
+        0.05940103290689713
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.0004168580016994383,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "raw",
+      "graph": "101",
+      "seed": 7,
+      "readout": "all",
+      "scores": [
+        0.8268593641546422
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.032767235999926925,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "raw",
+      "graph": "101",
+      "seed": 17,
+      "readout": "ria",
+      "scores": [
+        0.06139964494366268
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.0006497430003946647,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "raw",
+      "graph": "101",
+      "seed": 17,
+      "readout": "all",
+      "scores": [
+        0.8080646209494622
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.03256855200015707,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "raw",
+      "graph": "101",
+      "seed": 27,
+      "readout": "ria",
+      "scores": [
+        0.057656405430447255
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.000825775001430884,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "raw",
+      "graph": "101",
+      "seed": 27,
+      "readout": "all",
+      "scores": [
+        0.8467062807612605
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.033943860998988384,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "raw",
+      "graph": "104",
+      "seed": 7,
+      "readout": "ria",
+      "scores": [
+        0.020308625989839846
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.0004100379992451053,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "raw",
+      "graph": "104",
+      "seed": 7,
+      "readout": "all",
+      "scores": [
+        0.8298432872899206
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.03199772500011022,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "raw",
+      "graph": "104",
+      "seed": 17,
+      "readout": "ria",
+      "scores": [
+        0.08109370359116319
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.000790170997788664,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "raw",
+      "graph": "104",
+      "seed": 17,
+      "readout": "all",
+      "scores": [
+        0.8277394295586192
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.034427618000336224,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "raw",
+      "graph": "104",
+      "seed": 27,
+      "readout": "ria",
+      "scores": [
+        0.10226038594562425
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.0007713539998803753,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "raw",
+      "graph": "104",
+      "seed": 27,
+      "readout": "all",
+      "scores": [
+        0.840823408717174
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.03668790899973828,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "real",
+      "seed": 7,
+      "readout": "ria",
+      "scores": [
+        0.011947629543648919
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.0005638160000671633,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "real",
+      "seed": 7,
+      "readout": "all",
+      "scores": [
+        0.5489104634481554
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.032651154997438425,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "real",
+      "seed": 17,
+      "readout": "ria",
+      "scores": [
+        0.019849602251366005
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.0006406100001186132,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "real",
+      "seed": 17,
+      "readout": "all",
+      "scores": [
+        0.5613514026496119
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.03266400299980887,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "real",
+      "seed": 27,
+      "readout": "ria",
+      "scores": [
+        0.002252364927456063
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.0006568140015588142,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "real",
+      "seed": 27,
+      "readout": "all",
+      "scores": [
+        0.5399606129084167
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.031270758001483046,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "101",
+      "seed": 7,
+      "readout": "ria",
+      "scores": [
+        0.04279473850674165
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.00048645200149621814,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "101",
+      "seed": 7,
+      "readout": "all",
+      "scores": [
+        0.5590141823785955
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.031286551002267515,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "101",
+      "seed": 17,
+      "readout": "ria",
+      "scores": [
+        0.04444376837078101
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.00043806000030599535,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "101",
+      "seed": 17,
+      "readout": "all",
+      "scores": [
+        0.5516579536307405
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.03137707499990938,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "101",
+      "seed": 27,
+      "readout": "ria",
+      "scores": [
+        0.041197818819077914
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.00041453499943600036,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "101",
+      "seed": 27,
+      "readout": "all",
+      "scores": [
+        0.5692218737884083
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.03307305999987875,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "104",
+      "seed": 7,
+      "readout": "ria",
+      "scores": [
+        0.005099432858648334
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.0005015339993406087,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "104",
+      "seed": 7,
+      "readout": "all",
+      "scores": [
+        0.5591698385381887
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.032363226997404126,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "104",
+      "seed": 17,
+      "readout": "ria",
+      "scores": [
+        0.026513033618177695
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.0004862509995291475,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "104",
+      "seed": 17,
+      "readout": "all",
+      "scores": [
+        0.5589060410961411
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.032862594998732675,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "104",
+      "seed": 27,
+      "readout": "ria",
+      "scores": [
+        0.03801997229451648
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.00046294700223370455,
+      "zero_mse": 0.02653382493563387
+    },
+    {
+      "interface": "adapted",
+      "graph": "104",
+      "seed": 27,
+      "readout": "all",
+      "scores": [
+        0.5658292270655204
+      ],
+      "penalty": 1e-08,
+      "fit_seconds": 0.06307142200239468,
+      "zero_mse": 0.02653382493563387
+    }
+  ],
+  "source_sha256": "6114610c753daaffac40acbea7173b37e4639fa191cd3478b104023f60648cdb"
+}
