@@ -1,0 +1,53 @@
+[
+  {
+    "calibration_s": 1.0,
+    "holdout_frames": 120,
+    "normal": [
+      -0.22620394440235553,
+      0.9615294303419065,
+      -0.15586189439110654
+    ],
+    "normal_angle_from_y_deg": 15.944252390021852,
+    "singular_values": [
+      2.002260003409901,
+      0.24142495695268848,
+      0.2011070718701083
+    ],
+    "rms_height_in_body_lengths": 0.0704882054968091,
+    "mirror_difference_rms_mK": 23.284678049902993
+  },
+  {
+    "calibration_s": 2.0,
+    "holdout_frames": 90,
+    "normal": [
+      -0.08718288265854461,
+      0.9868714610711917,
+      -0.1359553761149519
+    ],
+    "normal_angle_from_y_deg": 9.294416150996742,
+    "singular_values": [
+      3.3248321359486797,
+      0.316615257389918,
+      0.2283442248666116
+    ],
+    "rms_height_in_body_lengths": 0.08310567041191663,
+    "mirror_difference_rms_mK": 27.462446267355258
+  },
+  {
+    "calibration_s": 3.0,
+    "holdout_frames": 60,
+    "normal": [
+      -0.2604607772451956,
+      0.9508160499732702,
+      -0.16765745623161632
+    ],
+    "normal_angle_from_y_deg": 18.044532333018154,
+    "singular_values": [
+      4.333661567298464,
+      0.36600137748681516,
+      0.27870002780175956
+    ],
+    "rms_height_in_body_lengths": 0.08421818360610359,
+    "mirror_difference_rms_mK": 27.688512705814997
+  }
+]

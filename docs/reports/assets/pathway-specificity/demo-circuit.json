@@ -1,0 +1,65 @@
+{
+  "upstream": "b99ca5a",
+  "sha256": "792a912ca1b466443d6fded8bd47cd4796a29aef044bb9c3c1c953965f1bd651",
+  "cells": 136,
+  "connection_records": 3076,
+  "core_membership": {
+    "AFDL": false,
+    "AFDR": false,
+    "AIYL": true,
+    "AIYR": true,
+    "AIZL": true,
+    "AIZR": true,
+    "RIAL": false,
+    "RIAR": false
+  },
+  "search_input": [
+    "AWAL",
+    "AWAR",
+    "AWCL",
+    "AWCR",
+    "ASKL",
+    "ASKR",
+    "ALNL",
+    "ALNR",
+    "PLML",
+    "PHAL",
+    "PHAR",
+    "URYDL",
+    "URYDR",
+    "URYVL",
+    "URYVR"
+  ],
+  "core_edges": [
+    {
+      "source": "AIYL",
+      "target": "AIYR",
+      "category": "gj",
+      "count": 1
+    },
+    {
+      "source": "AIYR",
+      "target": "AIYL",
+      "category": "gj",
+      "count": 1
+    },
+    {
+      "source": "AIYR",
+      "target": "AIYL",
+      "category": "syn",
+      "count": 2
+    },
+    {
+      "source": "AIZL",
+      "target": "AIZR",
+      "category": "gj",
+      "count": 5
+    },
+    {
+      "source": "AIZR",
+      "target": "AIZL",
+      "category": "gj",
+      "count": 5
+    }
+  ]
+}
