@@ -1,0 +1,74 @@
+{
+  "designs": [
+    {
+      "model": "real",
+      "graph_seed": 0,
+      "states": 302,
+      "parameters": 4016,
+      "chemical_edges": 3709,
+      "gap_pairs": 1091,
+      "chemical_changed": 0,
+      "gap_changed": 0
+    },
+    {
+      "model": "dense",
+      "graph_seed": 0,
+      "states": 302,
+      "parameters": 91511,
+      "chemical_edges": 91204,
+      "gap_pairs": 0,
+      "chemical_changed": 87495,
+      "gap_changed": 2196
+    },
+    {
+      "model": "rewired",
+      "graph_seed": 101,
+      "states": 302,
+      "parameters": 4016,
+      "chemical_edges": 3709,
+      "gap_pairs": 1091,
+      "chemical_changed": 6610,
+      "gap_changed": 4056
+    },
+    {
+      "model": "rewired",
+      "graph_seed": 202,
+      "states": 302,
+      "parameters": 4016,
+      "chemical_edges": 3709,
+      "gap_pairs": 1091,
+      "chemical_changed": 6644,
+      "gap_changed": 4076
+    },
+    {
+      "model": "rewired",
+      "graph_seed": 303,
+      "states": 302,
+      "parameters": 4016,
+      "chemical_edges": 3709,
+      "gap_pairs": 1091,
+      "chemical_changed": 6682,
+      "gap_changed": 4068
+    },
+    {
+      "model": "rewired",
+      "graph_seed": 404,
+      "states": 302,
+      "parameters": 4016,
+      "chemical_edges": 3709,
+      "gap_pairs": 1091,
+      "chemical_changed": 6646,
+      "gap_changed": 3992
+    }
+  ],
+  "graph_sha256": "0c4ce2068f10692eb15f1c636835ee3d36932db03abda7a866dc2987ef09e402",
+  "torch": "2.8.0+cpu",
+  "numpy": "2.0.2",
+  "scipy": "1.13.1",
+  "field_sha256": {
+    "single_center": "5fa140e5f2f7ffc5d0290eff77d57ca1a9f3dfd5aadbe4f117039ba23333b0fb",
+    "linear_gradient": "de68b513e99019c42f5d59da26db004f1764e141cb5346d7e4b89a8ac4ecdc93",
+    "dual_center": "af06280c594e4b32c92223eb6c7a05608f476fbf6bbf2bd0a4763d74a1ec3d23",
+    "ring_hotspot": "394c50893c72034e8a284bf6081c41ede141b57de3fc4c92263b6335b70f5f04"
+  }
+}
