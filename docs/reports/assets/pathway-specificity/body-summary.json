@@ -1,0 +1,94 @@
+{
+  "reference_normal": [
+    -0.08718288265854461,
+    0.9868714610711917,
+    -0.1359553761149519
+  ],
+  "body_length_world": 0.6273573251877241,
+  "mean_window_s": [
+    4,
+    5
+  ],
+  "native_baseline_head_max_difference": 0.0,
+  "repeat_max_center_distance_BL": 0.0,
+  "by_group": {
+    "sham": {
+      "max_pre_center_difference_BL": 0.0,
+      "mean_center_normal_BL": 0.0,
+      "mean_head_normal_BL": 0.0,
+      "at_4s_center_normal_BL": 0.0,
+      "at_5s_center_normal_BL": 0.0,
+      "mean_center_delta_xyz_BL": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "absolute_center_normal_since_2s_at_5s_BL": -0.16610607085050527
+    },
+    "right": {
+      "max_pre_center_difference_BL": 0.0,
+      "mean_center_normal_BL": -0.05203866108678308,
+      "mean_head_normal_BL": -0.12248687513424529,
+      "at_4s_center_normal_BL": -0.026523353643834877,
+      "at_5s_center_normal_BL": -0.08120805931189451,
+      "mean_center_delta_xyz_BL": [
+        -0.003204703906174544,
+        -0.05297544141888802,
+        0.0002802767976524187
+      ],
+      "absolute_center_normal_since_2s_at_5s_BL": -0.24731413016239975
+    },
+    "left": {
+      "max_pre_center_difference_BL": 0.0,
+      "mean_center_normal_BL": 0.07174609109336301,
+      "mean_head_normal_BL": 0.253729078496918,
+      "at_4s_center_normal_BL": 0.03014348812233097,
+      "at_5s_center_normal_BL": 0.12925889949537908,
+      "mean_center_delta_xyz_BL": [
+        -0.017838840823525947,
+        0.07000405773027278,
+        -0.00813386587198834
+      ],
+      "absolute_center_normal_since_2s_at_5s_BL": -0.03684717135512618
+    },
+    "dorsal": {
+      "max_pre_center_difference_BL": 0.0,
+      "mean_center_normal_BL": 0.025862887870191854,
+      "mean_head_normal_BL": 0.08525965923388898,
+      "at_4s_center_normal_BL": 0.005101188168776505,
+      "at_5s_center_normal_BL": 0.055102807045561294,
+      "mean_center_delta_xyz_BL": [
+        0.018031877689138665,
+        0.025913744921733876,
+        -0.013691430874831422
+      ],
+      "absolute_center_normal_since_2s_at_5s_BL": -0.11100326380494398
+    },
+    "ventral": {
+      "max_pre_center_difference_BL": 0.0,
+      "mean_center_normal_BL": 0.023311412344018966,
+      "mean_head_normal_BL": 0.010458097907578649,
+      "at_4s_center_normal_BL": 0.012815392783355481,
+      "at_5s_center_normal_BL": 0.035199581194398484,
+      "mean_center_delta_xyz_BL": [
+        -0.08245190606809356,
+        0.016408517932011635,
+        0.0005154674663758502
+      ],
+      "absolute_center_normal_since_2s_at_5s_BL": -0.13090648965610677
+    },
+    "sham2": {
+      "max_pre_center_difference_BL": 0.0,
+      "mean_center_normal_BL": 0.0,
+      "mean_head_normal_BL": 0.0,
+      "at_4s_center_normal_BL": 0.0,
+      "at_5s_center_normal_BL": 0.0,
+      "mean_center_delta_xyz_BL": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "absolute_center_normal_since_2s_at_5s_BL": -0.16610607085050527
+    }
+  }
+}

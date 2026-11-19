@@ -1,0 +1,20 @@
+{
+  "origin_world": [
+    0.42987099289894104,
+    -1.0633034706115723,
+    -1.435365915298462
+  ],
+  "body_length_world": 0.6273573251877241,
+  "normal_world": [
+    0.0,
+    1.0,
+    0.0
+  ],
+  "physics_hz": 240,
+  "physics_steps_per_frame": 8,
+  "resting_mesh_endpoints": [
+    149,
+    173
+  ],
+  "upstream": "b99ca5a"
+}

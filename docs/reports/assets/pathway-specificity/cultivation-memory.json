@@ -1,0 +1,29 @@
+{
+  "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5806692/#F2",
+  "conditions": [
+    "holding_above_cultivation",
+    "holding_below_cultivation"
+  ],
+  "counts": [
+    [
+      27,
+      75
+    ],
+    [
+      44,
+      65
+    ]
+  ],
+  "raw_actor_absolute_logit_differences": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "pooled_probability": 0.5071428571428571,
+  "risk_difference": 0.316923076923077,
+  "fitted_log_odds_difference": 1.3150313410984,
+  "in_sample_log_likelihood_gain_nats": 7.124097010009635
+}

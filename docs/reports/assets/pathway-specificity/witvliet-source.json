@@ -1,0 +1,13 @@
+{
+  "source": "https://raw.githubusercontent.com/dwitvliet/nature2021/0646af9d25896ae660f97d462eab2d67282f5625/data/synapses",
+  "sha256": {
+    "Dataset1_synapses.json": "d0a9b31c23b9c187e89c01e6b4b8b2a70e235a51fa8593d4af16e16123c0d3eb",
+    "Dataset2_synapses.json": "f9f3a145238bcef85514917eb0ff00845353fb58824a2af3c5ff5e7a09fe731a",
+    "Dataset3_synapses.json": "85a29d9bbed6704de72a13ada6c6d01171d9e624a032dc179cf0f89b5e3b7f9c",
+    "Dataset4_synapses.json": "3a415a13357a4e6c56c63a7150447086bdc424568486bdeed5844300df0ca05e",
+    "Dataset5_synapses.json": "d31f144fec7ed7206a8456ef68ecf2ff1bb8d129df69e8c5ebbc5db59ff452a0",
+    "Dataset6_synapses.json": "b1c973b4b7ec60f73d93726e13b9f48d84f67dbb3c01bcb1da15e3e939844dd0",
+    "Dataset7_synapses.json": "4d8d1ad47c6c986f7c6dac5d6ef16a6065afe805255c92d02885a0bb78be6228",
+    "Dataset8_synapses.json": "234ff5d5e88d004329898330ad17548afa9cfd66b11c6496d812e1a7798b4282"
+  }
+}
