@@ -1,0 +1,122 @@
+{
+  "normal-pos": {
+    "center_error_onset_C": 0.8642179952029103,
+    "center_error_final_C": 0.8644807445955252,
+    "center_error_drop_C": -0.0002627493926148361,
+    "final_benefit_C": 0.07268535627223827,
+    "tail_benefit_C": 0.04606372306095568,
+    "tail_vs_opposite_track_C": -0.032647628935015605,
+    "occupancy_active": 0.0,
+    "blind_occupancy_active": 0.0,
+    "final_axial_BL": 0.16014018864650406,
+    "final_paired_axial_BL": 0.49457609094568034,
+    "tail_paired_axial_BL": 0.33349256945855416,
+    "head_C_range": [
+      19.083952992102752,
+      19.153909558522685
+    ],
+    "thermal_rms_nA": 0.007015366412064055,
+    "motor_difference_rms_mV": 1.0301562619978395,
+    "muscle_difference_rms": 0.10538118263326482
+  },
+  "normal-neg": {
+    "center_error_onset_C": 0.8875669245215576,
+    "center_error_final_C": 0.9496133529261748,
+    "center_error_drop_C": -0.06204642840461716,
+    "final_benefit_C": -0.08111973721357657,
+    "tail_benefit_C": -0.07322396711761057,
+    "tail_vs_opposite_track_C": -0.02620155920336038,
+    "occupancy_active": 0.0,
+    "blind_occupancy_active": 0.0,
+    "final_axial_BL": -0.4017018436424984,
+    "final_paired_axial_BL": -0.7361377459416746,
+    "tail_paired_axial_BL": -0.5366738695386079,
+    "head_C_range": [
+      19.044562027604503,
+      19.152159650335385
+    ],
+    "thermal_rms_nA": 0.00666721429147781,
+    "motor_difference_rms_mV": 0.9743668314869284,
+    "muscle_difference_rms": 0.08820388171480278
+  },
+  "plane-pos": {
+    "center_error_onset_C": 0.8708947890892844,
+    "center_error_final_C": 0.8861879205423477,
+    "center_error_drop_C": -0.015293131453063324,
+    "final_benefit_C": -0.19349114253124355,
+    "tail_benefit_C": -0.1374592855169068,
+    "tail_vs_opposite_track_C": -0.20730780070266547,
+    "occupancy_active": 0.0,
+    "blind_occupancy_active": 0.0,
+    "final_axial_BL": 0.10214715033372866,
+    "final_paired_axial_BL": -0.824550732836259,
+    "tail_paired_axial_BL": -0.5895984131007953,
+    "head_C_range": [
+      19.091122165746516,
+      19.16558097389358
+    ],
+    "thermal_rms_nA": 0.00782639905658556,
+    "motor_difference_rms_mV": 1.1673515181047387,
+    "muscle_difference_rms": 0.10526903005613308
+  },
+  "plane-neg": {
+    "center_error_onset_C": 0.8816401245290422,
+    "center_error_final_C": 0.9833605118362883,
+    "center_error_drop_C": -0.10172038730724609,
+    "final_benefit_C": -0.004936584834076996,
+    "tail_benefit_C": -0.0031777695119301693,
+    "tail_vs_opposite_track_C": -0.04963233690709175,
+    "occupancy_active": 0.0,
+    "blind_occupancy_active": 0.0,
+    "final_axial_BL": -1.1521875139041207,
+    "final_paired_axial_BL": -0.22548963073413286,
+    "tail_paired_axial_BL": -0.12390186093195982,
+    "head_C_range": [
+      19.00989250439307,
+      19.14171861996492
+    ],
+    "thermal_rms_nA": 0.005477017026651258,
+    "motor_difference_rms_mV": 0.9591552333557647,
+    "muscle_difference_rms": 0.07675382685505952
+  },
+  "plane-inverted-pos": {
+    "center_error_onset_C": 0.8708947890892844,
+    "center_error_final_C": 0.77768011943202,
+    "center_error_drop_C": 0.09321466965726444,
+    "final_benefit_C": -0.08498334142091579,
+    "tail_benefit_C": -0.05865254101117348,
+    "tail_vs_opposite_track_C": 0.0055993458539014525,
+    "occupancy_active": 0.0,
+    "blind_occupancy_active": 0.0,
+    "final_axial_BL": 0.49807346915548417,
+    "final_paired_axial_BL": -0.4286244140145036,
+    "tail_paired_axial_BL": -0.2980819441748605,
+    "head_C_range": [
+      19.108269290555388,
+      19.236721896938775
+    ],
+    "thermal_rms_nA": 0.009892597920834604,
+    "motor_difference_rms_mV": 3.4474997991123852,
+    "muscle_difference_rms": 0.15028706854481017
+  },
+  "plane-inverted-neg": {
+    "center_error_onset_C": 0.8816401245290422,
+    "center_error_final_C": 0.9630669123113549,
+    "center_error_drop_C": -0.08142678778231272,
+    "final_benefit_C": 0.015357014690856374,
+    "tail_benefit_C": 0.01601692242927189,
+    "tail_vs_opposite_track_C": -0.0083676336012104,
+    "occupancy_active": 0.0,
+    "blind_occupancy_active": 0.0,
+    "final_axial_BL": -0.6158512962521777,
+    "final_paired_axial_BL": 0.31084658691781,
+    "tail_paired_axial_BL": 0.24728941941557284,
+    "head_C_range": [
+      19.033010584742836,
+      19.14171861996492
+    ],
+    "thermal_rms_nA": 0.006025355704042108,
+    "motor_difference_rms_mV": 1.129425608574918,
+    "muscle_difference_rms": 0.11070485364421268
+  }
+}

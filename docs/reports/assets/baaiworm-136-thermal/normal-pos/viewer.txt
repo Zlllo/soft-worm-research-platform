@@ -1,0 +1,61 @@
+try to regist path:
+registing voltage path: ../eworm/ghost_in_mesh_sim/data/tuned/video_offline/video_offline_neuronX/group1.vtg
+registing geometry path: ../eworm/ghost_in_mesh_sim/data/tuned/video_offline/video_offline_neuronX/group1.swc
+registing synapse path: ../eworm/ghost_in_mesh_sim/data/tuned/video_offline/video_offline_neuronX/group1.snp
+finished reading geometry file: ../eworm/ghost_in_mesh_sim/data/tuned/video_offline/video_offline_neuronX/group1.swc
+finished reading voltage file: ../eworm/ghost_in_mesh_sim/data/tuned/video_offline/video_offline_neuronX/group1.vtg
+finished reading synapse file: ../eworm/ghost_in_mesh_sim/data/tuned/video_offline/video_offline_neuronX/group1.snp
+Cuda found 1 GPUs in device
+Context created;
+ owl found 1 GPUs
+created basic neurons back-end!
+Scene info:
+	 span: (54.7131,796.75,132.963)
+
+camera setting:
+	 pos: (-597.969,48.925,-0.765148)
+	 to : (-0.406549,48.925,-0.765148)
+	 fov: 70
+
+building tubes
+initializing voltage sequence.
+build tubes: primitives: 30136
+building quad
+[(-27.7631,-349.45,-67.2467):(26.95,447.3,65.7164)]
+built quad
+building quadlight
+built quadlight
+building programs
+building pipeline
+building SBT
+
+----------Profiler Info------------
+BasicNeurons::build     	28.404566000 ms
+
+#owl.viewer: glfw initialized
+/home/lifesim/MetaWorm/Metaworm
+['/work/BAAIWorm/build2', '/home/lifesim/MetaWorm/Metaworm/..', '/home/lifesim/MetaWorm/Metaworm/../eworm/ghost_in_mesh_sim', '/home/lifesim/MetaWorm/Metaworm/interact', '/work/thermal136', '/work/BAAIWorm', '/work/BAAIWorm/build2', '/work/temperature', '/usr/lib/python38.zip', '/usr/lib/python3.8', '/usr/lib/python3.8/lib-dynload', '/usr/local/lib/python3.8/dist-packages', '/usr/lib/python3/dist-packages', '/home/lifesim/MetaWorm/build/']
++ Meta Data Path: /home/lifesim/MetaWorm/Metaworm/data/worm.meta
+  Reading MeditMesh /home/lifesim/MetaWorm/Metaworm/data/worm_mesh_4.mesh ...  Successed! AABB: [-0.0208762 -0.018059 -0.313462] [0.0190179 0.0196881 0.31417] Size: [0.0398942 0.0377471 0.627632]
+  Reading Muscle MDR_curve_BezierCurve.001...  Successed!   length: 241  MaxMinAvg: 0.00396416 5.38453e-05 0.00252709
+  Reading Muscle MVR_curve_BezierCurve.005...  Successed!   length: 241  MaxMinAvg: 0.00387789 2.39569e-05 0.00252407
+  Reading Muscle MDL_curve_BezierCurve.006...  Successed!   length: 241  MaxMinAvg: 0.00388483 1.74317e-05 0.00251724
+  Reading Muscle MVL_curve_BezierCurve.007...  Successed!   length: 241  MaxMinAvg: 0.00385454 1.79575e-05 0.00252352
+  Computing center of mass ...  332 Done
+  Computing center index ...  312 Done
+  Init Worm... Vertices: 984 Triangles: 13364 Tets: 3341 Countours: 1466 Constraints: 7899
+               Volume: 0.000490778 Surface Area: 0.0611304 Mass: 10
+  Reading Given Key File /home/lifesim/MetaWorm/Metaworm/data/worm_givenkey_turn2.csv... Done! Rows*Cols=20*4
+  Read C302 File /home/lifesim/MetaWorm/Metaworm/data/mengdi/eworm.muscle-220428-152601.txt Error!
+Done! total time=0 value of [1.79769e+308, -1.79769e+308]
+  Init KeyWorm... Failed to parse Json from data/state/worm_states_300_220428-144704.json
+Failed to parse Json from data/action/worm_actions_300_220428-144704.json
+
+Total degree of freedom : 2952
+Total constraints : 7899
+Avg Coord Velocity: [0, 0, 0]  0  Target Velocity: [0.0176497, 0.0342406, -0.215662]  0.219075
+[ 0.43650287 -1.0677443  -1.7485859 ] [0. 0. 0.]
+[0. 0. 0.] [-0.43650287 -1.0677443  -1.7485859 ]
+cuda cannot share graphics resources. error (/home/lifesim/MetaWorm/owl/samples/common/owlViewer/OWLViewer.cpp: line 136): unknown error
+Play.
+free(): invalid pointer
